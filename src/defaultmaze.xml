@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<!-- Legend :
+  '|' or '='	: wall
+  ' '		: corridor
+  'x'		: ghost corridor
+  'X'		: ghost home cell (must be unique)
+  '.'		: pill
+  'o'		: energizer
+-->
+
+<Maze rowCount="16" colCount="16">
+	<Row>|==============|</Row>
+	<Row>|......||......|</Row>
+	<Row>|..............|</Row>
+	<Row>||.|===||===|.||</Row>
+	<Row> |.|===||===|.| </Row>
+	<Row> |.||      ||.| </Row>
+	<Row> |.|| |x=| ||.| </Row>
+	<Row>=|.|| |x=| ||.|=</Row>
+	<Row>  .   |Xx|   .  </Row>
+	<Row>=|.|| |==| ||.|=</Row>
+	<Row> |.|| |==| ||.| </Row>
+	<Row> |.||      ||.| </Row>
+	<Row> |.|| |==| ||.| </Row>
+	<Row>||.|| |==| ||.|=</Row>
+	<Row>|..............|</Row>
+	<Row>|==============|</Row>
+	<Bonus rowIndex="11" colIndex="8" x-align="accross" y-align="center" />
+	<Kapman rowIndex="14" colIndex="8" x-align="accross" y-align="center" />
+	<Ghost rowIndex="8" colIndex="8" x-align="accross" y-align="center" imageId="ghost1"/>
+</Maze>

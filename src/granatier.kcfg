@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+  <kcfgfile name="granatierrc"/>
+  <group name="General">
+    <entry name="GameDifficulty" type="Int" key="GameDifficulty">
+      <label>Game difficulty level.</label>
+      <default>40</default>
+    </entry>
+    <entry name="Theme" type="String" key="Theme">
+      <label>The graphical theme to be used.</label>
+      <default>themes/clanbomber.desktop</default>
+    </entry>
+    <entry name="Sounds" type="Bool" key="Sounds">
+      <label>Whether sound effects should be played.</label>
+      <default>true</default>
+    </entry>
+  </group>
+</kcfg>
