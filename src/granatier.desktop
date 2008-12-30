@@ -3,7 +3,6 @@ Type=Application
 Version=0.0.1
 Name=Granatier
 GenericName=Bomberman clone
-GenericName[de]=Bomberman Klon
 Icon=granatier
 TryExec=granatier
 Exec=granatier

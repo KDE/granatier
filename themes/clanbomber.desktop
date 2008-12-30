@@ -1,7 +1,6 @@
 [KGameTheme]
 Name=Clanbomber
 Description=Clanbomber Theme
-Description[de]=Clanbomber Design
 Type=SVG
 FileName=clanbomber.svgz
 Preview=clanbomber_preview.png
