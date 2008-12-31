@@ -2,7 +2,12 @@
 Type=Application
 Version=0.0.1
 Name=Granatier
+Name[uk]=Гренадер
 GenericName=Bomberman clone
+GenericName[gl]=Clone do Bomberman
+GenericName[nds]=Bomberman-Kloon
+GenericName[sv]=Klon av Bomberman
+GenericName[uk]=Клон Bomberman
 Icon=granatier
 TryExec=granatier
 Exec=granatier
