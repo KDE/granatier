@@ -52,12 +52,21 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
         m_mazeItem[i] = new MazeItem*[m_game->getMaze()->getNbColumns()];
         for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
             // Create the mazeitem and set the image
-            MazeItem* mazeItem = new MazeItem(j * 40, i * 40);
+            MazeItem* mazeItem = new MazeItem(j * Cell::SIZE, i * Cell::SIZE);
             mazeItem->setSharedRenderer(m_renderer);
             //TODO: use this function call
             //mazeItem->setElementId(m_game->getMaze()->getCell(i,j).getElement()->getImageId());
-            mazeItem->setElementId("maze_ground");
-            mazeItem->setZValue(-2);
+            switch(m_game->getMaze()->getCell(i,j).getType())
+            {
+                case Cell::WALL:
+                    mazeItem->setElementId("maze_wall");
+                    mazeItem->setZValue(-2);
+                    break;
+                case Cell::CORRIDOR:
+                default:
+                    mazeItem->setElementId("maze_ground");
+                    mazeItem->setZValue(-1);
+            }
             m_mazeItem[i][j] = mazeItem;
         }
     }
@@ -65,7 +74,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	// Create the KapmanItem
 	m_kapmanItem = new KapmanItem(p_game->getKapman());
 	m_kapmanItem->setSharedRenderer(m_renderer);
-	m_kapmanItem->setElementId("player_1_up_0");
+	m_kapmanItem->setElementId("player1_right_0");
 	// Corrects the position of the KapmanItem
 	m_kapmanItem->update(p_game->getKapman()->getX(), p_game->getKapman()->getY());
 	m_kapmanItem->setZValue(2);

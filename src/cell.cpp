@@ -18,7 +18,7 @@
 #include "cell.h"
 #include "element.h"
 
-const qreal Cell::SIZE = 20.0;
+const qreal Cell::SIZE = 40.0;
 
 Cell::Cell() : m_type(Cell::WALL), m_element(NULL), m_cost(0), m_parent(NULL) {
 }
