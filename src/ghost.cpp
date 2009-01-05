@@ -77,7 +77,7 @@ void Ghost::updateMove() {
 		// If the ghost gets on a Cell center
 		if (onCenter()) {
 			// We retrieve all the directions the ghost can choose (save the turnning back)
-			if (m_maze->getCell(curCellRow, curCellCol + 1).getType() == Cell::CORRIDOR || 
+			if (m_maze->getCell(curCellRow, curCellCol + 1).getType() == Cell::GROUND || 
 					(m_maze->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
 					 m_maze->getCell(curCellRow, curCellCol + 1).getType() == Cell::GHOSTCAMP)) {
 				if (m_xSpeed >= 0) {
@@ -85,7 +85,7 @@ void Ghost::updateMove() {
 					halfTurnRequired = false;
 				}
 			}
-			if (m_maze->getCell(curCellRow + 1, curCellCol).getType() == Cell::CORRIDOR ||
+			if (m_maze->getCell(curCellRow + 1, curCellCol).getType() == Cell::GROUND ||
 					(m_maze->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
 					 m_maze->getCell(curCellRow + 1, curCellCol).getType() == Cell::GHOSTCAMP)) {
 				if (m_ySpeed >= 0) {
@@ -93,7 +93,7 @@ void Ghost::updateMove() {
 					halfTurnRequired = false;
 				}
 			}
-			if (m_maze->getCell(curCellRow - 1, curCellCol).getType() == Cell::CORRIDOR ||
+			if (m_maze->getCell(curCellRow - 1, curCellCol).getType() == Cell::GROUND ||
 					(m_maze->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
 					 m_maze->getCell(curCellRow - 1, curCellCol).getType() == Cell::GHOSTCAMP)) {
 				if (m_ySpeed <= 0) {
@@ -101,7 +101,7 @@ void Ghost::updateMove() {
 					halfTurnRequired = false;
 				}
 			}
-			if (m_maze->getCell(curCellRow, curCellCol - 1).getType() == Cell::CORRIDOR ||
+			if (m_maze->getCell(curCellRow, curCellCol - 1).getType() == Cell::GROUND ||
 					(m_maze->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
 					 m_maze->getCell(curCellRow, curCellCol - 1).getType() == Cell::GHOSTCAMP)) {
 				if (m_xSpeed <= 0) {

@@ -73,7 +73,7 @@ void Kapman::updateMove() {
 		// If the user asks for moving
 		if (m_askedXSpeed != 0 || m_askedYSpeed != 0) {
 			// Check the next cell with the asked direction
-			if (getAskedNextCell().getType() == Cell::CORRIDOR) {
+			if (getAskedNextCell().getType() == Cell::GROUND) {
 				// Update the direction
 				updateDirection();
 				// Move the kapman
@@ -95,14 +95,14 @@ void Kapman::updateMove() {
 				// If there is an asked direction (but not a half-turn)
 				if ((m_askedXSpeed != 0 || m_askedYSpeed != 0) && (m_askedXSpeed != m_xSpeed || m_askedYSpeed != m_ySpeed)) {
 					// Check the next cell with the kapman asked direction
-					if (getAskedNextCell().getType() == Cell::CORRIDOR) {
+					if (getAskedNextCell().getType() == Cell::GROUND) {
 						// Move the kapman on the cell center
 						moveOnCenter();
 						// Update the direction
 						updateDirection();
 					} else {
 						// Check the next cell with the kapman current direction
-						if (getNextCell().getType() != Cell::CORRIDOR) {
+						if (getNextCell().getType() != Cell::GROUND) {
 							// Move the kapman on the cell center
 							moveOnCenter();
 							// Stop moving
@@ -114,7 +114,7 @@ void Kapman::updateMove() {
 					}
 				} else {
 					// Check the next cell with the kapman current direction
-					if (getNextCell().getType() != Cell::CORRIDOR) {
+					if (getNextCell().getType() != Cell::GROUND) {
 						// Move the kapman on the cell center
 						moveOnCenter();
 						// Stop moving

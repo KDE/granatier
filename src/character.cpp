@@ -120,7 +120,7 @@ bool Character::isInLineSight(Character* p_character) {
 		if (curCallerCol > curCharacterCol && m_xSpeed < 0) {
 			// Check there is a wall between them
 			for (int i = curCharacterCol; i < curCallerCol; ++i) {
-				if (m_maze->getCell(curCallerRow, i).getType() != Cell::CORRIDOR) {
+				if (m_maze->getCell(curCallerRow, i).getType() != Cell::GROUND) {
 					return false;
 				}
 			}
@@ -130,7 +130,7 @@ bool Character::isInLineSight(Character* p_character) {
 		} else if (curCallerCol < curCharacterCol && m_xSpeed > 0) {
 			// Check there is a wall between them
 			for (int i = curCallerCol; i < curCharacterCol; ++i) {
-				if (m_maze->getCell(curCallerRow, i).getType() != Cell::CORRIDOR) {
+				if (m_maze->getCell(curCallerRow, i).getType() != Cell::GROUND) {
 					return false;
 				}
 			}
@@ -143,7 +143,7 @@ bool Character::isInLineSight(Character* p_character) {
 		if (curCallerRow > curCharacterRow && m_ySpeed < 0) {
 			// Check there is a wall between them
 			for (int i = curCharacterRow; i < curCallerRow; ++i) {
-				if (m_maze->getCell(i, curCallerCol).getType() != Cell::CORRIDOR) {
+				if (m_maze->getCell(i, curCallerCol).getType() != Cell::GROUND) {
 					return false;
 				}
 			}
@@ -153,7 +153,7 @@ bool Character::isInLineSight(Character* p_character) {
 		} else if (curCallerRow < curCharacterRow && m_ySpeed > 0) {
 			// Check there is a wall between them
 			for (int i = curCallerRow; i < curCharacterRow; ++i) {
-				if (m_maze->getCell(i, curCallerCol).getType() != Cell::CORRIDOR) {
+				if (m_maze->getCell(i, curCallerCol).getType() != Cell::GROUND) {
 					return false;
 				}
 			}

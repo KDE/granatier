@@ -62,7 +62,11 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
                     mazeItem->setElementId("maze_wall");
                     mazeItem->setZValue(-2);
                     break;
-                case Cell::CORRIDOR:
+                case Cell::HOLE:
+                    delete mazeItem;
+                    mazeItem = NULL;
+                    break;
+                case Cell::GROUND:
                 default:
                     mazeItem->setElementId("maze_ground");
                     mazeItem->setZValue(-1);

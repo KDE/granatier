@@ -136,16 +136,19 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
 		for (int i=0; i<m_buffer.length();++i)
 		{
 			switch(m_buffer.at(i).toAscii()){
+                case '_':
+                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::HOLE);
+                    break;
 				case '|':
 				case '=': m_game->getMaze()->setCellType(m_counterRows,i,Cell::WALL);
 					break;
-				case ' ': m_game->getMaze()->setCellType(m_counterRows,i,Cell::CORRIDOR);
+				case ' ': m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
 					break;
-				case '.': m_game->getMaze()->setCellType(m_counterRows,i,Cell::CORRIDOR);
+				case '.': m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
 					m_game->getMaze()->setCellElement(m_counterRows, i,
 							new Pill(m_counterRows, i, m_game->getMaze(), "pill"));
 					break; 
-				case 'o':m_game->getMaze()->setCellType(m_counterRows,i,Cell::CORRIDOR);
+				case 'o':m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
 					m_game->getMaze()->setCellElement(m_counterRows, i,
 							new Energizer(m_counterRows, i, m_game->getMaze(), "energizer"));
 					break;
