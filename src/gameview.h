@@ -58,6 +58,12 @@ class GameView : public QGraphicsView {
 		 */
 		void keyPressEvent(QKeyEvent* p_event);
 
+        /**
+         * Manages the player actions by hanlding the key release events.
+         * @param p_event the key release event
+         */
+        void keyReleaseEvent(QKeyEvent* p_event);
+
 		/**
 		 * Pauses the game on focus lost.
 		 * @param p_event the focus event
@@ -71,6 +77,12 @@ class GameView : public QGraphicsView {
 		 * @param p_event the key press event
 		 */
 		void keyPressed(QKeyEvent* p_event);
+        
+        /**
+         * Emitted on key release event for the Game instance
+         * @param p_event the key release event
+         */
+        void keyReleased(QKeyEvent* p_event);
 };
 
 #endif

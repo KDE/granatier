@@ -22,6 +22,7 @@ GameView::GameView(Game * p_game) : QGraphicsView(new GameScene(p_game)) {
 	setFocusPolicy(Qt::StrongFocus);
 	// Forward the key press events to the Game instance
 	connect(this, SIGNAL(keyPressed(QKeyEvent*)), p_game, SLOT(keyPressEvent(QKeyEvent*)));
+    connect(this, SIGNAL(keyReleased(QKeyEvent*)), p_game, SLOT(keyReleaseEvent(QKeyEvent*)));
 }
 
 GameView::~GameView() {
@@ -43,3 +44,6 @@ void GameView::keyPressEvent(QKeyEvent* p_event) {
 	emit(keyPressed(p_event));
 }
 
+void GameView::keyReleaseEvent(QKeyEvent* p_event) {
+    emit(keyReleased(p_event));
+}

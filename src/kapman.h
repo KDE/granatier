@@ -20,6 +20,8 @@
 
 #include "character.h"
 
+#include <QKeyEvent>
+
 /**
  * @brief This class represents the main character of the game.
  */
@@ -110,6 +112,16 @@ class Kapman : public Character {
 		 * Initializes the Kapman speed from the Character speed.
 		 */
 		void initSpeedInc();
+        
+        /**
+         * Manages the keys for moving and dropping bombs.
+         */
+        void keyPressed(QKeyEvent* keyEvent);
+        
+        /**
+         * Manages the keys for moving and dropping bombs.
+         */
+        void keyReleased(QKeyEvent* keyEvent);
 
 	private:
 

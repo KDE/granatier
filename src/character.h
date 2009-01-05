@@ -48,6 +48,17 @@ class Character : public Element {
 		/** Speed increase on hard level (percentage) */
 		static const qreal HIGH_SPEED_INC;
 
+        /** Keyboard shortcuts for moving and dropping a bomb */
+        struct Shortcuts
+        {
+            int moveLeft;
+            int moveRight;
+            int moveUp;
+            int moveDown;
+            int dropBomb;
+        };
+        Shortcuts m_key;
+
 	protected:
 
 		/** The Character x-speed */

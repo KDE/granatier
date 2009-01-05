@@ -270,6 +270,12 @@ class Game : public QObject {
 		 */
 		void keyPressEvent(QKeyEvent* p_event);
 		
+        /**
+         * Manages the key release events.
+         * @param p_event the key release event
+         */
+        void keyReleaseEvent(QKeyEvent* p_event);
+        
 		/**
 		 * Resumes the Game after the Kapman death.
 		 */

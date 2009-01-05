@@ -310,8 +310,8 @@ void Game::playSound(const QString& p_sound) {
 }
 
 void Game::keyPressEvent(QKeyEvent* p_event) {
-	// At the beginning or when paused, we start the timer when an arrow key is pressed
-	if ((p_event->key() == Qt::Key_Up || p_event->key() == Qt::Key_Down || p_event->key() ==  Qt::Key_Left || p_event->key() == Qt::Key_Right) && !m_timer->isActive()) {
+	// At the beginning or when paused, we start the timer when a key is pressed
+	if (!m_timer->isActive()) {
 		// If paused
 		if (m_state == PAUSED_UNLOCKED) {
 			switchPause();
@@ -325,30 +325,10 @@ void Game::keyPressEvent(QKeyEvent* p_event) {
 	}
 	// Behaviour when the game has begun
 	switch (p_event->key()) {
-		case Qt::Key_Up:
-			if (m_state == RUNNING) {
-				m_kapman->goUp();
-			}
-			break;
-		case Qt::Key_Down:
-			if (m_state == RUNNING) {
-				m_kapman->goDown();
-			}
-			break;
-		case Qt::Key_Right:
-			if (m_state == RUNNING) {
-				m_kapman->goRight();
-			}
-			break;
-		case Qt::Key_Left:
-			if (m_state == RUNNING) {
-				m_kapman->goLeft();
-			}
-			break;
 		case Qt::Key_P:
 		case Qt::Key_Escape:
 			switchPause();
-			break;
+            return;
 		case Qt::Key_K:
 			// Cheat code to get one more life
 			if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier)) {
@@ -356,17 +336,24 @@ void Game::keyPressEvent(QKeyEvent* p_event) {
 				m_isCheater = true;
 				emit(dataChanged(LivesInfo));
 			}
-			break;
+            return;
 		case Qt::Key_L:
 			// Cheat code to go to the next level
 			if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier)) {
 				m_isCheater = true;
 				nextLevel();
 			}
-			break;
+            return;
 		default:
 			break;
 	}
+    
+    m_kapman->keyPressed(p_event);
+}
+
+void Game::keyReleaseEvent(QKeyEvent* p_event)
+{
+    m_kapman->keyReleased(p_event);
 }
 
 void Game::update() {

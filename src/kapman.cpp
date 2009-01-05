@@ -18,6 +18,7 @@
 
 #include "kapman.h"
 
+#include <kdebug.h>
 #include <KGameDifficulty>
 
 const qreal Kapman::MAX_SPEED_RATIO = 1.5;
@@ -25,6 +26,12 @@ const qreal Kapman::MAX_SPEED_RATIO = 1.5;
 Kapman::Kapman(qreal p_x, qreal p_y, Maze* p_maze) : Character(p_x, p_y, p_maze) {
 	m_type = Element::KAPMAN;
 	m_maxSpeed = m_normalSpeed * MAX_SPEED_RATIO;
+    
+    m_key.moveLeft = Qt::Key_Left;
+    m_key.moveRight = Qt::Key_Right;
+    m_key.moveUp = Qt::Key_Up;
+    m_key.moveDown = Qt::Key_Down;
+    m_key.dropBomb = Qt::Key_Return;
 }
 
 Kapman::~Kapman() {
@@ -194,3 +201,62 @@ void Kapman::initSpeedInc() {
 	}
 }
 
+void Kapman::keyPressed(QKeyEvent* keyEvent)
+{
+    int key = keyEvent->key();
+
+    if(key == m_key.moveLeft || key == m_key.moveRight || key == m_key.moveUp || key == m_key.moveDown || key == m_key.dropBomb)
+    {
+        keyEvent->accept();
+        if(keyEvent->isAutoRepeat())
+        {
+            return;
+        }
+    }
+    else
+    {
+        return;
+    }
+
+    if(key == m_key.moveLeft)
+    {
+        goLeft();
+    }
+    else if(key == m_key.moveRight)
+    {
+        goRight();
+    }
+    else if(key == m_key.moveUp)
+    {
+        goUp();
+    }
+    else if(key == m_key.moveDown)
+    {
+        goDown();
+    }
+    else if(key == m_key.dropBomb)
+    {
+        //emit bomb(this);
+    }
+    
+}
+
+void Kapman::keyReleased(QKeyEvent* keyEvent)
+{
+    int key = keyEvent->key();
+
+    if(key == m_key.moveLeft || key == m_key.moveRight || key == m_key.moveUp || key == m_key.moveDown || key == m_key.dropBomb)
+    {
+        keyEvent->accept();
+        if(keyEvent->isAutoRepeat())
+        {
+            return;
+        }
+    }
+    else
+    {
+        return;
+    }
+
+    stopMoving();
+}
