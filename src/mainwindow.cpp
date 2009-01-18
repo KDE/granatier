@@ -172,7 +172,7 @@ void MainWindow::close() {
 		m_game->pause();
 	}
 	// Confirm before closing
-	if(KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit Kapman ?"), i18nc("To quit Kapman", "Quit")) == KMessageBox::Yes) {
+	if(KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit Granatier ?"), i18nc("To quit Granatier", "Quit")) == KMessageBox::Yes) {
 		KXmlGuiWindow::close();
 	}
 	else {
