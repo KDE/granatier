@@ -21,7 +21,7 @@
 #include <KGameDifficulty>
 
 const qreal Character::LOW_SPEED = 3.75;
-const qreal Character::MEDIUM_SPEED = 4.5;
+const qreal Character::MEDIUM_SPEED = 4;
 const qreal Character::HIGH_SPEED = 5.25;
 const qreal Character::LOW_SPEED_INC = 0.005;
 const qreal Character::MEDIUM_SPEED_INC = 0.01;

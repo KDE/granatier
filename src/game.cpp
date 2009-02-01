@@ -228,7 +228,7 @@ void Game::createKapman(QPointF p_position){
 }	
 
 void Game::createGhost(QPointF p_position, const QString & p_imageId){
-	m_ghosts.append(new Ghost(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_maze));
+	//m_ghosts.append(new Ghost(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_maze));
 }
 
 
@@ -261,12 +261,12 @@ void Game::initCharactersPosition() {
 		m_timer->stop();
 		m_state = RUNNING;
 		// Initialize Ghost coordinates and state
-		m_ghosts[0]->initCoordinate();
+		//m_ghosts[0]->initCoordinate();
 		//m_ghosts[1]->initCoordinate();
 		//m_ghosts[2]->initCoordinate();
 		//m_ghosts[3]->initCoordinate();
 		m_kapman->initCoordinate();
-		m_ghosts[0]->setState(Ghost::HUNTER);
+		//m_ghosts[0]->setState(Ghost::HUNTER);
 		//m_ghosts[1]->setState(Ghost::HUNTER);
 		//m_ghosts[2]->setState(Ghost::HUNTER);
 		//m_ghosts[3]->setState(Ghost::HUNTER);

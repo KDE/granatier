@@ -77,6 +77,11 @@ class Kapman : public Character {
 		 */
 		void goLeft();
 
+        /**
+         * Moves the Kapman function of its current coordinates and speed.
+         */
+        void move(qreal x, qreal y);
+        
 		/**
 		 * Updates the Kapman move
 		 */
@@ -122,6 +127,13 @@ class Kapman : public Character {
          * Manages the keys for moving and dropping bombs.
          */
         void keyReleased(QKeyEvent* keyEvent);
+        
+        /**
+         * Returns the sign of a value with a positive sign for zero
+         */
+         //TODO: find a better place
+        int signZeroPositive(qreal value);
+        
 
 	private:
 
