@@ -109,6 +109,9 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 	m_state = RUNNING;
 	// Init the characters coordinates on the Maze
 	initCharactersPosition();
+    
+    //create bombs
+    connect(m_kapman, SIGNAL(bombDropped(qreal, qreal)), this, SLOT(createBomb(qreal, qreal)));
 }
 
 Game::~Game() {
@@ -118,9 +121,14 @@ Game::~Game() {
 	delete m_bonusTimer;
 	delete m_maze;
 	delete m_kapman;
+    
 	for (int i = 0; i < m_ghosts.size(); ++i) {
 		delete m_ghosts[i];
 	}
+    
+    for (int i = 0; i < m_bombs.size(); ++i) {
+        delete m_bombs[i];
+    }
 	delete m_bonus;
 }
 
@@ -370,7 +378,14 @@ void Game::update() {
 		else {
 			m_ghosts[i]->updateMove();
 		}
-	}	
+	}
+    
+    //update Bombs
+    for (int i = 0; i < m_bombs.size(); ++i) {
+        m_bombs[i]->updateMove();
+    }
+    
+    //update Player
 	m_kapman->updateMove();
 	m_kapman->emitGameUpdated();
 }
@@ -506,4 +521,30 @@ void Game::endPreyState() {
 			m_ghosts[i]->setState(Ghost::HUNTER);
 		}
 	}
+}
+
+void Game::createBomb(qreal x, qreal y)
+{
+    m_bombs.append(new Bomb((m_maze->getColFromX(x) + 0.5) * Cell::SIZE, (m_maze->getRowFromY(y) + 0.5) * Cell::SIZE, m_maze, Game::FPS * 2));
+    emit bombCreated(m_bombs.last());
+    connect(m_bombs.last(), SIGNAL(bombFinished(Bomb*)), this, SLOT(slot_cleanupBombs(Bomb*)));
+    connect(m_bombs.last(), SIGNAL(bombDetonated()), this, SLOT(slot_bombDetonated()));
+}
+
+void Game::slot_cleanupBombs(Bomb* bomb)
+{
+    // Find the Bomb
+    int index = m_bombs.indexOf(bomb);
+    //remove the bomb
+    if(index != -1)
+    {
+        //do not delete the bomb because it will be deleted through the destructor of elementitem
+        emit bombRemoved(m_bombs.at(index));
+        m_bombs.removeAt(index);
+    }
+}
+
+void Game::slot_bombDetonated()
+{
+    playSound(KStandardDirs::locate("data", "granatier/sounds/explode.ogg"));
 }

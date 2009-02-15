@@ -671,7 +671,7 @@ void Kapman::keyPressed(QKeyEvent* keyEvent)
     }
     else if(key == m_key.dropBomb)
     {
-        //emit bomb(this);
+        emit bombDropped(m_x, m_y);
     }
     
 }

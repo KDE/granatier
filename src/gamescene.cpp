@@ -33,6 +33,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	connect(p_game, SIGNAL(bonusOn()), this, SLOT(displayBonus()));	
 	connect(p_game, SIGNAL(bonusOff()), this, SLOT(hideBonus()));
 	connect(p_game, SIGNAL(dataChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
+    connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
+    connect(p_game, SIGNAL(bombRemoved(Bomb*)), this, SLOT(removeBombItem(Bomb*)));
 
 	// Connection between Game and GameScene for the display of won points when a bonus or a ghost is eaten
 	connect(p_game, SIGNAL(pointsToDisplay(long, qreal, qreal)), this, SLOT(displayPoints(long, qreal, qreal)));
@@ -192,6 +194,9 @@ GameScene::~GameScene() {
 	for (int i = 0; i < m_ghostItems.size(); ++i) {
 		delete m_ghostItems[i];
 	}
+    for (int i = 0; i < m_bombItems.size(); ++i) {
+        delete m_bombItems[i];
+    }
     
 	for (int i = 0; i < m_game->getMaze()->getNbRows();++i) {
 		for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
@@ -390,4 +395,33 @@ void GameScene::hidePoints() {
 	removeItem(m_wonPointsLabels.last());
 	// Remove the oldest item from the list
 	delete m_wonPointsLabels.takeLast();
+}
+
+void GameScene::createBombItem(Bomb* bomb)
+{
+    // Create the Bombs
+    m_bombItems.append(new BombItem(bomb));
+    m_bombItems.last()->setSharedRenderer(m_renderer);
+    m_bombItems.last()->setElementId("bomb");
+    // Corrects the position of the BombItem
+    m_bombItems.last()->update(bomb->getX(), bomb->getY());
+    m_bombItems.last()->setZValue(1);
+    addItem(m_bombItems.last());
+}
+
+void GameScene::removeBombItem(Bomb* bomb)
+{
+    // Find the BombItem and remove it
+    for(int i = 0; i < m_bombItems.size(); i++)
+    {
+        if(m_bombItems[i]->getModel() == bomb)
+        {
+            if (items().contains(m_bombItems[i]))
+            {
+                removeItem(m_bombItems[i]);
+            }
+            m_bombItems[i]->deleteLater();
+            m_bombItems.removeAt(i);
+        }
+    }
 }

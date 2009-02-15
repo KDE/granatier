@@ -174,6 +174,11 @@ class Kapman : public Character {
 		  * Emitted when the kapman stops moving
 		  */
 		 void stopped();
+         
+         /**
+          * Emitted when the player drops a bomb
+          */
+         void bombDropped(qreal x, qreal y);
 };
 
 #endif

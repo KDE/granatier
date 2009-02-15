@@ -24,6 +24,7 @@
 #include "mazeitem.h"
 #include "ghostitem.h"
 #include "kapmanitem.h"
+#include "bombitem.h"
 
 #include <QGraphicsScene>
 #include <QList>
@@ -50,6 +51,9 @@ class GameScene : public QGraphicsScene {
 
 		/** The GhostItem of each Ghost to be drawn */
 		QList<GhostItem*> m_ghostItems;
+        
+        /** The BombItem of each Bomb to be drawn */
+        QList<BombItem*> m_bombItems;
 		
 		/** The ElementItem to be drawn (each Pill and Energizers) */
 		ElementItem*** m_elementItems;
@@ -154,6 +158,16 @@ class GameScene : public QGraphicsScene {
 		 * Hide the first label in the list of won points labels
 		 */
 		void hidePoints();
+        
+        /**
+         * Creates a BombItem
+         */
+        void createBombItem(Bomb* bomb);
+        
+        /**
+         * Removes a BombItem
+         */
+        void removeBombItem(Bomb* bomb);
 };
 
 #endif

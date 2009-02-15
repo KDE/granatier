@@ -2,6 +2,8 @@ project(granatier)
 
 set(granatierSources
 	bonus.cpp
+  bomb.cpp
+  bombitem.cpp
 	cell.cpp
 	character.cpp
 	characteritem.cpp

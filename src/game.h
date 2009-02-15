@@ -23,6 +23,7 @@
 #include "kapman.h"
 #include "ghost.h"
 #include "bonus.h"
+#include "bomb.h"
 
 #include <QPointF>
 #include <QTimer>
@@ -82,6 +83,9 @@ class Game : public QObject {
 		/** The Ghosts */
 		QList<Ghost*> m_ghosts;
 		
+        /** The Bombs */
+        QList<Bomb*> m_bombs;
+        
 		/** The Bonus instance */
 		Bonus *m_bonus;
 
@@ -159,7 +163,7 @@ class Game : public QObject {
 		 * @return the Ghost models
 		 */
 		QList<Ghost*> getGhosts () const;
-
+        
 		/**
 		 * @return the Bonus instance
 		 */
@@ -280,6 +284,11 @@ class Game : public QObject {
 		 * Resumes the Game after the Kapman death.
 		 */
 		void resumeAfterKapmanDeath();
+        
+        /**
+         * Creates a bomb in the Cell with the coordinates x and y
+         */
+        void createBomb(qreal x, qreal y);
 
 	private slots:
 
@@ -318,6 +327,16 @@ class Game : public QObject {
 		 * Ends the Ghosts prey state.
 		 */
 		void endPreyState();	
+        
+        /**
+         * Plays the detonation sound
+         */
+        void slot_bombDetonated();
+        
+        /**
+         * Removes exploded bombs from the bomb list
+         */
+        void slot_cleanupBombs(Bomb* bomb);
 		
 	signals:
 	
@@ -376,6 +395,16 @@ class Game : public QObject {
 		 * @param p_yPos the y position of the label
 		 */
 		void pointsToDisplay(long p_wonPoints, qreal p_xPos, qreal p_yPos);
+        
+        /**
+         * Emitted when a bomb was created.
+         */
+        void bombCreated(Bomb* bomb);
+        
+        /**
+         * Emitted when a bomb was removed.
+         */
+        void bombRemoved(Bomb* bomb);
 };
 
 #endif
