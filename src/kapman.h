@@ -132,7 +132,11 @@ class Kapman : public Character {
          * Returns the sign of a value with a positive sign for zero
          */
          //TODO: find a better place
-        int signZeroPositive(qreal value);
+        int signZeroPositive(const qreal value);
+        /**
+         * Returns the sign of a value with 0 for zero
+         */
+        int sign(const qreal value);
         
 
 	private:
