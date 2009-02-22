@@ -52,6 +52,11 @@ class Kapman : public Character {
 		 */
 		~Kapman();
 
+        /**
+         * Shortcuts for moving and dropping bombs
+         */
+        void setShortcuts(const Shortcuts keys);
+
 		/**
 		 * Initializes the Kapman.
 		 */

@@ -42,6 +42,9 @@ class KapmanItem : public CharacterItem {
 
 		/** Timer used to animate the KapmanItem */
 		QTimeLine * m_animationTimer;
+        
+        /** player ID */
+        QString m_strPlayerId;
 
 	public:
 
@@ -55,6 +58,11 @@ class KapmanItem : public CharacterItem {
 		 * Deletes the KapmanItem instance.
 		 */
 		~KapmanItem();
+        
+        /**
+         * Player ID to get the element ID from the SVG
+         */
+        void setPlayerId(QString strPlayerId);
 
 	public slots:
 

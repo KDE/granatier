@@ -40,6 +40,11 @@ Kapman::~Kapman() {
 
 }
 
+void Kapman::setShortcuts(const Shortcuts keys)
+{
+    m_key = keys;
+}
+
 void Kapman::init() {
 	goRight();
 	updateDirection();

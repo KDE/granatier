@@ -89,6 +89,7 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 		m_ghosts[i]->initSpeedInc();
 	}
 	m_kapman->initSpeedInc();
+    m_kapman2->initSpeedInc();
 
 	// Initialize Bonus timer from the difficulty level
 	m_bonusTimer = new QTimer(this);
@@ -112,6 +113,7 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
     
     //create bombs
     connect(m_kapman, SIGNAL(bombDropped(qreal, qreal)), this, SLOT(createBomb(qreal, qreal)));
+    connect(m_kapman2, SIGNAL(bombDropped(qreal, qreal)), this, SLOT(createBomb(qreal, qreal)));
 }
 
 Game::~Game() {
@@ -121,6 +123,7 @@ Game::~Game() {
 	delete m_bonusTimer;
 	delete m_maze;
 	delete m_kapman;
+    delete m_kapman2;
     
 	for (int i = 0; i < m_ghosts.size(); ++i) {
 		delete m_ghosts[i];
@@ -165,8 +168,16 @@ void Game::switchPause(bool p_locked) {
 	}
 }
 
-Kapman* Game::getKapman() const {
-	return m_kapman;
+Kapman* Game::getKapman(QString strPlayer) const
+{
+    if(strPlayer.compare("player1") == 0)
+    {
+        return m_kapman;
+    }
+    if(strPlayer.compare("player2") == 0)
+    {
+        return m_kapman2;
+    }
 }
 		
 QList<Ghost*> Game::getGhosts () const {
@@ -209,13 +220,15 @@ void Game::setLevel(int p_level) {
 	for (int i = 0; i < m_ghosts.size(); ++i) {
 		m_ghosts[i]->initSpeed();
 	}
-	m_kapman->initSpeed();
-	for (int i = 0; i < m_level; ++i) {
-		for (int j = 0; j < m_ghosts.size(); ++j) {
-			m_ghosts[j]->increaseCharactersSpeed();
-		}
-		m_kapman->increaseCharactersSpeed();
-	}
+    m_kapman->initSpeed();
+    m_kapman2->initSpeed();
+    for (int i = 0; i < m_level; ++i) {
+        for (int j = 0; j < m_ghosts.size(); ++j) {
+            m_ghosts[j]->increaseCharactersSpeed();
+        }
+        m_kapman->increaseCharactersSpeed();
+        m_kapman2->increaseCharactersSpeed();
+    }
 	setTimersDuration();
 	m_bonus->setPoints(m_level * 100);
 	emit(dataChanged(AllInfo));
@@ -231,9 +244,24 @@ void Game::createBonus(QPointF p_position){
 	m_bonus = new Bonus(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), m_maze, 100);
 }
 
-void Game::createKapman(QPointF p_position){
-	m_kapman = new Kapman(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), m_maze);
-}	
+void Game::createKapman(QPointF p_position, QString strPlayer)
+{
+    if(strPlayer.compare("player1") == 0)
+    {
+        m_kapman = new Kapman(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), m_maze);
+    }
+    if(strPlayer.compare("player2") == 0)
+    {
+        m_kapman2 = new Kapman(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), m_maze);
+        Character::Shortcuts keys;
+        keys.moveLeft = Qt::Key_A;
+        keys.moveRight = Qt::Key_D;
+        keys.moveUp = Qt::Key_W;
+        keys.moveDown = Qt::Key_S;
+        keys.dropBomb = Qt::Key_Space;
+        m_kapman2->setShortcuts(keys);
+    }
+}
 
 void Game::createGhost(QPointF p_position, const QString & p_imageId){
 	//m_ghosts.append(new Ghost(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_maze));
@@ -274,11 +302,13 @@ void Game::initCharactersPosition() {
 		//m_ghosts[2]->initCoordinate();
 		//m_ghosts[3]->initCoordinate();
 		m_kapman->initCoordinate();
+        m_kapman2->initCoordinate();
 		//m_ghosts[0]->setState(Ghost::HUNTER);
 		//m_ghosts[1]->setState(Ghost::HUNTER);
 		//m_ghosts[2]->setState(Ghost::HUNTER);
 		//m_ghosts[3]->setState(Ghost::HUNTER);
 		m_kapman->init();
+        m_kapman2->init();
 		// Initialize the Pills & Energizers coordinates
 		for (int i = 0; i < m_maze->getNbRows(); ++i) {
 			for (int j = 0; j < m_maze->getNbColumns(); ++j) {
@@ -357,11 +387,13 @@ void Game::keyPressEvent(QKeyEvent* p_event) {
 	}
     
     m_kapman->keyPressed(p_event);
+    m_kapman2->keyPressed(p_event);
 }
 
 void Game::keyReleaseEvent(QKeyEvent* p_event)
 {
     m_kapman->keyReleased(p_event);
+    m_kapman2->keyReleased(p_event);
 }
 
 void Game::update() {
@@ -386,8 +418,10 @@ void Game::update() {
     }
     
     //update Player
-	m_kapman->updateMove();
-	m_kapman->emitGameUpdated();
+    m_kapman->updateMove();
+    m_kapman->emitGameUpdated();
+    m_kapman2->updateMove();
+    m_kapman2->emitGameUpdated();
 }
 
 void Game::kapmanDeath() {

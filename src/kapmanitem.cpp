@@ -24,11 +24,12 @@
 
 #include <QGraphicsScene>
 #include <KGameDifficulty>
+#include <QDebug>
 
-const int KapmanItem::NB_FRAMES = 5;
-const int KapmanItem::ANIM_LOW_SPEED = 150;
-const int KapmanItem::ANIM_MEDIUM_SPEED = 150;
-const int KapmanItem::ANIM_HIGH_SPEED = 150;
+const int KapmanItem::NB_FRAMES = 13;
+const int KapmanItem::ANIM_LOW_SPEED = 240;
+const int KapmanItem::ANIM_MEDIUM_SPEED = 240;
+const int KapmanItem::ANIM_HIGH_SPEED = 240;
 
 KapmanItem::KapmanItem(Kapman* p_model) : CharacterItem(p_model) {
 	connect(p_model, SIGNAL(directionChanged()), this, SLOT(updateDirection()));
@@ -58,6 +59,12 @@ KapmanItem::KapmanItem(Kapman* p_model) : CharacterItem(p_model) {
 
 KapmanItem::~KapmanItem() {
 	delete m_animationTimer;
+}
+
+void KapmanItem::setPlayerId(QString strPlayerId)
+{
+    m_strPlayerId = strPlayerId;
+    setElementId(m_strPlayerId + "_0");
 }
 
 void KapmanItem::updateDirection() {
@@ -125,27 +132,27 @@ void KapmanItem::resumeAnim() {
 }
 
 void KapmanItem::stopAnim() {
-	setElementId("player1_right_0");
+	setElementId(m_strPlayerId + "_0");
         if (m_animationTimer->state() == QTimeLine::Running)
 	    m_animationTimer->stop();
 }
 
 void KapmanItem::setFrame(const int p_frame) {
-	setElementId(QString("player1_right_%1").arg(p_frame));
+	setElementId(m_strPlayerId + QString("_%1").arg(p_frame));
 }
 
 void KapmanItem::startBlinking() {
 	stopAnim();
-	setElementId("player1_right_0");
+	setElementId(m_strPlayerId + "_0");
 	CharacterItem::startBlinking();
 }
 
 void KapmanItem::blink() {
 	CharacterItem::blink();
 	if (m_nbBlinks % 2 == 0) {
-		setElementId("player1_right_0");
+		setElementId(m_strPlayerId + "_0");
 	} else {
-		setElementId("player1_right_1");
+		setElementId(m_strPlayerId + "_death");
 	}
 	// Make the kapman blink 2 times (4 ticks)
 	if (m_nbBlinks == 4) {

@@ -78,14 +78,24 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
     }
 
 	// Create the KapmanItem
-	m_kapmanItem = new KapmanItem(p_game->getKapman());
+	m_kapmanItem = new KapmanItem(p_game->getKapman("player1"));
 	m_kapmanItem->setSharedRenderer(m_renderer);
-	m_kapmanItem->setElementId("player1_right_0");
+	m_kapmanItem->setPlayerId("player1");
 	// Corrects the position of the KapmanItem
-	m_kapmanItem->update(p_game->getKapman()->getX(), p_game->getKapman()->getY());
+	m_kapmanItem->update(p_game->getKapman("player1")->getX(), p_game->getKapman("player1")->getY());
 	m_kapmanItem->setZValue(2);
 	// Stops the Kapman animation
 	m_kapmanItem->stopAnim();
+    
+    // Create the second player
+    m_kapmanItem2 = new KapmanItem(p_game->getKapman("player2"));
+    m_kapmanItem2->setSharedRenderer(m_renderer);
+    m_kapmanItem2->setPlayerId("player2");
+    // Corrects the position of the second player
+    m_kapmanItem2->update(p_game->getKapman("player2")->getX(), p_game->getKapman("player2")->getY());
+    m_kapmanItem2->setZValue(2);
+    // Stops the second player animation
+    m_kapmanItem2->stopAnim();
 
 	// Create the GhostItems
 	for (int i = 0; i < p_game->getGhosts().size(); ++i) {
@@ -159,6 +169,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
     }
 	// Display the KapmanItem
 	addItem(m_kapmanItem);
+    addItem(m_kapmanItem2);
 	// Display each GhostItem
 	for (int i = 0; i < m_ghostItems.size(); ++i) {
 		addItem(m_ghostItems[i]);
@@ -190,6 +201,7 @@ GameScene::~GameScene() {
     delete[] m_mazeItem;
     
 	delete m_kapmanItem;
+    delete m_kapmanItem2;
     
 	for (int i = 0; i < m_ghostItems.size(); ++i) {
 		delete m_ghostItems[i];
@@ -305,6 +317,7 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser) {
 		}
 		// Stop kapman animation
 		m_kapmanItem->pauseAnim();
+        m_kapmanItem2->pauseAnim();
 	} else {	// If the game has resumed
 		// If the pause was due to an action from the user
 		if (p_fromUser) {
@@ -315,6 +328,7 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser) {
 		}
 		// Resume kapman animation
 		m_kapmanItem->resumeAnim();
+        m_kapmanItem2->resumeAnim();
 	}
 }
 
