@@ -25,10 +25,10 @@
 #include <QGraphicsScene>
 #include <KGameDifficulty>
 
-const int KapmanItem::NB_FRAMES = 32;
-const int KapmanItem::ANIM_LOW_SPEED = 500;
-const int KapmanItem::ANIM_MEDIUM_SPEED = 400;
-const int KapmanItem::ANIM_HIGH_SPEED = 300;
+const int KapmanItem::NB_FRAMES = 5;
+const int KapmanItem::ANIM_LOW_SPEED = 150;
+const int KapmanItem::ANIM_MEDIUM_SPEED = 150;
+const int KapmanItem::ANIM_HIGH_SPEED = 150;
 
 KapmanItem::KapmanItem(Kapman* p_model) : CharacterItem(p_model) {
 	connect(p_model, SIGNAL(directionChanged()), this, SLOT(updateDirection()));
@@ -37,7 +37,7 @@ KapmanItem::KapmanItem(Kapman* p_model) : CharacterItem(p_model) {
 
 	// A timeLine for the Kapman animation	
 	m_animationTimer = new QTimeLine();
-	m_animationTimer->setCurveShape(QTimeLine::SineCurve);
+	m_animationTimer->setCurveShape(QTimeLine::LinearCurve);
 	m_animationTimer->setLoopCount(0);
 	m_animationTimer->setFrameRange(0, NB_FRAMES - 1);
 	// Animation speed
@@ -131,7 +131,7 @@ void KapmanItem::stopAnim() {
 }
 
 void KapmanItem::setFrame(const int p_frame) {
-	setElementId(QString("player1_right_%1").arg(p_frame % 2));
+	setElementId(QString("player1_right_%1").arg(p_frame));
 }
 
 void KapmanItem::startBlinking() {
