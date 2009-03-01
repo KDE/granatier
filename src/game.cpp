@@ -565,10 +565,13 @@ void Game::endPreyState() {
 
 void Game::createBomb(qreal x, qreal y)
 {
-    m_bombs.append(new Bomb((m_maze->getColFromX(x) + 0.5) * Cell::SIZE, (m_maze->getRowFromY(y) + 0.5) * Cell::SIZE, m_maze, Game::FPS * 2));
-    emit bombCreated(m_bombs.last());
-    connect(m_bombs.last(), SIGNAL(bombFinished(Bomb*)), this, SLOT(slot_cleanupBombs(Bomb*)));
-    connect(m_bombs.last(), SIGNAL(bombDetonated()), this, SLOT(slot_bombDetonated()));
+    int col = m_maze->getColFromX(x);
+    int row = m_maze->getRowFromY(y);
+    Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_maze, Game::FPS * 2);
+    emit bombCreated(bomb);
+    connect(bomb, SIGNAL(bombFinished(Bomb*)), this, SLOT(slot_cleanupBombs(Bomb*)));
+    connect(bomb, SIGNAL(bombDetonated()), this, SLOT(slot_bombDetonated()));
+    m_bombs.append(bomb);
 }
 
 void Game::slot_cleanupBombs(Bomb* bomb)

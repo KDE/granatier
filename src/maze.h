@@ -87,6 +87,14 @@ class Maze : public QObject {
 		 */
 		void setCellElement(const int p_row, const int p_column, Element* p_element);
 
+        /**
+         * Removes the Element that is on the Cell whose coordinates are given in parameters.
+         * @param p_row the Cell row
+         * @param p_column the Cell column
+         * @param p_element the Element that is on the Cell
+         */
+        void removeCellElement(const int p_row, const int p_column, Element* p_element);
+
 		/**
 		 * Sets the cell on witch the ghosts resurrect from prey state
 		 * @param p_resurrectionCell the cell on witch the ghosts resurrect

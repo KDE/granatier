@@ -49,15 +49,27 @@ void Maze::setCellType(const int p_row, const int p_column, const Cell::Type p_t
 	m_cells[p_row][p_column].setType(p_type);
 }
 
-void Maze::setCellElement(const int p_row, const int p_column, Element * p_element) {
-	if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns) {
-		kError() << "Bad maze coordinates";
-	}
-	m_cells[p_row][p_column].setElement(p_element);
-	if (p_element != NULL) {
-		m_totalNbElem++;
-		m_nbElem++;
-	}
+void Maze::setCellElement(const int p_row, const int p_column, Element * p_element)
+{
+    if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns) 
+    {
+        kError() << "Bad maze coordinates";
+    }
+    m_cells[p_row][p_column].setElement(p_element);
+    /*if (p_element != NULL)
+    {
+        m_totalNbElem++;
+        m_nbElem++;
+    }*/
+}
+
+void Maze::removeCellElement(const int p_row, const int p_column, Element * p_element)
+{
+    if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns) 
+    {
+        kError() << "Bad maze coordinates";
+    }
+    m_cells[p_row][p_column].removeElement(p_element);
 }
 
 void Maze::setResurrectionCell(QPoint p_resurrectionCell) {

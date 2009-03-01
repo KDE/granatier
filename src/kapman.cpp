@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -166,7 +167,7 @@ void Kapman::updateMove()
                 {
                     cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                     cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    if(m_maze->getCell(cellRow, cellCol).getType() == Cell::WALL)
+                    if(!m_maze->getCell(cellRow, cellCol).isWalkable())
                     {
                         deltaPerpendicularMove = deltaPerpendicularCellCenter + signZeroPositive(deltaPerpendicularCellCenter) * (fabs(deltaStraightMove - deltaStraightCellCenter) - Cell::SIZE/2);
                         if(fabs(deltaPerpendicularMove) > fabs(deltaPerpendicularCellCenter))       //check if moved over perpendicular center
@@ -192,7 +193,7 @@ void Kapman::updateMove()
                 {
                     cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                     cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    if(m_maze->getCell(cellRow, cellCol).getType() == Cell::WALL)
+                    if(!m_maze->getCell(cellRow, cellCol).isWalkable())
                     {
                         deltaPerpendicularMove = deltaPerpendicularCellCenter;
                     }
@@ -204,7 +205,7 @@ void Kapman::updateMove()
             }
             while(fabs(deltaAskedMove) > 0)     //complete the move
             {
-                if(m_maze->getCell(curCellRow + yDirection, curCellCol + xDirection).getType() == Cell::GROUND)     //check if next cell is walkable
+                if(m_maze->getCell(curCellRow + yDirection, curCellCol + xDirection).isWalkable())     //check if next cell is walkable
                 {
                     if(fabs(deltaAskedMove) > Cell::SIZE)   //move to next cell center if the remaining move exceeds a cell center
                     {
@@ -215,7 +216,7 @@ void Kapman::updateMove()
                         {
                             cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                            if(m_maze->getCell(cellRow, cellCol).getType() == Cell::WALL)
+                            if(!m_maze->getCell(cellRow, cellCol).isWalkable())
                             {
                                 deltaPerpendicularMove = deltaPerpendicularCellCenter;
                             }
@@ -229,7 +230,7 @@ void Kapman::updateMove()
                         {
                             cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                            if(m_maze->getCell(cellRow, cellCol).getType() == Cell::WALL)
+                            if(!m_maze->getCell(cellRow, cellCol).isWalkable())
                             {
                                 deltaPerpendicularMove = signZeroPositive(deltaPerpendicularCellCenter) * fabs(deltaAskedMove);
                                 if(fabs(deltaPerpendicularMove) > fabs(deltaPerpendicularCellCenter))

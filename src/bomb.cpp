@@ -29,6 +29,8 @@ Bomb::Bomb(qreal fX, qreal fY, Maze* pMaze, int nDetonationCountdown) : Element(
     m_x = fX;
     m_y = fY;
     
+    m_maze->setCellElement(m_maze->getRowFromY(m_y), m_maze->getColFromX(m_x), this);
+    
     m_detonationCountdown = nDetonationCountdown;
     m_detonationAsked = false;
     m_detonated = false;
@@ -179,5 +181,6 @@ void Bomb::detonate()
 void Bomb::slot_detonationCompleted()
 {
     //TODO: remove the detonation marks from the cells
+    m_maze->removeCellElement(m_maze->getRowFromY(m_y), m_maze->getColFromX(m_x), this);
     emit bombFinished(this);
 }

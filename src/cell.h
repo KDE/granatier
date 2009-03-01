@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -72,6 +73,12 @@ class Cell {
 		 */
 		~Cell();
 
+        /**
+         * Returns if it is possible to move into the cell or not, because of a wall, bomb, etc.
+         * @return true if it is possible to move into the cell
+         */
+        bool isWalkable();
+
 		/**
 		 * Gets the Cell type.
 		 * @return the Cell type
@@ -95,6 +102,12 @@ class Cell {
 		 * @param p_element the Element to set on the Cell
 		 */
 		void setElement(Element* p_element);
+
+        /**
+         * Removes the Element that is on the Cell.
+         * @param p_element the Element to remove from the Cell
+         */
+        void removeElement(Element* p_element);
 
 		/**
 		 * Gets the Cell cost for A* pathfinding algorithm.

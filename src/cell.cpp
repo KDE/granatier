@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -20,43 +21,69 @@
 
 const qreal Cell::SIZE = 40.0;
 
-Cell::Cell() : m_type(Cell::WALL), m_element(NULL), m_cost(0), m_parent(NULL) {
+Cell::Cell() : m_type(Cell::WALL), m_element(NULL), m_cost(0), m_parent(NULL)
+{
 }
 
-Cell::~Cell() {
-	m_element = NULL;
-	delete m_element;
+Cell::~Cell()
+{
+    //m_element = NULL;
+    //delete m_element;
 }
 
-Cell::Type Cell::getType() {
-	return m_type;
+bool Cell::isWalkable()
+{
+    if(m_type == Cell::WALL || m_element != NULL)
+    {
+        return false;
+    }
+    return true;
 }
 
-void Cell::setType(Cell::Type p_type) {
-	m_type = p_type;
+Cell::Type Cell::getType() 
+{
+    return m_type;
 }
 
-Element* Cell::getElement() {
-	return m_element;
+void Cell::setType(Cell::Type p_type)
+{
+    m_type = p_type;
 }
 
-void Cell::setElement(Element* p_element) {
-	m_element = p_element;
+Element* Cell::getElement()
+{
+    return m_element;
 }
 
-int Cell::getCost() const {
-	return m_cost;
+void Cell::setElement(Element* p_element)
+{
+    m_element = p_element;
 }
 
-void Cell::setCost(const int p_cost) {
-	m_cost = p_cost;
+void Cell::removeElement(Element* p_element)
+{
+    if(p_element == m_element)
+    {
+        m_element = NULL;
+    }
 }
 
-Cell* Cell::getParent() const {
-	return m_parent;
+int Cell::getCost() const
+{
+    return m_cost;
 }
 
-void Cell::setParent(Cell* p_parent) {
-	m_parent = p_parent;
+void Cell::setCost(const int p_cost)
+{
+    m_cost = p_cost;
 }
 
+Cell* Cell::getParent() const
+{
+    return m_parent;
+}
+
+void Cell::setParent(Cell* p_parent) 
+{
+    m_parent = p_parent;
+}
