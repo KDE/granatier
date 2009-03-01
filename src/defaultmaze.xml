@@ -24,7 +24,7 @@
   <Row>__===       ===__</Row>
   <Row>____=========____</Row>
   <Bonus rowIndex="11" colIndex="8" x-align="center" y-align="center" />
-  <Kapman rowIndex="2" colIndex="8" x-align="center" y-align="center" />
-  <Kapman2 rowIndex="10" colIndex="8" x-align="center" y-align="center" />
+  <Player rowIndex="2" colIndex="8" x-align="center" y-align="center" imageId="player1"/>
+  <Player rowIndex="10" colIndex="8" x-align="center" y-align="center" imageId="player2"/>
   <Ghost rowIndex="8" colIndex="8" x-align="center" y-align="center" imageId="ghost1"/>
 </Maze>

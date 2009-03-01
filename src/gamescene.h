@@ -46,9 +46,8 @@ class GameScene : public QGraphicsScene {
 		/** The MazeItems to be drawn */
 		MazeItem*** m_mazeItem;
 
-		/** The KapmanItem to be drawn */
-		KapmanItem* m_kapmanItem;
-        KapmanItem* m_kapmanItem2;
+        /** The PlayerItem of each Player to be drawn */
+        QList<KapmanItem*> m_playerItems;
 
 		/** The GhostItem of each Ghost to be drawn */
 		QList<GhostItem*> m_ghostItems;

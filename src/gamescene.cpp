@@ -77,25 +77,21 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
         }
     }
 
-	// Create the KapmanItem
-	m_kapmanItem = new KapmanItem(p_game->getKapman("player1"));
-	m_kapmanItem->setSharedRenderer(m_renderer);
-	m_kapmanItem->setPlayerId("player1");
-	// Corrects the position of the KapmanItem
-	m_kapmanItem->update(p_game->getKapman("player1")->getX(), p_game->getKapman("player1")->getY());
-	m_kapmanItem->setZValue(2);
-	// Stops the Kapman animation
-	m_kapmanItem->stopAnim();
-    
-    // Create the second player
-    m_kapmanItem2 = new KapmanItem(p_game->getKapman("player2"));
-    m_kapmanItem2->setSharedRenderer(m_renderer);
-    m_kapmanItem2->setPlayerId("player2");
-    // Corrects the position of the second player
-    m_kapmanItem2->update(p_game->getKapman("player2")->getX(), p_game->getKapman("player2")->getY());
-    m_kapmanItem2->setZValue(2);
-    // Stops the second player animation
-    m_kapmanItem2->stopAnim();
+    // Create the PlayerItems
+    QList <Kapman*> players = p_game->getPlayers();
+    KapmanItem* kapmanItem;
+    for(int i = 0; i < players.size(); i++)
+    {
+        kapmanItem = new KapmanItem(players[i]);
+        kapmanItem->setSharedRenderer(m_renderer);
+        // Corrects the position of the player
+        kapmanItem->update(players[i]->getX(), players[i]->getY());
+        kapmanItem->setZValue(2);
+        // Stops the player animation
+        kapmanItem->stopAnim();
+        
+        m_playerItems.append(kapmanItem);
+    }
 
 	// Create the GhostItems
 	for (int i = 0; i < p_game->getGhosts().size(); ++i) {
@@ -167,9 +163,12 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
             if(m_mazeItem[i][j] != NULL) addItem(m_mazeItem[i][j]);
         }
     }
-	// Display the KapmanItem
-	addItem(m_kapmanItem);
-    addItem(m_kapmanItem2);
+
+    // Display each PlayerItem
+    for (int i = 0; i < m_playerItems.size(); i++)
+    {
+        addItem(m_playerItems[i]);
+    }
 	// Display each GhostItem
 	for (int i = 0; i < m_ghostItems.size(); ++i) {
 		addItem(m_ghostItems[i]);
@@ -199,14 +198,18 @@ GameScene::~GameScene() {
         delete[] m_mazeItem[i];
     }
     delete[] m_mazeItem;
-    
-	delete m_kapmanItem;
-    delete m_kapmanItem2;
+
+    for (int i = 0; i < m_playerItems.size(); i++)
+    {
+        delete m_playerItems[i];
+    }
     
 	for (int i = 0; i < m_ghostItems.size(); ++i) {
 		delete m_ghostItems[i];
 	}
-    for (int i = 0; i < m_bombItems.size(); ++i) {
+    
+    for (int i = 0; i < m_bombItems.size(); i++)
+    {
         delete m_bombItems[i];
     }
     
@@ -315,9 +318,11 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser) {
 				m_pauseLabel->setPos((width() - m_pauseLabel->boundingRect().width()) / 2, (height() - m_pauseLabel->boundingRect().height()) / 2);
 			}
 		}
-		// Stop kapman animation
-		m_kapmanItem->pauseAnim();
-        m_kapmanItem2->pauseAnim();
+		// Stop player animation
+        for (int i = 0; i < m_playerItems.size(); i++)
+        {
+            m_playerItems[i]->pauseAnim();
+        }
 	} else {	// If the game has resumed
 		// If the pause was due to an action from the user
 		if (p_fromUser) {
@@ -326,9 +331,11 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser) {
 				removeItem(m_pauseLabel);
 			}
 		}
-		// Resume kapman animation
-		m_kapmanItem->resumeAnim();
-        m_kapmanItem2->resumeAnim();
+		// Resume player animation
+        for (int i = 0; i < m_playerItems.size(); i++)
+        {
+            m_playerItems[i]->resumeAnim();
+        }
 	}
 }
 

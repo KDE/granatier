@@ -77,11 +77,8 @@ class Game : public QObject {
 		/** The Maze */
 		Maze* m_maze;
 
-		/** The main Character */
-		Kapman* m_kapman;
-        
-        /** The second player */
-        Kapman* m_kapman2;
+        /** The Players */
+        QList<Kapman*> m_players;
 		
 		/** The Ghosts */
 		QList<Ghost*> m_ghosts;
@@ -156,12 +153,12 @@ class Game : public QObject {
 		 * @return the Maze instance
 		 */
 		Maze* getMaze() const;
-		 
-		/**
-		 * @return the Kapman model
-		 */
-		Kapman* getKapman(QString strPlayer) const;
 		
+        /**
+         * @return the Player models
+         */
+        QList<Kapman*> getPlayers() const;
+        
 		/**
 		 * @return the Ghost models
 		 */
@@ -214,11 +211,12 @@ class Game : public QObject {
 		 */
 		void createBonus(QPointF p_position);
 
-		/**
-		 * Create the new Kapman
-		 * @param p_position the Kapman position
-		 */
-		void createKapman(QPointF p_position, QString strPlayer);
+        /**
+         * Create the new Player
+         * @param p_position the Player position
+         * @param p_imageId the image of the Player
+         */
+        void createPlayer(QPointF p_position, const QString& p_imageId);
 
 		/**
 		 * Create the new Ghost

@@ -55,6 +55,9 @@ KapmanItem::KapmanItem(Kapman* p_model) : CharacterItem(p_model) {
 	m_blinkTimer = new QTimer(this);
 	m_blinkTimer->setInterval(400);
 	connect(m_blinkTimer, SIGNAL(timeout()), this, SLOT(blink()));
+    
+    m_strPlayerId = ((Kapman*) p_model)->getImageId();
+    setElementId(m_strPlayerId + "_0");
 }
 
 KapmanItem::~KapmanItem() {

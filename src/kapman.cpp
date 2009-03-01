@@ -25,9 +25,11 @@
 
 const qreal Kapman::MAX_SPEED_RATIO = 1.5;
 
-Kapman::Kapman(qreal p_x, qreal p_y, Maze* p_maze) : Character(p_x, p_y, p_maze) {
-	m_type = Element::KAPMAN;
-	m_maxSpeed = m_normalSpeed * MAX_SPEED_RATIO;
+Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze) : Character(p_x, p_y, p_maze)
+{
+    m_type = Element::KAPMAN;
+    m_maxSpeed = m_normalSpeed * MAX_SPEED_RATIO;
+    m_imageId = p_imageId;
     
     m_key.moveLeft = Qt::Key_Left;
     m_key.moveRight = Qt::Key_Right;
@@ -43,6 +45,11 @@ Kapman::~Kapman() {
 void Kapman::setShortcuts(const Shortcuts keys)
 {
     m_key = keys;
+}
+
+QString Kapman::getImageId() const
+{
+    return m_imageId;
 }
 
 void Kapman::init() {

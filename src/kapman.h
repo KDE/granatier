@@ -34,18 +34,22 @@ class Kapman : public Character {
 		/** Max speed ratio, compared with the initial speed  */
 		static const qreal MAX_SPEED_RATIO;
 
+        /** The path to the Player image */
+        QString m_imageId;
+        
 		/** Kapman asked speed */
 		qreal m_askedXSpeed, m_askedYSpeed;
 
 	public:
 
-		/**
-		 * Creates a new Kapman instance.
-		 * @param p_x the initial x-coordinate
-		 * @param p_y the initial y-coordinate
-		 * @param p_maze the Maze the Kapman is on
-		 */
-		Kapman(qreal p_x, qreal p_y, Maze* p_maze);
+        /**
+         * Creates a new Kapman instance.
+         * @param p_x the initial x-coordinate
+         * @param p_y the initial y-coordinate
+         * @param p_imageId path to the image of the related item
+         * @param p_maze the Maze the Kapman is on
+         */
+        Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze);
 
 		/**
 		 * Deletes the Kapman instance.
@@ -56,6 +60,12 @@ class Kapman : public Character {
          * Shortcuts for moving and dropping bombs
          */
         void setShortcuts(const Shortcuts keys);
+
+        /**
+         * Gets the path to the Player image.
+         * @return the path to the Player image
+         */
+        QString getImageId() const;
 
 		/**
 		 * Initializes the Kapman.
