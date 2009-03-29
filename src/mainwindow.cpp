@@ -98,7 +98,7 @@ void MainWindow::newGame(const bool gameOver) {
 	// If the game was not over
 	if (!gameOver){	
 		// Confirm before starting a new game
-		if (KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit the current game ?"), i18n("New game")) == KMessageBox::Yes) {
+		if (KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit the current game?"), i18n("New game")) == KMessageBox::Yes) {
 			// Start a new game
 			initGame();
 		}
@@ -172,7 +172,7 @@ void MainWindow::close() {
 		m_game->pause();
 	}
 	// Confirm before closing
-	if(KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit Granatier ?"), i18nc("To quit Granatier", "Quit")) == KMessageBox::Yes) {
+	if(KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit Granatier?"), i18nc("To quit Granatier", "Quit")) == KMessageBox::Yes) {
 		KXmlGuiWindow::close();
 	}
 	else {
