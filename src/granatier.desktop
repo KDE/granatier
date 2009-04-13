@@ -1,6 +1,5 @@
 [Desktop Entry]
 Type=Application
-Version=0.0.1
 Name=Granatier
 Name[el]=Βομβιστής
 Name[uk]=Гренадер
@@ -21,4 +20,4 @@ GenericName[x-test]=xxBomberman clonexx
 Icon=granatier
 TryExec=granatier
 Exec=granatier
-Categories=Game;ArcadeGame;
+Categories=Qt;KDE;Game;ArcadeGame;
