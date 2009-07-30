@@ -1,5 +1,22 @@
 project(granatier)
+
+find_package(Qt4 REQUIRED)
 find_package(KDE4 REQUIRED)
+find_package(LibKDEGames REQUIRED)
+find_package(Gluon REQUIRED)
+find_package(OpenAL REQUIRED)
+find_package(Alut REQUIRED)
+find_package(SndFile REQUIRED)
+find_package(Ogg REQUIRED)
+find_package(Vorbis REQUIRED)
+
+include_directories(${KDE4_INCLUDES})
+include_directories(${KDEGAMES_INCLUDE_DIRS})
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${ALUT_INCLUDE_DIRS})
+include_directories(${OPENAL_INCLUDE_DIR})
+
 include(KDE4Defaults)
 include(MacroLibrary)
 

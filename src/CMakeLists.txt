@@ -4,6 +4,7 @@ set(granatierSources
 	bonus.cpp
   bomb.cpp
   bombitem.cpp
+  bombexplosionitem.cpp
 	cell.cpp
 	character.cpp
 	characteritem.cpp
@@ -33,7 +34,7 @@ kde4_add_kcfg_files(granatierSources settings.kcfgc)
 
 kde4_add_executable(granatier ${granatierSources})
 
-target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${KDE4_PHONON_LIBS} ${QT_QTXML_LIBRARY} ${KDEGAMES_LIBRARY})
+target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${KDE4_PHONON_LIBS} ${QT_QTXML_LIBRARY} ${KDEGAMES_LIBRARY} kal)
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
 

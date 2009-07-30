@@ -114,6 +114,11 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 	m_state = RUNNING;
 	// Init the characters coordinates on the Maze
 	initCharactersPosition();
+    
+    
+    //init KALEngine
+    soundEngine = KALEngine::getInstance();
+    soundSourceExplode = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/explode.ogg")), soundEngine);
 }
 
 Game::~Game() {
@@ -136,6 +141,9 @@ Game::~Game() {
         delete m_bombs[i];
     }
 	delete m_bonus;
+    
+    delete soundSourceExplode;
+    KALEngine::kill();
 }
 
 void Game::start() {
@@ -589,5 +597,6 @@ void Game::slot_cleanupBombs(Bomb* bomb)
 
 void Game::slot_bombDetonated()
 {
-    playSound(KStandardDirs::locate("data", "granatier/sounds/explode.ogg"));
+    //playSound(KStandardDirs::locate("data", "granatier/sounds/explode.ogg"));
+    soundSourceExplode->play();
 }

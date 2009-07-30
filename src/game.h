@@ -31,6 +31,10 @@
 #include <KGameDifficulty>
 #include <Phonon/MediaObject>
 
+#include <KDE/KALEngine>
+#include <KDE/KALSource>
+#include <KDE/KALBuffer>
+
 /**
  * @brief This class manages the game main loop : it regularly checks the key press events, computes the character moves and updates their coordinates.
  */
@@ -109,6 +113,9 @@ class Game : public QObject {
 		
 		/** A second MediaObject to play sounds */
 		Phonon::MediaObject* m_media2;
+        
+        KALEngine* soundEngine;
+        KALSource* soundSourceExplode;
 		
 	public:
 
