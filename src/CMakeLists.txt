@@ -1,33 +1,33 @@
 project(granatier)
 
 set(granatierSources
-	bonus.cpp
-  bomb.cpp
-  bombitem.cpp
-  bombexplosionitem.cpp
-	cell.cpp
-	character.cpp
-	characteritem.cpp
-	element.cpp
-	elementitem.cpp
-	energizer.cpp
-	game.cpp
-	gamescene.cpp
-	gameview.cpp
-	ghost.cpp
-	ghostitem.cpp
-	kapman.cpp
-	kapmanitem.cpp
-	mainwindow.cpp
-	mapparser.cpp
-	main.cpp
-	maze.cpp
-	mazeitem.cpp
-	pill.cpp
+    block.cpp
+    bonus.cpp
+    bomb.cpp
+    bombitem.cpp
+    bombexplosionitem.cpp
+    cell.cpp
+    character.cpp
+    characteritem.cpp
+    element.cpp
+    elementitem.cpp
+    energizer.cpp
+    game.cpp
+    gamescene.cpp
+    gameview.cpp
+    ghost.cpp
+    ghostitem.cpp
+    kapman.cpp
+    kapmanitem.cpp
+    mainwindow.cpp
+    mapparser.cpp
+    main.cpp
+    maze.cpp
+    mazeitem.cpp
 )
 set(granatierData
-	defaultmaze.xml
-	granatierui.rc
+    defaultmaze.xml
+    granatierui.rc
 )
 
 kde4_add_kcfg_files(granatierSources settings.kcfgc)

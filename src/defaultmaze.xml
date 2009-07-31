@@ -5,7 +5,7 @@
   ' '		: corridor
   'x'		: ghost corridor
   'X'		: ghost home cell (must be unique)
-  '.'		: pill
+  '+'		: block
   'o'		: energizer
 -->
 
@@ -15,9 +15,9 @@
   <Row>__=           =__</Row>
   <Row>_==   =   =   ==_</Row>
   <Row>==  ===   ===  ==</Row>
-  <Row>=   =       =   =</Row>
+  <Row>=   =+++ +++=   =</Row>
   <Row>=               =</Row>
-  <Row>=   =       =   =</Row>
+  <Row>=   =+++ +++=   =</Row>
   <Row>==  ===   ===  ==</Row>
   <Row>_==   =   =   ==_</Row>
   <Row>__=           =__</Row>

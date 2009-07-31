@@ -18,86 +18,110 @@
 
 #include "mapparser.h"
 #include "element.h"
-#include "pill.h"
+#include "block.h"
 #include "energizer.h"
 
-MapParser::MapParser(Game* p_game) {
-	m_game = p_game;
-	m_counterRows = 0;
+MapParser::MapParser(Game* p_game)
+{
+    m_game = p_game;
+    m_counterRows = 0;
 }
 
-MapParser::~MapParser() {
-
+MapParser::~MapParser()
+{
 }
 
-bool MapParser::characters(const QString & ch ){
-	m_buffer = ch;
-	return true;
+bool MapParser::characters(const QString & ch)
+{
+    m_buffer = ch;
+    return true;
 }
 
-bool MapParser::startElement(const QString&, const QString&, const QString& p_qName, const QXmlAttributes& p_atts) {
-	qreal x_position = 0.0;
-	qreal y_position = 0.0;
-	
-	if (p_qName == "Maze") {
-		int nbRows = 0;
-		int nbColumns = 0;
-		// Initialize the number of rows and columns
-		for (int i = 0; i < p_atts.count(); ++i) {
-			if (p_atts.qName(i) == "rowCount") {
-				nbRows = p_atts.value(i).toInt();
-			}
-			if (p_atts.qName(i) == "colCount") {
-				nbColumns = p_atts.value(i).toInt();
-			}
-		}
-		// Create the Maze matrix
-		m_game->getMaze()->init(nbRows, nbColumns);
-	}
-	if (p_qName == "Bonus") {
-		// Initialize the number of rows and columns
-		for (int i = 0; i < p_atts.count(); ++i) {
-			if (p_atts.qName(i) == "rowIndex") {
-				y_position = p_atts.value(i).toInt();
-			}
-			if (p_atts.qName(i) == "colIndex") {
-				x_position = p_atts.value(i).toInt();
-			}
-			if (p_atts.qName(i) == "x-align") {
-				if(p_atts.value(i) == "center"){
-					x_position += 0.5;
-				}
-			}
-			if (p_atts.qName(i) == "y-align") {
-				if(p_atts.value(i) == "center"){
-					y_position += 0.5;
-				}
-			}
-		}
-		m_game->createBonus(QPointF(x_position, y_position));
-	}
-
-    if (p_qName == "Player") {
-        QString imageId = "";
+bool MapParser::startElement(const QString&, const QString&, const QString& p_qName, const QXmlAttributes& p_atts)
+{
+    qreal x_position = 0.0;
+    qreal y_position = 0.0;
+    
+    if (p_qName == "Maze")
+    {
+        int nbRows = 0;
+        int nbColumns = 0;
         // Initialize the number of rows and columns
-        for (int i = 0; i < p_atts.count(); i++) {
-            if (p_atts.qName(i) == "rowIndex") {
+        for (int i = 0; i < p_atts.count(); ++i)
+        {
+            if (p_atts.qName(i) == "rowCount")
+            {
+                nbRows = p_atts.value(i).toInt();
+            }
+            if (p_atts.qName(i) == "colCount")
+            {
+                nbColumns = p_atts.value(i).toInt();
+            }
+        }
+        // Create the Maze matrix
+        m_game->getMaze()->init(nbRows, nbColumns);
+    }
+    if (p_qName == "Bonus")
+    {
+        // Initialize the number of rows and columns
+        for (int i = 0; i < p_atts.count(); ++i)
+        {
+            if (p_atts.qName(i) == "rowIndex")
+            {
                 y_position = p_atts.value(i).toInt();
             }
-            if (p_atts.qName(i) == "colIndex") {
+            if (p_atts.qName(i) == "colIndex")
+            {
                 x_position = p_atts.value(i).toInt();
             }
-            if (p_atts.qName(i) == "x-align") {
-                if(p_atts.value(i) == "center"){
+            if (p_atts.qName(i) == "x-align")
+            {
+                if(p_atts.value(i) == "center")
+                {
                     x_position += 0.5;
                 }
             }
-            if (p_atts.qName(i) == "y-align") {
-                if(p_atts.value(i) == "center"){
+            if (p_atts.qName(i) == "y-align")
+            {
+                if(p_atts.value(i) == "center")
+                {
                     y_position += 0.5;
                 }
             }
-            if (p_atts.qName(i) == "imageId") {
+        }
+        m_game->createBonus(QPointF(x_position, y_position));
+    }
+
+    if (p_qName == "Player")
+    {
+        QString imageId = "";
+        // Initialize the number of rows and columns
+        for (int i = 0; i < p_atts.count(); i++)
+        {
+            if (p_atts.qName(i) == "rowIndex")
+            {
+                y_position = p_atts.value(i).toInt();
+            }
+            if (p_atts.qName(i) == "colIndex")
+            {
+                x_position = p_atts.value(i).toInt();
+            }
+            if (p_atts.qName(i) == "x-align")
+            {
+                if(p_atts.value(i) == "center")
+                {
+                    x_position += 0.5;
+                }
+            }
+            if (p_atts.qName(i) == "y-align")
+            {
+                if(p_atts.value(i) == "center")
+                {
+                    y_position += 0.5;
+                }
+            }
+            if (p_atts.qName(i) == "imageId")
+            {
                 imageId = p_atts.value(i);
             }
         }
@@ -105,70 +129,81 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
     }
 
 
-	if (p_qName == "Ghost") {
-		QString imageId = "";
-		// Initialize the number of rows and columns
-		for (int i = 0; i < p_atts.count(); ++i) {
-			if (p_atts.qName(i) == "rowIndex") {
-				y_position = p_atts.value(i).toInt();
-			}
-			if (p_atts.qName(i) == "colIndex") {
-				x_position = p_atts.value(i).toInt();
-			}
-			if (p_atts.qName(i) == "x-align") {
-				if(p_atts.value(i) == "center"){
-					x_position += 0.5;
-				}
-			}
-			if (p_atts.qName(i) == "y-align") {
-				if(p_atts.value(i) == "center"){
-					y_position += 0.5;
-				}
-			}
-			if (p_atts.qName(i) == "imageId") {
-				imageId = p_atts.value(i);
-			}
-		}
-		m_game->createGhost(QPointF(x_position, y_position),imageId);
-	}
+    if (p_qName == "Ghost")
+    {
+        QString imageId = "";
+        // Initialize the number of rows and columns
+        for (int i = 0; i < p_atts.count(); ++i)
+        {
+            if (p_atts.qName(i) == "rowIndex")
+            {
+                y_position = p_atts.value(i).toInt();
+            }
+            if (p_atts.qName(i) == "colIndex")
+            {
+                x_position = p_atts.value(i).toInt();
+            }
+            if (p_atts.qName(i) == "x-align")
+            {
+                if(p_atts.value(i) == "center")
+                {
+                    x_position += 0.5;
+                }
+            }
+            if (p_atts.qName(i) == "y-align")
+            {
+                if(p_atts.value(i) == "center")
+                {
+                    y_position += 0.5;
+                }
+            }
+            if (p_atts.qName(i) == "imageId")
+            {
+                imageId = p_atts.value(i);
+            }
+        }
+        m_game->createGhost(QPointF(x_position, y_position),imageId);
+    }
 
-	
-	return true;
+    
+    return true;
 }
 
-bool MapParser::endElement(const QString &, const QString &, const QString & p_qName ){
-	if(p_qName == "Row")
-	{
-		for (int i=0; i<m_buffer.length();++i)
-		{
-			switch(m_buffer.at(i).toAscii()){
+bool MapParser::endElement(const QString &, const QString &, const QString & p_qName)
+{
+    if(p_qName == "Row")
+    {
+        for (int i=0; i<m_buffer.length();++i)
+        {
+            switch(m_buffer.at(i).toAscii()){
                 case '_':
                     m_game->getMaze()->setCellType(m_counterRows,i,Cell::HOLE);
                     break;
-				case '|':
-				case '=': m_game->getMaze()->setCellType(m_counterRows,i,Cell::WALL);
-					break;
-				case ' ': m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
-					break;
-				case '.': m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
-					m_game->getMaze()->setCellElement(m_counterRows, i,
-							new Pill(m_counterRows, i, m_game->getMaze(), "pill"));
-					break; 
-				case 'o':m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
-					m_game->getMaze()->setCellElement(m_counterRows, i,
-							new Energizer(m_counterRows, i, m_game->getMaze(), "energizer"));
-					break;
-				case 'x':m_game->getMaze()->setCellType(m_counterRows,i,Cell::GHOSTCAMP);
-					break;
-				case 'X':m_game->getMaze()->setCellType(m_counterRows,i,Cell::GHOSTCAMP);
-					m_game->getMaze()->setResurrectionCell(QPoint(m_counterRows, i));
-					break;
-			}
-		}
-		m_counterRows ++;
-	}
-	return true;
+                case '|':
+                case '=':
+                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::WALL);
+                    break;
+                case ' ':
+                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
+                    break;
+                case '+':
+                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->getMaze()->setCellElement(m_counterRows, i, new Block(m_counterRows, i, m_game->getMaze(), "maze_block"));
+                    break; 
+                case 'o':
+                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->getMaze()->setCellElement(m_counterRows, i, new Energizer(m_counterRows, i, m_game->getMaze(), "energizer"));
+                    break;
+                case 'x':
+                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GHOSTCAMP);
+                    break;
+                case 'X':
+                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GHOSTCAMP);
+                    m_game->getMaze()->setResurrectionCell(QPoint(m_counterRows, i));
+                    break;
+            }
+        }
+        m_counterRows ++;
+    }
+    return true;
 }
-
-
-

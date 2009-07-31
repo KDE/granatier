@@ -318,16 +318,19 @@ void Game::initCharactersPosition() {
             m_players[i]->initCoordinate();
             m_players[i]->init();
         }
-		// Initialize the Pills & Energizers coordinates
-		for (int i = 0; i < m_maze->getNbRows(); ++i) {
-			for (int j = 0; j < m_maze->getNbColumns(); ++j) {
-				if (m_maze->getCell(i,j).getElement() != NULL){
-					m_maze->getCell(i,j).getElement()->setX(Cell::SIZE * (j + 0.5));
-					m_maze->getCell(i,j).getElement()->setY(Cell::SIZE * (i + 0.5));
-				}
-			}
-		}
-	}
+        // Initialize the Block coordinates
+        for (int i = 0; i < m_maze->getNbRows(); ++i)
+        {
+            for (int j = 0; j < m_maze->getNbColumns(); ++j)
+            {
+                if (m_maze->getCell(i,j).getElement() != NULL && m_maze->getCell(i,j).getElement()->getType() == Element::BLOCK)
+                {
+                    m_maze->getCell(i,j).getElement()->setX(Cell::SIZE * (j + 0.5));
+                    m_maze->getCell(i,j).getElement()->setY(Cell::SIZE * (i + 0.5));
+                }
+            }
+        }
+    }
 }
 
 void Game::setTimersDuration() {

@@ -17,23 +17,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "pill.h"
-#include "kapman.h"
+#ifndef BLOCK_H
+#define BLOCK_H
 
-const int Pill::POINTS = 10;
+#include "element.h"
 
-Pill::Pill(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId) : Element(p_x, p_y, p_maze) {
-	Element::setImageId(p_imageId);
-	m_points = 10;
-	m_type = Element::PILL;
-}
+/**
+ * @brief This class represents a block with the possibility of a bonus inside
+ */
+class Block : public Element {
 
-Pill::~Pill() {
-}
+    public:
 
-void Pill::doActionOnCollision(Kapman* p_kapman) {
-	p_kapman->winPoints(this);
-	// Tell to the maze that an element was eaten
-	m_maze->decrementNbElem();
-}
+        /**
+         * Creates a new Block instance.
+         */
+        Block(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId);
+
+        /**
+         * Deletes the Block instance.
+         */
+        ~Block();
+};
+
+#endif
 

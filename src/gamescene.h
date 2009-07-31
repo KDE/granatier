@@ -56,8 +56,8 @@ class GameScene : public QGraphicsScene {
         /** The BombItem of each Bomb to be drawn */
         QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
 		
-		/** The ElementItem to be drawn (each Pill and Energizers) */
-		ElementItem*** m_elementItems;
+		/** The ElementItem to be drawn (each Block) */
+		ElementItem*** m_blockItems;
 		
 		/** The Bonus ElementItem */
 		ElementItem* m_bonusItem;

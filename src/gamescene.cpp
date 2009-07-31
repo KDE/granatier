@@ -103,23 +103,28 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 		ghost->setZValue(3);
 		m_ghostItems.append(ghost);
 	}
-	// Create the Pill and Energizer items
-	m_elementItems = new ElementItem**[m_game->getMaze()->getNbRows()];
-	for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i) {
-		m_elementItems[i] = new ElementItem*[m_game->getMaze()->getNbColumns()];
-		for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
-			if (m_game->getMaze()->getCell(i, j).getElement() != NULL) {
-				// Create the element and set the image
-				ElementItem* element = new ElementItem(m_game->getMaze()->getCell(i, j).getElement());
-				element->setSharedRenderer(m_renderer);
-				element->setElementId(m_game->getMaze()->getCell(i,j).getElement()->getImageId());
-				element->update(m_game->getMaze()->getCell(i, j).getElement()->getX(), m_game->getMaze()->getCell(i, j).getElement()->getY());
-				m_elementItems[i][j] = element;
-			} else {
-				m_elementItems[i][j] = NULL;
-			}
-		}
-	}
+    // Create the Block items
+    m_blockItems = new ElementItem**[m_game->getMaze()->getNbRows()];
+    for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i)
+    {
+        m_blockItems[i] = new ElementItem*[m_game->getMaze()->getNbColumns()];
+        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+        {
+            if (m_game->getMaze()->getCell(i, j).getElement() != NULL && m_game->getMaze()->getCell(i, j).getElement()->getType() == Element::BLOCK)
+            {
+                // Create the element and set the image
+                ElementItem* element = new ElementItem(m_game->getMaze()->getCell(i, j).getElement());
+                element->setSharedRenderer(m_renderer);
+                element->setElementId(m_game->getMaze()->getCell(i,j).getElement()->getImageId());
+                element->update(m_game->getMaze()->getCell(i, j).getElement()->getX(), m_game->getMaze()->getCell(i, j).getElement()->getY());
+                m_blockItems[i][j] = element;
+            }
+            else
+            {
+                m_blockItems[i][j] = NULL;
+            }
+        }
+    }
 	// Create the Bonus item
 	m_bonusItem = new ElementItem(m_game->getBonus());
 	m_bonusItem->setSharedRenderer(m_renderer);
@@ -225,13 +230,13 @@ GameScene::~GameScene() {
     
 	for (int i = 0; i < m_game->getMaze()->getNbRows();++i) {
 		for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
-			if (m_elementItems[i][j] != NULL) {
-				delete m_elementItems[i][j];
+			if (m_blockItems[i][j] != NULL) {
+				delete m_blockItems[i][j];
 			}
 		}
-		delete[] m_elementItems[i];
+		delete[] m_blockItems[i];
 	}
-	delete[] m_elementItems;
+	delete[] m_blockItems;
     
 	delete m_bonusItem;
 	delete m_introLabel;
@@ -265,18 +270,23 @@ void GameScene::loadTheme() {
 }
 
 void GameScene::intro(const bool p_newLevel) {
-	// If a new level has begun
-	if (p_newLevel) {
-		// Set each Pill and Energizer item to its original coordinates
-		for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i) {
-			for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
-				if (m_elementItems[i][j] != NULL) {
-					if (!items().contains(m_elementItems[i][j])) {
-						addItem(m_elementItems[i][j]);
-					}
-				}
-			}
-		}
+    // If a new level has begun
+    if (p_newLevel)
+    {
+        // Set each Block item to its original coordinates
+        for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i)
+        {
+            for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+            {
+                if (m_blockItems[i][j] != NULL)
+                {
+                    if (!items().contains(m_blockItems[i][j]))
+                    {
+                        addItem(m_blockItems[i][j]);
+                    }
+                }
+            }
+        }
 		// Display the new level label
 		m_newLevelLabel->setPlainText(i18nc("The number of the game level", "Level %1", m_game->getLevel()));
 		if (!items().contains(m_newLevelLabel)) {
@@ -350,8 +360,8 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser) {
 }
 
 void GameScene::hideElement(const qreal p_x, const qreal p_y) {
-	if (items().contains(m_elementItems[(int)((p_y - (Cell::SIZE * 0.5)) / Cell::SIZE)][(int)((p_x - (Cell::SIZE * 0.5)) / Cell::SIZE)])) {
-		removeItem(m_elementItems[(int)((p_y - (Cell::SIZE * 0.5)) / Cell::SIZE)][(int)((p_x - (Cell::SIZE * 0.5)) / Cell::SIZE)]);
+	if (items().contains(m_blockItems[(int)((p_y - (Cell::SIZE * 0.5)) / Cell::SIZE)][(int)((p_x - (Cell::SIZE * 0.5)) / Cell::SIZE)])) {
+		removeItem(m_blockItems[(int)((p_y - (Cell::SIZE * 0.5)) / Cell::SIZE)][(int)((p_x - (Cell::SIZE * 0.5)) / Cell::SIZE)]);
 	}
 }
 

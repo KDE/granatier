@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Gaël Courcelle <gael.courcelle@gmail.com>
  * Copyright 2007-2008 Alexia Allanic <alexia_allanic@yahoo.fr>
@@ -17,39 +18,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PILL_H
-#define PILL_H
+#include "block.h"
 
-#include "element.h"
+Block::Block(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId) : Element(p_x, p_y, p_maze)
+{
+    m_imageId = p_imageId;
+    m_type = Element::BLOCK;
+}
 
-/**
- * @brief This class represents a Pill enabling to earn points.
- */
-class Pill : public Element {
-
-	public:
-
-		/** The Pill value */
-		static const int POINTS;
-
-	public:
-
-		/**
-		 * Creates a new Pill instance.
-		 */
-		Pill(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId);
-
-		/**
-		 * Deletes the Pill instance.
-		 */
-		~Pill();
-
-		/**
-		 * Computes an action on a collision with the Kapman.
-		 * @param p_kapman the instance of Kapman which collides with the Pill
-		 */
-		void doActionOnCollision(Kapman* p_kapman);
-};
-
-#endif
-
+Block::~Block()
+{
+}
