@@ -29,6 +29,8 @@ Bomb::Bomb(qreal fX, qreal fY, Maze* pMaze, int nDetonationCountdown) : Element(
     m_x = fX;
     m_y = fY;
     
+    m_bombRange = 1;
+    
     m_maze->setCellElement(m_maze->getRowFromY(m_y), m_maze->getColFromX(m_x), this);
     
     m_detonationCountdown = nDetonationCountdown;
@@ -170,6 +172,16 @@ void Bomb::moveOnCenter()
 {
     setX((m_maze->getColFromX(m_x) + 0.5) * Cell::SIZE);
     setY((m_maze->getRowFromY(m_y) + 0.5) * Cell::SIZE);
+}
+
+int Bomb::bombRange()
+{
+    return m_bombRange;
+}
+
+void Bomb::setBombRange(int bombRange)
+{
+    m_bombRange = bombRange;
 }
 
 void Bomb::detonate()

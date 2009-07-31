@@ -52,6 +52,9 @@ protected:
     /** The Bomb detonation has already started */
     bool m_detonated;
 
+    /** The Bomb detonation range */
+    int m_bombRange;
+
 public:
 
     /**
@@ -128,6 +131,18 @@ public:
     * @param p_ySpeed the y-speed to set
     */
     void setYSpeed(qreal p_ySpeed);
+    
+    /**
+    * Range of the bomb
+    * @return the Bomb range
+    */
+    int bombRange();
+    
+    /**
+    * Sets the Range of the bomb
+    * @param range the Bomb range
+    */
+    void setBombRange(int bombRange);
 
 public slots:
         void slot_detonationCompleted();

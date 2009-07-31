@@ -576,6 +576,7 @@ void Game::createBomb(qreal x, qreal y)
     int col = m_maze->getColFromX(x);
     int row = m_maze->getRowFromY(y);
     Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_maze, Game::FPS * 2);
+    bomb->setBombRange(3);
     emit bombCreated(bomb);
     connect(bomb, SIGNAL(bombFinished(Bomb*)), this, SLOT(slot_cleanupBombs(Bomb*)));
     connect(bomb, SIGNAL(bombDetonated()), this, SLOT(slot_bombDetonated()));

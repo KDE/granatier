@@ -208,10 +208,20 @@ GameScene::~GameScene() {
 		delete m_ghostItems[i];
 	}
     
-    for (int i = 0; i < m_bombItems.size(); i++)
+    // Find the BombItem and remove it
+    QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
+    while (i != m_bombItems.end())
     {
-        delete m_bombItems[i];
+        while(!i.value().isEmpty())
+        {
+            delete i.value().takeFirst();
+        }
+        delete i.key();
+        m_bombItems.erase(i);
+        ++i;
     }
+    
+    
     
 	for (int i = 0; i < m_game->getMaze()->getNbRows();++i) {
 		for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
@@ -421,28 +431,119 @@ void GameScene::hidePoints() {
 void GameScene::createBombItem(Bomb* bomb)
 {
     // Create the Bombs
-    m_bombItems.append(new BombItem(bomb));
-    m_bombItems.last()->setSharedRenderer(m_renderer);
-    m_bombItems.last()->setElementId("bomb");
+    BombItem* bombItem = new BombItem(bomb);
+    bombItem->setSharedRenderer(m_renderer);
+    bombItem->setElementId("bomb");
     // Corrects the position of the BombItem
-    m_bombItems.last()->update(bomb->getX(), bomb->getY());
-    m_bombItems.last()->setZValue(1);
-    addItem(m_bombItems.last());
+    bombItem->update(bomb->getX(), bomb->getY());
+    bombItem->setZValue(1);
+    addItem(bombItem);
+    
+    int nNumberOfColums = m_game->getMaze()->getNbColumns();
+    int nNumberOfRows = m_game->getMaze()->getNbRows();
+    int nColumn;
+    int nRow;
+    bool bNorthDone = false;
+    bool bEastDone = false;
+    bool bSouthDone = false;
+    bool bWestDone = false;
+    
+    BombExplosionItem* bombExplosionItem;
+    for(int i = 0; i < bomb->bombRange(); i++)
+    {
+        // north
+        nColumn = m_game->getMaze()->getColFromX(bomb->getX());
+        nRow = m_game->getMaze()->getRowFromY(bomb->getY() - (i+1)*Cell::SIZE);
+        if(!bNorthDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows && m_game->getMaze()->getCell(nRow, nColumn).isWalkable())
+        {
+            bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, i);
+            bombExplosionItem->setSharedRenderer(m_renderer);
+            bombExplosionItem->update(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
+            bombExplosionItem->setZValue(1);
+            addItem(bombExplosionItem);
+            m_bombItems[bombItem].append(bombExplosionItem);
+        }
+        else
+        {
+          bNorthDone = true;
+        }
+        // east
+        nColumn = m_game->getMaze()->getColFromX(bomb->getX() + (i+1)*Cell::SIZE);
+        nRow = m_game->getMaze()->getRowFromY(bomb->getY());
+        if(!bEastDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows && m_game->getMaze()->getCell(nRow, nColumn).isWalkable())
+        {
+            bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, i);
+            bombExplosionItem->setSharedRenderer(m_renderer);
+            bombExplosionItem->update(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
+            bombExplosionItem->setZValue(1);
+            addItem(bombExplosionItem);
+            m_bombItems[bombItem].append(bombExplosionItem);
+        }
+        else
+        {
+          bEastDone = true;
+        }
+        // south
+        nColumn = m_game->getMaze()->getColFromX(bomb->getX());
+        nRow = m_game->getMaze()->getRowFromY(bomb->getY() + (i+1)*Cell::SIZE);
+        if(!bSouthDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows && m_game->getMaze()->getCell(nRow, nColumn).isWalkable())
+        {
+            bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, i);
+            bombExplosionItem->setSharedRenderer(m_renderer);
+            bombExplosionItem->update(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
+            bombExplosionItem->setZValue(1);
+            addItem(bombExplosionItem);
+            m_bombItems[bombItem].append(bombExplosionItem);
+        }
+        else
+        {
+          bSouthDone = true;
+        }
+        //west
+        nColumn = m_game->getMaze()->getColFromX(bomb->getX() - (i+1)*Cell::SIZE);
+        nRow = m_game->getMaze()->getRowFromY(bomb->getY());
+        if(!bWestDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows && m_game->getMaze()->getCell(nRow, nColumn).isWalkable())
+        {
+            bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, i);
+            bombExplosionItem->setSharedRenderer(m_renderer);
+            bombExplosionItem->update(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
+            bombExplosionItem->setZValue(1);
+            addItem(bombExplosionItem);
+            m_bombItems[bombItem].append(bombExplosionItem);
+        }
+        else
+        {
+          bWestDone = true;
+        }
+    }
 }
 
 void GameScene::removeBombItem(Bomb* bomb)
 {
     // Find the BombItem and remove it
-    for(int i = 0; i < m_bombItems.size(); i++)
+    QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
+    while (i != m_bombItems.end())
     {
-        if(m_bombItems[i]->getModel() == bomb)
+        if(i.key()->getModel() == bomb)
         {
-            if (items().contains(m_bombItems[i]))
+            BombExplosionItem* bombExplosionItem;
+            while(!i.value().isEmpty())
             {
-                removeItem(m_bombItems[i]);
+                bombExplosionItem = i.value().takeFirst();
+                if(items().contains(bombExplosionItem))
+                {
+                    removeItem(bombExplosionItem);
+                }
+                delete bombExplosionItem;
             }
-            m_bombItems[i]->deleteLater();
-            m_bombItems.removeAt(i);
+            if(items().contains(i.key()))
+            {
+                removeItem(i.key());
+            }
+            i.key()->deleteLater();
+            m_bombItems.erase(i);
+            break;
         }
+        ++i;
     }
 }

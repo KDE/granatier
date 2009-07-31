@@ -16,30 +16,38 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "bombitem.h"
+#include "bombexplosionitem.h"
 
 #include <KDebug>
 
-BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
+BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int i) : QGraphicsSvgItem()
 {
-    setElementId("bomb");
+    m_direction = direction;
+    switch(m_direction)
+    {
+        case NORTH:
+            setElementId("bomb_exploded_north");
+            break;
+        case EAST:
+            setElementId("bomb_exploded_east");
+            break;
+        case SOUTH:
+            setElementId("bomb_exploded_south");
+            break;
+        case WEST:
+            setElementId("bomb_exploded_west");
+            break;
+    }
+    setVisible(false);
     connect(p_model, SIGNAL(bombDetonated()), this, SLOT(startDetonation()));
-    connect(this, SIGNAL(bombItemFinished(BombItem*)), p_model, SLOT(slot_detonationCompleted()));
-    
-    // Define the timer which sets the puls frequency
-    m_pulseTimer = new QTimer(this);
-    m_pulseTimer->setInterval(100);
-    m_pulseTimer->start();
-    connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
 }
 
-BombItem::~BombItem()
+BombExplosionItem::~BombExplosionItem()
 {
-    delete m_pulseTimer;
     delete m_explosionTimer;
 }
 
-QPainterPath BombItem::shape() const
+QPainterPath BombExplosionItem::shape() const
 {
     QPainterPath path;
     // Temporary variable to keep the boundingRect available
@@ -51,52 +59,22 @@ QPainterPath BombItem::shape() const
     return path;
 }
 
-void BombItem::update(qreal p_x, qreal p_y)
+void BombExplosionItem::update(qreal p_x, qreal p_y)
 {
     // Compute the top-right coordinates of the item
     qreal x = p_x - boundingRect().width() / 2;
     qreal y = p_y - boundingRect().height() / 2;
     // Updates the view coordinates
     setPos(x, y);
-    m_x = p_x;
-    m_y = p_y;
 }
 
-void BombItem::startDetonation()
+void BombExplosionItem::startDetonation()
 {
-    m_numberPulse = 0;
-    m_pulseTimer->stop();
-    
     // Define the timer which sets the explosion frequency
     m_explosionCounter = 0;
     m_explosionTimer = new QTimer(this);
     m_explosionTimer->setInterval(600);
     m_explosionTimer->setSingleShot(true);
     m_explosionTimer->start();
-    connect(m_explosionTimer, SIGNAL(timeout()), this, SLOT(explode()));
-    setElementId("bomb_exploded");
-    update(m_x, m_y);
-}
-
-void BombItem::pulse()
-{
-    m_numberPulse++;
-    QTransform transform;
-    if (m_numberPulse % 2 == 0)
-    {
-        // shrink the item
-        transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
-        transform.scale(0.95, 0.95);
-        transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
-        setTransform(transform);
-    }
-    else
-    {
-        resetTransform();
-    }
-}
-
-void BombItem::explode()
-{
-    emit bombItemFinished(this);
+    setVisible(true);
 }

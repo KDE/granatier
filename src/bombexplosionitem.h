@@ -16,50 +16,52 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef BOMBITEM_H
-#define BOMBITEM_H
+#ifndef BOMBEXPLOSIONITEM_H
+#define BOMBEXPLOSIONITEM_H
 
-#include "elementitem.h"
+#include <QGraphicsSvgItem>
 #include "bomb.h"
 
 #include <QTimer>
 
 /**
- * @brief This class is the graphical representation of a Bomb.
+ * @brief This class is the graphical representation of a Bomb explosion.
  */
-class BombItem : public ElementItem
+class BombExplosionItem : public QGraphicsSvgItem
 {
 
     Q_OBJECT
 
+public:
+    /** The Explosion directions */
+    enum Direction {
+        NORTH,
+        EAST,
+        SOUTH,
+        WEST
+    };
+
 protected:
 
-    /** Timer used to make the bomb pulse */
-    QTimer* m_pulseTimer;
-    
-    /** Timer used to animate explosion */
+   /** Timer used to animate explosion */
     QTimer* m_explosionTimer;
-
-    /** Number of ticks of the pulse timer */
-    int m_numberPulse;
     
     int m_explosionCounter;
     
-    int m_x;
-    int m_y;
+    Direction m_direction;
 
 public:
 
     /**
-     * Creates a new BombItem instance.
+     * Creates a new BombExplosionItem instance.
      * @param p_model the Bomb model
      */
-    BombItem(Bomb* p_model);
+    BombExplosionItem(Bomb* p_model, Direction direction, int i);
 
     /**
-     * Deletes the BombItem instance.
+     * Deletes the BombExplosionItem instance.
      */
-    ~BombItem();
+    ~BombExplosionItem();
 
     /**
      * Overrides the default shape function to make it a small circle
@@ -71,7 +73,7 @@ public:
 public slots:
 
     /**
-     * Updates the BombItem coordinates.
+     * Updates the BombExplosionItem coordinates.
      * @param p_x the new x-coordinate
      * @param p_y the new y-coordinate
      */
@@ -82,19 +84,6 @@ private slots:
      * Starts the bomb detonation
      */
     virtual void startDetonation();
-
-    /**
-     * Makes the bomb pulse
-     */
-    virtual void pulse();
-    
-    /**
-    * Animates the explosion
-    */
-    virtual void explode();
-
-signals:
-    void bombItemFinished(BombItem* bombItem);
 };
 
 #endif

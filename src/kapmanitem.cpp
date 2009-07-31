@@ -102,7 +102,8 @@ void KapmanItem::manageCollision() {
 		for (int i = 0; i < collidingList.size(); ++i) {
 			// The maze and the points labels have a negative zValue which allows to exclude them from the treatment of collisions
 			if (collidingList[i]->zValue() >= 0) {
-				((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Kapman*)getModel());
+				//((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Kapman*)getModel());
+                setElementId(m_strPlayerId + "_death");
 			}
 		}
 	}

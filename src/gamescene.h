@@ -25,6 +25,7 @@
 #include "ghostitem.h"
 #include "kapmanitem.h"
 #include "bombitem.h"
+#include "bombexplosionitem.h"
 
 #include <QGraphicsScene>
 #include <QList>
@@ -53,7 +54,7 @@ class GameScene : public QGraphicsScene {
 		QList<GhostItem*> m_ghostItems;
         
         /** The BombItem of each Bomb to be drawn */
-        QList<BombItem*> m_bombItems;
+        QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
 		
 		/** The ElementItem to be drawn (each Pill and Energizers) */
 		ElementItem*** m_elementItems;

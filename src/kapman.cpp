@@ -359,18 +359,22 @@ void Kapman::keyPressed(QKeyEvent* keyEvent)
     if(key == m_key.moveLeft)
     {
         goLeft();
+        updateDirection();
     }
     else if(key == m_key.moveRight)
     {
         goRight();
+        updateDirection();
     }
     else if(key == m_key.moveUp)
     {
         goUp();
+        updateDirection();
     }
     else if(key == m_key.moveDown)
     {
         goDown();
+        updateDirection();
     }
     else if(key == m_key.dropBomb)
     {
