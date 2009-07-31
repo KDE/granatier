@@ -70,6 +70,25 @@ void BombExplosionItem::update(qreal p_x, qreal p_y)
 
 void BombExplosionItem::startDetonation()
 {
+    QTransform transform;
+    // move item towards the explosion
+    switch(m_direction)
+    {
+        case NORTH:
+            transform.translate(0, 20);
+            break;
+        case EAST:
+            transform.translate(-20, 0);
+            break;
+        case SOUTH:
+            transform.translate(0, -20);
+            break;
+        case WEST:
+            transform.translate(20, 0);
+            break;
+    }
+    setTransform(transform);
+    
     // Define the timer which sets the explosion frequency
     m_explosionCounter = 0;
     m_explosionTimer = new QTimer(this);

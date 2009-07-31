@@ -24,6 +24,8 @@
 
 Bomb::Bomb(qreal fX, qreal fY, Maze* pMaze, int nDetonationCountdown) : Element(fX, fY, pMaze), m_xSpeed(0), m_ySpeed(0)
 {
+    m_type = Element::BOMB;
+    
     m_xInit = fX;
     m_yInit = fY;
     m_x = fX;

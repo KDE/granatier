@@ -28,7 +28,7 @@ const qreal Kapman::MAX_SPEED_RATIO = 1.5;
 
 Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze) : Character(p_x, p_y, p_maze)
 {
-    m_type = Element::KAPMAN;
+    m_type = Element::PLAYER;
     m_maxSpeed = m_normalSpeed * MAX_SPEED_RATIO;
     m_imageId = p_imageId;
     

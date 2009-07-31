@@ -33,7 +33,11 @@ Cell::~Cell()
 
 bool Cell::isWalkable()
 {
-    if(m_type == Cell::WALL || m_element != NULL)
+    if(m_type == Cell::WALL)
+    {
+        return false;
+    }
+    else if(m_element != NULL && (m_element->getType() == Element::BLOCK || m_element->getType() == Element::BOMB))
     {
         return false;
     }
