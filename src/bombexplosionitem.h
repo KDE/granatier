@@ -43,12 +43,7 @@ public:
 
 protected:
 
-   /** Timer used to animate explosion */
-    QTimer* m_explosionTimer;
-    
-    int m_explosionCounter;
-    
-    Direction m_direction;
+   Direction m_direction;
 
 public:
 
@@ -78,12 +73,6 @@ public slots:
      * @param p_y the new y-coordinate
      */
     virtual void update(qreal p_x, qreal p_y);
-
-private slots:
-    /**
-     * Starts the bomb detonation
-     */
-    virtual void startDetonation();
 };
 
 #endif

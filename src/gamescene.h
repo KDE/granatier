@@ -169,6 +169,11 @@ class GameScene : public QGraphicsScene {
          * Removes a BombItem
          */
         void removeBombItem(Bomb* bomb);
+        
+        /**
+         * Creates the explosion items
+         */
+        void slot_bombDetonated(Bomb* bomb);
 };
 
 #endif

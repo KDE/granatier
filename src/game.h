@@ -24,6 +24,7 @@
 #include "ghost.h"
 #include "bonus.h"
 #include "bomb.h"
+#include "block.h"
 
 #include <QPointF>
 #include <QTimer>
@@ -254,6 +255,11 @@ class Game : public QObject {
 		 * @param p_enabled if true the sounds will be enabled, otherwise they will be disabled
 		 */
 		void setSoundsEnabled(bool p_enabled);
+        
+        /**
+         * remove Block from list and decide to give bonus
+         */
+        void blockDestroyed(const int row, const int col, Block* block);
 		
 	private:
 	
@@ -339,7 +345,7 @@ class Game : public QObject {
         /**
          * Plays the detonation sound
          */
-        void slot_bombDetonated();
+        void slot_bombDetonated(Bomb* bomb);
         
         /**
          * Removes exploded bombs from the bomb list

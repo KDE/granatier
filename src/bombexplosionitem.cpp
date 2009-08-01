@@ -22,29 +22,34 @@
 
 BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int i) : QGraphicsSvgItem()
 {
+    QTransform transform;
     m_direction = direction;
     switch(m_direction)
     {
         case NORTH:
             setElementId("bomb_exploded_north");
+            transform.translate(0, 20);
             break;
         case EAST:
             setElementId("bomb_exploded_east");
+            transform.translate(-20, 0);
             break;
         case SOUTH:
             setElementId("bomb_exploded_south");
+            transform.translate(0, -20);
             break;
         case WEST:
             setElementId("bomb_exploded_west");
+            transform.translate(20, 0);
             break;
     }
-    setVisible(false);
-    connect(p_model, SIGNAL(bombDetonated()), this, SLOT(startDetonation()));
+    setTransform(transform);
+    
+    setVisible(true);
 }
 
 BombExplosionItem::~BombExplosionItem()
 {
-    delete m_explosionTimer;
 }
 
 QPainterPath BombExplosionItem::shape() const
@@ -66,34 +71,4 @@ void BombExplosionItem::update(qreal p_x, qreal p_y)
     qreal y = p_y - boundingRect().height() / 2;
     // Updates the view coordinates
     setPos(x, y);
-}
-
-void BombExplosionItem::startDetonation()
-{
-    QTransform transform;
-    // move item towards the explosion
-    switch(m_direction)
-    {
-        case NORTH:
-            transform.translate(0, 20);
-            break;
-        case EAST:
-            transform.translate(-20, 0);
-            break;
-        case SOUTH:
-            transform.translate(0, -20);
-            break;
-        case WEST:
-            transform.translate(20, 0);
-            break;
-    }
-    setTransform(transform);
-    
-    // Define the timer which sets the explosion frequency
-    m_explosionCounter = 0;
-    m_explosionTimer = new QTimer(this);
-    m_explosionTimer->setInterval(600);
-    m_explosionTimer->setSingleShot(true);
-    m_explosionTimer->start();
-    setVisible(true);
 }

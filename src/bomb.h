@@ -143,6 +143,16 @@ public:
     * @param range the Bomb range
     */
     void setBombRange(int bombRange);
+    
+    /**
+    * Manages the Bomb explosion
+    */
+    void detonate();
+    
+    /**
+    * returns if the bomb is already detonated
+    */
+    bool isDetonated();
 
 public slots:
         void slot_detonationCompleted();
@@ -165,17 +175,12 @@ protected:
     * Moves the Bomb on the center of its current Cell.
     */
     void moveOnCenter();
-    
-    /**
-    * Manages the Bomb explosion
-    */
-    void detonate();
 
 signals:
     /**
     * Emitted when the Bomb is exploded.
     */
-    void bombDetonated();
+    void bombDetonated(Bomb* bomb);
     
     /**
     * Emitted when the Bomb is exploded.

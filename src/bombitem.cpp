@@ -23,7 +23,7 @@
 BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
 {
     setElementId("bomb");
-    connect(p_model, SIGNAL(bombDetonated()), this, SLOT(startDetonation()));
+    connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation(Bomb*)));
     connect(this, SIGNAL(bombItemFinished(BombItem*)), p_model, SLOT(slot_detonationCompleted()));
     
     // Define the timer which sets the puls frequency
@@ -62,7 +62,7 @@ void BombItem::update(qreal p_x, qreal p_y)
     m_y = p_y;
 }
 
-void BombItem::startDetonation()
+void BombItem::startDetonation(Bomb* bomb)
 {
     m_numberPulse = 0;
     m_pulseTimer->stop();

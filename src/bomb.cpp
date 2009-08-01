@@ -72,7 +72,6 @@ void Bomb::updateMove()
     if(m_detonationAsked)
     {
         detonate();
-        m_detonated = true;
         return;
     }
     
@@ -188,13 +187,17 @@ void Bomb::setBombRange(int bombRange)
 
 void Bomb::detonate()
 {
-    //TODO: add detonation marks to the cells
-    emit bombDetonated();
+    m_detonated = true;
+    emit bombDetonated(this);
+}
+
+bool Bomb::isDetonated()
+{
+    return m_detonated;
 }
 
 void Bomb::slot_detonationCompleted()
 {
-    //TODO: remove the detonation marks from the cells
     m_maze->removeCellElement(m_maze->getRowFromY(m_y), m_maze->getColFromX(m_x), this);
     emit bombFinished(this);
 }

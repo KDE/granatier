@@ -578,11 +578,18 @@ void Game::createBomb(qreal x, qreal y)
 {
     int col = m_maze->getColFromX(x);
     int row = m_maze->getRowFromY(y);
+    if(col >= 0 && col < m_maze->getNbColumns() && row >= 0 && row < m_maze->getNbRows())
+    {
+        if(m_maze->getCell(row, col).getElement() != NULL && m_maze->getCell(row, col).getElement()->getType() == Element::BOMB)
+        {
+            return;
+        }
+    }
     Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_maze, Game::FPS * 2);
     bomb->setBombRange(3);
     emit bombCreated(bomb);
     connect(bomb, SIGNAL(bombFinished(Bomb*)), this, SLOT(slot_cleanupBombs(Bomb*)));
-    connect(bomb, SIGNAL(bombDetonated()), this, SLOT(slot_bombDetonated()));
+    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(slot_bombDetonated(Bomb*)));
     m_bombs.append(bomb);
 }
 
@@ -599,8 +606,14 @@ void Game::slot_cleanupBombs(Bomb* bomb)
     }
 }
 
-void Game::slot_bombDetonated()
+void Game::slot_bombDetonated(Bomb* bomb)
 {
     //playSound(KStandardDirs::locate("data", "granatier/sounds/explode.ogg"));
     soundSourceExplode->play();
+}
+
+void Game::blockDestroyed(const int row, const int col, Block* block)
+{
+    m_maze->removeCellElement(row, col, block);
+    //do not delete the block because it will be deleted through the destructor of elementitem 
 }
