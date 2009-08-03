@@ -75,7 +75,7 @@ void BombItem::startDetonation(Bomb* bomb)
     m_explosionTimer->start();
     connect(m_explosionTimer, SIGNAL(timeout()), this, SLOT(explode()));
     setElementId("bomb_exploded");
-    setZValue(13); //maxBombRange+3
+    setZValue(300+13); //300+maxBombRange+3
     update(m_x, m_y);
 }
 

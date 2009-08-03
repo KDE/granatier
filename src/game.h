@@ -91,8 +91,11 @@ class Game : public QObject {
         /** The Bombs */
         QList<Bomb*> m_bombs;
         
-		/** The Bonus instance */
-		Bonus *m_bonus;
+        /** The Blocks */
+        QList<Block*> m_blocks;
+        
+		/** The Bonuses */
+		QList<Bonus*> m_bonus;
 
 		/** A flag to know if the player has cheated during the game */
 		bool m_isCheater;
@@ -170,13 +173,13 @@ class Game : public QObject {
 		/**
 		 * @return the Ghost models
 		 */
-		QList<Ghost*> getGhosts () const;
-        
-		/**
-		 * @return the Bonus instance
-		 */
-		Bonus* getBonus(); 
+		QList<Ghost*> getGhosts () const; 
 		
+        /**
+         * @return the Bonus instance
+         */
+        QList<Bonus*> getBonus();
+
 		/**
 		 * @return the main timer
 		 */
@@ -213,11 +216,17 @@ class Game : public QObject {
 		 */
 		void setLevel(int p_level);
 
-		/**
-		 * Create the new Bonus
-		 * @param p_position the Bonus position
-		 */
-		void createBonus(QPointF p_position);
+        /**
+          * Create the hidden Bonuses
+          */
+        void createBonus();
+        
+        /**
+         * Create a new Block
+         * @param p_position the Block position
+         * @param p_imageId the image of the Block
+         */
+        void createBlock(QPointF p_position, const QString& p_imageId);
 
         /**
          * Create the new Player

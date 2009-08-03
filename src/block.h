@@ -21,23 +21,37 @@
 #define BLOCK_H
 
 #include "element.h"
+#include "bonus.h"
 
 /**
  * @brief This class represents a block with the possibility of a bonus inside
  */
 class Block : public Element {
 
-    public:
+public:
 
-        /**
-         * Creates a new Block instance.
-         */
-        Block(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId);
+    /**
+      * Creates a new Block instance.
+      */
+    Block(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId);
 
-        /**
-         * Deletes the Block instance.
-         */
-        ~Block();
+    /**
+      * Deletes the Block instance.
+      */
+    ~Block();
+    
+    /**
+      * Sets the Bonus which is contained by the Block
+      */
+    void setBonus(Bonus* bonus);
+    
+    /**
+      * Returns the Bonus which is contained by the Block
+      */
+    Bonus* getBonus();
+        
+private:
+    Bonus* m_bonus;
 };
 
 #endif

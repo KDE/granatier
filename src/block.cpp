@@ -24,8 +24,19 @@ Block::Block(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId) : Ele
 {
     m_imageId = p_imageId;
     m_type = Element::BLOCK;
+    m_bonus = NULL;
 }
 
 Block::~Block()
 {
+}
+
+void Block::setBonus(Bonus* bonus)
+{
+    m_bonus = bonus;
+}
+
+Bonus* Block::getBonus()
+{
+    return m_bonus;
 }

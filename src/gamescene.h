@@ -60,7 +60,7 @@ class GameScene : public QGraphicsScene {
 		ElementItem*** m_blockItems;
 		
 		/** The Bonus ElementItem */
-		ElementItem* m_bonusItem;
+		ElementItem*** m_bonusItems;
 
 		/** A list with labels to display when a ghost or a bonus is eaten */
 		QList<QGraphicsTextItem*> m_wonPointsLabels;

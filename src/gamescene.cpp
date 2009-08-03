@@ -86,7 +86,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
         kapmanItem->setSharedRenderer(m_renderer);
         // Corrects the position of the player
         kapmanItem->update(players[i]->getX(), players[i]->getY());
-        kapmanItem->setZValue(2);
+        kapmanItem->setZValue(210+i);
         // Stops the player animation
         kapmanItem->stopAnim();
         
@@ -103,32 +103,63 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 		ghost->setZValue(3);
 		m_ghostItems.append(ghost);
 	}
-    // Create the Block items
+    // Create the Block and Bonus items
     m_blockItems = new ElementItem**[m_game->getMaze()->getNbRows()];
+    m_bonusItems = new ElementItem**[m_game->getMaze()->getNbRows()];
     for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i)
     {
         m_blockItems[i] = new ElementItem*[m_game->getMaze()->getNbColumns()];
+        m_bonusItems[i] = new ElementItem*[m_game->getMaze()->getNbColumns()];
         for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
         {
             if (m_game->getMaze()->getCell(i, j).getElement() != NULL && m_game->getMaze()->getCell(i, j).getElement()->getType() == Element::BLOCK)
             {
-                // Create the element and set the image
-                ElementItem* element = new ElementItem(m_game->getMaze()->getCell(i, j).getElement());
-                element->setSharedRenderer(m_renderer);
-                element->setElementId(m_game->getMaze()->getCell(i,j).getElement()->getImageId());
-                element->update(m_game->getMaze()->getCell(i, j).getElement()->getX(), m_game->getMaze()->getCell(i, j).getElement()->getY());
-                m_blockItems[i][j] = element;
+                // Create the element item and set the image
+                Element* element = m_game->getMaze()->getCell(i, j).getElement();
+                ElementItem* elementItem = new ElementItem(element);
+                elementItem->setSharedRenderer(m_renderer);
+                elementItem->setElementId(element->getImageId());
+                elementItem->update(element->getX(), element->getY());
+                elementItem->setZValue(200);
+                m_blockItems[i][j] = elementItem;
+                
+                // if the block contains a hidden bonus, create the bonus item 
+                Bonus* bonus = (dynamic_cast <Block*> (element))->getBonus();
+                if(bonus)
+                {
+                  
+                    ElementItem* bonusItem = new ElementItem(bonus);
+                    bonusItem->setSharedRenderer(m_renderer);
+                    switch(bonus->getBonusType())
+                    {
+                        case Bonus::SPEED:  bonusItem->setElementId("bonus_speed");
+                                            break;
+                        case Bonus::BOMB:   bonusItem->setElementId("bonus_bomb");
+                                            break;
+                        case Bonus::RANGE:  bonusItem->setElementId("bonus_range");
+                                            break;
+                        case Bonus::THROW:  bonusItem->setElementId("bonus_throw");
+                                            break;
+                        case Bonus::MOVE:   bonusItem->setElementId("bonus_move");
+                                            break;
+                        default:            bonusItem->setElementId("bonus_speed");
+                    }
+                    bonusItem->update(bonus->getX(), bonus->getY());
+                    bonusItem->setZValue(100);
+                    m_bonusItems[i][j] = bonusItem;
+                }
+                else
+                {
+                    m_bonusItems[i][j] = NULL;
+                }
             }
             else
             {
                 m_blockItems[i][j] = NULL;
+                m_bonusItems[i][j] = NULL;
             }
         }
     }
-	// Create the Bonus item
-	m_bonusItem = new ElementItem(m_game->getBonus());
-	m_bonusItem->setSharedRenderer(m_renderer);
-	m_bonusItem->setElementId("bonus1");
 
 	// Create the introduction labels
 	m_introLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
@@ -193,10 +224,14 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	intro(true);
 }
 
-GameScene::~GameScene() {
-    for (int i = 0; i < m_game->getMaze()->getNbRows();++i) {
-        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
-            if (m_mazeItem[i][j] != NULL) {
+GameScene::~GameScene()
+{
+    for (int i = 0; i < m_game->getMaze()->getNbRows();++i)
+    {
+        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+        {
+            if (m_mazeItem[i][j] != NULL)
+            {
                 delete m_mazeItem[i][j];
             }
         }
@@ -209,9 +244,10 @@ GameScene::~GameScene() {
         delete m_playerItems[i];
     }
     
-	for (int i = 0; i < m_ghostItems.size(); ++i) {
-		delete m_ghostItems[i];
-	}
+    for (int i = 0; i < m_ghostItems.size(); ++i)
+    {
+        delete m_ghostItems[i];
+    }
     
     // Find the BombItem and remove it
     QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
@@ -228,26 +264,34 @@ GameScene::~GameScene() {
     
     
     
-	for (int i = 0; i < m_game->getMaze()->getNbRows();++i) {
-		for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
-			if (m_blockItems[i][j] != NULL) {
-				delete m_blockItems[i][j];
-			}
-		}
-		delete[] m_blockItems[i];
-	}
-	delete[] m_blockItems;
+    for (int i = 0; i < m_game->getMaze()->getNbRows();++i)
+    {
+        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+        {
+            if (m_blockItems[i][j] != NULL)
+            {
+                delete m_blockItems[i][j];
+            }
+            if (m_bonusItems[i][j] != NULL)
+            {
+                delete m_bonusItems[i][j];
+            }
+        }
+        delete[] m_blockItems[i];
+        delete[] m_bonusItems[i];
+    }
+    delete[] m_blockItems;
+    delete[] m_bonusItems;
     
-	delete m_bonusItem;
-	delete m_introLabel;
-	delete m_introLabel2;
-	delete m_newLevelLabel;
-	delete m_scoreLabel;
-	delete m_livesLabel;
-	delete m_levelLabel;
-	delete m_pauseLabel;
-	delete m_cache;
-	delete m_renderer;
+    delete m_introLabel;
+    delete m_introLabel2;
+    delete m_newLevelLabel;
+    delete m_scoreLabel;
+    delete m_livesLabel;
+    delete m_levelLabel;
+    delete m_pauseLabel;
+    delete m_cache;
+    delete m_renderer;
 }
 
 Game* GameScene::getGame() const {
@@ -273,7 +317,7 @@ void GameScene::intro(const bool p_newLevel) {
     // If a new level has begun
     if (p_newLevel)
     {
-        // Set each Block item to its original coordinates
+        // Set the Block an Bonus Items
         for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i)
         {
             for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
@@ -285,8 +329,16 @@ void GameScene::intro(const bool p_newLevel) {
                         addItem(m_blockItems[i][j]);
                     }
                 }
+                if (m_bonusItems[i][j] != NULL)
+                {
+                    if (!items().contains(m_bonusItems[i][j]))
+                    {
+                        addItem(m_bonusItems[i][j]);
+                    }
+                }
             }
         }
+        
 		// Display the new level label
 		m_newLevelLabel->setPlainText(i18nc("The number of the game level", "Level %1", m_game->getLevel()));
 		if (!items().contains(m_newLevelLabel)) {
@@ -365,40 +417,12 @@ void GameScene::hideElement(const qreal p_x, const qreal p_y) {
 	}
 }
 
-void GameScene::displayBonus() {
-	if (!items().contains(m_bonusItem)) {
-		switch (m_game->getLevel()) {
-			case 1:
-				m_bonusItem->setElementId("bonus1");
-				break;
-			case 2:
-				m_bonusItem->setElementId("bonus2");
-				break;
-			case 3:
-				m_bonusItem->setElementId("bonus3");
-				break;
-			case 4:
-				m_bonusItem->setElementId("bonus4");
-				break;
-			case 5:
-				m_bonusItem->setElementId("bonus5");
-				break;
-			case 6:
-				m_bonusItem->setElementId("bonus6");
-				break;
-			default:
-				m_bonusItem->setElementId("bonus7");
-				break;	
-		}
-		m_bonusItem->update(m_game->getBonus()->getX(), m_game->getBonus()->getY());
-		addItem(m_bonusItem);
-	}
+void GameScene::displayBonus()
+{
 }
 
-void GameScene::hideBonus() {
-	if (items().contains(m_bonusItem)) {
-		removeItem(m_bonusItem);
-	}
+void GameScene::hideBonus()
+{
 }
 
 void GameScene::updateInfo(const Game::InformationTypes p_info) {
@@ -446,7 +470,7 @@ void GameScene::createBombItem(Bomb* bomb)
     bombItem->setElementId("bomb");
     // Corrects the position of the BombItem
     bombItem->update(bomb->getX(), bomb->getY());
-    bombItem->setZValue(1);
+    bombItem->setZValue(200);
     addItem(bombItem);
     m_bombItems[bombItem].append(NULL);
     
@@ -475,7 +499,7 @@ void GameScene::removeBombItem(Bomb* bomb)
             {
                 removeItem(i.key());
             }
-            i.key()->deleteLater();
+            delete i.key();
             m_bombItems.erase(i);
             break;
         }
@@ -544,7 +568,7 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, i);
                 bombExplosionItem->setSharedRenderer(m_renderer);
                 bombExplosionItem->update(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
-                bombExplosionItem->setZValue(nBombRange+3 - i);
+                bombExplosionItem->setZValue(300 + nBombRange+3 - i);
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -584,7 +608,7 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, i);
                 bombExplosionItem->setSharedRenderer(m_renderer);
                 bombExplosionItem->update(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
-                bombExplosionItem->setZValue(nBombRange+3 - i);
+                bombExplosionItem->setZValue(300 + nBombRange+3 - i);
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -624,7 +648,7 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, i);
                 bombExplosionItem->setSharedRenderer(m_renderer);
                 bombExplosionItem->update(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
-                bombExplosionItem->setZValue(nBombRange+3 - i);
+                bombExplosionItem->setZValue(300 + nBombRange+3 - i);
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -664,7 +688,7 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, i);
                 bombExplosionItem->setSharedRenderer(m_renderer);
                 bombExplosionItem->update(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
-                bombExplosionItem->setZValue(nBombRange+3 - i);
+                bombExplosionItem->setZValue(300 + nBombRange+3 - i);
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }

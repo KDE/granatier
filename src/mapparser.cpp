@@ -89,7 +89,7 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
                 }
             }
         }
-        m_game->createBonus(QPointF(x_position, y_position));
+        //m_game->createBonus(QPointF(x_position, y_position));
     }
 
     if (p_qName == "Player")
@@ -188,7 +188,7 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                     break;
                 case '+':
                     m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->getMaze()->setCellElement(m_counterRows, i, new Block(m_counterRows, i, m_game->getMaze(), "maze_block"));
+                    m_game->createBlock(QPointF(i, m_counterRows), "maze_block");
                     break; 
                 case 'o':
                     m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);

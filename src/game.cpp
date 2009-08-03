@@ -115,32 +115,32 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 	// Init the characters coordinates on the Maze
 	initCharactersPosition();
     
-    
+    // Create the hidden Bonuses
+    createBonus();
+       
     //init KALEngine
     soundEngine = KALEngine::getInstance();
     soundSourceExplode = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/explode.ogg")), soundEngine);
 }
 
-Game::~Game() {
-	delete m_media1;
-	delete m_media2;
-	delete m_timer;
-	delete m_bonusTimer;
-	delete m_maze;
+Game::~Game()
+{
+    delete m_media1;
+    delete m_media2;
+    delete m_timer;
+    delete m_bonusTimer;
+    delete m_maze;
     
     for (int i = 0; i < m_ghosts.size(); i++)
     {
         delete m_players[i];
     }
     
-	for (int i = 0; i < m_ghosts.size(); ++i) {
-		delete m_ghosts[i];
-	}
-    
-    for (int i = 0; i < m_bombs.size(); ++i) {
-        delete m_bombs[i];
+    for (int i = 0; i < m_ghosts.size(); ++i) {
+        delete m_ghosts[i];
     }
-	delete m_bonus;
+    
+    //bombs, bonuses and blocks are deletet by the destructor of their elementitem
     
     delete soundSourceExplode;
     KALEngine::kill();
@@ -241,18 +241,78 @@ void Game::setLevel(int p_level) {
         }
     }
 	setTimersDuration();
-	m_bonus->setPoints(m_level * 100);
+	//m_bonus->setPoints(m_level * 100);
 	emit(dataChanged(AllInfo));
 	emit(pauseChanged(false, true));
 	emit(levelStarted(true));
 }
 
-Bonus* Game::getBonus() {
-	return m_bonus;
+QList<Bonus*> Game::getBonus()
+{
+    return m_bonus;
 }
 
-void Game::createBonus(QPointF p_position){
-	m_bonus = new Bonus(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), m_maze, 100);
+void Game::createBonus()
+{
+    Bonus* bonus;
+    qsrand(QDateTime::currentDateTime().toTime_t());
+    int nBonusCount = 0.3 * m_blocks.size();
+    QList<Bonus::BonusType> bonusTypeList;
+    Bonus::BonusType bonusType;
+    for (int i = 0; i < m_blocks.size(); i++)
+    {
+        bonusType = Bonus::NONE;
+        if(i < nBonusCount)
+        {
+            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 5))
+            {
+                case 0: bonusType = Bonus::SPEED;
+                        break;
+                case 1: bonusType = Bonus::BOMB;
+                        break;
+                case 2: bonusType = Bonus::RANGE;
+                        break;
+                case 3: bonusType = Bonus::THROW;
+                        break;
+                case 4: bonusType = Bonus::MOVE;
+                        break;
+                default: bonusType = Bonus::SPEED;
+            }
+        }
+        bonusTypeList.append(bonusType);
+    }
+    
+    int nShuffle;
+    for (int i = 0; i < m_blocks.size(); i++)
+    {
+        nShuffle = m_blocks.size() * (qrand()/1.0)/RAND_MAX;
+        if(nShuffle >= m_blocks.size())
+        {
+            nShuffle = m_blocks.size() - 1;
+        }
+        else if(nShuffle < 0)
+        {
+            nShuffle = 0;
+        }
+        bonusTypeList.swap(i, nShuffle);
+    }
+    
+    for (int i = 0; i < m_blocks.size(); ++i)
+    {
+        if(bonusTypeList[i] != Bonus::NONE)
+        {
+            bonus = new Bonus(m_blocks[i]->getX(), m_blocks[i]->getY(), m_maze, bonusTypeList[i]);
+            m_bonus.append(bonus);
+            m_blocks[i]->setBonus(bonus);
+        }
+    }
+}
+
+void Game::createBlock(QPointF p_position, const QString& p_imageId)
+{
+    Block* block = new Block(p_position.y(), p_position.x(), m_maze, p_imageId);
+    m_blocks.append(block);
+    m_maze->setCellElement(p_position.y(), p_position.x(), block);
 }
 
 void Game::createPlayer(QPointF p_position, const QString& p_imageId)
@@ -545,7 +605,7 @@ void Game::nextLevel() {
 	// Initialize the maze items
 	m_maze->resetNbElem();
 	// Update Bonus
-	m_bonus->setPoints(m_level * 100);
+	//->setPoints(m_level * 100);
 	// Move all characters to their initial positions
 	initCharactersPosition();
 	// Increase the ghosts speed
@@ -614,6 +674,12 @@ void Game::slot_bombDetonated(Bomb* bomb)
 
 void Game::blockDestroyed(const int row, const int col, Block* block)
 {
-    m_maze->removeCellElement(row, col, block);
-    //do not delete the block because it will be deleted through the destructor of elementitem 
+    // find the Block
+    int index = m_blocks.indexOf(block);
+    // remove the Block
+    if(index != -1)
+    {
+        //do not delete the block because it will be deleted through the destructor of elementitem
+        m_maze->removeCellElement(row, col, block);
+    }
 }
