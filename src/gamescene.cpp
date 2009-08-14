@@ -30,11 +30,9 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
 	connect(p_game, SIGNAL(pauseChanged(bool, bool)), this, SLOT(setPaused(bool, bool)));
 	connect(p_game, SIGNAL(elementEaten(qreal, qreal)), this, SLOT(hideElement(qreal, qreal)));
-	connect(p_game, SIGNAL(bonusOn()), this, SLOT(displayBonus()));	
-	connect(p_game, SIGNAL(bonusOff()), this, SLOT(hideBonus()));
+	connect(p_game, SIGNAL(bonusOn()), this, SLOT(displayBonus()));
 	connect(p_game, SIGNAL(dataChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
-    connect(p_game, SIGNAL(bombRemoved(Bomb*)), this, SLOT(removeBombItem(Bomb*)));
 
 	// Connection between Game and GameScene for the display of won points when a bonus or a ghost is eaten
 	connect(p_game, SIGNAL(pointsToDisplay(long, qreal, qreal)), this, SLOT(displayPoints(long, qreal, qreal)));
@@ -91,6 +89,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
         kapmanItem->stopAnim();
         
         m_playerItems.append(kapmanItem);
+        
+        connect (kapmanItem, SIGNAL(bonusItemTaken(ElementItem*)), this, SLOT(removeBonusItem(ElementItem*)));
     }
 
 	// Create the GhostItems
@@ -421,8 +421,25 @@ void GameScene::displayBonus()
 {
 }
 
-void GameScene::hideBonus()
+void GameScene::removeBonusItem(ElementItem* bonusItem)
 {
+     // Set the Block an Bonus Items
+    for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i)
+    {
+        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+        {
+            if (m_bonusItems[i][j] != NULL && m_bonusItems[i][j] == bonusItem)
+            {
+                if (items().contains(m_bonusItems[i][j]))
+                {
+                    removeItem(m_bonusItems[i][j]);
+                    m_bonusItems[i][j] = NULL;
+                    m_game->removeBonus(dynamic_cast <Bonus*> (bonusItem->getModel()));
+                    bonusItem->deleteLater();
+                }
+            }
+        }
+    }
 }
 
 void GameScene::updateInfo(const Game::InformationTypes p_info) {
@@ -475,15 +492,17 @@ void GameScene::createBombItem(Bomb* bomb)
     m_bombItems[bombItem].append(NULL);
     
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(slot_bombDetonated(Bomb*)));
+    connect(bombItem, SIGNAL(bombItemFinished(BombItem*)), this, SLOT(removeBombItem(BombItem*)));
 }
 
-void GameScene::removeBombItem(Bomb* bomb)
+void GameScene::removeBombItem(BombItem* bombItem)
 {
+    m_game->removeBomb(dynamic_cast <Bomb*> (bombItem->getModel()));
     // Find the BombItem and remove it
     QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
     while (i != m_bombItems.end())
     {
-        if(i.key()->getModel() == bomb)
+        if(i.key() == bombItem)
         {
             BombExplosionItem* bombExplosionItem;
             while(!i.value().isEmpty())
@@ -521,6 +540,11 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
     bool bEastDone = false;
     bool bSouthDone = false;
     bool bWestDone = false;
+    int nDetonationCountdown = 75;
+    int nDetonationCountdownNorth = nDetonationCountdown;
+    int nDetonationCountdownEast = nDetonationCountdown;
+    int nDetonationCountdownSouth = nDetonationCountdown;
+    int nDetonationCountdownWest = nDetonationCountdown;
     
     // Find the BombItem from the Bomb
     QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
@@ -552,7 +576,8 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                 {
-                    dynamic_cast <Bomb*> (element)->detonate();
+                    dynamic_cast <Bomb*> (element)->setDetonationCountdown(nDetonationCountdownNorth);
+                    nDetonationCountdownNorth += nDetonationCountdown;
                 }
                 else if(element && element->getType() == Element::BLOCK)
                 {
@@ -592,7 +617,8 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                 {
-                    dynamic_cast <Bomb*> (element)->detonate();
+                    dynamic_cast <Bomb*> (element)->setDetonationCountdown(nDetonationCountdownEast);
+                    nDetonationCountdownEast += nDetonationCountdown;
                 }
                 else if(element && element->getType() == Element::BLOCK)
                 {
@@ -632,7 +658,8 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                 {
-                    dynamic_cast <Bomb*> (element)->detonate();
+                    dynamic_cast <Bomb*> (element)->setDetonationCountdown(nDetonationCountdownSouth);
+                    nDetonationCountdownSouth += nDetonationCountdown;
                 }
                 else if(element && element->getType() == Element::BLOCK)
                 {
@@ -672,7 +699,8 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                 {
-                    dynamic_cast <Bomb*> (element)->detonate();
+                    dynamic_cast <Bomb*> (element)->setDetonationCountdown(nDetonationCountdownWest);
+                    nDetonationCountdownWest += nDetonationCountdown;
                 }
                 else if(element && element->getType() == Element::BLOCK)
                 {

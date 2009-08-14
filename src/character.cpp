@@ -20,12 +20,12 @@
 
 #include <KGameDifficulty>
 
-const qreal Character::LOW_SPEED = 3.75;
-const qreal Character::MEDIUM_SPEED = 4;
-const qreal Character::HIGH_SPEED = 5.25;
-const qreal Character::LOW_SPEED_INC = 0.005;
-const qreal Character::MEDIUM_SPEED_INC = 0.01;
-const qreal Character::HIGH_SPEED_INC = 0.02;
+const qreal Character::LOW_SPEED = 1;
+const qreal Character::MEDIUM_SPEED = 1;
+const qreal Character::HIGH_SPEED = 1;
+const qreal Character::LOW_SPEED_INC = 1;
+const qreal Character::MEDIUM_SPEED_INC = 1;
+const qreal Character::HIGH_SPEED_INC = 1;
 
 Character::Character(qreal p_x, qreal p_y, Maze* p_maze) : Element(p_x, p_y, p_maze), m_xSpeed(0), m_ySpeed(0) {
 	initSpeed();

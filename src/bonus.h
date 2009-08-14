@@ -61,10 +61,16 @@ public:
     void doActionOnCollision(Kapman* p_kapman);
     
     int getBonusType();
+    
+    void setTaken();
+    
+    bool isTaken();
 
 private:
     /** The Bonus type */
     BonusType m_bonusType;
+    
+    bool m_taken;
 };
 
 #endif

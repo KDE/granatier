@@ -32,7 +32,7 @@ Energizer::~Energizer() {
 }
 
 void Energizer::doActionOnCollision(Kapman* p_kapman) {
-	p_kapman->winPoints(this);
+	//p_kapman->winPoints(this);
 	// Tell to the maze that an element was eaten
 	m_maze->decrementNbElem();
 }

@@ -29,8 +29,10 @@ const qreal Kapman::MAX_SPEED_RATIO = 1.5;
 Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze) : Character(p_x, p_y, p_maze)
 {
     m_type = Element::PLAYER;
-    m_maxSpeed = m_normalSpeed * MAX_SPEED_RATIO;
+    m_maxSpeed = 10;
     m_imageId = p_imageId;
+    m_speed = 2;
+    m_bombRange = 1;
     
     m_key.moveLeft = Qt::Key_Left;
     m_key.moveRight = Qt::Key_Right;
@@ -277,9 +279,21 @@ void Kapman::move(qreal x, qreal y) {
     emit moved(m_x, m_y);
 }
 
-void Kapman::winPoints(Element* p_element) {
-	// Emits a signal to the game
-	emit sWinPoints(p_element);
+void Kapman::addBonus(Bonus* p_bonus)
+{
+    int bonusType = p_bonus->getBonusType();
+    if(bonusType == Bonus::SPEED)
+    {
+        increaseCharactersSpeed();
+    }
+    else if(bonusType == Bonus::RANGE)
+    {
+        m_bombRange++;
+        if(m_bombRange > 10)
+        {
+            m_bombRange = 10;
+        }
+    }
 }
 
 void Kapman::die() {
@@ -316,6 +330,11 @@ Cell Kapman::getAskedNextCell() {
 	}
 
 	return nextCell;
+}
+
+int Kapman::getBombRange() const
+{
+    return m_bombRange;
 }
 
 void Kapman::stopMoving() {
@@ -378,7 +397,7 @@ void Kapman::keyPressed(QKeyEvent* keyEvent)
     }
     else if(key == m_key.dropBomb)
     {
-        emit bombDropped(m_x, m_y);
+        emit bombDropped(this, m_x, m_y);
     }
     
 }

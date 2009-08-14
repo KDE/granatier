@@ -19,6 +19,7 @@
 #define KAPMAN_H
 
 #include "character.h"
+#include "bonus.h"
 
 #include <QKeyEvent>
 
@@ -39,6 +40,9 @@ class Kapman : public Character {
         
 		/** Kapman asked speed */
 		qreal m_askedXSpeed, m_askedYSpeed;
+        
+        /** Player bomb range */
+        int m_bombRange;
 
 	public:
 
@@ -112,11 +116,16 @@ class Kapman : public Character {
 		 */
 		qreal getAskedYSpeed() const;
 
+        /**
+         * @return the bomb range
+         */
+        int getBombRange() const;
+        
 		/**
 		 * Manages the points won
 		 * @param p_element reference to the element eaten
 		 */
-		void winPoints(Element* p_element);
+		void addBonus(Bonus* p_bonus);
 
 		/**
 		 * Implements the Character function
@@ -197,7 +206,7 @@ class Kapman : public Character {
          /**
           * Emitted when the player drops a bomb
           */
-         void bombDropped(qreal x, qreal y);
+         void bombDropped(Kapman* player, qreal x, qreal y);
 };
 
 #endif

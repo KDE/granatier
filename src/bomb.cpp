@@ -35,15 +35,21 @@ Bomb::Bomb(qreal fX, qreal fY, Maze* pMaze, int nDetonationCountdown) : Element(
     
     m_maze->setCellElement(m_maze->getRowFromY(m_y), m_maze->getColFromX(m_x), this);
     
-    m_detonationCountdown = nDetonationCountdown;
-    m_detonationAsked = false;
     m_detonated = false;
+    
+    // Define the timer which sets the puls frequency
+    m_detonationCountdownTimer = new QTimer(this);
+    m_detonationCountdownTimer->setInterval(nDetonationCountdown);
+    m_detonationCountdownTimer->setSingleShot(true);
+    m_detonationCountdownTimer->start();
+    connect(m_detonationCountdownTimer, SIGNAL(timeout()), this, SLOT(detonate()));
     
     moveOnCenter();
 }
 
 Bomb::~Bomb()
 {
+    delete m_detonationCountdownTimer;
 }
 
 void Bomb::goUp()
@@ -64,23 +70,6 @@ void Bomb::goLeft()
 
 void Bomb::updateMove()
 {
-    if(m_detonated)
-    {
-        return;
-    }
-    
-    if(m_detonationAsked)
-    {
-        detonate();
-        return;
-    }
-    
-    m_detonationCountdown--;
-    
-    if(m_detonationCountdown == 0)
-    {
-        m_detonationAsked = true;
-    }
 }
 
 void Bomb::move()
@@ -187,8 +176,11 @@ void Bomb::setBombRange(int bombRange)
 
 void Bomb::detonate()
 {
-    m_detonated = true;
-    emit bombDetonated(this);
+    if(!m_detonated)
+    {
+        m_detonated = true;
+        emit bombDetonated(this);
+    }
 }
 
 bool Bomb::isDetonated()
@@ -196,8 +188,16 @@ bool Bomb::isDetonated()
     return m_detonated;
 }
 
+void Bomb::setDetonationCountdown(int nDetonationTimeout)
+{
+    if(m_detonationCountdownTimer->interval() > nDetonationTimeout)
+    {
+        m_detonationCountdownTimer->setInterval(nDetonationTimeout);
+    }
+}
+
 void Bomb::slot_detonationCompleted()
 {
+    //TODO: call from game
     m_maze->removeCellElement(m_maze->getRowFromY(m_y), m_maze->getColFromX(m_x), this);
-    emit bombFinished(this);
 }

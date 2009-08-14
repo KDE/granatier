@@ -43,17 +43,14 @@ protected:
     /** The Bomb speed */
     qreal m_speed;
     
-    /** The Bomb detonation countdown */
-    int m_detonationCountdown;
-    
-    /** The Bomb detonation in next move */
-    bool m_detonationAsked;
-    
     /** The Bomb detonation has already started */
     bool m_detonated;
 
     /** The Bomb detonation range */
     int m_bombRange;
+    
+    /** Timer used to make the bomb detonate */
+    QTimer* m_detonationCountdownTimer;
 
 public:
 
@@ -145,17 +142,22 @@ public:
     void setBombRange(int bombRange);
     
     /**
+    * returns if the bomb is already detonated
+    */
+    bool isDetonated();
+    
+    /**
+    * sets the detonation countdown
+    */
+    void setDetonationCountdown(int nDetonationTimeout);
+
+public slots:
+    /**
     * Manages the Bomb explosion
     */
     void detonate();
     
-    /**
-    * returns if the bomb is already detonated
-    */
-    bool isDetonated();
-
-public slots:
-        void slot_detonationCompleted();
+    void slot_detonationCompleted();
 
 protected:
 
@@ -181,11 +183,6 @@ signals:
     * Emitted when the Bomb is exploded.
     */
     void bombDetonated(Bomb* bomb);
-    
-    /**
-    * Emitted when the Bomb is exploded.
-    */
-    void bombFinished(Bomb* bomb);
 };
 
 #endif

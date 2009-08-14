@@ -93,18 +93,33 @@ void KapmanItem::updateDirection() {
 	setTransform(transform);
 }
 
-void KapmanItem::manageCollision() {
-	QList<QGraphicsItem*> collidingList = collidingItems();
+void KapmanItem::manageCollision()
+{
+    QList<QGraphicsItem*> collidingList = collidingItems();
+    ElementItem* elementItem;
 
-	// The signal is emitted only if the list contains more than 1 items (to exclude the case
-	// when the kapman only collides with the maze)
-	if (collidingList.size() > 1) {
-		for (int i = 0; i < collidingList.size(); ++i) {
-			// The maze and the points labels have a negative zValue which allows to exclude them from the treatment of collisions
-			if (collidingList[i]->zValue() >= 0) {
-				//((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Kapman*)getModel());
+    // The signal is emitted only if the list contains more than 1 items (to exclude the case
+    // when the kapman only collides with the maze)
+    if (collidingList.size() > 1)
+    {
+        for (int i = 0; i < collidingList.size(); ++i)
+        {
+            // The maze and the points labels have a negative zValue which allows to exclude them from the treatment of collisions
+            if (collidingList[i]->zValue() >= 300)
+            {
+                //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Kapman*)getModel());
                 setElementId(m_strPlayerId + "_death");
-			}
+            }
+            else if (collidingList[i]->zValue() == 100)
+            {
+                elementItem = dynamic_cast <ElementItem*> (collidingList[i]);
+                if(dynamic_cast <Bonus*> (elementItem->getModel())->isTaken() == false)
+                {
+                    dynamic_cast <Bonus*> (elementItem->getModel())->setTaken();
+                    elementItem->getModel()->doActionOnCollision(dynamic_cast <Kapman*> (this->getModel()));
+                    emit bonusItemTaken(elementItem);
+                }
+            }
 		}
 	}
 }

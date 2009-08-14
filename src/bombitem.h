@@ -21,7 +21,7 @@
 
 #include "elementitem.h"
 #include "bomb.h"
-
+// 
 #include <QTimer>
 
 /**
@@ -94,7 +94,7 @@ private slots:
     virtual void explode();
 
 signals:
-    void bombItemFinished(BombItem* bombItem);
+    void bombItemFinished(BombItem* bombItem);  //explosion finished
 };
 
 #endif

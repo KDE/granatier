@@ -91,7 +91,7 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
     
     for (int i = 0; i < m_players.size(); i++)
     {
-        connect(m_players[i], SIGNAL(bombDropped(qreal, qreal)), this, SLOT(createBomb(qreal, qreal)));
+        connect(m_players[i], SIGNAL(bombDropped(Kapman*, qreal, qreal)), this, SLOT(createBomb(Kapman*, qreal, qreal)));
         m_players[i]->initSpeedInc();
     }
 
@@ -120,7 +120,10 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
        
     //init KALEngine
     soundEngine = KALEngine::getInstance();
+    soundSourcePutBomb = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/putbomb.ogg")), soundEngine);
     soundSourceExplode = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/explode.ogg")), soundEngine);
+    soundSourceExplode->setGain(1);
+    soundSourceBonus = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/wow.ogg")), soundEngine);
 }
 
 Game::~Game()
@@ -142,7 +145,9 @@ Game::~Game()
     
     //bombs, bonuses and blocks are deletet by the destructor of their elementitem
     
+    delete soundSourcePutBomb;
     delete soundSourceExplode;
+    delete soundSourceBonus;
     KALEngine::kill();
 }
 
@@ -306,6 +311,13 @@ void Game::createBonus()
             m_blocks[i]->setBonus(bonus);
         }
     }
+}
+
+void Game::removeBonus(Bonus* bonus)
+{
+    m_bonus.removeAt(m_bonus.indexOf(bonus));
+    //do not delete the Bonus, because the ElementItem will delete it
+    soundSourceBonus->play();
 }
 
 void Game::createBlock(QPointF p_position, const QString& p_imageId)
@@ -634,7 +646,7 @@ void Game::endPreyState() {
 	}
 }
 
-void Game::createBomb(qreal x, qreal y)
+void Game::createBomb(Kapman* player, qreal x, qreal y)
 {
     int col = m_maze->getColFromX(x);
     int row = m_maze->getRowFromY(y);
@@ -645,15 +657,15 @@ void Game::createBomb(qreal x, qreal y)
             return;
         }
     }
-    Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_maze, Game::FPS * 2);
-    bomb->setBombRange(3);
+    Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_maze, 2500);    // time in ms
+    bomb->setBombRange(player->getBombRange());
     emit bombCreated(bomb);
-    connect(bomb, SIGNAL(bombFinished(Bomb*)), this, SLOT(slot_cleanupBombs(Bomb*)));
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(slot_bombDetonated(Bomb*)));
     m_bombs.append(bomb);
+    soundSourcePutBomb->play();
 }
 
-void Game::slot_cleanupBombs(Bomb* bomb)
+void Game::removeBomb(Bomb* bomb)
 {
     // Find the Bomb
     int index = m_bombs.indexOf(bomb);
@@ -661,7 +673,6 @@ void Game::slot_cleanupBombs(Bomb* bomb)
     if(index != -1)
     {
         //do not delete the bomb because it will be deleted through the destructor of elementitem
-        emit bombRemoved(m_bombs.at(index));
         m_bombs.removeAt(index);
     }
 }
@@ -669,7 +680,15 @@ void Game::slot_cleanupBombs(Bomb* bomb)
 void Game::slot_bombDetonated(Bomb* bomb)
 {
     //playSound(KStandardDirs::locate("data", "granatier/sounds/explode.ogg"));
+    soundSourceExplode->setMaxGain(10);
+    
+    if(soundSourceExplode->elapsedTime() == 0)
+    {
+        soundSourceExplode->setGain(1);
+    }
+    
     soundSourceExplode->play();
+    soundSourceExplode->setGain(soundSourceExplode->gain()*1.2);
 }
 
 void Game::blockDestroyed(const int row, const int col, Block* block)

@@ -118,6 +118,9 @@ class KapmanItem : public CharacterItem {
 		 * Implements the CharacterItem method.
 		 */
 		void blink();
+        
+signals:
+    void bonusItemTaken(ElementItem* bonusItem);
 };
 
 #endif

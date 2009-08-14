@@ -31,12 +31,20 @@ BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
     m_pulseTimer->setInterval(100);
     m_pulseTimer->start();
     connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
+    
+    m_explosionTimer = NULL;
 }
 
 BombItem::~BombItem()
 {
-    delete m_pulseTimer;
-    delete m_explosionTimer;
+    if(m_pulseTimer)
+    {
+        delete m_pulseTimer;
+    }
+    if(m_explosionTimer)
+    {
+        delete m_explosionTimer;
+    }
 }
 
 QPainterPath BombItem::shape() const
@@ -74,6 +82,7 @@ void BombItem::startDetonation(Bomb* bomb)
     m_explosionTimer->setSingleShot(true);
     m_explosionTimer->start();
     connect(m_explosionTimer, SIGNAL(timeout()), this, SLOT(explode()));
+    
     setElementId("bomb_exploded");
     setZValue(300+13); //300+maxBombRange+3
     update(m_x, m_y);

@@ -25,6 +25,7 @@ Bonus::Bonus(qreal p_x, qreal p_y, Maze* p_maze, Bonus::BonusType bonusType) : E
 {
     m_type = Element::BONUS;
     m_bonusType = bonusType;
+    m_taken = false;
 }
 
 Bonus::~Bonus()
@@ -34,10 +35,20 @@ Bonus::~Bonus()
 
 void Bonus::doActionOnCollision(Kapman* p_kapman)
 {
-    p_kapman->winPoints(this);
+    p_kapman->addBonus(this);
 }
 
 int Bonus::getBonusType()
 {
   return m_bonusType;
+}
+
+void Bonus::setTaken()
+{
+    m_taken = true;
+}
+
+bool Bonus::isTaken()
+{
+  return m_taken;
 }

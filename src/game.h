@@ -119,7 +119,9 @@ class Game : public QObject {
 		Phonon::MediaObject* m_media2;
         
         KALEngine* soundEngine;
+        KALSource* soundSourcePutBomb;
         KALSource* soundSourceExplode;
+        KALSource* soundSourceBonus;
 		
 	public:
 
@@ -222,6 +224,11 @@ class Game : public QObject {
         void createBonus();
         
         /**
+         * @param bonus the Bonus to remove
+         */
+        void removeBonus(Bonus* bonus);
+        
+        /**
          * Create a new Block
          * @param p_position the Block position
          * @param p_imageId the image of the Block
@@ -269,6 +276,11 @@ class Game : public QObject {
          * remove Block from list and decide to give bonus
          */
         void blockDestroyed(const int row, const int col, Block* block);
+        
+        /**
+         * Removes exploded bombs from the bomb list
+         */
+        void removeBomb(Bomb* bomb);
 		
 	private:
 	
@@ -311,7 +323,7 @@ class Game : public QObject {
         /**
          * Creates a bomb in the Cell with the coordinates x and y
          */
-        void createBomb(qreal x, qreal y);
+        void createBomb(Kapman* player, qreal x, qreal y);
 
 	private slots:
 
@@ -355,11 +367,6 @@ class Game : public QObject {
          * Plays the detonation sound
          */
         void slot_bombDetonated(Bomb* bomb);
-        
-        /**
-         * Removes exploded bombs from the bomb list
-         */
-        void slot_cleanupBombs(Bomb* bomb);
 		
 	signals:
 	

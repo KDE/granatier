@@ -139,7 +139,7 @@ class GameScene : public QGraphicsScene {
 		/**
 		 * Remove the Bonus from the GameScene.
 		 */
-		void hideBonus();
+		void removeBonusItem(ElementItem* bonusItem);
 	
 		/**
 		 * Upadates the Game information labels.
@@ -168,7 +168,7 @@ class GameScene : public QGraphicsScene {
         /**
          * Removes a BombItem
          */
-        void removeBombItem(Bomb* bomb);
+        void removeBombItem(BombItem* bombItem);
         
         /**
          * Creates the explosion items
