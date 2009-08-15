@@ -212,14 +212,14 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	// Initialize the information labels (score, lives and label)
 	updateInfo(Game::AllInfo);
 	// Display the score label
-	addItem(m_scoreLabel);
-	m_scoreLabel->setPos(Cell::SIZE, height() + Cell::SIZE);
+	//addItem(m_scoreLabel);
+	//m_scoreLabel->setPos(Cell::SIZE, height() + Cell::SIZE);
 	// Display the lives label
-	addItem(m_livesLabel);
-	m_livesLabel->setPos(width() - m_livesLabel->boundingRect().width() - 20 , height() - Cell::SIZE - m_livesLabel->boundingRect().height() / 2);
+	//addItem(m_livesLabel);
+	//m_livesLabel->setPos(width() - m_livesLabel->boundingRect().width() - 20 , height() - Cell::SIZE - m_livesLabel->boundingRect().height() / 2);
 	// Display the level label
-	addItem(m_levelLabel);
-	m_levelLabel->setPos((width() - m_levelLabel->boundingRect().width()) / 2 , height() - Cell::SIZE - m_levelLabel->boundingRect().height() / 2);
+	//addItem(m_levelLabel);
+	//m_levelLabel->setPos((width() - m_levelLabel->boundingRect().width()) / 2 , height() - Cell::SIZE - m_levelLabel->boundingRect().height() / 2);
 	// Display each Pill and Energizer item and introduction labels
 	intro(true);
 }
@@ -339,29 +339,29 @@ void GameScene::intro(const bool p_newLevel) {
             }
         }
         
-		// Display the new level label
-		m_newLevelLabel->setPlainText(i18nc("The number of the game level", "Level %1", m_game->getLevel()));
-		if (!items().contains(m_newLevelLabel)) {
-			addItem(m_newLevelLabel);
-			m_newLevelLabel->setPos((width() - m_newLevelLabel->boundingRect().width()) / 2, (height() - m_newLevelLabel->boundingRect().height()) / 2);
-		}
-		// Display the introduction label
-		if (!items().contains(m_introLabel2)) {
-			addItem(m_introLabel2);
-			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
-				(height() - m_introLabel2->boundingRect().height() + m_newLevelLabel->boundingRect().height()) / 2);
-		}
+// 		// Display the new level label
+// 		m_newLevelLabel->setPlainText(i18nc("The number of the game level", "Level %1", m_game->getLevel()));
+// 		if (!items().contains(m_newLevelLabel)) {
+// 			addItem(m_newLevelLabel);
+// 			m_newLevelLabel->setPos((width() - m_newLevelLabel->boundingRect().width()) / 2, (height() - m_newLevelLabel->boundingRect().height()) / 2);
+// 		}
+// 		// Display the introduction label
+// 		if (!items().contains(m_introLabel2)) {
+// 			addItem(m_introLabel2);
+// 			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
+// 				(height() - m_introLabel2->boundingRect().height() + m_newLevelLabel->boundingRect().height()) / 2);
+// 		}
 	} else {
-		// Display the introduction labels
-		if (!items().contains(m_introLabel)) {
-			addItem(m_introLabel);
-			m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
-		}
-		if (!items().contains(m_introLabel2)) {
-			addItem(m_introLabel2);
-			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
-				(height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
-		}
+// 		// Display the introduction labels
+// 		if (!items().contains(m_introLabel)) {
+// 			addItem(m_introLabel);
+// 			m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
+// 		}
+// 		if (!items().contains(m_introLabel2)) {
+// 			addItem(m_introLabel2);
+// 			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
+// 				(height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
+// 		}
 	}
 }
 
