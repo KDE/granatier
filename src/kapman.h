@@ -45,7 +45,7 @@ class Kapman : public Character {
         int m_bombRange;
         
         /** Player bomb total armory */
-        int m_bombTotalArmory;
+        int m_maxBombArmory;
         
         /** Player bomb armory */
         int m_bombArmory;

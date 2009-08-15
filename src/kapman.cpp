@@ -33,8 +33,8 @@ Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze) : C
     m_imageId = p_imageId;
     m_speed = 2;
     m_bombRange = 1;
-    m_bombTotalArmory = 1;
-    m_bombArmory = m_bombTotalArmory;
+    m_maxBombArmory = 1;
+    m_bombArmory = m_maxBombArmory;
     
     m_key.moveLeft = Qt::Key_Left;
     m_key.moveRight = Qt::Key_Right;
@@ -286,7 +286,11 @@ void Kapman::addBonus(Bonus* p_bonus)
     int bonusType = p_bonus->getBonusType();
     if(bonusType == Bonus::SPEED)
     {
-        increaseCharactersSpeed();
+        m_speed++;
+        if(m_speed > m_maxSpeed)
+        {
+            m_speed = m_maxSpeed;
+        }
     }
     else if(bonusType == Bonus::RANGE)
     {
@@ -298,15 +302,15 @@ void Kapman::addBonus(Bonus* p_bonus)
     }
     else if(bonusType == Bonus::BOMB)
     {
-        m_bombTotalArmory++;
-        if(m_bombTotalArmory > 10)
+        m_maxBombArmory++;
+        if(m_maxBombArmory > 10)
         {
-            m_bombTotalArmory = 10;
+            m_maxBombArmory = 10;
         }
         m_bombArmory++;
-        if(m_bombArmory > m_bombTotalArmory)
+        if(m_bombArmory > m_maxBombArmory)
         {
-            m_bombArmory = m_bombTotalArmory;
+            m_bombArmory = m_maxBombArmory;
         }
     }
 }
@@ -364,9 +368,9 @@ void Kapman::decrementBombArmory()
 void Kapman::slot_refillBombArmory()
 {
     m_bombArmory++;
-    if(m_bombArmory > m_bombTotalArmory)
+    if(m_bombArmory > m_maxBombArmory)
     {
-        m_bombArmory = m_bombTotalArmory;
+        m_bombArmory = m_maxBombArmory;
     }
 }
 
