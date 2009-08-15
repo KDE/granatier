@@ -33,6 +33,8 @@ Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze) : C
     m_imageId = p_imageId;
     m_speed = 2;
     m_bombRange = 1;
+    m_bombTotalArmory = 1;
+    m_bombArmory = m_bombTotalArmory;
     
     m_key.moveLeft = Qt::Key_Left;
     m_key.moveRight = Qt::Key_Right;
@@ -294,6 +296,19 @@ void Kapman::addBonus(Bonus* p_bonus)
             m_bombRange = 10;
         }
     }
+    else if(bonusType == Bonus::BOMB)
+    {
+        m_bombTotalArmory++;
+        if(m_bombTotalArmory > 10)
+        {
+            m_bombTotalArmory = 10;
+        }
+        m_bombArmory++;
+        if(m_bombArmory > m_bombTotalArmory)
+        {
+            m_bombArmory = m_bombTotalArmory;
+        }
+    }
 }
 
 void Kapman::die() {
@@ -335,6 +350,24 @@ Cell Kapman::getAskedNextCell() {
 int Kapman::getBombRange() const
 {
     return m_bombRange;
+}
+
+void Kapman::decrementBombArmory()
+{
+    m_bombArmory--;
+    if(m_bombArmory < 0)
+    {
+        m_bombArmory = 0;
+    }
+}
+
+void Kapman::slot_refillBombArmory()
+{
+    m_bombArmory++;
+    if(m_bombArmory > m_bombTotalArmory)
+    {
+        m_bombArmory = m_bombTotalArmory;
+    }
 }
 
 void Kapman::stopMoving() {
@@ -395,7 +428,7 @@ void Kapman::keyPressed(QKeyEvent* keyEvent)
         goDown();
         updateDirection();
     }
-    else if(key == m_key.dropBomb)
+    else if(key == m_key.dropBomb && m_bombArmory > 0)
     {
         emit bombDropped(this, m_x, m_y);
     }

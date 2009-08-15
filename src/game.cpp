@@ -269,7 +269,7 @@ void Game::createBonus()
         bonusType = Bonus::NONE;
         if(i < nBonusCount)
         {
-            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 5))
+            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 3/*5*/))
             {
                 case 0: bonusType = Bonus::SPEED;
                         break;
@@ -661,7 +661,9 @@ void Game::createBomb(Kapman* player, qreal x, qreal y)
     bomb->setBombRange(player->getBombRange());
     emit bombCreated(bomb);
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(slot_bombDetonated(Bomb*)));
+    connect(bomb, SIGNAL(bombDetonated(Bomb*)), player, SLOT(slot_refillBombArmory()));
     m_bombs.append(bomb);
+    player->decrementBombArmory();
     soundSourcePutBomb->play();
 }
 

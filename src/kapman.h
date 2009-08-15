@@ -43,6 +43,12 @@ class Kapman : public Character {
         
         /** Player bomb range */
         int m_bombRange;
+        
+        /** Player bomb total armory */
+        int m_bombTotalArmory;
+        
+        /** Player bomb armory */
+        int m_bombArmory;
 
 	public:
 
@@ -121,6 +127,11 @@ class Kapman : public Character {
          */
         int getBombRange() const;
         
+        /**
+         * decrements the bomb armory
+         */
+        void decrementBombArmory();
+        
 		/**
 		 * Manages the points won
 		 * @param p_element reference to the element eaten
@@ -180,6 +191,12 @@ class Kapman : public Character {
 		 */
 		void stopMoving();
 
+public slots:
+    /**
+     * refills the bomb armory after a bomb is exploded
+     */
+    void slot_refillBombArmory();
+        
 	signals:
 
 		/**
