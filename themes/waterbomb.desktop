@@ -1,0 +1,11 @@
+[KGameTheme]
+Name=Water Bomb
+Name[sv]=Klanbombare
+Name[x-test]=xxWaterBombxx
+Description=Water Bomb Theme
+Description[de]=Wasserbomben-Design
+Type=SVG
+FileName=waterbomb.svgz
+Preview=waterbomb_preview.png
+Author=Mathias Kraus
+AuthorEmail=k.hias@gmx.de
