@@ -22,6 +22,8 @@
 #include "bonus.h"
 
 #include <QKeyEvent>
+#include <KDE/KALBuffer>
+#include <KDE/KALSource>
 
 /**
  * @brief This class represents the main character of the game.
@@ -49,6 +51,11 @@ class Kapman : public Character {
         
         /** Player bomb armory */
         int m_bombArmory;
+        
+        bool m_death;
+        
+        KALSource* m_soundSourceDie;
+        KALSource* m_soundSourceWilhelmScream;
 
 	public:
 
@@ -138,6 +145,16 @@ class Kapman : public Character {
 		 */
 		void addBonus(Bonus* p_bonus);
 
+        /**
+         * sets the die sound
+         */
+        void setSoundDie(KALBuffer* buffer);
+        
+        /**
+         * sets the wilhelm scream sound
+         */
+        void setSoundWilhelmScream(KALBuffer* buffer);
+        
 		/**
 		 * Implements the Character function
 		 */
@@ -224,6 +241,11 @@ public slots:
           * Emitted when the player drops a bomb
           */
          void bombDropped(Kapman* player, qreal x, qreal y);
+         
+         /**
+          * Emitted when the player is dying
+          */
+         void dying(Kapman* player);
 };
 
 #endif

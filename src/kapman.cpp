@@ -21,6 +21,7 @@
 
 #include <kdebug.h>
 #include <KGameDifficulty>
+#include <KDE/KALEngine>
 
 #include <cmath>
 
@@ -35,16 +36,28 @@ Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze) : C
     m_bombRange = 1;
     m_maxBombArmory = 1;
     m_bombArmory = m_maxBombArmory;
+    m_death = false;
     
     m_key.moveLeft = Qt::Key_Left;
     m_key.moveRight = Qt::Key_Right;
     m_key.moveUp = Qt::Key_Up;
     m_key.moveDown = Qt::Key_Down;
     m_key.dropBomb = Qt::Key_Return;
+    
+    m_soundSourceDie = NULL;
+    m_soundSourceWilhelmScream = NULL;
 }
 
-Kapman::~Kapman() {
-
+Kapman::~Kapman()
+{
+    if(m_soundSourceDie)
+    {
+        delete m_soundSourceDie;
+    }
+    if(m_soundSourceWilhelmScream)
+    {
+        delete m_soundSourceWilhelmScream;
+    }
 }
 
 void Kapman::setShortcuts(const Shortcuts keys)
@@ -315,8 +328,50 @@ void Kapman::addBonus(Bonus* p_bonus)
     }
 }
 
-void Kapman::die() {
-	emit eaten();
+void Kapman::setSoundDie(KALBuffer* buffer)
+{
+    if(m_soundSourceDie)
+    {
+        delete m_soundSourceDie;
+        m_soundSourceDie = NULL;
+    }
+    
+    if(buffer)
+    {
+        m_soundSourceDie = new KALSource(buffer, KALEngine::getInstance());
+    }
+}
+
+void Kapman::setSoundWilhelmScream(KALBuffer* buffer)
+{
+    if(m_soundSourceWilhelmScream)
+    {
+        delete m_soundSourceWilhelmScream;
+        m_soundSourceWilhelmScream = NULL;
+    }
+    
+    if(buffer)
+    {
+        m_soundSourceWilhelmScream = new KALSource(buffer, KALEngine::getInstance());
+    }
+}
+
+void Kapman::die()
+{
+    if(m_imageId == "player1" && m_soundSourceWilhelmScream != NULL && m_soundSourceWilhelmScream->elapsedTime() == 0)
+    {
+        m_soundSourceWilhelmScream->play();
+    }
+    else if(m_imageId != "player1" && m_soundSourceDie != NULL && m_soundSourceDie->elapsedTime() == 0)
+    {
+        m_soundSourceDie->play();
+    }
+    
+    if(!m_death)
+    {
+        m_death = true;
+        emit dying(this);
+    }
 }
 
 void Kapman::emitGameUpdated() {

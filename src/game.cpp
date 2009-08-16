@@ -83,7 +83,7 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 	}	
 
 	for (int i = 0; i < m_ghosts.size(); ++i) {
-		connect(m_ghosts[i], SIGNAL(lifeLost()), this, SLOT(kapmanDeath()));
+		//connect(m_ghosts[i], SIGNAL(lifeLost()), this, SLOT(kapmanDeath()));
 		connect(m_ghosts[i], SIGNAL(ghostEaten(Ghost*)), this, SLOT(ghostDeath(Ghost*)));
 		// Initialize the ghosts speed and the ghost speed increase considering the characters speed
 		m_ghosts[i]->initSpeedInc();
@@ -124,6 +124,16 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
     soundSourceExplode = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/explode.ogg")), soundEngine);
     soundSourceExplode->setGain(1);
     soundSourceBonus = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/wow.ogg")), soundEngine);
+    soundBufferDie = new KALBuffer(KStandardDirs::locate("data", "granatier/sounds/die.ogg"));
+    soundBufferWilhelmScream = new KALBuffer(KStandardDirs::locate("data", "granatier/sounds/wilhelmscream.ogg"));
+    soundSourceDie = new KALSource(soundBufferDie, soundEngine);
+    soundSourceWilhelmScream = new KALSource(soundBufferWilhelmScream, soundEngine);
+    
+    for (int i = 0; i < m_players.size(); i++)
+    {
+        m_players[i]->setSoundDie(soundBufferDie);
+        m_players[i]->setSoundWilhelmScream(soundBufferWilhelmScream);
+    }
 }
 
 Game::~Game()
@@ -148,6 +158,10 @@ Game::~Game()
     delete soundSourcePutBomb;
     delete soundSourceExplode;
     delete soundSourceBonus;
+    delete soundSourceWilhelmScream;
+    delete soundSourceDie;
+    delete soundBufferWilhelmScream;
+    delete soundBufferDie;
     KALEngine::kill();
 }
 
@@ -341,6 +355,7 @@ void Game::createPlayer(QPointF p_position, const QString& p_imageId)
         player->setShortcuts(keys);
     }
     m_players.append(player);
+    connect(player, SIGNAL(dying(Kapman*)), this, SLOT(kapmanDeath(Kapman*)));
 }
 
 void Game::createGhost(QPointF p_position, const QString & p_imageId){
@@ -513,13 +528,24 @@ void Game::update() {
     }
 }
 
-void Game::kapmanDeath() {
-	playSound(KStandardDirs::locate("sound", "kapman/gameover.ogg"));
-	m_lives--;
-	//m_kapman->die();
-	// Make a 2 seconds pause while the kapman is blinking
-	pause(true);
-	QTimer::singleShot(2500, this, SLOT(resumeAfterKapmanDeath()));
+void Game::kapmanDeath(Kapman* player)
+{
+// 	playSound(KStandardDirs::locate("sound", "kapman/gameover.ogg"));
+// 	m_lives--;
+// 	//m_kapman->die();
+// 	// Make a 2 seconds pause while the kapman is blinking
+// 	pause(true);
+// 	QTimer::singleShot(2500, this, SLOT(resumeAfterKapmanDeath()));
+    
+    
+//     if(player->getImageId() == "player1")
+//     {
+//         soundSourceDie->play();
+//     }
+//     else
+//     {
+//         soundSourceWilhelmScream->play();
+//     }
 }
 
 void Game::resumeAfterKapmanDeath() {

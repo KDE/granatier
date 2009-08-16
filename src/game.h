@@ -122,6 +122,10 @@ class Game : public QObject {
         KALSource* soundSourcePutBomb;
         KALSource* soundSourceExplode;
         KALSource* soundSourceBonus;
+        KALBuffer* soundBufferDie;
+        KALBuffer* soundBufferWilhelmScream;
+        KALSource* soundSourceDie;
+        KALSource* soundSourceWilhelmScream;
 		
 	public:
 
@@ -335,7 +339,7 @@ class Game : public QObject {
 		/**
 		 * Manages the loss of a life.
 		 */
-		void kapmanDeath();
+		void kapmanDeath(Kapman* player);
 
 		/**
 		 * Manages the death of a Ghost.

@@ -109,6 +109,7 @@ void KapmanItem::manageCollision()
             {
                 //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Kapman*)getModel());
                 setElementId(m_strPlayerId + "_death");
+                dynamic_cast <Kapman*> (m_model)->die();
             }
             else if (collidingList[i]->zValue() == 100)
             {
