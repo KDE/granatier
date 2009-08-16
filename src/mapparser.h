@@ -25,7 +25,7 @@
 #include <QXmlDefaultHandler>
 
 /**
- * @brief This class handles XML reader events in order to initialize the Maze properties.
+ * @brief This class handles XML reader events in order to initialize the Arena properties.
  */
 class MapParser : public QXmlDefaultHandler {
 	

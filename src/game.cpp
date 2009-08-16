@@ -45,16 +45,15 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 	// Tells the KGameDifficulty singleton that the game is not running
 	KGameDifficulty::setRunning(false);
 
-	// Create the Maze instance
-	m_maze = new Maze();
-	connect(m_maze, SIGNAL(allElementsEaten()), this, SLOT(nextLevel()));
+	// Create the Arena instance
+	m_arena = new Arena();
 
-	// Create the parser that will parse the XML file in order to initialize the Maze instance
+	// Create the parser that will parse the XML file in order to initialize the Arena instance
 	// This also creates all the characters
 	MapParser mapParser(this);
 	// Set the XML file as input source for the parser
-	QFile mazeXmlFile(KStandardDirs::locate("appdata", "defaultmaze.xml"));
-	QXmlInputSource source(&mazeXmlFile);
+	QFile arenaXmlFile(KStandardDirs::locate("appdata", "defaultarena.xml"));
+	QXmlInputSource source(&arenaXmlFile);
 	// Create the XML file reader
 	QXmlSimpleReader reader;
 	reader.setContentHandler(&mapParser);
@@ -112,7 +111,7 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 	connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
 	m_timer->start();
 	m_state = RUNNING;
-	// Init the characters coordinates on the Maze
+	// Init the characters coordinates on the Arena
 	initCharactersPosition();
     
     // Create the hidden Bonuses
@@ -142,7 +141,7 @@ Game::~Game()
     delete m_media2;
     delete m_timer;
     delete m_bonusTimer;
-    delete m_maze;
+    delete m_arena;
     
     for (int i = 0; i < m_ghosts.size(); i++)
     {
@@ -212,8 +211,8 @@ QTimer* Game::getTimer() const {
 	return m_timer;
 }
 
-Maze* Game::getMaze() const {
-	return m_maze;
+Arena* Game::getArena() const {
+	return m_arena;
 }
 
 bool Game::isPaused() const {
@@ -238,7 +237,6 @@ int Game::getLevel() const {
 void Game::setLevel(int p_level) {
 	m_isCheater = true;
 	m_level = p_level;
-	m_maze->resetNbElem();
 	m_timer->start();	// Needed to reinit character positions
 	initCharactersPosition();
 	for (int i = 0; i < m_ghosts.size(); ++i) {
@@ -320,7 +318,7 @@ void Game::createBonus()
     {
         if(bonusTypeList[i] != Bonus::NONE)
         {
-            bonus = new Bonus(m_blocks[i]->getX(), m_blocks[i]->getY(), m_maze, bonusTypeList[i]);
+            bonus = new Bonus(m_blocks[i]->getX(), m_blocks[i]->getY(), m_arena, bonusTypeList[i]);
             m_bonus.append(bonus);
             m_blocks[i]->setBonus(bonus);
         }
@@ -336,14 +334,14 @@ void Game::removeBonus(Bonus* bonus)
 
 void Game::createBlock(QPointF p_position, const QString& p_imageId)
 {
-    Block* block = new Block(p_position.y(), p_position.x(), m_maze, p_imageId);
+    Block* block = new Block(p_position.y(), p_position.x(), m_arena, p_imageId);
     m_blocks.append(block);
-    m_maze->setCellElement(p_position.y(), p_position.x(), block);
+    m_arena->setCellElement(p_position.y(), p_position.x(), block);
 }
 
 void Game::createPlayer(QPointF p_position, const QString& p_imageId)
 {
-    Kapman* player = new Kapman(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_maze);
+    Kapman* player = new Kapman(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_arena);
     if(p_imageId.compare("player2") == 0)
     {
         Character::Shortcuts keys;
@@ -359,12 +357,7 @@ void Game::createPlayer(QPointF p_position, const QString& p_imageId)
 }
 
 void Game::createGhost(QPointF p_position, const QString & p_imageId){
-	//m_ghosts.append(new Ghost(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_maze));
-}
-
-
-void Game::initMaze(const int p_nbRows, const int p_nbColumns){
-	m_maze->init(p_nbRows, p_nbColumns);
+	//m_ghosts.append(new Ghost(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_arena));
 }
 
 void Game::setSoundsEnabled(bool p_enabled) {
@@ -406,14 +399,14 @@ void Game::initCharactersPosition() {
             m_players[i]->init();
         }
         // Initialize the Block coordinates
-        for (int i = 0; i < m_maze->getNbRows(); ++i)
+        for (int i = 0; i < m_arena->getNbRows(); ++i)
         {
-            for (int j = 0; j < m_maze->getNbColumns(); ++j)
+            for (int j = 0; j < m_arena->getNbColumns(); ++j)
             {
-                if (m_maze->getCell(i,j).getElement() != NULL && m_maze->getCell(i,j).getElement()->getType() == Element::BLOCK)
+                if (m_arena->getCell(i,j).getElement() != NULL && m_arena->getCell(i,j).getElement()->getType() == Element::BLOCK)
                 {
-                    m_maze->getCell(i,j).getElement()->setX(Cell::SIZE * (j + 0.5));
-                    m_maze->getCell(i,j).getElement()->setY(Cell::SIZE * (i + 0.5));
+                    m_arena->getCell(i,j).getElement()->setX(Cell::SIZE * (j + 0.5));
+                    m_arena->getCell(i,j).getElement()->setY(Cell::SIZE * (i + 0.5));
                 }
             }
         }
@@ -503,8 +496,8 @@ void Game::update() {
 	int curKapmanRow, curKapmanCol;
 	
 	// Check if the kapman is in the line of sight of a ghost
-	//curKapmanRow = m_maze->getRowFromY(m_kapman->getY());
-	//curKapmanCol = m_maze->getColFromX(m_kapman->getX());
+	//curKapmanRow = m_arena->getRowFromY(m_kapman->getY());
+	//curKapmanCol = m_arena->getColFromX(m_kapman->getX());
 	
 	for (int i = 0; i < m_ghosts.size(); ++i) {
 		//if (m_ghosts[i]->getState() == Ghost::HUNTER && m_ghosts[i]->isInLineSight(m_kapman)) {
@@ -627,12 +620,6 @@ void Game::winPoints(Element* p_element) {
 	
 		emit(bonusOff());
 	}
-	// If 1/3 or 2/3 of the pills are eaten
-	if (m_maze->getNbElem() == m_maze->getTotalNbElem() / 3 || m_maze->getNbElem() == (m_maze->getTotalNbElem() * 2 / 3)) {
-		// Display the Bonus
-		emit(bonusOn());
-		m_bonusTimer->start();
-	}	
 	emit(dataChanged(ScoreInfo));
 }
 
@@ -640,8 +627,6 @@ void Game::nextLevel() {
 	playSound(KStandardDirs::locate("sound", "kapman/levelup.ogg"));
 	// Increment the level
 	m_level++;
-	// Initialize the maze items
-	m_maze->resetNbElem();
 	// Update Bonus
 	//->setPoints(m_level * 100);
 	// Move all characters to their initial positions
@@ -674,16 +659,16 @@ void Game::endPreyState() {
 
 void Game::createBomb(Kapman* player, qreal x, qreal y)
 {
-    int col = m_maze->getColFromX(x);
-    int row = m_maze->getRowFromY(y);
-    if(col >= 0 && col < m_maze->getNbColumns() && row >= 0 && row < m_maze->getNbRows())
+    int col = m_arena->getColFromX(x);
+    int row = m_arena->getRowFromY(y);
+    if(col >= 0 && col < m_arena->getNbColumns() && row >= 0 && row < m_arena->getNbRows())
     {
-        if(m_maze->getCell(row, col).getElement() != NULL && m_maze->getCell(row, col).getElement()->getType() == Element::BOMB)
+        if(m_arena->getCell(row, col).getElement() != NULL && m_arena->getCell(row, col).getElement()->getType() == Element::BOMB)
         {
             return;
         }
     }
-    Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_maze, 2500);    // time in ms
+    Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_arena, 2500);    // time in ms
     bomb->setBombRange(player->getBombRange());
     emit bombCreated(bomb);
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(slot_bombDetonated(Bomb*)));
@@ -727,6 +712,6 @@ void Game::blockDestroyed(const int row, const int col, Block* block)
     if(index != -1)
     {
         //do not delete the block because it will be deleted through the destructor of elementitem
-        m_maze->removeCellElement(row, col, block);
+        m_arena->removeCellElement(row, col, block);
     }
 }

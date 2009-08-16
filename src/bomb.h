@@ -58,10 +58,10 @@ public:
     * Creates a new Bomb instance.
     * @param fX the initial x-coordinate
     * @param fY the initial y-coordinate
-    * @param pMaze the Maze the Bomb is on
+    * @param p_arena the Arena the Bomb is on
     * @param nDetonationCountdown the time until detonation
     */
-    Bomb(qreal fX, qreal fY, Maze* pMaze, int nDetonationCountdown);
+    Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown);
 
     /**
     * Deletes the Bomb instance.
@@ -95,7 +95,7 @@ public:
 
     /**
     * Moves the Bomb function of its current coordinates and speed.
-    * If the Bomb reaches a border, it circles around the maze and continue its way from the other side.
+    * If the Bomb reaches a border, it circles around the arena and continue its way from the other side.
     */
     void move();
 

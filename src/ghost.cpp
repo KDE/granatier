@@ -25,7 +25,7 @@
 
 const qreal Ghost::MAX_SPEED_RATIO = 2.0;
 
-Ghost::Ghost(qreal p_x, qreal p_y, const QString & p_imageId, Maze* p_maze) : Character(p_x, p_y, p_maze) {
+Ghost::Ghost(qreal p_x, qreal p_y, const QString & p_imageId, Arena* p_arena) : Character(p_x, p_y, p_arena) {
 	// Initialize the ghost attributes
 	m_imageId = p_imageId;
 	m_points = 200;
@@ -64,8 +64,8 @@ void Ghost::goLeft() {
 
 void Ghost::updateMove() {
 	// Get the current cell coordinates from the character coordinates
-	int curCellRow = m_maze->getRowFromY(m_y);
-	int curCellCol = m_maze->getColFromX(m_x);
+	int curCellRow = m_arena->getRowFromY(m_y);
+	int curCellCol = m_arena->getColFromX(m_x);
 	// Flag to know when the ghost has no choice but go back
 	bool halfTurnRequired = true;
 	// Contains the different directions a ghost can choose when on a cell center
@@ -77,33 +77,33 @@ void Ghost::updateMove() {
 		// If the ghost gets on a Cell center
 		if (onCenter()) {
 			// We retrieve all the directions the ghost can choose (save the turnning back)
-			if (m_maze->getCell(curCellRow, curCellCol + 1).getType() == Cell::GROUND || 
-					(m_maze->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
-					 m_maze->getCell(curCellRow, curCellCol + 1).getType() == Cell::GHOSTCAMP)) {
+			if (m_arena->getCell(curCellRow, curCellCol + 1).getType() == Cell::GROUND || 
+					(m_arena->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
+					 m_arena->getCell(curCellRow, curCellCol + 1).getType() == Cell::GHOSTCAMP)) {
 				if (m_xSpeed >= 0) {
 					directionsList.append(QPointF(m_speed, 0.0));
 					halfTurnRequired = false;
 				}
 			}
-			if (m_maze->getCell(curCellRow + 1, curCellCol).getType() == Cell::GROUND ||
-					(m_maze->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
-					 m_maze->getCell(curCellRow + 1, curCellCol).getType() == Cell::GHOSTCAMP)) {
+			if (m_arena->getCell(curCellRow + 1, curCellCol).getType() == Cell::GROUND ||
+					(m_arena->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
+					 m_arena->getCell(curCellRow + 1, curCellCol).getType() == Cell::GHOSTCAMP)) {
 				if (m_ySpeed >= 0) {
 					directionsList.append(QPointF(0.0, m_speed));
 					halfTurnRequired = false;
 				}
 			}
-			if (m_maze->getCell(curCellRow - 1, curCellCol).getType() == Cell::GROUND ||
-					(m_maze->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
-					 m_maze->getCell(curCellRow - 1, curCellCol).getType() == Cell::GHOSTCAMP)) {
+			if (m_arena->getCell(curCellRow - 1, curCellCol).getType() == Cell::GROUND ||
+					(m_arena->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
+					 m_arena->getCell(curCellRow - 1, curCellCol).getType() == Cell::GHOSTCAMP)) {
 				if (m_ySpeed <= 0) {
 					directionsList.append(QPointF(0.0, -m_speed));
 					halfTurnRequired = false;
 				}
 			}
-			if (m_maze->getCell(curCellRow, curCellCol - 1).getType() == Cell::GROUND ||
-					(m_maze->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
-					 m_maze->getCell(curCellRow, curCellCol - 1).getType() == Cell::GHOSTCAMP)) {
+			if (m_arena->getCell(curCellRow, curCellCol - 1).getType() == Cell::GROUND ||
+					(m_arena->getCell(curCellRow, curCellCol).getType() == Cell::GHOSTCAMP &&
+					 m_arena->getCell(curCellRow, curCellCol - 1).getType() == Cell::GHOSTCAMP)) {
 				if (m_xSpeed <= 0) {
 					directionsList.append(QPointF(-m_speed, 0.0));
 					halfTurnRequired = false;
@@ -135,20 +135,20 @@ void Ghost::updateMove() {
 				m_pathToCamp.removeFirst();
 			} else {
 				// If the ghost is not at home (that means it has just been eaten)
-				if (curCellRow != m_maze->getResurrectionCell().y() || curCellCol != m_maze->getResurrectionCell().x()) {
-					// Compute the path to go back to the camp
-					m_pathToCamp = m_maze->getPathToGhostCamp(curCellRow, curCellCol);
-					if (!m_pathToCamp.isEmpty()) {
-						updateMove(m_pathToCamp.first().y(), m_pathToCamp.first().x());
-					} else {
-						// Set the ghost at home
-						m_x = m_maze->getResurrectionCell().x() * Cell::SIZE + Cell::SIZE / 2;
-						m_y = m_maze->getResurrectionCell().y() * Cell::SIZE + Cell::SIZE / 2;
-						setState(Ghost::HUNTER);
-					}
-				} else {	// The ghost has reached the ghost camp
-					setState(Ghost::HUNTER);
-				}
+// 				if (curCellRow != m_arena->getResurrectionCell().y() || curCellCol != m_arena->getResurrectionCell().x()) {
+// 					// Compute the path to go back to the camp
+// 					//m_pathToCamp = m_arena->getPathToGhostCamp(curCellRow, curCellCol);
+// 					if (!m_pathToCamp.isEmpty()) {
+// 						updateMove(m_pathToCamp.first().y(), m_pathToCamp.first().x());
+// 					} else {
+// 						// Set the ghost at home
+// 						m_x = m_arena->getResurrectionCell().x() * Cell::SIZE + Cell::SIZE / 2;
+// 						m_y = m_arena->getResurrectionCell().y() * Cell::SIZE + Cell::SIZE / 2;
+// 						setState(Ghost::HUNTER);
+// 					}
+// 				} else {	// The ghost has reached the ghost camp
+// 					setState(Ghost::HUNTER);
+// 				}
 			}
 		}
 		move();
@@ -157,8 +157,8 @@ void Ghost::updateMove() {
 
 void Ghost::updateMove(int p_row, int p_col) {
 	// Get the current cell coordinates from the ghost coordinates
-	int curGhostRow = m_maze->getRowFromY(m_y);
-	int curGhostCol = m_maze->getColFromX(m_x);
+	int curGhostRow = m_arena->getRowFromY(m_y);
+	int curGhostCol = m_arena->getColFromX(m_x);
 	
 	if (onCenter()) {
 		if (curGhostRow == p_row) {

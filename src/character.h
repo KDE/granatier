@@ -85,9 +85,9 @@ class Character : public Element {
 		 * Creates a new Character instance.
 		 * @param p_x the initial x-coordinate
 		 * @param p_y the initial y-coordinate
-		 * @param p_maze the Maze the Character is on
+		 * @param p_arena the Arena the Character is on
 		 */
-		Character(qreal p_x, qreal p_y, Maze* p_maze);
+		Character(qreal p_x, qreal p_y, Arena* p_arena);
 
 		/**
 		 * Deletes the Character instance.
@@ -121,7 +121,7 @@ class Character : public Element {
 
 		/**
 		 * Moves the Character function of its current coordinates and speed.
-		 * If the character reaches a border, it circles around the maze and continue its way from the other side.
+		 * If the character reaches a border, it circles around the arena and continue its way from the other side.
 		 */
 		void move();
 

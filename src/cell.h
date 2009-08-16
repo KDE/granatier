@@ -24,7 +24,7 @@
 class Element;
 
 /**
- * @brief This class represents a Cell of the Maze.
+ * @brief This class represents a Cell of the Arena.
  */
 class Cell {
 

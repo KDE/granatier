@@ -19,7 +19,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "maze.h"
+#include "arena.h"
 #include "kapman.h"
 #include "ghost.h"
 #include "bonus.h"
@@ -79,8 +79,8 @@ class Game : public QObject {
 		/** Timer to manage the prey state of the ghosts */
 		QTimer* m_preyTimer;
 		
-		/** The Maze */
-		Maze* m_maze;
+		/** The Arena */
+		Arena* m_arena;
 
         /** The Players */
         QList<Kapman*> m_players;
@@ -167,9 +167,9 @@ class Game : public QObject {
 		void switchPause(bool p_locked = false);
 
 		/**
-		 * @return the Maze instance
+		 * @return the Arena instance
 		 */
-		Maze* getMaze() const;
+		Arena* getArena() const;
 		
         /**
          * @return the Player models
@@ -252,13 +252,6 @@ class Game : public QObject {
 		 * @param p_imageId the image of the Ghost
 		 */
 		void createGhost(QPointF p_position, const QString & p_imageId);
-
-		/**
-		 * Initializes a Maze
-		 * @param p_nbRows the number of rows
-		 * @param p_nbColumns the number of columns
-		 */
-		void initMaze(const int p_nbRows, const int p_nbColumns);
 
 		/**
 		 * Initializes a Ghost

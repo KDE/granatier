@@ -27,7 +27,7 @@ const qreal Character::LOW_SPEED_INC = 1;
 const qreal Character::MEDIUM_SPEED_INC = 1;
 const qreal Character::HIGH_SPEED_INC = 1;
 
-Character::Character(qreal p_x, qreal p_y, Maze* p_maze) : Element(p_x, p_y, p_maze), m_xSpeed(0), m_ySpeed(0) {
+Character::Character(qreal p_x, qreal p_y, Arena* p_arena) : Element(p_x, p_y, p_arena), m_xSpeed(0), m_ySpeed(0) {
 	initSpeed();
 	m_maxSpeed = m_normalSpeed;	// To avoid bugs, but will be overridden in the Ghost and Kapman constructors
 }
@@ -36,14 +36,14 @@ Character::~Character() {
 }
 
 void Character::move() {
-	// Take care of the Maze borders
-	if (m_maze->getColFromX(m_x + m_xSpeed) == 0) {									// First column
-		m_x = (m_maze->getNbColumns() - 1.5) * Cell::SIZE;
-	} else if (m_maze->getColFromX(m_x + m_xSpeed) == m_maze->getNbColumns() - 1) {	// Last column
+	// Take care of the Arena borders
+	if (m_arena->getColFromX(m_x + m_xSpeed) == 0) {									// First column
+		m_x = (m_arena->getNbColumns() - 1.5) * Cell::SIZE;
+	} else if (m_arena->getColFromX(m_x + m_xSpeed) == m_arena->getNbColumns() - 1) {	// Last column
 		m_x = 1.5 * Cell::SIZE;
-	} else if (m_maze->getRowFromY(m_y + m_ySpeed) == 0) {							// First row
-		m_y = (m_maze->getNbRows() - 1.5) * Cell::SIZE;
-	} else if (m_maze->getRowFromY(m_y + m_ySpeed) == m_maze->getNbRows() - 1) {	// Last row
+	} else if (m_arena->getRowFromY(m_y + m_ySpeed) == 0) {							// First row
+		m_y = (m_arena->getNbRows() - 1.5) * Cell::SIZE;
+	} else if (m_arena->getRowFromY(m_y + m_ySpeed) == m_arena->getNbRows() - 1) {	// Last row
 		m_y = 1.5 * Cell::SIZE;
 	}
 	// Move the Character
@@ -109,10 +109,10 @@ bool Character::isInLineSight(Character* p_character) {
 	int curCharacterRow;	// The current row of the other Character
 	int curCharacterCol;	// The current column of the other Character
 	
-	curCallerRow = m_maze->getRowFromY(m_y);
-	curCallerCol = m_maze->getColFromX(m_x);
-	curCharacterRow = m_maze->getRowFromY(p_character->getY());
-	curCharacterCol = m_maze->getColFromX(p_character->getX());
+	curCallerRow = m_arena->getRowFromY(m_y);
+	curCallerCol = m_arena->getColFromX(m_x);
+	curCharacterRow = m_arena->getRowFromY(p_character->getY());
+	curCharacterCol = m_arena->getColFromX(p_character->getX());
 	
 	// If the two Characters are on the same row
 	if (curCallerRow == curCharacterRow ) {
@@ -120,7 +120,7 @@ bool Character::isInLineSight(Character* p_character) {
 		if (curCallerCol > curCharacterCol && m_xSpeed < 0) {
 			// Check there is a wall between them
 			for (int i = curCharacterCol; i < curCallerCol; ++i) {
-				if (m_maze->getCell(curCallerRow, i).getType() != Cell::GROUND) {
+				if (m_arena->getCell(curCallerRow, i).getType() != Cell::GROUND) {
 					return false;
 				}
 			}
@@ -130,7 +130,7 @@ bool Character::isInLineSight(Character* p_character) {
 		} else if (curCallerCol < curCharacterCol && m_xSpeed > 0) {
 			// Check there is a wall between them
 			for (int i = curCallerCol; i < curCharacterCol; ++i) {
-				if (m_maze->getCell(curCallerRow, i).getType() != Cell::GROUND) {
+				if (m_arena->getCell(curCallerRow, i).getType() != Cell::GROUND) {
 					return false;
 				}
 			}
@@ -143,7 +143,7 @@ bool Character::isInLineSight(Character* p_character) {
 		if (curCallerRow > curCharacterRow && m_ySpeed < 0) {
 			// Check there is a wall between them
 			for (int i = curCharacterRow; i < curCallerRow; ++i) {
-				if (m_maze->getCell(i, curCallerCol).getType() != Cell::GROUND) {
+				if (m_arena->getCell(i, curCallerCol).getType() != Cell::GROUND) {
 					return false;
 				}
 			}
@@ -153,7 +153,7 @@ bool Character::isInLineSight(Character* p_character) {
 		} else if (curCallerRow < curCharacterRow && m_ySpeed > 0) {
 			// Check there is a wall between them
 			for (int i = curCallerRow; i < curCharacterRow; ++i) {
-				if (m_maze->getCell(i, curCallerCol).getType() != Cell::GROUND) {
+				if (m_arena->getCell(i, curCallerCol).getType() != Cell::GROUND) {
 					return false;
 				}
 			}
@@ -168,18 +168,18 @@ bool Character::isInLineSight(Character* p_character) {
 Cell Character::getNextCell() {
 	Cell nextCell;
 	// Get the current cell coordinates from the character coordinates
-	int curCellRow = m_maze->getRowFromY(m_y);
-	int curCellCol = m_maze->getColFromX(m_x);
+	int curCellRow = m_arena->getRowFromY(m_y);
+	int curCellCol = m_arena->getColFromX(m_x);
 
 	// Get the next cell function of the character direction
 	if (m_xSpeed > 0) {
-		nextCell = m_maze->getCell(curCellRow, curCellCol + 1);
+		nextCell = m_arena->getCell(curCellRow, curCellCol + 1);
 	} else if (m_xSpeed < 0) {
-		nextCell = m_maze->getCell(curCellRow, curCellCol - 1);
+		nextCell = m_arena->getCell(curCellRow, curCellCol - 1);
 	} else if (m_ySpeed > 0) {
-		nextCell = m_maze->getCell(curCellRow + 1, curCellCol);
+		nextCell = m_arena->getCell(curCellRow + 1, curCellCol);
 	} else if (m_ySpeed < 0) {
-		nextCell = m_maze->getCell(curCellRow - 1, curCellCol);
+		nextCell = m_arena->getCell(curCellRow - 1, curCellCol);
 	}
 
 	return nextCell;
@@ -187,8 +187,8 @@ Cell Character::getNextCell() {
 
 bool Character::onCenter() {
 	// Get the current cell center coordinates
-	qreal centerX = (m_maze->getColFromX(m_x) + 0.5) * Cell::SIZE;
-	qreal centerY = (m_maze->getRowFromY(m_y) + 0.5) * Cell::SIZE;
+	qreal centerX = (m_arena->getColFromX(m_x) + 0.5) * Cell::SIZE;
+	qreal centerY = (m_arena->getRowFromY(m_y) + 0.5) * Cell::SIZE;
 	bool willGoPast = false;
 
 	// Will the character go past the center of the cell it's on ?
@@ -217,6 +217,6 @@ bool Character::onCenter() {
 }
 
 void Character::moveOnCenter() {
-	setX((m_maze->getColFromX(m_x) + 0.5) * Cell::SIZE);
-	setY((m_maze->getRowFromY(m_y) + 0.5) * Cell::SIZE);
+	setX((m_arena->getColFromX(m_x) + 0.5) * Cell::SIZE);
+	setY((m_arena->getRowFromY(m_y) + 0.5) * Cell::SIZE);
 }

@@ -22,7 +22,7 @@
 
 const int Energizer::POINTS = 50;
 
-Energizer::Energizer(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId) :  Element(p_x, p_y, p_maze) {
+Energizer::Energizer(qreal p_x, qreal p_y, Arena* p_arena, const QString& p_imageId) :  Element(p_x, p_y, p_arena) {
 	Element::setImageId(p_imageId);
 	m_points = 50;
 	m_type = Element::ENERGYZER;
@@ -33,7 +33,7 @@ Energizer::~Energizer() {
 
 void Energizer::doActionOnCollision(Kapman* p_kapman) {
 	//p_kapman->winPoints(this);
-	// Tell to the maze that an element was eaten
-	m_maze->decrementNbElem();
+	// Tell to the arena that an element was eaten
+	//m_arena->decrementNbElem();
 }
 

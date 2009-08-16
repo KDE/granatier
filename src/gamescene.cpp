@@ -46,32 +46,32 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	m_renderer = new KSvgRenderer();
 	loadTheme();
     
-    // Create the MazeItems
-    m_mazeItem = new MazeItem**[m_game->getMaze()->getNbRows()];
-    for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i) {
-        m_mazeItem[i] = new MazeItem*[m_game->getMaze()->getNbColumns()];
-        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
-            // Create the mazeitem and set the image
-            MazeItem* mazeItem = new MazeItem(j * Cell::SIZE, i * Cell::SIZE);
-            mazeItem->setSharedRenderer(m_renderer);
+    // Create the ArenaItems
+    m_arenaItem = new ArenaItem**[m_game->getArena()->getNbRows()];
+    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i) {
+        m_arenaItem[i] = new ArenaItem*[m_game->getArena()->getNbColumns()];
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j) {
+            // Create the ArenaItem and set the image
+            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE);
+            arenaItem->setSharedRenderer(m_renderer);
             //TODO: use this function call
-            //mazeItem->setElementId(m_game->getMaze()->getCell(i,j).getElement()->getImageId());
-            switch(m_game->getMaze()->getCell(i,j).getType())
+            //arenaItem->setElementId(m_game->getArena()->getCell(i,j).getElement()->getImageId());
+            switch(m_game->getArena()->getCell(i,j).getType())
             {
                 case Cell::WALL:
-                    mazeItem->setElementId("maze_wall");
-                    mazeItem->setZValue(-2);
+                    arenaItem->setElementId("arena_wall");
+                    arenaItem->setZValue(-2);
                     break;
                 case Cell::HOLE:
-                    delete mazeItem;
-                    mazeItem = NULL;
+                    delete arenaItem;
+                    arenaItem = NULL;
                     break;
                 case Cell::GROUND:
                 default:
-                    mazeItem->setElementId("maze_ground");
-                    mazeItem->setZValue(-1);
+                    arenaItem->setElementId("arena_ground");
+                    arenaItem->setZValue(-1);
             }
-            m_mazeItem[i][j] = mazeItem;
+            m_arenaItem[i][j] = arenaItem;
         }
     }
 
@@ -104,18 +104,18 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 		m_ghostItems.append(ghost);
 	}
     // Create the Block and Bonus items
-    m_blockItems = new ElementItem**[m_game->getMaze()->getNbRows()];
-    m_bonusItems = new ElementItem**[m_game->getMaze()->getNbRows()];
-    for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i)
+    m_blockItems = new ElementItem**[m_game->getArena()->getNbRows()];
+    m_bonusItems = new ElementItem**[m_game->getArena()->getNbRows()];
+    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
     {
-        m_blockItems[i] = new ElementItem*[m_game->getMaze()->getNbColumns()];
-        m_bonusItems[i] = new ElementItem*[m_game->getMaze()->getNbColumns()];
-        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+        m_blockItems[i] = new ElementItem*[m_game->getArena()->getNbColumns()];
+        m_bonusItems[i] = new ElementItem*[m_game->getArena()->getNbColumns()];
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if (m_game->getMaze()->getCell(i, j).getElement() != NULL && m_game->getMaze()->getCell(i, j).getElement()->getType() == Element::BLOCK)
+            if (m_game->getArena()->getCell(i, j).getElement() != NULL && m_game->getArena()->getCell(i, j).getElement()->getType() == Element::BLOCK)
             {
                 // Create the element item and set the image
-                Element* element = m_game->getMaze()->getCell(i, j).getElement();
+                Element* element = m_game->getArena()->getCell(i, j).getElement();
                 ElementItem* elementItem = new ElementItem(element);
                 elementItem->setSharedRenderer(m_renderer);
                 elementItem->setElementId(element->getImageId());
@@ -193,10 +193,10 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	m_levelLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
 	m_levelLabel->setDefaultTextColor(QColor("#FFFFFF"));
 
-	// Display the MazeItem
-    for (int i = 0; i < m_game->getMaze()->getNbRows();++i) {
-        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j) {
-            if(m_mazeItem[i][j] != NULL) addItem(m_mazeItem[i][j]);
+	// Display the ArenaItem
+    for (int i = 0; i < m_game->getArena()->getNbRows();++i) {
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j) {
+            if(m_arenaItem[i][j] != NULL) addItem(m_arenaItem[i][j]);
         }
     }
 
@@ -226,18 +226,18 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 
 GameScene::~GameScene()
 {
-    for (int i = 0; i < m_game->getMaze()->getNbRows();++i)
+    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
     {
-        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if (m_mazeItem[i][j] != NULL)
+            if (m_arenaItem[i][j] != NULL)
             {
-                delete m_mazeItem[i][j];
+                delete m_arenaItem[i][j];
             }
         }
-        delete[] m_mazeItem[i];
+        delete[] m_arenaItem[i];
     }
-    delete[] m_mazeItem;
+    delete[] m_arenaItem;
 
     for (int i = 0; i < m_playerItems.size(); i++)
     {
@@ -264,9 +264,9 @@ GameScene::~GameScene()
     
     
     
-    for (int i = 0; i < m_game->getMaze()->getNbRows();++i)
+    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
     {
-        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             if (m_blockItems[i][j] != NULL)
             {
@@ -318,9 +318,9 @@ void GameScene::intro(const bool p_newLevel) {
     if (p_newLevel)
     {
         // Set the Block an Bonus Items
-        for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i)
+        for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
         {
-            for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+            for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
             {
                 if (m_blockItems[i][j] != NULL)
                 {
@@ -424,9 +424,9 @@ void GameScene::displayBonus()
 void GameScene::removeBonusItem(ElementItem* bonusItem)
 {
      // Set the Block an Bonus Items
-    for (int i = 0; i < m_game->getMaze()->getNbRows(); ++i)
+    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
     {
-        for (int j = 0; j < m_game->getMaze()->getNbColumns(); ++j)
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             if (m_bonusItems[i][j] != NULL && m_bonusItems[i][j] == bonusItem)
             {
@@ -532,8 +532,8 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
     BombExplosionItem* bombExplosionItem = NULL;
     Element* element = NULL;
     int nBombRange = bomb->bombRange();
-    int nNumberOfColums = m_game->getMaze()->getNbColumns();
-    int nNumberOfRows = m_game->getMaze()->getNbRows();
+    int nNumberOfColums = m_game->getArena()->getNbColumns();
+    int nNumberOfRows = m_game->getArena()->getNbRows();
     int nColumn;
     int nRow;
     bool bNorthDone = false;
@@ -566,12 +566,12 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
     for(int i = 0; i < nBombRange; i++)
     {
         // north
-        nColumn = m_game->getMaze()->getColFromX(bomb->getX());
-        nRow = m_game->getMaze()->getRowFromY(bomb->getY() - (i+1)*Cell::SIZE);
+        nColumn = m_game->getArena()->getColFromX(bomb->getX());
+        nRow = m_game->getArena()->getRowFromY(bomb->getY() - (i+1)*Cell::SIZE);
         if(!bNorthDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
         {
-            element = m_game->getMaze()->getCell(nRow, nColumn).getElement();
-            if(m_game->getMaze()->getCell(nRow, nColumn).isWalkable() ||
+            element = m_game->getArena()->getCell(nRow, nColumn).getElement();
+            if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() ||
                 (element && (element->getType() == Element::BOMB || element->getType() == Element::BLOCK)))
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
@@ -607,12 +607,12 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
           bNorthDone = true;
         }
         // east
-        nColumn = m_game->getMaze()->getColFromX(bomb->getX() + (i+1)*Cell::SIZE);
-        nRow = m_game->getMaze()->getRowFromY(bomb->getY());
+        nColumn = m_game->getArena()->getColFromX(bomb->getX() + (i+1)*Cell::SIZE);
+        nRow = m_game->getArena()->getRowFromY(bomb->getY());
         if(!bEastDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
         {
-            element = m_game->getMaze()->getCell(nRow, nColumn).getElement();
-            if(m_game->getMaze()->getCell(nRow, nColumn).isWalkable() ||
+            element = m_game->getArena()->getCell(nRow, nColumn).getElement();
+            if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() ||
                 (element && (element->getType() == Element::BOMB || element->getType() == Element::BLOCK)))
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
@@ -648,12 +648,12 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
           bEastDone = true;
         }
         // south
-        nColumn = m_game->getMaze()->getColFromX(bomb->getX());
-        nRow = m_game->getMaze()->getRowFromY(bomb->getY() + (i+1)*Cell::SIZE);
+        nColumn = m_game->getArena()->getColFromX(bomb->getX());
+        nRow = m_game->getArena()->getRowFromY(bomb->getY() + (i+1)*Cell::SIZE);
         if(!bSouthDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
         {
-            element = m_game->getMaze()->getCell(nRow, nColumn).getElement();
-            if(m_game->getMaze()->getCell(nRow, nColumn).isWalkable() ||
+            element = m_game->getArena()->getCell(nRow, nColumn).getElement();
+            if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() ||
                 (element && (element->getType() == Element::BOMB || element->getType() == Element::BLOCK)))
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
@@ -689,12 +689,12 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
           bSouthDone = true;
         }
         //west
-        nColumn = m_game->getMaze()->getColFromX(bomb->getX() - (i+1)*Cell::SIZE);
-        nRow = m_game->getMaze()->getRowFromY(bomb->getY());
+        nColumn = m_game->getArena()->getColFromX(bomb->getX() - (i+1)*Cell::SIZE);
+        nRow = m_game->getArena()->getRowFromY(bomb->getY());
         if(!bWestDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
         {
-            element = m_game->getMaze()->getCell(nRow, nColumn).getElement();
-            if(m_game->getMaze()->getCell(nRow, nColumn).isWalkable() ||
+            element = m_game->getArena()->getCell(nRow, nColumn).getElement();
+            if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() ||
                 (element && (element->getType() == Element::BOMB || element->getType() == Element::BLOCK)))
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))

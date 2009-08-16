@@ -60,9 +60,9 @@ class Ghost : public Character {
 		 * @param p_x the initial x-coordinate
 		 * @param p_y the initial y-coordinate
 		 * @param p_imageId path to the image of the related item
-		 * @param p_maze the Maze the Ghost is on
+		 * @param p_arena the Arena the Ghost is on
 		 */
-		Ghost(qreal p_x, qreal p_y, const QString & p_imageId, Maze* p_maze);
+		Ghost(qreal p_x, qreal p_y, const QString & p_imageId, Arena* p_arena);
 
 		/**
 		 * Deletes the Ghost instance.

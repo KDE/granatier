@@ -22,7 +22,7 @@
 #include <KGameDifficulty>
 #include <KDebug>
 
-Bomb::Bomb(qreal fX, qreal fY, Maze* pMaze, int nDetonationCountdown) : Element(fX, fY, pMaze), m_xSpeed(0), m_ySpeed(0)
+Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
 {
     m_type = Element::BOMB;
     
@@ -33,7 +33,7 @@ Bomb::Bomb(qreal fX, qreal fY, Maze* pMaze, int nDetonationCountdown) : Element(
     
     m_bombRange = 1;
     
-    m_maze->setCellElement(m_maze->getRowFromY(m_y), m_maze->getColFromX(m_x), this);
+    m_arena->setCellElement(m_arena->getRowFromY(m_y), m_arena->getColFromX(m_x), this);
     
     m_detonated = false;
     
@@ -109,18 +109,18 @@ Cell Bomb::getNextCell()
 {
     Cell nextCell;
     // Get the current cell coordinates from the character coordinates
-    int curCellRow = m_maze->getRowFromY(m_y);
-    int curCellCol = m_maze->getColFromX(m_x);
+    int curCellRow = m_arena->getRowFromY(m_y);
+    int curCellCol = m_arena->getColFromX(m_x);
 
     // Get the next cell function of the character direction
     if (m_xSpeed > 0) {
-        nextCell = m_maze->getCell(curCellRow, curCellCol + 1);
+        nextCell = m_arena->getCell(curCellRow, curCellCol + 1);
     } else if (m_xSpeed < 0) {
-        nextCell = m_maze->getCell(curCellRow, curCellCol - 1);
+        nextCell = m_arena->getCell(curCellRow, curCellCol - 1);
     } else if (m_ySpeed > 0) {
-        nextCell = m_maze->getCell(curCellRow + 1, curCellCol);
+        nextCell = m_arena->getCell(curCellRow + 1, curCellCol);
     } else if (m_ySpeed < 0) {
-        nextCell = m_maze->getCell(curCellRow - 1, curCellCol);
+        nextCell = m_arena->getCell(curCellRow - 1, curCellCol);
     }
 
     return nextCell;
@@ -129,8 +129,8 @@ Cell Bomb::getNextCell()
 bool Bomb::onCenter()
 {
     // Get the current cell center coordinates
-    qreal centerX = (m_maze->getColFromX(m_x) + 0.5) * Cell::SIZE;
-    qreal centerY = (m_maze->getRowFromY(m_y) + 0.5) * Cell::SIZE;
+    qreal centerX = (m_arena->getColFromX(m_x) + 0.5) * Cell::SIZE;
+    qreal centerY = (m_arena->getRowFromY(m_y) + 0.5) * Cell::SIZE;
     bool willGoPast = false;
 
     // Will the character go past the center of the cell it's on ?
@@ -160,8 +160,8 @@ bool Bomb::onCenter()
 
 void Bomb::moveOnCenter()
 {
-    setX((m_maze->getColFromX(m_x) + 0.5) * Cell::SIZE);
-    setY((m_maze->getRowFromY(m_y) + 0.5) * Cell::SIZE);
+    setX((m_arena->getColFromX(m_x) + 0.5) * Cell::SIZE);
+    setY((m_arena->getRowFromY(m_y) + 0.5) * Cell::SIZE);
 }
 
 int Bomb::bombRange()
@@ -199,5 +199,5 @@ void Bomb::setDetonationCountdown(int nDetonationTimeout)
 void Bomb::slot_detonationCompleted()
 {
     //TODO: call from game
-    m_maze->removeCellElement(m_maze->getRowFromY(m_y), m_maze->getColFromX(m_x), this);
+    m_arena->removeCellElement(m_arena->getRowFromY(m_y), m_arena->getColFromX(m_x), this);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Mathias Kraus <k.hias@gmx.de>
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Pierre-Benoît Besse <besse.pb@gmail.com>
  * 
@@ -17,17 +17,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "mazeitem.h"
+#ifndef ARENAITEM_H
+#define ARENAITEM_H
 
-MazeItem::MazeItem(qreal p_x, qreal p_y) : QGraphicsSvgItem() {
-    // Init the view coordinates
-    setPos(p_x, p_y);
-	// Configure the cache in order to increase the performance
-	setCacheMode(DeviceCoordinateCache);
-	setMaximumCacheSize(QSize(2000, 2000));
-}
+#include <QGraphicsSvgItem>
 
-MazeItem::~MazeItem() {
+/**
+ * @brief This class is the graphical view of the Arena.
+ */
+class ArenaItem : public QGraphicsSvgItem
+{
+    Q_OBJECT
 
-}
+public:
+
+    /**
+      * Creates a new ArenaItem instances.
+      */
+    ArenaItem(qreal p_x, qreal p_y);
+
+    /**
+      * Deletes the ArenaItem instances.
+      */
+    ~ArenaItem();
+};
+
+#endif
 

@@ -64,9 +64,9 @@ class Kapman : public Character {
          * @param p_x the initial x-coordinate
          * @param p_y the initial y-coordinate
          * @param p_imageId path to the image of the related item
-         * @param p_maze the Maze the Kapman is on
+         * @param p_arena the Arena the Kapman is on
          */
-        Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze);
+        Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena);
 
 		/**
 		 * Deletes the Kapman instance.

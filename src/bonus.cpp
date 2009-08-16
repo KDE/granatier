@@ -21,7 +21,7 @@
 #include "bonus.h"
 #include "kapman.h"
 
-Bonus::Bonus(qreal p_x, qreal p_y, Maze* p_maze, Bonus::BonusType bonusType) : Element(p_x, p_y, p_maze)
+Bonus::Bonus(qreal p_x, qreal p_y, Arena* p_arena, Bonus::BonusType bonusType) : Element(p_x, p_y, p_arena)
 {
     m_type = Element::BONUS;
     m_bonusType = bonusType;

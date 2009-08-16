@@ -21,7 +21,7 @@
 
 #include "game.h"
 #include "elementitem.h"
-#include "mazeitem.h"
+#include "arenaitem.h"
 #include "ghostitem.h"
 #include "kapmanitem.h"
 #include "bombitem.h"
@@ -44,8 +44,8 @@ class GameScene : public QGraphicsScene {
 		/** The Game instance */
 		Game* m_game;
 
-		/** The MazeItems to be drawn */
-		MazeItem*** m_mazeItem;
+		/** The ArenaItems to be drawn */
+		ArenaItem*** m_arenaItem;
 
         /** The PlayerItem of each Player to be drawn */
         QList<KapmanItem*> m_playerItems;

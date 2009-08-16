@@ -1,6 +1,8 @@
 project(granatier)
 
 set(granatierSources
+    arena.cpp
+    arenaitem.cpp
     block.cpp
     bonus.cpp
     bomb.cpp
@@ -22,11 +24,9 @@ set(granatierSources
     mainwindow.cpp
     mapparser.cpp
     main.cpp
-    maze.cpp
-    mazeitem.cpp
 )
 set(granatierData
-    defaultmaze.xml
+    defaultarena.xml
     granatierui.rc
 )
 

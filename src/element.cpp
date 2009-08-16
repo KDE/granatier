@@ -17,7 +17,7 @@
 
 #include "element.h"
 
-Element::Element(qreal p_x, qreal p_y, Maze* p_maze) : m_xInit(p_x), m_yInit(p_y),  m_maze(p_maze) {
+Element::Element(qreal p_x, qreal p_y, Arena* p_arena) : m_xInit(p_x), m_yInit(p_y),  m_arena(p_arena) {
 	m_points = 0;
 	initCoordinate();
 }

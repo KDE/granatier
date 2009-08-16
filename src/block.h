@@ -33,7 +33,7 @@ public:
     /**
       * Creates a new Block instance.
       */
-    Block(qreal p_x, qreal p_y, Maze* p_maze, const QString& p_imageId);
+    Block(qreal p_x, qreal p_y, Arena* p_arena, const QString& p_imageId);
 
     /**
       * Deletes the Block instance.

@@ -42,7 +42,7 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
     qreal x_position = 0.0;
     qreal y_position = 0.0;
     
-    if (p_qName == "Maze")
+    if (p_qName == "Arena")
     {
         int nbRows = 0;
         int nbColumns = 0;
@@ -58,8 +58,8 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
                 nbColumns = p_atts.value(i).toInt();
             }
         }
-        // Create the Maze matrix
-        m_game->getMaze()->init(nbRows, nbColumns);
+        // Create the Arena matrix
+        m_game->getArena()->init(nbRows, nbColumns);
     }
     if (p_qName == "Bonus")
     {
@@ -175,31 +175,25 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
     {
         for (int i=0; i<m_buffer.length();++i)
         {
-            switch(m_buffer.at(i).toAscii()){
+            switch(m_buffer.at(i).toAscii())
+            {
                 case '_':
-                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::HOLE);
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::HOLE);
                     break;
                 case '|':
                 case '=':
-                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::WALL);
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::WALL);
                     break;
                 case ' ':
-                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
                     break;
                 case '+':
-                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->createBlock(QPointF(i, m_counterRows), "maze_block");
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->createBlock(QPointF(i, m_counterRows), "arena_block");
                     break; 
                 case 'o':
-                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->getMaze()->setCellElement(m_counterRows, i, new Energizer(m_counterRows, i, m_game->getMaze(), "energizer"));
-                    break;
-                case 'x':
-                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GHOSTCAMP);
-                    break;
-                case 'X':
-                    m_game->getMaze()->setCellType(m_counterRows,i,Cell::GHOSTCAMP);
-                    m_game->getMaze()->setResurrectionCell(QPoint(m_counterRows, i));
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->getArena()->setCellElement(m_counterRows, i, new Energizer(m_counterRows, i, m_game->getArena(), "energizer"));
                     break;
             }
         }

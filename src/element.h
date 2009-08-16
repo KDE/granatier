@@ -20,7 +20,7 @@
 
 #include <QObject>
 
-#include "maze.h"
+#include "arena.h"
 
 class Kapman;
 
@@ -61,8 +61,8 @@ class Element : public QObject {
 		/** The Element current y-coordinate */
 		qreal m_y;
 
-		/** The Maze the Element is on */
-		Maze* m_maze;
+		/** The Arena the Element is on */
+		Arena* m_arena;
 
 		/** The Id of the Element */
 		QString m_imageId;
@@ -76,9 +76,9 @@ class Element : public QObject {
 		 * Creates a new Element instance.
 		 * @param p_x the initial x-coordinate
 		 * @param p_y the initial y-coordinate
-		 * @param p_maze the Maze the Element is on
+		 * @param p_arena the Arena the Element is on
 		 */
-		Element(qreal p_x, qreal p_y, Maze* p_maze);
+		Element(qreal p_x, qreal p_y, Arena* p_arena);
 
 		/**
 		 * Deletes the Element instance.

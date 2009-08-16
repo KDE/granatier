@@ -44,10 +44,10 @@ public:
       * Creates a new Bonus instance.
       * @param p_x the initial x-coordinate
       * @param p_y the initial y-coordinate
-      * @param p_maze a reference to the Maze the Bonus will be on
+      * @param p_arena a reference to the Arena the Bonus will be on
       * @param bonusType the Bonus Type
       */
-    Bonus(qreal p_x, qreal p_y, Maze* p_maze, Bonus::BonusType bonusType);
+    Bonus(qreal p_x, qreal p_y, Arena* p_arena, Bonus::BonusType bonusType);
 
     /**
       * Deletes the Bonus instance.

@@ -27,7 +27,7 @@
 
 const qreal Kapman::MAX_SPEED_RATIO = 1.5;
 
-Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Maze* p_maze) : Character(p_x, p_y, p_maze)
+Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena) : Character(p_x, p_y, p_arena)
 {
     m_type = Element::PLAYER;
     m_maxSpeed = 10;
@@ -127,8 +127,8 @@ void Kapman::updateMove()
         int cellRow;
         
         // Get the current cell coordinates from the character coordinates
-        int curCellRow = m_maze->getRowFromY(m_y);
-        int curCellCol = m_maze->getColFromX(m_x);
+        int curCellRow = m_arena->getRowFromY(m_y);
+        int curCellCol = m_arena->getColFromX(m_x);
         
         //set variables for right/left move
         if(m_askedXSpeed != 0 || m_xSpeed != 0)
@@ -184,7 +184,7 @@ void Kapman::updateMove()
                 {
                     cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                     cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    if(!m_maze->getCell(cellRow, cellCol).isWalkable())
+                    if(!m_arena->getCell(cellRow, cellCol).isWalkable())
                     {
                         deltaPerpendicularMove = deltaPerpendicularCellCenter + signZeroPositive(deltaPerpendicularCellCenter) * (fabs(deltaStraightMove - deltaStraightCellCenter) - Cell::SIZE/2);
                         if(fabs(deltaPerpendicularMove) > fabs(deltaPerpendicularCellCenter))       //check if moved over perpendicular center
@@ -210,7 +210,7 @@ void Kapman::updateMove()
                 {
                     cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                     cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    if(!m_maze->getCell(cellRow, cellCol).isWalkable())
+                    if(!m_arena->getCell(cellRow, cellCol).isWalkable())
                     {
                         deltaPerpendicularMove = deltaPerpendicularCellCenter;
                     }
@@ -222,7 +222,7 @@ void Kapman::updateMove()
             }
             while(fabs(deltaAskedMove) > 0)     //complete the move
             {
-                if(m_maze->getCell(curCellRow + yDirection, curCellCol + xDirection).isWalkable())     //check if next cell is walkable
+                if(m_arena->getCell(curCellRow + yDirection, curCellCol + xDirection).isWalkable())     //check if next cell is walkable
                 {
                     if(fabs(deltaAskedMove) > Cell::SIZE)   //move to next cell center if the remaining move exceeds a cell center
                     {
@@ -233,7 +233,7 @@ void Kapman::updateMove()
                         {
                             cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                            if(!m_maze->getCell(cellRow, cellCol).isWalkable())
+                            if(!m_arena->getCell(cellRow, cellCol).isWalkable())
                             {
                                 deltaPerpendicularMove = deltaPerpendicularCellCenter;
                             }
@@ -247,7 +247,7 @@ void Kapman::updateMove()
                         {
                             cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                            if(!m_maze->getCell(cellRow, cellCol).isWalkable())
+                            if(!m_arena->getCell(cellRow, cellCol).isWalkable())
                             {
                                 deltaPerpendicularMove = signZeroPositive(deltaPerpendicularCellCenter) * fabs(deltaAskedMove);
                                 if(fabs(deltaPerpendicularMove) > fabs(deltaPerpendicularCellCenter))
@@ -388,19 +388,19 @@ qreal Kapman::getAskedYSpeed() const {
 
 Cell Kapman::getAskedNextCell() {
 	// Get the current cell coordinates from the character coordinates
-	int curCellRow = m_maze->getRowFromY(m_y);
-	int curCellCol = m_maze->getColFromX(m_x);
+	int curCellRow = m_arena->getRowFromY(m_y);
+	int curCellCol = m_arena->getColFromX(m_x);
 	Cell nextCell;
 
 	// Get the next cell function of the character asked direction
 	if (m_askedXSpeed > 0) {
-		nextCell = m_maze->getCell(curCellRow, curCellCol + 1);
+		nextCell = m_arena->getCell(curCellRow, curCellCol + 1);
 	} else if (m_askedXSpeed < 0) {
-		nextCell = m_maze->getCell(curCellRow, curCellCol - 1);
+		nextCell = m_arena->getCell(curCellRow, curCellCol - 1);
 	} else if (m_askedYSpeed > 0) {
-		nextCell = m_maze->getCell(curCellRow + 1, curCellCol);
+		nextCell = m_arena->getCell(curCellRow + 1, curCellCol);
 	} else if (m_askedYSpeed < 0) {
-		nextCell = m_maze->getCell(curCellRow - 1, curCellCol);
+		nextCell = m_arena->getCell(curCellRow - 1, curCellCol);
 	}
 
 	return nextCell;

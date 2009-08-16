@@ -3,13 +3,11 @@
 <!-- Legend :
   '|' or '='	: wall
   ' '		: corridor
-  'x'		: ghost corridor
-  'X'		: ghost home cell (must be unique)
   '+'		: block
   'o'		: energizer
 -->
 
-<Maze rowCount="13" colCount="17">
+<Arena rowCount="13" colCount="17">
   <Row>____=========____</Row>
   <Row>__===+++++++===__</Row>
   <Row>__=+++++ +++++=__</Row>
@@ -27,4 +25,4 @@
   <Player rowIndex="2" colIndex="8" x-align="center" y-align="center" imageId="player1"/>
   <Player rowIndex="10" colIndex="8" x-align="center" y-align="center" imageId="player2"/>
   <Ghost rowIndex="8" colIndex="8" x-align="center" y-align="center" imageId="ghost1"/>
-</Maze>
+</Arena>
