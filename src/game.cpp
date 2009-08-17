@@ -52,7 +52,7 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 	// This also creates all the characters
 	MapParser mapParser(this);
 	// Set the XML file as input source for the parser
-	QFile arenaXmlFile(KStandardDirs::locate("appdata", "defaultarena.xml"));
+	QFile arenaXmlFile(KStandardDirs::locate("appdata", Settings::self()->arena()));
 	QXmlInputSource source(&arenaXmlFile);
 	// Create the XML file reader
 	QXmlSimpleReader reader;
@@ -119,12 +119,12 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
        
     //init KALEngine
     soundEngine = KALEngine::getInstance();
-    soundSourcePutBomb = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/putbomb.ogg")), soundEngine);
-    soundSourceExplode = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/explode.ogg")), soundEngine);
+    soundSourcePutBomb = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
+    soundSourceExplode = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("appdata", "sounds/explode.ogg")), soundEngine);
     soundSourceExplode->setGain(1);
-    soundSourceBonus = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("data", "granatier/sounds/wow.ogg")), soundEngine);
-    soundBufferDie = new KALBuffer(KStandardDirs::locate("data", "granatier/sounds/die.ogg"));
-    soundBufferWilhelmScream = new KALBuffer(KStandardDirs::locate("data", "granatier/sounds/wilhelmscream.ogg"));
+    soundSourceBonus = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("appdata", "sounds/wow.ogg")), soundEngine);
+    soundBufferDie = new KALBuffer(KStandardDirs::locate("appdata", "sounds/die.ogg"));
+    soundBufferWilhelmScream = new KALBuffer(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"));
     soundSourceDie = new KALSource(soundBufferDie, soundEngine);
     soundSourceWilhelmScream = new KALSource(soundBufferWilhelmScream, soundEngine);
     

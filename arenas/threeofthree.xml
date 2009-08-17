@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+
+<!-- Legend :
+  '|','='           : wall
+  ' '               : corridor
+  '+'               : block
+  'l','r','u','d'   : arrows
+  'o'               : bomb hole
+-->
+
+<Arena rowCount="13" colCount="17">
+  <Row>=================</Row>
+  <Row>=3   d + + d   1=</Row>
+  <Row>=++ +++===+++ ++=</Row>
+  <Row>=++  r +d+ l  ++=</Row>
+  <Row>=  ++=++ ++=++  =</Row>
+  <Row>=  ++=++ ++=++  =</Row>
+  <Row>=++===++o++===++=</Row>
+  <Row>=  ++=++ ++=++  =</Row>
+  <Row>=  ++=++ ++=++  =</Row>
+  <Row>=++  r +u+ l  ++=</Row>
+  <Row>=++ +++===+++ ++=</Row>
+  <Row>=2   u + + u   4=</Row>
+  <Row>=================</Row>
+</Arena>

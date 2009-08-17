@@ -13,6 +13,10 @@
       <label>The graphical theme to be used.</label>
       <default>themes/clanbomber.desktop</default>
     </entry>
+    <entry name="Arena" type="String" key="Arena">
+      <label>The arena to be used.</label>
+      <default>arenas/granatier.xml</default>
+    </entry>
     <entry name="Sounds" type="Bool" key="Sounds">
       <label>Whether sound effects should be played.</label>
       <default>true</default>

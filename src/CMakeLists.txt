@@ -26,7 +26,6 @@ set(granatierSources
     main.cpp
 )
 set(granatierData
-    defaultarena.xml
     granatierui.rc
 )
 

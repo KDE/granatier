@@ -39,9 +39,6 @@ bool MapParser::characters(const QString & ch)
 
 bool MapParser::startElement(const QString&, const QString&, const QString& p_qName, const QXmlAttributes& p_atts)
 {
-    qreal x_position = 0.0;
-    qreal y_position = 0.0;
-    
     if (p_qName == "Arena")
     {
         int nbRows = 0;
@@ -61,110 +58,6 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
         // Create the Arena matrix
         m_game->getArena()->init(nbRows, nbColumns);
     }
-    if (p_qName == "Bonus")
-    {
-        // Initialize the number of rows and columns
-        for (int i = 0; i < p_atts.count(); ++i)
-        {
-            if (p_atts.qName(i) == "rowIndex")
-            {
-                y_position = p_atts.value(i).toInt();
-            }
-            if (p_atts.qName(i) == "colIndex")
-            {
-                x_position = p_atts.value(i).toInt();
-            }
-            if (p_atts.qName(i) == "x-align")
-            {
-                if(p_atts.value(i) == "center")
-                {
-                    x_position += 0.5;
-                }
-            }
-            if (p_atts.qName(i) == "y-align")
-            {
-                if(p_atts.value(i) == "center")
-                {
-                    y_position += 0.5;
-                }
-            }
-        }
-        //m_game->createBonus(QPointF(x_position, y_position));
-    }
-
-    if (p_qName == "Player")
-    {
-        QString imageId = "";
-        // Initialize the number of rows and columns
-        for (int i = 0; i < p_atts.count(); i++)
-        {
-            if (p_atts.qName(i) == "rowIndex")
-            {
-                y_position = p_atts.value(i).toInt();
-            }
-            if (p_atts.qName(i) == "colIndex")
-            {
-                x_position = p_atts.value(i).toInt();
-            }
-            if (p_atts.qName(i) == "x-align")
-            {
-                if(p_atts.value(i) == "center")
-                {
-                    x_position += 0.5;
-                }
-            }
-            if (p_atts.qName(i) == "y-align")
-            {
-                if(p_atts.value(i) == "center")
-                {
-                    y_position += 0.5;
-                }
-            }
-            if (p_atts.qName(i) == "imageId")
-            {
-                imageId = p_atts.value(i);
-            }
-        }
-        m_game->createPlayer(QPointF(x_position, y_position), imageId);
-    }
-
-
-    if (p_qName == "Ghost")
-    {
-        QString imageId = "";
-        // Initialize the number of rows and columns
-        for (int i = 0; i < p_atts.count(); ++i)
-        {
-            if (p_atts.qName(i) == "rowIndex")
-            {
-                y_position = p_atts.value(i).toInt();
-            }
-            if (p_atts.qName(i) == "colIndex")
-            {
-                x_position = p_atts.value(i).toInt();
-            }
-            if (p_atts.qName(i) == "x-align")
-            {
-                if(p_atts.value(i) == "center")
-                {
-                    x_position += 0.5;
-                }
-            }
-            if (p_atts.qName(i) == "y-align")
-            {
-                if(p_atts.value(i) == "center")
-                {
-                    y_position += 0.5;
-                }
-            }
-            if (p_atts.qName(i) == "imageId")
-            {
-                imageId = p_atts.value(i);
-            }
-        }
-        m_game->createGhost(QPointF(x_position, y_position),imageId);
-    }
-
     
     return true;
 }
@@ -195,6 +88,16 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                     m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
                     m_game->getArena()->setCellElement(m_counterRows, i, new Energizer(m_counterRows, i, m_game->getArena(), "energizer"));
                     break;
+                case '1':
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->createPlayer(QPointF(i+0.5, m_counterRows+0.5), "player1");
+                    break;
+                case '2':
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->createPlayer(QPointF(i+0.5, m_counterRows+0.5), "player2");
+                    break;
+                default:
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
             }
         }
         m_counterRows ++;
