@@ -165,21 +165,21 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	m_introLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
 	m_introLabel->setFont(QFont("Helvetica", 25, QFont::Bold, false));
 	m_introLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_introLabel->setZValue(4);
+	m_introLabel->setZValue(1000);
 	m_introLabel2 = new QGraphicsTextItem(i18n("Press any arrow key to start"));
 	m_introLabel2->setFont(QFont("Helvetica", 15, QFont::Bold, false));
 	m_introLabel2->setDefaultTextColor(QColor("#FFFF00"));
-	m_introLabel2->setZValue(4);
+	m_introLabel2->setZValue(1000);
 	// Create the new level label
 	m_newLevelLabel = new QGraphicsTextItem();
 	m_newLevelLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
 	m_newLevelLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_newLevelLabel->setZValue(4);
+	m_newLevelLabel->setZValue(1000);
 	// Create the pause label
 	m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
 	m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
 	m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_pauseLabel->setZValue(4);
+	m_pauseLabel->setZValue(1000);
 	// Create the score label
 	m_scoreLabel = new QGraphicsTextItem();
 	m_scoreLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
@@ -345,23 +345,27 @@ void GameScene::intro(const bool p_newLevel) {
 // 			addItem(m_newLevelLabel);
 // 			m_newLevelLabel->setPos((width() - m_newLevelLabel->boundingRect().width()) / 2, (height() - m_newLevelLabel->boundingRect().height()) / 2);
 // 		}
-// 		// Display the introduction label
-// 		if (!items().contains(m_introLabel2)) {
-// 			addItem(m_introLabel2);
-// 			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
-// 				(height() - m_introLabel2->boundingRect().height() + m_newLevelLabel->boundingRect().height()) / 2);
-// 		}
+		// Display the introduction label
+        if (!items().contains(m_introLabel)) {
+            addItem(m_introLabel);
+            m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
+        }
+		if (!items().contains(m_introLabel2)) {
+			addItem(m_introLabel2);
+			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
+				(height() - m_introLabel2->boundingRect().height() + m_newLevelLabel->boundingRect().height()) / 2);
+		}
 	} else {
-// 		// Display the introduction labels
-// 		if (!items().contains(m_introLabel)) {
-// 			addItem(m_introLabel);
-// 			m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
-// 		}
-// 		if (!items().contains(m_introLabel2)) {
-// 			addItem(m_introLabel2);
-// 			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
-// 				(height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
-// 		}
+		// Display the introduction labels
+		if (!items().contains(m_introLabel)) {
+			addItem(m_introLabel);
+			m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
+		}
+		if (!items().contains(m_introLabel2)) {
+			addItem(m_introLabel2);
+			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
+				(height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
+		}
 	}
 }
 
