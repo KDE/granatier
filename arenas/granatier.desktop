@@ -1,0 +1,11 @@
+[Arena]
+Name=Granatier
+Name[x-test]=xxGranatierxx
+Description=Default Granatier Arena
+Description[de]=Standard Granatier Arena
+Description[x-test]=xxDefault Granatier Arenaxx
+Type=XML
+FileName=granatier.xml
+Preview=granatier_preview.png
+Author=Mathias Kraus
+AuthorEmail=k.hias@gmx.de

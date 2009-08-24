@@ -44,6 +44,9 @@ class MainWindow : public KXmlGuiWindow {
 
 		/** The highscores dialog */
 		KScoreDialog* m_kScoreDialog;
+        
+        QString m_strOldTheme;
+        QString m_strOldArena;
 		
 	public:
 

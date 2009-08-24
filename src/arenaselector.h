@@ -1,4 +1,5 @@
 /*
+    Copyright (C) 2009 Mathias Kraus <k.hias@gmx.de>
     Copyright (C) 2006 Mauricio Piacentini  <mauricio@tabuleiro.com>
     Copyright (C) 2007 Matt Williams   <matt@milliams.com>
 
@@ -17,35 +18,33 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-#ifndef KGAMETHEMESELECTOR_H
-#define KGAMETHEMESELECTOR_H
+#ifndef ARENASELECTOR_H
+#define ARENASELECTOR_H
 
 #include <QtGui/QWidget>
 
-#include <libkdegames_export.h>
-
-class KGameTheme;
+class ArenaSettings;
 class KConfigSkeleton; 
-class KGameThemeSelectorPrivate;
+class ArenaSelectorPrivate;
 
 /**
- * \class KGameThemeSelector kgamethemeselector.h <KGameThemeSelector>
+ * \class ArenaSelector arenaselector.h <ArenaSelector>
  * 
- * @short A widget used to select the game's theme
+ * @short A widget used to select the game's arena
  *
- * The most common way to use the theme selector is to add it as page to a KConfigDialog
+ * The most common way to use the arena selector is to add it as page to a KConfigDialog
  * \code
  * KConfigDialog *dialog = new KConfigDialog(this, "settings", Settings::self());
- * dialog->addPage(new KGameThemeSelector(dialog, Settings::self()), i18n("Theme"), "game_theme");
+ * dialog->addPage(new ArenaSelector(dialog, Settings::self()), i18n("Arena"), "game_arena");
  * dialog->show();
  * \endcode
- * This will create a page in your KConfigDialog with the title "Theme" and using the 
- * "game_theme" icon. By default, the widget will search in the share/apps/appname/themes 
- * directory for .desktop files with a group called "KGameTheme".
+ * This will create a page in your KConfigDialog with the title "Arena" and using the 
+ * "game_arena" icon. By default, the widget will search in the share/apps/appname/arenas 
+ * directory for .desktop files with a group called "Arena".
  *
  * @author Mauricio Piacentini
  **/
-class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
+class ArenaSelector : public QWidget
 {
     Q_OBJECT
     public:
@@ -54,19 +53,19 @@ class KDEGAMES_EXPORT KGameThemeSelector : public QWidget
           NewStuffEnableDownload
         };
         /**
-         * Load a specific theme file.
-         * @param groupName the title of the config group in the theme .desktop file
+         * Load a specific arena file.
+         * @param groupName the title of the config group in the arena .desktop file
          * @param directory subdirectory (of share/apps/appname) to search in
-         * @return true if the theme files and properties could be loaded
+         * @return true if the arena files and properties could be loaded
          */
-        KGameThemeSelector(QWidget* parent, KConfigSkeleton* config, KGameThemeSelector::NewStuffState knsflags = KGameThemeSelector::NewStuffEnableDownload, const QString &groupName = QLatin1String("KGameTheme"), const QString &directory = QLatin1String("themes"));
-        virtual ~KGameThemeSelector();
+        ArenaSelector(QWidget* parent, KConfigSkeleton* config, ArenaSelector::NewStuffState knsflags = ArenaSelector::NewStuffEnableDownload, const QString &groupName = QLatin1String("Arena"), const QString &directory = QLatin1String("arenas"));
+        virtual ~ArenaSelector();
     
     private:
-        class KGameThemeSelectorPrivate;
-        KGameThemeSelectorPrivate* const d;
+        class ArenaSelectorPrivate;
+        ArenaSelectorPrivate* const d;
 
-        Q_DISABLE_COPY(KGameThemeSelector)
+        Q_DISABLE_COPY(ArenaSelector)
 
         Q_PRIVATE_SLOT(d, void _k_updatePreview())
         Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())

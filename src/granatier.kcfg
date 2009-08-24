@@ -15,7 +15,7 @@
     </entry>
     <entry name="Arena" type="String" key="Arena">
       <label>The arena to be used.</label>
-      <default>arenas/granatier.xml</default>
+      <default>arenas/granatier.desktop</default>
     </entry>
     <entry name="Sounds" type="Bool" key="Sounds">
       <label>Whether sound effects should be played.</label>

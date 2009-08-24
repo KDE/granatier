@@ -3,6 +3,8 @@ project(granatier)
 set(granatierSources
     arena.cpp
     arenaitem.cpp
+    arenaselector.cpp
+    arenasettings.cpp
     block.cpp
     bonus.cpp
     bomb.cpp
@@ -28,6 +30,8 @@ set(granatierSources
 set(granatierData
     granatierui.rc
 )
+
+kde4_add_ui_files(granatierSources arenaselector.ui)
 
 kde4_add_kcfg_files(granatierSources settings.kcfgc)
 

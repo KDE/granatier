@@ -21,6 +21,7 @@
 #include "gameview.h"
 #include "gamescene.h"
 #include "settings.h"
+#include "arenaselector.h"
 
 #include <KActionCollection>
 #include <KStandardGameAction>
@@ -66,6 +67,10 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::initGame() {
+    //the focus has to be set at the beginning and also at the end to cover all possible cases
+    //TODO: check why setting the focus only at the end doesn't work
+    this->setFocusProxy(m_view);
+    this->setFocus();
 	// If a Game instance already exists
 	if (m_game) {
 		// Delete the Game instance
@@ -83,7 +88,9 @@ void MainWindow::initGame() {
 	m_view = new GameView(m_game);
 	m_view->setBackgroundBrush(Qt::black);
 	setCentralWidget(m_view);
-	m_view->setFocus();
+	//m_view->setFocus();
+    this->setFocusProxy(m_view);
+    this->setFocus();
 }
 
 void MainWindow::newGame(const bool gameOver) {
@@ -148,18 +155,36 @@ void MainWindow::setSoundsEnabled(bool p_enabled) {
 	m_game->setSoundsEnabled(p_enabled);
 }
 
-void MainWindow::showSettings() {
-	if (KConfigDialog::showDialog("settings")) {
-		return;
-	}
-	KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", Settings::self());
-	settingsDialog->addPage(new KGameThemeSelector(settingsDialog, Settings::self(), KGameThemeSelector::NewStuffDisableDownload), i18n("Theme"), "kapman");
-	connect(settingsDialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(loadSettings()));
-	settingsDialog->show();
+void MainWindow::showSettings()
+{
+    if (KConfigDialog::showDialog("settings"))
+    {
+        return;
+    }
+    KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", Settings::self());
+    // Theme
+    m_strOldTheme = Settings::self()->theme();
+    settingsDialog->addPage(new KGameThemeSelector(settingsDialog, Settings::self(), KGameThemeSelector::NewStuffDisableDownload), i18n("Theme"), "granatier");
+    // Arena
+    m_strOldArena = Settings::self()->arena();
+    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "granatier");
+        
+    connect(settingsDialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(loadSettings()));
+    settingsDialog->show();
 }
 
-void MainWindow::loadSettings() {
-	((GameScene*)m_view->scene())->loadTheme();
+void MainWindow::loadSettings()
+{
+    if(m_strOldTheme != Settings::self()->theme())
+    {
+        ((GameScene*)m_view->scene())->loadTheme();
+        m_strOldTheme = Settings::self()->theme();
+    }
+    if(m_strOldArena != Settings::self()->arena())
+    {
+        initGame();
+        m_strOldArena = Settings::self()->arena();
+    }
 }
 
 void MainWindow::close() {

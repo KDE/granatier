@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KGameThemeSelectorBase</class>
- <widget class="QWidget" name="KGameThemeSelectorBase">
+ <class>ArenaSelectorBase</class>
+ <widget class="QWidget" name="ArenaSelectorBase">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -19,7 +19,7 @@
      <item>
       <layout class="QVBoxLayout">
        <item>
-        <widget class="QListWidget" name="themeList">
+        <widget class="QListWidget" name="arenaList">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -37,7 +37,7 @@
        <item>
         <widget class="QPushButton" name="getNewButton">
          <property name="text">
-          <string>&amp;Get New Themes...</string>
+          <string>&amp;Get New Arenas...</string>
          </property>
         </widget>
        </item>
@@ -62,7 +62,7 @@
          <number>9</number>
         </property>
         <item>
-         <widget class="QLabel" name="themePreview">
+         <widget class="QLabel" name="arenaPreview">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -94,14 +94,14 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Theme Details</string>
+      <string>Arena Details</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="spacing">
        <number>9</number>
       </property>
       <item row="0" column="1">
-       <widget class="QLabel" name="themeAuthor">
+       <widget class="QLabel" name="arenaAuthor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -136,7 +136,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLabel" name="themeContact">
+       <widget class="QLabel" name="arenaContact">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -171,7 +171,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLabel" name="themeDescription">
+       <widget class="QLabel" name="arenaDescription">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -222,7 +222,7 @@
     </widget>
    </item>
    <item>
-    <widget class="KLineEdit" name="kcfg_Theme">
+    <widget class="KLineEdit" name="kcfg_Arena">
      <property name="enabled">
       <bool>false</bool>
      </property>

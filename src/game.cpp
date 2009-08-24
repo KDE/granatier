@@ -52,7 +52,12 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 	// This also creates all the characters
 	MapParser mapParser(this);
 	// Set the XML file as input source for the parser
-	QFile arenaXmlFile(KStandardDirs::locate("appdata", Settings::self()->arena()));
+    QString filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
+    KConfig arenaConfig(filePath, KConfig::SimpleConfig);
+    KConfigGroup group = arenaConfig.group("Arena");
+    QString arenaName = group.readEntry("FileName");
+    QFile arenaXmlFile(KStandardDirs::locate("appdata", QString("arenas/%1").arg(arenaName)));
+    //QFile arenaXmlFile(KStandardDirs::locate("appdata", "arenas/granatier.xml"));
 	QXmlInputSource source(&arenaXmlFile);
 	// Create the XML file reader
 	QXmlSimpleReader reader;

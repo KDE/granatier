@@ -1,0 +1,10 @@
+[Arena]
+Name=Crazy
+Name[x-test]=xxCrazyxx
+Description=Crazy Arena
+Description[x-test]=xxCrazy Arenaxx
+Type=XML
+FileName=crazy.xml
+Preview=crazy_preview.png
+Author=Mathias Kraus
+AuthorEmail=k.hias@gmx.de

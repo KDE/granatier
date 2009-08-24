@@ -1,0 +1,10 @@
+[Arena]
+Name=Three of Three
+Name[x-test]=xxThree of Threexx
+Description=Three of Three Arena
+Description[x-test]=xxThree of Threexx
+Type=XML
+FileName=threeofthree.xml
+Preview=threeofthree_preview.png
+Author=Mathias Kraus
+AuthorEmail=k.hias@gmx.de
