@@ -65,6 +65,9 @@ class GameScene : public QGraphicsScene {
 		/** A list with labels to display when a ghost or a bonus is eaten */
 		QList<QGraphicsTextItem*> m_wonPointsLabels;
 
+        /** The labels background*/
+        QGraphicsRectItem* m_labelBackground;
+        
 		/** The labels to be displayed during the game */
 		QGraphicsTextItem* m_introLabel;
 		QGraphicsTextItem* m_introLabel2;

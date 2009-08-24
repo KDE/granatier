@@ -161,25 +161,29 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
         }
     }
 
+    // Create the labels background
+    m_labelBackground = new QGraphicsRectItem();
+    m_labelBackground->setBrush(QBrush(Qt::blue));
+    m_labelBackground->setZValue(1000);
 	// Create the introduction labels
 	m_introLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
 	m_introLabel->setFont(QFont("Helvetica", 25, QFont::Bold, false));
 	m_introLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_introLabel->setZValue(1000);
+	m_introLabel->setZValue(1001);
 	m_introLabel2 = new QGraphicsTextItem(i18n("Press any arrow key to start"));
 	m_introLabel2->setFont(QFont("Helvetica", 15, QFont::Bold, false));
 	m_introLabel2->setDefaultTextColor(QColor("#FFFF00"));
-	m_introLabel2->setZValue(1000);
+	m_introLabel2->setZValue(1001);
 	// Create the new level label
 	m_newLevelLabel = new QGraphicsTextItem();
 	m_newLevelLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
 	m_newLevelLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_newLevelLabel->setZValue(1000);
+	m_newLevelLabel->setZValue(1001);
 	// Create the pause label
 	m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
 	m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
 	m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_pauseLabel->setZValue(1000);
+	m_pauseLabel->setZValue(1001);
 	// Create the score label
 	m_scoreLabel = new QGraphicsTextItem();
 	m_scoreLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
@@ -290,6 +294,7 @@ GameScene::~GameScene()
     delete m_livesLabel;
     delete m_levelLabel;
     delete m_pauseLabel;
+    delete m_labelBackground;
     delete m_cache;
     delete m_renderer;
 }
@@ -313,7 +318,8 @@ void GameScene::loadTheme() {
 	Settings::self()->config()->group("General").writeEntry("Theme", Settings::self()->theme());
 }
 
-void GameScene::intro(const bool p_newLevel) {
+void GameScene::intro(const bool p_newLevel)
+{
     // If a new level has begun
     if (p_newLevel)
     {
@@ -345,74 +351,144 @@ void GameScene::intro(const bool p_newLevel) {
 // 			addItem(m_newLevelLabel);
 // 			m_newLevelLabel->setPos((width() - m_newLevelLabel->boundingRect().width()) / 2, (height() - m_newLevelLabel->boundingRect().height()) / 2);
 // 		}
-		// Display the introduction label
-        if (!items().contains(m_introLabel)) {
+        // Display the introduction label
+        if (!items().contains(m_introLabel))
+        {
             addItem(m_introLabel);
-            m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
         }
-		if (!items().contains(m_introLabel2)) {
-			addItem(m_introLabel2);
-			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
-				(height() - m_introLabel2->boundingRect().height() + m_newLevelLabel->boundingRect().height()) / 2);
-		}
-	} else {
-		// Display the introduction labels
-		if (!items().contains(m_introLabel)) {
-			addItem(m_introLabel);
-			m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
-		}
-		if (!items().contains(m_introLabel2)) {
-			addItem(m_introLabel2);
-			m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2,
-				(height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
-		}
-	}
+        m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
+        
+        if (!items().contains(m_introLabel2))
+        {
+            addItem(m_introLabel2);
+        }
+        m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2, (height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
+        
+        if (!items().contains(m_labelBackground))
+        {
+            addItem(m_labelBackground);
+        }
+        int nLeft;
+        int nTop;
+        int nWidth;
+        int nHeight;
+        if(m_introLabel->boundingRect().width() >= m_introLabel2->boundingRect().width())
+        {
+            nLeft = (width() - m_introLabel->boundingRect().width()) / 2 - 10;
+            nWidth = m_introLabel->boundingRect().width() + 20;
+        }
+        else
+        {
+            nLeft = (width() - m_introLabel2->boundingRect().width()) / 2 - 10;
+            nWidth = m_introLabel2->boundingRect().width() + 20;
+        }
+        nTop = (height() - m_introLabel->boundingRect().height()) / 2 - 10;
+        nHeight = m_introLabel->boundingRect().height() + m_introLabel2->boundingRect().height() + 10;
+        m_labelBackground->setRect(nLeft, nTop, nWidth, nHeight);
+    }
+    else
+    {
+        // Display the introduction labels
+        if (!items().contains(m_introLabel))
+        {
+            addItem(m_introLabel);
+        }
+        m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
+        
+        if (!items().contains(m_introLabel2))
+        {
+            addItem(m_introLabel2);
+        }
+        m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2, (height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
+        
+        int nLeft;
+        int nTop;
+        int nWidth;
+        int nHeight;
+        if(m_introLabel->boundingRect().width() >= m_introLabel2->boundingRect().width())
+        {
+            nLeft = (width() - m_introLabel->boundingRect().width()) / 2 - 10;
+            nWidth = m_introLabel->boundingRect().width() + 20;
+        }
+        else
+        {
+            nLeft = (width() - m_introLabel2->boundingRect().width()) / 2 - 10;
+            nWidth = m_introLabel2->boundingRect().width() + 20;
+        }
+        nTop = (height() - m_introLabel->boundingRect().height()) / 2 - 10;
+        nHeight = m_introLabel->boundingRect().height() + m_introLabel2->boundingRect().height() + 10;
+        m_labelBackground->setRect(nLeft, nTop, nWidth, nHeight);
+    }
 }
 
-void GameScene::start() {
-	// If the introduction and new level labels were displayed then remove them
-	if (items().contains(m_introLabel)) {
-		removeItem(m_introLabel);
-	}
-	if (items().contains(m_introLabel2)) {
-		removeItem(m_introLabel2);
-	}
-	if (items().contains(m_newLevelLabel)) {
-		removeItem(m_newLevelLabel);
-	}
+void GameScene::start()
+{
+    // If the introduction and new level labels were displayed then remove them
+    if (items().contains(m_introLabel))
+    {
+        removeItem(m_introLabel);
+    }
+    if (items().contains(m_introLabel2))
+    {
+        removeItem(m_introLabel2);
+    }
+    if (items().contains(m_newLevelLabel))
+    {
+        removeItem(m_newLevelLabel);
+    }
+    if (items().contains(m_labelBackground))
+    {
+        removeItem(m_labelBackground);
+    }
 }
 
-void GameScene::setPaused(const bool p_pause, const bool p_fromUser) {
-	// If the game has paused
-	if (p_pause) {
-		// If the pause is due to an action from the user
-		if (p_fromUser) {
-			// If the label was not displayed yet
-			if (!items().contains(m_pauseLabel)) {
-				// Display the pause label
-				addItem(m_pauseLabel);
-				m_pauseLabel->setPos((width() - m_pauseLabel->boundingRect().width()) / 2, (height() - m_pauseLabel->boundingRect().height()) / 2);
-			}
-		}
-		// Stop player animation
+void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
+{
+    // If the game has paused
+    if (p_pause)
+    {
+        // If the pause is due to an action from the user
+        if (p_fromUser)
+        {
+            // If the label was not displayed yet
+            if (!items().contains(m_pauseLabel))
+            {
+                // Display the pause label
+                addItem(m_pauseLabel);
+            }
+            m_pauseLabel->setPos((width() - m_pauseLabel->boundingRect().width()) / 2, (height() - m_pauseLabel->boundingRect().height()) / 2);
+            if (!items().contains(m_labelBackground))
+            {
+                addItem(m_labelBackground);
+            }
+            m_labelBackground->setRect((width() - m_pauseLabel->boundingRect().width()) / 2 - 10, (height() - m_pauseLabel->boundingRect().height()) / 2 - 10, m_pauseLabel->boundingRect().width() + 20, m_pauseLabel->boundingRect().height() + 20);
+        }
+        // Stop player animation
         for (int i = 0; i < m_playerItems.size(); i++)
         {
             m_playerItems[i]->pauseAnim();
         }
-	} else {	// If the game has resumed
-		// If the pause was due to an action from the user
-		if (p_fromUser) {
-			// If the label was displayed
-			if (items().contains(m_pauseLabel)) {
-				removeItem(m_pauseLabel);
-			}
-		}
-		// Resume player animation
+    }
+    else
+    {   // If the game has resumed
+        // If the pause was due to an action from the user
+        if (p_fromUser) {
+            // If the label was displayed
+            if (items().contains(m_pauseLabel))
+            {
+                removeItem(m_pauseLabel);
+            }
+            if (items().contains(m_labelBackground))
+            {
+                removeItem(m_labelBackground);
+            }
+        }
+        // Resume player animation
         for (int i = 0; i < m_playerItems.size(); i++)
         {
             m_playerItems[i]->resumeAnim();
         }
-	}
+    }
 }
 
 void GameScene::hideElement(const qreal p_x, const qreal p_y) {
