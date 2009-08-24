@@ -163,7 +163,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 
     // Create the labels background
     m_labelBackground = new QGraphicsRectItem();
-    m_labelBackground->setBrush(QBrush(Qt::blue));
+    m_labelBackground->setBrush(QBrush(QColor(0,0,0,175)));
     m_labelBackground->setZValue(1000);
 	// Create the introduction labels
 	m_introLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
@@ -368,23 +368,7 @@ void GameScene::intro(const bool p_newLevel)
         {
             addItem(m_labelBackground);
         }
-        int nLeft;
-        int nTop;
-        int nWidth;
-        int nHeight;
-        if(m_introLabel->boundingRect().width() >= m_introLabel2->boundingRect().width())
-        {
-            nLeft = (width() - m_introLabel->boundingRect().width()) / 2 - 10;
-            nWidth = m_introLabel->boundingRect().width() + 20;
-        }
-        else
-        {
-            nLeft = (width() - m_introLabel2->boundingRect().width()) / 2 - 10;
-            nWidth = m_introLabel2->boundingRect().width() + 20;
-        }
-        nTop = (height() - m_introLabel->boundingRect().height()) / 2 - 10;
-        nHeight = m_introLabel->boundingRect().height() + m_introLabel2->boundingRect().height() + 10;
-        m_labelBackground->setRect(nLeft, nTop, nWidth, nHeight);
+        m_labelBackground->setRect(0, 0, width(), height());
     }
     else
     {
@@ -401,23 +385,11 @@ void GameScene::intro(const bool p_newLevel)
         }
         m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2, (height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
         
-        int nLeft;
-        int nTop;
-        int nWidth;
-        int nHeight;
-        if(m_introLabel->boundingRect().width() >= m_introLabel2->boundingRect().width())
+        if (!items().contains(m_labelBackground))
         {
-            nLeft = (width() - m_introLabel->boundingRect().width()) / 2 - 10;
-            nWidth = m_introLabel->boundingRect().width() + 20;
+            addItem(m_labelBackground);
         }
-        else
-        {
-            nLeft = (width() - m_introLabel2->boundingRect().width()) / 2 - 10;
-            nWidth = m_introLabel2->boundingRect().width() + 20;
-        }
-        nTop = (height() - m_introLabel->boundingRect().height()) / 2 - 10;
-        nHeight = m_introLabel->boundingRect().height() + m_introLabel2->boundingRect().height() + 10;
-        m_labelBackground->setRect(nLeft, nTop, nWidth, nHeight);
+        m_labelBackground->setRect(0, 0, width(), height());
     }
 }
 
@@ -461,7 +433,7 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
             {
                 addItem(m_labelBackground);
             }
-            m_labelBackground->setRect((width() - m_pauseLabel->boundingRect().width()) / 2 - 10, (height() - m_pauseLabel->boundingRect().height()) / 2 - 10, m_pauseLabel->boundingRect().width() + 20, m_pauseLabel->boundingRect().height() + 20);
+            m_labelBackground->setRect(0, 0, width(), height());
         }
         // Stop player animation
         for (int i = 0; i < m_playerItems.size(); i++)
