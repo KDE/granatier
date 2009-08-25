@@ -1,8 +1,6 @@
 [Arena]
 Name=Labyrinth
-Name[x-test]=xxLabyrinthxx
 Description=Labyrinth Arena
-Description[x-test]=xxLabyrinth Arenaxx
 Type=XML
 FileName=labyrinth.xml
 Preview=labyrinth_preview.png
