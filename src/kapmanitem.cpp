@@ -105,7 +105,7 @@ void KapmanItem::manageCollision()
         for (int i = 0; i < collidingList.size(); ++i)
         {
             // The arena and the points labels have a negative zValue which allows to exclude them from the treatment of collisions
-            if (collidingList[i]->zValue() >= 300)
+            if (collidingList[i]->zValue() >= 300 && collidingList[i]->zValue() < 400)
             {
                 //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Kapman*)getModel());
                 setElementId(m_strPlayerId + "_death");

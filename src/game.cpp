@@ -29,11 +29,15 @@ int Game::s_bonusDuration;
 int Game::s_preyStateDuration;
 qreal Game::s_durationRatio;
 
-Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_lives(3), m_points(0), m_level(1), m_nbEatenGhosts(0), m_media1(0), m_media2(0) {
+Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nbEatenGhosts(0), m_media1(0), m_media2(0)
+{
+    init();
+    
+    m_gameOver = false;
 	// Initialize the sound state
 	setSoundsEnabled(Settings::sounds());
 	// Initialize the game difficulty
-    	Settings::setGameDifficulty((int) p_difficulty);
+    Settings::setGameDifficulty((int) p_difficulty);
 	Settings::self()->writeConfig();
 
 	// Timers for medium difficulty
@@ -44,30 +48,6 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 
 	// Tells the KGameDifficulty singleton that the game is not running
 	KGameDifficulty::setRunning(false);
-
-	// Create the Arena instance
-	m_arena = new Arena();
-
-	// Create the parser that will parse the XML file in order to initialize the Arena instance
-	// This also creates all the characters
-	MapParser mapParser(this);
-	// Set the XML file as input source for the parser
-    QString filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
-    KConfig arenaConfig(filePath, KConfig::SimpleConfig);
-    KConfigGroup group = arenaConfig.group("Arena");
-    QString arenaName = group.readEntry("FileName");
-    QFile arenaXmlFile(KStandardDirs::locate("appdata", QString("arenas/%1").arg(arenaName)));
-    //QFile arenaXmlFile(KStandardDirs::locate("appdata", "arenas/granatier.xml"));
-	QXmlInputSource source(&arenaXmlFile);
-	// Create the XML file reader
-	QXmlSimpleReader reader;
-	reader.setContentHandler(&mapParser);
-	// Parse the XML file
-	reader.parse(source);
-
-	//connect(m_kapman, SIGNAL(sWinPoints(Element*)), this, SLOT(winPoints(Element*)));
-
-	
 
 	// Initialize the characters speed timers duration considering the difficulty level
 	switch (p_difficulty) {
@@ -84,44 +64,8 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
 			break;
 		default:
 			break;
-	}	
-
-	for (int i = 0; i < m_ghosts.size(); ++i) {
-		//connect(m_ghosts[i], SIGNAL(lifeLost()), this, SLOT(kapmanDeath()));
-		connect(m_ghosts[i], SIGNAL(ghostEaten(Ghost*)), this, SLOT(ghostDeath(Ghost*)));
-		// Initialize the ghosts speed and the ghost speed increase considering the characters speed
-		m_ghosts[i]->initSpeedInc();
 	}
     
-    for (int i = 0; i < m_players.size(); i++)
-    {
-        connect(m_players[i], SIGNAL(bombDropped(Kapman*, qreal, qreal)), this, SLOT(createBomb(Kapman*, qreal, qreal)));
-        m_players[i]->initSpeedInc();
-    }
-
-	// Initialize Bonus timer from the difficulty level
-	m_bonusTimer = new QTimer(this);
-	m_bonusTimer->setInterval( (int)(s_bonusDuration * s_durationRatio) );
-	m_bonusTimer->setSingleShot(true);
-	connect(m_bonusTimer, SIGNAL(timeout()), this, SLOT(hideBonus()));
-	// Initialize the Preys timer from the difficulty level
-	m_preyTimer = new QTimer(this);
-	m_preyTimer->setInterval( (int)(s_preyStateDuration * s_durationRatio) );
-	m_preyTimer->setSingleShot(true);
-	connect(m_preyTimer, SIGNAL(timeout()), this, SLOT(endPreyState()));
-
-	// Start the Game timer
-	m_timer = new QTimer(this);
-	m_timer->setInterval(int(1000 / Game::FPS));
-	connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
-	m_timer->start();
-	m_state = RUNNING;
-	// Init the characters coordinates on the Arena
-	initCharactersPosition();
-    
-    // Create the hidden Bonuses
-    createBonus();
-       
     //init KALEngine
     soundEngine = KALEngine::getInstance();
     soundSourcePutBomb = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
@@ -140,13 +84,64 @@ Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_
     }
 }
 
+void Game::init()
+{
+    // Create the Arena instance
+    m_arena = new Arena();
+
+    // Create the parser that will parse the XML file in order to initialize the Arena instance
+    // This also creates all the characters
+    MapParser mapParser(this);
+    // Set the XML file as input source for the parser
+    QString filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
+    KConfig arenaConfig(filePath, KConfig::SimpleConfig);
+    KConfigGroup group = arenaConfig.group("Arena");
+    QString arenaName = group.readEntry("FileName");
+    QFile arenaXmlFile(KStandardDirs::locate("appdata", QString("arenas/%1").arg(arenaName)));
+    //QFile arenaXmlFile(KStandardDirs::locate("appdata", "arenas/granatier.xml"));
+    QXmlInputSource source(&arenaXmlFile);
+    // Create the XML file reader
+    QXmlSimpleReader reader;
+    reader.setContentHandler(&mapParser);
+    // Parse the XML file
+    reader.parse(source);
+    
+    for (int i = 0; i < m_players.size(); i++)
+    {
+        connect(m_players[i], SIGNAL(bombDropped(Kapman*, qreal, qreal)), this, SLOT(createBomb(Kapman*, qreal, qreal)));
+        m_players[i]->initSpeedInc();
+    }
+    
+    // Initialize Bonus timer from the difficulty level
+    m_bonusTimer = new QTimer(this);
+    m_bonusTimer->setInterval( (int)(s_bonusDuration * s_durationRatio) );
+    m_bonusTimer->setSingleShot(true);
+    connect(m_bonusTimer, SIGNAL(timeout()), this, SLOT(hideBonus()));
+    // Initialize the Preys timer from the difficulty level
+    m_preyTimer = new QTimer(this);
+    m_preyTimer->setInterval( (int)(s_preyStateDuration * s_durationRatio) );
+    m_preyTimer->setSingleShot(true);
+    connect(m_preyTimer, SIGNAL(timeout()), this, SLOT(endPreyState()));
+    
+    // Start the Game timer
+    m_timer = new QTimer(this);
+    m_timer->setInterval(int(1000 / Game::FPS));
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
+    m_timer->start();
+    m_state = RUNNING;
+    // Init the characters coordinates on the Arena
+    initCharactersPosition();
+    
+    // Create the hidden Bonuses
+    createBonus();
+}
+
 Game::~Game()
 {
     delete m_media1;
     delete m_media2;
     delete m_timer;
     delete m_bonusTimer;
-    delete m_arena;
     
     for (int i = 0; i < m_ghosts.size(); i++)
     {
@@ -159,6 +154,8 @@ Game::~Game()
     
     //bombs, bonuses and blocks are deletet by the destructor of their elementitem
     
+    cleanUp();
+    
     delete soundSourcePutBomb;
     delete soundSourceExplode;
     delete soundSourceBonus;
@@ -167,6 +164,11 @@ Game::~Game()
     delete soundBufferWilhelmScream;
     delete soundBufferDie;
     KALEngine::kill();
+}
+
+void Game::cleanUp()
+{
+    delete m_arena;
 }
 
 void Game::start() {
@@ -232,7 +234,7 @@ int Game::getScore() const {
 	return m_points;
 }
 int Game::getLives() const {
-	return m_lives;
+	return 3;//m_lives;
 }
 
 int Game::getLevel() const {
@@ -267,6 +269,11 @@ void Game::setLevel(int p_level) {
 	emit(dataChanged(AllInfo));
 	emit(pauseChanged(false, true));
 	emit(levelStarted(true));
+}
+
+QString Game::getWinner() const
+{
+    return m_strWinner;
 }
 
 QList<Bonus*> Game::getBonus()
@@ -354,7 +361,27 @@ void Game::createPlayer(QPointF p_position, const QString& p_imageId)
         keys.moveRight = Qt::Key_D;
         keys.moveUp = Qt::Key_W;
         keys.moveDown = Qt::Key_S;
+        keys.dropBomb = Qt::Key_Q;
+        player->setShortcuts(keys);
+    }
+    if(p_imageId.compare("player3") == 0)
+    {
+        Character::Shortcuts keys;
+        keys.moveLeft = Qt::Key_J;
+        keys.moveRight = Qt::Key_L;
+        keys.moveUp = Qt::Key_I;
+        keys.moveDown = Qt::Key_K;
         keys.dropBomb = Qt::Key_Space;
+        player->setShortcuts(keys);
+    }
+    if(p_imageId.compare("player4") == 0)
+    {
+        Character::Shortcuts keys;
+        keys.moveLeft = Qt::Key_R;
+        keys.moveRight = Qt::Key_Z;
+        keys.moveUp = Qt::Key_T;
+        keys.moveDown = Qt::Key_G;
+        keys.dropBomb = Qt::Key_C;
         player->setShortcuts(keys);
     }
     m_players.append(player);
@@ -464,15 +491,15 @@ void Game::keyPressEvent(QKeyEvent* p_event) {
 		case Qt::Key_Escape:
 			switchPause();
             return;
-		case Qt::Key_K:
+		case Qt::Key_E:
 			// Cheat code to get one more life
 			if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier)) {
-				m_lives++;
+				//m_lives++;
 				m_isCheater = true;
 				emit(dataChanged(LivesInfo));
 			}
             return;
-		case Qt::Key_L:
+		case Qt::Key_N:
 			// Cheat code to go to the next level
 			if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier)) {
 				m_isCheater = true;
@@ -533,7 +560,7 @@ void Game::kapmanDeath(Kapman* player)
 // 	//m_kapman->die();
 // 	// Make a 2 seconds pause while the kapman is blinking
 // 	pause(true);
-// 	QTimer::singleShot(2500, this, SLOT(resumeAfterKapmanDeath()));
+ 	QTimer::singleShot(1500, this, SLOT(resumeAfterKapmanDeath()));
     
     
 //     if(player->getImageId() == "player1")
@@ -546,20 +573,52 @@ void Game::kapmanDeath(Kapman* player)
 //     }
 }
 
-void Game::resumeAfterKapmanDeath() {
-	emit(dataChanged(LivesInfo));
+void Game::resumeAfterKapmanDeath()
+{
+    int nPlayerAlive = 0;
+    int nIndex = 0;;
+    if(m_gameOver)
+    {
+        return;
+    }
+    for(int i = 0; i < m_players.length(); i++)
+    {
+        if(m_players[i]->isAlive())
+        {
+            nPlayerAlive++;
+            nIndex = i;
+        }
+    }
+    if (nPlayerAlive > 1)
+    {
+        return;
+    }
+	//emit(dataChanged(LivesInfo));
 	// Start the timer
 	start();
 	// Remove a possible bonus
-	emit(bonusOff());
-	// If their is no lives left, we start a new game
-	if (m_lives <= 0) {
-		emit(gameOver(true));
-	} else {
-		emit(levelStarted(false));
-		// Move all characters to their initial positions
-		initCharactersPosition();
-	}
+	//emit(bonusOff());
+    // If a player reaches the win points start a new game
+    if (nPlayerAlive == 1)
+    {
+        m_players[nIndex]->addPoint();
+    }
+    if (m_players[nIndex]->points() >= m_winPoints)
+    {
+        m_gameOver = true;
+        m_strWinner = m_players[nIndex]->getImageId();
+        emit(gameOver(true));
+    }
+    else
+    {
+        emit(levelStarted(false));
+        // Move all characters to their initial positions
+        initCharactersPosition();
+        for(int i = 0; i < m_players.length(); i++)
+        {
+            m_players[i]->resurrect();
+        }
+    }
 }
 
 void Game::ghostDeath(Ghost* p_ghost) {
@@ -595,7 +654,7 @@ void Game::winPoints(Element* p_element) {
 	// For each 10000 points we get a life more
 	if (m_points / 10000 > (m_points - wonPoints) / 10000) {
 		playSound(KStandardDirs::locate("sound", "kapman/life.ogg"));
-		m_lives++;
+		//m_lives++;
 		emit(dataChanged(LivesInfo));
 	}
 	// If the eaten element is an energyzer we change the ghosts state

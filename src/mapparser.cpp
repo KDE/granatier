@@ -96,6 +96,14 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                     m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
                     m_game->createPlayer(QPointF(i+0.5, m_counterRows+0.5), "player2");
                     break;
+                case '3':
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->createPlayer(QPointF(i+0.5, m_counterRows+0.5), "player3");
+                    break;
+                case '4':
+                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_game->createPlayer(QPointF(i+0.5, m_counterRows+0.5), "player4");
+                    break;
                 default:
                     m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
             }

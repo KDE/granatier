@@ -30,13 +30,10 @@ const qreal Kapman::MAX_SPEED_RATIO = 1.5;
 Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena) : Character(p_x, p_y, p_arena)
 {
     m_type = Element::PLAYER;
-    m_maxSpeed = 10;
     m_imageId = p_imageId;
-    m_speed = 2;
-    m_bombRange = 1;
-    m_maxBombArmory = 1;
-    m_bombArmory = m_maxBombArmory;
-    m_death = false;
+    m_points = 0;
+    
+    resurrect();
     
     m_key.moveLeft = Qt::Key_Left;
     m_key.moveRight = Qt::Key_Right;
@@ -374,6 +371,31 @@ void Kapman::die()
     }
 }
 
+bool Kapman::isAlive()
+{
+    return !m_death;
+}
+
+void Kapman::resurrect()
+{
+    m_death = false;
+    m_maxSpeed = 10;
+    m_speed = 2;
+    m_bombRange = 1;
+    m_maxBombArmory = 1;
+    m_bombArmory = m_maxBombArmory;
+}
+
+int Kapman::points()
+{
+    return m_points;
+}
+
+void Kapman::addPoint()
+{
+    m_points++;
+}
+
 void Kapman::emitGameUpdated() {
 	emit gameUpdated();
 }
@@ -452,6 +474,11 @@ void Kapman::initSpeedInc() {
 
 void Kapman::keyPressed(QKeyEvent* keyEvent)
 {
+    if(m_death)
+    {
+        return;
+    }
+    
     int key = keyEvent->key();
 
     if(key == m_key.moveLeft || key == m_key.moveRight || key == m_key.moveUp || key == m_key.moveDown || key == m_key.dropBomb)

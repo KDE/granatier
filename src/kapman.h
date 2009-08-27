@@ -52,7 +52,11 @@ class Kapman : public Character {
         /** Player bomb armory */
         int m_bombArmory;
         
+        /** Player death flag */
         bool m_death;
+        
+        /** Points from the player */
+        int m_points;
         
         KALSource* m_soundSourceDie;
         KALSource* m_soundSourceWilhelmScream;
@@ -160,6 +164,26 @@ class Kapman : public Character {
 		 */
 		void die();
 		
+        /**
+         *  returns if the player is alive
+         */
+        bool isAlive();
+        
+        /**
+         * resurrects the player
+         */
+        void resurrect();
+        
+        /**
+         * returns the points
+         */
+        int points();
+        
+        /**
+         * adds a point
+         */
+        void addPoint();
+        
 		/**
 		 * Emits a signal to Kapmanitem in order to manage collisions
 		 */

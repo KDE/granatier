@@ -100,8 +100,8 @@ class Game : public QObject {
 		/** A flag to know if the player has cheated during the game */
 		bool m_isCheater;
 
-		/** The remaining number of lives */
-		int m_lives;
+		/** The points which are needed to win */
+		int m_winPoints;
 		
 		/** The won points */
 		long m_points;
@@ -126,6 +126,9 @@ class Game : public QObject {
         KALBuffer* soundBufferWilhelmScream;
         KALSource* soundSourceDie;
         KALSource* soundSourceWilhelmScream;
+        
+        bool m_gameOver;
+        QString m_strWinner;
 		
 	public:
 
@@ -223,6 +226,11 @@ class Game : public QObject {
 		void setLevel(int p_level);
 
         /**
+          * @return the winner of the game
+          */
+        QString getWinner() const;
+        
+        /**
           * Create the hidden Bonuses
           */
         void createBonus();
@@ -281,6 +289,15 @@ class Game : public QObject {
 		
 	private:
 	
+        /**
+         * Initializes class
+         */
+        void init();
+        /**
+         * Cleans class
+         */
+        void cleanUp();
+        
 		/**
 		 * Initializes the character coordinates.
 		 */
