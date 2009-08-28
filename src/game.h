@@ -42,16 +42,6 @@ class Game : public QObject {
 
 	Q_OBJECT
 
-	public :
-		/** Ratio which modify the timers function of the difficulty */
-		static qreal s_durationRatio;
-
-		/** Timer duration for prey state in medium difficulty */
-		static int s_preyStateDuration;
-
-		/** Timer duration for bonus apparition in medium difficulty */
-		static int s_bonusDuration;
-
 	private :
 
 		/** Number of FPS */
@@ -71,12 +61,6 @@ class Game : public QObject {
 
 		/** The Game main timer */
 		QTimer* m_timer;
-		
-		/** The Bonus timer to make it disappear if it is not eaten after a given time */
-		QTimer* m_bonusTimer;
-
-		/** Timer to manage the prey state of the ghosts */
-		QTimer* m_preyTimer;
 		
 		/** The Arena */
 		Arena* m_arena;
@@ -302,12 +286,6 @@ class Game : public QObject {
 		void initCharactersPosition();
 
 		/**
-		 * Calculates and update the ghosts speed depending on the ghosts speed
-		 * The value is in Ghost::s_speed
-		 */
-		void setTimersDuration();
-
-		/**
 		 * Plays the given sound.
 		 * @param p_sound the path to the sound to play
 		 */
@@ -364,16 +342,6 @@ class Game : public QObject {
 		 * Starts the next level.
 		 */
 		void nextLevel();
-		
-		/**
-		 * Hides the Bonus.
-		 */
-		void hideBonus();
-
-		/**
-		 * Ends the Ghosts prey state.
-		 */
-		void endPreyState();	
         
         /**
          * Plays the detonation sound

@@ -23,8 +23,8 @@ GhostItem::GhostItem(Ghost* p_model) : CharacterItem (p_model) {
 	connect(p_model, SIGNAL(stateChanged()), this, SLOT(updateState()));
 
 	// Calculations for the duration of blinking stuff
-	int blinkTimerDuration = (int)(500 * Game::s_durationRatio);
-	int startBlinkingTimerDuration = (int)(Game::s_preyStateDuration*Game::s_durationRatio - 5*blinkTimerDuration);
+	int blinkTimerDuration = (int)(500);
+	int startBlinkingTimerDuration = (int)(5*blinkTimerDuration);
 
 	// Define the timer which tells the ghosts to start blinking when about to leave prey state
 	m_startBlinkingTimer = new QTimer(this);
@@ -44,7 +44,7 @@ GhostItem::~GhostItem() {
 
 void GhostItem::updateBlinkTimersDuration() {
 	// Set the timers duration depending on the prey state duration
-	int blinkTimerDuration = (int)( (Game::s_preyStateDuration*Game::s_durationRatio) / 20);
+	int blinkTimerDuration = (int)(20);
 	int startBlinkingTimerDuration = (int)(blinkTimerDuration * 15);
 	m_blinkTimer->setInterval(blinkTimerDuration);
 	m_startBlinkingTimer->setInterval(startBlinkingTimerDuration);

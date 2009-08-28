@@ -25,23 +25,15 @@
 #include <KStandardDirs>
 
 const int Game::FPS = 40;
-int Game::s_bonusDuration;
-int Game::s_preyStateDuration;
-qreal Game::s_durationRatio;
 
 Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nbEatenGhosts(0), m_media1(0), m_media2(0)
 {
     init();
     
     m_gameOver = false;
-	// Initialize the sound state
-	setSoundsEnabled(Settings::sounds());
-
-	// Timers for medium difficulty
-	s_bonusDuration = 7000;
-	s_preyStateDuration = 10000;
-	// Difference ratio between low/high and medium speed
-	s_durationRatio = 1.0;
+    
+    // Initialize the sound state
+    setSoundsEnabled(Settings::sounds());
     
     //init KALEngine
     soundEngine = KALEngine::getInstance();
@@ -89,17 +81,6 @@ void Game::init()
         m_players[i]->initSpeedInc();
     }
     
-    // Initialize Bonus timer from the difficulty level
-    m_bonusTimer = new QTimer(this);
-    m_bonusTimer->setInterval( (int)(s_bonusDuration * s_durationRatio) );
-    m_bonusTimer->setSingleShot(true);
-    connect(m_bonusTimer, SIGNAL(timeout()), this, SLOT(hideBonus()));
-    // Initialize the Preys timer from the difficulty level
-    m_preyTimer = new QTimer(this);
-    m_preyTimer->setInterval( (int)(s_preyStateDuration * s_durationRatio) );
-    m_preyTimer->setSingleShot(true);
-    connect(m_preyTimer, SIGNAL(timeout()), this, SLOT(endPreyState()));
-    
     // Start the Game timer
     m_timer = new QTimer(this);
     m_timer->setInterval(int(1000 / Game::FPS));
@@ -118,7 +99,6 @@ Game::~Game()
     delete m_media1;
     delete m_media2;
     delete m_timer;
-    delete m_bonusTimer;
     
     for (int i = 0; i < m_ghosts.size(); i++)
     {
@@ -241,7 +221,6 @@ void Game::setLevel(int p_level) {
             m_players[j]->increaseCharactersSpeed();
         }
     }
-	setTimersDuration();
 	//m_bonus->setPoints(m_level * 100);
 	emit(dataChanged(AllInfo));
 	emit(pauseChanged(false, true));
@@ -420,15 +399,6 @@ void Game::initCharactersPosition() {
             }
         }
     }
-}
-
-void Game::setTimersDuration() {
-	// Updates the timers duration ratio with the ghosts speed
-	s_durationRatio = Character::MEDIUM_SPEED / m_ghosts[0]->getNormalSpeed();
-
-	// Updates the timers duration
-	m_bonusTimer->setInterval( (int)(s_bonusDuration * s_durationRatio) );
-	m_preyTimer->setInterval( (int)(s_preyStateDuration * s_durationRatio) );
 }
 
 void Game::playSound(const QString& p_sound) {
@@ -634,8 +604,6 @@ void Game::winPoints(Element* p_element) {
 	}
 	// If the eaten element is an energyzer we change the ghosts state
 	if (p_element->getType() == Element::ENERGYZER) {
-		// We start the prey timer
-		m_preyTimer->start();
 		playSound(KStandardDirs::locate("sound", "kapman/energizer.ogg"));
 		for (int i = 0; i < m_ghosts.size(); ++i) {
 			if(m_ghosts[i]->getState() != Ghost::EATEN) {
@@ -675,25 +643,10 @@ void Game::nextLevel() {
 		// Increase the ghosts speed increase
 		m_ghosts[i]->increaseCharactersSpeed();
 	}
-	//m_kapman->increaseCharactersSpeed();
-	// Update the timers duration with the new speed
-	setTimersDuration();
 	// Update the score, level and lives labels
 	emit(dataChanged(AllInfo));
 	// Update the view
 	emit(levelStarted(true));
-}
-
-void Game::hideBonus() {
-	emit(bonusOff());
-}
-
-void Game::endPreyState() {
-	for (int i = 0; i < m_ghosts.size(); ++i) {
-		if(m_ghosts[i]->getState() != Ghost::EATEN) {
-			m_ghosts[i]->setState(Ghost::HUNTER);
-		}
-	}
 }
 
 void Game::createBomb(Kapman* player, qreal x, qreal y)
