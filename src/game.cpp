@@ -29,42 +29,19 @@ int Game::s_bonusDuration;
 int Game::s_preyStateDuration;
 qreal Game::s_durationRatio;
 
-Game::Game(KGameDifficulty::standardLevel p_difficulty) : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nbEatenGhosts(0), m_media1(0), m_media2(0)
+Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nbEatenGhosts(0), m_media1(0), m_media2(0)
 {
     init();
     
     m_gameOver = false;
 	// Initialize the sound state
 	setSoundsEnabled(Settings::sounds());
-	// Initialize the game difficulty
-    Settings::setGameDifficulty((int) p_difficulty);
-	Settings::self()->writeConfig();
 
 	// Timers for medium difficulty
 	s_bonusDuration = 7000;
 	s_preyStateDuration = 10000;
 	// Difference ratio between low/high and medium speed
 	s_durationRatio = 1.0;
-
-	// Tells the KGameDifficulty singleton that the game is not running
-	KGameDifficulty::setRunning(false);
-
-	// Initialize the characters speed timers duration considering the difficulty level
-	switch (p_difficulty) {
-		case KGameDifficulty::Easy:
-			// Ratio low/medium speed
-			s_durationRatio = Character::MEDIUM_SPEED / Character::LOW_SPEED;
-			break;
-		case KGameDifficulty::Medium:
-			s_durationRatio = 1;
-			break;
-		case KGameDifficulty::Hard:
-			// Ratio high/medium speed
-			s_durationRatio = Character::MEDIUM_SPEED / Character::HIGH_SPEED;
-			break;
-		default:
-			break;
-	}
     
     //init KALEngine
     soundEngine = KALEngine::getInstance();
@@ -482,8 +459,6 @@ void Game::keyPressEvent(QKeyEvent* p_event) {
 			m_timer->start();
 			emit(gameStarted());
 		}
-		// Tells the KGameDifficulty singleton that the game now runs
-		KGameDifficulty::setRunning(true);
 	}
 	// Behaviour when the game has begun
 	switch (p_event->key()) {

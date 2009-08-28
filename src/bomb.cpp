@@ -19,7 +19,6 @@
 
 #include "bomb.h"
 
-#include <KGameDifficulty>
 #include <KDebug>
 
 Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)

@@ -18,8 +18,6 @@
 
 #include "character.h"
 
-#include <KGameDifficulty>
-
 const qreal Character::LOW_SPEED = 1;
 const qreal Character::MEDIUM_SPEED = 1;
 const qreal Character::HIGH_SPEED = 1;
@@ -81,16 +79,8 @@ void Character::setYSpeed(qreal p_ySpeed) {
 }
 
 void Character::initSpeed() {
-	// Kapman speed increase when level up
-	if(KGameDifficulty::level() == KGameDifficulty::Easy) {
-		m_normalSpeed = Character::LOW_SPEED;
-	}
-	if(KGameDifficulty::level() == KGameDifficulty::Medium) {
-		m_normalSpeed = Character::MEDIUM_SPEED;
-	}
-	if(KGameDifficulty::level() == KGameDifficulty::Hard) {
-		m_normalSpeed = Character::HIGH_SPEED;
-	}
+	// Kapman speed
+	m_normalSpeed = Character::MEDIUM_SPEED;
 	m_speed = m_normalSpeed;
 }
 

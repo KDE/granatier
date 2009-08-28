@@ -23,7 +23,6 @@
 #include "ghost.h"
 
 #include <QGraphicsScene>
-#include <KGameDifficulty>
 #include <QDebug>
 
 const int KapmanItem::NB_FRAMES = 13;
@@ -42,13 +41,7 @@ KapmanItem::KapmanItem(Kapman* p_model) : CharacterItem(p_model) {
 	m_animationTimer->setLoopCount(0);
 	m_animationTimer->setFrameRange(0, NB_FRAMES - 1);
 	// Animation speed
-	if (KGameDifficulty::level() == KGameDifficulty::Easy) {
-		m_animationTimer->setDuration(KapmanItem::ANIM_LOW_SPEED);
-	} else if (KGameDifficulty::level() == KGameDifficulty::Medium) {
-		m_animationTimer->setDuration(KapmanItem::ANIM_MEDIUM_SPEED);
-	} else if (KGameDifficulty::level() == KGameDifficulty::Hard) {
-		m_animationTimer->setDuration(KapmanItem::ANIM_HIGH_SPEED);
-	}
+	m_animationTimer->setDuration(KapmanItem::ANIM_MEDIUM_SPEED);
 	connect(m_animationTimer, SIGNAL(frameChanged(int)), this, SLOT(setFrame(int)));
 
 	// Define the timer which sets the blinking frequency

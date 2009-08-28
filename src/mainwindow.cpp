@@ -48,12 +48,8 @@ MainWindow::MainWindow() {
     	KAction* levelAction = new KAction(i18n("&Change level"), this);
 	actionCollection()->addAction("level", levelAction);
 	connect(levelAction, SIGNAL(triggered(bool)), this, SLOT(changeLevel()));
-	// Initialize the KGameDifficulty singleton
-	KGameDifficulty::init(this, this, SLOT(initGame()));
- 	KGameDifficulty::addStandardLevel(KGameDifficulty::Easy);
- 	KGameDifficulty::addStandardLevel(KGameDifficulty::Medium);
- 	KGameDifficulty::addStandardLevel(KGameDifficulty::Hard);
-    	KGameDifficulty::setLevel(KGameDifficulty::standardLevel(Settings::gameDifficulty()));
+    // init game
+    initGame();
 	// KScoreDialog
 	m_kScoreDialog = new KScoreDialog(KScoreDialog::Name | KScoreDialog::Score | KScoreDialog::Level, this);
 	// Setup the window
@@ -77,7 +73,7 @@ void MainWindow::initGame() {
 		delete m_game;
 	}
 	// Create a new Game instance
-	m_game = new Game(KGameDifficulty::level());
+	m_game = new Game();
 	connect(m_game, SIGNAL(gameOver(bool)), this, SLOT(newGame(bool)));		// TODO Remove the useless bool parameter from gameOver()
 	// If a GameView instance already exists
 	if (m_view) {

@@ -20,7 +20,6 @@
 #include "time.h"
 
 #include <QPointF>
-#include <KGameDifficulty>
 #include <cstdlib>
 
 const qreal Ghost::MAX_SPEED_RATIO = 2.0;
@@ -222,14 +221,6 @@ void Ghost::doActionOnCollision(Kapman*) {
 
 void Ghost::initSpeedInc() {
 	// Ghosts speed increase when level up
-	if(KGameDifficulty::level() == KGameDifficulty::Easy) {
-		m_speedIncrease = Character::LOW_SPEED_INC;
-	}
-	if(KGameDifficulty::level() == KGameDifficulty::Medium) {
-		m_speedIncrease = Character::MEDIUM_SPEED_INC;
-	}
-	if(KGameDifficulty::level() == KGameDifficulty::Hard) {
-		m_speedIncrease = Character::HIGH_SPEED_INC;
-	}
+	m_speedIncrease = Character::MEDIUM_SPEED_INC;
 }
 

@@ -20,7 +20,6 @@
 #include "kapman.h"
 
 #include <kdebug.h>
-#include <KGameDifficulty>
 #include <KDE/KALEngine>
 
 #include <cmath>
@@ -461,15 +460,7 @@ void Kapman::stopMoving() {
 
 void Kapman::initSpeedInc() {
 	// Kapman speed increase when level up
-	if(KGameDifficulty::level() == KGameDifficulty::Easy) {
-		m_speedIncrease = (Character::LOW_SPEED_INC / 2);
-	}
-	if(KGameDifficulty::level() == KGameDifficulty::Medium) {
-		m_speedIncrease = (Character::MEDIUM_SPEED_INC / 2);
-	}
-	if(KGameDifficulty::level() == KGameDifficulty::Hard) {
-		m_speedIncrease = (Character::HIGH_SPEED_INC / 2);
-	}
+	m_speedIncrease = (Character::MEDIUM_SPEED_INC / 2);
 }
 
 void Kapman::keyPressed(QKeyEvent* keyEvent)
