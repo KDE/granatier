@@ -91,6 +91,18 @@ class Element : public QObject {
 		 */
 		virtual void doActionOnCollision(Kapman* p_kapman);
 
+        /**
+         * Sets arena for the element.
+         * @param p_arena arena
+         */
+        void setArena(Arena* p_arena);
+        
+        /**
+         * Sets the path initial position.
+         * @param p_position initial position
+         */
+        void setInitialCoordinates (qreal p_x, qreal p_y);
+        
 		/**
 		 * Gets the path to the Element image.
 		 * @return the path to the Element image

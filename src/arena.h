@@ -25,6 +25,7 @@
 #include <QObject>
 #include <QList>
 #include <QPoint>
+#include <QMap>
 
 /**
  * @brief This class represents the Arena of the game.
@@ -34,10 +35,6 @@ class Arena : public QObject
     Q_OBJECT
 
 private:
-
-    /** The Cell coordinates where the Ghosts go back when they have been eaten */
-    QPoint m_resurrectionCell;
-
     /** The number of rows of the Arena */
     int m_nbRows;
     
@@ -46,6 +43,9 @@ private:
     
     /** The Arena Cells */
     Cell** m_cells;
+    
+    /** The Player positon on the Arena */
+    QMap <int, QPointF> m_playerPosition;
 
 public:
 
@@ -89,7 +89,21 @@ public:
       * @param p_element the Element that is on the Cell
       */
     void removeCellElement(const int p_row, const int p_column, Element* p_element);
-
+    
+    /**
+      * Sets the player position on the arena.
+      * @param p_player the player number
+      * @param p_position the player position
+      */
+    void setPlayerPosition(int p_player, QPointF p_position);
+    
+    /**
+      * Gets the player position on the arena.
+      * @param p_player the player number
+      * @return p_position the player position
+      */
+    QPointF getPlayerPosition(int p_player);
+    
     /**
       * Gets the Cell at the given coordinates.
       * @param p_row the row index

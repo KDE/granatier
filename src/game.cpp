@@ -28,10 +28,6 @@ const int Game::FPS = 40;
 
 Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nbEatenGhosts(0), m_media1(0), m_media2(0)
 {
-    init();
-    
-    m_gameOver = false;
-    
     // Initialize the sound state
     setSoundsEnabled(Settings::sounds());
     
@@ -46,11 +42,25 @@ Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nb
     soundSourceDie = new KALSource(soundBufferDie, soundEngine);
     soundSourceWilhelmScream = new KALSource(soundBufferWilhelmScream, soundEngine);
     
+    m_arena = 0;
+    
+    int nNumberOfPlayers = Settings::self()->players();
+    for (int i = 0; i < nNumberOfPlayers; i++)
+    {
+        createPlayer(QPointF(-0.5, 0.5), QString("player%1").arg(i+1));
+    }
+    
+    init();
+    
     for (int i = 0; i < m_players.size(); i++)
     {
+        connect(m_players[i], SIGNAL(bombDropped(Kapman*, qreal, qreal)), this, SLOT(createBomb(Kapman*, qreal, qreal)));
+        m_players[i]->initSpeedInc();
         m_players[i]->setSoundDie(soundBufferDie);
         m_players[i]->setSoundWilhelmScream(soundBufferWilhelmScream);
     }
+    
+    m_gameOver = false;
 }
 
 void Game::init()
@@ -75,19 +85,19 @@ void Game::init()
     // Parse the XML file
     reader.parse(source);
     
-    for (int i = 0; i < m_players.size(); i++)
-    {
-        connect(m_players[i], SIGNAL(bombDropped(Kapman*, qreal, qreal)), this, SLOT(createBomb(Kapman*, qreal, qreal)));
-        m_players[i]->initSpeedInc();
-    }
-    
     // Start the Game timer
     m_timer = new QTimer(this);
     m_timer->setInterval(int(1000 / Game::FPS));
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     m_timer->start();
     m_state = RUNNING;
+    
     // Init the characters coordinates on the Arena
+    for (int i = 0; i < m_players.size(); i++)
+    {
+        m_players[i]->setArena(m_arena);
+        m_players[i]->setInitialCoordinates(qreal(Cell::SIZE * m_arena->getPlayerPosition(i+1).x()), qreal(Cell::SIZE * m_arena->getPlayerPosition(i+1).y()));
+    }
     initCharactersPosition();
     
     // Create the hidden Bonuses

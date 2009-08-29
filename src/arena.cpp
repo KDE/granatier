@@ -79,6 +79,20 @@ void Arena::removeCellElement(const int p_row, const int p_column, Element * p_e
     m_cells[p_row][p_column].removeElement(p_element);
 }
 
+void Arena::setPlayerPosition(int p_player, QPointF p_position)
+{
+    m_playerPosition.insert(p_player, p_position);
+}
+    
+QPointF Arena::getPlayerPosition(int p_player)
+{
+    if(m_playerPosition.contains(p_player))
+    {
+        return m_playerPosition.value(p_player);
+    }
+    return m_playerPosition.begin().value();    //to have a valid position
+}
+
 Cell Arena::getCell(const int p_row, const int p_column) const
 {
     if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns)

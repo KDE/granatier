@@ -29,6 +29,17 @@ void Element::doActionOnCollision(Kapman*) {
 	// Do nothing by default : will be redefined within the subclasses
 }
 
+void Element::setArena(Arena* p_arena)
+{
+    m_arena = p_arena;
+}
+
+void Element::setInitialCoordinates (qreal p_x, qreal p_y)
+{
+    m_xInit = p_x;
+    m_yInit = p_y;
+}
+
 qreal Element::getX() const {
 	return m_x;
 }
