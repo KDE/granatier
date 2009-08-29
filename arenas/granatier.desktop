@@ -8,6 +8,7 @@ Description[pt]=Arena Predefinida do Granatier
 Description[pt_BR]=Arena Predefinida do Granatier
 Description[sv]=Standardarena för Granatier
 Description[uk]=Типова арена «Гренадера»
+Description[x-test]=xxDefault Granatier Arenaxx
 Type=XML
 FileName=granatier.xml
 Preview=granatier_preview.png
