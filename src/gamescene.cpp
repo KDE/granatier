@@ -25,28 +25,29 @@
 #include <KGameTheme>
 #include <KLocale>
 
-GameScene::GameScene(Game* p_game) : m_game(p_game) {
-	connect(p_game, SIGNAL(levelStarted(bool)), SLOT(intro(bool)));
-	connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
-	connect(p_game, SIGNAL(pauseChanged(bool, bool)), this, SLOT(setPaused(bool, bool)));
-	connect(p_game, SIGNAL(elementEaten(qreal, qreal)), this, SLOT(hideElement(qreal, qreal)));
-	connect(p_game, SIGNAL(bonusOn()), this, SLOT(displayBonus()));
-	connect(p_game, SIGNAL(dataChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
+GameScene::GameScene(Game* p_game) : m_game(p_game)
+{
+    connect(p_game, SIGNAL(levelStarted(bool)), SLOT(intro(bool)));
+    connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
+    connect(p_game, SIGNAL(pauseChanged(bool, bool)), this, SLOT(setPaused(bool, bool)));
+    connect(p_game, SIGNAL(elementEaten(qreal, qreal)), this, SLOT(hideElement(qreal, qreal)));
+    connect(p_game, SIGNAL(bonusOn()), this, SLOT(displayBonus()));
+    connect(p_game, SIGNAL(dataChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
 
-	// Connection between Game and GameScene for the display of won points when a bonus or a ghost is eaten
-	connect(p_game, SIGNAL(pointsToDisplay(long, qreal, qreal)), this, SLOT(displayPoints(long, qreal, qreal)));
+    // Connection between Game and GameScene for the display of won points when a bonus or a ghost is eaten
+    connect(p_game, SIGNAL(pointsToDisplay(long, qreal, qreal)), this, SLOT(displayPoints(long, qreal, qreal)));
 
-	// Set the pixmap cache limit to improve performance
-	setItemIndexMethod(NoIndex);
-	m_cache = new KPixmapCache("granatier_cache");
-	m_cache->setCacheLimit(3 * 1024);
+    // Set the pixmap cache limit to improve performance
+    setItemIndexMethod(NoIndex);
+    m_cache = new KPixmapCache("granatier_cache");
+    m_cache->setCacheLimit(3 * 1024);
 
-	// Load the SVG file
-	m_renderer = new KSvgRenderer();
-	loadTheme();
+    // Load the SVG file
+    m_renderer = new KSvgRenderer();
+    loadTheme();
 
-    // Create the PlayerItems
+    // Create the PlayerItems and the points labels
     QList <Kapman*> players = p_game->getPlayers();
     KapmanItem* kapmanItem;
     for(int i = 0; i < players.size(); i++)
@@ -62,43 +63,52 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
         m_playerItems.append(kapmanItem);
         
         connect (kapmanItem, SIGNAL(bonusItemTaken(ElementItem*)), this, SLOT(removeBonusItem(ElementItem*)));
+        
+        m_playerPointsLabels.append(new QGraphicsTextItem(players[i]->getImageId()));
+        m_playerPointsLabels.last()->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+        m_playerPointsLabels.last()->setDefaultTextColor(QColor("#FFFF00"));
+        m_playerPointsLabels.last()->setZValue(1001);
     }
 
     // Create the labels background
     m_labelBackground = new QGraphicsRectItem();
     m_labelBackground->setBrush(QBrush(QColor(0,0,0,175)));
     m_labelBackground->setZValue(1000);
-	// Create the introduction labels
-	m_introLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
-	m_introLabel->setFont(QFont("Helvetica", 25, QFont::Bold, false));
-	m_introLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_introLabel->setZValue(1001);
-	m_introLabel2 = new QGraphicsTextItem(i18n("Press any arrow key to start"));
-	m_introLabel2->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-	m_introLabel2->setDefaultTextColor(QColor("#FFFF00"));
-	m_introLabel2->setZValue(1001);
-	// Create the new level label
-	m_newLevelLabel = new QGraphicsTextItem();
-	m_newLevelLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
-	m_newLevelLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_newLevelLabel->setZValue(1001);
-	// Create the pause label
-	m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
-	m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
-	m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
-	m_pauseLabel->setZValue(1001);
-	// Create the score label
-	m_scoreLabel = new QGraphicsTextItem();
-	m_scoreLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-	m_scoreLabel->setDefaultTextColor(QColor("#FFFFFF"));
-	// Create the lives label
-	m_livesLabel = new QGraphicsTextItem();
-	m_livesLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-	m_livesLabel->setDefaultTextColor(QColor("#FFFFFF"));
-	// Create the level label
-	m_levelLabel = new QGraphicsTextItem();
-	m_levelLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-	m_levelLabel->setDefaultTextColor(QColor("#FFFFFF"));
+    // Create the introduction labels
+    m_introLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
+    m_introLabel->setFont(QFont("Helvetica", 25, QFont::Bold, false));
+    m_introLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_introLabel->setZValue(1001);
+    m_introLabel2 = new QGraphicsTextItem(i18n("Press Space to start"));
+    m_introLabel2->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_introLabel2->setDefaultTextColor(QColor("#FFFF00"));
+    m_introLabel2->setZValue(1001);
+    m_introLabel3 = new QGraphicsTextItem(i18n("Press Space to continue ..."));
+    m_introLabel3->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_introLabel3->setDefaultTextColor(QColor("#FFFF00"));
+    m_introLabel3->setZValue(1001);
+    // Create the new level label
+    m_newLevelLabel = new QGraphicsTextItem();
+    m_newLevelLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
+    m_newLevelLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_newLevelLabel->setZValue(1001);
+    // Create the pause label
+    m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
+    m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
+    m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_pauseLabel->setZValue(1001);
+    // Create the score label
+    m_scoreLabel = new QGraphicsTextItem();
+    m_scoreLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_scoreLabel->setDefaultTextColor(QColor("#FFFFFF"));
+    // Create the lives label
+    m_livesLabel = new QGraphicsTextItem();
+    m_livesLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_livesLabel->setDefaultTextColor(QColor("#FFFFFF"));
+    // Create the level label
+    m_levelLabel = new QGraphicsTextItem();
+    m_levelLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_levelLabel->setDefaultTextColor(QColor("#FFFFFF"));
 
     // Display each PlayerItem
     for (int i = 0; i < m_playerItems.size(); i++)
@@ -106,17 +116,17 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
         addItem(m_playerItems[i]);
     }
 
-	// Initialize the information labels (score, lives and label)
-	updateInfo(Game::AllInfo);
-	// Display the score label
-	//addItem(m_scoreLabel);
-	//m_scoreLabel->setPos(Cell::SIZE, height() + Cell::SIZE);
-	// Display the lives label
-	//addItem(m_livesLabel);
-	//m_livesLabel->setPos(width() - m_livesLabel->boundingRect().width() - 20 , height() - Cell::SIZE - m_livesLabel->boundingRect().height() / 2);
-	// Display the level label
-	//addItem(m_levelLabel);
-	//m_levelLabel->setPos((width() - m_levelLabel->boundingRect().width()) / 2 , height() - Cell::SIZE - m_levelLabel->boundingRect().height() / 2);
+    // Initialize the information labels (score, lives and label)
+    updateInfo(Game::AllInfo);
+    // Display the score label
+    //addItem(m_scoreLabel);
+    //m_scoreLabel->setPos(Cell::SIZE, height() + Cell::SIZE);
+    // Display the lives label
+    //addItem(m_livesLabel);
+    //m_livesLabel->setPos(width() - m_livesLabel->boundingRect().width() - 20 , height() - Cell::SIZE - m_livesLabel->boundingRect().height() / 2);
+    // Display the level label
+    //addItem(m_levelLabel);
+    //m_levelLabel->setPos((width() - m_levelLabel->boundingRect().width()) / 2 , height() - Cell::SIZE - m_levelLabel->boundingRect().height() / 2);
 
     init();
 }
@@ -233,11 +243,17 @@ GameScene::~GameScene()
     
     for (int i = 0; i < m_playerItems.size(); i++)
     {
+        if(items().contains(m_playerItems[i]))
+        {
+            removeItem(m_playerItems[i]);
+        }
         delete m_playerItems[i];
+        delete m_playerPointsLabels[i];
     }
     
     delete m_introLabel;
     delete m_introLabel2;
+    delete m_introLabel3;
     delete m_newLevelLabel;
     delete m_scoreLabel;
     delete m_livesLabel;
@@ -251,7 +267,6 @@ GameScene::~GameScene()
 
 void GameScene::cleanUp()
 {
-    setPaused (true, false);
     // remove the arena items
     for (int i = 0; i < m_game->getArena()->getNbRows();++i)
     {
@@ -319,6 +334,41 @@ void GameScene::cleanUp()
     }
     delete[] m_blockItems;
     delete[] m_bonusItems;
+    
+    // remove the player points labels from the gamescene
+    for (int i = 0; i < m_playerPointsLabels.size(); i++)
+    {
+        if(items().contains(m_playerPointsLabels[i]))
+        {
+            removeItem(m_playerPointsLabels[i]);
+        }
+    }
+    if(items().contains(m_introLabel3))
+    {
+        removeItem(m_introLabel3);
+    }
+}
+
+void GameScene::showPoints(int p_winPoints)
+{
+    QList <Kapman*> players = m_game->getPlayers();
+    for(int i = 0; i < players.length(); i++)
+    {
+        // If the label was not displayed yet
+        if (!items().contains(m_playerPointsLabels[i]))
+        {
+            // Display the pause label
+            addItem(m_playerPointsLabels[i]);
+        }
+        m_playerPointsLabels[i]->setPlainText(QString("%1 %2").arg(players[i]->getImageId()).arg(QString(players[i]->points(), QChar('X')), -p_winPoints, QChar('O')));
+        m_playerPointsLabels[i]->setPos((width() - m_playerPointsLabels[i]->boundingRect().width()) / 2, (height() - (players.length() - i) * m_playerPointsLabels[i]->boundingRect().height()) / 2);
+    }
+    
+    if (!items().contains(m_introLabel3))
+    {
+        addItem(m_introLabel3);
+    }
+    m_introLabel3->setPos((width() - m_introLabel3->boundingRect().width()) / 2, (height() + m_introLabel3->boundingRect().height()) / 2);
 }
 
 Game* GameScene::getGame() const
@@ -452,12 +502,12 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
                 addItem(m_pauseLabel);
             }
             m_pauseLabel->setPos((width() - m_pauseLabel->boundingRect().width()) / 2, (height() - m_pauseLabel->boundingRect().height()) / 2);
-            if (!items().contains(m_labelBackground))
-            {
-                addItem(m_labelBackground);
-            }
-            m_labelBackground->setRect(0, 0, width(), height());
         }
+        if (!items().contains(m_labelBackground))
+        {
+            addItem(m_labelBackground);
+        }
+        m_labelBackground->setRect(0, 0, width(), height());
         // Stop player animation
         for (int i = 0; i < m_playerItems.size(); i++)
         {
@@ -480,10 +530,10 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
             {
                 removeItem(m_pauseLabel);
             }
-            if (items().contains(m_labelBackground))
-            {
-                removeItem(m_labelBackground);
-            }
+        }
+        if (items().contains(m_labelBackground))
+        {
+            removeItem(m_labelBackground);
         }
         // Resume player animation
         for (int i = 0; i < m_playerItems.size(); i++)

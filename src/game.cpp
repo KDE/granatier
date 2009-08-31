@@ -439,42 +439,72 @@ void Game::playSound(const QString& p_sound) {
 	}
 }
 
-void Game::keyPressEvent(QKeyEvent* p_event) {
-	// At the beginning or when paused, we start the timer when a key is pressed
-	if (!m_timer->isActive()) {
-		// If paused
-		if (m_state == PAUSED_UNLOCKED) {
-			switchPause();
-		} else if (m_state == RUNNING) {	// At the game beginning
-			// Start the game
-			m_timer->start();
-			emit(gameStarted());
-		}
-	}
-	// Behaviour when the game has begun
-	switch (p_event->key()) {
-		case Qt::Key_P:
-		case Qt::Key_Escape:
-			switchPause();
+void Game::keyPressEvent(QKeyEvent* p_event)
+{
+    // At the beginning or when paused, we start the timer when a key is pressed
+    if (!m_timer->isActive())
+    {
+        if(p_event->key() == Qt::Key_Space)
+        {
+            // If paused
+            if (m_state == PAUSED_UNLOCKED)
+            {
+                switchPause();
+            }
+            else if (m_state == RUNNING)      // At the game beginning
+            {
+                // Start the game
+                m_timer->start();
+                emit(gameStarted());
+            }
+            else if (m_state == PAUSED_LOCKED)
+            {
+                m_gameScene->cleanUp();
+                cleanUp();
+                init();
+                m_gameScene->init();
+                for(int i = 0; i < m_players.length(); i++)
+                {
+                    m_players[i]->resurrect();
+                    if (m_players[i]->points() >= m_winPoints)
+                    {
+                        m_gameOver = true;
+                        m_strWinner = m_players[i]->getImageId();
+                        emit(gameOver(true));
+                        return;
+                    }
+                }
+            }
+        }
+        return;
+    }
+    // Behaviour when the game has begun
+    switch (p_event->key())
+    {
+        case Qt::Key_P:
+        case Qt::Key_Escape:
+            switchPause();
             return;
-		case Qt::Key_E:
-			// Cheat code to get one more life
-			if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier)) {
-				//m_lives++;
-				m_isCheater = true;
-				emit(dataChanged(LivesInfo));
-			}
+        case Qt::Key_E:
+            // Cheat code to get one more life
+            if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier))
+            {
+                //m_lives++;
+                m_isCheater = true;
+                emit(dataChanged(LivesInfo));
+            }
             return;
-		case Qt::Key_N:
-			// Cheat code to go to the next level
-			if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier)) {
-				m_isCheater = true;
-				nextLevel();
-			}
+        case Qt::Key_N:
+            // Cheat code to go to the next level
+            if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier))
+            {
+                m_isCheater = true;
+                nextLevel();
+            }
             return;
-		default:
-			break;
-	}
+        default:
+            break;
+    }
     
     for(int i = 0; i < m_players.size(); i++)
     {
@@ -569,23 +599,10 @@ void Game::resumeAfterKapmanDeath()
     {
         m_players[nIndex]->addPoint();
     }
-    if (m_players[nIndex]->points() >= m_winPoints)
-    {
-        m_gameOver = true;
-        m_strWinner = m_players[nIndex]->getImageId();
-        emit(gameOver(true));
-    }
-    else
-    {
-        m_gameScene->cleanUp();
-        cleanUp();
-        init();
-        m_gameScene->init();
-        for(int i = 0; i < m_players.length(); i++)
-        {
-            m_players[i]->resurrect();
-        }
-    }
+    
+    pause(true);
+    m_gameScene->showPoints(m_winPoints);
+    
 }
 
 void Game::ghostDeath(Ghost* p_ghost) {

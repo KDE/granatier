@@ -50,6 +50,9 @@ class GameScene : public QGraphicsScene {
         /** The PlayerItem of each Player to be drawn */
         QList<KapmanItem*> m_playerItems;
         
+        /** The PlayerItem of each Player to be drawn */
+        QList<QGraphicsTextItem*> m_playerPointsLabels;
+        
         /** The BombItem of each Bomb to be drawn */
         QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
 		
@@ -68,6 +71,7 @@ class GameScene : public QGraphicsScene {
 		/** The labels to be displayed during the game */
 		QGraphicsTextItem* m_introLabel;
 		QGraphicsTextItem* m_introLabel2;
+        QGraphicsTextItem* m_introLabel3;
 		QGraphicsTextItem* m_newLevelLabel;
 		QGraphicsTextItem* m_scoreLabel;
 		QGraphicsTextItem* m_livesLabel;
@@ -112,7 +116,13 @@ class GameScene : public QGraphicsScene {
      * Cleans class
      */
     void cleanUp();
-        
+    
+    /**
+     * Shows the labels with the points.
+     * @param p_winPoints the points needed to win the game
+     */
+    void showPoints(int p_winPoints);
+    
 	private slots:
 
 		/**
