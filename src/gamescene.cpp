@@ -45,35 +45,6 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	// Load the SVG file
 	m_renderer = new KSvgRenderer();
 	loadTheme();
-    
-    // Create the ArenaItems
-    m_arenaItem = new ArenaItem**[m_game->getArena()->getNbRows()];
-    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i) {
-        m_arenaItem[i] = new ArenaItem*[m_game->getArena()->getNbColumns()];
-        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j) {
-            // Create the ArenaItem and set the image
-            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE);
-            arenaItem->setSharedRenderer(m_renderer);
-            //TODO: use this function call
-            //arenaItem->setElementId(m_game->getArena()->getCell(i,j).getElement()->getImageId());
-            switch(m_game->getArena()->getCell(i,j).getType())
-            {
-                case Cell::WALL:
-                    arenaItem->setElementId("arena_wall");
-                    arenaItem->setZValue(-2);
-                    break;
-                case Cell::HOLE:
-                    delete arenaItem;
-                    arenaItem = NULL;
-                    break;
-                case Cell::GROUND:
-                default:
-                    arenaItem->setElementId("arena_ground");
-                    arenaItem->setZValue(-1);
-            }
-            m_arenaItem[i][j] = arenaItem;
-        }
-    }
 
     // Create the PlayerItems
     QList <Kapman*> players = p_game->getPlayers();
@@ -91,74 +62,6 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
         m_playerItems.append(kapmanItem);
         
         connect (kapmanItem, SIGNAL(bonusItemTaken(ElementItem*)), this, SLOT(removeBonusItem(ElementItem*)));
-    }
-
-	// Create the GhostItems
-	for (int i = 0; i < p_game->getGhosts().size(); ++i) {
-		GhostItem* ghost = new GhostItem(p_game->getGhosts()[i]);
-		ghost->setSharedRenderer(m_renderer);
-		ghost->setElementId(p_game->getGhosts()[i]->getImageId());
-		ghost->update(p_game->getGhosts()[i]->getX(), p_game->getGhosts()[i]->getY());
-		// At the beginning, the ghosts are above the kapman because they eat him
-		ghost->setZValue(3);
-		m_ghostItems.append(ghost);
-	}
-    // Create the Block and Bonus items
-    m_blockItems = new ElementItem**[m_game->getArena()->getNbRows()];
-    m_bonusItems = new ElementItem**[m_game->getArena()->getNbRows()];
-    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
-    {
-        m_blockItems[i] = new ElementItem*[m_game->getArena()->getNbColumns()];
-        m_bonusItems[i] = new ElementItem*[m_game->getArena()->getNbColumns()];
-        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
-        {
-            if (m_game->getArena()->getCell(i, j).getElement() != NULL && m_game->getArena()->getCell(i, j).getElement()->getType() == Element::BLOCK)
-            {
-                // Create the element item and set the image
-                Element* element = m_game->getArena()->getCell(i, j).getElement();
-                ElementItem* elementItem = new ElementItem(element);
-                elementItem->setSharedRenderer(m_renderer);
-                elementItem->setElementId(element->getImageId());
-                elementItem->update(element->getX(), element->getY());
-                elementItem->setZValue(200);
-                m_blockItems[i][j] = elementItem;
-                
-                // if the block contains a hidden bonus, create the bonus item 
-                Bonus* bonus = (dynamic_cast <Block*> (element))->getBonus();
-                if(bonus)
-                {
-                  
-                    ElementItem* bonusItem = new ElementItem(bonus);
-                    bonusItem->setSharedRenderer(m_renderer);
-                    switch(bonus->getBonusType())
-                    {
-                        case Bonus::SPEED:  bonusItem->setElementId("bonus_speed");
-                                            break;
-                        case Bonus::BOMB:   bonusItem->setElementId("bonus_bomb");
-                                            break;
-                        case Bonus::RANGE:  bonusItem->setElementId("bonus_range");
-                                            break;
-                        case Bonus::THROW:  bonusItem->setElementId("bonus_throw");
-                                            break;
-                        case Bonus::MOVE:   bonusItem->setElementId("bonus_move");
-                                            break;
-                        default:            bonusItem->setElementId("bonus_speed");
-                    }
-                    bonusItem->update(bonus->getX(), bonus->getY());
-                    bonusItem->setZValue(100);
-                    m_bonusItems[i][j] = bonusItem;
-                }
-                else
-                {
-                    m_bonusItems[i][j] = NULL;
-                }
-            }
-            else
-            {
-                m_blockItems[i][j] = NULL;
-                m_bonusItems[i][j] = NULL;
-            }
-        }
     }
 
     // Create the labels background
@@ -197,22 +100,12 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	m_levelLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
 	m_levelLabel->setDefaultTextColor(QColor("#FFFFFF"));
 
-	// Display the ArenaItem
-    for (int i = 0; i < m_game->getArena()->getNbRows();++i) {
-        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j) {
-            if(m_arenaItem[i][j] != NULL) addItem(m_arenaItem[i][j]);
-        }
-    }
-
     // Display each PlayerItem
     for (int i = 0; i < m_playerItems.size(); i++)
     {
         addItem(m_playerItems[i]);
     }
-	// Display each GhostItem
-	for (int i = 0; i < m_ghostItems.size(); ++i) {
-		addItem(m_ghostItems[i]);
-	}
+
 	// Initialize the information labels (score, lives and label)
 	updateInfo(Game::AllInfo);
 	// Display the score label
@@ -224,68 +117,124 @@ GameScene::GameScene(Game* p_game) : m_game(p_game) {
 	// Display the level label
 	//addItem(m_levelLabel);
 	//m_levelLabel->setPos((width() - m_levelLabel->boundingRect().width()) / 2 , height() - Cell::SIZE - m_levelLabel->boundingRect().height() / 2);
-	// Display each Pill and Energizer item and introduction labels
-	intro(true);
+
+    init();
+}
+
+void GameScene::init()
+{
+    // Create the ArenaItems
+    m_arenaItem = new ArenaItem**[m_game->getArena()->getNbRows()];
+    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
+    {
+        m_arenaItem[i] = new ArenaItem*[m_game->getArena()->getNbColumns()];
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            // Create the ArenaItem and set the image
+            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE);
+            arenaItem->setSharedRenderer(m_renderer);
+            //TODO: use this function call
+            //arenaItem->setElementId(m_game->getArena()->getCell(i,j).getElement()->getImageId());
+            switch(m_game->getArena()->getCell(i,j).getType())
+            {
+                case Cell::WALL:
+                    arenaItem->setElementId("arena_wall");
+                    arenaItem->setZValue(-2);
+                    break;
+                case Cell::HOLE:
+                    delete arenaItem;
+                    arenaItem = NULL;
+                    break;
+                case Cell::GROUND:
+                default:
+                    arenaItem->setElementId("arena_ground");
+                    arenaItem->setZValue(-1);
+            }
+            m_arenaItem[i][j] = arenaItem;
+        }
+    }
+    
+    // Create the Block and Bonus items
+    m_blockItems = new ElementItem**[m_game->getArena()->getNbRows()];
+    m_bonusItems = new ElementItem**[m_game->getArena()->getNbRows()];
+    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
+    {
+        m_blockItems[i] = new ElementItem*[m_game->getArena()->getNbColumns()];
+        m_bonusItems[i] = new ElementItem*[m_game->getArena()->getNbColumns()];
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            if (m_game->getArena()->getCell(i, j).getElement() != NULL && m_game->getArena()->getCell(i, j).getElement()->getType() == Element::BLOCK)
+            {
+                // Create the element item and set the image
+                Element* element = m_game->getArena()->getCell(i, j).getElement();
+                ElementItem* elementItem = new ElementItem(element);
+                elementItem->setSharedRenderer(m_renderer);
+                elementItem->setElementId(element->getImageId());
+                elementItem->update(element->getX(), element->getY());
+                elementItem->setZValue(200);
+                m_blockItems[i][j] = elementItem;
+                // if the block contains a hidden bonus, create the bonus item 
+                Bonus* bonus = (dynamic_cast <Block*> (element))->getBonus();
+                if(bonus)
+                {
+                  
+                    ElementItem* bonusItem = new ElementItem(bonus);
+                    bonusItem->setSharedRenderer(m_renderer);
+                    switch(bonus->getBonusType())
+                    {
+                        case Bonus::SPEED:  bonusItem->setElementId("bonus_speed");
+                                            break;
+                        case Bonus::BOMB:   bonusItem->setElementId("bonus_bomb");
+                                            break;
+                        case Bonus::RANGE:  bonusItem->setElementId("bonus_range");
+                                            break;
+                        case Bonus::THROW:  bonusItem->setElementId("bonus_throw");
+                                            break;
+                        case Bonus::MOVE:   bonusItem->setElementId("bonus_move");
+                                            break;
+                        default:            bonusItem->setElementId("bonus_speed");
+                    }
+                    bonusItem->update(bonus->getX(), bonus->getY());
+                    bonusItem->setZValue(100);
+                    m_bonusItems[i][j] = bonusItem;
+                }
+                else
+                {
+                    m_bonusItems[i][j] = NULL;
+                }
+            }
+            else
+            {
+                m_blockItems[i][j] = NULL;
+                m_bonusItems[i][j] = NULL;
+            }
+        }
+    }
+    
+    // Display the ArenaItem
+    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
+    {
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            if(m_arenaItem[i][j] != NULL)
+            {
+                addItem(m_arenaItem[i][j]);
+            }
+        }
+    }
+    
+    // Display each Pill and Energizer item and introduction labels
+    intro(true);
 }
 
 GameScene::~GameScene()
 {
-    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
-    {
-        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
-        {
-            if (m_arenaItem[i][j] != NULL)
-            {
-                delete m_arenaItem[i][j];
-            }
-        }
-        delete[] m_arenaItem[i];
-    }
-    delete[] m_arenaItem;
-
+    cleanUp();
+    
     for (int i = 0; i < m_playerItems.size(); i++)
     {
         delete m_playerItems[i];
     }
-    
-    for (int i = 0; i < m_ghostItems.size(); ++i)
-    {
-        delete m_ghostItems[i];
-    }
-    
-    // Find the BombItem and remove it
-    QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
-    while (i != m_bombItems.end())
-    {
-        while(!i.value().isEmpty())
-        {
-            delete i.value().takeFirst();
-        }
-        delete i.key();
-        m_bombItems.erase(i);
-        ++i;
-    }
-    
-    
-    
-    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
-    {
-        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
-        {
-            if (m_blockItems[i][j] != NULL)
-            {
-                delete m_blockItems[i][j];
-            }
-            if (m_bonusItems[i][j] != NULL)
-            {
-                delete m_bonusItems[i][j];
-            }
-        }
-        delete[] m_blockItems[i];
-        delete[] m_bonusItems[i];
-    }
-    delete[] m_blockItems;
-    delete[] m_bonusItems;
     
     delete m_introLabel;
     delete m_introLabel2;
@@ -295,12 +244,86 @@ GameScene::~GameScene()
     delete m_levelLabel;
     delete m_pauseLabel;
     delete m_labelBackground;
+    
     delete m_cache;
     delete m_renderer;
 }
 
-Game* GameScene::getGame() const {
-	return m_game;
+void GameScene::cleanUp()
+{
+    setPaused (true, false);
+    // remove the arena items
+    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
+    {
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            if (m_arenaItem[i][j] != NULL)
+            {
+                if (items().contains(m_arenaItem[i][j]))
+                {
+                    removeItem(m_arenaItem[i][j]);
+                }
+                delete m_arenaItem[i][j];
+            }
+        }
+        delete[] m_arenaItem[i];
+    }
+    delete[] m_arenaItem;
+    
+    // Find the BombItem and remove it
+    BombExplosionItem* bombExplosionItem;
+    QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
+    while (i != m_bombItems.end())
+    {
+        while(!i.value().isEmpty())
+        {
+            bombExplosionItem = i.value().takeFirst();
+            if(items().contains(bombExplosionItem))
+            {
+                removeItem(bombExplosionItem);
+            }
+            delete bombExplosionItem;
+        }
+        if(items().contains(i.key()))
+        {
+            removeItem(i.key());
+        }
+        delete i.key();
+        i = m_bombItems.erase(i);
+    }
+    
+    // Find the BlockItems and BonusItems and remove it
+    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
+    {
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            if (m_blockItems[i][j] != NULL)
+            {
+                if (items().contains(m_blockItems[i][j]))
+                {
+                    removeItem(m_blockItems[i][j]);
+                }
+                delete m_blockItems[i][j];
+            }
+            if (m_bonusItems[i][j] != NULL)
+            {
+                if (items().contains(m_bonusItems[i][j]))
+                {
+                    removeItem(m_bonusItems[i][j]);
+                }
+                delete m_bonusItems[i][j];
+            }
+        }
+        delete[] m_blockItems[i];
+        delete[] m_bonusItems[i];
+    }
+    delete[] m_blockItems;
+    delete[] m_bonusItems;
+}
+
+Game* GameScene::getGame() const
+{
+    return m_game;
 }
 
 void GameScene::loadTheme() {
@@ -440,6 +463,13 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
         {
             m_playerItems[i]->pauseAnim();
         }
+        // Stop bomb animation
+        QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
+        while (i != m_bombItems.end())
+        {
+            i.key()->pauseAnim();
+            ++i;
+        }
     }
     else
     {   // If the game has resumed
@@ -459,6 +489,13 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
         for (int i = 0; i < m_playerItems.size(); i++)
         {
             m_playerItems[i]->resumeAnim();
+        }
+        // Resume bomb animation
+        QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
+        while (i != m_bombItems.end())
+        {
+            i.key()->resumeAnim();
+            ++i;
         }
     }
 }
@@ -487,7 +524,7 @@ void GameScene::removeBonusItem(ElementItem* bonusItem)
                     removeItem(m_bonusItems[i][j]);
                     m_bonusItems[i][j] = NULL;
                     m_game->removeBonus(dynamic_cast <Bonus*> (bonusItem->getModel()));
-                    bonusItem->deleteLater();
+                    delete bonusItem;
                 }
             }
         }
@@ -551,12 +588,12 @@ void GameScene::removeBombItem(BombItem* bombItem)
 {
     m_game->removeBomb(dynamic_cast <Bomb*> (bombItem->getModel()));
     // Find the BombItem and remove it
+    BombExplosionItem* bombExplosionItem;
     QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
     while (i != m_bombItems.end())
     {
         if(i.key() == bombItem)
         {
-            BombExplosionItem* bombExplosionItem;
             while(!i.value().isEmpty())
             {
                 bombExplosionItem = i.value().takeFirst();
@@ -571,10 +608,13 @@ void GameScene::removeBombItem(BombItem* bombItem)
                 removeItem(i.key());
             }
             delete i.key();
-            m_bombItems.erase(i);
+            i = m_bombItems.erase(i);
             break;
         }
-        ++i;
+        else
+        {
+            ++i;
+        }
     }
 }
 

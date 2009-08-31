@@ -49,9 +49,6 @@ class GameScene : public QGraphicsScene {
 
         /** The PlayerItem of each Player to be drawn */
         QList<KapmanItem*> m_playerItems;
-
-		/** The GhostItem of each Ghost to be drawn */
-		QList<GhostItem*> m_ghostItems;
         
         /** The BombItem of each Bomb to be drawn */
         QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
@@ -90,12 +87,12 @@ class GameScene : public QGraphicsScene {
 		 * @param p_game the Game instance whose elements must be contained in the GameScene in order to be drawn
 		 */
 		GameScene(Game* p_game);
-
+        
 		/**
 		 * Deletes the Game instance.
 		 */
 		~GameScene();
-
+        
 		/**
 		 * @return the Game instance
 		 */
@@ -106,6 +103,16 @@ class GameScene : public QGraphicsScene {
 		 */
 		void loadTheme();
 		
+    /**
+     * Initializes class
+     */
+    void init();
+    
+    /**
+     * Cleans class
+     */
+    void cleanUp();
+        
 	private slots:
 
 		/**
@@ -113,7 +120,7 @@ class GameScene : public QGraphicsScene {
 		 * @param p_newLevel true a new level has begun, false otherwise
 		 */
 		void intro(const bool p_newLevel);
-	
+	    
 		/**
 		 * Updates the elements to be drawn when the Game starts.
 		 */

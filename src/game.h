@@ -35,6 +35,8 @@
 #include <KDE/KALSource>
 #include <KDE/KALBuffer>
 
+class GameScene;
+
 /**
  * @brief This class manages the game main loop : it regularly checks the key press events, computes the character moves and updates their coordinates.
  */
@@ -112,6 +114,8 @@ class Game : public QObject {
         
         bool m_gameOver;
         QString m_strWinner;
+        
+        GameScene* m_gameScene;
 		
 	public:
 
@@ -268,6 +272,12 @@ class Game : public QObject {
          * Removes exploded bombs from the bomb list
          */
         void removeBomb(Bomb* bomb);
+        
+        /**
+         * Sets the games gamescene
+         * @param p_gameScene the gamescene
+         */
+        void setGameScene(GameScene* p_gameScene);
 		
 	private:
 	

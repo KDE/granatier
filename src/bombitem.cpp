@@ -59,6 +59,32 @@ QPainterPath BombItem::shape() const
     return path;
 }
 
+void BombItem::pauseAnim()
+{
+    dynamic_cast <Bomb*> (m_model)->pause();
+    if(m_pulseTimer)
+    {
+        m_pulseTimer->stop();
+    }
+    if(m_explosionTimer)
+    {
+        m_explosionTimer->stop();
+    }    
+}
+
+void BombItem::resumeAnim()
+{
+    if(m_pulseTimer)
+    {
+        m_pulseTimer->start();
+    }
+    if(m_explosionTimer)
+    {
+        m_explosionTimer->start();
+    }
+    dynamic_cast <Bomb*> (m_model)->resume();
+}
+
 void BombItem::update(qreal p_x, qreal p_y)
 {
     // Compute the top-right coordinates of the item
@@ -74,6 +100,8 @@ void BombItem::startDetonation(Bomb* bomb)
 {
     m_numberPulse = 0;
     m_pulseTimer->stop();
+    delete m_pulseTimer;
+    m_pulseTimer = 0;
     
     // Define the timer which sets the explosion frequency
     m_explosionCounter = 0;

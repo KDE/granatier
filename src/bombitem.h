@@ -68,6 +68,16 @@ public:
      */
     QPainterPath shape() const;
     
+    /**
+     * Pauses the BombItem animation.
+     */
+    void pauseAnim();
+    
+    /**
+     * Resumes the BombItem animation.
+     */
+    void resumeAnim();
+    
 public slots:
 
     /**

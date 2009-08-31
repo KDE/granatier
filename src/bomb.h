@@ -150,6 +150,16 @@ public:
     * sets the detonation countdown
     */
     void setDetonationCountdown(int nDetonationTimeout);
+    
+    /**
+    * Pauses bomb timer.
+    */
+    void pause();
+    
+    /**
+    * Resumes bomb timer.
+    */
+    void resume();
 
 public slots:
     /**

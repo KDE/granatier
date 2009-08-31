@@ -84,6 +84,7 @@ void MainWindow::initGame() {
 	m_view = new GameView(m_game);
 	m_view->setBackgroundBrush(Qt::black);
 	setCentralWidget(m_view);
+    m_game->setGameScene(dynamic_cast <GameScene*> (m_view->scene()));
 	//m_view->setFocus();
     this->setFocusProxy(m_view);
     this->setFocus();

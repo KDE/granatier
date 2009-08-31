@@ -21,6 +21,7 @@
 #include "game.h"
 #include "mapparser.h"
 #include "settings.h"
+#include "gamescene.h"
 
 #include <KStandardDirs>
 
@@ -43,6 +44,7 @@ Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nb
     soundSourceWilhelmScream = new KALSource(soundBufferWilhelmScream, soundEngine);
     
     m_arena = 0;
+    m_gameScene = 0;
     
     int nNumberOfPlayers = Settings::self()->players();
     for (int i = 0; i < nNumberOfPlayers; i++)
@@ -108,7 +110,6 @@ Game::~Game()
 {
     delete m_media1;
     delete m_media2;
-    delete m_timer;
     
     for (int i = 0; i < m_ghosts.size(); i++)
     {
@@ -130,12 +131,22 @@ Game::~Game()
     delete soundSourceDie;
     delete soundBufferWilhelmScream;
     delete soundBufferDie;
-    KALEngine::kill();
 }
 
 void Game::cleanUp()
 {
+    m_blocks.clear();
+    m_bonus.clear();
+    m_bombs.clear();
     delete m_arena;
+    m_arena = 0;
+    delete m_timer;
+    m_timer = 0;
+}
+
+void Game::setGameScene(GameScene* p_gameScene)
+{
+    m_gameScene = p_gameScene;
 }
 
 void Game::start() {
@@ -566,9 +577,10 @@ void Game::resumeAfterKapmanDeath()
     }
     else
     {
-        emit(levelStarted(false));
-        // Move all characters to their initial positions
-        initCharactersPosition();
+        m_gameScene->cleanUp();
+        cleanUp();
+        init();
+        m_gameScene->init();
         for(int i = 0; i < m_players.length(); i++)
         {
             m_players[i]->resurrect();

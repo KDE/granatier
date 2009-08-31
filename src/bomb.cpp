@@ -48,7 +48,10 @@ Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown) : Eleme
 
 Bomb::~Bomb()
 {
-    delete m_detonationCountdownTimer;
+    if(m_detonationCountdownTimer)
+    {
+        delete m_detonationCountdownTimer;
+    }
 }
 
 void Bomb::goUp()
@@ -173,11 +176,29 @@ void Bomb::setBombRange(int bombRange)
     m_bombRange = bombRange;
 }
 
+void Bomb::pause()
+{
+    if(m_detonationCountdownTimer)
+    {
+        m_detonationCountdownTimer->stop();
+    }
+}
+
+void Bomb::resume()
+{
+    if(m_detonationCountdownTimer)
+    {
+        m_detonationCountdownTimer->start();
+    }
+}
+
 void Bomb::detonate()
 {
     if(!m_detonated)
     {
         m_detonated = true;
+        delete m_detonationCountdownTimer;
+        m_detonationCountdownTimer = 0;
         emit bombDetonated(this);
     }
 }
