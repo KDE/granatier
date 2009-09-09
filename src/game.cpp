@@ -33,15 +33,15 @@ Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nb
     setSoundsEnabled(Settings::sounds());
     
     //init KALEngine
-    soundEngine = KALEngine::getInstance();
-    soundSourcePutBomb = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
-    soundSourceExplode = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("appdata", "sounds/explode.ogg")), soundEngine);
-    soundSourceExplode->setGain(1);
-    soundSourceBonus = new KALSource(KALBuffer::fromOgg(KStandardDirs::locate("appdata", "sounds/wow.ogg")), soundEngine);
+    soundEngine = KALEngine::instance();
+    soundPutBomb = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
+    soundExplode = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/explode.ogg")), soundEngine);
+    soundExplode->setGain(1);
+    soundBonus = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/wow.ogg")), soundEngine);
     soundBufferDie = new KALBuffer(KStandardDirs::locate("appdata", "sounds/die.ogg"));
     soundBufferWilhelmScream = new KALBuffer(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"));
-    soundSourceDie = new KALSource(soundBufferDie, soundEngine);
-    soundSourceWilhelmScream = new KALSource(soundBufferWilhelmScream, soundEngine);
+    soundDie = new KALSound(soundBufferDie, soundEngine);
+    soundWilhelmScream = new KALSound(soundBufferWilhelmScream, soundEngine);
     
     m_arena = 0;
     m_gameScene = 0;
@@ -124,11 +124,11 @@ Game::~Game()
     
     cleanUp();
     
-    delete soundSourcePutBomb;
-    delete soundSourceExplode;
-    delete soundSourceBonus;
-    delete soundSourceWilhelmScream;
-    delete soundSourceDie;
+    delete soundPutBomb;
+    delete soundExplode;
+    delete soundBonus;
+    delete soundWilhelmScream;
+    delete soundDie;
     delete soundBufferWilhelmScream;
     delete soundBufferDie;
 }
@@ -318,7 +318,7 @@ void Game::removeBonus(Bonus* bonus)
 {
     m_bonus.removeAt(m_bonus.indexOf(bonus));
     //do not delete the Bonus, because the ElementItem will delete it
-    soundSourceBonus->play();
+    soundBonus->play();
 }
 
 void Game::createBlock(QPointF p_position, const QString& p_imageId)
@@ -706,7 +706,7 @@ void Game::createBomb(Kapman* player, qreal x, qreal y)
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), player, SLOT(slot_refillBombArmory()));
     m_bombs.append(bomb);
     player->decrementBombArmory();
-    soundSourcePutBomb->play();
+    soundPutBomb->play();
 }
 
 void Game::removeBomb(Bomb* bomb)
@@ -724,15 +724,15 @@ void Game::removeBomb(Bomb* bomb)
 void Game::slot_bombDetonated(Bomb* bomb)
 {
     //playSound(KStandardDirs::locate("data", "granatier/sounds/explode.ogg"));
-    soundSourceExplode->setMaxGain(10);
+    soundExplode->setMaxGain(10);
     
-    if(soundSourceExplode->elapsedTime() == 0)
+    if(soundExplode->elapsedTime() == 0)
     {
-        soundSourceExplode->setGain(1);
+        soundExplode->setGain(1);
     }
     
-    soundSourceExplode->play();
-    soundSourceExplode->setGain(soundSourceExplode->gain()*1.2);
+    soundExplode->play();
+    soundExplode->setGain(soundExplode->gain()*1.2);
 }
 
 void Game::blockDestroyed(const int row, const int col, Block* block)

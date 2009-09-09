@@ -32,7 +32,7 @@
 #include <Phonon/MediaObject>
 
 #include <KDE/KALEngine>
-#include <KDE/KALSource>
+#include <KDE/KALSound>
 #include <KDE/KALBuffer>
 
 class GameScene;
@@ -104,13 +104,13 @@ class Game : public QObject {
 		Phonon::MediaObject* m_media2;
         
         KALEngine* soundEngine;
-        KALSource* soundSourcePutBomb;
-        KALSource* soundSourceExplode;
-        KALSource* soundSourceBonus;
+        KALSound* soundPutBomb;
+        KALSound* soundExplode;
+        KALSound* soundBonus;
         KALBuffer* soundBufferDie;
         KALBuffer* soundBufferWilhelmScream;
-        KALSource* soundSourceDie;
-        KALSource* soundSourceWilhelmScream;
+        KALSound* soundDie;
+        KALSound* soundWilhelmScream;
         
         bool m_gameOver;
         QString m_strWinner;

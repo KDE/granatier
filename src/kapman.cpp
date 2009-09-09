@@ -40,19 +40,19 @@ Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena) :
     m_key.moveDown = Qt::Key_Down;
     m_key.dropBomb = Qt::Key_Return;
     
-    m_soundSourceDie = NULL;
-    m_soundSourceWilhelmScream = NULL;
+    m_soundDie = NULL;
+    m_soundWilhelmScream = NULL;
 }
 
 Kapman::~Kapman()
 {
-    if(m_soundSourceDie)
+    if(m_soundDie)
     {
-        delete m_soundSourceDie;
+        delete m_soundDie;
     }
-    if(m_soundSourceWilhelmScream)
+    if(m_soundWilhelmScream)
     {
-        delete m_soundSourceWilhelmScream;
+        delete m_soundWilhelmScream;
     }
 }
 
@@ -326,41 +326,41 @@ void Kapman::addBonus(Bonus* p_bonus)
 
 void Kapman::setSoundDie(KALBuffer* buffer)
 {
-    if(m_soundSourceDie)
+    if(m_soundDie)
     {
-        delete m_soundSourceDie;
-        m_soundSourceDie = NULL;
+        delete m_soundDie;
+        m_soundDie = NULL;
     }
     
     if(buffer)
     {
-        m_soundSourceDie = new KALSource(buffer, KALEngine::getInstance());
+        m_soundDie = new KALSound(buffer, KALEngine::instance());
     }
 }
 
 void Kapman::setSoundWilhelmScream(KALBuffer* buffer)
 {
-    if(m_soundSourceWilhelmScream)
+    if(m_soundWilhelmScream)
     {
-        delete m_soundSourceWilhelmScream;
-        m_soundSourceWilhelmScream = NULL;
+        delete m_soundWilhelmScream;
+        m_soundWilhelmScream = NULL;
     }
     
     if(buffer)
     {
-        m_soundSourceWilhelmScream = new KALSource(buffer, KALEngine::getInstance());
+        m_soundWilhelmScream = new KALSound(buffer, KALEngine::instance());
     }
 }
 
 void Kapman::die()
 {
-    if(m_imageId == "player1" && m_soundSourceWilhelmScream != NULL && m_soundSourceWilhelmScream->elapsedTime() == 0)
+    if(m_imageId == "player1" && m_soundWilhelmScream != NULL && m_soundWilhelmScream->elapsedTime() == 0)
     {
-        m_soundSourceWilhelmScream->play();
+        m_soundWilhelmScream->play();
     }
-    else if(m_imageId != "player1" && m_soundSourceDie != NULL && m_soundSourceDie->elapsedTime() == 0)
+    else if(m_imageId != "player1" && m_soundDie != NULL && m_soundDie->elapsedTime() == 0)
     {
-        m_soundSourceDie->play();
+        m_soundDie->play();
     }
     
     if(!m_death)

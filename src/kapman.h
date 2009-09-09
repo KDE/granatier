@@ -23,7 +23,7 @@
 
 #include <QKeyEvent>
 #include <KDE/KALBuffer>
-#include <KDE/KALSource>
+#include <KDE/KALSound>
 
 /**
  * @brief This class represents the main character of the game.
@@ -58,8 +58,8 @@ class Kapman : public Character {
         /** Points from the player */
         int m_points;
         
-        KALSource* m_soundSourceDie;
-        KALSource* m_soundSourceWilhelmScream;
+        KALSound* m_soundDie;
+        KALSound* m_soundWilhelmScream;
 
 	public:
 
