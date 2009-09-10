@@ -1,6 +1,7 @@
 [Arena]
 Name=Granatier
 Name[el]=Βομβιστής
+Name[it]=Granatiere
 Name[uk]=Гренадер
 Name[x-test]=xxGranatierxx
 Description=Default Granatier Arena

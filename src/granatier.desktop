@@ -2,6 +2,7 @@
 Type=Application
 Name=Granatier
 Name[el]=Βομβιστής
+Name[it]=Granatiere
 Name[uk]=Гренадер
 Name[x-test]=xxGranatierxx
 GenericName=Bomberman clone
@@ -10,6 +11,7 @@ GenericName[el]=Κλώνος του Bomberman
 GenericName[et]=Bombermani kloon
 GenericName[fr]=Clone de Bomberman
 GenericName[gl]=Clone do Bomberman
+GenericName[it]=Clone di Bomberman
 GenericName[ja]=Bomberman のクローン
 GenericName[km]=ក្លូន Bomberman
 GenericName[nds]=Bomberman-Kloon
