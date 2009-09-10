@@ -19,7 +19,6 @@
 #include "mapparser.h"
 #include "element.h"
 #include "block.h"
-#include "energizer.h"
 
 MapParser::MapParser(Game* p_game)
 {
@@ -86,7 +85,6 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                     break; 
                 case 'o':
                     m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->getArena()->setCellElement(m_counterRows, i, new Energizer(m_counterRows, i, m_game->getArena(), "energizer"));
                     break;
                 case '1':
                     m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);

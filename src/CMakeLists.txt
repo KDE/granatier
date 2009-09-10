@@ -15,7 +15,6 @@ set(granatierSources
     characteritem.cpp
     element.cpp
     elementitem.cpp
-    energizer.cpp
     game.cpp
     gamescene.cpp
     gameview.cpp
