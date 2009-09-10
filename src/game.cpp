@@ -27,7 +27,7 @@
 
 const int Game::FPS = 40;
 
-Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_nbEatenGhosts(0), m_media1(0), m_media2(0)
+Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_media1(0), m_media2(0)
 {
     // Initialize the sound state
     setSoundsEnabled(Settings::sounds());
@@ -111,15 +111,11 @@ Game::~Game()
     delete m_media1;
     delete m_media2;
     
-    for (int i = 0; i < m_ghosts.size(); i++)
+    for (int i = 0; i < m_players.size(); i++)
     {
         delete m_players[i];
     }
-    
-    for (int i = 0; i < m_ghosts.size(); ++i) {
-        delete m_ghosts[i];
-    }
-    
+        
     //bombs, bonuses and blocks are deletet by the destructor of their elementitem
     
     cleanUp();
@@ -187,11 +183,6 @@ QList<Kapman*> Game::getPlayers() const
     return m_players;
 }
 
-		
-QList<Ghost*> Game::getGhosts () const {
-	return m_ghosts;
-}
-
 QTimer* Game::getTimer() const {
 	return m_timer;
 }
@@ -224,24 +215,12 @@ void Game::setLevel(int p_level) {
 	m_level = p_level;
 	m_timer->start();	// Needed to reinit character positions
 	initCharactersPosition();
-	for (int i = 0; i < m_ghosts.size(); ++i) {
-		m_ghosts[i]->initSpeed();
-	}
     
     for (int i = 0; i < m_players.size(); i++)
     {
         m_players[i]->initSpeed();
     }
-    for (int i = 0; i < m_level; ++i) {
-        for (int j = 0; j < m_ghosts.size(); ++j) {
-            m_ghosts[j]->increaseCharactersSpeed();
-        }
-        
-        for (int j = 0; j < m_players.size(); j++)
-        {
-            m_players[j]->increaseCharactersSpeed();
-        }
-    }
+
 	//m_bonus->setPoints(m_level * 100);
 	emit(dataChanged(AllInfo));
 	emit(pauseChanged(false, true));
@@ -365,10 +344,6 @@ void Game::createPlayer(QPointF p_position, const QString& p_imageId)
     connect(player, SIGNAL(dying(Kapman*)), this, SLOT(kapmanDeath(Kapman*)));
 }
 
-void Game::createGhost(QPointF p_position, const QString & p_imageId){
-	//m_ghosts.append(new Ghost(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_arena));
-}
-
 void Game::setSoundsEnabled(bool p_enabled) {
 	if (p_enabled) {
 		if (!m_media1) {
@@ -393,15 +368,7 @@ void Game::initCharactersPosition() {
 		// At the beginning, the timer is stopped but the Game isn't paused (to allow keyPressedEvent detection)
 		m_timer->stop();
 		m_state = RUNNING;
-		// Initialize Ghost coordinates and state
-		//m_ghosts[0]->initCoordinate();
-		//m_ghosts[1]->initCoordinate();
-		//m_ghosts[2]->initCoordinate();
-		//m_ghosts[3]->initCoordinate();
-		//m_ghosts[0]->setState(Ghost::HUNTER);
-		//m_ghosts[1]->setState(Ghost::HUNTER);
-		//m_ghosts[2]->setState(Ghost::HUNTER);
-		//m_ghosts[3]->setState(Ghost::HUNTER);
+        // Initialize the Player coordinates
         for(int i = 0; i < m_players.size(); i++)
         {
             m_players[i]->initCoordinate();
@@ -520,24 +487,11 @@ void Game::keyReleaseEvent(QKeyEvent* p_event)
     }
 }
 
-void Game::update() {
-	int curKapmanRow, curKapmanCol;
-	
-	// Check if the kapman is in the line of sight of a ghost
-	//curKapmanRow = m_arena->getRowFromY(m_kapman->getY());
-	//curKapmanCol = m_arena->getColFromX(m_kapman->getX());
-	
-	for (int i = 0; i < m_ghosts.size(); ++i) {
-		//if (m_ghosts[i]->getState() == Ghost::HUNTER && m_ghosts[i]->isInLineSight(m_kapman)) {
-		//	m_ghosts[i]->updateMove(curKapmanRow, curKapmanCol);
-		//}
-		//else {
-			m_ghosts[i]->updateMove();
-		//}
-	}
-    
+void Game::update()
+{
     //update Bombs
-    for (int i = 0; i < m_bombs.size(); ++i) {
+    for (int i = 0; i < m_bombs.size(); ++i)
+    {
         m_bombs[i]->updateMove();
     }
     
@@ -605,32 +559,12 @@ void Game::resumeAfterKapmanDeath()
     
 }
 
-void Game::ghostDeath(Ghost* p_ghost) {
-	m_nbEatenGhosts++;
-	p_ghost->setState(Ghost::EATEN);
-	winPoints(p_ghost);
-}
-
 void Game::winPoints(Element* p_element) {
 
 	// The value of won Points
 	long wonPoints;
 
-	// If the eaten element is a ghost, win 200 * number of eaten ghosts since the energizer was eaten
-	if (p_element->getType() == Element::GHOST) {
-		playSound(KStandardDirs::locate("sound", "kapman/ghost.ogg"));
-		// Get the position of the ghost
-		qreal xPos = p_element->getX();
-		qreal yPos = p_element->getY();
-		// Add points to the score
-		wonPoints = p_element->getPoints() * m_nbEatenGhosts;
-		// Send to the scene the number of points to display and its position 
-		emit(pointsToDisplay(wonPoints, xPos, yPos));
-	}
-	// Else you just win the value of the element
-	else {
-		wonPoints = p_element->getPoints();
-	}
+	wonPoints = p_element->getPoints();
 
 	// Update of the points value
 	m_points += wonPoints;
@@ -641,18 +575,8 @@ void Game::winPoints(Element* p_element) {
 		//m_lives++;
 		emit(dataChanged(LivesInfo));
 	}
-	// If the eaten element is an energyzer we change the ghosts state
-	if (p_element->getType() == Element::ENERGYZER) {
-		playSound(KStandardDirs::locate("sound", "kapman/energizer.ogg"));
-		for (int i = 0; i < m_ghosts.size(); ++i) {
-			if(m_ghosts[i]->getState() != Ghost::EATEN) {
-				m_ghosts[i]->setState(Ghost::PREY);
-			}
-		}
-		// Reset the number of eaten ghosts
-		m_nbEatenGhosts = 0;
-		emit(elementEaten(p_element->getX(), p_element->getY()));
-	} else if (p_element->getType() == Element::PILL) {
+
+	if (p_element->getType() == Element::PILL) {
 		playSound(KStandardDirs::locate("sound", "kapman/pill.ogg"));
 		emit(elementEaten(p_element->getX(), p_element->getY()));
 	} else if (p_element->getType() == Element::BONUS) {
@@ -677,11 +601,6 @@ void Game::nextLevel() {
 	//->setPoints(m_level * 100);
 	// Move all characters to their initial positions
 	initCharactersPosition();
-	// Increase the ghosts speed
-	for (int i = 0; i < m_ghosts.size(); ++i) {
-		// Increase the ghosts speed increase
-		m_ghosts[i]->increaseCharactersSpeed();
-	}
 	// Update the score, level and lives labels
 	emit(dataChanged(AllInfo));
 	// Update the view

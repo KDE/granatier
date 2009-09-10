@@ -19,8 +19,6 @@ set(granatierSources
     game.cpp
     gamescene.cpp
     gameview.cpp
-    ghost.cpp
-    ghostitem.cpp
     kapman.cpp
     kapmanitem.cpp
     mainwindow.cpp

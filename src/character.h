@@ -22,7 +22,7 @@
 #include "element.h"
 
 /**
- * @brief This class describes the common characteristics and behaviour of the game characters (Kapman and the Ghost).
+ * @brief This class describes the common characteristics and behaviour of the game characters (Players).
  */
 class Character : public Element {
 

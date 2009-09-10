@@ -20,7 +20,6 @@
 
 #include "kapmanitem.h"
 #include "characteritem.h"
-#include "ghost.h"
 
 #include <QGraphicsScene>
 #include <QDebug>

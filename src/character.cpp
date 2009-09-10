@@ -27,7 +27,7 @@ const qreal Character::HIGH_SPEED_INC = 1;
 
 Character::Character(qreal p_x, qreal p_y, Arena* p_arena) : Element(p_x, p_y, p_arena), m_xSpeed(0), m_ySpeed(0) {
 	initSpeed();
-	m_maxSpeed = m_normalSpeed;	// To avoid bugs, but will be overridden in the Ghost and Kapman constructors
+	m_maxSpeed = m_normalSpeed;	// To avoid bugs, but will be overridden in the Kapman constructors
 }
 
 Character::~Character() {

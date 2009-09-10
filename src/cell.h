@@ -44,7 +44,6 @@ class Cell {
             ARROWLEFT,
             ARROWDOWN,
             ARROWRIGHT,
-			GHOSTCAMP
 		};
 
 	private:

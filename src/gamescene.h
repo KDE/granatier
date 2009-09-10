@@ -22,7 +22,6 @@
 #include "game.h"
 #include "elementitem.h"
 #include "arenaitem.h"
-#include "ghostitem.h"
 #include "kapmanitem.h"
 #include "bombitem.h"
 #include "bombexplosionitem.h"
@@ -62,7 +61,7 @@ class GameScene : public QGraphicsScene {
 		/** The Bonus ElementItem */
 		ElementItem*** m_bonusItems;
 
-		/** A list with labels to display when a ghost or a bonus is eaten */
+		/** A list with labels to display when a bonus is eaten */
 		QList<QGraphicsTextItem*> m_wonPointsLabels;
 
         /** The labels background*/
@@ -145,7 +144,7 @@ class GameScene : public QGraphicsScene {
 		
 		/**
 		 * Removes the Element at the given coordinates from the GameScene.
-		 * @param p_wonPoints value of the won Points, used when a ghost or a Bonus is eaten
+		 * @param p_wonPoints value of the won Points, used when a Bonus is eaten
 		 * @param p_x x-coordinate of the Element
 		 * @param p_y y-coordinate of the Element
 		 */
@@ -168,7 +167,7 @@ class GameScene : public QGraphicsScene {
 		void updateInfo(const Game::InformationTypes p_info);
 
 		/**
-		 * Display won Points on the scene when a Bonus or a Ghosts is eaten
+		 * Display won Points on the scene when a Bonus is eaten
 		 * @param p_wonPoints the value to display
 		 * @param p_xPos the position of the eaten element on X axis
 		 * @param p_yPos the position of the eaten element on Y axis

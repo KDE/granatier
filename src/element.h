@@ -38,7 +38,6 @@ class Element : public QObject {
             BLOCK,
             PLAYER,
             BOMB,
-			GHOST,
 			PILL,
 			ENERGYZER,
 			BONUS

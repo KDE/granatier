@@ -35,7 +35,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     connect(p_game, SIGNAL(dataChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
 
-    // Connection between Game and GameScene for the display of won points when a bonus or a ghost is eaten
+    // Connection between Game and GameScene for the display of won points when a bonus is eaten
     connect(p_game, SIGNAL(pointsToDisplay(long, qreal, qreal)), this, SLOT(displayPoints(long, qreal, qreal)));
 
     // Set the pixmap cache limit to improve performance

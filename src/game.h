@@ -21,7 +21,6 @@
 
 #include "arena.h"
 #include "kapman.h"
-#include "ghost.h"
 #include "bonus.h"
 #include "bomb.h"
 #include "block.h"
@@ -69,10 +68,7 @@ class Game : public QObject {
 
         /** The Players */
         QList<Kapman*> m_players;
-		
-		/** The Ghosts */
-		QList<Ghost*> m_ghosts;
-		
+
         /** The Bombs */
         QList<Bomb*> m_bombs;
         
@@ -93,9 +89,6 @@ class Game : public QObject {
 
 		/** The current game level */
 		int m_level;
-
-		/** The number of eaten ghosts since the beginning of the current level */
-		int m_nbEatenGhosts;
 
 		/** A first MediaObject to play sounds */
 		Phonon::MediaObject* m_media1;
@@ -165,11 +158,6 @@ class Game : public QObject {
          */
         QList<Kapman*> getPlayers() const;
         
-		/**
-		 * @return the Ghost models
-		 */
-		QList<Ghost*> getGhosts () const; 
-		
         /**
          * @return the Bonus instance
          */
@@ -239,18 +227,6 @@ class Game : public QObject {
          * @param p_imageId the image of the Player
          */
         void createPlayer(QPointF p_position, const QString& p_imageId);
-
-		/**
-		 * Create the new Ghost
-		 * @param p_position the Ghost position
-		 * @param p_imageId the image of the Ghost
-		 */
-		void createGhost(QPointF p_position, const QString & p_imageId);
-
-		/**
-		 * Initializes a Ghost
-		 */
-		void initGhost();
 
 		/**
 		 * Initializes a Kapman
@@ -338,11 +314,6 @@ class Game : public QObject {
 		void kapmanDeath(Kapman* player);
 
 		/**
-		 * Manages the death of a Ghost.
-		 */
-		void ghostDeath(Ghost* p_ghost);
-
-		/**
 		 * Increases the score considering the eaten Element.
 		 * @param p_element the eaten Element
 		 */
@@ -408,7 +379,7 @@ class Game : public QObject {
 		void dataChanged(Game::InformationTypes p_infoType);
 
 		/**
-		 * Emitted when a ghost or a bonus is eaten. It tells to the scene to
+		 * Emitted when a bonus is eaten. It tells to the scene to
 		 * display the number of won points
 		 * @param p_wonPoints the value to display
 		 * @param p_xPos the x position of the label
