@@ -22,7 +22,7 @@
 #include "game.h"
 #include "elementitem.h"
 #include "arenaitem.h"
-#include "kapmanitem.h"
+#include "playeritem.h"
 #include "bombitem.h"
 #include "bombexplosionitem.h"
 
@@ -47,7 +47,7 @@ class GameScene : public QGraphicsScene {
 		ArenaItem*** m_arenaItem;
 
         /** The PlayerItem of each Player to be drawn */
-        QList<KapmanItem*> m_playerItems;
+        QList<PlayerItem*> m_playerItems;
         
         /** The PlayerItem of each Player to be drawn */
         QList<QGraphicsTextItem*> m_playerPointsLabels;

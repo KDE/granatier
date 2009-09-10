@@ -22,10 +22,10 @@
 #include "mainwindow.h"
 
 int main(int argc, char** argv) {
-	// About Kapman
+	// About Granatier
 	KAboutData about("granatier", 0, ki18n("Granatier"), "0.0.1",
 		ki18n("Granatier : Bomberman Clone !"),
-		KAboutData::License_GPL, ki18n("Copyright (c) 2008 The Granatier Team !"));
+		KAboutData::License_GPL, ki18n("Copyright (c) 2009 The Granatier Team !"));
 	about.addAuthor(ki18n("Mathias Kraus"), ki18n("Developer"), "k.hias@gmx.de", 0);
 	about.addAuthor(ki18n("Thomas Gallinari"), ki18n("Developer"), "tg8187@yahoo.fr", 0);
 	about.addAuthor(ki18n("Pierre-Benoit Besse"), ki18n("Developer"), "besse.pb@gmail.com", 0);

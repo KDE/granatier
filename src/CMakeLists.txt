@@ -18,11 +18,11 @@ set(granatierSources
     game.cpp
     gamescene.cpp
     gameview.cpp
-    kapman.cpp
-    kapmanitem.cpp
+    main.cpp
     mainwindow.cpp
     mapparser.cpp
-    main.cpp
+    player.cpp
+    playeritem.cpp
 )
 set(granatierData
     granatierui.rc

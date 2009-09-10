@@ -56,8 +56,7 @@ Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_me
     
     for (int i = 0; i < m_players.size(); i++)
     {
-        connect(m_players[i], SIGNAL(bombDropped(Kapman*, qreal, qreal)), this, SLOT(createBomb(Kapman*, qreal, qreal)));
-        m_players[i]->initSpeedInc();
+        connect(m_players[i], SIGNAL(bombDropped(Player*, qreal, qreal)), this, SLOT(createBomb(Player*, qreal, qreal)));
         m_players[i]->setSoundDie(soundBufferDie);
         m_players[i]->setSoundWilhelmScream(soundBufferWilhelmScream);
     }
@@ -178,7 +177,7 @@ void Game::switchPause(bool p_locked) {
 	}
 }
 
-QList<Kapman*> Game::getPlayers() const 
+QList<Player*> Game::getPlayers() const 
 {
     return m_players;
 }
@@ -309,7 +308,7 @@ void Game::createBlock(QPointF p_position, const QString& p_imageId)
 
 void Game::createPlayer(QPointF p_position, const QString& p_imageId)
 {
-    Kapman* player = new Kapman(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_arena);
+    Player* player = new Player(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_arena);
     if(p_imageId.compare("player2") == 0)
     {
         Character::Shortcuts keys;
@@ -341,7 +340,7 @@ void Game::createPlayer(QPointF p_position, const QString& p_imageId)
         player->setShortcuts(keys);
     }
     m_players.append(player);
-    connect(player, SIGNAL(dying(Kapman*)), this, SLOT(kapmanDeath(Kapman*)));
+    connect(player, SIGNAL(dying(Player*)), this, SLOT(playerDeath(Player*)));
 }
 
 void Game::setSoundsEnabled(bool p_enabled) {
@@ -503,27 +502,22 @@ void Game::update()
     }
 }
 
-void Game::kapmanDeath(Kapman* player)
+void Game::playerDeath(Player* player)
 {
-// 	playSound(KStandardDirs::locate("sound", "kapman/gameover.ogg"));
-// 	m_lives--;
-// 	//m_kapman->die();
-// 	// Make a 2 seconds pause while the kapman is blinking
-// 	pause(true);
- 	QTimer::singleShot(1500, this, SLOT(resumeAfterKapmanDeath()));
-    
-    
-//     if(player->getImageId() == "player1")
-//     {
-//         soundSourceDie->play();
-//     }
-//     else
-//     {
-//         soundSourceWilhelmScream->play();
-//     }
+    //m_player->die();
+    //wait some time until the game stops
+    QTimer::singleShot(1500, this, SLOT(resumeAfterPlayerDeath()));   
+    //if(player->getImageId() == "player1")
+    //{
+    //    soundSourceDie->play();
+    //}
+    //else
+    //{
+    //    soundSourceWilhelmScream->play();
+    //}
 }
 
-void Game::resumeAfterKapmanDeath()
+void Game::resumeAfterPlayerDeath()
 {
     int nPlayerAlive = 0;
     int nIndex = 0;;
@@ -607,7 +601,7 @@ void Game::nextLevel() {
 	emit(levelStarted(true));
 }
 
-void Game::createBomb(Kapman* player, qreal x, qreal y)
+void Game::createBomb(Player* player, qreal x, qreal y)
 {
     int col = m_arena->getColFromX(x);
     int row = m_arena->getRowFromY(y);

@@ -22,7 +22,7 @@
 
 #include "arena.h"
 
-class Kapman;
+class Player;
 
 /**
  * @brief This class describes the common characteristics and behaviour of any game Element (character or item).
@@ -85,10 +85,10 @@ class Element : public QObject {
 		~Element();
 
 		/**
-		 * Computes an action on a collision with the Kapman.
-		 * @param p_kapman the instance of Kapman which collides with the Element
+		 * Computes an action on a collision with the Player.
+		 * @param p_player the instance of Player which collides with the Element
 		 */
-		virtual void doActionOnCollision(Kapman* p_kapman);
+		virtual void doActionOnCollision(Player* p_player);
 
         /**
          * Sets arena for the element.

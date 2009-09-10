@@ -28,7 +28,7 @@
 #include <KScoreDialog>
 
 /**
- * @brief This class enables to create the main window for Kapman.
+ * @brief This class enables to create the main window for Granatier.
  */
 class MainWindow : public KXmlGuiWindow {
 

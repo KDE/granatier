@@ -20,7 +20,7 @@
 #define GAME_H
 
 #include "arena.h"
-#include "kapman.h"
+#include "player.h"
 #include "bonus.h"
 #include "bomb.h"
 #include "block.h"
@@ -67,7 +67,7 @@ class Game : public QObject {
 		Arena* m_arena;
 
         /** The Players */
-        QList<Kapman*> m_players;
+        QList<Player*> m_players;
 
         /** The Bombs */
         QList<Bomb*> m_bombs;
@@ -156,7 +156,7 @@ class Game : public QObject {
         /**
          * @return the Player models
          */
-        QList<Kapman*> getPlayers() const;
+        QList<Player*> getPlayers() const;
         
         /**
          * @return the Bonus instance
@@ -229,11 +229,6 @@ class Game : public QObject {
         void createPlayer(QPointF p_position, const QString& p_imageId);
 
 		/**
-		 * Initializes a Kapman
-		 */
-		void initKapman();
-
-		/**
 		 * Enables / disables the sounds.
 		 * @param p_enabled if true the sounds will be enabled, otherwise they will be disabled
 		 */
@@ -292,14 +287,14 @@ class Game : public QObject {
         void keyReleaseEvent(QKeyEvent* p_event);
         
 		/**
-		 * Resumes the Game after the Kapman death.
+		 * Resumes the Game after the Player death.
 		 */
-		void resumeAfterKapmanDeath();
+		void resumeAfterPlayerDeath();
         
         /**
          * Creates a bomb in the Cell with the coordinates x and y
          */
-        void createBomb(Kapman* player, qreal x, qreal y);
+        void createBomb(Player* player, qreal x, qreal y);
 
 	private slots:
 
@@ -311,7 +306,7 @@ class Game : public QObject {
 		/**
 		 * Manages the loss of a life.
 		 */
-		void kapmanDeath(Kapman* player);
+		void playerDeath(Player* player);
 
 		/**
 		 * Increases the score considering the eaten Element.

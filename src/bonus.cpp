@@ -19,7 +19,7 @@
  */
 
 #include "bonus.h"
-#include "kapman.h"
+#include "player.h"
 
 Bonus::Bonus(qreal p_x, qreal p_y, Arena* p_arena, Bonus::BonusType bonusType) : Element(p_x, p_y, p_arena)
 {
@@ -33,9 +33,9 @@ Bonus::~Bonus()
 
 }
 
-void Bonus::doActionOnCollision(Kapman* p_kapman)
+void Bonus::doActionOnCollision(Player* p_player)
 {
-    p_kapman->addBonus(this);
+    p_player->addBonus(this);
 }
 
 int Bonus::getBonusType()

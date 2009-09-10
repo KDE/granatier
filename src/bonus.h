@@ -55,10 +55,10 @@ public:
     ~Bonus();
 
     /**
-      * Computes an action on a collision with the Kapman.
-      * @param p_kapman the Kapman instance that collides with the Bonus
+      * Computes an action on a collision with the Player.
+      * @param p_player the Player instance that collides with the Bonus
       */
-    void doActionOnCollision(Kapman* p_kapman);
+    void doActionOnCollision(Player* p_player);
     
     int getBonusType();
     

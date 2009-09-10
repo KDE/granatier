@@ -31,10 +31,6 @@ class CharacterItem : public ElementItem {
 	Q_OBJECT
 
 	protected:
-
-		/** Timer used to make the character blink */
-		QTimer* m_blinkTimer;
-
 		/** Number of ticks of the blink timer */
 		int m_nbBlinks;
 
@@ -68,14 +64,9 @@ class CharacterItem : public ElementItem {
 		virtual void update(qreal p_x, qreal p_y);
 	
 		/**
-		 * Starts the character blinking.
+		 * Sets the character dead.
 		 */
-		virtual void startBlinking();
-
-		/**
-		 * Makes the character blink.
-		 */
-		virtual void blink();
+		virtual void setDead();
 };
 
 #endif

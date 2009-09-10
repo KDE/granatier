@@ -48,21 +48,21 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     loadTheme();
 
     // Create the PlayerItems and the points labels
-    QList <Kapman*> players = p_game->getPlayers();
-    KapmanItem* kapmanItem;
+    QList <Player*> players = p_game->getPlayers();
+    PlayerItem* playerItem;
     for(int i = 0; i < players.size(); i++)
     {
-        kapmanItem = new KapmanItem(players[i]);
-        kapmanItem->setSharedRenderer(m_renderer);
+        playerItem = new PlayerItem(players[i]);
+        playerItem->setSharedRenderer(m_renderer);
         // Corrects the position of the player
-        kapmanItem->update(players[i]->getX(), players[i]->getY());
-        kapmanItem->setZValue(210+i);
+        playerItem->update(players[i]->getX(), players[i]->getY());
+        playerItem->setZValue(210+i);
         // Stops the player animation
-        kapmanItem->stopAnim();
+        playerItem->stopAnim();
         
-        m_playerItems.append(kapmanItem);
+        m_playerItems.append(playerItem);
         
-        connect (kapmanItem, SIGNAL(bonusItemTaken(ElementItem*)), this, SLOT(removeBonusItem(ElementItem*)));
+        connect (playerItem, SIGNAL(bonusItemTaken(ElementItem*)), this, SLOT(removeBonusItem(ElementItem*)));
         
         m_playerPointsLabels.append(new QGraphicsTextItem(players[i]->getImageId()));
         m_playerPointsLabels.last()->setFont(QFont("Helvetica", 15, QFont::Bold, false));
@@ -351,7 +351,7 @@ void GameScene::cleanUp()
 
 void GameScene::showPoints(int p_winPoints)
 {
-    QList <Kapman*> players = m_game->getPlayers();
+    QList <Player*> players = m_game->getPlayers();
     for(int i = 0; i < players.length(); i++)
     {
         // If the label was not displayed yet

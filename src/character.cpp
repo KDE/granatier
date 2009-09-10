@@ -27,7 +27,7 @@ const qreal Character::HIGH_SPEED_INC = 1;
 
 Character::Character(qreal p_x, qreal p_y, Arena* p_arena) : Element(p_x, p_y, p_arena), m_xSpeed(0), m_ySpeed(0) {
 	initSpeed();
-	m_maxSpeed = m_normalSpeed;	// To avoid bugs, but will be overridden in the Kapman constructors
+	m_maxSpeed = m_normalSpeed;	// To avoid bugs, but will be overridden in the Player constructors
 }
 
 Character::~Character() {
@@ -51,7 +51,7 @@ void Character::move() {
 }
 
 void Character::die() {
-	emit(eaten());
+	emit(dead());
 }
 
 qreal Character::getXSpeed() const {
@@ -79,17 +79,8 @@ void Character::setYSpeed(qreal p_ySpeed) {
 }
 
 void Character::initSpeed() {
-	// Kapman speed
+	// Player speed
 	m_normalSpeed = Character::MEDIUM_SPEED;
-	m_speed = m_normalSpeed;
-}
-
-void Character::increaseCharactersSpeed() {
-	m_normalSpeed += m_normalSpeed * m_speedIncrease;
-	// Do not have a speed over the max allowed speed
-	if (m_normalSpeed > m_maxSpeed) {
-		m_normalSpeed = m_maxSpeed;
-	}
 	m_speed = m_normalSpeed;
 }
 

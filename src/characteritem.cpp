@@ -18,11 +18,11 @@
 #include "characteritem.h"
 
 CharacterItem::CharacterItem(Character* p_model) : ElementItem (p_model) {
-	connect(p_model, SIGNAL(eaten()), this, SLOT(startBlinking()));
+	connect(p_model, SIGNAL(dead()), this, SLOT(setDead()));
 }
 
-CharacterItem::~CharacterItem() {
-	delete m_blinkTimer;
+CharacterItem::~CharacterItem()
+{
 }
 
 QPainterPath CharacterItem::shape() const
@@ -45,12 +45,7 @@ void CharacterItem::update(qreal p_x, qreal p_y) {
 	setPos(x, y);
 }
 
-void CharacterItem::startBlinking() {
-	m_nbBlinks = 0;
-	m_blinkTimer->start();
-}
-
-void CharacterItem::blink() {
-	m_nbBlinks++;
+void CharacterItem::setDead()
+{
 }
 

@@ -17,16 +17,14 @@
  */
 
 
-#include "kapman.h"
+#include "player.h"
 
 #include <kdebug.h>
 #include <KDE/KALEngine>
 
 #include <cmath>
 
-const qreal Kapman::MAX_SPEED_RATIO = 1.5;
-
-Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena) : Character(p_x, p_y, p_arena)
+Player::Player(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena) : Character(p_x, p_y, p_arena)
 {
     m_type = Element::PLAYER;
     m_imageId = p_imageId;
@@ -44,7 +42,7 @@ Kapman::Kapman(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena) :
     m_soundWilhelmScream = NULL;
 }
 
-Kapman::~Kapman()
+Player::~Player()
 {
     if(m_soundDie)
     {
@@ -56,54 +54,60 @@ Kapman::~Kapman()
     }
 }
 
-void Kapman::setShortcuts(const Shortcuts keys)
+void Player::setShortcuts(const Shortcuts keys)
 {
     m_key = keys;
 }
 
-QString Kapman::getImageId() const
+QString Player::getImageId() const
 {
     return m_imageId;
 }
 
-void Kapman::init() {
-	goRight();
-	updateDirection();
+void Player::init()
+{
+    goRight();
+    updateDirection();
     stopMoving();
-	// Stop animation
-	emit stopped();
+    // Stop animation
+    emit stopped();
 }
 
-void Kapman::goUp() {
-	m_askedXSpeed = 0;
-	m_askedYSpeed = -m_speed;
+void Player::goUp()
+{
+    m_askedXSpeed = 0;
+    m_askedYSpeed = -m_speed;
 }
 
-void Kapman::goDown() {
-	m_askedXSpeed = 0;
-	m_askedYSpeed = m_speed;
+void Player::goDown()
+{
+    m_askedXSpeed = 0;
+    m_askedYSpeed = m_speed;
 }
 
-void Kapman::goRight() {
-	m_askedXSpeed = m_speed;
-	m_askedYSpeed = 0;
+void Player::goRight()
+{
+    m_askedXSpeed = m_speed;
+    m_askedYSpeed = 0;
 }
 
-void Kapman::goLeft() {
-	m_askedXSpeed = -m_speed;
-	m_askedYSpeed = 0;
+void Player::goLeft()
+{
+    m_askedXSpeed = -m_speed;
+    m_askedYSpeed = 0;
 }
 
-void Kapman::updateDirection() {
-	setXSpeed(m_askedXSpeed);
-	setYSpeed(m_askedYSpeed);
-	m_askedXSpeed = 0;
-	m_askedYSpeed = 0;
-	// Signal to the kapman item that the direction changed
-	emit directionChanged();
+void Player::updateDirection()
+{
+    setXSpeed(m_askedXSpeed);
+    setYSpeed(m_askedYSpeed);
+    m_askedXSpeed = 0;
+    m_askedYSpeed = 0;
+    // Signal to the player item that the direction changed
+    emit directionChanged();
 }
 
-void Kapman::updateMove()
+void Player::updateMove()
 {
     //check if there is a hurdle in the way
     if(m_askedXSpeed != 0 || m_xSpeed != 0 || m_askedYSpeed != 0 || m_ySpeed != 0)
@@ -271,7 +275,7 @@ void Kapman::updateMove()
             updateDirection();
         }
         
-        // Move the kapman
+        // Move the player
         if(xDirection != 0)
         {
             move(m_x + deltaStraightMove, m_y + deltaPerpendicularMove);
@@ -283,14 +287,15 @@ void Kapman::updateMove()
     }
 }
 
-void Kapman::move(qreal x, qreal y) {
+void Player::move(qreal x, qreal y)
+{
     // Move the Character
     m_x = x;
     m_y = y;
     emit moved(m_x, m_y);
 }
 
-void Kapman::addBonus(Bonus* p_bonus)
+void Player::addBonus(Bonus* p_bonus)
 {
     int bonusType = p_bonus->getBonusType();
     if(bonusType == Bonus::SPEED)
@@ -324,7 +329,7 @@ void Kapman::addBonus(Bonus* p_bonus)
     }
 }
 
-void Kapman::setSoundDie(KALBuffer* buffer)
+void Player::setSoundDie(KALBuffer* buffer)
 {
     if(m_soundDie)
     {
@@ -338,7 +343,7 @@ void Kapman::setSoundDie(KALBuffer* buffer)
     }
 }
 
-void Kapman::setSoundWilhelmScream(KALBuffer* buffer)
+void Player::setSoundWilhelmScream(KALBuffer* buffer)
 {
     if(m_soundWilhelmScream)
     {
@@ -352,7 +357,7 @@ void Kapman::setSoundWilhelmScream(KALBuffer* buffer)
     }
 }
 
-void Kapman::die()
+void Player::die()
 {
     if(m_imageId == "player1" && m_soundWilhelmScream != NULL && m_soundWilhelmScream->elapsedTime() == 0)
     {
@@ -370,12 +375,12 @@ void Kapman::die()
     }
 }
 
-bool Kapman::isAlive()
+bool Player::isAlive()
 {
     return !m_death;
 }
 
-void Kapman::resurrect()
+void Player::resurrect()
 {
     m_death = false;
     m_maxSpeed = 10;
@@ -385,54 +390,58 @@ void Kapman::resurrect()
     m_bombArmory = m_maxBombArmory;
 }
 
-int Kapman::points()
+int Player::points()
 {
     return m_points;
 }
 
-void Kapman::addPoint()
+void Player::addPoint()
 {
     m_points++;
 }
 
-void Kapman::emitGameUpdated() {
-	emit gameUpdated();
+void Player::emitGameUpdated()
+{
+    emit gameUpdated();
 }
 
-qreal Kapman::getAskedXSpeed() const {
-	return m_askedXSpeed;
+qreal Player::getAskedXSpeed() const
+{
+    return m_askedXSpeed;
 }
 
-qreal Kapman::getAskedYSpeed() const {
-	return m_askedYSpeed;
+qreal Player::getAskedYSpeed() const
+{
+    return m_askedYSpeed;
 }
 
-Cell Kapman::getAskedNextCell() {
-	// Get the current cell coordinates from the character coordinates
-	int curCellRow = m_arena->getRowFromY(m_y);
-	int curCellCol = m_arena->getColFromX(m_x);
-	Cell nextCell;
+Cell Player::getAskedNextCell()
+{
+    // Get the current cell coordinates from the character coordinates
+    int curCellRow = m_arena->getRowFromY(m_y);
+    int curCellCol = m_arena->getColFromX(m_x);
+    Cell nextCell;
 
-	// Get the next cell function of the character asked direction
-	if (m_askedXSpeed > 0) {
-		nextCell = m_arena->getCell(curCellRow, curCellCol + 1);
-	} else if (m_askedXSpeed < 0) {
-		nextCell = m_arena->getCell(curCellRow, curCellCol - 1);
-	} else if (m_askedYSpeed > 0) {
-		nextCell = m_arena->getCell(curCellRow + 1, curCellCol);
-	} else if (m_askedYSpeed < 0) {
-		nextCell = m_arena->getCell(curCellRow - 1, curCellCol);
-	}
+    // Get the next cell function of the character asked direction
+    if (m_askedXSpeed > 0) {
+        nextCell = m_arena->getCell(curCellRow, curCellCol + 1);
+    } else if (m_askedXSpeed < 0) {
+        nextCell = m_arena->getCell(curCellRow, curCellCol - 1);
+    } else if (m_askedYSpeed > 0) {
+        nextCell = m_arena->getCell(curCellRow + 1, curCellCol);
+    } else if (m_askedYSpeed < 0) {
+        nextCell = m_arena->getCell(curCellRow - 1, curCellCol);
+    }
 
-	return nextCell;
+    return nextCell;
 }
 
-int Kapman::getBombRange() const
+int Player::getBombRange() const
 {
     return m_bombRange;
 }
 
-void Kapman::decrementBombArmory()
+void Player::decrementBombArmory()
 {
     m_bombArmory--;
     if(m_bombArmory < 0)
@@ -441,7 +450,7 @@ void Kapman::decrementBombArmory()
     }
 }
 
-void Kapman::slot_refillBombArmory()
+void Player::slot_refillBombArmory()
 {
     m_bombArmory++;
     if(m_bombArmory > m_maxBombArmory)
@@ -450,20 +459,16 @@ void Kapman::slot_refillBombArmory()
     }
 }
 
-void Kapman::stopMoving() {
-	setXSpeed(0);
-	setYSpeed(0);
-	m_askedXSpeed = 0;
-	m_askedYSpeed = 0;
-	emit stopped();
+void Player::stopMoving()
+{
+    setXSpeed(0);
+    setYSpeed(0);
+    m_askedXSpeed = 0;
+    m_askedYSpeed = 0;
+    emit stopped();
 }
 
-void Kapman::initSpeedInc() {
-	// Kapman speed increase when level up
-	m_speedIncrease = (Character::MEDIUM_SPEED_INC / 2);
-}
-
-void Kapman::keyPressed(QKeyEvent* keyEvent)
+void Player::keyPressed(QKeyEvent* keyEvent)
 {
     if(m_death)
     {
@@ -512,7 +517,7 @@ void Kapman::keyPressed(QKeyEvent* keyEvent)
     
 }
 
-void Kapman::keyReleased(QKeyEvent* keyEvent)
+void Player::keyReleased(QKeyEvent* keyEvent)
 {
     int key = keyEvent->key();
 
@@ -553,12 +558,12 @@ void Kapman::keyReleased(QKeyEvent* keyEvent)
     if(m_xSpeed == 0 && m_ySpeed == 0 && m_askedXSpeed == 0 && m_askedYSpeed == 0) stopMoving();
 }
 
-int Kapman::signZeroPositive(const qreal value)
+int Player::signZeroPositive(const qreal value)
 {
     return (value >= 0 ? 1 : -1);
 }
 
-int Kapman::sign(const qreal value)
+int Player::sign(const qreal value)
 {
     if(value == 0)
     {

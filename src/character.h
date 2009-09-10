@@ -73,9 +73,6 @@ class Character : public Element {
 		/** Reference to the speed of the character when in "normal" behaviour */
 		qreal m_normalSpeed;
 
-		/** The value the character's speed is incremented by when level up */
-		qreal m_speedIncrease;
-
 		/** The maximum character speed */
 		qreal m_maxSpeed;
 
@@ -178,17 +175,7 @@ class Character : public Element {
 		 */
 		bool isInLineSight(Character* p_character);
 
-		/**
-		 * Increases the Character speed with each level completed.
-		 */
-		void increaseCharactersSpeed();
-
 	protected:
-
-		/**
-		 * Initializes the Character speed increment considering the difficulty level.
-		 */
-		virtual void initSpeedInc() = 0;
 		 
 		/**
 		 * Gets the next Cell the Character is going to reach.
@@ -210,9 +197,9 @@ class Character : public Element {
 	signals:
 
 		/**
-		 * Emitted when the character is eaten.
+		 * Emitted when the character is dead.
 		 */
-		void eaten();
+		void dead();
 };
 
 #endif
