@@ -33,6 +33,7 @@ Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_me
     setSoundsEnabled(Settings::sounds());
     
     //init KALEngine
+    #ifdef GRANATIER_USE_GLUON
     soundEngine = KALEngine::instance();
     soundPutBomb = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
     soundExplode = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/explode.ogg")), soundEngine);
@@ -42,6 +43,18 @@ Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_me
     soundBufferWilhelmScream = new KALBuffer(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"));
     soundDie = new KALSound(soundBufferDie, soundEngine);
     soundWilhelmScream = new KALSound(soundBufferWilhelmScream, soundEngine);
+    #else
+    m_phononPutBomb = Phonon::createPlayer(Phonon::GameCategory);
+    m_phononPutBomb->setCurrentSource(KStandardDirs::locate("appdata", "sounds/putbomb.ogg"));
+    m_phononExplode = Phonon::createPlayer(Phonon::GameCategory);
+    m_phononExplode->setCurrentSource(KStandardDirs::locate("appdata", "sounds/explode.ogg"));
+    m_phononBonus = Phonon::createPlayer(Phonon::GameCategory);
+    m_phononBonus->setCurrentSource(KStandardDirs::locate("appdata", "sounds/wow.ogg"));
+    m_phononDie = Phonon::createPlayer(Phonon::GameCategory);
+    m_phononDie->setCurrentSource(KStandardDirs::locate("appdata", "sounds/die.ogg"));
+    m_phononWilhelmScream = Phonon::createPlayer(Phonon::GameCategory);
+    m_phononWilhelmScream->setCurrentSource(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"));
+    #endif
     
     m_arena = 0;
     m_gameScene = 0;
@@ -57,8 +70,10 @@ Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_me
     for (int i = 0; i < m_players.size(); i++)
     {
         connect(m_players[i], SIGNAL(bombDropped(Player*, qreal, qreal)), this, SLOT(createBomb(Player*, qreal, qreal)));
+        #ifdef GRANATIER_USE_GLUON
         m_players[i]->setSoundDie(soundBufferDie);
         m_players[i]->setSoundWilhelmScream(soundBufferWilhelmScream);
+        #endif
     }
     
     m_gameOver = false;
@@ -119,6 +134,7 @@ Game::~Game()
     
     cleanUp();
     
+    #ifdef GRANATIER_USE_GLUON
     delete soundPutBomb;
     delete soundExplode;
     delete soundBonus;
@@ -126,6 +142,13 @@ Game::~Game()
     delete soundDie;
     delete soundBufferWilhelmScream;
     delete soundBufferDie;
+    #else
+    delete m_phononPutBomb;
+    delete m_phononExplode;
+    delete m_phononBonus;
+    delete m_phononDie;
+    delete m_phononWilhelmScream;
+    #endif
 }
 
 void Game::cleanUp()
@@ -296,7 +319,11 @@ void Game::removeBonus(Bonus* bonus)
 {
     m_bonus.removeAt(m_bonus.indexOf(bonus));
     //do not delete the Bonus, because the ElementItem will delete it
+    #ifdef GRANATIER_USE_GLUON
     soundBonus->play();
+    #else
+    m_phononBonus->play();
+    #endif
 }
 
 void Game::createBlock(QPointF p_position, const QString& p_imageId)
@@ -515,6 +542,16 @@ void Game::playerDeath(Player* player)
     //{
     //    soundSourceWilhelmScream->play();
     //}
+    #ifndef GRANATIER_USE_GLUON
+    if(player->getImageId() == "player1")
+    {
+        m_phononWilhelmScream->play();
+    }
+    else
+    {
+        m_phononDie->play();
+    }
+    #endif
 }
 
 void Game::resumeAfterPlayerDeath()
@@ -619,7 +656,11 @@ void Game::createBomb(Player* player, qreal x, qreal y)
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), player, SLOT(slot_refillBombArmory()));
     m_bombs.append(bomb);
     player->decrementBombArmory();
+    #ifdef GRANATIER_USE_GLUON
     soundPutBomb->play();
+    #else
+    m_phononPutBomb->play();
+    #endif
 }
 
 void Game::removeBomb(Bomb* bomb)
@@ -637,6 +678,7 @@ void Game::removeBomb(Bomb* bomb)
 void Game::slot_bombDetonated(Bomb* bomb)
 {
     //playSound(KStandardDirs::locate("data", "granatier/sounds/explode.ogg"));
+    #ifdef GRANATIER_USE_GLUON
     soundExplode->setMaxGain(10);
     
     if(soundExplode->elapsedTime() == 0)
@@ -646,6 +688,9 @@ void Game::slot_bombDetonated(Bomb* bomb)
     
     soundExplode->play();
     soundExplode->setGain(soundExplode->gain()*1.2);
+    #else
+    m_phononExplode->play();
+    #endif
 }
 
 void Game::blockDestroyed(const int row, const int col, Block* block)

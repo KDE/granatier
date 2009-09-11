@@ -23,8 +23,11 @@
 #include "bonus.h"
 
 #include <QKeyEvent>
+
+#ifdef GRANATIER_USE_GLUON
 #include <KDE/KALBuffer>
 #include <KDE/KALSound>
+#endif
 
 /**
  * @brief This class represents the main character of the game.
@@ -54,9 +57,11 @@ private:
     
     /** Points from the player */
     int m_points;
-    
+
+    #ifdef GRANATIER_USE_GLUON
     KALSound* m_soundDie;
     KALSound* m_soundWilhelmScream;
+    #endif
 
 public:
     /**
@@ -145,6 +150,7 @@ public:
       */
     void addBonus(Bonus* p_bonus);
 
+    #ifdef GRANATIER_USE_GLUON
     /**
       * sets the die sound
       */
@@ -154,6 +160,7 @@ public:
       * sets the wilhelm scream sound
       */
     void setSoundWilhelmScream(KALBuffer* buffer);
+    #endif
     
     /**
       * Implements the Character function

@@ -28,11 +28,15 @@
 #include <QPointF>
 #include <QTimer>
 #include <QKeyEvent>
-#include <Phonon/MediaObject>
 
+#ifdef GRANATIER_USE_GLUON
 #include <KDE/KALEngine>
 #include <KDE/KALSound>
 #include <KDE/KALBuffer>
+#endif
+//TODO: #else
+#include <Phonon/MediaObject>
+//#endif
 
 class GameScene;
 
@@ -96,6 +100,8 @@ class Game : public QObject {
 		/** A second MediaObject to play sounds */
 		Phonon::MediaObject* m_media2;
         
+        #ifdef GRANATIER_USE_GLUON
+        /** User KALEngine for sound */
         KALEngine* soundEngine;
         KALSound* soundPutBomb;
         KALSound* soundExplode;
@@ -104,6 +110,14 @@ class Game : public QObject {
         KALBuffer* soundBufferWilhelmScream;
         KALSound* soundDie;
         KALSound* soundWilhelmScream;
+        #else
+        /** Use Phonon for sound */
+        Phonon::MediaObject* m_phononPutBomb;
+        Phonon::MediaObject* m_phononExplode;
+        Phonon::MediaObject* m_phononBonus;
+        Phonon::MediaObject* m_phononDie;
+        Phonon::MediaObject* m_phononWilhelmScream;
+        #endif
         
         bool m_gameOver;
         QString m_strWinner;

@@ -38,6 +38,9 @@ int main(int argc, char** argv) {
 	KApplication app;
 	// Insert libkdegames catalog, for translation of libkdegames messages
 	KGlobal::locale()->insertCatalog("libkdegames");
+    #ifndef GRANATIER_USE_GLUON
+        qWarning() << "Using Phonon for sound. For better sound experience you have to build granatier with gluon.";
+    #endif
 	// Create the main window
 	MainWindow* window = new MainWindow();
 	// Show the main window

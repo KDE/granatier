@@ -20,7 +20,10 @@
 #include "player.h"
 
 #include <kdebug.h>
+
+#ifdef GRANATIER_USE_GLUON
 #include <KDE/KALEngine>
+#endif
 
 #include <cmath>
 
@@ -38,12 +41,15 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena) :
     m_key.moveDown = Qt::Key_Down;
     m_key.dropBomb = Qt::Key_Return;
     
+    #ifdef GRANATIER_USE_GLUON
     m_soundDie = NULL;
     m_soundWilhelmScream = NULL;
+    #endif
 }
 
 Player::~Player()
 {
+    #ifdef GRANATIER_USE_GLUON
     if(m_soundDie)
     {
         delete m_soundDie;
@@ -52,6 +58,7 @@ Player::~Player()
     {
         delete m_soundWilhelmScream;
     }
+    #endif
 }
 
 void Player::setShortcuts(const Shortcuts keys)
@@ -329,6 +336,7 @@ void Player::addBonus(Bonus* p_bonus)
     }
 }
 
+#ifdef GRANATIER_USE_GLUON
 void Player::setSoundDie(KALBuffer* buffer)
 {
     if(m_soundDie)
@@ -356,9 +364,11 @@ void Player::setSoundWilhelmScream(KALBuffer* buffer)
         m_soundWilhelmScream = new KALSound(buffer, KALEngine::instance());
     }
 }
+#endif
 
 void Player::die()
 {
+    #ifdef GRANATIER_USE_GLUON
     if(m_imageId == "player1" && m_soundWilhelmScream != NULL && m_soundWilhelmScream->elapsedTime() == 0)
     {
         m_soundWilhelmScream->play();
@@ -367,6 +377,7 @@ void Player::die()
     {
         m_soundDie->play();
     }
+    #endif
     
     if(!m_death)
     {
