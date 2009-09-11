@@ -47,6 +47,7 @@ class ArenaSelector::ArenaSelectorPrivate
 
         // private slots
         void _k_updatePreview();
+        void _k_updateArenaList(const QString& strArena);
         void _k_openKNewStuffDialog();
 };
 
@@ -71,6 +72,7 @@ void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, A
     //The lineEdit widget holds our arena path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.
     ui.kcfg_Arena->hide();
+    connect(ui.kcfg_Arena, SIGNAL(textChanged(const QString&)), q, SLOT(_k_updateArenaList(const QString&)));
 
     //Disable KNS button?
     if (knsflags==ArenaSelector::NewStuffDisableDownload) {
@@ -174,6 +176,22 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     //Draw the preview
     QPixmap pix(selArena->preview());
     ui.arenaPreview->setPixmap(pix.scaled(ui.arenaPreview->size(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+}
+
+void ArenaSelector::ArenaSelectorPrivate::_k_updateArenaList(const QString& strArena)
+{
+    //find arena and set selection to the current arena; happens when pressing "Default"
+    if(arenaMap.value(ui.arenaList->currentItem()->text())->fileName() != strArena)
+    {
+        for(int i = 0; i < ui.arenaList->count(); i++)
+        {
+            if(arenaMap.value(ui.arenaList->item(i)->text())->fileName() == strArena)
+            {
+                ui.arenaList->setCurrentItem(ui.arenaList->item(i));
+                break;
+            }
+        }
+    }
 }
 
 void ArenaSelector::ArenaSelectorPrivate::_k_openKNewStuffDialog()

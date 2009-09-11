@@ -68,6 +68,7 @@ class ArenaSelector : public QWidget
         Q_DISABLE_COPY(ArenaSelector)
 
         Q_PRIVATE_SLOT(d, void _k_updatePreview())
+        Q_PRIVATE_SLOT(d, void _k_updateArenaList(const QString&))
         Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
 };
 
