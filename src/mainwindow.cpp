@@ -22,6 +22,7 @@
 #include "gamescene.h"
 #include "settings.h"
 #include "arenaselector.h"
+#include "ui_generalsettings.h"
 
 #include <KActionCollection>
 #include <KStandardGameAction>
@@ -31,6 +32,17 @@
 #include <KGameThemeSelector>
 #include <KInputDialog>
 #include <KLocale>
+
+class GeneralSettings : public QWidget
+{
+public:
+    GeneralSettings(QWidget *parent) : QWidget(parent)
+    {
+        ui.setupUi(this);
+    }
+private:
+    Ui::GeneralSettings ui;
+};
 
 MainWindow::MainWindow() {
 	// Initialize the game
@@ -159,12 +171,16 @@ void MainWindow::showSettings()
         return;
     }
     KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", Settings::self());
+    // General Settings
+    m_nOldNumberOfPlayers = Settings::self()->players();
+    m_nOldPointsToWin = Settings::self()->pointsToWin();
+    settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), "games-config-options");
     // Theme
     m_strOldTheme = Settings::self()->theme();
-    settingsDialog->addPage(new KGameThemeSelector(settingsDialog, Settings::self(), KGameThemeSelector::NewStuffDisableDownload), i18n("Theme"), "granatier");
+    settingsDialog->addPage(new KGameThemeSelector(settingsDialog, Settings::self(), KGameThemeSelector::NewStuffDisableDownload), i18n("Theme"), "games-config-theme");
     // Arena
     m_strOldArena = Settings::self()->arena();
-    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "granatier");
+    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
         
     connect(settingsDialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(loadSettings()));
     settingsDialog->show();
@@ -181,6 +197,16 @@ void MainWindow::loadSettings()
     {
         initGame();
         m_strOldArena = Settings::self()->arena();
+    }
+    if(m_nOldNumberOfPlayers != Settings::self()->players())
+    {
+        initGame();
+        m_nOldNumberOfPlayers = Settings::self()->players();
+    }
+    if(m_nOldPointsToWin != Settings::self()->pointsToWin())
+    {
+        initGame();
+        m_nOldPointsToWin = Settings::self()->pointsToWin();
     }
 }
 

@@ -27,7 +27,7 @@
 
 const int Game::FPS = 40;
 
-Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_media1(0), m_media2(0)
+Game::Game() : m_isCheater(false), m_points(0), m_level(1), m_media1(0), m_media2(0)
 {
     // Initialize the sound state
     setSoundsEnabled(Settings::sounds());
@@ -58,6 +58,7 @@ Game::Game() : m_isCheater(false), m_winPoints(3), m_points(0), m_level(1), m_me
     
     m_arena = 0;
     m_gameScene = 0;
+    m_winPoints = Settings::self()->pointsToWin();
     
     int nNumberOfPlayers = Settings::self()->players();
     for (int i = 0; i < nNumberOfPlayers; i++)

@@ -28,7 +28,7 @@ set(granatierData
     granatierui.rc
 )
 
-kde4_add_ui_files(granatierSources arenaselector.ui)
+kde4_add_ui_files(granatierSources arenaselector.ui generalsettings.ui)
 
 kde4_add_kcfg_files(granatierSources settings.kcfgc)
 
