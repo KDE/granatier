@@ -20,7 +20,7 @@
 
 #include <QGraphicsSvgItem>
 
-#include "element.h"
+class Element;
 
 /**
  * @brief This class is the graphical representation of a game Element.

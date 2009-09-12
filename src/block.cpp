@@ -19,6 +19,7 @@
  */
 
 #include "block.h"
+#include "bonus.h"
 
 Block::Block(qreal p_x, qreal p_y, Arena* p_arena, const QString& p_imageId) : Element(p_x, p_y, p_arena)
 {

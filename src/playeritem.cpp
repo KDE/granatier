@@ -20,7 +20,10 @@
 
 #include "playeritem.h"
 #include "characteritem.h"
+#include "player.h"
+#include "bonus.h"
 
+#include <QTimeLine>
 #include <QGraphicsScene>
 #include <QDebug>
 

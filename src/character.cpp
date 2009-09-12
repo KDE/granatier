@@ -17,6 +17,8 @@
  */
 
 #include "character.h"
+#include "cell.h"
+#include "arena.h"
 
 const qreal Character::LOW_SPEED = 1;
 const qreal Character::MEDIUM_SPEED = 1;

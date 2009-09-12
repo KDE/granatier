@@ -18,12 +18,16 @@
  */
 
 #include "mainwindow.h"
+#include "game.h"
 #include "gameview.h"
 #include "gamescene.h"
 #include "settings.h"
 #include "arenaselector.h"
 #include "ui_generalsettings.h"
 
+#include <QGraphicsView>
+#include <QTimer>
+#include <KScoreDialog>
 #include <KActionCollection>
 #include <KStandardGameAction>
 #include <KToggleAction>

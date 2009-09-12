@@ -20,9 +20,9 @@
 #define BOMBEXPLOSIONITEM_H
 
 #include <QGraphicsSvgItem>
-#include "bomb.h"
 
-#include <QTimer>
+class Bomb;
+class QTimer;
 
 /**
  * @brief This class is the graphical representation of a Bomb explosion.

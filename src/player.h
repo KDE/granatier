@@ -20,13 +20,13 @@
 #define PLAYER_H
 
 #include "character.h"
-#include "bonus.h"
 
-#include <QKeyEvent>
+class Bonus;
+class QKeyEvent;
 
 #ifdef GRANATIER_USE_GLUON
-#include <KDE/KALBuffer>
-#include <KDE/KALSound>
+class KALBuffer;
+class KALSound;
 #endif
 
 /**

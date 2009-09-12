@@ -17,7 +17,9 @@
  */
 
 #include "bombitem.h"
+#include "bomb.h"
 
+#include <QTimer>
 #include <KDebug>
 
 BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)

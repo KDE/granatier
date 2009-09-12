@@ -22,7 +22,8 @@
 
 #include "element.h"
 
-#include <QTimer>
+class Cell;
+class QTimer;
 
 /**
  * @brief This class describes the common characteristics and behaviour of the bomb item.

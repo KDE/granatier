@@ -19,9 +19,9 @@
 #define CHARACTERITEM_H
 
 #include "elementitem.h"
-#include "character.h"
 
-#include <QTimer>
+class Character;
+class QTimer;
 
 /**
  * @brief This class is the graphical representation of a Character.

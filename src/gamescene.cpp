@@ -21,9 +21,22 @@
 #include "cell.h"
 #include "bonus.h"
 #include "settings.h"
+#include "game.h"
+#include "player.h"
+#include "block.h"
+#include "bomb.h"
+#include "arena.h"
+#include "elementitem.h"
+#include "arenaitem.h"
+#include "playeritem.h"
+#include "bombitem.h"
+#include "bombexplosionitem.h"
 
+#include <QTimer>
 #include <KGameTheme>
 #include <KLocale>
+#include <KPixmapCache>
+#include <KSvgRenderer>
 
 GameScene::GameScene(Game* p_game) : m_game(p_game)
 {

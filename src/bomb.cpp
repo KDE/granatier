@@ -18,7 +18,10 @@
  */
 
 #include "bomb.h"
+#include "cell.h"
+#include "arena.h"
 
+#include <QTimer>
 #include <KDebug>
 
 Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)

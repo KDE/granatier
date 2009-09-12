@@ -18,10 +18,10 @@
 #ifndef GAMEVIEW_H
 #define GAMEVIEW_H
 
-#include "game.h"
-
 #include <QGraphicsView>
-#include <QKeyEvent>
+
+class QKeyEvent;
+class Game;
 
 /**
  * @brief This class manages the drawing of each element of the Game instance.

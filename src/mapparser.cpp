@@ -19,6 +19,8 @@
 #include "mapparser.h"
 #include "element.h"
 #include "block.h"
+#include "game.h"
+#include "arena.h"
 
 MapParser::MapParser(Game* p_game)
 {

@@ -21,7 +21,8 @@
 #define BLOCK_H
 
 #include "element.h"
-#include "bonus.h"
+
+class Bonus;
 
 /**
  * @brief This class represents a block with the possibility of a bonus inside

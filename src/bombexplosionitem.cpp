@@ -17,7 +17,9 @@
  */
 
 #include "bombexplosionitem.h"
+#include "bomb.h"
 
+#include <QTimer>
 #include <KDebug>
 
 BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int i) : QGraphicsSvgItem()

@@ -21,6 +21,8 @@
 
 #include "element.h"
 
+class Cell;
+
 /**
  * @brief This class describes the common characteristics and behaviour of the game characters (Players).
  */

@@ -19,9 +19,10 @@
 
 #include "arena.h"
 
+#include <QPoint>
 #include <KDebug>
 
-#include <math.h>
+#include <cmath>
 
 Arena::Arena()
 {

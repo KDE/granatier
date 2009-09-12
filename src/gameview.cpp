@@ -17,6 +17,10 @@
 
 #include "gameview.h"
 #include "gamescene.h"
+#include "game.h"
+
+#include <QTimer>
+#include <QKeyEvent>
 
 GameView::GameView(Game * p_game) : QGraphicsView(new GameScene(p_game)) {
 	setFocusPolicy(Qt::StrongFocus);

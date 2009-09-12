@@ -20,12 +20,12 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include "game.h"
-#include "gameview.h"
-
 #include <KXmlGuiWindow>
-#include <QGraphicsView>
-#include <KScoreDialog>
+
+class Game;
+class GameView;
+class QGraphicsView;
+class KScoreDialog;
 
 /**
  * @brief This class enables to create the main window for Granatier.

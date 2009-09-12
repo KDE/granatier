@@ -22,8 +22,26 @@
 #include "mapparser.h"
 #include "settings.h"
 #include "gamescene.h"
+#include "arena.h"
+#include "player.h"
+#include "bonus.h"
+#include "bomb.h"
+#include "block.h"
+
+#include <QPointF>
+#include <QTimer>
+#include <QKeyEvent>
 
 #include <KStandardDirs>
+
+#ifdef GRANATIER_USE_GLUON
+#include <KDE/KALEngine>
+#include <KDE/KALSound>
+#include <KDE/KALBuffer>
+#endif
+//TODO: #else
+#include <Phonon/MediaObject>
+//#endif
 
 const int Game::FPS = 40;
 

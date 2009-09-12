@@ -19,26 +19,28 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "arena.h"
-#include "player.h"
-#include "bonus.h"
-#include "bomb.h"
-#include "block.h"
+#include <QObject>
 
-#include <QPointF>
-#include <QTimer>
-#include <QKeyEvent>
-
-#ifdef GRANATIER_USE_GLUON
-#include <KDE/KALEngine>
-#include <KDE/KALSound>
-#include <KDE/KALBuffer>
-#endif
-//TODO: #else
-#include <Phonon/MediaObject>
+//TODO: #ifndef GRANATIER_USE_GLUON
+#include <Phonon>
 //#endif
 
 class GameScene;
+class Arena;
+class Player;
+class Bonus;
+class Bomb;
+class Block;
+class Element;
+class QPointF;
+class QTimer;
+class QKeyEvent;
+
+#ifdef GRANATIER_USE_GLUON
+class KALEngine;
+class KALBuffer;
+class KALSound;
+#endif
 
 /**
  * @brief This class manages the game main loop : it regularly checks the key press events, computes the character moves and updates their coordinates.

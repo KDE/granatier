@@ -16,6 +16,8 @@
  */
 
 #include "element.h"
+#include "arena.h"
+#include "player.h"
 
 Element::Element(qreal p_x, qreal p_y, Arena* p_arena) : m_xInit(p_x), m_yInit(p_y),  m_arena(p_arena) {
 	m_points = 0;

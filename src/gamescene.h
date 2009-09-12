@@ -19,17 +19,21 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include "game.h"
-#include "elementitem.h"
-#include "arenaitem.h"
-#include "playeritem.h"
-#include "bombitem.h"
-#include "bombexplosionitem.h"
-
 #include <QGraphicsScene>
+
+#include <game.h>
+
 #include <QList>
-#include <KPixmapCache>
-#include <KSvgRenderer>
+#include <QHash>
+
+class ElementItem;
+class ArenaItem;
+class PlayerItem;
+class Bomb;
+class BombItem;
+class BombExplosionItem;
+class KPixmapCache;
+class KSvgRenderer;
 
 /**
  * @brief This class contains all the Game elements to be drawn on the screen by the GameView instance.

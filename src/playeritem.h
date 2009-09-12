@@ -20,9 +20,9 @@
 #define PLAYERITEM_H
 
 #include "characteritem.h"
-#include "player.h"
 
-#include <QTimeLine>
+class QTimeLine;
+class Player;
 
 /**
  * @brief This class manage the display of the Player.

@@ -20,8 +20,7 @@
 
 #include <QObject>
 
-#include "arena.h"
-
+class Arena;
 class Player;
 
 /**

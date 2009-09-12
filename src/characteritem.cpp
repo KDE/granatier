@@ -16,6 +16,9 @@
  */
 
 #include "characteritem.h"
+#include "character.h"
+
+#include <QTimer>
 
 CharacterItem::CharacterItem(Character* p_model) : ElementItem (p_model) {
 	connect(p_model, SIGNAL(dead()), this, SLOT(setDead()));

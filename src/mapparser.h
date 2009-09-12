@@ -20,9 +20,9 @@
 #ifndef MAPPARSER_H
 #define MAPPARSER_H
 
-#include "game.h"
-
 #include <QXmlDefaultHandler>
+
+class Game;
 
 /**
  * @brief This class handles XML reader events in order to initialize the Arena properties.

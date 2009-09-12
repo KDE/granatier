@@ -18,11 +18,16 @@
 
 
 #include "player.h"
+#include "bonus.h"
+#include "arena.h"
 
+#include <QKeyEvent>
 #include <kdebug.h>
 
 #ifdef GRANATIER_USE_GLUON
 #include <KDE/KALEngine>
+#include <KDE/KALBuffer>
+#include <KDE/KALSound>
 #endif
 
 #include <cmath>

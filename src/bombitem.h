@@ -20,9 +20,9 @@
 #define BOMBITEM_H
 
 #include "elementitem.h"
-#include "bomb.h"
-// 
-#include <QTimer>
+
+class Bomb;
+class QTimer;
 
 /**
  * @brief This class is the graphical representation of a Bomb.

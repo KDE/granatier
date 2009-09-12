@@ -16,6 +16,7 @@
  */
 
 #include "elementitem.h"
+#include "element.h"
 
 ElementItem::ElementItem(Element* p_model) : QGraphicsSvgItem() {
 	m_model = p_model;

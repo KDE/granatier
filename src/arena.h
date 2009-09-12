@@ -20,12 +20,15 @@
 #ifndef ARENA_H
 #define ARENA_H
 
+#include <QObject>
+
 #include "cell.h"
 
-#include <QObject>
 #include <QList>
-#include <QPoint>
 #include <QMap>
+
+class QPoint;
+class QPointF;
 
 /**
  * @brief This class represents the Arena of the game.
