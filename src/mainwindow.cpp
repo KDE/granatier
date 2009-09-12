@@ -176,14 +176,10 @@ void MainWindow::showSettings()
     }
     KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", Settings::self());
     // General Settings
-    m_nOldNumberOfPlayers = Settings::self()->players();
-    m_nOldPointsToWin = Settings::self()->pointsToWin();
     settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), "games-config-options");
     // Theme
-    m_strOldTheme = Settings::self()->theme();
     settingsDialog->addPage(new KGameThemeSelector(settingsDialog, Settings::self(), KGameThemeSelector::NewStuffDisableDownload), i18n("Theme"), "games-config-theme");
     // Arena
-    m_strOldArena = Settings::self()->arena();
     settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
         
     connect(settingsDialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(loadSettings()));
@@ -192,26 +188,7 @@ void MainWindow::showSettings()
 
 void MainWindow::loadSettings()
 {
-    if(m_strOldTheme != Settings::self()->theme())
-    {
-        ((GameScene*)m_view->scene())->loadTheme();
-        m_strOldTheme = Settings::self()->theme();
-    }
-    if(m_strOldArena != Settings::self()->arena())
-    {
-        initGame();
-        m_strOldArena = Settings::self()->arena();
-    }
-    if(m_nOldNumberOfPlayers != Settings::self()->players())
-    {
-        initGame();
-        m_nOldNumberOfPlayers = Settings::self()->players();
-    }
-    if(m_nOldPointsToWin != Settings::self()->pointsToWin())
-    {
-        initGame();
-        m_nOldPointsToWin = Settings::self()->pointsToWin();
-    }
+    initGame();
 }
 
 void MainWindow::close() {
