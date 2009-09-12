@@ -92,7 +92,10 @@ class Game : public QObject {
 		
 		/** The won points */
 		long m_points;
-
+        
+        /** Flag if the round is over */
+        int m_roundOver;
+        
 		/** The current game level */
 		int m_level;
 

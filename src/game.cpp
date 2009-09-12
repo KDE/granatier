@@ -103,6 +103,8 @@ void Game::init()
     // Create the Arena instance
     m_arena = new Arena();
 
+    m_roundOver = 0;
+    
     // Create the parser that will parse the XML file in order to initialize the Arena instance
     // This also creates all the characters
     MapParser mapParser(this);
@@ -478,6 +480,7 @@ void Game::keyPressEvent(QKeyEvent* p_event)
                 for(int i = 0; i < m_players.length(); i++)
                 {
                     m_players[i]->resurrect();
+                    // If a player reaches the win points start a new game
                     if (m_players[i]->points() >= m_winPoints)
                     {
                         m_gameOver = true;
@@ -593,19 +596,21 @@ void Game::resumeAfterPlayerDeath()
     {
         return;
     }
-	//emit(dataChanged(LivesInfo));
-	// Start the timer
-	start();
-	// Remove a possible bonus
-	//emit(bonusOff());
-    // If a player reaches the win points start a new game
-    if (nPlayerAlive == 1)
+
+    if(!m_roundOver)
     {
-        m_players[nIndex]->addPoint();
+        // Start the timer
+        start();
+        
+        if (nPlayerAlive == 1)
+        {
+            m_roundOver = 1;
+            m_players[nIndex]->addPoint();
+        }
+        
+        pause(true);
+        m_gameScene->showPoints(m_winPoints);
     }
-    
-    pause(true);
-    m_gameScene->showPoints(m_winPoints);
     
 }
 
