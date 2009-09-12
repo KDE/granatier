@@ -409,7 +409,7 @@ void GameScene::intro(const bool p_newLevel)
     // If a new level has begun
     if (p_newLevel)
     {
-        // Set the Block an Bonus Items
+        // Set the Block Items
         for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
         {
             for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
@@ -419,13 +419,6 @@ void GameScene::intro(const bool p_newLevel)
                     if (!items().contains(m_blockItems[i][j]))
                     {
                         addItem(m_blockItems[i][j]);
-                    }
-                }
-                if (m_bonusItems[i][j] != NULL)
-                {
-                    if (!items().contains(m_bonusItems[i][j]))
-                    {
-                        addItem(m_bonusItems[i][j]);
                     }
                 }
             }
@@ -743,6 +736,14 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
                         m_game->blockDestroyed(nRow, nColumn, dynamic_cast <Block*> (element));
                         delete m_blockItems[nRow][nColumn]; //this will also delete the block instance
                         m_blockItems[nRow][nColumn] = NULL;
+                        //display bonus if available
+                        if (m_bonusItems[nRow][nColumn] != NULL)
+                        {
+                            if (!items().contains(m_bonusItems[nRow][nColumn]))
+                            {
+                                addItem(m_bonusItems[nRow][nColumn]);
+                            }
+                        }
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, i);
@@ -784,6 +785,14 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
                         m_game->blockDestroyed(nRow, nColumn, dynamic_cast <Block*> (element));
                         delete m_blockItems[nRow][nColumn]; //this will also delete the block instance
                         m_blockItems[nRow][nColumn] = NULL;
+                        //display bonus if available
+                        if (m_bonusItems[nRow][nColumn] != NULL)
+                        {
+                            if (!items().contains(m_bonusItems[nRow][nColumn]))
+                            {
+                                addItem(m_bonusItems[nRow][nColumn]);
+                            }
+                        }
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, i);
@@ -825,6 +834,14 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
                         m_game->blockDestroyed(nRow, nColumn, dynamic_cast <Block*> (element));
                         delete m_blockItems[nRow][nColumn]; //this will also delete the block instance
                         m_blockItems[nRow][nColumn] = NULL;
+                        //display bonus if available
+                        if (m_bonusItems[nRow][nColumn] != NULL)
+                        {
+                            if (!items().contains(m_bonusItems[nRow][nColumn]))
+                            {
+                                addItem(m_bonusItems[nRow][nColumn]);
+                            }
+                        }
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, i);
@@ -866,6 +883,14 @@ void GameScene::slot_bombDetonated(Bomb* bomb)
                         m_game->blockDestroyed(nRow, nColumn, dynamic_cast <Block*> (element));
                         delete m_blockItems[nRow][nColumn]; //this will also delete the block instance
                         m_blockItems[nRow][nColumn] = NULL;
+                        //display bonus if available
+                        if (m_bonusItems[nRow][nColumn] != NULL)
+                        {
+                            if (!items().contains(m_bonusItems[nRow][nColumn]))
+                            {
+                                addItem(m_bonusItems[nRow][nColumn]);
+                            }
+                        }
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, i);
