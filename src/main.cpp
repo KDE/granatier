@@ -16,10 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include "mainwindow.h"
+
+#include <QDebug>
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KApplication>
-#include "mainwindow.h"
 
 int main(int argc, char** argv) {
 	// About Granatier
