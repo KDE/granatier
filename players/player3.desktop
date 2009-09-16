@@ -1,0 +1,10 @@
+[Player]
+Name=Player3
+Name[x-test]=xxPlayer3xx
+Description=This is Player3
+Description[x-test]=xxThis is Player3xx
+Type=SVG
+FileName=player3.svgz
+Preview=player3_preview.svgz
+Author=Mathias Kraus
+AuthorEmail=k.hias@gmx.de

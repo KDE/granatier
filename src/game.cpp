@@ -27,13 +27,15 @@
 #include "bonus.h"
 #include "bomb.h"
 #include "block.h"
+#include "playersettings.h"
 
 #include <QPointF>
 #include <QTimer>
 #include <QKeyEvent>
 
 #include <KStandardDirs>
-
+#include <KComponentData>
+#include <KConfig>
 #ifdef GRANATIER_USE_GLUON
 #include <KDE/KALEngine>
 #include <KDE/KALSound>
@@ -45,8 +47,10 @@
 
 const int Game::FPS = 40;
 
-Game::Game() : m_isCheater(false), m_points(0), m_level(1), m_media1(0), m_media2(0)
+Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_level(1), m_media1(0), m_media2(0)
 {
+    m_playerSettings = playerSettings;
+    
     // Initialize the sound state
     setSoundsEnabled(Settings::sounds());
     
@@ -78,10 +82,13 @@ Game::Game() : m_isCheater(false), m_points(0), m_level(1), m_media1(0), m_media
     m_gameScene = 0;
     m_winPoints = Settings::self()->pointsToWin();
     
-    int nNumberOfPlayers = Settings::self()->players();
-    for (int i = 0; i < nNumberOfPlayers; i++)
+    QStringList strPlayerIDs = m_playerSettings->playerIDs();
+    for(int i = 0; i < strPlayerIDs.count(); i++)
     {
-        createPlayer(QPointF(-0.5, 0.5), QString("player%1").arg(i+1));
+        if(m_playerSettings->enabled(strPlayerIDs[i]))
+        {
+            createPlayer(QPointF(-0.5, 0.5), m_playerSettings->playerFile(strPlayerIDs[i]), m_playerSettings->playerName(strPlayerIDs[i]));
+        }
     }
     
     init();
@@ -354,10 +361,10 @@ void Game::createBlock(QPointF p_position, const QString& p_imageId)
     m_arena->setCellElement(p_position.y(), p_position.x(), block);
 }
 
-void Game::createPlayer(QPointF p_position, const QString& p_imageId)
+void Game::createPlayer(QPointF p_position, const QString& p_graphicsPath, const QString& p_playerName)
 {
-    Player* player = new Player(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_imageId, m_arena);
-    if(p_imageId.compare("player2") == 0)
+    Player* player = new Player(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_graphicsPath, p_playerName, m_arena);
+    if(p_graphicsPath.contains("player2"))
     {
         Character::Shortcuts keys;
         keys.moveLeft = Qt::Key_A;
@@ -367,7 +374,7 @@ void Game::createPlayer(QPointF p_position, const QString& p_imageId)
         keys.dropBomb = Qt::Key_Q;
         player->setShortcuts(keys);
     }
-    if(p_imageId.compare("player3") == 0)
+    if(p_graphicsPath.contains("player3"))
     {
         Character::Shortcuts keys;
         keys.moveLeft = Qt::Key_J;
@@ -377,7 +384,7 @@ void Game::createPlayer(QPointF p_position, const QString& p_imageId)
         keys.dropBomb = Qt::Key_Space;
         player->setShortcuts(keys);
     }
-    if(p_imageId.compare("player4") == 0)
+    if(p_graphicsPath.contains("player4"))
     {
         Character::Shortcuts keys;
         keys.moveLeft = Qt::Key_R;
@@ -484,7 +491,7 @@ void Game::keyPressEvent(QKeyEvent* p_event)
                     if (m_players[i]->points() >= m_winPoints)
                     {
                         m_gameOver = true;
-                        m_strWinner = m_players[i]->getImageId();
+                        m_strWinner = m_players[i]->getPlayerName();
                         emit(gameOver(true));
                         return;
                     }
@@ -556,7 +563,7 @@ void Game::playerDeath(Player* player)
     //m_player->die();
     //wait some time until the game stops
     QTimer::singleShot(1500, this, SLOT(resumeAfterPlayerDeath()));   
-    //if(player->getImageId() == "player1")
+    //if(player->getGraphicsPath().contains == "player1")
     //{
     //    soundSourceDie->play();
     //}
@@ -565,7 +572,7 @@ void Game::playerDeath(Player* player)
     //    soundSourceWilhelmScream->play();
     //}
     #ifndef GRANATIER_USE_GLUON
-    if(player->getImageId() == "player1")
+    if(player->getGraphicsPath().contains("player1"))
     {
         m_phononWilhelmScream->play();
     }

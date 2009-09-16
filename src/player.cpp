@@ -32,10 +32,12 @@
 
 #include <cmath>
 
-Player::Player(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena) : Character(p_x, p_y, p_arena)
+Player::Player(qreal p_x, qreal p_y, const QString& p_graphicsPath, const QString& p_playerName, Arena* p_arena) : Character(p_x, p_y, p_arena)
 {
     m_type = Element::PLAYER;
-    m_imageId = p_imageId;
+    m_graphicsPath = p_graphicsPath;
+    m_playerName = p_playerName;
+    
     m_points = 0;
     
     resurrect();
@@ -71,9 +73,14 @@ void Player::setShortcuts(const Shortcuts keys)
     m_key = keys;
 }
 
-QString Player::getImageId() const
+QString Player::getGraphicsPath() const
 {
-    return m_imageId;
+    return m_graphicsPath;
+}
+
+QString Player::getPlayerName() const
+{
+    return m_playerName;
 }
 
 void Player::init()

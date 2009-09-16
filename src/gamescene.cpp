@@ -66,7 +66,6 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     for(int i = 0; i < players.size(); i++)
     {
         playerItem = new PlayerItem(players[i]);
-        playerItem->setSharedRenderer(m_renderer);
         // Corrects the position of the player
         playerItem->update(players[i]->getX(), players[i]->getY());
         playerItem->setZValue(210+i);
@@ -77,7 +76,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         
         connect (playerItem, SIGNAL(bonusItemTaken(ElementItem*)), this, SLOT(removeBonusItem(ElementItem*)));
         
-        m_playerPointsLabels.append(new QGraphicsTextItem(players[i]->getImageId()));
+        m_playerPointsLabels.append(new QGraphicsTextItem(players[i]->getPlayerName()));
         m_playerPointsLabels.last()->setFont(QFont("Helvetica", 15, QFont::Bold, false));
         m_playerPointsLabels.last()->setDefaultTextColor(QColor("#FFFF00"));
         m_playerPointsLabels.last()->setZValue(1001);
@@ -373,7 +372,7 @@ void GameScene::showPoints(int p_winPoints)
             // Display the pause label
             addItem(m_playerPointsLabels[i]);
         }
-        m_playerPointsLabels[i]->setPlainText(QString("%1 %2").arg(players[i]->getImageId()).arg(QString(players[i]->points(), QChar('X')), -p_winPoints, QChar('O')));
+        m_playerPointsLabels[i]->setPlainText(QString("%1 %2").arg(players[i]->getPlayerName()).arg(QString(players[i]->points(), QChar('X')), -p_winPoints, QChar('O')));
         m_playerPointsLabels[i]->setPos((width() - m_playerPointsLabels[i]->boundingRect().width()) / 2, (height() - (players.length() - i) * m_playerPointsLabels[i]->boundingRect().height()) / 2);
     }
     

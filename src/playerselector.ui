@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ArenaSelectorBase</class>
- <widget class="QWidget" name="ArenaSelectorBase">
+ <class>PlayerSelectorBase</class>
+ <widget class="QWidget" name="PlayerSelectorBase">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -19,12 +19,12 @@
      <item>
       <layout class="QVBoxLayout">
        <item>
-        <widget class="KListWidget" name="arenaList"/>
+        <widget class="KListWidget" name="playerList"/>
        </item>
        <item>
         <widget class="QPushButton" name="getNewButton">
          <property name="text">
-          <string>&amp;Get New Arenas...</string>
+          <string>&amp;Get New Players...</string>
          </property>
         </widget>
        </item>
@@ -49,23 +49,7 @@
          <number>9</number>
         </property>
         <item>
-         <widget class="QLabel" name="arenaPreview">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>160</width>
-            <height>120</height>
-           </size>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
+         <widget class="QGraphicsView" name="playerPreview"/>
         </item>
        </layout>
       </widget>
@@ -81,14 +65,14 @@
       </sizepolicy>
      </property>
      <property name="title">
-      <string>Arena Details</string>
+      <string>Player Details</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <property name="spacing">
        <number>9</number>
       </property>
       <item row="0" column="1">
-       <widget class="QLabel" name="arenaAuthor">
+       <widget class="QLabel" name="playerAuthor">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -123,7 +107,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLabel" name="arenaContact">
+       <widget class="QLabel" name="playerContact">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -158,7 +142,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QLabel" name="arenaDescription">
+       <widget class="QLabel" name="playerDescription">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -209,17 +193,7 @@
     </widget>
    </item>
    <item>
-    <widget class="KLineEdit" name="kcfg_Arena">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="frame">
-      <bool>false</bool>
-     </property>
-     <property name="readOnly">
-      <bool>false</bool>
-     </property>
-    </widget>
+    <widget class="QSpinBox" name="kcfg_Dummy"/>
    </item>
   </layout>
  </widget>
@@ -228,11 +202,6 @@
    <class>KListWidget</class>
    <extends>QListWidget</extends>
    <header>klistwidget.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

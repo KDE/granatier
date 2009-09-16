@@ -22,6 +22,7 @@
 
 class Character;
 class QTimer;
+class KSvgRenderer;
 
 /**
  * @brief This class is the graphical representation of a Character.
@@ -31,8 +32,8 @@ class CharacterItem : public ElementItem {
 	Q_OBJECT
 
 	protected:
-		/** Number of ticks of the blink timer */
-		int m_nbBlinks;
+		/** Shared renderer for the player frames */
+		KSvgRenderer* m_renderer;
 
 	public:
 

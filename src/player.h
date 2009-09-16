@@ -23,6 +23,7 @@
 
 class Bonus;
 class QKeyEvent;
+class QString;
 
 #ifdef GRANATIER_USE_GLUON
 class KALBuffer;
@@ -38,7 +39,8 @@ class Player : public Character
 
 private:
     /** The path to the Player image */
-    QString m_imageId;
+    QString m_playerName;
+    QString m_graphicsPath;
     
     /** Player asked speed */
     qreal m_askedXSpeed, m_askedYSpeed;
@@ -68,10 +70,11 @@ public:
       * Creates a new Player instance.
       * @param p_x the initial x-coordinate
       * @param p_y the initial y-coordinate
-      * @param p_imageId path to the image of the related item
+      * @param p_graphicsPath the Path to the SVG of the related item
+      * @param p_playerName the Name of the Player
       * @param p_arena the Arena the Player is on
       */
-    Player(qreal p_x, qreal p_y, const QString& p_imageId, Arena* p_arena);
+    Player(qreal p_x, qreal p_y, const QString& p_graphicsPath, const QString& p_playerName, Arena* p_arena);
 
     /**
       * Deletes the Player instance.
@@ -84,10 +87,16 @@ public:
     void setShortcuts(const Shortcuts keys);
 
     /**
+      * Gets the path to the Player SVG.
+      * @return the path to the Player SVG
+      */
+    QString getGraphicsPath() const;
+    
+    /**
       * Gets the path to the Player image.
       * @return the path to the Player image
       */
-    QString getImageId() const;
+    QString getPlayerName() const;
 
     /**
       * Initializes the Player.

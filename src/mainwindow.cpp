@@ -23,6 +23,8 @@
 #include "gamescene.h"
 #include "settings.h"
 #include "arenaselector.h"
+#include "playerselector.h"
+#include "playersettings.h"
 #include "ui_generalsettings.h"
 
 #include <QGraphicsView>
@@ -36,6 +38,10 @@
 #include <KGameThemeSelector>
 #include <KInputDialog>
 #include <KLocale>
+
+#include <KStandardDirs>
+#include <QGraphicsSvgItem>
+#include <KSvgRenderer>
 
 class GeneralSettings : public QWidget
 {
@@ -52,6 +58,7 @@ MainWindow::MainWindow() {
 	// Initialize the game
 	m_game = NULL;
 	m_view = NULL;
+    m_playerSettings = new PlayerSettings();
 	// Set the window menus
 	KStandardGameAction::gameNew(this, SLOT(newGame(bool)), actionCollection());
 	KStandardGameAction::highscores(this, SLOT(showHighscores()), actionCollection());
@@ -75,6 +82,7 @@ MainWindow::MainWindow() {
 MainWindow::~MainWindow() {
 	delete m_game;
 	delete m_view;
+    delete m_playerSettings;
 	delete m_kScoreDialog;
 }
 
@@ -89,7 +97,7 @@ void MainWindow::initGame() {
 		delete m_game;
 	}
 	// Create a new Game instance
-	m_game = new Game();
+	m_game = new Game(m_playerSettings);
 	connect(m_game, SIGNAL(gameOver(bool)), this, SLOT(newGame(bool)));		// TODO Remove the useless bool parameter from gameOver()
 	// If a GameView instance already exists
 	if (m_view) {
@@ -181,14 +189,24 @@ void MainWindow::showSettings()
     settingsDialog->addPage(new KGameThemeSelector(settingsDialog, Settings::self(), KGameThemeSelector::NewStuffDisableDownload), i18n("Theme"), "games-config-theme");
     // Arena
     settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
-        
+    // Player
+    settingsDialog->addPage(new PlayerSelector(settingsDialog, m_playerSettings), i18n("Player"), "games-config-custom");
+    
     connect(settingsDialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(loadSettings()));
+    connect(settingsDialog, SIGNAL(cancelClicked()), this, SLOT(settingsDialogCanceled()));
     settingsDialog->show();
 }
 
 void MainWindow::loadSettings()
 {
+    Settings::self()->setDummy(0);
+    m_playerSettings->savePlayerSettings();
     initGame();
+}
+
+void MainWindow::settingsDialogCanceled()
+{
+    m_playerSettings->discardUnsavedSettings();
 }
 
 void MainWindow::close() {

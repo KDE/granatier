@@ -25,7 +25,8 @@
 
 #include <QTimeLine>
 #include <QGraphicsScene>
-#include <QDebug>
+#include <KSvgRenderer>
+#include <KStandardDirs>
 
 const int PlayerItem::NB_FRAMES = 13;
 const int PlayerItem::ANIM_SPEED = 240;
@@ -36,6 +37,9 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     connect(p_model, SIGNAL(gameUpdated()), this, SLOT(manageCollision()));
     connect(p_model, SIGNAL(stopped()), this, SLOT(stopAnim()));
 
+    // load the SVG
+    QString strPlayerId = ((Player*) p_model)->getGraphicsPath();
+    m_renderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(strPlayerId)));
     // A timeLine for the Player animation	
     m_animationTimer = new QTimeLine();
     m_animationTimer->setCurveShape(QTimeLine::LinearCurve);
@@ -45,8 +49,7 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     m_animationTimer->setDuration(PlayerItem::ANIM_SPEED);
     connect(m_animationTimer, SIGNAL(frameChanged(int)), this, SLOT(setFrame(int)));
     
-    m_strPlayerId = ((Player*) p_model)->getImageId();
-    setElementId(m_strPlayerId + "_0");
+    setElementId("player_0");
 }
 
 PlayerItem::~PlayerItem()
@@ -57,7 +60,7 @@ PlayerItem::~PlayerItem()
 void PlayerItem::setPlayerId(QString strPlayerId)
 {
     m_strPlayerId = strPlayerId;
-    setElementId(m_strPlayerId + "_0");
+    setElementId("player_0");
 }
 
 void PlayerItem::updateDirection()
@@ -107,7 +110,7 @@ void PlayerItem::manageCollision()
             if (collidingList[i]->zValue() >= 300 && collidingList[i]->zValue() < 400)
             {
                 //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Player*)getModel());
-                setElementId(m_strPlayerId + "_death");
+                setElementId("player_death");
                 dynamic_cast <Player*> (m_model)->die();
             }
             else if (collidingList[i]->zValue() == 100)
@@ -162,7 +165,7 @@ void PlayerItem::resumeAnim()
 
 void PlayerItem::stopAnim()
 {
-    setElementId(m_strPlayerId + "_0");
+    setElementId("player_0");
     if (m_animationTimer->state() == QTimeLine::Running)
     {
         m_animationTimer->stop();
@@ -171,11 +174,11 @@ void PlayerItem::stopAnim()
 
 void PlayerItem::setFrame(const int p_frame)
 {
-    setElementId(m_strPlayerId + QString("_%1").arg(p_frame));
+    setElementId(QString("player_%1").arg(p_frame));
 }
 
 void PlayerItem::setDead()
 {
     stopAnim();
-    setElementId(m_strPlayerId + "_death");
+    setElementId("player_death");
 }

@@ -23,12 +23,14 @@ set(granatierSources
     mapparser.cpp
     player.cpp
     playeritem.cpp
+    playerselector.cpp
+    playersettings.cpp
 )
 set(granatierData
     granatierui.rc
 )
 
-kde4_add_ui_files(granatierSources arenaselector.ui generalsettings.ui)
+kde4_add_ui_files(granatierSources arenaselector.ui generalsettings.ui playerselector.ui)
 
 kde4_add_kcfg_files(granatierSources settings.kcfgc)
 

@@ -32,6 +32,7 @@ class Bonus;
 class Bomb;
 class Block;
 class Element;
+class PlayerSettings;
 class QPointF;
 class QTimer;
 class QKeyEvent;
@@ -128,6 +129,8 @@ class Game : public QObject {
         QString m_strWinner;
         
         GameScene* m_gameScene;
+        
+        PlayerSettings* m_playerSettings;
 		
 	public:
 
@@ -142,8 +145,9 @@ class Game : public QObject {
 
 		/**
 		 * Creates a new Game instance.
+         * @param playerSettings the player settings
 		 */
-		Game();
+		Game(PlayerSettings* playerSettings);
 
 		/**
 		 * Deletes the Game instance.
@@ -245,7 +249,7 @@ class Game : public QObject {
          * @param p_position the Player position
          * @param p_imageId the image of the Player
          */
-        void createPlayer(QPointF p_position, const QString& p_imageId);
+        void createPlayer(QPointF p_position, const QString& p_graphicsPath, const QString& p_playerName);
 
 		/**
 		 * Enables / disables the sounds.

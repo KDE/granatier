@@ -24,6 +24,7 @@
 
 class Game;
 class GameView;
+class PlayerSettings;
 class QGraphicsView;
 class KScoreDialog;
 
@@ -41,6 +42,9 @@ class MainWindow : public KXmlGuiWindow {
 
 		/** The Game instance that manages the main loop and events */
 		Game* m_game;
+        
+        /** The PlayerSettings instance for player name, shortcuts ...  */
+        PlayerSettings* m_playerSettings;
 
 		/** The highscores dialog */
 		KScoreDialog* m_kScoreDialog;
@@ -96,6 +100,11 @@ class MainWindow : public KXmlGuiWindow {
 		 * Loads the settings.
 		 */
 		void loadSettings();
+        
+        /**
+         * Cancel at settings dialog clicked.
+         */
+        void settingsDialogCanceled();
 
 		/**
 		 * Closes the MainWindow.

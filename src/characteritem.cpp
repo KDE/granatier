@@ -19,13 +19,18 @@
 #include "character.h"
 
 #include <QTimer>
+#include <KSvgRenderer>
 
-CharacterItem::CharacterItem(Character* p_model) : ElementItem (p_model) {
-	connect(p_model, SIGNAL(dead()), this, SLOT(setDead()));
+CharacterItem::CharacterItem(Character* p_model) : ElementItem (p_model)
+{
+    m_renderer = new KSvgRenderer();
+    setSharedRenderer(m_renderer);
+    connect(p_model, SIGNAL(dead()), this, SLOT(setDead()));
 }
 
 CharacterItem::~CharacterItem()
 {
+    delete m_renderer;
 }
 
 QPainterPath CharacterItem::shape() const

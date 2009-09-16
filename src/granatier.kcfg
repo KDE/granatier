@@ -17,10 +17,6 @@
       <label>The arena to be used.</label>
       <default>arenas/granatier.desktop</default>
     </entry>
-    <entry name="Players" type="Int" key="Players">
-      <label>The number of players.</label>
-      <default>2</default>
-    </entry>
     <entry name="PointsToWin" type="Int" key="PointsToWin">
       <label>The points a user needs to win the game.</label>
       <default>3</default>
@@ -28,6 +24,10 @@
     <entry name="Sounds" type="Bool" key="Sounds">
       <label>Whether sound effects should be played.</label>
       <default>true</default>
+    </entry>
+    <entry name="Dummy" type="Int" key="Dummy">
+      <label>This is a dummy setting for player setup.</label>
+      <default>0</default>
     </entry>
   </group>
 </kcfg>
