@@ -1,14 +1,12 @@
 [Arena]
 Name=Crazy
 Name[pt]=Louco
-Name[pt_BR]=Louco
 Name[sv]=Galen
 Name[tr]=Çılgın
 Name[uk]=Шалена
 Name[x-test]=xxCrazyxx
 Description=Crazy Arena
 Description[pt]=Arena Louca
-Description[pt_BR]=Arena Louca
 Description[sv]=Galen arena
 Description[tr]=Çılgın Arena
 Description[uk]=Шалена арена

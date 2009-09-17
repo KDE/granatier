@@ -1,8 +1,6 @@
 [Player]
 Name=Player1
-Name[x-test]=xxPlayer1xx
 Description=This is Player1
-Description[x-test]=xxThis is Player1xx
 Type=SVG
 FileName=player1.svgz
 Preview=player1_preview.svgz
