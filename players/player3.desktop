@@ -1,6 +1,14 @@
 [Player]
 Name=Player3
+Name[sv]=Spelare 3
+Name[tr]=Oyuncu 3
+Name[uk]=Гравець3
+Name[x-test]=xxPlayer3xx
 Description=This is Player3
+Description[sv]=Det här är tredje spelaren
+Description[tr]=Bu 3. Oyuncu
+Description[uk]=Це Гравець3
+Description[x-test]=xxThis is Player3xx
 Type=SVG
 FileName=player3.svgz
 Preview=player3_preview.svgz
