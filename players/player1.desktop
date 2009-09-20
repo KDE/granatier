@@ -1,10 +1,12 @@
 [Player]
 Name=Player1
+Name[pt]=Jogador 1
 Name[sv]=Spelare 1
 Name[tr]=Oyuncu 1
 Name[uk]=Гравець1
 Name[x-test]=xxPlayer1xx
 Description=This is Player1
+Description[pt]=Este é o Jogador 1
 Description[sv]=Det här är första spelaren
 Description[tr]=Bu 1. Oyuncu
 Description[uk]=Це Гравець1
