@@ -24,12 +24,6 @@
 #include <QKeyEvent>
 #include <kdebug.h>
 
-#ifdef GRANATIER_USE_GLUON
-#include <KDE/KALEngine>
-#include <KDE/KALBuffer>
-#include <KDE/KALSound>
-#endif
-
 #include <cmath>
 
 Player::Player(qreal p_x, qreal p_y, const QString& p_graphicsPath, const QString& p_playerName, Arena* p_arena) : Character(p_x, p_y, p_arena)
@@ -47,25 +41,10 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_graphicsPath, const QStrin
     m_key.moveUp = Qt::Key_Up;
     m_key.moveDown = Qt::Key_Down;
     m_key.dropBomb = Qt::Key_Return;
-    
-    #ifdef GRANATIER_USE_GLUON
-    m_soundDie = NULL;
-    m_soundWilhelmScream = NULL;
-    #endif
 }
 
 Player::~Player()
 {
-    #ifdef GRANATIER_USE_GLUON
-    if(m_soundDie)
-    {
-        delete m_soundDie;
-    }
-    if(m_soundWilhelmScream)
-    {
-        delete m_soundWilhelmScream;
-    }
-    #endif
 }
 
 void Player::setShortcuts(const Shortcuts keys)
@@ -348,49 +327,8 @@ void Player::addBonus(Bonus* p_bonus)
     }
 }
 
-#ifdef GRANATIER_USE_GLUON
-void Player::setSoundDie(KALBuffer* buffer)
-{
-    if(m_soundDie)
-    {
-        delete m_soundDie;
-        m_soundDie = NULL;
-    }
-    
-    if(buffer)
-    {
-        m_soundDie = new KALSound(buffer, KALEngine::instance());
-    }
-}
-
-void Player::setSoundWilhelmScream(KALBuffer* buffer)
-{
-    if(m_soundWilhelmScream)
-    {
-        delete m_soundWilhelmScream;
-        m_soundWilhelmScream = NULL;
-    }
-    
-    if(buffer)
-    {
-        m_soundWilhelmScream = new KALSound(buffer, KALEngine::instance());
-    }
-}
-#endif
-
 void Player::die()
 {
-    #ifdef GRANATIER_USE_GLUON
-    if(m_imageId == "player1" && m_soundWilhelmScream != NULL && m_soundWilhelmScream->elapsedTime() == 0)
-    {
-        m_soundWilhelmScream->play();
-    }
-    else if(m_imageId != "player1" && m_soundDie != NULL && m_soundDie->elapsedTime() == 0)
-    {
-        m_soundDie->play();
-    }
-    #endif
-    
     if(!m_death)
     {
         m_death = true;

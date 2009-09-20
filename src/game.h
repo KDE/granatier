@@ -124,6 +124,7 @@ class Game : public QObject {
         
         bool m_soundEnabled;
         bool m_gameOver;
+        bool m_wilhelmScream;
         QString m_strWinner;
         
         GameScene* m_gameScene;

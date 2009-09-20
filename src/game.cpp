@@ -53,10 +53,13 @@ Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_
     
     // Initialize the sound state
     setSoundsEnabled(Settings::sounds());
+    m_wilhelmScream = Settings::useWilhelmScream();
     
     //init KALEngine
     #ifdef GRANATIER_USE_GLUON
     soundEngine = KALEngine::instance();
+    soundPutBomb = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
+    delete soundPutBomb; //TODO: sound doesn't play after first game is over; fix this workaround in gluon
     soundPutBomb = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
     soundExplode = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/explode.ogg")), soundEngine);
     soundExplode->setGain(1);
@@ -114,10 +117,6 @@ Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_
     for (int i = 0; i < m_players.size(); i++)
     {
         connect(m_players[i], SIGNAL(bombDropped(Player*, qreal, qreal)), this, SLOT(createBomb(Player*, qreal, qreal)));
-        #ifdef GRANATIER_USE_GLUON
-        m_players[i]->setSoundDie(soundBufferDie);
-        m_players[i]->setSoundWilhelmScream(soundBufferWilhelmScream);
-        #endif
     }
     
     m_gameOver = false;
@@ -377,28 +376,31 @@ void Game::removeBonus(Bonus* bonus)
 {
     m_bonus.removeAt(m_bonus.indexOf(bonus));
     //do not delete the Bonus, because the ElementItem will delete it
-    #ifdef GRANATIER_USE_GLUON
-    soundBonus->play();
-    #else
-    qint64 nLastRemainingTime;
-    int nIndex = 0;
-    if(m_phononBonusTimer->isActive())
+    if(m_soundEnabled)
     {
-        return;
-    }
-    nLastRemainingTime = m_phononBonus.first()->remainingTime();
-    nIndex = 0;
-    for(int i = 0; i < m_phononBonus.count(); i++)
-    {
-        if(nLastRemainingTime > m_phononBonus.at(i)->remainingTime())
+        #ifdef GRANATIER_USE_GLUON
+        soundBonus->play();
+        #else
+        qint64 nLastRemainingTime;
+        int nIndex = 0;
+        if(m_phononBonusTimer->isActive())
         {
-            nIndex = i;
+            return;
         }
+        nLastRemainingTime = m_phononBonus.first()->remainingTime();
+        nIndex = 0;
+        for(int i = 0; i < m_phononBonus.count(); i++)
+        {
+            if(nLastRemainingTime > m_phononBonus.at(i)->remainingTime())
+            {
+                nIndex = i;
+            }
+        }
+        
+        m_phononBonus.at(nIndex)->play();
+        m_phononBonusTimer->start(50);
+        #endif
     }
-    
-    m_phononBonus.at(nIndex)->play();
-    m_phononBonusTimer->start(50);
-    #endif
 }
 
 void Game::createBlock(QPointF p_position, const QString& p_imageId)
@@ -583,26 +585,38 @@ void Game::playerDeath(Player* player)
     //wait some time until the game stops
     QTimer::singleShot(1500, this, SLOT(resumeAfterPlayerDeath()));   
 
-    #ifndef GRANATIER_USE_GLUON
-    qint64 nLastRemainingTime;
-    int nIndex = 0;
-    if(m_phononDieTimer->isActive())
+    if(m_soundEnabled)
     {
-        return;
-    }
-    nLastRemainingTime = m_phononDie.first()->remainingTime();
-    nIndex = 0;
-    for(int i = 0; i < m_phononDie.count(); i++)
-    {
-        if(nLastRemainingTime > m_phononDie.at(i)->remainingTime())
+        #ifdef GRANATIER_USE_GLUON
+        if(m_wilhelmScream)
         {
-            nIndex = i;
+            soundWilhelmScream->play();
         }
+        else
+        {
+            soundDie->play();
+        }
+        #else
+        qint64 nLastRemainingTime;
+        int nIndex = 0;
+        if(m_phononDieTimer->isActive())
+        {
+            return;
+        }
+        nLastRemainingTime = m_phononDie.first()->remainingTime();
+        nIndex = 0;
+        for(int i = 0; i < m_phononDie.count(); i++)
+        {
+            if(nLastRemainingTime > m_phononDie.at(i)->remainingTime())
+            {
+                nIndex = i;
+            }
+        }
+        
+        m_phononDie.at(nIndex)->play();
+        m_phononDieTimer->start(50);
+        #endif
     }
-    
-    m_phononDie.at(nIndex)->play();
-    m_phononDieTimer->start(50);
-    #endif
 }
 
 void Game::resumeAfterPlayerDeath()
@@ -705,28 +719,32 @@ void Game::createBomb(Player* player, qreal x, qreal y)
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), player, SLOT(slot_refillBombArmory()));
     m_bombs.append(bomb);
     player->decrementBombArmory();
-    #ifdef GRANATIER_USE_GLUON
-    soundPutBomb->play();
-    #else
-    qint64 nLastRemainingTime;
-    int nIndex = 0;
-    if(m_phononPutBombTimer->isActive())
-    {
-        return;
-    }
-    nLastRemainingTime = m_phononPutBomb.first()->remainingTime();
-    nIndex = 0;
-    for(int i = 0; i < m_phononPutBomb.count(); i++)
-    {
-        if(nLastRemainingTime > m_phononPutBomb.at(i)->remainingTime())
-        {
-            nIndex = i;
-        }
-    }
     
-    m_phononPutBomb.at(nIndex)->play();
-    m_phononPutBombTimer->start(25);
-    #endif
+    if(m_soundEnabled)
+    {
+        #ifdef GRANATIER_USE_GLUON
+        soundPutBomb->play();
+        #else
+        qint64 nLastRemainingTime;
+        int nIndex = 0;
+        if(m_phononPutBombTimer->isActive())
+        {
+            return;
+        }
+        nLastRemainingTime = m_phononPutBomb.first()->remainingTime();
+        nIndex = 0;
+        for(int i = 0; i < m_phononPutBomb.count(); i++)
+        {
+            if(nLastRemainingTime > m_phononPutBomb.at(i)->remainingTime())
+            {
+                nIndex = i;
+            }
+        }
+        
+        m_phononPutBomb.at(nIndex)->play();
+        m_phononPutBombTimer->start(25);
+        #endif
+    }
 }
 
 void Game::removeBomb(Bomb* bomb)
@@ -743,37 +761,39 @@ void Game::removeBomb(Bomb* bomb)
 
 void Game::slot_bombDetonated(Bomb* bomb)
 {
-    //playSound(KStandardDirs::locate("data", "granatier/sounds/explode.ogg"));
-    #ifdef GRANATIER_USE_GLUON
-    soundExplode->setMaxGain(10);
-    
-    if(soundExplode->elapsedTime() == 0)
+    if(m_soundEnabled)
     {
-        soundExplode->setGain(1);
-    }
-    
-    soundExplode->play();
-    soundExplode->setGain(soundExplode->gain()*1.2);
-    #else
-    qint64 nLastRemainingTime;
-    int nIndex = 0;
-    if(m_phononExplodeTimer->isActive())
-    {
-        return;
-    }
-    nLastRemainingTime = m_phononExplode.first()->remainingTime();
-    nIndex = 0;
-    for(int i = 0; i < m_phononExplode.count(); i++)
-    {
-        if(nLastRemainingTime > m_phononExplode.at(i)->remainingTime())
+        #ifdef GRANATIER_USE_GLUON
+        soundExplode->setMaxGain(10);
+        
+        if(soundExplode->elapsedTime() == 0)
         {
-            nIndex = i;
+            soundExplode->setGain(1);
         }
+        
+        soundExplode->play();
+        soundExplode->setGain(soundExplode->gain()*1.2);
+        #else
+        qint64 nLastRemainingTime;
+        int nIndex = 0;
+        if(m_phononExplodeTimer->isActive())
+        {
+            return;
+        }
+        nLastRemainingTime = m_phononExplode.first()->remainingTime();
+        nIndex = 0;
+        for(int i = 0; i < m_phononExplode.count(); i++)
+        {
+            if(nLastRemainingTime > m_phononExplode.at(i)->remainingTime())
+            {
+                nIndex = i;
+            }
+        }
+        
+        m_phononExplode.at(nIndex)->play();
+        m_phononExplodeTimer->start(50);
+        #endif
     }
-    
-    m_phononExplode.at(nIndex)->play();
-    m_phononExplodeTimer->start(50);
-    #endif
 }
 
 void Game::blockDestroyed(const int row, const int col, Block* block)

@@ -25,11 +25,6 @@ class Bonus;
 class QKeyEvent;
 class QString;
 
-#ifdef GRANATIER_USE_GLUON
-class KALBuffer;
-class KALSound;
-#endif
-
 /**
  * @brief This class represents the main character of the game.
  */
@@ -59,11 +54,6 @@ private:
     
     /** Points from the player */
     int m_points;
-
-    #ifdef GRANATIER_USE_GLUON
-    KALSound* m_soundDie;
-    KALSound* m_soundWilhelmScream;
-    #endif
 
 public:
     /**
@@ -158,18 +148,6 @@ public:
       * @param p_element reference to the element eaten
       */
     void addBonus(Bonus* p_bonus);
-
-    #ifdef GRANATIER_USE_GLUON
-    /**
-      * sets the die sound
-      */
-    void setSoundDie(KALBuffer* buffer);
-    
-    /**
-      * sets the wilhelm scream sound
-      */
-    void setSoundWilhelmScream(KALBuffer* buffer);
-    #endif
     
     /**
       * Implements the Character function
