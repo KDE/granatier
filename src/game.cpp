@@ -40,14 +40,14 @@
 #include <KDE/KALEngine>
 #include <KDE/KALSound>
 #include <KDE/KALBuffer>
-#endif
-//TODO: #else
-#include <Phonon/MediaObject>
 //#endif
+#else
+#include <Phonon/MediaObject>
+#endif
 
 const int Game::FPS = 40;
 
-Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_level(1), m_media1(0), m_media2(0)
+Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_level(1)
 {
     m_playerSettings = playerSettings;
     
@@ -66,16 +66,34 @@ Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_
     soundDie = new KALSound(soundBufferDie, soundEngine);
     soundWilhelmScream = new KALSound(soundBufferWilhelmScream, soundEngine);
     #else
-    m_phononPutBomb = Phonon::createPlayer(Phonon::GameCategory);
-    m_phononPutBomb->setCurrentSource(KStandardDirs::locate("appdata", "sounds/putbomb.ogg"));
-    m_phononExplode = Phonon::createPlayer(Phonon::GameCategory);
-    m_phononExplode->setCurrentSource(KStandardDirs::locate("appdata", "sounds/explode.ogg"));
-    m_phononBonus = Phonon::createPlayer(Phonon::GameCategory);
-    m_phononBonus->setCurrentSource(KStandardDirs::locate("appdata", "sounds/wow.ogg"));
-    m_phononDie = Phonon::createPlayer(Phonon::GameCategory);
-    m_phononDie->setCurrentSource(KStandardDirs::locate("appdata", "sounds/die.ogg"));
-    m_phononWilhelmScream = Phonon::createPlayer(Phonon::GameCategory);
-    m_phononWilhelmScream->setCurrentSource(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"));
+    for(int i = 0; i < 3; i++)
+    {
+        m_phononPutBomb.append(Phonon::createPlayer(Phonon::GameCategory));
+        m_phononPutBomb.last()->setCurrentSource(KStandardDirs::locate("appdata", "sounds/putbomb.ogg"));
+    }
+    m_phononPutBombTimer = new QTimer(this);
+    m_phononPutBombTimer->setSingleShot(true);
+    for(int i = 0; i < 3; i++)
+    {
+        m_phononExplode.append(Phonon::createPlayer(Phonon::GameCategory));
+        m_phononExplode.last()->setCurrentSource(KStandardDirs::locate("appdata", "sounds/explode.ogg"));
+    }
+    m_phononExplodeTimer = new QTimer(this);
+    m_phononExplodeTimer->setSingleShot(true);
+    for(int i = 0; i < 3; i++)
+    {
+        m_phononBonus.append(Phonon::createPlayer(Phonon::GameCategory));
+        m_phononBonus.last()->setCurrentSource(KStandardDirs::locate("appdata", "sounds/wow.ogg"));
+    }
+    m_phononBonusTimer = new QTimer(this);
+    m_phononBonusTimer->setSingleShot(true);
+    for(int i = 0; i < 2; i++)
+    {
+        m_phononDie.append(Phonon::createPlayer(Phonon::GameCategory));
+        m_phononDie.last()->setCurrentSource(KStandardDirs::locate("appdata", "sounds/die.ogg"));
+    }
+    m_phononDieTimer = new QTimer(this);
+    m_phononDieTimer->setSingleShot(true);
     #endif
     
     m_arena = 0;
@@ -150,9 +168,6 @@ void Game::init()
 
 Game::~Game()
 {
-    delete m_media1;
-    delete m_media2;
-    
     for (int i = 0; i < m_players.size(); i++)
     {
         delete m_players[i];
@@ -171,11 +186,26 @@ Game::~Game()
     delete soundBufferWilhelmScream;
     delete soundBufferDie;
     #else
-    delete m_phononPutBomb;
-    delete m_phononExplode;
-    delete m_phononBonus;
-    delete m_phononDie;
-    delete m_phononWilhelmScream;
+    while(!(m_phononPutBomb.isEmpty()))
+    {
+        delete m_phononPutBomb.takeLast();
+    }
+    delete m_phononPutBombTimer;
+    while(!(m_phononExplode.isEmpty()))
+    {
+        delete m_phononExplode.takeLast();
+    }
+    delete m_phononExplodeTimer;
+    while(!(m_phononBonus.isEmpty()))
+    {
+        delete m_phononBonus.takeLast();
+    }
+    delete m_phononBonusTimer;
+    while(!(m_phononDie.isEmpty()))
+    {
+        delete m_phononDie.takeLast();
+    }
+    delete m_phononDieTimer;
     #endif
 }
 
@@ -350,7 +380,24 @@ void Game::removeBonus(Bonus* bonus)
     #ifdef GRANATIER_USE_GLUON
     soundBonus->play();
     #else
-    m_phononBonus->play();
+    qint64 nLastRemainingTime;
+    int nIndex = 0;
+    if(m_phononBonusTimer->isActive())
+    {
+        return;
+    }
+    nLastRemainingTime = m_phononBonus.first()->remainingTime();
+    nIndex = 0;
+    for(int i = 0; i < m_phononBonus.count(); i++)
+    {
+        if(nLastRemainingTime > m_phononBonus.at(i)->remainingTime())
+        {
+            nIndex = i;
+        }
+    }
+    
+    m_phononBonus.at(nIndex)->play();
+    m_phononBonusTimer->start(50);
     #endif
 }
 
@@ -398,22 +445,11 @@ void Game::createPlayer(QPointF p_position, const QString& p_graphicsPath, const
     connect(player, SIGNAL(dying(Player*)), this, SLOT(playerDeath(Player*)));
 }
 
-void Game::setSoundsEnabled(bool p_enabled) {
-	if (p_enabled) {
-		if (!m_media1) {
-			m_media1 = Phonon::createPlayer(Phonon::GameCategory);
-		}
-		if (!m_media2) {
-			m_media2 = Phonon::createPlayer(Phonon::GameCategory);
-		}
-	} else {
-		delete m_media1;
-		delete m_media2;
-		m_media1 = 0;
-		m_media2 = 0;
-	}
-	Settings::setSounds(p_enabled);
-	Settings::self()->writeConfig();
+void Game::setSoundsEnabled(bool p_enabled)
+{
+    m_soundEnabled = p_enabled;
+    Settings::setSounds(p_enabled);
+    Settings::self()->writeConfig();
 }
 
 void Game::initCharactersPosition() {
@@ -441,23 +477,6 @@ void Game::initCharactersPosition() {
             }
         }
     }
-}
-
-void Game::playSound(const QString& p_sound) {
-	Phonon::MediaObject* m_usedMedia;
-
-	if (Settings::sounds()) {
-		// Choose the media object with the smallest remaining time
-		if (m_media1->remainingTime() <= m_media2->remainingTime()) {
-			m_usedMedia = m_media1;
-		} else {
-			m_usedMedia = m_media2;
-		}
-		if (m_usedMedia->currentSource().fileName() != p_sound) {
-			m_usedMedia->setCurrentSource(p_sound);
-		}
-		m_usedMedia->play();
-	}
 }
 
 void Game::keyPressEvent(QKeyEvent* p_event)
@@ -563,23 +582,26 @@ void Game::playerDeath(Player* player)
     //m_player->die();
     //wait some time until the game stops
     QTimer::singleShot(1500, this, SLOT(resumeAfterPlayerDeath()));   
-    //if(player->getGraphicsPath().contains == "player1")
-    //{
-    //    soundSourceDie->play();
-    //}
-    //else
-    //{
-    //    soundSourceWilhelmScream->play();
-    //}
+
     #ifndef GRANATIER_USE_GLUON
-    if(player->getGraphicsPath().contains("player1"))
+    qint64 nLastRemainingTime;
+    int nIndex = 0;
+    if(m_phononDieTimer->isActive())
     {
-        m_phononWilhelmScream->play();
+        return;
     }
-    else
+    nLastRemainingTime = m_phononDie.first()->remainingTime();
+    nIndex = 0;
+    for(int i = 0; i < m_phononDie.count(); i++)
     {
-        m_phononDie->play();
+        if(nLastRemainingTime > m_phononDie.at(i)->remainingTime())
+        {
+            nIndex = i;
+        }
     }
+    
+    m_phononDie.at(nIndex)->play();
+    m_phononDieTimer->start(50);
     #endif
 }
 
@@ -633,16 +655,13 @@ void Game::winPoints(Element* p_element) {
 
 	// For each 10000 points we get a life more
 	if (m_points / 10000 > (m_points - wonPoints) / 10000) {
-		playSound(KStandardDirs::locate("sound", "kapman/life.ogg"));
 		//m_lives++;
 		emit(dataChanged(LivesInfo));
 	}
 
 	if (p_element->getType() == Element::PILL) {
-		playSound(KStandardDirs::locate("sound", "kapman/pill.ogg"));
 		emit(elementEaten(p_element->getX(), p_element->getY()));
 	} else if (p_element->getType() == Element::BONUS) {
-		playSound(KStandardDirs::locate("sound", "kapman/bonus.ogg"));
 		// Get the position of the Bonus
 		qreal xPos = p_element->getX();
 		qreal yPos = p_element->getY();
@@ -656,7 +675,6 @@ void Game::winPoints(Element* p_element) {
 }
 
 void Game::nextLevel() {
-	playSound(KStandardDirs::locate("sound", "kapman/levelup.ogg"));
 	// Increment the level
 	m_level++;
 	// Update Bonus
@@ -690,7 +708,24 @@ void Game::createBomb(Player* player, qreal x, qreal y)
     #ifdef GRANATIER_USE_GLUON
     soundPutBomb->play();
     #else
-    m_phononPutBomb->play();
+    qint64 nLastRemainingTime;
+    int nIndex = 0;
+    if(m_phononPutBombTimer->isActive())
+    {
+        return;
+    }
+    nLastRemainingTime = m_phononPutBomb.first()->remainingTime();
+    nIndex = 0;
+    for(int i = 0; i < m_phononPutBomb.count(); i++)
+    {
+        if(nLastRemainingTime > m_phononPutBomb.at(i)->remainingTime())
+        {
+            nIndex = i;
+        }
+    }
+    
+    m_phononPutBomb.at(nIndex)->play();
+    m_phononPutBombTimer->start(25);
     #endif
 }
 
@@ -720,7 +755,24 @@ void Game::slot_bombDetonated(Bomb* bomb)
     soundExplode->play();
     soundExplode->setGain(soundExplode->gain()*1.2);
     #else
-    m_phononExplode->play();
+    qint64 nLastRemainingTime;
+    int nIndex = 0;
+    if(m_phononExplodeTimer->isActive())
+    {
+        return;
+    }
+    nLastRemainingTime = m_phononExplode.first()->remainingTime();
+    nIndex = 0;
+    for(int i = 0; i < m_phononExplode.count(); i++)
+    {
+        if(nLastRemainingTime > m_phononExplode.at(i)->remainingTime())
+        {
+            nIndex = i;
+        }
+    }
+    
+    m_phononExplode.at(nIndex)->play();
+    m_phononExplodeTimer->start(50);
     #endif
 }
 

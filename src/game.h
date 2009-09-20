@@ -21,9 +21,9 @@
 
 #include <QObject>
 
-//TODO: #ifndef GRANATIER_USE_GLUON
+#ifndef GRANATIER_USE_GLUON
 #include <Phonon>
-//#endif
+#endif
 
 class GameScene;
 class Arena;
@@ -99,12 +99,6 @@ class Game : public QObject {
         
 		/** The current game level */
 		int m_level;
-
-		/** A first MediaObject to play sounds */
-		Phonon::MediaObject* m_media1;
-		
-		/** A second MediaObject to play sounds */
-		Phonon::MediaObject* m_media2;
         
         #ifdef GRANATIER_USE_GLUON
         /** User KALEngine for sound */
@@ -118,13 +112,17 @@ class Game : public QObject {
         KALSound* soundWilhelmScream;
         #else
         /** Use Phonon for sound */
-        Phonon::MediaObject* m_phononPutBomb;
-        Phonon::MediaObject* m_phononExplode;
-        Phonon::MediaObject* m_phononBonus;
-        Phonon::MediaObject* m_phononDie;
-        Phonon::MediaObject* m_phononWilhelmScream;
+        QTimer* m_phononPutBombTimer;
+        QList <Phonon::MediaObject*> m_phononPutBomb;
+        QTimer* m_phononExplodeTimer;
+        QList <Phonon::MediaObject*> m_phononExplode;
+        QTimer* m_phononBonusTimer;
+        QList <Phonon::MediaObject*> m_phononBonus;
+        QTimer* m_phononDieTimer;
+        QList <Phonon::MediaObject*> m_phononDie;
         #endif
         
+        bool m_soundEnabled;
         bool m_gameOver;
         QString m_strWinner;
         
@@ -288,12 +286,6 @@ class Game : public QObject {
 		 * Initializes the character coordinates.
 		 */
 		void initCharactersPosition();
-
-		/**
-		 * Plays the given sound.
-		 * @param p_sound the path to the sound to play
-		 */
-		void playSound(const QString& p_sound);
 
 	public slots:
 

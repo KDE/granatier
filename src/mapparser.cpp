@@ -22,6 +22,8 @@
 #include "game.h"
 #include "arena.h"
 
+#include <QPointF>
+
 MapParser::MapParser(Game* p_game)
 {
     m_game = p_game;
