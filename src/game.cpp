@@ -40,7 +40,6 @@
 #include <KDE/KALEngine>
 #include <KDE/KALSound>
 #include <KDE/KALBuffer>
-//#endif
 #else
 #include <Phonon/MediaObject>
 #endif
@@ -59,10 +58,7 @@ Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_
     #ifdef GRANATIER_USE_GLUON
     soundEngine = KALEngine::instance();
     soundPutBomb = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
-    delete soundPutBomb; //TODO: sound doesn't play after first game is over; fix this workaround in gluon
-    soundPutBomb = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
     soundExplode = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/explode.ogg")), soundEngine);
-    soundExplode->setGain(1);
     soundBonus = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/wow.ogg")), soundEngine);
     soundBufferDie = new KALBuffer(KStandardDirs::locate("appdata", "sounds/die.ogg"));
     soundBufferWilhelmScream = new KALBuffer(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"));
@@ -764,15 +760,7 @@ void Game::slot_bombDetonated(Bomb* bomb)
     if(m_soundEnabled)
     {
         #ifdef GRANATIER_USE_GLUON
-        soundExplode->setMaxGain(10);
-        
-        if(soundExplode->elapsedTime() == 0)
-        {
-            soundExplode->setGain(1);
-        }
-        
         soundExplode->play();
-        soundExplode->setGain(soundExplode->gain()*1.2);
         #else
         qint64 nLastRemainingTime;
         int nIndex = 0;
