@@ -20,27 +20,28 @@
 #include "player.h"
 #include "bonus.h"
 #include "arena.h"
+#include "playersettings.h"
 
 #include <QKeyEvent>
 #include <kdebug.h>
 
 #include <cmath>
 
-Player::Player(qreal p_x, qreal p_y, const QString& p_graphicsPath, const QString& p_playerName, Arena* p_arena) : Character(p_x, p_y, p_arena)
+Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSettings* p_playerSettings, Arena* p_arena) : Character(p_x, p_y, p_arena)
 {
     m_type = Element::PLAYER;
-    m_graphicsPath = p_graphicsPath;
-    m_playerName = p_playerName;
+    m_graphicsPath = p_playerSettings->playerFile(p_playerID);
+    m_playerName = p_playerSettings->playerName(p_playerID);
     
     m_points = 0;
     
     resurrect();
     
-    m_key.moveLeft = Qt::Key_Left;
-    m_key.moveRight = Qt::Key_Right;
-    m_key.moveUp = Qt::Key_Up;
-    m_key.moveDown = Qt::Key_Down;
-    m_key.dropBomb = Qt::Key_Return;
+    m_key.moveLeft = p_playerSettings->keyLeft(p_playerID);
+    m_key.moveRight = p_playerSettings->keyRight(p_playerID);
+    m_key.moveUp = p_playerSettings->keyUp(p_playerID);
+    m_key.moveDown = p_playerSettings->keyDown(p_playerID);
+    m_key.dropBomb = p_playerSettings->keyPutBomb(p_playerID);
 }
 
 Player::~Player()

@@ -243,13 +243,6 @@ class Game : public QObject {
          */
         void createBlock(QPointF p_position, const QString& p_imageId);
 
-        /**
-         * Create the new Player
-         * @param p_position the Player position
-         * @param p_imageId the image of the Player
-         */
-        void createPlayer(QPointF p_position, const QString& p_graphicsPath, const QString& p_playerName);
-
 		/**
 		 * Enables / disables the sounds.
 		 * @param p_enabled if true the sounds will be enabled, otherwise they will be disabled

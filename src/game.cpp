@@ -104,7 +104,9 @@ Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_
     {
         if(m_playerSettings->enabled(strPlayerIDs[i]))
         {
-            createPlayer(QPointF(-0.5, 0.5), m_playerSettings->playerFile(strPlayerIDs[i]), m_playerSettings->playerName(strPlayerIDs[i]));
+            Player* player = new Player(qreal(Cell::SIZE * (-0.5)),qreal(Cell::SIZE * 0.5), strPlayerIDs[i], playerSettings, m_arena);
+            m_players.append(player);
+            connect(player, SIGNAL(dying(Player*)), this, SLOT(playerDeath(Player*)));
         }
     }
     
@@ -404,43 +406,6 @@ void Game::createBlock(QPointF p_position, const QString& p_imageId)
     Block* block = new Block(p_position.y(), p_position.x(), m_arena, p_imageId);
     m_blocks.append(block);
     m_arena->setCellElement(p_position.y(), p_position.x(), block);
-}
-
-void Game::createPlayer(QPointF p_position, const QString& p_graphicsPath, const QString& p_playerName)
-{
-    Player* player = new Player(qreal(Cell::SIZE * p_position.x()),qreal(Cell::SIZE * p_position.y()), p_graphicsPath, p_playerName, m_arena);
-    if(p_graphicsPath.contains("player2"))
-    {
-        Character::Shortcuts keys;
-        keys.moveLeft = Qt::Key_A;
-        keys.moveRight = Qt::Key_D;
-        keys.moveUp = Qt::Key_W;
-        keys.moveDown = Qt::Key_S;
-        keys.dropBomb = Qt::Key_Q;
-        player->setShortcuts(keys);
-    }
-    if(p_graphicsPath.contains("player3"))
-    {
-        Character::Shortcuts keys;
-        keys.moveLeft = Qt::Key_J;
-        keys.moveRight = Qt::Key_L;
-        keys.moveUp = Qt::Key_I;
-        keys.moveDown = Qt::Key_K;
-        keys.dropBomb = Qt::Key_Space;
-        player->setShortcuts(keys);
-    }
-    if(p_graphicsPath.contains("player4"))
-    {
-        Character::Shortcuts keys;
-        keys.moveLeft = Qt::Key_R;
-        keys.moveRight = Qt::Key_Z;
-        keys.moveUp = Qt::Key_T;
-        keys.moveDown = Qt::Key_G;
-        keys.dropBomb = Qt::Key_C;
-        player->setShortcuts(keys);
-    }
-    m_players.append(player);
-    connect(player, SIGNAL(dying(Player*)), this, SLOT(playerDeath(Player*)));
 }
 
 void Game::setSoundsEnabled(bool p_enabled)

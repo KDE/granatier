@@ -21,6 +21,7 @@
 
 #include "character.h"
 
+class PlayerSettings;
 class Bonus;
 class QKeyEvent;
 class QString;
@@ -60,12 +61,12 @@ public:
       * Creates a new Player instance.
       * @param p_x the initial x-coordinate
       * @param p_y the initial y-coordinate
-      * @param p_graphicsPath the Path to the SVG of the related item
-      * @param p_playerName the Name of the Player
+      * @param p_playerID the Player ID for PlayerSettings
+      * @param p_playerSettings the PlayerSettings
       * @param p_arena the Arena the Player is on
       */
-    Player(qreal p_x, qreal p_y, const QString& p_graphicsPath, const QString& p_playerName, Arena* p_arena);
-
+    Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSettings* p_playerSettings, Arena* p_arena);
+    
     /**
       * Deletes the Player instance.
       */

@@ -5,9 +5,9 @@
       http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
   <kcfgfile name="granatierrc"/>
   <group name="General">
-    <entry name="GameDifficulty" type="Int" key="GameDifficulty">
-      <label>Game difficulty level.</label>
-      <default>40</default>
+    <entry name="FirstRun" type="Int" key="FirstRun">
+      <label>Check if it's the first run of the game.</label>
+      <default>1</default>
     </entry>
     <entry name="Theme" type="String" key="Theme">
       <label>The graphical theme to be used.</label>

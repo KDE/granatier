@@ -73,6 +73,7 @@ public:
     //slot
     void slotUpdatePreview();
     void slotUpdateName(QListWidgetItem* item);
+    void slotUpdateShortcut(const QKeySequence& seq);
 };
 
 PlayerSelector::PlayerSelector(QWidget* parent, PlayerSettings* playerSettings) : QWidget(parent), d(new PlayerSelectorPrivate(this, playerSettings))
@@ -116,14 +117,46 @@ void PlayerSelector::PlayerSelectorPrivate::setupData()
     m_playerPreview = 0;
     ui.playerPreview->fitInView(ui.playerPreview->sceneRect(), Qt::KeepAspectRatio);
     
-    //connect(ui.playerList, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), q ,SLOT(slotUpdatePreview()));
     connect(ui.playerList, SIGNAL(itemSelectionChanged()), q, SLOT(slotUpdatePreview()));
     connect(ui.playerList, SIGNAL(itemChanged(QListWidgetItem*)), q, SLOT(slotUpdateName(QListWidgetItem*)));
     
     if(ui.playerList->count() > 0)
     {
         ui.playerList->setCurrentItem(ui.playerList->item(0));
+        
+        ui.keyUp->setObjectName(strPlayerIDs[0]);
+        ui.keyUp->setKeySequence(m_playerSettings->keyUp(strPlayerIDs[0]));
+        ui.keyUp->setModifierlessAllowed(true);
+        ui.keyUp->setMultiKeyShortcutsAllowed(false);
+        ui.keyRight->setObjectName(strPlayerIDs[0]);
+        ui.keyRight->setKeySequence(m_playerSettings->keyRight(strPlayerIDs[0]));
+        ui.keyRight->setModifierlessAllowed(true);
+        ui.keyRight->setMultiKeyShortcutsAllowed(false);
+        ui.keyDown->setObjectName(strPlayerIDs[0]);
+        ui.keyDown->setKeySequence(m_playerSettings->keyDown(strPlayerIDs[0]));
+        ui.keyDown->setModifierlessAllowed(true);
+        ui.keyDown->setMultiKeyShortcutsAllowed(false);
+        ui.keyLeft->setObjectName(strPlayerIDs[0]);
+        ui.keyLeft->setKeySequence(m_playerSettings->keyLeft(strPlayerIDs[0]));
+        ui.keyLeft->setModifierlessAllowed(true);
+        ui.keyLeft->setMultiKeyShortcutsAllowed(false);
+        ui.keyPutBomb->setObjectName(strPlayerIDs[0]);
+        ui.keyPutBomb->setKeySequence(m_playerSettings->keyPutBomb(strPlayerIDs[0]));
+        ui.keyPutBomb->setModifierlessAllowed(true);
+        ui.keyPutBomb->setMultiKeyShortcutsAllowed(false);
     }
+    
+    ui.keyUp->setEnabled(false);
+    ui.keyRight->setEnabled(false);
+    ui.keyDown->setEnabled(false);
+    ui.keyLeft->setEnabled(false);
+    ui.keyPutBomb->setEnabled(false);
+    
+    connect(ui.keyUp, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
+    connect(ui.keyRight, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
+    connect(ui.keyDown, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
+    connect(ui.keyLeft, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
+    connect(ui.keyPutBomb, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
 }
 
 void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()
@@ -140,9 +173,10 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()
     {
         delete m_renderer;
     }
+    int nIndex = ui.playerList->currentIndex().row();
     //TODO: check if renderer is needed
     m_renderer = new KSvgRenderer;
-    m_renderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(m_playerSettings->playerPreviewFile(strPlayerIDs[ui.playerList->currentIndex().row()]))));
+    m_renderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(m_playerSettings->playerPreviewFile(strPlayerIDs[nIndex]))));
     int nDummy = ui.kcfg_Dummy->value() + 1;
     ui.kcfg_Dummy->setValue(nDummy);
     m_playerPreview = new QGraphicsSvgItem();
@@ -150,6 +184,17 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()
     m_playerPreview->setElementId("player");
     m_graphicsScene->addItem(m_playerPreview);
     ui.playerPreview->fitInView(ui.playerPreview->sceneRect(), Qt::KeepAspectRatio);
+    
+    ui.keyUp->setObjectName(strPlayerIDs[nIndex]);
+    ui.keyUp->setKeySequence(m_playerSettings->keyUp(strPlayerIDs[nIndex]));
+    ui.keyRight->setObjectName(strPlayerIDs[nIndex]);
+    ui.keyRight->setKeySequence(m_playerSettings->keyRight(strPlayerIDs[nIndex]));
+    ui.keyDown->setObjectName(strPlayerIDs[nIndex]);
+    ui.keyDown->setKeySequence(m_playerSettings->keyDown(strPlayerIDs[nIndex]));
+    ui.keyLeft->setObjectName(strPlayerIDs[nIndex]);
+    ui.keyLeft->setKeySequence(m_playerSettings->keyLeft(strPlayerIDs[nIndex]));
+    ui.keyPutBomb->setObjectName(strPlayerIDs[nIndex]);
+    ui.keyPutBomb->setKeySequence(m_playerSettings->keyPutBomb(strPlayerIDs[nIndex]));
 }
 
 void PlayerSelector::PlayerSelectorPrivate::slotUpdateName(QListWidgetItem* item)
@@ -172,6 +217,16 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdateName(QListWidgetItem* item
         int nDummy = ui.kcfg_Dummy->value() + 1;
         ui.kcfg_Dummy->setValue(nDummy);
     }
+}
+
+void PlayerSelector::PlayerSelectorPrivate::slotUpdateShortcut(const QKeySequence& seq)
+{
+    int nIndex = ui.playerList->currentIndex().row();
+    //m_playerSettings->setKeyUp(strPlayerIDs[nIndex], seq);
+    //m_playerSettings->setKeyRight(strPlayerIDs[nIndex], seq);
+    //m_playerSettings->setKeyDown(strPlayerIDs[nIndex], seq);
+    //m_playerSettings->setKeyLeft(strPlayerIDs[nIndex], seq);
+    //m_playerSettings->setKeyPutBomb(strPlayerIDs[nIndex], seq);
 }
 
 #include "playerselector.moc"

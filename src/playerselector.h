@@ -39,6 +39,7 @@ private:
     Q_DISABLE_COPY(PlayerSelector)
     Q_PRIVATE_SLOT(d, void slotUpdatePreview())
     Q_PRIVATE_SLOT(d, void slotUpdateName(QListWidgetItem* item))
+    Q_PRIVATE_SLOT(d, void slotUpdateShortcut(const QKeySequence& seq))
 }; 
 
 #endif
