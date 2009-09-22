@@ -437,8 +437,8 @@ void Player::keyPressed(QKeyEvent* keyEvent)
         return;
     }
     
-    int key = keyEvent->key();
-
+    QKeySequence key = QKeySequence(keyEvent->key());
+    
     if(key == m_key.moveLeft || key == m_key.moveRight || key == m_key.moveUp || key == m_key.moveDown || key == m_key.dropBomb)
     {
         keyEvent->accept();
@@ -481,7 +481,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
 
 void Player::keyReleased(QKeyEvent* keyEvent)
 {
-    int key = keyEvent->key();
+    QKeySequence key = QKeySequence(keyEvent->key());
 
     if(key == m_key.moveLeft || key == m_key.moveRight || key == m_key.moveUp || key == m_key.moveDown || key == m_key.dropBomb)
     {

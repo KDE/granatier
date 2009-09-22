@@ -146,12 +146,6 @@ void PlayerSelector::PlayerSelectorPrivate::setupData()
         ui.keyPutBomb->setMultiKeyShortcutsAllowed(false);
     }
     
-    ui.keyUp->setEnabled(false);
-    ui.keyRight->setEnabled(false);
-    ui.keyDown->setEnabled(false);
-    ui.keyLeft->setEnabled(false);
-    ui.keyPutBomb->setEnabled(false);
-    
     connect(ui.keyUp, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
     connect(ui.keyRight, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
     connect(ui.keyDown, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
@@ -184,6 +178,11 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()
     m_playerPreview->setElementId("player");
     m_graphicsScene->addItem(m_playerPreview);
     ui.playerPreview->fitInView(ui.playerPreview->sceneRect(), Qt::KeepAspectRatio);
+    
+    KConfig desktopFile(KStandardDirs::locate("appdata", "players/" + strPlayerIDs[nIndex]), KConfig::SimpleConfig);
+    ui.playerAuthor->setText(desktopFile.group("Player").readEntry<QString>("Author", ""));
+    ui.playerContact->setText(QString("<a href=\"mailto:%1\">%1</a>").arg(desktopFile.group("Player").readEntry<QString>("AuthorEmail", "")));
+    ui.playerDescription->setText(desktopFile.group("Player").readEntry<QString>("Description", ""));
     
     ui.keyUp->setObjectName(strPlayerIDs[nIndex]);
     ui.keyUp->setKeySequence(m_playerSettings->keyUp(strPlayerIDs[nIndex]));
@@ -222,11 +221,14 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdateName(QListWidgetItem* item
 void PlayerSelector::PlayerSelectorPrivate::slotUpdateShortcut(const QKeySequence& seq)
 {
     int nIndex = ui.playerList->currentIndex().row();
-    //m_playerSettings->setKeyUp(strPlayerIDs[nIndex], seq);
-    //m_playerSettings->setKeyRight(strPlayerIDs[nIndex], seq);
-    //m_playerSettings->setKeyDown(strPlayerIDs[nIndex], seq);
-    //m_playerSettings->setKeyLeft(strPlayerIDs[nIndex], seq);
-    //m_playerSettings->setKeyPutBomb(strPlayerIDs[nIndex], seq);
+    m_playerSettings->setKeyUp(strPlayerIDs[nIndex], ui.keyUp->keySequence());
+    m_playerSettings->setKeyRight(strPlayerIDs[nIndex], ui.keyRight->keySequence());
+    m_playerSettings->setKeyDown(strPlayerIDs[nIndex], ui.keyDown->keySequence());
+    m_playerSettings->setKeyLeft(strPlayerIDs[nIndex], ui.keyLeft->keySequence());
+    m_playerSettings->setKeyPutBomb(strPlayerIDs[nIndex], ui.keyPutBomb->keySequence());
+    
+    int nDummy = ui.kcfg_Dummy->value() + 1;
+    ui.kcfg_Dummy->setValue(nDummy);
 }
 
 #include "playerselector.moc"

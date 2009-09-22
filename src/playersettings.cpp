@@ -69,11 +69,11 @@ PlayerSettings::PlayerSettings()
                     nEnableCount++;
                 }
                 
-                m_playerSettings.find(strPlayerID).value().keyUp = (Qt::Key) granatierConfig.group("Player").group(playersGroupList[i]).readEntry<int>("KeyUp", 0);
-                m_playerSettings.find(strPlayerID).value().keyRight = (Qt::Key) granatierConfig.group("Player").group(playersGroupList[i]).readEntry<int>("KeyRight", 0);
-                m_playerSettings.find(strPlayerID).value().keyDown = (Qt::Key) granatierConfig.group("Player").group(playersGroupList[i]).readEntry<int>("KeyDown", 0);
-                m_playerSettings.find(strPlayerID).value().keyLeft = (Qt::Key) granatierConfig.group("Player").group(playersGroupList[i]).readEntry<int>("KeyLeft", 0);
-                m_playerSettings.find(strPlayerID).value().keyPutBomb = (Qt::Key) granatierConfig.group("Player").group(playersGroupList[i]).readEntry<int>("KeyPutBomb", 0);
+                m_playerSettings.find(strPlayerID).value().keyUp = QKeySequence(granatierConfig.group("Player").group(playersGroupList[i]).readEntry<QString>("KeyUp", ""));
+                m_playerSettings.find(strPlayerID).value().keyRight = QKeySequence(granatierConfig.group("Player").group(playersGroupList[i]).readEntry<QString>("KeyRight", ""));
+                m_playerSettings.find(strPlayerID).value().keyDown = QKeySequence(granatierConfig.group("Player").group(playersGroupList[i]).readEntry<QString>("KeyDown", ""));
+                m_playerSettings.find(strPlayerID).value().keyLeft = QKeySequence(granatierConfig.group("Player").group(playersGroupList[i]).readEntry<QString>("KeyLeft", ""));
+                m_playerSettings.find(strPlayerID).value().keyPutBomb = QKeySequence(granatierConfig.group("Player").group(playersGroupList[i]).readEntry<QString>("KeyPutBomb", ""));
             }
         }
     }
@@ -93,23 +93,23 @@ PlayerSettings::PlayerSettings()
     if(nFirstRun)
     {
         settingsIterator = m_playerSettings.begin();
-        settingsIterator.value().keyUp = Qt::Key_Up;
-        settingsIterator.value().keyRight = Qt::Key_Right;
-        settingsIterator.value().keyDown = Qt::Key_Down;
-        settingsIterator.value().keyLeft = Qt::Key_Left;
-        settingsIterator.value().keyPutBomb = Qt::Key_Return;
+        settingsIterator.value().keyUp = QKeySequence(Qt::Key_Up);
+        settingsIterator.value().keyRight = QKeySequence(Qt::Key_Right);
+        settingsIterator.value().keyDown = QKeySequence(Qt::Key_Down);
+        settingsIterator.value().keyLeft = QKeySequence(Qt::Key_Left);
+        settingsIterator.value().keyPutBomb = QKeySequence(Qt::Key_Return);
         ++settingsIterator;
-        settingsIterator.value().keyUp = Qt::Key_W;
-        settingsIterator.value().keyRight = Qt::Key_D;
-        settingsIterator.value().keyDown = Qt::Key_S;
-        settingsIterator.value().keyLeft = Qt::Key_A;
-        settingsIterator.value().keyPutBomb = Qt::Key_Q;
+        settingsIterator.value().keyUp = QKeySequence(Qt::Key_W);
+        settingsIterator.value().keyRight = QKeySequence(Qt::Key_D);
+        settingsIterator.value().keyDown = QKeySequence(Qt::Key_S);
+        settingsIterator.value().keyLeft = QKeySequence(Qt::Key_A);
+        settingsIterator.value().keyPutBomb = QKeySequence(Qt::Key_Q);
         ++settingsIterator;
-        settingsIterator.value().keyUp = Qt::Key_I;
-        settingsIterator.value().keyRight = Qt::Key_L;
-        settingsIterator.value().keyDown = Qt::Key_K;
-        settingsIterator.value().keyLeft = Qt::Key_J;
-        settingsIterator.value().keyPutBomb = Qt::Key_Space;
+        settingsIterator.value().keyUp = QKeySequence(Qt::Key_I);
+        settingsIterator.value().keyRight = QKeySequence(Qt::Key_L);
+        settingsIterator.value().keyDown = QKeySequence(Qt::Key_K);
+        settingsIterator.value().keyLeft = QKeySequence(Qt::Key_J);
+        settingsIterator.value().keyPutBomb = QKeySequence(Qt::Key_Space);
         m_tempPlayerSettings = m_playerSettings;
         savePlayerSettings();
         granatierConfig.group("General").writeEntry("FirstRun", 0);
@@ -122,22 +122,22 @@ PlayerSettings::~PlayerSettings()
 {
 }
 
-QStringList PlayerSettings::playerIDs()
+const QStringList PlayerSettings::playerIDs()
 {
     return m_playerSettings.keys();
 }
 
-QString PlayerSettings::playerName(const QString& strPlayerID) const
+const QString PlayerSettings::playerName(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).strPlayerName;
 }
 
-QString PlayerSettings::playerFile(const QString& strPlayerID) const
+const QString PlayerSettings::playerFile(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).strPlayerFile;
 }
 
-QString PlayerSettings::playerPreviewFile(const QString& strPlayerID) const
+const QString PlayerSettings::playerPreviewFile(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).strPlayerPreviewFile;
 }
@@ -147,27 +147,27 @@ bool PlayerSettings::enabled(const QString& strPlayerID) const
     return m_playerSettings.value(strPlayerID).enabled;
 }
 
-Qt::Key PlayerSettings::keyUp(const QString& strPlayerID) const
+const QKeySequence PlayerSettings::keyUp(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).keyUp;
 }
 
-Qt::Key PlayerSettings::keyRight(const QString& strPlayerID) const
+const QKeySequence PlayerSettings::keyRight(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).keyRight;
 }
 
-Qt::Key PlayerSettings::keyDown(const QString& strPlayerID) const
+const QKeySequence PlayerSettings::keyDown(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).keyDown;
 }
 
-Qt::Key PlayerSettings::keyLeft(const QString& strPlayerID) const
+const QKeySequence PlayerSettings::keyLeft(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).keyLeft;
 }
 
-Qt::Key PlayerSettings::keyPutBomb(const QString& strPlayerID) const
+const QKeySequence PlayerSettings::keyPutBomb(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).keyPutBomb;
 }
@@ -218,26 +218,11 @@ void PlayerSettings::savePlayerSettings()
             granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("Name", i.value().strPlayerName);
             granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("Enabled", (i.value().enabled ? 1 : 0));
             
-            if((int) i.value().keyUp != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyUp", (int) i.value().keyUp);
-            }
-            if((int) i.value().keyRight != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyRight", (int) i.value().keyRight);
-            }
-            if((int) i.value().keyDown != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyDown", (int) i.value().keyDown);
-            }
-            if((int) i.value().keyLeft != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyLeft", (int) i.value().keyLeft);
-            }
-            if((int) i.value().keyPutBomb != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyPutBomb", (int) i.value().keyPutBomb);
-            }
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyUp", i.value().keyUp.toString());
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyRight", i.value().keyRight.toString());
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyDown", i.value().keyDown.toString());
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyLeft", i.value().keyLeft.toString());
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyPutBomb", i.value().keyPutBomb.toString());
             
             ++i;
         }
@@ -252,26 +237,11 @@ void PlayerSettings::savePlayerSettings()
             granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("Name", i.value().strPlayerName);
             granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("Enabled", (i.value().enabled ? 1 : 0));
             
-            if((int) i.value().keyUp != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyUp", (int) i.value().keyUp);
-            }
-            if((int) i.value().keyRight != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyRight", (int) i.value().keyRight);
-            }
-            if((int) i.value().keyDown != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyDown", (int) i.value().keyDown);
-            }
-            if((int) i.value().keyLeft != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyLeft", (int) i.value().keyLeft);
-            }
-            if((int) i.value().keyPutBomb != 0)
-            {
-                granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyPutBomb", (int) i.value().keyPutBomb);
-            }
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyUp", i.value().keyUp.toString());
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyRight", i.value().keyRight.toString());
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyDown", i.value().keyDown.toString());
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyLeft", i.value().keyLeft.toString());
+            granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("KeyPutBomb", i.value().keyPutBomb.toString());
             
             nPlayersGroupIndex++;
             ++i;
@@ -300,7 +270,7 @@ void PlayerSettings::setEnabled(const QString& strPlayerID, const bool enabled)
     }
 }
 
-void PlayerSettings::setKeyUp(const QString& strPlayerID, const Qt::Key key)
+void PlayerSettings::setKeyUp(const QString& strPlayerID, const QKeySequence& key)
 {
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
@@ -308,7 +278,7 @@ void PlayerSettings::setKeyUp(const QString& strPlayerID, const Qt::Key key)
     }
 }
 
-void PlayerSettings::setKeyRight(const QString& strPlayerID, const Qt::Key key)
+void PlayerSettings::setKeyRight(const QString& strPlayerID, const QKeySequence& key)
 {
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
@@ -316,7 +286,7 @@ void PlayerSettings::setKeyRight(const QString& strPlayerID, const Qt::Key key)
     }
 }
 
-void PlayerSettings::setKeyDown(const QString& strPlayerID, const Qt::Key key)
+void PlayerSettings::setKeyDown(const QString& strPlayerID, const QKeySequence& key)
 {
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
@@ -324,7 +294,7 @@ void PlayerSettings::setKeyDown(const QString& strPlayerID, const Qt::Key key)
     }
 }
 
-void PlayerSettings::setKeyLeft(const QString& strPlayerID, const Qt::Key key)
+void PlayerSettings::setKeyLeft(const QString& strPlayerID, const QKeySequence& key)
 {
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
@@ -332,7 +302,7 @@ void PlayerSettings::setKeyLeft(const QString& strPlayerID, const Qt::Key key)
     }
 }
 
-void PlayerSettings::setKeyPutBomb(const QString& strPlayerID, const Qt::Key key)
+void PlayerSettings::setKeyPutBomb(const QString& strPlayerID, const QKeySequence& key)
 {
     if(m_tempPlayerSettings.contains(strPlayerID))
     {

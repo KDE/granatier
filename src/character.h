@@ -21,6 +21,8 @@
 
 #include "element.h"
 
+#include <QKeySequence>
+
 class Cell;
 
 /**
@@ -53,11 +55,11 @@ class Character : public Element {
         /** Keyboard shortcuts for moving and dropping a bomb */
         struct Shortcuts
         {
-            int moveLeft;
-            int moveRight;
-            int moveUp;
-            int moveDown;
-            int dropBomb;
+            QKeySequence moveLeft;
+            QKeySequence moveRight;
+            QKeySequence moveUp;
+            QKeySequence moveDown;
+            QKeySequence dropBomb;
         };
         Shortcuts m_key;
 
