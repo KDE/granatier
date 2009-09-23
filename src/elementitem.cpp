@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -18,36 +19,41 @@
 #include "elementitem.h"
 #include "element.h"
 
-ElementItem::ElementItem(Element* p_model) : QGraphicsSvgItem() {
-	m_model = p_model;
-	// Init the view coordinates
-	setPos(p_model->getX() - boundingRect().width() / 2, p_model->getY() - boundingRect().height() / 2);
-	// Connects the model to the view
-	connect(p_model, SIGNAL(moved(qreal, qreal)), this, SLOT(update(qreal, qreal)));
-	setCacheMode(DeviceCoordinateCache);
-	setMaximumCacheSize(QSize(500, 500));
+ElementItem::ElementItem(Element* p_model) : QGraphicsSvgItem()
+{
+    m_model = p_model;
+    // Init the view coordinates
+    setPos(p_model->getX() - boundingRect().width() / 2, p_model->getY() - boundingRect().height() / 2);
+    // Connects the model to the view
+    connect(p_model, SIGNAL(moved(qreal, qreal)), this, SLOT(update(qreal, qreal)));
+    setCacheMode(DeviceCoordinateCache);
+    setMaximumCacheSize(QSize(500, 500));
 }
 
-ElementItem::~ElementItem() {
-	delete m_model;
+ElementItem::~ElementItem()
+{
+    delete m_model;
 
 }
 
-Element* ElementItem::getModel() const {
-	return m_model;
+Element* ElementItem::getModel() const
+{
+    return m_model;
 }
 
-QPainterPath ElementItem::shape() const {
-	QPainterPath path;
-	path.addEllipse(boundingRect());
-	return path;
+QPainterPath ElementItem::shape() const
+{
+    QPainterPath path;
+    path.addEllipse(boundingRect());
+    return path;
 }
 
-void ElementItem::update(qreal p_x, qreal p_y) {
-	// Compute the top-right coordinates of the item
-	qreal x = p_x - boundingRect().width() / 2;
-	qreal y = p_y - boundingRect().height() / 2;
+void ElementItem::update(qreal p_x, qreal p_y)
+{
+    // Compute the top-right coordinates of the item
+    qreal x = p_x - boundingRect().width() / 2;
+    qreal y = p_y - boundingRect().height() / 2;
 
-	// Updates the view coordinates
-	setPos(x, y);
+    // Updates the view coordinates
+    setPos(x, y);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Mathias Kraus <k.hias@gmx.de>
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Pierre-Benoit Besse <besse@gmail.com>
  * Copyright 2007-2008 Alexandre Galinier <alex.galinier@hotmail.com>
@@ -46,7 +46,7 @@
 
 const int Game::FPS = 40;
 
-Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_points(0), m_level(1)
+Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_level(1)
 {
     m_playerSettings = playerSettings;
     
@@ -276,9 +276,6 @@ bool Game::isCheater() const {
 	return m_isCheater;
 }
 
-int Game::getScore() const {
-	return m_points;
-}
 int Game::getLives() const {
 	return 3;//m_lives;
 }
@@ -618,35 +615,16 @@ void Game::resumeAfterPlayerDeath()
     
 }
 
-void Game::winPoints(Element* p_element) {
+void Game::winPoints(Element* p_element)
+{
+    if (p_element->getType() == Element::BONUS)
+    {
+        // Get the position of the Bonus
+        qreal xPos = p_element->getX();
+        qreal yPos = p_element->getY();
 
-	// The value of won Points
-	long wonPoints;
-
-	wonPoints = p_element->getPoints();
-
-	// Update of the points value
-	m_points += wonPoints;
-
-	// For each 10000 points we get a life more
-	if (m_points / 10000 > (m_points - wonPoints) / 10000) {
-		//m_lives++;
-		emit(dataChanged(LivesInfo));
-	}
-
-	if (p_element->getType() == Element::PILL) {
-		emit(elementEaten(p_element->getX(), p_element->getY()));
-	} else if (p_element->getType() == Element::BONUS) {
-		// Get the position of the Bonus
-		qreal xPos = p_element->getX();
-		qreal yPos = p_element->getY();
-
-		// Sends to the scene the number of points to display and its position
-		emit(pointsToDisplay(wonPoints, xPos, yPos));
-	
-		emit(bonusOff());
-	}
-	emit(dataChanged(ScoreInfo));
+        emit(bonusOff());
+    }
 }
 
 void Game::nextLevel() {

@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -28,141 +29,131 @@ class Player;
  */
 class Element : public QObject {
 
-	Q_OBJECT
-	
-	public:
-	
-		/** The Element possible types */
-		enum Type {
-            BLOCK,
-            PLAYER,
-            BOMB,
-			PILL,
-			ENERGYZER,
-			BONUS
-		};
-		
-	protected:
-	
-		/** The Element type */
-		Type m_type;
+Q_OBJECT
 
-		/** The Element initial x-coordinate */
-		qreal m_xInit;
+public:
 
-		/** The Element initial y-coordinate */ 
-		qreal m_yInit;
+    /** The Element possible types */
+    enum Type
+    {
+        BLOCK,
+        PLAYER,
+        BOMB,
+        BONUS
+    };
+    
+protected:
 
-		/** The Element current x-coordinate */
-		qreal m_x;
+    /** The Element type */
+    Type m_type;
 
-		/** The Element current y-coordinate */
-		qreal m_y;
+    /** The Element initial x-coordinate */
+    qreal m_xInit;
 
-		/** The Arena the Element is on */
-		Arena* m_arena;
+    /** The Element initial y-coordinate */ 
+    qreal m_yInit;
 
-		/** The Id of the Element */
-		QString m_imageId;
-		
-		/** Points won when the Element is eaten */
-		int m_points;
+    /** The Element current x-coordinate */
+    qreal m_x;
 
-	public:
+    /** The Element current y-coordinate */
+    qreal m_y;
 
-		/**
-		 * Creates a new Element instance.
-		 * @param p_x the initial x-coordinate
-		 * @param p_y the initial y-coordinate
-		 * @param p_arena the Arena the Element is on
-		 */
-		Element(qreal p_x, qreal p_y, Arena* p_arena);
+    /** The Arena the Element is on */
+    Arena* m_arena;
 
-		/**
-		 * Deletes the Element instance.
-		 */
-		~Element();
+    /** The Id of the Element */
+    QString m_imageId;
 
-		/**
-		 * Computes an action on a collision with the Player.
-		 * @param p_player the instance of Player which collides with the Element
-		 */
-		virtual void doActionOnCollision(Player* p_player);
+public:
 
-        /**
-         * Sets arena for the element.
-         * @param p_arena arena
-         */
-        void setArena(Arena* p_arena);
-        
-        /**
-         * Sets the path initial position.
-         * @param p_position initial position
-         */
-        void setInitialCoordinates (qreal p_x, qreal p_y);
-        
-		/**
-		 * Gets the path to the Element image.
-		 * @return the path to the Element image
-		 */
-		QString getImageId() const;
-		
-		/**
-		 * Gets the value of the Element.
-		 * @return the points won when the Element is eaten
-		 */
-		int getPoints() const;
-		
-		/**
-		 * Gets the type of the Element.
-		 * @return the Element type
-		 */
-		Element::Type getType() const;
+    /**
+      * Creates a new Element instance.
+      * @param p_x the initial x-coordinate
+      * @param p_y the initial y-coordinate
+      * @param p_arena the Arena the Element is on
+      */
+    Element(qreal p_x, qreal p_y, Arena* p_arena);
 
-		/**
-		 * Sets the Element image.
-		 * @param p_imageId the image to set
-		 */
-		void setImageId(const QString & p_imageId);
+    /**
+      * Deletes the Element instance.
+      */
+    ~Element();
 
-		/**
-		 * Gets the Element x-coordinate.
-		 * @return the x-coordinate
-		 */
-		qreal getX() const;
+    /**
+      * Computes an action on a collision with the Player.
+      * @param p_player the instance of Player which collides with the Element
+      */
+    virtual void doActionOnCollision(Player* p_player);
 
-		/**
-		 * Gets the Element y-coordinate.
-		 * @return the y-coordinate
-		 */
-		qreal getY() const;
+    /**
+      * Sets arena for the element.
+      * @param p_arena arena
+      */
+    void setArena(Arena* p_arena);
+    
+    /**
+      * Sets the path initial position.
+      * @param p_position initial position
+      */
+    void setInitialCoordinates (qreal p_x, qreal p_y);
+    
+    /**
+      * Gets the path to the Element image.
+      * @return the path to the Element image
+      */
+    QString getImageId() const;
+    
+    /**
+      * Gets the type of the Element.
+      * @return the Element type
+      */
+    Element::Type getType() const;
 
-		/**
-		 * Sets the Element x-coordinate to the given value
-		 * @param p_x the x-coordinate to set
-		 */
-		void setX(qreal p_x);
+    /**
+      * Sets the Element image.
+      * @param p_imageId the image to set
+      */
+    void setImageId(const QString & p_imageId);
 
-		/**
-		 * Sets the Element y-coordinate to the given value
-		 * @param p_y the y-coordinate to set
-		 */
-		void setY(qreal p_y);
+    /**
+      * Gets the Element x-coordinate.
+      * @return the x-coordinate
+      */
+    qreal getX() const;
 
-		/**
-		* Initializes Element x-coordinate and y-coordinate with
-		* initial values
-		*/
-		void initCoordinate();
+    /**
+      * Gets the Element y-coordinate.
+      * @return the y-coordinate
+      */
+    qreal getY() const;
 
-	signals:
+    /**
+      * Sets the Element x-coordinate to the given value
+      * @param p_x the x-coordinate to set
+      */
+    void setX(qreal p_x);
 
-		/**
-		 * Emitted on Element move.
-		 * @param p_x the new x-coordinate
-		 * @param p_y the new y-coordinate
-		 */
-		void moved(qreal p_x, qreal p_y);
+    /**
+      * Sets the Element y-coordinate to the given value
+      * @param p_y the y-coordinate to set
+      */
+    void setY(qreal p_y);
+
+    /**
+    * Initializes Element x-coordinate and y-coordinate with
+    * initial values
+    */
+    void initCoordinate();
+
+signals:
+
+    /**
+      * Emitted on Element move.
+      * @param p_x the new x-coordinate
+      * @param p_y the new y-coordinate
+      */
+    void moved(qreal p_x, qreal p_y);
 };
 
 #endif

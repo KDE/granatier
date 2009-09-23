@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -19,16 +20,18 @@
 #include "arena.h"
 #include "player.h"
 
-Element::Element(qreal p_x, qreal p_y, Arena* p_arena) : m_xInit(p_x), m_yInit(p_y),  m_arena(p_arena) {
-	m_points = 0;
-	initCoordinate();
+Element::Element(qreal p_x, qreal p_y, Arena* p_arena) : m_xInit(p_x), m_yInit(p_y),  m_arena(p_arena)
+{
+    initCoordinate();
 }
 
-Element::~Element() {
+Element::~Element()
+{
 }
 
-void Element::doActionOnCollision(Player*) {
-	// Do nothing by default : will be redefined within the subclasses
+void Element::doActionOnCollision(Player*)
+{
+    // Do nothing by default : will be redefined within the subclasses
 }
 
 void Element::setArena(Arena* p_arena)
@@ -42,41 +45,45 @@ void Element::setInitialCoordinates (qreal p_x, qreal p_y)
     m_yInit = p_y;
 }
 
-qreal Element::getX() const {
-	return m_x;
+qreal Element::getX() const
+{
+    return m_x;
 }
 
-qreal Element::getY() const {
-	return m_y;
+qreal Element::getY() const
+{
+    return m_y;
 }
 
-void Element::setX(qreal p_x) {
-	m_x = p_x;
-	emit(moved(m_x, m_y));
+void Element::setX(qreal p_x)
+{
+    m_x = p_x;
+    emit(moved(m_x, m_y));
 }
 
-void Element::setY(qreal p_y) {
-	m_y = p_y;
-	emit(moved(m_x, m_y));
+void Element::setY(qreal p_y)
+{
+    m_y = p_y;
+    emit(moved(m_x, m_y));
 }
 
-int Element::getPoints() const {
-	return m_points;
+Element::Type Element::getType() const
+{
+    return m_type;
 }
 
-Element::Type Element::getType() const {
-	return m_type;
+QString Element::getImageId() const
+{
+    return m_imageId;
 }
 
-QString Element::getImageId() const {
-	return m_imageId;
+void  Element::setImageId(const QString & p_imageId)
+{
+    m_imageId = p_imageId;
 }
 
-void  Element::setImageId(const QString & p_imageId){
-	m_imageId = p_imageId;
-}
-
-void Element::initCoordinate(){
-	setX(m_xInit);
-	setY(m_yInit);
+void Element::initCoordinate()
+{
+    setX(m_xInit);
+    setY(m_yInit);
 }

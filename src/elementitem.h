@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -27,49 +28,47 @@ class Element;
  */
 class ElementItem : public QGraphicsSvgItem {
 
-	Q_OBJECT
+Q_OBJECT
 
-	private:
-		/** The Label containing the points won when eaten, to display on the scene */
-		QGraphicsTextItem* m_pointsToDisplay;
-	
-	protected:
-	
-		/** The instance of Element the ElementItem will represent */
-		Element* m_model;
+private:
 
-	public:
+protected:
 
-		/**
-		 * Creates a new ElementItem instance.
-		 * @param p_model the Element model
-		 */
-		ElementItem(Element* p_model);
+    /** The instance of Element the ElementItem will represent */
+    Element* m_model;
 
-		/**
-		 * Deletes the ElementItem instance.
-		 */
-		~ElementItem();
-		
-		/**
-		 * Gets the Element model.
-		 * @return the model
-		 */
-		Element* getModel() const;
+public:
 
-		/**
-		 * Reimplement QGraphicsItem::shape() to return an ellipse to improve collisions.
-		 */
-		QPainterPath shape() const;
+    /**
+      * Creates a new ElementItem instance.
+      * @param p_model the Element model
+      */
+    ElementItem(Element* p_model);
 
-	public slots:
+    /**
+      * Deletes the ElementItem instance.
+      */
+    ~ElementItem();
+    
+    /**
+      * Gets the Element model.
+      * @return the model
+      */
+    Element* getModel() const;
 
-		/**
-		 * Updates the ElementItem coordinates.
-		 * @param p_x the new x-coordinate
-		 * @param p_y the new y-coordinate
-		 */
-		virtual void update(qreal p_x, qreal p_y);
+    /**
+      * Reimplement QGraphicsItem::shape() to return an ellipse to improve collisions.
+      */
+    QPainterPath shape() const;
+
+public slots:
+
+    /**
+      * Updates the ElementItem coordinates.
+      * @param p_x the new x-coordinate
+      * @param p_y the new y-coordinate
+      */
+    virtual void update(qreal p_x, qreal p_y);
 };
 
 #endif

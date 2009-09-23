@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Alexandre Galinier <alex.galinier@hotmail.com>
  * 
@@ -90,9 +91,6 @@ class Game : public QObject {
 
 		/** The points which are needed to win */
 		int m_winPoints;
-		
-		/** The won points */
-		long m_points;
         
         /** Flag if the round is over */
         int m_roundOver;
