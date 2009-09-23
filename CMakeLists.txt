@@ -3,7 +3,7 @@ project(granatier)
 find_package(Qt4 REQUIRED)
 find_package(KDE4 REQUIRED)
 find_package(LibKDEGames REQUIRED)
-macro_optional_find_package(Gluon QUIET)
+macro_optional_find_package(Gluon)
 
 include_directories(${KDE4_INCLUDES})
 include_directories(${KDEGAMES_INCLUDE_DIRS})

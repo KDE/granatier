@@ -22,7 +22,7 @@
 #include <QObject>
 
 #ifndef GRANATIER_USE_GLUON
-#include <Phonon>
+#include <Phonon/MediaObject>
 #endif
 
 class GameScene;
