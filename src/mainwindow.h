@@ -33,83 +33,70 @@ class KScoreDialog;
  */
 class MainWindow : public KXmlGuiWindow {
 
-	Q_OBJECT
+Q_OBJECT
 
-	private :
-		
-		/** The GameView instance that manages the game drawing and the collisions */
-		GameView* m_view;
+private :
+    
+    /** The GameView instance that manages the game drawing and the collisions */
+    GameView* m_view;
 
-		/** The Game instance that manages the main loop and events */
-		Game* m_game;
-        
-        /** The PlayerSettings instance for player name, shortcuts ...  */
-        PlayerSettings* m_playerSettings;
+    /** The Game instance that manages the main loop and events */
+    Game* m_game;
+    
+    /** The PlayerSettings instance for player name, shortcuts ...  */
+    PlayerSettings* m_playerSettings;
+    
+public:
 
-		/** The highscores dialog */
-		KScoreDialog* m_kScoreDialog;
-		
-	public:
+    /**
+      * Creates a new MainWindow instance.
+      */
+    MainWindow();
 
-		/**
-		 * Creates a new MainWindow instance.
-		 */
-		MainWindow();
+    /**
+      * Deletes the MainWindow instance.
+      */
+    ~MainWindow();
 
-		/**
-		 * Deletes the MainWindow instance.
-		 */
-		~MainWindow();
+private slots:
 
-	private slots:
+    /**
+      * Initializes the MainWindow for a new game.
+      * Creates a new Game instance and a new GameView instance that displays the game.
+      */
+    void initGame();
 
-		/**
-		 * Initializes the MainWindow for a new game.
-		 * Creates a new Game instance and a new GameView instance that displays the game.
-		 */
-		void initGame();
+    /**
+      * Starts a new game.
+      * @param p_gameOver true if the game was over, false if a game is running
+      */
+    void newGame(const bool p_gameOver = false);
 
-		/**
-		 * Starts a new game.
-		 * @param p_gameOver true if the game was over, false if a game is running
-		 */
-		void newGame(const bool p_gameOver = false);
+    /**
+      * Sets the sounds enabled / disabled.
+      * @param p_enabled if true the sounds will be enabled, otherwise they will be disabled
+      */
+    void setSoundsEnabled(bool p_enabled);
 
-		/**
-		 * Shows the highscores dialog.
-		 */
-		void showHighscores();
+    /**
+      * Shows the settings dialog.
+      */
+    void showSettings();
 
-		/**
-		 * Shows a dialog enabling to change the current level.
-		 */
-		void changeLevel();
+    /**
+      * Loads the settings.
+      */
+    void applyNewSettings();
+    
+    /**
+      * Cancel at settings dialog clicked.
+      */
+    void settingsDialogCanceled();
 
-		/**
-		 * Sets the sounds enabled / disabled.
-		 * @param p_enabled if true the sounds will be enabled, otherwise they will be disabled
-		 */
-		void setSoundsEnabled(bool p_enabled);
-
-		/**
-		 * Shows the settings dialog.
-		 */
-		void showSettings();
-
-		/**
-		 * Loads the settings.
-		 */
-		void loadSettings();
-        
-        /**
-         * Cancel at settings dialog clicked.
-         */
-        void settingsDialogCanceled();
-
-		/**
-		 * Closes the MainWindow.
-		 */
-		void close();
+    /**
+      * Closes the MainWindow.
+      */
+    void close();
 };
 
 #endif
