@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -29,60 +30,60 @@ class Game;
  */
 class GameView : public QGraphicsView {
 
-	Q_OBJECT
-	
-	public:
+Q_OBJECT
 
-		/**
-		 * Creates a new GameView instance.
-		 * @param p_game the Game instance whose elements have to be drawn
-		 */
-		GameView(Game* p_game);
+public:
 
-		/**
-		 * Deletes the GameView instance.
-		 */
-		~GameView();
+    /**
+      * Creates a new GameView instance.
+      * @param p_game the Game instance whose elements have to be drawn
+      */
+    GameView(Game* p_game);
 
-		/**
-		 * Resizes the items when the view is resized.
-		 * @param p_event the resize event
-		 */
-		void resizeEvent(QResizeEvent* p_event);
+    /**
+      * Deletes the GameView instance.
+      */
+    ~GameView();
 
-	protected:
+    /**
+      * Resizes the items when the view is resized.
+      * @param p_event the resize event
+      */
+    void resizeEvent(QResizeEvent* p_event);
 
-		/**
-		 * Manages the player actions by hanlding the key press events.
-		 * @param p_event the key press event
-		 */
-		void keyPressEvent(QKeyEvent* p_event);
+protected:
 
-        /**
-         * Manages the player actions by hanlding the key release events.
-         * @param p_event the key release event
-         */
-        void keyReleaseEvent(QKeyEvent* p_event);
+    /**
+      * Manages the player actions by hanlding the key press events.
+      * @param p_event the key press event
+      */
+    void keyPressEvent(QKeyEvent* p_event);
 
-		/**
-		 * Pauses the game on focus lost.
-		 * @param p_event the focus event
-		 */
-		void focusOutEvent(QFocusEvent* p_event);
+    /**
+      * Manages the player actions by hanlding the key release events.
+      * @param p_event the key release event
+      */
+    void keyReleaseEvent(QKeyEvent* p_event);
 
-	signals:
+    /**
+      * Pauses the game on focus lost.
+      * @param p_event the focus event
+      */
+    void focusOutEvent(QFocusEvent* p_event);
 
-		/**
-		 * Emitted on key press event for the Game instance
-		 * @param p_event the key press event
-		 */
-		void keyPressed(QKeyEvent* p_event);
-        
-        /**
-         * Emitted on key release event for the Game instance
-         * @param p_event the key release event
-         */
-        void keyReleased(QKeyEvent* p_event);
+signals:
+
+    /**
+      * Emitted on key press event for the Game instance
+      * @param p_event the key press event
+      */
+    void keyPressed(QKeyEvent* p_event);
+    
+    /**
+      * Emitted on key release event for the Game instance
+      * @param p_event the key release event
+      */
+    void keyReleased(QKeyEvent* p_event);
 };
 
 #endif

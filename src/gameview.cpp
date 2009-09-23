@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -22,32 +23,39 @@
 #include <QTimer>
 #include <QKeyEvent>
 
-GameView::GameView(Game * p_game) : QGraphicsView(new GameScene(p_game)) {
-	setFocusPolicy(Qt::StrongFocus);
-	// Forward the key press events to the Game instance
-	connect(this, SIGNAL(keyPressed(QKeyEvent*)), p_game, SLOT(keyPressEvent(QKeyEvent*)));
+GameView::GameView(Game * p_game) : QGraphicsView(new GameScene(p_game))
+{
+    setFocusPolicy(Qt::StrongFocus);
+    // Forward the key press events to the Game instance
+    connect(this, SIGNAL(keyPressed(QKeyEvent*)), p_game, SLOT(keyPressEvent(QKeyEvent*)));
     connect(this, SIGNAL(keyReleased(QKeyEvent*)), p_game, SLOT(keyReleaseEvent(QKeyEvent*)));
 }
 
-GameView::~GameView() {
+GameView::~GameView()
+{
 
 }
 
-void GameView::resizeEvent(QResizeEvent*) {
-	fitInView(sceneRect(), Qt::KeepAspectRatio);
+void GameView::resizeEvent(QResizeEvent*)
+{
+    fitInView(sceneRect(), Qt::KeepAspectRatio);
 }
 
-void GameView::focusOutEvent(QFocusEvent*) {
-	// Pause the game if it is not already paused
-	if (((GameScene*)scene())->getGame()->getTimer()->isActive()) {
-		((GameScene*)scene())->getGame()->switchPause();
-	}
+void GameView::focusOutEvent(QFocusEvent*)
+{
+    // Pause the game if it is not already paused
+    if (((GameScene*)scene())->getGame()->getTimer()->isActive())
+    {
+        ((GameScene*)scene())->getGame()->switchPause();
+    }
 }
 
-void GameView::keyPressEvent(QKeyEvent* p_event) {
-	emit(keyPressed(p_event));
+void GameView::keyPressEvent(QKeyEvent* p_event)
+{
+    emit(keyPressed(p_event));
 }
 
-void GameView::keyReleaseEvent(QKeyEvent* p_event) {
+void GameView::keyReleaseEvent(QKeyEvent* p_event)
+{
     emit(keyReleased(p_event));
 }
