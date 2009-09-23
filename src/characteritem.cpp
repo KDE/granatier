@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -35,22 +36,23 @@ CharacterItem::~CharacterItem()
 
 QPainterPath CharacterItem::shape() const
 {
-	QPainterPath path;
-	// Temporary variable to keep the boundingRect available
-	QRectF rect = boundingRect();
+    QPainterPath path;
+    // Temporary variable to keep the boundingRect available
+    QRectF rect = boundingRect();
 
-	// Calculation of the shape
-	QRectF shapeRect = QRectF( rect.x()+rect.width()/4, rect.y()+rect.height()/4, rect.width()/2, rect.height()/2 );
-	path.addEllipse(shapeRect);
-	return path;
+    // Calculation of the shape
+    QRectF shapeRect = QRectF( rect.x()+rect.width()/4, rect.y()+rect.height()/4, rect.width()/2, rect.height()/2 );
+    path.addEllipse(shapeRect);
+    return path;
 }
 
-void CharacterItem::update(qreal p_x, qreal p_y) {
-	// Compute the top-right coordinates of the item
-	qreal x = p_x - boundingRect().width() / 2;
-	qreal y = p_y - boundingRect().height() / 2;
-	// Updates the view coordinates
-	setPos(x, y);
+void CharacterItem::update(qreal p_x, qreal p_y)
+{
+    // Compute the top-right coordinates of the item
+    qreal x = p_x - boundingRect().width() / 2;
+    qreal y = p_y - boundingRect().height() / 2;
+    // Updates the view coordinates
+    setPos(x, y);
 }
 
 void CharacterItem::setDead()

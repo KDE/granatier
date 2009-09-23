@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
@@ -29,45 +30,45 @@ class KSvgRenderer;
  */
 class CharacterItem : public ElementItem {
 
-	Q_OBJECT
+Q_OBJECT
 
-	protected:
-		/** Shared renderer for the player frames */
-		KSvgRenderer* m_renderer;
+protected:
+    /** Shared renderer for the player frames */
+    KSvgRenderer* m_renderer;
 
-	public:
+public:
 
-		/**
-		 * Creates a new CharacterItem instance.
-		 * @param p_model the Character model
-		 */
-		CharacterItem(Character* p_model);
+    /**
+      * Creates a new CharacterItem instance.
+      * @param p_model the Character model
+      */
+    CharacterItem(Character* p_model);
 
-		/**
-		 * Deletes the CharacterItem instance.
-		 */
-		~CharacterItem();
+    /**
+      * Deletes the CharacterItem instance.
+      */
+    ~CharacterItem();
 
-		/**
-		 * Overrides the default shape function to make it a small circle
-		 * This function is used to determinate collision between items
-		 * @return QPainterPath the new shape of the Character
-		 */
-		QPainterPath shape() const;
-		
-	public slots:
+    /**
+      * Overrides the default shape function to make it a small circle
+      * This function is used to determinate collision between items
+      * @return QPainterPath the new shape of the Character
+      */
+    QPainterPath shape() const;
+    
+public slots:
 
-		/**
-		 * Updates the CharacterItem coordinates.
-		 * @param p_x the new x-coordinate
-		 * @param p_y the new y-coordinate
-		 */
-		virtual void update(qreal p_x, qreal p_y);
-	
-		/**
-		 * Sets the character dead.
-		 */
-		virtual void setDead();
+    /**
+      * Updates the CharacterItem coordinates.
+      * @param p_x the new x-coordinate
+      * @param p_y the new y-coordinate
+      */
+    virtual void update(qreal p_x, qreal p_y);
+
+    /**
+      * Sets the character dead.
+      */
+    virtual void setDead();
 };
 
 #endif
