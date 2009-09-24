@@ -92,7 +92,7 @@ void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, A
 
 void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelection)
 {
-    qDeleteAll(arenaMap.values());
+    qDeleteAll(arenaMap);
     arenaMap.clear();
 
     //Disconnect the arenaList as we are going to clear it and do not want previews generated
