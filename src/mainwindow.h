@@ -84,7 +84,7 @@ private slots:
     void showSettings();
 
     /**
-      * Loads the settings.
+      * Applies the new settings.
       */
     void applyNewSettings();
     
