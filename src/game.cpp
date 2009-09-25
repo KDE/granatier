@@ -46,7 +46,7 @@
 
 const int Game::FPS = 40;
 
-Game::Game(PlayerSettings* playerSettings) : m_isCheater(false), m_level(1)
+Game::Game(PlayerSettings* playerSettings)
 {
     m_playerSettings = playerSettings;
     
@@ -125,7 +125,7 @@ void Game::init()
     // Create the Arena instance
     m_arena = new Arena();
 
-    m_roundOver = 0;
+    m_roundFinished = 0;
     
     // Create the parser that will parse the XML file in order to initialize the Arena instance
     // This also creates all the characters
@@ -222,37 +222,45 @@ void Game::setGameScene(GameScene* p_gameScene)
     m_gameScene = p_gameScene;
 }
 
-void Game::start() {
-	// Restart the Game timer
-	m_timer->start();
-	m_state = RUNNING;
-	emit(pauseChanged(false, false));
+void Game::start()
+{
+    // Restart the Game timer
+    m_timer->start();
+    m_state = RUNNING;
+    emit(pauseChanged(false, false));
 }
 
-void Game::pause(bool p_locked) {
-	// Stop the Game timer
-	m_timer->stop();
-	if (p_locked) {
-		m_state = PAUSED_LOCKED;
-	} else {
-		m_state = PAUSED_UNLOCKED;
-	}
-	emit(pauseChanged(true, false));
+void Game::pause(bool p_locked)
+{
+    // Stop the Game timer
+    m_timer->stop();
+    if (p_locked)
+    {
+        m_state = PAUSED_LOCKED;
+    }
+    else
+    {
+        m_state = PAUSED_UNLOCKED;
+    }
+    emit(pauseChanged(true, false));
 }
 
-void Game::switchPause(bool p_locked) {
-	// If the Game is not already paused
-	if (m_state == RUNNING) {
-		// Pause the Game
-		pause(p_locked);
-		emit(pauseChanged(true, true));
-	}
-	// If the Game is already paused
-	else {
-		// Resume the Game
-		start();
-		emit(pauseChanged(false, true));
-	}
+void Game::switchPause(bool p_locked)
+{
+    // If the Game is not already paused
+    if (m_state == RUNNING)
+    {
+        // Pause the Game
+        pause(p_locked);
+        emit(pauseChanged(true, true));
+    }
+    // If the Game is already paused
+    else
+    {
+        // Resume the Game
+        start();
+        emit(pauseChanged(false, true));
+    }
 }
 
 QList<Player*> Game::getPlayers() const 
@@ -260,45 +268,19 @@ QList<Player*> Game::getPlayers() const
     return m_players;
 }
 
-QTimer* Game::getTimer() const {
-	return m_timer;
+QTimer* Game::getTimer() const
+{
+    return m_timer;
 }
 
-Arena* Game::getArena() const {
-	return m_arena;
+Arena* Game::getArena() const
+{
+    return m_arena;
 }
 
-bool Game::isPaused() const {
-	return (m_state != RUNNING);
-}
-
-bool Game::isCheater() const {
-	return m_isCheater;
-}
-
-int Game::getLives() const {
-	return 3;//m_lives;
-}
-
-int Game::getLevel() const {
-	return m_level;
-}
-
-void Game::setLevel(int p_level) {
-	m_isCheater = true;
-	m_level = p_level;
-	m_timer->start();	// Needed to reinit character positions
-	initCharactersPosition();
-    
-    for (int i = 0; i < m_players.size(); i++)
-    {
-        m_players[i]->initSpeed();
-    }
-
-	//m_bonus->setPoints(m_level * 100);
-	emit(dataChanged(AllInfo));
-	emit(pauseChanged(false, true));
-	emit(levelStarted(true));
+bool Game::isPaused() const
+{
+    return (m_state != RUNNING);
 }
 
 QString Game::getWinner() const
@@ -412,12 +394,14 @@ void Game::setSoundsEnabled(bool p_enabled)
     Settings::self()->writeConfig();
 }
 
-void Game::initCharactersPosition() {
-	// If the timer is stopped, it means that collisions are already being handled
-	if (m_timer->isActive()) {	
-		// At the beginning, the timer is stopped but the Game isn't paused (to allow keyPressedEvent detection)
-		m_timer->stop();
-		m_state = RUNNING;
+void Game::initCharactersPosition()
+{
+    // If the timer is stopped, it means that collisions are already being handled
+    if (m_timer->isActive())
+    {
+        // At the beginning, the timer is stopped but the Game isn't paused (to allow keyPressedEvent detection)
+        m_timer->stop();
+        m_state = RUNNING;
         // Initialize the Player coordinates
         for(int i = 0; i < m_players.size(); i++)
         {
@@ -486,27 +470,11 @@ void Game::keyPressEvent(QKeyEvent* p_event)
         case Qt::Key_Escape:
             switchPause();
             return;
-        case Qt::Key_E:
-            // Cheat code to get one more life
-            if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier))
-            {
-                //m_lives++;
-                m_isCheater = true;
-                emit(dataChanged(LivesInfo));
-            }
-            return;
-        case Qt::Key_N:
-            // Cheat code to go to the next level
-            if (p_event->modifiers() == (Qt::AltModifier | Qt::ControlModifier | Qt::ShiftModifier))
-            {
-                m_isCheater = true;
-                nextLevel();
-            }
-            return;
         default:
             break;
     }
     
+    //TODO: make signal
     for(int i = 0; i < m_players.size(); i++)
     {
         m_players[i]->keyPressed(p_event);
@@ -515,6 +483,7 @@ void Game::keyPressEvent(QKeyEvent* p_event)
 
 void Game::keyReleaseEvent(QKeyEvent* p_event)
 {
+    //TODO: make signal
     for(int i = 0; i < m_players.size(); i++)
     {
         m_players[i]->keyReleased(p_event);
@@ -539,9 +508,8 @@ void Game::update()
 
 void Game::playerDeath(Player* player)
 {
-    //m_player->die();
     //wait some time until the game stops
-    QTimer::singleShot(1500, this, SLOT(resumeAfterPlayerDeath()));   
+    QTimer::singleShot(1500, this, SLOT(checkRoundFinished()));   
 
     if(m_soundEnabled)
     {
@@ -577,7 +545,7 @@ void Game::playerDeath(Player* player)
     }
 }
 
-void Game::resumeAfterPlayerDeath()
+void Game::checkRoundFinished()
 {
     int nPlayerAlive = 0;
     int nIndex = 0;;
@@ -598,14 +566,14 @@ void Game::resumeAfterPlayerDeath()
         return;
     }
 
-    if(!m_roundOver)
+    if(!m_roundFinished)
     {
         // Start the timer
         start();
         
         if (nPlayerAlive == 1)
         {
-            m_roundOver = 1;
+            m_roundFinished = 1;
             m_players[nIndex]->addPoint();
         }
         
@@ -613,31 +581,6 @@ void Game::resumeAfterPlayerDeath()
         m_gameScene->showPoints(m_winPoints);
     }
     
-}
-
-void Game::winPoints(Element* p_element)
-{
-    if (p_element->getType() == Element::BONUS)
-    {
-        // Get the position of the Bonus
-        qreal xPos = p_element->getX();
-        qreal yPos = p_element->getY();
-
-        emit(bonusOff());
-    }
-}
-
-void Game::nextLevel() {
-	// Increment the level
-	m_level++;
-	// Update Bonus
-	//->setPoints(m_level * 100);
-	// Move all characters to their initial positions
-	initCharactersPosition();
-	// Update the score, level and lives labels
-	emit(dataChanged(AllInfo));
-	// Update the view
-	emit(levelStarted(true));
 }
 
 void Game::createBomb(Player* player, qreal x, qreal y)

@@ -47,357 +47,290 @@ class KALSound;
 /**
  * @brief This class manages the game main loop : it regularly checks the key press events, computes the character moves and updates their coordinates.
  */
-class Game : public QObject {
+class Game : public QObject
+{
 
-	Q_OBJECT
+Q_OBJECT
 
-	private :
+private :
 
-		/** Number of FPS */
-		static const int FPS;
+    /** Number of FPS */
+    static const int FPS;
 
-		/** The game different states : RUNNING, PAUSED_LOCKED, PAUSED_UNLOCKED */
-		enum State {
-			RUNNING,			// Game running
-			PAUSED_LOCKED,		// Game paused and user is not allowed to unpause
-			PAUSED_UNLOCKED		// Game paused and user is allowed to unpause
-		};
-		/** A flag for the State enum */
-		Q_DECLARE_FLAGS(GameStates, State)
+    /** The game different states : RUNNING, PAUSED_LOCKED, PAUSED_UNLOCKED */
+    enum State
+    {
+        RUNNING,            // Game running
+        PAUSED_LOCKED,      // Game paused and user is not allowed to unpause
+        PAUSED_UNLOCKED     // Game paused and user is allowed to unpause
+    };
+    /** A flag for the State enum */
+    Q_DECLARE_FLAGS(GameStates, State)
 
-		/** The game state */
-		State m_state;
+    /** The game state */
+    State m_state;
 
-		/** The Game main timer */
-		QTimer* m_timer;
-		
-		/** The Arena */
-		Arena* m_arena;
+    /** The Game main timer */
+    QTimer* m_timer;
+    
+    /** The gamecene */
+    GameScene* m_gameScene;
+    
+    /** The player settings */
+    PlayerSettings* m_playerSettings;
+    
+    /** The Arena */
+    Arena* m_arena;
 
-        /** The Players */
-        QList<Player*> m_players;
+    /** The Players */
+    QList<Player*> m_players;
 
-        /** The Bombs */
-        QList<Bomb*> m_bombs;
-        
-        /** The Blocks */
-        QList<Block*> m_blocks;
-        
-		/** The Bonuses */
-		QList<Bonus*> m_bonus;
+    /** The Bombs */
+    QList<Bomb*> m_bombs;
+    
+    /** The Blocks */
+    QList<Block*> m_blocks;
+    
+    /** The Bonuses */
+    QList<Bonus*> m_bonus;
 
-		/** A flag to know if the player has cheated during the game */
-		bool m_isCheater;
+    /** The points which are needed to win */
+    int m_winPoints;
+    
+    /** Flag if the round is over */
+    int m_roundFinished;
+    
+    /** Flag if the game is over */
+    bool m_gameOver;
+    
+    /** Name of the playe who won the game */
+    QString m_strWinner;
+    
+    /** Flag if sound is enabled */
+    bool m_soundEnabled;
+    
+    /** Flag to use wilhelm scream for dying  */
+    bool m_wilhelmScream;
+    
+    #ifdef GRANATIER_USE_GLUON
+    /** User KALEngine for sound */
+    KALEngine* soundEngine;
+    KALSound* soundPutBomb;
+    KALSound* soundExplode;
+    KALSound* soundBonus;
+    KALBuffer* soundBufferDie;
+    KALBuffer* soundBufferWilhelmScream;
+    KALSound* soundDie;
+    KALSound* soundWilhelmScream;
+    #else
+    /** Use Phonon for sound */
+    QTimer* m_phononPutBombTimer;
+    QList <Phonon::MediaObject*> m_phononPutBomb;
+    QTimer* m_phononExplodeTimer;
+    QList <Phonon::MediaObject*> m_phononExplode;
+    QTimer* m_phononBonusTimer;
+    QList <Phonon::MediaObject*> m_phononBonus;
+    QTimer* m_phononDieTimer;
+    QList <Phonon::MediaObject*> m_phononDie;
+    #endif
+    
+public:
 
-		/** The points which are needed to win */
-		int m_winPoints;
-        
-        /** Flag if the round is over */
-        int m_roundOver;
-        
-		/** The current game level */
-		int m_level;
-        
-        #ifdef GRANATIER_USE_GLUON
-        /** User KALEngine for sound */
-        KALEngine* soundEngine;
-        KALSound* soundPutBomb;
-        KALSound* soundExplode;
-        KALSound* soundBonus;
-        KALBuffer* soundBufferDie;
-        KALBuffer* soundBufferWilhelmScream;
-        KALSound* soundDie;
-        KALSound* soundWilhelmScream;
-        #else
-        /** Use Phonon for sound */
-        QTimer* m_phononPutBombTimer;
-        QList <Phonon::MediaObject*> m_phononPutBomb;
-        QTimer* m_phononExplodeTimer;
-        QList <Phonon::MediaObject*> m_phononExplode;
-        QTimer* m_phononBonusTimer;
-        QList <Phonon::MediaObject*> m_phononBonus;
-        QTimer* m_phononDieTimer;
-        QList <Phonon::MediaObject*> m_phononDie;
-        #endif
-        
-        bool m_soundEnabled;
-        bool m_gameOver;
-        bool m_wilhelmScream;
-        QString m_strWinner;
-        
-        GameScene* m_gameScene;
-        
-        PlayerSettings* m_playerSettings;
-		
-	public:
+    /** The different types of information about the game */
+    enum Information
+    {
+        NoInfo = 0,
+        TimeInfo = 1,     // Remaining time
+        ArenaInfo = 2,    // The name of the current arena
+        PlayerInfo = 4,   // Current level
+        AllInfo = TimeInfo | ArenaInfo | PlayerInfo
+    };
+    /** A flag for the Information enum */
+    Q_DECLARE_FLAGS(InformationTypes, Information)
 
-		/** The different types of information about the game */
-		enum Information { NoInfo = 0,
-				   ScoreInfo = 1,	// Score
-				   LivesInfo = 2,	// Number of remaining lives
-				   LevelInfo = 4,	// Current level
-				   AllInfo = ScoreInfo | LivesInfo | LevelInfo };
-		/** A flag for the Information enum */
-		Q_DECLARE_FLAGS(InformationTypes, Information)
+    /**
+    * Creates a new Game instance.
+    * @param playerSettings the player settings
+    */
+    Game(PlayerSettings* playerSettings);
 
-		/**
-		 * Creates a new Game instance.
-         * @param playerSettings the player settings
-		 */
-		Game(PlayerSettings* playerSettings);
+    /**
+    * Deletes the Game instance.
+    */
+    ~Game();
 
-		/**
-		 * Deletes the Game instance.
-		 */
-		~Game();
+    /**
+    * Starts the Game.
+    */
+    void start();
 
-		/**
-		 * Starts the Game.
-		 */
-		void start();
+    /**
+    * Pauses the Game.
+    * @param p_locked if true the player will be unable to unset the pause.
+    */
+    void pause(bool p_locked = false);
 
-		/**
-		 * Pauses the Game.
-		 * @param p_locked if true the player will be unable to unset the pause.
-		 */
-		void pause(bool p_locked = false);
+    /**
+    * Pauses / unpauses the game.
+    * @param p_locked if true the player will be unable to unset the pause.
+    */
+    void switchPause(bool p_locked = false);
 
-		/**
-		 * Pauses / unpauses the game.
-		 * @param p_locked if true the player will be unable to unset the pause.
-		 */
-		void switchPause(bool p_locked = false);
+    /**
+    * Enables / disables the sounds.
+    * @param p_enabled if true the sounds will be enabled, otherwise they will be disabled
+    */
+    void setSoundsEnabled(bool p_enabled);
+    
+    /**
+    * @return the Arena instance
+    */
+    Arena* getArena() const;
+    
+    /**
+    * @return the Player models
+    */
+    QList<Player*> getPlayers() const;
+    
+    /**
+    * @return the Bonus instance
+    */
+    QList<Bonus*> getBonus();
 
-		/**
-		 * @return the Arena instance
-		 */
-		Arena* getArena() const;
-		
-        /**
-         * @return the Player models
-         */
-        QList<Player*> getPlayers() const;
-        
-        /**
-         * @return the Bonus instance
-         */
-        QList<Bonus*> getBonus();
+    /**
+    * @return the main timer
+    */
+    QTimer* getTimer() const;
+    
+    /**
+    * @return true if the Game is paused, false otherwise
+    */
+    bool isPaused() const;
 
-		/**
-		 * @return the main timer
-		 */
-		QTimer* getTimer() const;
-		 
-		/**
-		 * @return true if the Game is paused, false otherwise
-		 */
-		bool isPaused() const;
-		
-		/**
-		 * @return true if the player has cheated during the game, false otherwise
-		 */
-		bool isCheater() const;
+    /**
+    * @return the winner of the game
+    */
+    QString getWinner() const;
+    
+    /**
+    * Create the hidden Bonuses
+    */
+    void createBonus();
+    
+    /**
+    * @param bonus the Bonus to remove
+    */
+    void removeBonus(Bonus* bonus);
+    
+    /**
+    * Create a new Block
+    * @param p_position the Block position
+    * @param p_imageId the image of the Block
+    */
+    void createBlock(QPointF p_position, const QString& p_imageId);
+    
+    /**
+    * remove Block from list and decide to give bonus
+    */
+    void blockDestroyed(const int row, const int col, Block* block);
+    
+    /**
+    * Removes exploded bombs from the bomb list
+    */
+    void removeBomb(Bomb* bomb);
+    
+    /**
+    * Sets the games gamescene
+    * @param p_gameScene the gamescene
+    */
+    void setGameScene(GameScene* p_gameScene);
+    
+private:
 
-		/**
-		 * @return the score
-		 */
-		int getScore () const;
+    /**
+    * Initializes class
+    */
+    void init();
+    /**
+    * Cleans class
+    */
+    void cleanUp();
+    
+    /**
+    * Initializes the character coordinates.
+    */
+    void initCharactersPosition();
 
-		/**
-		 * @return the number of remaining lives
-		 */
-		int getLives() const;
+public slots:
 
-		/**
-		 * @return the current level
-		 */
-		int getLevel() const;
+    /**
+    * Manages the key press events.
+    * @param p_event the key press event
+    */
+    void keyPressEvent(QKeyEvent* p_event);
+    
+    /**
+    * Manages the key release events.
+    * @param p_event the key release event
+    */
+    void keyReleaseEvent(QKeyEvent* p_event);
+    
+    /**
+    * Checks if the round has finished.
+    */
+    void checkRoundFinished();
+    
+    /**
+    * Creates a bomb in the Cell with the coordinates x and y
+    */
+    void createBomb(Player* player, qreal x, qreal y);
 
-		/**
-		 * Sets the level to the given number.
-		 * @param p_level the new level
-		 */
-		void setLevel(int p_level);
+private slots:
 
-        /**
-          * @return the winner of the game
-          */
-        QString getWinner() const;
-        
-        /**
-          * Create the hidden Bonuses
-          */
-        void createBonus();
-        
-        /**
-         * @param bonus the Bonus to remove
-         */
-        void removeBonus(Bonus* bonus);
-        
-        /**
-         * Create a new Block
-         * @param p_position the Block position
-         * @param p_imageId the image of the Block
-         */
-        void createBlock(QPointF p_position, const QString& p_imageId);
+    /**
+    * Updates the Game data.
+    */
+    void update();
+    
+    /**
+    * Manages the loss of a life.
+    */
+    void playerDeath(Player* player);
+    
+    /**
+    * Plays the detonation sound
+    */
+    void slot_bombDetonated(Bomb* bomb);
+    
+signals:
 
-		/**
-		 * Enables / disables the sounds.
-		 * @param p_enabled if true the sounds will be enabled, otherwise they will be disabled
-		 */
-		void setSoundsEnabled(bool p_enabled);
-        
-        /**
-         * remove Block from list and decide to give bonus
-         */
-        void blockDestroyed(const int row, const int col, Block* block);
-        
-        /**
-         * Removes exploded bombs from the bomb list
-         */
-        void removeBomb(Bomb* bomb);
-        
-        /**
-         * Sets the games gamescene
-         * @param p_gameScene the gamescene
-         */
-        void setGameScene(GameScene* p_gameScene);
-		
-	private:
-	
-        /**
-         * Initializes class
-         */
-        void init();
-        /**
-         * Cleans class
-         */
-        void cleanUp();
-        
-		/**
-		 * Initializes the character coordinates.
-		 */
-		void initCharactersPosition();
-
-	public slots:
-
-		/**
-		 * Manages the key press events.
-		 * @param p_event the key press event
-		 */
-		void keyPressEvent(QKeyEvent* p_event);
-		
-        /**
-         * Manages the key release events.
-         * @param p_event the key release event
-         */
-        void keyReleaseEvent(QKeyEvent* p_event);
-        
-		/**
-		 * Resumes the Game after the Player death.
-		 */
-		void resumeAfterPlayerDeath();
-        
-        /**
-         * Creates a bomb in the Cell with the coordinates x and y
-         */
-        void createBomb(Player* player, qreal x, qreal y);
-
-	private slots:
-
-		/**
-		 * Updates the Game data.
-		 */
-		void update();
-		
-		/**
-		 * Manages the loss of a life.
-		 */
-		void playerDeath(Player* player);
-
-		/**
-		 * Increases the score considering the eaten Element.
-		 * @param p_element the eaten Element
-		 */
-		void winPoints(Element* p_element);
-
-		/**
-		 * Starts the next level.
-		 */
-		void nextLevel();
-        
-        /**
-         * Plays the detonation sound
-         */
-        void slot_bombDetonated(Bomb* bomb);
-		
-	signals:
-	
-		/**
-		 * Emitted when the Game is started.
-		 */
-		void gameStarted();
-		
-		/**
-		 * Emitted when the Game is over.
-		 * @param p_unused this parameter must always be true !
-		 */
-		void gameOver(const bool p_unused);
-
-		/**
-		 * Emitted when a level begins, if level up or if a life has been lost.
-		 * @param p_newLevel true if a new level is beginning, false otherwise
-		 */
-		void levelStarted(const bool p_newLevel);
-		
-		/**
-		 * Emitted when the pause state has changed.
-		 * @param p_pause true if the Game is paused, false otherwise
-		 * @param p_fromUser true if the Game has been paused due to an action the player has done, false otherwise
-		 */
-		void pauseChanged(const bool p_pause, const bool p_fromUser);
-		
-		/**
-		 * Emitted when an Element has been eaten.
-		 * @param p_x the Element x-coordinate
-		 * @param p_y the Element y-coordinate
-		 */
-		void elementEaten(const qreal p_x, const qreal p_y);
-		
-		/**
-		 * Emitted when the Bonus has to be displayed.
-		 */
-		void bonusOn();
-
-		/**
-		 * Emitted when the Bonus has to disappear.
-		 */
-		void bonusOff();
-		
-		/**
-		 * Emitted when the Game data (score, level, lives) have changed.
-		 * @param p_infoType the type of data that have changed
-		 */
-		void dataChanged(Game::InformationTypes p_infoType);
-
-		/**
-		 * Emitted when a bonus is eaten. It tells to the scene to
-		 * display the number of won points
-		 * @param p_wonPoints the value to display
-		 * @param p_xPos the x position of the label
-		 * @param p_yPos the y position of the label
-		 */
-		void pointsToDisplay(long p_wonPoints, qreal p_xPos, qreal p_yPos);
-        
-        /**
-         * Emitted when a bomb was created.
-         */
-        void bombCreated(Bomb* bomb);
-        
-        /**
-         * Emitted when a bomb was removed.
-         */
-        void bombRemoved(Bomb* bomb);
+    /**
+    * Emitted when the Game is started.
+    */
+    void gameStarted();
+    
+    /**
+    * Emitted when the Game is over.
+    * @param p_unused this parameter must always be true !
+    */
+    void gameOver(const bool p_unused);
+    
+    /**
+    * Emitted when the pause state has changed.
+    * @param p_pause true if the Game is paused, false otherwise
+    * @param p_fromUser true if the Game has been paused due to an action the player has done, false otherwise
+    */
+    void pauseChanged(const bool p_pause, const bool p_fromUser);
+    
+    /**
+    * Emitted when a bomb was created.
+    */
+    void bombCreated(Bomb* bomb);
+    
+    /**
+    * Emitted when a bomb was removed.
+    */
+    void bombRemoved(Bomb* bomb);
 };
 
 #endif

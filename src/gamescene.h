@@ -147,19 +147,6 @@ class GameScene : public QGraphicsScene {
 		void setPaused(const bool p_pause, const bool p_fromUser);
 		
 		/**
-		 * Removes the Element at the given coordinates from the GameScene.
-		 * @param p_wonPoints value of the won Points, used when a Bonus is eaten
-		 * @param p_x x-coordinate of the Element
-		 * @param p_y y-coordinate of the Element
-		 */
-		void hideElement(const qreal p_x, const qreal p_y);
-		
-		/**
-		 * Displays the Bonus.
-		 */
-		void displayBonus();
-		
-		/**
 		 * Remove the Bonus from the GameScene.
 		 */
 		void removeBonusItem(ElementItem* bonusItem);
@@ -169,19 +156,6 @@ class GameScene : public QGraphicsScene {
 		 * @param p_info the type of the information to be updated
 		 */
 		void updateInfo(const Game::InformationTypes p_info);
-
-		/**
-		 * Display won Points on the scene when a Bonus is eaten
-		 * @param p_wonPoints the value to display
-		 * @param p_xPos the position of the eaten element on X axis
-		 * @param p_yPos the position of the eaten element on Y axis
-		 */
-		void displayPoints(long p_wonPoints, qreal p_xPos, qreal p_yPos);
-
-		/**
-		 * Hide the first label in the list of won points labels
-		 */
-		void hidePoints();
         
         /**
          * Creates a BombItem

@@ -40,16 +40,9 @@
 
 GameScene::GameScene(Game* p_game) : m_game(p_game)
 {
-    connect(p_game, SIGNAL(levelStarted(bool)), SLOT(intro(bool)));
     connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
     connect(p_game, SIGNAL(pauseChanged(bool, bool)), this, SLOT(setPaused(bool, bool)));
-    connect(p_game, SIGNAL(elementEaten(qreal, qreal)), this, SLOT(hideElement(qreal, qreal)));
-    connect(p_game, SIGNAL(bonusOn()), this, SLOT(displayBonus()));
-    connect(p_game, SIGNAL(dataChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
-
-    // Connection between Game and GameScene for the display of won points when a bonus is eaten
-    connect(p_game, SIGNAL(pointsToDisplay(long, qreal, qreal)), this, SLOT(displayPoints(long, qreal, qreal)));
 
     // Set the pixmap cache limit to improve performance
     setItemIndexMethod(NoIndex);
@@ -129,7 +122,6 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     }
 
     // Initialize the information labels (score, lives and label)
-    updateInfo(Game::AllInfo);
     // Display the score label
     //addItem(m_scoreLabel);
     //m_scoreLabel->setPos(Cell::SIZE, height() + Cell::SIZE);
@@ -555,16 +547,6 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
     }
 }
 
-void GameScene::hideElement(const qreal p_x, const qreal p_y) {
-	if (items().contains(m_blockItems[(int)((p_y - (Cell::SIZE * 0.5)) / Cell::SIZE)][(int)((p_x - (Cell::SIZE * 0.5)) / Cell::SIZE)])) {
-		removeItem(m_blockItems[(int)((p_y - (Cell::SIZE * 0.5)) / Cell::SIZE)][(int)((p_x - (Cell::SIZE * 0.5)) / Cell::SIZE)]);
-	}
-}
-
-void GameScene::displayBonus()
-{
-}
-
 void GameScene::removeBonusItem(ElementItem* bonusItem)
 {
      // Set the Block an Bonus Items
@@ -586,38 +568,8 @@ void GameScene::removeBonusItem(ElementItem* bonusItem)
     }
 }
 
-void GameScene::updateInfo(const Game::InformationTypes p_info) {
-	if (p_info & Game::LivesInfo) {
-	    m_livesLabel->setPlainText(i18n("Lives: %1", m_game->getLives()));
-	}
-	if (p_info & Game::LevelInfo) {
-	    m_levelLabel->setPlainText(i18nc("The number of the game level", "Level: %1", m_game->getLevel()));
-	}
-}
-
-void GameScene::displayPoints(long p_wonPoints, qreal p_xPos, qreal p_yPos) {
-	// Launch a singleShot timer
-	QTimer::singleShot(1000, this, SLOT(hidePoints()));
-
-	// Add a label in the list of won points Labels
-	m_wonPointsLabels.prepend(new QGraphicsTextItem(QString::number(p_wonPoints)));
-	addItem(m_wonPointsLabels.first());
-
-	// Temporary reference to the first item in the list
-	QGraphicsTextItem* tempRef = m_wonPointsLabels.first();
-
-	// Positioning and customization of the point label
-	tempRef->setDefaultTextColor(QColor("#FFFF00"));
-	tempRef->setFont(QFont("Helvetica", 15, QFont::Normal, false));
-	tempRef->setPos(p_xPos-(tempRef->boundingRect().width() / 2), p_yPos-(tempRef->boundingRect().height() / 2));
-	tempRef->setZValue(-1);
-}
-
-void GameScene::hidePoints() {
-	// Remove the oldest item of the list from the scene
-	removeItem(m_wonPointsLabels.last());
-	// Remove the oldest item from the list
-	delete m_wonPointsLabels.takeLast();
+void GameScene::updateInfo(const Game::InformationTypes p_info)
+{
 }
 
 void GameScene::createBombItem(Bomb* bomb)
