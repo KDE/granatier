@@ -1,4 +1,5 @@
 /*
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Alexandre Galinier <alex.galinier@hotmail.com>
  * 
@@ -40,76 +41,69 @@ class KSvgRenderer;
  */
 class GameScene : public QGraphicsScene {
 
-	Q_OBJECT
-		
-	private:
+Q_OBJECT
+    
+private:
 
-		/** The Game instance */
-		Game* m_game;
+    /** The Game instance */
+    Game* m_game;
 
-		/** The ArenaItems to be drawn */
-		ArenaItem*** m_arenaItem;
+    /** The ArenaItems to be drawn */
+    ArenaItem*** m_arenaItem;
 
-        /** The PlayerItem of each Player to be drawn */
-        QList<PlayerItem*> m_playerItems;
-        
-        /** The PlayerItem of each Player to be drawn */
-        QList<QGraphicsTextItem*> m_playerPointsLabels;
-        
-        /** The BombItem of each Bomb to be drawn */
-        QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
-		
-		/** The ElementItem to be drawn (each Block) */
-		ElementItem*** m_blockItems;
-		
-		/** The Bonus ElementItem */
-		ElementItem*** m_bonusItems;
+    /** The PlayerItem of each Player to be drawn */
+    QList<PlayerItem*> m_playerItems;
+    
+    /** The current Points of each Player to be drawn */
+    QList<QGraphicsTextItem*> m_playerPointsLabels;
+    
+    /** The BombItem of each Bomb to be drawn */
+    QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
+    
+    /** The ElementItem to be drawn (each Block) */
+    ElementItem*** m_blockItems;
+    
+    /** The Bonus ElementItem */
+    ElementItem*** m_bonusItems;
 
-		/** A list with labels to display when a bonus is eaten */
-		QList<QGraphicsTextItem*> m_wonPointsLabels;
+    /** The overlay to darken the game during pause*/
+    QGraphicsRectItem* m_dimmOverlay;
+    
+    /** The labels to be displayed during the game */
+    QGraphicsTextItem* m_introLabel;
+    QGraphicsTextItem* m_introLabel2;
+    QGraphicsTextItem* m_introLabel3;
+    QGraphicsTextItem* m_pauseLabel;
 
-        /** The labels background*/
-        QGraphicsRectItem* m_labelBackground;
-        
-		/** The labels to be displayed during the game */
-		QGraphicsTextItem* m_introLabel;
-		QGraphicsTextItem* m_introLabel2;
-        QGraphicsTextItem* m_introLabel3;
-		QGraphicsTextItem* m_newLevelLabel;
-		QGraphicsTextItem* m_scoreLabel;
-		QGraphicsTextItem* m_livesLabel;
-		QGraphicsTextItem* m_levelLabel;
-		QGraphicsTextItem* m_pauseLabel;
+    /** The pixmap cache */
+    KPixmapCache* m_cache; //TODO: check if the cache is used
 
-		/** The pixmap cache */
-		KPixmapCache* m_cache;
+    /** The SVG renderer */
+    KSvgRenderer* m_renderer;
+    
+public:
 
-		/** The SVG renderer */
-		KSvgRenderer* m_renderer;
-		
-	public:
+    /**
+      * Creates a new GameScene instance.
+      * @param p_game the Game instance whose elements must be contained in the GameScene in order to be drawn
+      */
+    GameScene(Game* p_game);
+    
+    /**
+      * Deletes the Game instance.
+      */
+    ~GameScene();
+    
+    /**
+      * @return the Game instance
+      */
+    Game* getGame() const;
 
-		/**
-		 * Creates a new GameScene instance.
-		 * @param p_game the Game instance whose elements must be contained in the GameScene in order to be drawn
-		 */
-		GameScene(Game* p_game);
-        
-		/**
-		 * Deletes the Game instance.
-		 */
-		~GameScene();
-        
-		/**
-		 * @return the Game instance
-		 */
-		Game* getGame() const;
-
-		/**
-		 * Loads the game theme.
-		 */
-		void loadTheme();
-		
+    /**
+      * Loads the game theme.
+      */
+    void loadTheme();
+    
     /**
      * Initializes class
      */
@@ -124,53 +118,47 @@ class GameScene : public QGraphicsScene {
      * Shows the labels with the points.
      * @param p_winPoints the points needed to win the game
      */
-    void showPoints(int p_winPoints);
+    void showScore(int p_winPoints);
     
-	private slots:
+private slots:
+    
+    /**
+    * Updates the elements to be drawn when the Game starts.
+    */
+    void start();
+    
+    /**
+    * Updates the elements to be drawn considering the Game state (paused or running).
+    * @param p_pause if true the Game has been paused, if false the Game has been resumed
+    * @param p_fromUser if true the Game has been paused due to an action from the user
+    */
+    void setPaused(const bool p_pause, const bool p_fromUser);
+    
+    /**
+    * Remove the Bonus from the GameScene.
+    */
+    void removeBonusItem(ElementItem* bonusItem);
 
-		/**
-		 * Updates the elements to be drawn on Game introduction.
-		 * @param p_newLevel true a new level has begun, false otherwise
-		 */
-		void intro(const bool p_newLevel);
-	    
-		/**
-		 * Updates the elements to be drawn when the Game starts.
-		 */
-		void start();
-		
-		/**
-		 * Updates the elements to be drawn considering the Game state (paused or running).
-		 * @param p_pause if true the Game has been paused, if false the Game has been resumed
-		 * @param p_fromUser if true the Game has been paused due to an action from the user
-		 */
-		void setPaused(const bool p_pause, const bool p_fromUser);
-		
-		/**
-		 * Remove the Bonus from the GameScene.
-		 */
-		void removeBonusItem(ElementItem* bonusItem);
-	
-		/**
-		 * Upadates the Game information labels.
-		 * @param p_info the type of the information to be updated
-		 */
-		void updateInfo(const Game::InformationTypes p_info);
-        
-        /**
-         * Creates a BombItem
-         */
-        void createBombItem(Bomb* bomb);
-        
-        /**
-         * Removes a BombItem
-         */
-        void removeBombItem(BombItem* bombItem);
-        
-        /**
-         * Creates the explosion items
-         */
-        void slot_bombDetonated(Bomb* bomb);
+    /**
+    * Upadates the Game information labels.
+    * @param p_info the type of the information to be updated
+    */
+    void updateInfo(const Game::InformationTypes p_info);
+    
+    /**
+    * Creates a BombItem
+    */
+    void createBombItem(Bomb* bomb);
+    
+    /**
+    * Removes a BombItem
+    */
+    void removeBombItem(BombItem* bombItem);
+    
+    /**
+    * Creates the explosion items
+    */
+    void bombDetonated(Bomb* bomb);
 };
 
 #endif

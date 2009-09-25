@@ -300,7 +300,7 @@ private slots:
     /**
     * Plays the detonation sound
     */
-    void slot_bombDetonated(Bomb* bomb);
+    void bombDetonated(Bomb* bomb);
     
 signals:
 

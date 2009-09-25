@@ -578,7 +578,7 @@ void Game::checkRoundFinished()
         }
         
         pause(true);
-        m_gameScene->showPoints(m_winPoints);
+        m_gameScene->showScore(m_winPoints);
     }
     
 }
@@ -597,7 +597,7 @@ void Game::createBomb(Player* player, qreal x, qreal y)
     Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_arena, 2500);    // time in ms
     bomb->setBombRange(player->getBombRange());
     emit bombCreated(bomb);
-    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(slot_bombDetonated(Bomb*)));
+    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), player, SLOT(slot_refillBombArmory()));
     m_bombs.append(bomb);
     player->decrementBombArmory();
@@ -641,7 +641,7 @@ void Game::removeBomb(Bomb* bomb)
     }
 }
 
-void Game::slot_bombDetonated(Bomb* bomb)
+void Game::bombDetonated(Bomb* bomb)
 {
     if(m_soundEnabled)
     {

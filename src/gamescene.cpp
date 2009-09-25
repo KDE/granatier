@@ -1,5 +1,5 @@
 /*
- * Copyright 2008 Mathias Kraus <k.hias@gmx.de>
+ * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Alexandre Galinier <alex.galinier@hotmail.com>
  * 
@@ -76,9 +76,9 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     }
 
     // Create the labels background
-    m_labelBackground = new QGraphicsRectItem();
-    m_labelBackground->setBrush(QBrush(QColor(0,0,0,175)));
-    m_labelBackground->setZValue(1000);
+    m_dimmOverlay = new QGraphicsRectItem();
+    m_dimmOverlay->setBrush(QBrush(QColor(0,0,0,175)));
+    m_dimmOverlay->setZValue(1000);
     // Create the introduction labels
     m_introLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
     m_introLabel->setFont(QFont("Helvetica", 25, QFont::Bold, false));
@@ -92,28 +92,11 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_introLabel3->setFont(QFont("Helvetica", 15, QFont::Bold, false));
     m_introLabel3->setDefaultTextColor(QColor("#FFFF00"));
     m_introLabel3->setZValue(1001);
-    // Create the new level label
-    m_newLevelLabel = new QGraphicsTextItem();
-    m_newLevelLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
-    m_newLevelLabel->setDefaultTextColor(QColor("#FFFF00"));
-    m_newLevelLabel->setZValue(1001);
     // Create the pause label
     m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
     m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
     m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_pauseLabel->setZValue(1001);
-    // Create the score label
-    m_scoreLabel = new QGraphicsTextItem();
-    m_scoreLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-    m_scoreLabel->setDefaultTextColor(QColor("#FFFFFF"));
-    // Create the lives label
-    m_livesLabel = new QGraphicsTextItem();
-    m_livesLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-    m_livesLabel->setDefaultTextColor(QColor("#FFFFFF"));
-    // Create the level label
-    m_levelLabel = new QGraphicsTextItem();
-    m_levelLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-    m_levelLabel->setDefaultTextColor(QColor("#FFFFFF"));
 
     // Display each PlayerItem
     for (int i = 0; i < m_playerItems.size(); i++)
@@ -237,8 +220,39 @@ void GameScene::init()
         }
     }
     
-    // Display each Pill and Energizer item and introduction labels
-    intro(true);
+    // Display the Block Items
+    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
+    {
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            if (m_blockItems[i][j] != NULL)
+            {
+                if (!items().contains(m_blockItems[i][j]))
+                {
+                    addItem(m_blockItems[i][j]);
+                }
+            }
+        }
+    }
+    
+    // Display the introduction label
+    if (!items().contains(m_introLabel))
+    {
+        addItem(m_introLabel);
+    }
+    m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
+    
+    if (!items().contains(m_introLabel2))
+    {
+        addItem(m_introLabel2);
+    }
+    m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2, (height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
+    
+    if (!items().contains(m_dimmOverlay))
+    {
+        addItem(m_dimmOverlay);
+    }
+    m_dimmOverlay->setRect(0, 0, width(), height());
 }
 
 GameScene::~GameScene()
@@ -258,12 +272,8 @@ GameScene::~GameScene()
     delete m_introLabel;
     delete m_introLabel2;
     delete m_introLabel3;
-    delete m_newLevelLabel;
-    delete m_scoreLabel;
-    delete m_livesLabel;
-    delete m_levelLabel;
     delete m_pauseLabel;
-    delete m_labelBackground;
+    delete m_dimmOverlay;
     
     delete m_cache;
     delete m_renderer;
@@ -353,7 +363,7 @@ void GameScene::cleanUp()
     }
 }
 
-void GameScene::showPoints(int p_winPoints)
+void GameScene::showScore(int p_winPoints)
 {
     QList <Player*> players = m_game->getPlayers();
     for(int i = 0; i < players.length(); i++)
@@ -380,87 +390,22 @@ Game* GameScene::getGame() const
     return m_game;
 }
 
-void GameScene::loadTheme() {
-	KGameTheme theme;
-	if (!theme.load(Settings::self()->theme())) {
-		return;
-	}
-	if (!m_renderer->load(theme.graphics())) {
-		return;
-	}
-	m_cache->discard();
-	update(0, 0, width(), height());
-
-	// Update the theme config: if the default theme is selected, no theme entry is written -> the theme selector does not select the theme
-	Settings::self()->config()->group("General").writeEntry("Theme", Settings::self()->theme());
-}
-
-void GameScene::intro(const bool p_newLevel)
+void GameScene::loadTheme()
 {
-    // If a new level has begun
-    if (p_newLevel)
+    KGameTheme theme;
+    if (!theme.load(Settings::self()->theme()))
     {
-        // Set the Block Items
-        for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
-        {
-            for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
-            {
-                if (m_blockItems[i][j] != NULL)
-                {
-                    if (!items().contains(m_blockItems[i][j]))
-                    {
-                        addItem(m_blockItems[i][j]);
-                    }
-                }
-            }
-        }
-        
-// 		// Display the new level label
-// 		m_newLevelLabel->setPlainText(i18nc("The number of the game level", "Level %1", m_game->getLevel()));
-// 		if (!items().contains(m_newLevelLabel)) {
-// 			addItem(m_newLevelLabel);
-// 			m_newLevelLabel->setPos((width() - m_newLevelLabel->boundingRect().width()) / 2, (height() - m_newLevelLabel->boundingRect().height()) / 2);
-// 		}
-        // Display the introduction label
-        if (!items().contains(m_introLabel))
-        {
-            addItem(m_introLabel);
-        }
-        m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
-        
-        if (!items().contains(m_introLabel2))
-        {
-            addItem(m_introLabel2);
-        }
-        m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2, (height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
-        
-        if (!items().contains(m_labelBackground))
-        {
-            addItem(m_labelBackground);
-        }
-        m_labelBackground->setRect(0, 0, width(), height());
+        return;
     }
-    else
+    if (!m_renderer->load(theme.graphics()))
     {
-        // Display the introduction labels
-        if (!items().contains(m_introLabel))
-        {
-            addItem(m_introLabel);
-        }
-        m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
-        
-        if (!items().contains(m_introLabel2))
-        {
-            addItem(m_introLabel2);
-        }
-        m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2, (height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
-        
-        if (!items().contains(m_labelBackground))
-        {
-            addItem(m_labelBackground);
-        }
-        m_labelBackground->setRect(0, 0, width(), height());
+        return;
     }
+    m_cache->discard();
+    update(0, 0, width(), height());
+
+    // Update the theme config: if the default theme is selected, no theme entry is written -> the theme selector does not select the theme
+    Settings::self()->config()->group("General").writeEntry("Theme", Settings::self()->theme());
 }
 
 void GameScene::start()
@@ -474,13 +419,9 @@ void GameScene::start()
     {
         removeItem(m_introLabel2);
     }
-    if (items().contains(m_newLevelLabel))
+    if (items().contains(m_dimmOverlay))
     {
-        removeItem(m_newLevelLabel);
-    }
-    if (items().contains(m_labelBackground))
-    {
-        removeItem(m_labelBackground);
+        removeItem(m_dimmOverlay);
     }
 }
 
@@ -500,11 +441,11 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
             }
             m_pauseLabel->setPos((width() - m_pauseLabel->boundingRect().width()) / 2, (height() - m_pauseLabel->boundingRect().height()) / 2);
         }
-        if (!items().contains(m_labelBackground))
+        if (!items().contains(m_dimmOverlay))
         {
-            addItem(m_labelBackground);
+            addItem(m_dimmOverlay);
         }
-        m_labelBackground->setRect(0, 0, width(), height());
+        m_dimmOverlay->setRect(0, 0, width(), height());
         // Stop player animation
         for (int i = 0; i < m_playerItems.size(); i++)
         {
@@ -528,9 +469,9 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
                 removeItem(m_pauseLabel);
             }
         }
-        if (items().contains(m_labelBackground))
+        if (items().contains(m_dimmOverlay))
         {
-            removeItem(m_labelBackground);
+            removeItem(m_dimmOverlay);
         }
         // Resume player animation
         for (int i = 0; i < m_playerItems.size(); i++)
@@ -549,7 +490,7 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
 
 void GameScene::removeBonusItem(ElementItem* bonusItem)
 {
-     // Set the Block an Bonus Items
+    // remove the Bonus Items
     for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
     {
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
@@ -584,7 +525,7 @@ void GameScene::createBombItem(Bomb* bomb)
     addItem(bombItem);
     m_bombItems[bombItem].append(NULL);
     
-    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(slot_bombDetonated(Bomb*)));
+    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
     connect(bombItem, SIGNAL(bombItemFinished(BombItem*)), this, SLOT(removeBombItem(BombItem*)));
 }
 
@@ -622,7 +563,7 @@ void GameScene::removeBombItem(BombItem* bombItem)
     }
 }
 
-void GameScene::slot_bombDetonated(Bomb* bomb)
+void GameScene::bombDetonated(Bomb* bomb)
 {
     BombItem* bombItem = NULL;
     BombExplosionItem* bombExplosionItem = NULL;
