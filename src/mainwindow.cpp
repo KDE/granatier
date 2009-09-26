@@ -146,7 +146,7 @@ void MainWindow::newGame(const bool gameOver)
     else
     {
         // Display the score information
-        KMessageBox::information(this, i18n("The winner is %1.").arg(m_game->getWinner()), i18n("Game Over"));
+        KMessageBox::information(this, i18n("The winner is %1.", m_game->getWinner()), i18n("Game Over"));
         // Start a new game
         initGame();
     }
