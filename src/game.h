@@ -73,6 +73,9 @@ private :
     /** The Game main timer */
     QTimer* m_timer;
     
+    /** The Round timer */
+    QTimer* m_roundTimer;
+    
     /** The gamecene */
     GameScene* m_gameScene;
     
@@ -96,6 +99,9 @@ private :
 
     /** The points which are needed to win */
     int m_winPoints;
+    
+    /** The remaining time for a round */
+    int m_remainingTime;
     
     /** Flag if the round is over */
     int m_roundFinished;
@@ -121,6 +127,7 @@ private :
     KALBuffer* soundBufferDie;
     KALBuffer* soundBufferWilhelmScream;
     KALSound* soundDie;
+    QTimer* gluonDieTimer;
     KALSound* soundWilhelmScream;
     #else
     /** Use Phonon for sound */
@@ -201,6 +208,11 @@ public:
     * @return the main timer
     */
     QTimer* getTimer() const;
+    
+    /**
+    * @return the remaining round time
+    */
+    int getRemainingTime() const;
     
     /**
     * @return true if the Game is paused, false otherwise
@@ -302,6 +314,11 @@ private slots:
     */
     void bombDetonated(Bomb* bomb);
     
+    /**
+    * Decrement the remaining round time
+    */
+    void decrementRemainingRoundTime();
+    
 signals:
 
     /**
@@ -331,6 +348,11 @@ signals:
     * Emitted when a bomb was removed.
     */
     void bombRemoved(Bomb* bomb);
+    
+    /**
+    * Emitted when something to display has changed.
+    */
+    void infoChanged(const Game::InformationTypes p_info);
 };
 
 #endif

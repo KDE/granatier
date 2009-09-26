@@ -64,6 +64,8 @@ Game::Game(PlayerSettings* playerSettings)
     soundBufferWilhelmScream = new KALBuffer(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"));
     soundDie = new KALSound(soundBufferDie, soundEngine);
     soundWilhelmScream = new KALSound(soundBufferWilhelmScream, soundEngine);
+    gluonDieTimer = new QTimer(this);
+    gluonDieTimer->setSingleShot(true);
     #else
     for(int i = 0; i < 3; i++)
     {
@@ -126,6 +128,7 @@ void Game::init()
     m_arena = new Arena();
 
     m_roundFinished = 0;
+    m_remainingTime = Settings::roundTime();
     
     // Create the parser that will parse the XML file in order to initialize the Arena instance
     // This also creates all the characters
@@ -150,6 +153,11 @@ void Game::init()
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     m_timer->start();
     m_state = RUNNING;
+    
+    m_roundTimer  = new QTimer(this);
+    m_roundTimer->setInterval(1000);
+    connect(m_roundTimer, SIGNAL(timeout()), this, SLOT(decrementRemainingRoundTime()));
+    m_roundTimer->start();
     
     // Init the characters coordinates on the Arena
     for (int i = 0; i < m_players.size(); i++)
@@ -182,6 +190,7 @@ Game::~Game()
     delete soundDie;
     delete soundBufferWilhelmScream;
     delete soundBufferDie;
+    delete gluonDieTimer;
     #else
     while(!(m_phononPutBomb.isEmpty()))
     {
@@ -215,6 +224,8 @@ void Game::cleanUp()
     m_arena = 0;
     delete m_timer;
     m_timer = 0;
+    delete m_roundTimer;
+    m_roundTimer = 0;
 }
 
 void Game::setGameScene(GameScene* p_gameScene)
@@ -227,6 +238,7 @@ void Game::start()
     // Restart the Game timer
     m_timer->start();
     m_state = RUNNING;
+    m_roundTimer->start();
     emit(pauseChanged(false, false));
 }
 
@@ -234,6 +246,7 @@ void Game::pause(bool p_locked)
 {
     // Stop the Game timer
     m_timer->stop();
+    m_roundTimer->stop();
     if (p_locked)
     {
         m_state = PAUSED_LOCKED;
@@ -271,6 +284,11 @@ QList<Player*> Game::getPlayers() const
 QTimer* Game::getTimer() const
 {
     return m_timer;
+}
+
+int Game::getRemainingTime() const
+{
+    return m_remainingTime;
 }
 
 Arena* Game::getArena() const
@@ -401,6 +419,7 @@ void Game::initCharactersPosition()
     {
         // At the beginning, the timer is stopped but the Game isn't paused (to allow keyPressedEvent detection)
         m_timer->stop();
+        m_roundTimer->stop();
         m_state = RUNNING;
         // Initialize the Player coordinates
         for(int i = 0; i < m_players.size(); i++)
@@ -439,6 +458,7 @@ void Game::keyPressEvent(QKeyEvent* p_event)
             {
                 // Start the game
                 m_timer->start();
+                m_roundTimer->start();
                 emit(gameStarted());
             }
             else if (m_state == PAUSED_LOCKED)
@@ -506,6 +526,52 @@ void Game::update()
     }
 }
 
+void Game::decrementRemainingRoundTime()
+{
+    m_remainingTime--;
+    if(m_remainingTime >= 0)
+    {
+        emit(infoChanged(TimeInfo));
+    }
+    else
+    {
+        if(m_remainingTime % 2 == 0)
+        {
+            //create bombs at randoms places
+            int nRow;
+            int nCol;
+            bool bFound = false;
+            do
+            {
+                nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
+                nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
+                if(m_arena->getCell(nRow, nCol).getType() == Cell::GROUND)
+                {
+                    if(m_arena->getCell(nRow, nCol).getElement() == 0 || m_arena->getCell(nRow, nCol).getElement()->getType() != Element::BLOCK)
+                    {
+                        bFound = true;
+                    }
+                }
+            }
+            while (!bFound);
+            
+            Bomb* bomb = new Bomb((nCol + 0.5) * Cell::SIZE, (nRow + 0.5) * Cell::SIZE, m_arena, 1000);    // time in ms
+            bomb->setBombRange(1);
+            emit bombCreated(bomb);
+            connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
+            m_bombs.append(bomb);
+            if(m_remainingTime > -100 && m_roundTimer->interval() > 150)
+            {
+                m_roundTimer->setInterval(m_roundTimer->interval() + m_remainingTime);
+            }
+            else if (m_roundTimer->interval() > 40)
+            {
+                m_roundTimer->setInterval(m_roundTimer->interval() - 1);
+            }
+        }
+    }
+}
+
 void Game::playerDeath(Player* player)
 {
     //wait some time until the game stops
@@ -514,6 +580,10 @@ void Game::playerDeath(Player* player)
     if(m_soundEnabled)
     {
         #ifdef GRANATIER_USE_GLUON
+        if(gluonDieTimer->isActive())
+        {
+            return;
+        }
         if(m_wilhelmScream)
         {
             soundWilhelmScream->play();
@@ -522,6 +592,7 @@ void Game::playerDeath(Player* player)
         {
             soundDie->play();
         }
+        gluonDieTimer->start(10);
         #else
         qint64 nLastRemainingTime;
         int nIndex = 0;

@@ -43,6 +43,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
     connect(p_game, SIGNAL(pauseChanged(bool, bool)), this, SLOT(setPaused(bool, bool)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
+    connect(p_game, SIGNAL(infoChanged(Game::InformationTypes)), this, SLOT(updateInfo(const Game::InformationTypes)));
 
     // Set the pixmap cache limit to improve performance
     setItemIndexMethod(NoIndex);
@@ -97,25 +98,22 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
     m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_pauseLabel->setZValue(1001);
-
+    // The remaining time
+    m_remainingTime = new QGraphicsTextItem(i18n("0:00"));
+    m_remainingTime->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_remainingTime->setDefaultTextColor(QColor("#FFFF00"));
+    m_remainingTime->setZValue(0);
+    
     // Display each PlayerItem
     for (int i = 0; i < m_playerItems.size(); i++)
     {
         addItem(m_playerItems[i]);
     }
 
-    // Initialize the information labels (score, lives and label)
-    // Display the score label
-    //addItem(m_scoreLabel);
-    //m_scoreLabel->setPos(Cell::SIZE, height() + Cell::SIZE);
-    // Display the lives label
-    //addItem(m_livesLabel);
-    //m_livesLabel->setPos(width() - m_livesLabel->boundingRect().width() - 20 , height() - Cell::SIZE - m_livesLabel->boundingRect().height() / 2);
-    // Display the level label
-    //addItem(m_levelLabel);
-    //m_levelLabel->setPos((width() - m_levelLabel->boundingRect().width()) / 2 , height() - Cell::SIZE - m_levelLabel->boundingRect().height() / 2);
-
     init();
+    
+    setSceneRect(sceneRect().x(), sceneRect().y() - m_remainingTime->boundingRect().height(), sceneRect().width(), sceneRect().height() + m_remainingTime->boundingRect().height());
+    m_dimmOverlay->setRect(sceneRect().x(), sceneRect().y(), width(), height());
 }
 
 void GameScene::init()
@@ -248,11 +246,19 @@ void GameScene::init()
     }
     m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2, (height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
     
+    if (!items().contains(m_remainingTime))
+    {
+        addItem(m_remainingTime);
+    }
+    m_remainingTime->setDefaultTextColor(QColor("#FFFF00"));
+    int nTime = m_game->getRemainingTime();
+    m_remainingTime->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
+    m_remainingTime->setPos((width() - m_remainingTime->boundingRect().width()), - m_remainingTime->boundingRect().height());
+    
     if (!items().contains(m_dimmOverlay))
     {
         addItem(m_dimmOverlay);
     }
-    m_dimmOverlay->setRect(0, 0, width(), height());
 }
 
 GameScene::~GameScene()
@@ -273,6 +279,7 @@ GameScene::~GameScene()
     delete m_introLabel2;
     delete m_introLabel3;
     delete m_pauseLabel;
+    delete m_remainingTime;
     delete m_dimmOverlay;
     
     delete m_cache;
@@ -361,6 +368,10 @@ void GameScene::cleanUp()
     {
         removeItem(m_introLabel3);
     }
+    if(items().contains(m_remainingTime))
+    {
+        removeItem(m_remainingTime);
+    }
 }
 
 void GameScene::showScore(int p_winPoints)
@@ -445,7 +456,7 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
         {
             addItem(m_dimmOverlay);
         }
-        m_dimmOverlay->setRect(0, 0, width(), height());
+        m_dimmOverlay->setRect(sceneRect().x(), sceneRect().y(), width(), height());
         // Stop player animation
         for (int i = 0; i < m_playerItems.size(); i++)
         {
@@ -511,6 +522,20 @@ void GameScene::removeBonusItem(ElementItem* bonusItem)
 
 void GameScene::updateInfo(const Game::InformationTypes p_info)
 {
+    if(p_info == Game::TimeInfo)
+    {
+        int nTime = m_game->getRemainingTime();
+        if(nTime > 0)
+        {
+            m_remainingTime->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
+        }
+        else
+        {
+            m_remainingTime->setPlainText("Sudden Death");
+            m_remainingTime->setDefaultTextColor(QColor("#FF0000"));
+            m_remainingTime->setPos((width() - m_remainingTime->boundingRect().width()), - m_remainingTime->boundingRect().height());
+        }
+    }
 }
 
 void GameScene::createBombItem(Bomb* bomb)

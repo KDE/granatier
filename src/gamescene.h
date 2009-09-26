@@ -74,6 +74,7 @@ private:
     QGraphicsTextItem* m_introLabel2;
     QGraphicsTextItem* m_introLabel3;
     QGraphicsTextItem* m_pauseLabel;
+    QGraphicsTextItem* m_remainingTime;
 
     /** The pixmap cache */
     KPixmapCache* m_cache; //TODO: check if the cache is used
