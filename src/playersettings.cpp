@@ -17,8 +17,6 @@
 
 #include "playersettings.h"
 
-#include <QtCore>
-
 #include <KStandardDirs>
 #include <KConfig>
 #include <KConfigGroup>

@@ -47,7 +47,7 @@ private:
     /** The Arena Cells */
     Cell** m_cells;
     
-    /** The Player positon on the Arena */
+    /** The Player position on the Arena */
     QMap <int, QPointF> m_playerPosition;
 
 public:
@@ -150,4 +150,3 @@ public:
 };
 
 #endif
-
