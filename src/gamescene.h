@@ -80,7 +80,11 @@ private:
     KPixmapCache* m_cache; //TODO: check if the cache is used
 
     /** The SVG renderer */
-    KSvgRenderer* m_renderer;
+    KSvgRenderer* m_rendererSelectedTheme;
+    KSvgRenderer* m_rendererDefaultTheme;
+    KSvgRenderer* m_rendererArenaItems;
+    KSvgRenderer* m_rendererBonusItems;
+    KSvgRenderer* m_rendererBombItems;
     
 public:
 

@@ -175,7 +175,10 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()
     ui.kcfg_Dummy->setValue(nDummy);
     m_playerPreview = new QGraphicsSvgItem();
     m_playerPreview->setSharedRenderer(m_renderer);
-    m_playerPreview->setElementId("player");
+    if(m_renderer->elementExists("player"))
+    {
+        m_playerPreview->setElementId("player");
+    }
     m_graphicsScene->addItem(m_playerPreview);
     ui.playerPreview->fitInView(ui.playerPreview->sceneRect(), Qt::KeepAspectRatio);
     

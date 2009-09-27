@@ -37,6 +37,7 @@
 #include <KLocale>
 #include <KPixmapCache>
 #include <KSvgRenderer>
+#include <KStandardDirs>
 
 GameScene::GameScene(Game* p_game) : m_game(p_game)
 {
@@ -50,9 +51,51 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_cache = new KPixmapCache("granatier_cache");
     m_cache->setCacheLimit(3 * 1024);
 
-    // Load the SVG file
-    m_renderer = new KSvgRenderer();
+    // Load the default SVG file as fallback
+    m_rendererDefaultTheme = new KSvgRenderer();
+    m_rendererDefaultTheme->load(KStandardDirs::locate("appdata", "themes/clanbomber.svgz"));
+    // Load the selected SVG file
+    m_rendererSelectedTheme = new KSvgRenderer();
     loadTheme();
+    
+    // set the renderer for the arena items
+    if(m_rendererSelectedTheme->elementExists("arena_ground") &&
+        m_rendererSelectedTheme->elementExists("arena_wall") &&
+        m_rendererSelectedTheme->elementExists("arena_block"))
+    {
+        m_rendererArenaItems = m_rendererSelectedTheme;
+    }
+    else
+    {
+        m_rendererArenaItems = m_rendererDefaultTheme;
+    }
+    // set the renderer for the bonus items
+    if(m_rendererSelectedTheme->elementExists("bonus_speed") &&
+        m_rendererSelectedTheme->elementExists("bonus_bomb") &&
+        m_rendererSelectedTheme->elementExists("bonus_range") &&
+        m_rendererSelectedTheme->elementExists("bonus_throw") &&
+        m_rendererSelectedTheme->elementExists("bonus_move"))
+    {
+        m_rendererBonusItems = m_rendererSelectedTheme;
+    }
+    else
+    {
+        m_rendererBonusItems = m_rendererDefaultTheme;
+    }
+    // set the renderer for the bomb items
+    if(m_rendererSelectedTheme->elementExists("bomb") &&
+        m_rendererSelectedTheme->elementExists("bomb_exploded") &&
+        m_rendererSelectedTheme->elementExists("bomb_exploded_north") &&
+        m_rendererSelectedTheme->elementExists("bomb_exploded_east") &&
+        m_rendererSelectedTheme->elementExists("bomb_exploded_south") &&
+        m_rendererSelectedTheme->elementExists("bomb_exploded_west"))
+    {
+        m_rendererBombItems = m_rendererSelectedTheme;
+    }
+    else
+    {
+        m_rendererBombItems = m_rendererDefaultTheme;
+    }
 
     // Create the PlayerItems and the points labels
     QList <Player*> players = p_game->getPlayers();
@@ -130,7 +173,7 @@ void GameScene::init()
         {
             // Create the ArenaItem and set the image
             ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE);
-            arenaItem->setSharedRenderer(m_renderer);
+            arenaItem->setSharedRenderer(m_rendererArenaItems);
             //TODO: use this function call
             //arenaItem->setElementId(m_game->getArena()->getCell(i,j).getElement()->getImageId());
             switch(m_game->getArena()->getCell(i,j).getType())
@@ -166,7 +209,7 @@ void GameScene::init()
                 // Create the element item and set the image
                 Element* element = m_game->getArena()->getCell(i, j).getElement();
                 ElementItem* elementItem = new ElementItem(element);
-                elementItem->setSharedRenderer(m_renderer);
+                elementItem->setSharedRenderer(m_rendererArenaItems);
                 elementItem->setElementId(element->getImageId());
                 elementItem->update(element->getX(), element->getY());
                 elementItem->setZValue(200);
@@ -177,7 +220,7 @@ void GameScene::init()
                 {
                   
                     ElementItem* bonusItem = new ElementItem(bonus);
-                    bonusItem->setSharedRenderer(m_renderer);
+                    bonusItem->setSharedRenderer(m_rendererBonusItems);
                     switch(bonus->getBonusType())
                     {
                         case Bonus::SPEED:  bonusItem->setElementId("bonus_speed");
@@ -286,7 +329,8 @@ GameScene::~GameScene()
     delete m_dimmOverlay;
     
     delete m_cache;
-    delete m_renderer;
+    delete m_rendererSelectedTheme;
+    delete m_rendererDefaultTheme;
 }
 
 void GameScene::cleanUp()
@@ -411,7 +455,7 @@ void GameScene::loadTheme()
     {
         return;
     }
-    if (!m_renderer->load(theme.graphics()))
+    if (!m_rendererSelectedTheme->load(theme.graphics()))
     {
         return;
     }
@@ -545,7 +589,7 @@ void GameScene::createBombItem(Bomb* bomb)
 {
     // Create the Bombs
     BombItem* bombItem = new BombItem(bomb);
-    bombItem->setSharedRenderer(m_renderer);
+    bombItem->setSharedRenderer(m_rendererBombItems);
     bombItem->setElementId("bomb");
     // Corrects the position of the BombItem
     bombItem->update(bomb->getX(), bomb->getY());
@@ -664,7 +708,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, i);
-                bombExplosionItem->setSharedRenderer(m_renderer);
+                bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombRange+3 - i);
                 addItem(bombExplosionItem);
@@ -713,7 +757,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, i);
-                bombExplosionItem->setSharedRenderer(m_renderer);
+                bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombRange+3 - i);
                 addItem(bombExplosionItem);
@@ -762,7 +806,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, i);
-                bombExplosionItem->setSharedRenderer(m_renderer);
+                bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombRange+3 - i);
                 addItem(bombExplosionItem);
@@ -811,7 +855,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, i);
-                bombExplosionItem->setSharedRenderer(m_renderer);
+                bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombRange+3 - i);
                 addItem(bombExplosionItem);
