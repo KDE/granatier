@@ -25,6 +25,9 @@
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
 #include <KComponentData>
+#include <KFile>
+#include <KSaveFile>
+#include <QDebug>
 
 #include "ui_arenaselector.h"
 #include "arenasettings.h"
@@ -49,6 +52,7 @@ class ArenaSelector::ArenaSelectorPrivate
         void _k_updatePreview();
         void _k_updateArenaList(const QString& strArena);
         void _k_openKNewStuffDialog();
+        void _k_importArenasDialog();
 };
 
 ArenaSelector::ArenaSelector(QWidget* parent, KConfigSkeleton * aconfig, ArenaSelector::NewStuffState knsflags, const QString &groupName, const QString &directory)
@@ -88,6 +92,7 @@ void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, A
     findArenas(lastUsedArena);
 
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
+    connect(ui.importArenas, SIGNAL(clicked()), q, SLOT(_k_importArenasDialog()));
 }
 
 void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelection)
@@ -202,6 +207,86 @@ void ArenaSelector::ArenaSelectorPrivate::_k_openKNewStuffDialog()
     if (entries.size()>0) findArenas(currentArenaPath);
     //Needed as the static KNS constructor made copies
     qDeleteAll(entries);
+}
+
+void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
+{
+    qWarning() << "Import...";
+    
+    //find the clanbomber files
+    QStringList listClanbomberPaths;
+    listClanbomberPaths.append("/usr/share/games/clanbomber/maps/");
+    listClanbomberPaths.append(QDir::homePath() + "/.clanbomber/maps/");
+    for(int ii = 0; ii < listClanbomberPaths.count(); ii++)
+    {
+        QString strDirectoryPath = listClanbomberPaths[ii];
+        QStringList listMaps;
+        QDir clanbomberDir(strDirectoryPath);
+        if(!clanbomberDir.exists())
+        {
+            continue;
+        }
+        
+        listMaps = clanbomberDir.entryList(QStringList("*.map"));
+        for(int j = 0; j < listMaps.count(); j++)
+        {
+            QFile mapFile(strDirectoryPath + listMaps[j]);
+            mapFile.open(QIODevice::ReadOnly | QIODevice::Text);
+            QTextStream readStream(&mapFile);
+            
+            QString strAuthor = readStream.readLine();
+            int nNumberOfPlayers = readStream.readLine().toInt();
+            
+            KSaveFile desktopFile;
+            QString strName = listMaps[j].left(listMaps[j].count()-4);
+            desktopFile.setFileName(QString("%1clanbomber_%2.desktop").arg(KStandardDirs::locateLocal("appdata", "arenas/")).arg(strName));
+            desktopFile.open();
+            QTextStream streamDesktopFile(&desktopFile);
+            
+            streamDesktopFile << "[Arena]\n";
+            streamDesktopFile << "Name=" << strName << "\n";
+            streamDesktopFile << "Description=Clanbomber Import\n";
+            streamDesktopFile << "Type=XML\n";
+            streamDesktopFile << "FileName=clanbomber_" << strName << ".xml\n";
+            streamDesktopFile << "Author=" << strAuthor << "\n";
+            streamDesktopFile << "AuthorEmail=-\n";
+            
+            streamDesktopFile.flush();
+            desktopFile.finalize();
+            desktopFile.close();
+            
+            QStringList arena;
+            do
+            {
+                arena.append(readStream.readLine());
+            }
+            while(!readStream.atEnd());
+            arena.replaceInStrings("*", "=");
+            arena.replaceInStrings("-", "_");
+            arena.replaceInStrings("S", "-");
+            arena.replaceInStrings("^", "u");
+            arena.replaceInStrings(">", "r");
+            arena.replaceInStrings("v", "d");
+            arena.replaceInStrings("<", "l");
+            
+            KSaveFile arenaFile;
+            arenaFile.setFileName(QString("%1clanbomber_%2.xml").arg(KStandardDirs::locateLocal("appdata", "arenas/")).arg(strName));
+            arenaFile.open();
+            
+            QTextStream streamArenaFile(&arenaFile);
+            
+            streamArenaFile << "<?xml version=\"1.0\"?>\n";
+            streamArenaFile << "<Arena rowCount=\"" << arena.count() << "\" colCount=\"" << arena[0].count() << "\">\n";
+            for(int j = 0; j < arena.count(); j++)
+            {
+                streamArenaFile << "  <Row>" << arena[j] << "</Row>\n";
+            }
+            streamArenaFile << "</Arena>\n";
+        }
+    }
+    
+    ArenaSettings* selArena = arenaMap.value(ui.arenaList->currentItem()->text());
+    findArenas(selArena->fileName());
 }
 
 #include "arenaselector.moc"

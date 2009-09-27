@@ -70,6 +70,7 @@ class ArenaSelector : public QWidget
         Q_PRIVATE_SLOT(d, void _k_updatePreview())
         Q_PRIVATE_SLOT(d, void _k_updateArenaList(const QString&))
         Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
+        Q_PRIVATE_SLOT(d, void _k_importArenasDialog())
 };
 
 #endif
