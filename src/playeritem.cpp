@@ -40,7 +40,7 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     // load the SVG
     QString strPlayerId = ((Player*) p_model)->getGraphicsPath();
     m_renderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(strPlayerId)));
-    // A timeLine for the Player animation	
+    // A timeLine for the Player animation
     m_animationTimer = new QTimeLine();
     m_animationTimer->setCurveShape(QTimeLine::LinearCurve);
     m_animationTimer->setLoopCount(0);
@@ -49,18 +49,15 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     m_animationTimer->setDuration(PlayerItem::ANIM_SPEED);
     connect(m_animationTimer, SIGNAL(frameChanged(int)), this, SLOT(setFrame(int)));
     
-    setElementId("player_0");
+    if(m_renderer->elementExists("player_0"))
+    {
+        setElementId("player_0");
+    }
 }
 
 PlayerItem::~PlayerItem()
 {
     delete m_animationTimer;
-}
-
-void PlayerItem::setPlayerId(QString strPlayerId)
-{
-    m_strPlayerId = strPlayerId;
-    setElementId("player_0");
 }
 
 void PlayerItem::updateDirection()
@@ -110,7 +107,10 @@ void PlayerItem::manageCollision()
             if (collidingList[i]->zValue() >= 300 && collidingList[i]->zValue() < 400)
             {
                 //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Player*)getModel());
-                setElementId("player_death");
+                if(m_renderer->elementExists("player_death"))
+                {
+                    setElementId("player_death");
+                }
                 dynamic_cast <Player*> (m_model)->die();
             }
             else if (collidingList[i]->zValue() == 100)
@@ -165,7 +165,10 @@ void PlayerItem::resumeAnim()
 
 void PlayerItem::stopAnim()
 {
-    setElementId("player_0");
+    if(m_renderer->elementExists("player_0"))
+    {
+        setElementId("player_0");
+    }
     if (m_animationTimer->state() == QTimeLine::Running)
     {
         m_animationTimer->stop();
@@ -174,11 +177,17 @@ void PlayerItem::stopAnim()
 
 void PlayerItem::setFrame(const int p_frame)
 {
-    setElementId(QString("player_%1").arg(p_frame));
+    if(m_renderer->elementExists(QString("player_%1").arg(p_frame)))
+    {
+        setElementId(QString("player_%1").arg(p_frame));
+    }
 }
 
 void PlayerItem::setDead()
 {
     stopAnim();
-    setElementId("player_death");
+    if(m_renderer->elementExists("player_death"))
+    {
+        setElementId("player_death");
+    }
 }

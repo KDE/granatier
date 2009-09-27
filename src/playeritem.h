@@ -57,11 +57,6 @@ public:
       * Deletes the PlayerItem instance.
       */
     ~PlayerItem();
-    
-    /**
-      * Player ID to get the element ID from the SVG
-      */
-    void setPlayerId(QString strPlayerId);
 
 public slots:
 
