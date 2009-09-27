@@ -109,11 +109,14 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         addItem(m_playerItems[i]);
     }
-
-    init();
     
-    setSceneRect(sceneRect().x(), sceneRect().y() - m_remainingTime->boundingRect().height(), sceneRect().width(), sceneRect().height() + m_remainingTime->boundingRect().height());
+    setSceneRect(0, -m_remainingTime->boundingRect().height(),
+                 m_game->getArena()->getNbColumns()*Cell::SIZE,
+                 m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTime->boundingRect().height());
+    
     m_dimmOverlay->setRect(sceneRect().x(), sceneRect().y(), width(), height());
+    
+    init();
 }
 
 void GameScene::init()
