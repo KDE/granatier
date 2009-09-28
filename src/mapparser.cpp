@@ -24,9 +24,9 @@
 
 #include <QPointF>
 
-MapParser::MapParser(Game* p_game)
+MapParser::MapParser(Arena* p_arena)
 {
-    m_game = p_game;
+    m_arena = p_arena;
     m_counterRows = 0;
 }
 
@@ -59,7 +59,7 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
             }
         }
         // Create the Arena matrix
-        m_game->getArena()->init(nbRows, nbColumns);
+        m_arena->init(nbRows, nbColumns);
     }
     
     return true;
@@ -74,40 +74,39 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
             switch(m_buffer.at(i).toAscii())
             {
                 case '_':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::HOLE);
+                    m_arena->setCellType(m_counterRows,i,Cell::HOLE);
                     break;
                 case '|':
                 case '=':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::WALL);
+                    m_arena->setCellType(m_counterRows,i,Cell::WALL);
                     break;
                 case ' ':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
                     break;
                 case '+':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->createBlock(QPointF(i, m_counterRows), "arena_block");
+                    m_arena->setCellType(m_counterRows,i,Cell::BLOCK);
                     break; 
                 case 'o':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
                     break;
                 case '1':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->getArena()->setPlayerPosition(1, QPointF(i+0.5, m_counterRows+0.5));
+                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setPlayerPosition(1, QPointF(i+0.5, m_counterRows+0.5));
                     break;
                 case '2':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->getArena()->setPlayerPosition(2, QPointF(i+0.5, m_counterRows+0.5));
+                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setPlayerPosition(2, QPointF(i+0.5, m_counterRows+0.5));
                     break;
                 case '3':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->getArena()->setPlayerPosition(3, QPointF(i+0.5, m_counterRows+0.5));
+                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setPlayerPosition(3, QPointF(i+0.5, m_counterRows+0.5));
                     break;
                 case '4':
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_game->getArena()->setPlayerPosition(4, QPointF(i+0.5, m_counterRows+0.5));
+                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setPlayerPosition(4, QPointF(i+0.5, m_counterRows+0.5));
                     break;
                 default:
-                    m_game->getArena()->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
             }
         }
         m_counterRows ++;

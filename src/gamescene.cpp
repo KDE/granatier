@@ -187,6 +187,7 @@ void GameScene::init()
                     arenaItem = NULL;
                     break;
                 case Cell::GROUND:
+                case Cell::BLOCK:
                 default:
                     arenaItem->setElementId("arena_ground");
                     arenaItem->setZValue(-1);

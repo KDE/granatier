@@ -37,6 +37,7 @@ class Cell {
 		enum Type {
 			WALL,
 			GROUND,
+            BLOCK,
             ICE,
             BOMBTRAP,
             HOLE,

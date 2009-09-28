@@ -24,6 +24,5 @@ Description[uk]=Типова арена «Гренадера»
 Description[x-test]=xxDefault Granatier Arenaxx
 Type=XML
 FileName=granatier.xml
-Preview=granatier_preview.png
 Author=Mathias Kraus
 AuthorEmail=k.hias@gmx.de

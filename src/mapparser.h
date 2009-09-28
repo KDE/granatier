@@ -23,49 +23,51 @@
 #include <QXmlDefaultHandler>
 
 class Game;
+class Arena;
 
 /**
  * @brief This class handles XML reader events in order to initialize the Arena properties.
  */
-class MapParser : public QXmlDefaultHandler {
-	
-	private:
+class MapParser : public QXmlDefaultHandler
+{
 
-		/** The Game to initialize */
-		Game * m_game;
-		
-		/** The parser's buffer */
-		QString m_buffer;
-		
-		/** The rows counter */
-		int m_counterRows;
-	public:
+private:
 
-		/**
-		 * Creates a new GameParser.
-		 * @param p_game the Game to initialize
-		 */
-		 MapParser(Game* p_game);
-		
-		/**
-		 * Deletes the GameParser instance.
-		 */
-		~MapParser();
-		
-		/**
-		* Implement QXmlDefaultHandler::characters
-		*/
-		bool characters(const QString & ch );
+    /** The Game to initialize */
+    Arena* m_arena;
+    
+    /** The parser's buffer */
+    QString m_buffer;
+    
+    /** The rows counter */
+    int m_counterRows;
+public:
+    
+    /**
+      * Creates a new GameParser.
+      * @param p_arena the Arena to initialize
+      */
+    MapParser(Arena* p_arena);
+    
+    /**
+      * Deletes the GameParser instance.
+      */
+    ~MapParser();
+    
+    /**
+    * Implement QXmlDefaultHandler::characters
+    */
+    bool characters(const QString & ch );
 
-		/**
-		 * Implements QXmlDefaultHandler::startElement()
-		 */
-		bool startElement(const QString&, const QString&, const QString& p_qName, const QXmlAttributes& p_atts);
-		
-		/**
-		* Implements QXmlDefaultHandler::endElement()
-		*/
-		bool endElement(const QString &, const QString &, const QString & p_qName );
+    /**
+      * Implements QXmlDefaultHandler::startElement()
+      */
+    bool startElement(const QString&, const QString&, const QString& p_qName, const QXmlAttributes& p_atts);
+    
+    /**
+    * Implements QXmlDefaultHandler::endElement()
+    */
+    bool endElement(const QString &, const QString &, const QString & p_qName );
 
 };
 

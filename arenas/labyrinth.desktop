@@ -13,6 +13,5 @@ Description[uk]=Арена-лабіринт
 Description[x-test]=xxLabyrinth Arenaxx
 Type=XML
 FileName=labyrinth.xml
-Preview=labyrinth_preview.png
 Author=Mathias Kraus
 AuthorEmail=k.hias@gmx.de

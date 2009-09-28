@@ -235,13 +235,6 @@ public:
     void removeBonus(Bonus* bonus);
     
     /**
-    * Create a new Block
-    * @param p_position the Block position
-    * @param p_imageId the image of the Block
-    */
-    void createBlock(QPointF p_position, const QString& p_imageId);
-    
-    /**
     * remove Block from list and decide to give bonus
     */
     void blockDestroyed(const int row, const int col, Block* block);

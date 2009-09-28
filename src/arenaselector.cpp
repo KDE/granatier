@@ -19,7 +19,13 @@
 */
 
 #include "arenaselector.h"
+#include "arena.h"
+#include "arenaitem.h"
+#include "mapparser.h"
 
+#include <QGraphicsView>
+#include <QGraphicsSvgItem>
+#include <KSvgRenderer>
 #include <KLocale>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
@@ -36,7 +42,26 @@ class ArenaSelector::ArenaSelectorPrivate
 {
     public:
         ArenaSelectorPrivate(ArenaSelector* parent) : q(parent) {}
-        ~ArenaSelectorPrivate() { qDeleteAll(arenaMap); }
+        ~ArenaSelectorPrivate()
+        {
+            qDeleteAll(arenaMap);
+            if(m_graphicsScene)
+            {
+                while(!m_arenaItems.isEmpty())
+                {
+                    if(m_graphicsScene->items().contains(m_arenaItems.last()))
+                    {
+                        m_graphicsScene->removeItem(m_arenaItems.last());
+                    }
+                    delete m_arenaItems.takeLast();
+                }
+                delete m_graphicsScene;
+            }
+            if(m_renderer)
+            {
+                delete m_renderer;
+            }
+        }
 
         ArenaSelector* q;
 
@@ -44,6 +69,10 @@ class ArenaSelector::ArenaSelectorPrivate
         Ui::ArenaSelectorBase ui;
         QString lookupDirectory;
         QString groupName;
+        
+        KSvgRenderer* m_renderer;
+        QGraphicsScene* m_graphicsScene;
+        QList <QGraphicsSvgItem*> m_arenaItems;
 
         void setupData(KConfigSkeleton* config, ArenaSelector::NewStuffState knsflags);
         void findArenas(const QString &initialSelection);
@@ -82,7 +111,14 @@ void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, A
     if (knsflags==ArenaSelector::NewStuffDisableDownload) {
       ui.getNewButton->hide();
     }
-
+    
+    //graphicsscene for new arena preview
+    m_graphicsScene = new QGraphicsScene();
+    ui.arenaPreview->setScene(m_graphicsScene);
+    ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
+    ui.arenaPreview->setBackgroundBrush(Qt::black);
+    m_renderer = 0;
+    
     //Get the last used arena path from the KConfigSkeleton
     KConfigSkeletonItem * configItem = aconfig->findItem("Arena");
     QString lastUsedArena = configItem->property().toString();
@@ -177,10 +213,68 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     ui.arenaAuthor->setText(selArena->arenaProperty(authstr));
     ui.arenaContact->setText(emailstr);
     ui.arenaDescription->setText(selArena->arenaProperty(descstr));
+    
+    //show the arena without a preview pixmap
+    Arena* arena = new Arena;
+    MapParser mapParser(arena);
+    QFile arenaXmlFile(selArena->graphics());
+    QXmlInputSource source(&arenaXmlFile);
+    // Create the XML file reader
+    QXmlSimpleReader reader;
+    reader.setContentHandler(&mapParser);
+    // Parse the XML file
+    reader.parse(source);
 
-    //Draw the preview
-    QPixmap pix(selArena->preview());
-    ui.arenaPreview->setPixmap(pix.scaled(ui.arenaPreview->size(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+    while(!m_arenaItems.isEmpty())
+    {
+        if(m_graphicsScene->items().contains(m_arenaItems.last()))
+        {
+            m_graphicsScene->removeItem(m_arenaItems.last());
+        }
+        delete m_arenaItems.takeLast();
+    }
+    if(m_renderer)
+    {
+        delete m_renderer;
+    }
+    
+    m_renderer = new KSvgRenderer;
+    m_renderer->load(KStandardDirs::locate("appdata", QString("themes/clanbomber.svgz")));
+    
+    for (int i = 0; i < arena->getNbRows(); ++i)
+    {
+        for (int j = 0; j < arena->getNbColumns(); ++j)
+        {
+            // Create the ArenaItem and set the image
+            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE);
+            arenaItem->setSharedRenderer(m_renderer);
+            switch(arena->getCell(i,j).getType())
+            {
+                case Cell::WALL:
+                    arenaItem->setElementId("arena_wall");
+                    arenaItem->setZValue(-2);
+                    break;
+                case Cell::BLOCK:
+                    arenaItem->setElementId("arena_block");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::HOLE:
+                    delete arenaItem;
+                    arenaItem = NULL;
+                    break;
+                case Cell::GROUND:
+                default:
+                    arenaItem->setElementId("arena_ground");
+                    arenaItem->setZValue(-1);
+            }
+            if(arenaItem)
+            {
+                m_arenaItems.append(arenaItem);
+                m_graphicsScene->addItem(arenaItem);
+            }
+        }
+    }
+    ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
 }
 
 void ArenaSelector::ArenaSelectorPrivate::_k_updateArenaList(const QString& strArena)

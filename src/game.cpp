@@ -132,7 +132,7 @@ void Game::init()
     
     // Create the parser that will parse the XML file in order to initialize the Arena instance
     // This also creates all the characters
-    MapParser mapParser(this);
+    MapParser mapParser(m_arena);
     // Set the XML file as input source for the parser
     QString filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
     KConfig arenaConfig(filePath, KConfig::SimpleConfig);
@@ -146,6 +146,20 @@ void Game::init()
     reader.setContentHandler(&mapParser);
     // Parse the XML file
     reader.parse(source);
+    
+    //create the block items
+    for (int i = 0; i < m_arena->getNbRows(); ++i)
+    {
+        for (int j = 0; j < m_arena->getNbColumns(); ++j)
+        {
+            if(m_arena->getCell(i,j).getType() == Cell::BLOCK)
+            {
+                Block* block = new Block(i, j, m_arena, "arena_block");
+                m_blocks.append(block);
+                m_arena->setCellElement(i, j, block);
+            }
+        }
+    }
     
     // Start the Game timer
     m_timer = new QTimer(this);
@@ -396,13 +410,6 @@ void Game::removeBonus(Bonus* bonus)
         m_phononBonusTimer->start(50);
         #endif
     }
-}
-
-void Game::createBlock(QPointF p_position, const QString& p_imageId)
-{
-    Block* block = new Block(p_position.y(), p_position.x(), m_arena, p_imageId);
-    m_blocks.append(block);
-    m_arena->setCellElement(p_position.y(), p_position.x(), block);
 }
 
 void Game::setSoundsEnabled(bool p_enabled)

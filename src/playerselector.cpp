@@ -116,6 +116,7 @@ void PlayerSelector::PlayerSelectorPrivate::setupData()
     m_renderer = 0;
     m_playerPreview = 0;
     ui.playerPreview->fitInView(ui.playerPreview->sceneRect(), Qt::KeepAspectRatio);
+    ui.playerPreview->setBackgroundBrush(Qt::black);
     
     connect(ui.playerList, SIGNAL(itemSelectionChanged()), q, SLOT(slotUpdatePreview()));
     connect(ui.playerList, SIGNAL(itemChanged(QListWidgetItem*)), q, SLOT(slotUpdateName(QListWidgetItem*)));
