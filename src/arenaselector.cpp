@@ -216,21 +216,25 @@ void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
     //find the clanbomber files
     QStringList listClanbomberPaths;
     listClanbomberPaths.append("/usr/share/games/clanbomber/maps/");
+    listClanbomberPaths.append("/usr/share/apps/clanbomber/maps/");
+    listClanbomberPaths.append("/usr/local/share/games/clanbomber/maps/");
+    listClanbomberPaths.append("/usr/local/share/apps/clanbomber/maps/");
+    listClanbomberPaths.append("/usr/games/clanbomber/maps/");
+    listClanbomberPaths.append("/usr/local/games/clanbomber/maps/");
     listClanbomberPaths.append(QDir::homePath() + "/.clanbomber/maps/");
-    for(int ii = 0; ii < listClanbomberPaths.count(); ii++)
+    for(int i = 0; i < listClanbomberPaths.count(); i++)
     {
-        QString strDirectoryPath = listClanbomberPaths[ii];
-        QStringList listMaps;
-        QDir clanbomberDir(strDirectoryPath);
+        QDir clanbomberDir(listClanbomberPaths[i]);
         if(!clanbomberDir.exists())
         {
             continue;
         }
         
+        QStringList listMaps;
         listMaps = clanbomberDir.entryList(QStringList("*.map"));
         for(int j = 0; j < listMaps.count(); j++)
         {
-            QFile mapFile(strDirectoryPath + listMaps[j]);
+            QFile mapFile(listClanbomberPaths[i] + listMaps[j]);
             mapFile.open(QIODevice::ReadOnly | QIODevice::Text);
             QTextStream readStream(&mapFile);
             
