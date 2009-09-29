@@ -17,6 +17,7 @@ Name[tr]=Granatier
 Name[uk]=Гренадер
 Name[x-test]=xxGranatierxx
 Description=Default Granatier Arena
+Description[de]=Das Standardspielfeld von Granatier.
 Description[pt]=Arena Predefinida do Granatier
 Description[sv]=Standardarena för Granatier
 Description[tr]=Öntanımlı Granatier Arenası

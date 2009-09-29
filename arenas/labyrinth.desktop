@@ -1,11 +1,13 @@
 [Arena]
 Name=Labyrinth
+Name[de]=Labyrinth
 Name[pt]=Labirinto
 Name[sv]=Labyrint
 Name[tr]=Labirent
 Name[uk]=Лабіринт
 Name[x-test]=xxLabyrinthxx
 Description=Labyrinth Arena
+Description[de]=Ein Labyrinth als Spielfeld.
 Description[pt]=Arena em Labirinto
 Description[sv]=Labyrintarena
 Description[tr]=Labirent Arena
