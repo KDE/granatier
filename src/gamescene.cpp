@@ -186,6 +186,30 @@ void GameScene::init()
                     delete arenaItem;
                     arenaItem = NULL;
                     break;
+                /*case Cell::ICE:
+                    arenaItem->setElementId("arena_ice");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::BOMBTRAP:
+                    arenaItem->setElementId("arena_bomb_trap");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::ARROWUP:
+                    arenaItem->setElementId("arena_arrow_up");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::ARROWRIGHT:
+                    arenaItem->setElementId("arena_arrow_right");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::ARROWDOWN:
+                    arenaItem->setElementId("arena_arrow_down");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::ARROWLEFT:
+                    arenaItem->setElementId("arena_arrow_left");
+                    arenaItem->setZValue(0);
+                    break;*/
                 case Cell::GROUND:
                 case Cell::BLOCK:
                 default:

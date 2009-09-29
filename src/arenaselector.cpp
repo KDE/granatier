@@ -262,6 +262,30 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
                     delete arenaItem;
                     arenaItem = NULL;
                     break;
+                case Cell::ICE:
+                    arenaItem->setElementId("arena_ice");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::BOMBTRAP:
+                    arenaItem->setElementId("arena_bomb_trap");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::ARROWUP:
+                    arenaItem->setElementId("arena_arrow_up");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::ARROWRIGHT:
+                    arenaItem->setElementId("arena_arrow_right");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::ARROWDOWN:
+                    arenaItem->setElementId("arena_arrow_down");
+                    arenaItem->setZValue(0);
+                    break;
+                case Cell::ARROWLEFT:
+                    arenaItem->setElementId("arena_arrow_left");
+                    arenaItem->setZValue(0);
+                    break;
                 case Cell::GROUND:
                 default:
                     arenaItem->setElementId("arena_ground");
@@ -362,10 +386,21 @@ void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
             arena.replaceInStrings("*", "=");
             arena.replaceInStrings("-", "_");
             arena.replaceInStrings("S", "-");
+            arena.replaceInStrings("R", "x");
             arena.replaceInStrings("^", "u");
             arena.replaceInStrings(">", "r");
             arena.replaceInStrings("v", "d");
             arena.replaceInStrings("<", "l");
+            arena.replaceInStrings("9", " ");
+            arena.replaceInStrings("8", "9");
+            arena.replaceInStrings("7", "8");
+            arena.replaceInStrings("6", "7");
+            arena.replaceInStrings("5", "6");
+            arena.replaceInStrings("4", "5");
+            arena.replaceInStrings("3", "4");
+            arena.replaceInStrings("2", "3");
+            arena.replaceInStrings("1", "2");
+            arena.replaceInStrings("0", "1");
             
             KSaveFile arenaFile;
             arenaFile.setFileName(QString("%1clanbomber_%2.xml").arg(KStandardDirs::locateLocal("appdata", "arenas/")).arg(strName));

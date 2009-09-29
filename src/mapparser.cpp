@@ -22,7 +22,9 @@
 #include "game.h"
 #include "arena.h"
 
+#include <stdlib.h>
 #include <QPointF>
+#include <QDateTime>
 
 MapParser::MapParser(Arena* p_arena)
 {
@@ -60,6 +62,8 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
         }
         // Create the Arena matrix
         m_arena->init(nbRows, nbColumns);
+        // initialize random generator
+        qsrand(QDateTime::currentDateTime().toTime_t());
     }
     
     return true;
@@ -85,9 +89,35 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                     break;
                 case '+':
                     m_arena->setCellType(m_counterRows,i,Cell::BLOCK);
+                    break;
+                case 'x':
+                    // create a random block
+                    if((qrand()/1.0)/RAND_MAX > 0.25)
+                    {
+                        m_arena->setCellType(m_counterRows,i,Cell::BLOCK);
+                    }
+                    else
+                    {
+                        m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    }
                     break; 
                 case 'o':
-                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setCellType(m_counterRows,i,Cell::BOMBTRAP);
+                    break;
+                case '-':
+                    m_arena->setCellType(m_counterRows,i,Cell::ICE);
+                    break;
+                case 'u':
+                    m_arena->setCellType(m_counterRows,i,Cell::ARROWUP);
+                    break;
+                case 'r':
+                    m_arena->setCellType(m_counterRows,i,Cell::ARROWRIGHT);
+                    break;
+                case 'd':
+                    m_arena->setCellType(m_counterRows,i,Cell::ARROWDOWN);
+                    break;
+                case 'l':
+                    m_arena->setCellType(m_counterRows,i,Cell::ARROWLEFT);
                     break;
                 case '1':
                     m_arena->setCellType(m_counterRows,i,Cell::GROUND);
