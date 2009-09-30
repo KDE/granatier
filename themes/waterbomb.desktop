@@ -1,6 +1,7 @@
 [KGameTheme]
 Name=Water Bomb
 Name[de]=Wasserbombe
+Name[el]=Βόμβα Νερού
 Name[pt]=Bomba de Água
 Name[sv]=Vattenbomb
 Name[tr]=Su Bombası
@@ -8,6 +9,7 @@ Name[uk]=Водяна бомба
 Name[x-test]=xxWater Bombxx
 Description=Water Bomb Theme
 Description[de]=Das Wasserbomben-Design von Granatier.
+Description[el]=Θέμα Βόμβας Νερού
 Description[pt]=Tema de Bomba de Água
 Description[sv]=Vattenbombtema
 Description[tr]=Su Bombası Teması

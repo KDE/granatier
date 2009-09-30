@@ -1,7 +1,7 @@
 [Arena]
 Name=Granatier
 Name[de]=Granatier
-Name[el]=Βομβιστής
+Name[el]=Χειροβομβιστής
 Name[en_GB]=Granatier
 Name[et]=Granatier
 Name[fr]=Granatier
@@ -18,6 +18,7 @@ Name[uk]=Гренадер
 Name[x-test]=xxGranatierxx
 Description=Default Granatier Arena
 Description[de]=Das Standardspielfeld von Granatier.
+Description[el]=Προεπιλεγμένο Πεδίο Δράσης Χειροβομβιστή
 Description[pt]=Arena Predefinida do Granatier
 Description[sv]=Standardarena för Granatier
 Description[tr]=Öntanımlı Granatier Arenası
