@@ -44,7 +44,7 @@ class Cell {
             ARROWUP,
             ARROWLEFT,
             ARROWDOWN,
-            ARROWRIGHT,
+            ARROWRIGHT
 		};
 
 	private:
