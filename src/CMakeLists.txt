@@ -25,6 +25,7 @@ set(granatierSources
     playeritem.cpp
     playerselector.cpp
     playersettings.cpp
+    infooverlay.cpp
 )
 set(granatierData
     granatierui.rc

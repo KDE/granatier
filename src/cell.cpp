@@ -27,8 +27,6 @@ Cell::Cell() : m_type(Cell::WALL), m_element(NULL), m_cost(0), m_parent(NULL)
 
 Cell::~Cell()
 {
-    //m_element = NULL;
-    //delete m_element;
 }
 
 bool Cell::isWalkable()

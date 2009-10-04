@@ -220,9 +220,19 @@ public:
     bool isPaused() const;
 
     /**
+    * @return flag if the game is over
+    */
+    bool getGameOver() const;
+    
+    /**
     * @return the winner of the game
     */
     QString getWinner() const;
+    
+     /**
+    * @return the points needed to win the game
+    */
+    int getWinPoints() const;
     
     /**
     * Create the hidden Bonuses

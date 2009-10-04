@@ -31,6 +31,7 @@
 #include "playeritem.h"
 #include "bombitem.h"
 #include "bombexplosionitem.h"
+#include "infooverlay.h"
 
 #include <QTimer>
 #include <KGameTheme>
@@ -96,6 +97,16 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         m_rendererBombItems = m_rendererDefaultTheme;
     }
+    // set the renderer for the score items
+    if(m_rendererSelectedTheme->elementExists("score_star_enabled") &&
+        m_rendererSelectedTheme->elementExists("score_star_disabled"))
+    {
+        m_rendererScoreItems = m_rendererSelectedTheme;
+    }
+    else
+    {
+        m_rendererScoreItems = m_rendererDefaultTheme;
+    }
 
     // Create the PlayerItems and the points labels
     QList <Player*> players = p_game->getPlayers();
@@ -112,35 +123,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_playerItems.append(playerItem);
         
         connect (playerItem, SIGNAL(bonusItemTaken(ElementItem*)), this, SLOT(removeBonusItem(ElementItem*)));
-        
-        m_playerPointsLabels.append(new QGraphicsTextItem(players[i]->getPlayerName()));
-        m_playerPointsLabels.last()->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-        m_playerPointsLabels.last()->setDefaultTextColor(QColor("#FFFF00"));
-        m_playerPointsLabels.last()->setZValue(1001);
     }
 
-    // Create the labels background
-    m_dimmOverlay = new QGraphicsRectItem();
-    m_dimmOverlay->setBrush(QBrush(QColor(0,0,0,175)));
-    m_dimmOverlay->setZValue(1000);
-    // Create the introduction labels
-    m_introLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
-    m_introLabel->setFont(QFont("Helvetica", 25, QFont::Bold, false));
-    m_introLabel->setDefaultTextColor(QColor("#FFFF00"));
-    m_introLabel->setZValue(1001);
-    m_introLabel2 = new QGraphicsTextItem(i18n("Press Space to start"));
-    m_introLabel2->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-    m_introLabel2->setDefaultTextColor(QColor("#FFFF00"));
-    m_introLabel2->setZValue(1001);
-    m_introLabel3 = new QGraphicsTextItem(i18n("Press Space to continue ..."));
-    m_introLabel3->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-    m_introLabel3->setDefaultTextColor(QColor("#FFFF00"));
-    m_introLabel3->setZValue(1001);
-    // Create the pause label
-    m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
-    m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
-    m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
-    m_pauseLabel->setZValue(1001);
     // The remaining time
     m_remainingTime = new QGraphicsTextItem(i18n("0:00"));
     m_remainingTime->setFont(QFont("Helvetica", 15, QFont::Bold, false));
@@ -157,7 +141,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
                  m_game->getArena()->getNbColumns()*Cell::SIZE,
                  m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTime->boundingRect().height());
     
-    m_dimmOverlay->setRect(sceneRect().x(), sceneRect().y(), width(), height());
+    // create the info overlay
+    m_infoOverlay = new InfoOverlay(m_game, m_rendererScoreItems, this);
     
     init();
 }
@@ -304,19 +289,6 @@ void GameScene::init()
         }
     }
     
-    // Display the introduction label
-    if (!items().contains(m_introLabel))
-    {
-        addItem(m_introLabel);
-    }
-    m_introLabel->setPos((width() - m_introLabel->boundingRect().width()) / 2, (height() - m_introLabel->boundingRect().height()) / 2);
-    
-    if (!items().contains(m_introLabel2))
-    {
-        addItem(m_introLabel2);
-    }
-    m_introLabel2->setPos((width() - m_introLabel2->boundingRect().width()) / 2, (height() - m_introLabel2->boundingRect().height() + m_introLabel->boundingRect().height()) / 2);
-    
     if (!items().contains(m_remainingTime))
     {
         addItem(m_remainingTime);
@@ -326,10 +298,7 @@ void GameScene::init()
     m_remainingTime->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
     m_remainingTime->setPos((width() - m_remainingTime->boundingRect().width()), - m_remainingTime->boundingRect().height());
     
-    if (!items().contains(m_dimmOverlay))
-    {
-        addItem(m_dimmOverlay);
-    }
+    m_infoOverlay->showGetReady();
 }
 
 GameScene::~GameScene()
@@ -343,15 +312,10 @@ GameScene::~GameScene()
             removeItem(m_playerItems[i]);
         }
         delete m_playerItems[i];
-        delete m_playerPointsLabels[i];
     }
     
-    delete m_introLabel;
-    delete m_introLabel2;
-    delete m_introLabel3;
-    delete m_pauseLabel;
+    delete m_infoOverlay;
     delete m_remainingTime;
-    delete m_dimmOverlay;
     
     delete m_cache;
     delete m_rendererSelectedTheme;
@@ -428,44 +392,17 @@ void GameScene::cleanUp()
     delete[] m_blockItems;
     delete[] m_bonusItems;
     
-    // remove the player points labels from the gamescene
-    for (int i = 0; i < m_playerPointsLabels.size(); i++)
-    {
-        if(items().contains(m_playerPointsLabels[i]))
-        {
-            removeItem(m_playerPointsLabels[i]);
-        }
-    }
-    if(items().contains(m_introLabel3))
-    {
-        removeItem(m_introLabel3);
-    }
+    m_infoOverlay->hideItems();
+    
     if(items().contains(m_remainingTime))
     {
         removeItem(m_remainingTime);
     }
 }
 
-void GameScene::showScore(int p_winPoints)
+void GameScene::showScore()
 {
-    QList <Player*> players = m_game->getPlayers();
-    for(int i = 0; i < players.length(); i++)
-    {
-        // If the label was not displayed yet
-        if (!items().contains(m_playerPointsLabels[i]))
-        {
-            // Display the pause label
-            addItem(m_playerPointsLabels[i]);
-        }
-        m_playerPointsLabels[i]->setPlainText(QString("%1 %2").arg(players[i]->getPlayerName()).arg(QString(players[i]->points(), QChar('X')), -p_winPoints, QChar('O')));
-        m_playerPointsLabels[i]->setPos((width() - m_playerPointsLabels[i]->boundingRect().width()) / 2, (height() - (players.length() - i) * m_playerPointsLabels[i]->boundingRect().height()) / 2);
-    }
-    
-    if (!items().contains(m_introLabel3))
-    {
-        addItem(m_introLabel3);
-    }
-    m_introLabel3->setPos((width() - m_introLabel3->boundingRect().width()) / 2, (height() + m_introLabel3->boundingRect().height()) / 2);
+    m_infoOverlay->showScore();
 }
 
 Game* GameScene::getGame() const
@@ -493,19 +430,8 @@ void GameScene::loadTheme()
 
 void GameScene::start()
 {
-    // If the introduction and new level labels were displayed then remove them
-    if (items().contains(m_introLabel))
-    {
-        removeItem(m_introLabel);
-    }
-    if (items().contains(m_introLabel2))
-    {
-        removeItem(m_introLabel2);
-    }
-    if (items().contains(m_dimmOverlay))
-    {
-        removeItem(m_dimmOverlay);
-    }
+    // hide the info items
+    m_infoOverlay->hideItems();
 }
 
 void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
@@ -516,19 +442,9 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
         // If the pause is due to an action from the user
         if (p_fromUser)
         {
-            // If the label was not displayed yet
-            if (!items().contains(m_pauseLabel))
-            {
-                // Display the pause label
-                addItem(m_pauseLabel);
-            }
-            m_pauseLabel->setPos((width() - m_pauseLabel->boundingRect().width()) / 2, (height() - m_pauseLabel->boundingRect().height()) / 2);
+            m_infoOverlay->showPause();
         }
-        if (!items().contains(m_dimmOverlay))
-        {
-            addItem(m_dimmOverlay);
-        }
-        m_dimmOverlay->setRect(sceneRect().x(), sceneRect().y(), width(), height());
+        
         // Stop player animation
         for (int i = 0; i < m_playerItems.size(); i++)
         {
@@ -543,19 +459,9 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
         }
     }
     else
-    {   // If the game has resumed
-        // If the pause was due to an action from the user
-        if (p_fromUser) {
-            // If the label was displayed
-            if (items().contains(m_pauseLabel))
-            {
-                removeItem(m_pauseLabel);
-            }
-        }
-        if (items().contains(m_dimmOverlay))
-        {
-            removeItem(m_dimmOverlay);
-        }
+    {   // If the game has resumed, hide the info items
+        m_infoOverlay->hideItems();
+        
         // Resume player animation
         for (int i = 0; i < m_playerItems.size(); i++)
         {
@@ -603,7 +509,7 @@ void GameScene::updateInfo(const Game::InformationTypes p_info)
         }
         else
         {
-            m_remainingTime->setPlainText("Sudden Death");
+            m_remainingTime->setPlainText(i18n("Sudden Death"));
             m_remainingTime->setDefaultTextColor(QColor("#FF0000"));
             m_remainingTime->setPos((width() - m_remainingTime->boundingRect().width()), - m_remainingTime->boundingRect().height());
         }

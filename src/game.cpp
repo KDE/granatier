@@ -315,9 +315,19 @@ bool Game::isPaused() const
     return (m_state != RUNNING);
 }
 
+bool Game::getGameOver() const
+{
+    return m_gameOver;
+}
+
 QString Game::getWinner() const
 {
     return m_strWinner;
+}
+
+int Game::getWinPoints() const
+{
+    return m_winPoints; 
 }
 
 QList<Bonus*> Game::getBonus()
@@ -470,20 +480,21 @@ void Game::keyPressEvent(QKeyEvent* p_event)
             }
             else if (m_state == PAUSED_LOCKED)
             {
-                m_gameScene->cleanUp();
-                cleanUp();
-                init();
-                m_gameScene->init();
-                for(int i = 0; i < m_players.length(); i++)
+                // if the game is over, start a new game
+                if (m_gameOver)
                 {
-                    m_players[i]->resurrect();
-                    // If a player reaches the win points start a new game
-                    if (m_players[i]->points() >= m_winPoints)
+                    emit(gameOver(true));
+                    return;
+                }
+                else
+                {
+                    m_gameScene->cleanUp();
+                    cleanUp();
+                    init();
+                    m_gameScene->init();
+                    for(int i = 0; i < m_players.length(); i++)
                     {
-                        m_gameOver = true;
-                        m_strWinner = m_players[i]->getPlayerName();
-                        emit(gameOver(true));
-                        return;
+                        m_players[i]->resurrect();
                     }
                 }
             }
@@ -656,7 +667,18 @@ void Game::checkRoundFinished()
         }
         
         pause(true);
-        m_gameScene->showScore(m_winPoints);
+        
+        for(int i = 0; i < m_players.length(); i++)
+        {
+            // check if a player reaches the win points
+            if (m_players[i]->points() >= m_winPoints)
+            {
+                m_gameOver = true;
+                m_strWinner = m_players[i]->getPlayerName();
+                break;
+            }
+        }
+        m_gameScene->showScore();
     }
     
 }

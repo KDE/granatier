@@ -33,6 +33,7 @@ class PlayerItem;
 class Bomb;
 class BombItem;
 class BombExplosionItem;
+class InfoOverlay;
 class KPixmapCache;
 class KSvgRenderer;
 
@@ -54,9 +55,6 @@ private:
     /** The PlayerItem of each Player to be drawn */
     QList<PlayerItem*> m_playerItems;
     
-    /** The current Points of each Player to be drawn */
-    QList<QGraphicsTextItem*> m_playerPointsLabels;
-    
     /** The BombItem of each Bomb to be drawn */
     QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
     
@@ -65,15 +63,11 @@ private:
     
     /** The Bonus ElementItem */
     ElementItem*** m_bonusItems;
-
-    /** The overlay to darken the game during pause*/
-    QGraphicsRectItem* m_dimmOverlay;
+    
+    /** The overlay to show the score at the end of a round*/
+    InfoOverlay* m_infoOverlay;
     
     /** The labels to be displayed during the game */
-    QGraphicsTextItem* m_introLabel;
-    QGraphicsTextItem* m_introLabel2;
-    QGraphicsTextItem* m_introLabel3;
-    QGraphicsTextItem* m_pauseLabel;
     QGraphicsTextItem* m_remainingTime;
 
     /** The pixmap cache */
@@ -85,6 +79,7 @@ private:
     KSvgRenderer* m_rendererArenaItems;
     KSvgRenderer* m_rendererBonusItems;
     KSvgRenderer* m_rendererBombItems;
+    KSvgRenderer* m_rendererScoreItems;
     
 public:
 
@@ -121,9 +116,8 @@ public:
     
     /**
      * Shows the labels with the points.
-     * @param p_winPoints the points needed to win the game
      */
-    void showScore(int p_winPoints);
+    void showScore();
     
 private slots:
     
