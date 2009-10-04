@@ -48,6 +48,16 @@ void Arena::init(const int p_nbRows, const int p_nbColumns)
     }
 }
 
+QString Arena::getName () const
+{
+    return m_strArenaName;
+}
+    
+void Arena::setName (const QString p_strArenaName)
+{
+    m_strArenaName = p_strArenaName;
+}
+
 void Arena::setCellType(const int p_row, const int p_column, const Cell::Type p_type)
 {
     if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns)

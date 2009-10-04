@@ -126,10 +126,15 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     }
 
     // The remaining time
-    m_remainingTime = new QGraphicsTextItem(i18n("0:00"));
-    m_remainingTime->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-    m_remainingTime->setDefaultTextColor(QColor("#FFFF00"));
-    m_remainingTime->setZValue(0);
+    m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
+    m_remainingTimeLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_remainingTimeLabel->setZValue(0);
+    
+    m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
+    m_arenaNameLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_arenaNameLabel->setZValue(0);
     
     // Display each PlayerItem
     for (int i = 0; i < m_playerItems.size(); i++)
@@ -137,9 +142,9 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         addItem(m_playerItems[i]);
     }
     
-    setSceneRect(0, -m_remainingTime->boundingRect().height(),
+    setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
                  m_game->getArena()->getNbColumns()*Cell::SIZE,
-                 m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTime->boundingRect().height());
+                 m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
     
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, m_rendererScoreItems, this);
@@ -289,14 +294,21 @@ void GameScene::init()
         }
     }
     
-    if (!items().contains(m_remainingTime))
+    if (!items().contains(m_remainingTimeLabel))
     {
-        addItem(m_remainingTime);
+        addItem(m_remainingTimeLabel);
     }
-    m_remainingTime->setDefaultTextColor(QColor("#FFFF00"));
+    m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     int nTime = m_game->getRemainingTime();
-    m_remainingTime->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
-    m_remainingTime->setPos((width() - m_remainingTime->boundingRect().width()), - m_remainingTime->boundingRect().height());
+    m_remainingTimeLabel->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
+    m_remainingTimeLabel->setPos((width() - m_remainingTimeLabel->boundingRect().width()), - m_remainingTimeLabel->boundingRect().height());
+    
+    if (!items().contains(m_arenaNameLabel))
+    {
+        addItem(m_arenaNameLabel);
+    }
+    m_arenaNameLabel->setPlainText(m_game->getArena()->getName());
+    m_arenaNameLabel->setPos(0, - m_arenaNameLabel->boundingRect().height());
     
     m_infoOverlay->showGetReady();
 }
@@ -315,7 +327,8 @@ GameScene::~GameScene()
     }
     
     delete m_infoOverlay;
-    delete m_remainingTime;
+    delete m_remainingTimeLabel;
+    delete m_arenaNameLabel;
     
     delete m_cache;
     delete m_rendererSelectedTheme;
@@ -394,9 +407,14 @@ void GameScene::cleanUp()
     
     m_infoOverlay->hideItems();
     
-    if(items().contains(m_remainingTime))
+    if(items().contains(m_remainingTimeLabel))
     {
-        removeItem(m_remainingTime);
+        removeItem(m_remainingTimeLabel);
+    }
+    
+    if(items().contains(m_arenaNameLabel))
+    {
+        removeItem(m_arenaNameLabel);
     }
 }
 
@@ -505,13 +523,13 @@ void GameScene::updateInfo(const Game::InformationTypes p_info)
         int nTime = m_game->getRemainingTime();
         if(nTime > 0)
         {
-            m_remainingTime->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
+            m_remainingTimeLabel->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
         }
         else
         {
-            m_remainingTime->setPlainText(i18n("Sudden Death"));
-            m_remainingTime->setDefaultTextColor(QColor("#FF0000"));
-            m_remainingTime->setPos((width() - m_remainingTime->boundingRect().width()), - m_remainingTime->boundingRect().height());
+            m_remainingTimeLabel->setPlainText(i18n("Sudden Death"));
+            m_remainingTimeLabel->setDefaultTextColor(QColor("#FF0000"));
+            m_remainingTimeLabel->setPos((width() - m_remainingTimeLabel->boundingRect().width()), - m_remainingTimeLabel->boundingRect().height());
         }
     }
 }

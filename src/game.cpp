@@ -137,8 +137,8 @@ void Game::init()
     QString filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
     KConfig arenaConfig(filePath, KConfig::SimpleConfig);
     KConfigGroup group = arenaConfig.group("Arena");
-    QString arenaName = group.readEntry("FileName");
-    QFile arenaXmlFile(KStandardDirs::locate("appdata", QString("arenas/%1").arg(arenaName)));
+    QString arenaFileName = group.readEntry("FileName");
+    QFile arenaXmlFile(KStandardDirs::locate("appdata", QString("arenas/%1").arg(arenaFileName)));
     //QFile arenaXmlFile(KStandardDirs::locate("appdata", "arenas/granatier.xml"));
     QXmlInputSource source(&arenaXmlFile);
     // Create the XML file reader
@@ -146,6 +146,9 @@ void Game::init()
     reader.setContentHandler(&mapParser);
     // Parse the XML file
     reader.parse(source);
+    
+    QString arenaName = group.readEntry("Name");
+    m_arena->setName(arenaName);
     
     //create the block items
     for (int i = 0; i < m_arena->getNbRows(); ++i)

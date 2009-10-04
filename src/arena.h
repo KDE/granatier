@@ -29,6 +29,7 @@
 
 class QPoint;
 class QPointF;
+class QString;
 
 /**
  * @brief This class represents the Arena of the game.
@@ -38,6 +39,9 @@ class Arena : public QObject
     Q_OBJECT
 
 private:
+    /** The number of rows of the Arena */
+    QString m_strArenaName;
+    
     /** The number of rows of the Arena */
     int m_nbRows;
     
@@ -68,7 +72,19 @@ public:
       * @param p_nbColumns the number of columns
       */
     void init(const int p_nbRows, const int p_nbColumns);
-
+    
+    /**
+      * Returns the Arean name.
+      * @return the Arena name
+      */
+    QString getName () const;
+    
+    /**
+      * Sets the Arena name
+      * @param p_strArenaName the Arena name
+      */
+    void setName (const QString p_strArenaName);
+    
     /**
       * Sets the CellType of the Cell whose coordinates are given in parameters.
       * @param p_row the Cell row

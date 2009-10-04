@@ -67,8 +67,11 @@ private:
     /** The overlay to show the score at the end of a round*/
     InfoOverlay* m_infoOverlay;
     
-    /** The labels to be displayed during the game */
-    QGraphicsTextItem* m_remainingTime;
+    /** The labels to displayed the arena name */
+    QGraphicsTextItem* m_arenaNameLabel;
+    
+    /** The labels to displayed the remaining time */
+    QGraphicsTextItem* m_remainingTimeLabel;
 
     /** The pixmap cache */
     KPixmapCache* m_cache; //TODO: check if the cache is used
