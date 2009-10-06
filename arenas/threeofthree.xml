@@ -10,7 +10,7 @@
 
 <Arena rowCount="13" colCount="17">
   <Row>=================</Row>
-  <Row>=3   d + + d   1=</Row>
+  <Row>=p   d + + d   p=</Row>
   <Row>=++ +++===+++ ++=</Row>
   <Row>=++  r +d+ l  ++=</Row>
   <Row>=  ++=++ ++=++  =</Row>
@@ -20,6 +20,6 @@
   <Row>=  ++=++ ++=++  =</Row>
   <Row>=++  r +u+ l  ++=</Row>
   <Row>=++ +++===+++ ++=</Row>
-  <Row>=2   u + + u   4=</Row>
+  <Row>=p   u + + u   p=</Row>
   <Row>=================</Row>
 </Arena>

@@ -119,21 +119,9 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                 case 'l':
                     m_arena->setCellType(m_counterRows,i,Cell::ARROWLEFT);
                     break;
-                case '1':
+                case 'p':
                     m_arena->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_arena->setPlayerPosition(1, QPointF(i+0.5, m_counterRows+0.5));
-                    break;
-                case '2':
-                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_arena->setPlayerPosition(2, QPointF(i+0.5, m_counterRows+0.5));
-                    break;
-                case '3':
-                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_arena->setPlayerPosition(3, QPointF(i+0.5, m_counterRows+0.5));
-                    break;
-                case '4':
-                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
-                    m_arena->setPlayerPosition(4, QPointF(i+0.5, m_counterRows+0.5));
+                    m_arena->addPlayerPosition(QPointF(i+0.5, m_counterRows+0.5));
                     break;
                 default:
                     m_arena->setCellType(m_counterRows,i,Cell::GROUND);

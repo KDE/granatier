@@ -391,16 +391,16 @@ void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
             arena.replaceInStrings(">", "r");
             arena.replaceInStrings("v", "d");
             arena.replaceInStrings("<", "l");
-            arena.replaceInStrings("9", " ");
-            arena.replaceInStrings("8", "9");
-            arena.replaceInStrings("7", "8");
-            arena.replaceInStrings("6", "7");
-            arena.replaceInStrings("5", "6");
-            arena.replaceInStrings("4", "5");
-            arena.replaceInStrings("3", "4");
-            arena.replaceInStrings("2", "3");
-            arena.replaceInStrings("1", "2");
-            arena.replaceInStrings("0", "1");
+            arena.replaceInStrings("0", "p");
+            arena.replaceInStrings("1", "p");
+            arena.replaceInStrings("2", "p");
+            arena.replaceInStrings("3", "p");
+            arena.replaceInStrings("4", "p");
+            arena.replaceInStrings("5", "p");
+            arena.replaceInStrings("6", "p");
+            arena.replaceInStrings("7", "p");
+            arena.replaceInStrings("8", "p");
+            arena.replaceInStrings("9", "p");
             
             KSaveFile arenaFile;
             arenaFile.setFileName(QString("%1clanbomber_%2.xml").arg(KStandardDirs::locateLocal("appdata", "arenas/")).arg(strName));

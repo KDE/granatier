@@ -25,7 +25,6 @@
 #include "cell.h"
 
 #include <QList>
-#include <QMap>
 
 class QPoint;
 class QPointF;
@@ -52,7 +51,7 @@ private:
     Cell** m_cells;
     
     /** The Player position on the Arena */
-    QMap <int, QPointF> m_playerPosition;
+    QList <QPointF> m_playerPosition;
 
 public:
 
@@ -114,7 +113,7 @@ public:
       * @param p_player the player number
       * @param p_position the player position
       */
-    void setPlayerPosition(int p_player, QPointF p_position);
+    void addPlayerPosition(QPointF p_position);
     
     /**
       * Gets the player position on the arena.

@@ -21,6 +21,7 @@
 
 #include <QPoint>
 #include <KDebug>
+#include <QDateTime>
 
 #include <cmath>
 
@@ -90,18 +91,35 @@ void Arena::removeCellElement(const int p_row, const int p_column, Element * p_e
     m_cells[p_row][p_column].removeElement(p_element);
 }
 
-void Arena::setPlayerPosition(int p_player, QPointF p_position)
+void Arena::addPlayerPosition(QPointF p_position)
 {
-    m_playerPosition.insert(p_player, p_position);
+    m_playerPosition.append(p_position);
+    
+    //TODO: maybe in own function
+    int nShuffle;
+    qsrand(QDateTime::currentDateTime().toTime_t());
+    for (int i = 0; i < m_playerPosition.size(); i++)
+    {
+        nShuffle = m_playerPosition.size() * (qrand()/1.0)/RAND_MAX;
+        if(nShuffle >= m_playerPosition.size())
+        {
+            nShuffle = m_playerPosition.size() - 1;
+        }
+        else if(nShuffle < 0)
+        {
+            nShuffle = 0;
+        }
+        m_playerPosition.swap(i, nShuffle);
+    }
 }
     
 QPointF Arena::getPlayerPosition(int p_player)
 {
-    if(m_playerPosition.contains(p_player))
+    if(m_playerPosition.count() > p_player)
     {
-        return m_playerPosition.value(p_player);
+        return m_playerPosition.at(p_player);
     }
-    return m_playerPosition.begin().value();    //to have a valid position
+    return m_playerPosition.at(0);    //to have a valid position
 }
 
 Cell Arena::getCell(const int p_row, const int p_column) const

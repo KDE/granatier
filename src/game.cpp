@@ -180,7 +180,8 @@ void Game::init()
     for (int i = 0; i < m_players.size(); i++)
     {
         m_players[i]->setArena(m_arena);
-        m_players[i]->setInitialCoordinates(qreal(Cell::SIZE * m_arena->getPlayerPosition(i+1).x()), qreal(Cell::SIZE * m_arena->getPlayerPosition(i+1).y()));
+        QPointF playerPosition = m_arena->getPlayerPosition(i);
+        m_players[i]->setInitialCoordinates(qreal(Cell::SIZE * playerPosition.x()), qreal(Cell::SIZE * playerPosition.y()));
     }
     initCharactersPosition();
     
