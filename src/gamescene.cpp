@@ -248,6 +248,12 @@ void GameScene::init()
                                             break;
                         case Bonus::MOVE:   bonusItem->setElementId("bonus_move");
                                             break;
+                        case Bonus::HYPERACTIVE:   bonusItem->setElementId("bonus_bad_hyperactive");
+                                            break;
+                        case Bonus::SLOW:   bonusItem->setElementId("bonus_bad_slow");
+                                            break;
+                        case Bonus::DRUG:   bonusItem->setElementId("bonus_bad_drug");
+                                            break;
                         default:            bonusItem->setElementId("bonus_speed");
                     }
                     bonusItem->update(bonus->getX(), bonus->getY());

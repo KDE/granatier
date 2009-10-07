@@ -344,6 +344,7 @@ void Game::createBonus()
     Bonus* bonus;
     qsrand(QDateTime::currentDateTime().toTime_t());
     int nBonusCount = 0.3 * m_blocks.size();
+    int nBadBonusCount = 0.1 * m_blocks.size();
     QList<Bonus::BonusType> bonusTypeList;
     Bonus::BonusType bonusType;
     for (int i = 0; i < m_blocks.size(); i++)
@@ -364,6 +365,19 @@ void Game::createBonus()
                 case 4: bonusType = Bonus::MOVE;
                         break;
                 default: bonusType = Bonus::SPEED;
+            }
+        }
+        else if (i-nBonusCount < nBadBonusCount)
+        {
+            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 3))
+            {
+                case 0: bonusType = Bonus::HYPERACTIVE;
+                        break;
+                case 1: bonusType = Bonus::SLOW;
+                        break;
+                case 2: bonusType = Bonus::DRUG;
+                        break;
+                default: bonusType = Bonus::HYPERACTIVE;
             }
         }
         bonusTypeList.append(bonusType);

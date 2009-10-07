@@ -23,6 +23,7 @@
 #include "playersettings.h"
 
 #include <QKeyEvent>
+#include <QTimer>
 #include <kdebug.h>
 
 #include <cmath>
@@ -35,6 +36,11 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
     
     m_points = 0;
     
+    m_badBonusCountdownTimer = new QTimer;
+    m_badBonusCountdownTimer->setSingleShot(true);
+    m_badBonusCountdownTimer->setInterval(15000);
+    connect(m_badBonusCountdownTimer, SIGNAL(timeout()), this, SLOT(slot_removeBadBonus()));
+    
     resurrect();
     
     m_key.moveLeft = p_playerSettings->keyLeft(p_playerID);
@@ -46,6 +52,7 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
 
 Player::~Player()
 {
+    delete m_badBonusCountdownTimer;
 }
 
 void Player::setShortcuts(const Shortcuts keys)
@@ -299,7 +306,13 @@ void Player::addBonus(Bonus* p_bonus)
     int bonusType = p_bonus->getBonusType();
     if(bonusType == Bonus::SPEED)
     {
-        m_speed++;
+        if(m_badBonusCountdownTimer->isActive())
+        {
+            m_badBonusCountdownTimer->stop();
+            slot_removeBadBonus();
+        }
+        
+        m_speed += 1;
         if(m_speed > m_maxSpeed)
         {
             m_speed = m_maxSpeed;
@@ -307,6 +320,12 @@ void Player::addBonus(Bonus* p_bonus)
     }
     else if(bonusType == Bonus::RANGE)
     {
+        if(m_badBonusCountdownTimer->isActive())
+        {
+            m_badBonusCountdownTimer->stop();
+            slot_removeBadBonus();
+        }
+        
         m_bombRange++;
         if(m_bombRange > 10)
         {
@@ -315,6 +334,12 @@ void Player::addBonus(Bonus* p_bonus)
     }
     else if(bonusType == Bonus::BOMB)
     {
+        if(m_badBonusCountdownTimer->isActive())
+        {
+            m_badBonusCountdownTimer->stop();
+            slot_removeBadBonus();
+        }
+        
         m_maxBombArmory++;
         if(m_maxBombArmory > 10)
         {
@@ -325,6 +350,43 @@ void Player::addBonus(Bonus* p_bonus)
         {
             m_bombArmory = m_maxBombArmory;
         }
+    }
+    else if(bonusType == Bonus::HYPERACTIVE)
+    {
+        if(m_badBonusCountdownTimer->isActive())
+        {
+            m_badBonusCountdownTimer->stop();
+            slot_removeBadBonus();
+        }
+        
+        m_normalSpeed = m_speed;
+        m_speed = m_maxSpeed * 2;
+        m_badBonusType = Bonus::HYPERACTIVE;
+        m_badBonusCountdownTimer->start();
+    }
+    else if(bonusType == Bonus::SLOW)
+    {
+        if(m_badBonusCountdownTimer->isActive())
+        {
+            m_badBonusCountdownTimer->stop();
+            slot_removeBadBonus();
+        }
+        
+        m_normalSpeed = m_speed;
+        m_speed = 1;
+        m_badBonusType = Bonus::SLOW;
+        m_badBonusCountdownTimer->start();
+    }
+    else if(bonusType == Bonus::DRUG)
+    {
+        if(m_badBonusCountdownTimer->isActive())
+        {
+            m_badBonusCountdownTimer->stop();
+            slot_removeBadBonus();
+        }
+        
+        m_badBonusType = Bonus::DRUG;
+        m_badBonusCountdownTimer->start();
     }
 }
 
@@ -350,6 +412,11 @@ void Player::resurrect()
     m_bombRange = 1;
     m_maxBombArmory = 1;
     m_bombArmory = m_maxBombArmory;
+    if(m_badBonusCountdownTimer->isActive())
+    {
+        m_badBonusCountdownTimer->stop();
+        slot_removeBadBonus();
+    }
 }
 
 int Player::points()
@@ -421,6 +488,22 @@ void Player::slot_refillBombArmory()
     }
 }
 
+void Player::slot_removeBadBonus()
+{
+    m_badBonusCountdownTimer->stop();
+    
+    switch (m_badBonusType)
+    {
+        case Bonus::HYPERACTIVE:
+        case Bonus::SLOW:
+            m_speed = m_normalSpeed;
+            break;
+        case Bonus::DRUG:
+            //nothing to do
+            break;
+    }
+}
+
 void Player::stopMoving()
 {
     setXSpeed(0);
@@ -454,22 +537,50 @@ void Player::keyPressed(QKeyEvent* keyEvent)
 
     if(key == m_key.moveLeft)
     {
-        goLeft();
+        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::DRUG)
+        {
+            goRight();
+        }
+        else
+        {
+            goLeft();
+        }
         updateDirection();
     }
     else if(key == m_key.moveRight)
     {
-        goRight();
+        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::DRUG)
+        {
+            goLeft();
+        }
+        else
+        {
+           goRight();
+        }
         updateDirection();
     }
     else if(key == m_key.moveUp)
     {
-        goUp();
+        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::DRUG)
+        {
+            goDown();
+        }
+        else
+        {
+           goUp();
+        }
         updateDirection();
     }
     else if(key == m_key.moveDown)
     {
-        goDown();
+        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::DRUG)
+        {
+            goUp();
+        }
+        else
+        {
+           goDown();
+        }
         updateDirection();
     }
     else if(key == m_key.dropBomb && m_bombArmory > 0)

@@ -25,6 +25,7 @@ class PlayerSettings;
 class Bonus;
 class QKeyEvent;
 class QString;
+class QTimer;
 
 /**
  * @brief This class represents the main character of the game.
@@ -55,6 +56,17 @@ private:
     
     /** Points from the player */
     int m_points;
+    
+    /** the bad bonus type */
+    int m_badBonusType;
+    
+    /** the speed before a bad bonus was taken */
+    qreal m_normalSpeed;
+    
+    /** timer for the bad bonus to disapear */
+    QTimer* m_badBonusCountdownTimer;
+    
+    
 
 public:
     /**
@@ -221,7 +233,13 @@ public slots:
      * refills the bomb armory after a bomb is exploded
      */
     void slot_refillBombArmory();
-        
+    
+private slots:
+    /**
+     * removes the bad bonus from the player
+     */
+    void slot_removeBadBonus();
+
 signals:
     /**
       * Emitted when the direction changed

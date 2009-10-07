@@ -37,7 +37,10 @@ public:
         BOMB,
         RANGE,
         THROW,
-        MOVE
+        MOVE,
+        SLOW,
+        HYPERACTIVE,
+        DRUG
     };
 
     /**
