@@ -59,7 +59,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_rendererSelectedTheme = new KSvgRenderer();
     loadTheme();
     
-    // set the renderer for the arena items
+    // set the renderer for the arena items TODO: add all the arena items
     if(m_rendererSelectedTheme->elementExists("arena_ground") &&
         m_rendererSelectedTheme->elementExists("arena_wall") &&
         m_rendererSelectedTheme->elementExists("arena_block"))
@@ -70,7 +70,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         m_rendererArenaItems = m_rendererDefaultTheme;
     }
-    // set the renderer for the bonus items
+    // set the renderer for the bonus items TODO: add all the bonus items
     if(m_rendererSelectedTheme->elementExists("bonus_speed") &&
         m_rendererSelectedTheme->elementExists("bonus_bomb") &&
         m_rendererSelectedTheme->elementExists("bonus_range") &&
@@ -176,30 +176,48 @@ void GameScene::init()
                     delete arenaItem;
                     arenaItem = NULL;
                     break;
-                /*case Cell::ICE:
-                    arenaItem->setElementId("arena_ice");
-                    arenaItem->setZValue(0);
-                    break;
+                case Cell::ICE:
+                    if(Settings::self()->showAllTiles() == 1)
+                    {
+                        arenaItem->setElementId("arena_ice");
+                        arenaItem->setZValue(0);
+                        break;
+                    }
                 case Cell::BOMBTRAP:
-                    arenaItem->setElementId("arena_bomb_trap");
-                    arenaItem->setZValue(0);
-                    break;
+                    if(Settings::self()->showAllTiles() == 1)
+                    {
+                        arenaItem->setElementId("arena_bomb_trap");
+                        arenaItem->setZValue(0);
+                        break;
+                    }
                 case Cell::ARROWUP:
-                    arenaItem->setElementId("arena_arrow_up");
-                    arenaItem->setZValue(0);
-                    break;
+                    if(Settings::self()->showAllTiles() == 1)
+                    {
+                        arenaItem->setElementId("arena_arrow_up");
+                        arenaItem->setZValue(0);
+                        break;
+                    }
                 case Cell::ARROWRIGHT:
-                    arenaItem->setElementId("arena_arrow_right");
-                    arenaItem->setZValue(0);
-                    break;
+                    if(Settings::self()->showAllTiles() == 1)
+                    {
+                        arenaItem->setElementId("arena_arrow_right");
+                        arenaItem->setZValue(0);
+                        break;
+                    }
                 case Cell::ARROWDOWN:
-                    arenaItem->setElementId("arena_arrow_down");
-                    arenaItem->setZValue(0);
-                    break;
+                    if(Settings::self()->showAllTiles() == 1)
+                    {
+                        arenaItem->setElementId("arena_arrow_down");
+                        arenaItem->setZValue(0);
+                        break;
+                    }
                 case Cell::ARROWLEFT:
-                    arenaItem->setElementId("arena_arrow_left");
-                    arenaItem->setZValue(0);
-                    break;*/
+                    if(Settings::self()->showAllTiles() == 1)
+                    {
+                        arenaItem->setElementId("arena_arrow_left");
+                        arenaItem->setZValue(0);
+                        break;
+                    }
                 case Cell::GROUND:
                 case Cell::BLOCK:
                 default:

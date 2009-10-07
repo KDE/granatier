@@ -37,5 +37,9 @@
       <label>This is a dummy setting for player setup.</label>
       <default>0</default>
     </entry>
+    <entry name="ShowAllTiles" type="Int" key="ShowAllTiles">
+      <label>This is only for the artists to make their life easier.</label>
+      <default>0</default>
+    </entry>
   </group>
 </kcfg>

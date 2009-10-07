@@ -352,7 +352,13 @@ void Game::createBonus()
         bonusType = Bonus::NONE;
         if(i < nBonusCount)
         {
-            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 3/*5*/))
+            int nNumberOfBonuses = 3;
+            if(Settings::self()->showAllTiles() == 1)
+            {
+                nNumberOfBonuses = 5;
+            }
+            
+            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * nNumberOfBonuses))
             {
                 case 0: bonusType = Bonus::SPEED;
                         break;
