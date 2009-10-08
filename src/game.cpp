@@ -368,7 +368,7 @@ void Game::createBonus()
                         break;
                 case 3: bonusType = Bonus::THROW;
                         break;
-                case 4: bonusType = Bonus::MOVE;
+                case 4: bonusType = Bonus::KICK;
                         break;
                 default: bonusType = Bonus::SPEED;
             }

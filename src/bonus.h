@@ -37,7 +37,7 @@ public:
         BOMB,
         POWER,
         THROW,
-        MOVE,
+        KICK,
         SLOW,
         HYPERACTIVE,
         MIRROR

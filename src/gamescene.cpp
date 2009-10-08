@@ -75,7 +75,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("bonus_bomb") &&
         m_rendererSelectedTheme->elementExists("bonus_power") &&
         m_rendererSelectedTheme->elementExists("bonus_throw") &&
-        m_rendererSelectedTheme->elementExists("bonus_move"))
+        m_rendererSelectedTheme->elementExists("bonus_kick"))
     {
         m_rendererBonusItems = m_rendererSelectedTheme;
     }
@@ -268,7 +268,7 @@ void GameScene::init()
                                             break;
                         case Bonus::THROW:  bonusItem->setElementId("bonus_throw");
                                             break;
-                        case Bonus::MOVE:   bonusItem->setElementId("bonus_move");
+                        case Bonus::KICK:   bonusItem->setElementId("bonus_kick");
                                             break;
                         case Bonus::HYPERACTIVE:   bonusItem->setElementId("bonus_bad_hyperactive");
                                             break;
