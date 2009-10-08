@@ -42,8 +42,8 @@ private:
     /** Player asked speed */
     qreal m_askedXSpeed, m_askedYSpeed;
     
-    /** Player bomb range */
-    int m_bombRange;
+    /** Player bomb power */
+    int m_bombPower;
     
     /** Player bomb total armory */
     int m_maxBombArmory;
@@ -147,9 +147,9 @@ public:
     qreal getAskedYSpeed() const;
 
     /**
-      * @return the bomb range
+      * @return the bomb power
       */
-    int getBombRange() const;
+    int getBombPower() const;
     
     /**
       * decrements the bomb armory

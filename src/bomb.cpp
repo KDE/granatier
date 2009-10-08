@@ -33,7 +33,7 @@ Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown) : Eleme
     m_x = fX;
     m_y = fY;
     
-    m_bombRange = 1;
+    m_bombPower = 1;
     
     m_arena->setCellElement(m_arena->getRowFromY(m_y), m_arena->getColFromX(m_x), this);
     
@@ -169,14 +169,14 @@ void Bomb::moveOnCenter()
     setY((m_arena->getRowFromY(m_y) + 0.5) * Cell::SIZE);
 }
 
-int Bomb::bombRange()
+int Bomb::bombPower()
 {
-    return m_bombRange;
+    return m_bombPower;
 }
 
-void Bomb::setBombRange(int bombRange)
+void Bomb::setBombPower(int bombPower)
 {
-    m_bombRange = bombRange;
+    m_bombPower = bombPower;
 }
 
 void Bomb::pause()

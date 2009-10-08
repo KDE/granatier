@@ -319,17 +319,17 @@ void Player::addBonus(Bonus* p_bonus)
                 m_speed = m_maxSpeed;
             }
             break;
-        case Bonus::RANGE:
+        case Bonus::POWER:
             if(m_badBonusCountdownTimer->isActive())
             {
                 m_badBonusCountdownTimer->stop();
                 slot_removeBadBonus();
             }
             
-            m_bombRange++;
-            if(m_bombRange > 10)
+            m_bombPower++;
+            if(m_bombPower > 10)
             {
-                m_bombRange = 10;
+                m_bombPower = 10;
             }
             break;
         case Bonus::BOMB:
@@ -413,7 +413,7 @@ void Player::resurrect()
     m_death = false;
     m_maxSpeed = 10;
     m_speed = 2;
-    m_bombRange = 1;
+    m_bombPower = 1;
     m_maxBombArmory = 1;
     m_bombArmory = m_maxBombArmory;
     if(m_badBonusCountdownTimer->isActive())
@@ -469,9 +469,9 @@ Cell Player::getAskedNextCell()
     return nextCell;
 }
 
-int Player::getBombRange() const
+int Player::getBombPower() const
 {
-    return m_bombRange;
+    return m_bombPower;
 }
 
 void Player::decrementBombArmory()

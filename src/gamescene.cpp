@@ -73,7 +73,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     // set the renderer for the bonus items TODO: add all the bonus items
     if(m_rendererSelectedTheme->elementExists("bonus_speed") &&
         m_rendererSelectedTheme->elementExists("bonus_bomb") &&
-        m_rendererSelectedTheme->elementExists("bonus_range") &&
+        m_rendererSelectedTheme->elementExists("bonus_power") &&
         m_rendererSelectedTheme->elementExists("bonus_throw") &&
         m_rendererSelectedTheme->elementExists("bonus_move"))
     {
@@ -264,7 +264,7 @@ void GameScene::init()
                                             break;
                         case Bonus::BOMB:   bonusItem->setElementId("bonus_bomb");
                                             break;
-                        case Bonus::RANGE:  bonusItem->setElementId("bonus_range");
+                        case Bonus::POWER:  bonusItem->setElementId("bonus_power");
                                             break;
                         case Bonus::THROW:  bonusItem->setElementId("bonus_throw");
                                             break;
@@ -622,7 +622,7 @@ void GameScene::bombDetonated(Bomb* bomb)
     BombItem* bombItem = NULL;
     BombExplosionItem* bombExplosionItem = NULL;
     Element* element = NULL;
-    int nBombRange = bomb->bombRange();
+    int nBombPower = bomb->bombPower();
     int nNumberOfColums = m_game->getArena()->getNbColumns();
     int nNumberOfRows = m_game->getArena()->getNbRows();
     int nColumn;
@@ -654,7 +654,7 @@ void GameScene::bombDetonated(Bomb* bomb)
         return;
     }
     
-    for(int i = 0; i < nBombRange; i++)
+    for(int i = 0; i < nBombPower; i++)
     {
         // north
         nColumn = m_game->getArena()->getColFromX(bomb->getX());
@@ -692,7 +692,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
-                bombExplosionItem->setZValue(300 + nBombRange+3 - i);
+                bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -741,7 +741,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
-                bombExplosionItem->setZValue(300 + nBombRange+3 - i);
+                bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -790,7 +790,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
-                bombExplosionItem->setZValue(300 + nBombRange+3 - i);
+                bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -839,7 +839,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
-                bombExplosionItem->setZValue(300 + nBombRange+3 - i);
+                bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }

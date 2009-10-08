@@ -47,8 +47,8 @@ protected:
     /** The Bomb detonation has already started */
     bool m_detonated;
 
-    /** The Bomb detonation range */
-    int m_bombRange;
+    /** The Bomb detonation power */
+    int m_bombPower;
     
     /** Timer used to make the bomb detonate */
     QTimer* m_detonationCountdownTimer;
@@ -131,16 +131,16 @@ public:
     void setYSpeed(qreal p_ySpeed);
     
     /**
-    * Range of the bomb
-    * @return the Bomb range
+    * Power of the bomb
+    * @return the Bomb power
     */
-    int bombRange();
+    int bombPower();
     
     /**
-    * Sets the Range of the bomb
-    * @param range the Bomb range
+    * Sets the Power of the bomb
+    * @param bombPower the Bomb power
     */
-    void setBombRange(int bombRange);
+    void setBombPower(int bombPower);
     
     /**
     * returns if the bomb is already detonated

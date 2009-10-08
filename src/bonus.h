@@ -35,7 +35,7 @@ public:
         NONE,
         SPEED,
         BOMB,
-        RANGE,
+        POWER,
         THROW,
         MOVE,
         SLOW,

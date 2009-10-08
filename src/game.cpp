@@ -364,7 +364,7 @@ void Game::createBonus()
                         break;
                 case 1: bonusType = Bonus::BOMB;
                         break;
-                case 2: bonusType = Bonus::RANGE;
+                case 2: bonusType = Bonus::POWER;
                         break;
                 case 3: bonusType = Bonus::THROW;
                         break;
@@ -598,7 +598,7 @@ void Game::decrementRemainingRoundTime()
             while (!bFound);
             
             Bomb* bomb = new Bomb((nCol + 0.5) * Cell::SIZE, (nRow + 0.5) * Cell::SIZE, m_arena, 1000);    // time in ms
-            bomb->setBombRange(1);
+            bomb->setBombPower(1);
             emit bombCreated(bomb);
             connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
             m_bombs.append(bomb);
@@ -719,7 +719,7 @@ void Game::createBomb(Player* player, qreal x, qreal y)
         }
     }
     Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_arena, 2500);    // time in ms
-    bomb->setBombRange(player->getBombRange());
+    bomb->setBombPower(player->getBombPower());
     emit bombCreated(bomb);
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), player, SLOT(slot_refillBombArmory()));
