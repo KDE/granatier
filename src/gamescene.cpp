@@ -274,7 +274,7 @@ void GameScene::init()
                                             break;
                         case Bonus::SLOW:   bonusItem->setElementId("bonus_bad_slow");
                                             break;
-                        case Bonus::DRUG:   bonusItem->setElementId("bonus_bad_drug");
+                        case Bonus::MIRROR: bonusItem->setElementId("bonus_bad_mirror");
                                             break;
                         default:            bonusItem->setElementId("bonus_speed");
                     }

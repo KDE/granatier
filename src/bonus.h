@@ -40,7 +40,7 @@ public:
         MOVE,
         SLOW,
         HYPERACTIVE,
-        DRUG
+        MIRROR
     };
 
     /**

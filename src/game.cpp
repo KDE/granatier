@@ -381,7 +381,7 @@ void Game::createBonus()
                         break;
                 case 1: bonusType = Bonus::SLOW;
                         break;
-                case 2: bonusType = Bonus::DRUG;
+                case 2: bonusType = Bonus::MIRROR;
                         break;
                 default: bonusType = Bonus::HYPERACTIVE;
             }

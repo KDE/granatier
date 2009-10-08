@@ -374,14 +374,14 @@ void Player::addBonus(Bonus* p_bonus)
             m_badBonusType = Bonus::SLOW;
             m_badBonusCountdownTimer->start();
             break;
-        case Bonus::DRUG:
+        case Bonus::MIRROR:
             if(m_badBonusCountdownTimer->isActive())
             {
                 m_badBonusCountdownTimer->stop();
                 slot_removeBadBonus();
             }
             
-            m_badBonusType = Bonus::DRUG;
+            m_badBonusType = Bonus::MIRROR;
             m_badBonusCountdownTimer->start();
             break;
         default:
@@ -502,7 +502,7 @@ void Player::slot_removeBadBonus()
         case Bonus::SLOW:
             m_speed = m_normalSpeed;
             break;
-        case Bonus::DRUG:
+        case Bonus::MIRROR:
             //nothing to do
             break;
     }
@@ -541,7 +541,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
 
     if(key == m_key.moveLeft)
     {
-        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::DRUG)
+        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::MIRROR)
         {
             goRight();
         }
@@ -553,7 +553,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
     }
     else if(key == m_key.moveRight)
     {
-        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::DRUG)
+        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::MIRROR)
         {
             goLeft();
         }
@@ -565,7 +565,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
     }
     else if(key == m_key.moveUp)
     {
-        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::DRUG)
+        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::MIRROR)
         {
             goDown();
         }
@@ -577,7 +577,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
     }
     else if(key == m_key.moveDown)
     {
-        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::DRUG)
+        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::MIRROR)
         {
             goUp();
         }
