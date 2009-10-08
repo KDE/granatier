@@ -18,6 +18,7 @@
 #include "infooverlay.h"
 #include "game.h"
 #include "player.h"
+#include "settings.h"
 
 #include <QTimer>
 #include <QGraphicsScene>
@@ -135,6 +136,10 @@ InfoOverlay::InfoOverlay (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
     
     m_dimmOverlay = new QGraphicsRectItem();
     m_dimmOverlay->setBrush(QBrush(QColor(0,0,0,175)));
+    if(Settings::self()->showAllTiles() == 1)
+    {
+        m_dimmOverlay->setBrush(QBrush(QColor(0,0,0,0)));
+    }
     m_dimmOverlay->setZValue(1000);
     m_dimmOverlay->setRect(m_graphicsScene->sceneRect().x(), m_graphicsScene->sceneRect().y(),
                            m_graphicsScene->width(), m_graphicsScene->height());

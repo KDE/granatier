@@ -246,6 +246,10 @@ void GameScene::init()
                 elementItem->setElementId(element->getImageId());
                 elementItem->update(element->getX(), element->getY());
                 elementItem->setZValue(200);
+                if(Settings::self()->showAllTiles() == 1)
+                {
+                    elementItem->setZValue(99);
+                }
                 m_blockItems[i][j] = elementItem;
                 // if the block contains a hidden bonus, create the bonus item 
                 Bonus* bonus = (dynamic_cast <Block*> (element))->getBonus();
@@ -277,6 +281,11 @@ void GameScene::init()
                     bonusItem->update(bonus->getX(), bonus->getY());
                     bonusItem->setZValue(100);
                     m_bonusItems[i][j] = bonusItem;
+                    
+                    if(Settings::self()->showAllTiles() == 1)
+                    {
+                        addItem(bonusItem);
+                    }
                 }
                 else
                 {
