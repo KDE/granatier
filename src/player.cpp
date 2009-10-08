@@ -304,89 +304,93 @@ void Player::move(qreal x, qreal y)
 void Player::addBonus(Bonus* p_bonus)
 {
     int bonusType = p_bonus->getBonusType();
-    if(bonusType == Bonus::SPEED)
+    switch (bonusType)
     {
-        if(m_badBonusCountdownTimer->isActive())
-        {
-            m_badBonusCountdownTimer->stop();
-            slot_removeBadBonus();
-        }
-        
-        m_speed += 1;
-        if(m_speed > m_maxSpeed)
-        {
-            m_speed = m_maxSpeed;
-        }
-    }
-    else if(bonusType == Bonus::RANGE)
-    {
-        if(m_badBonusCountdownTimer->isActive())
-        {
-            m_badBonusCountdownTimer->stop();
-            slot_removeBadBonus();
-        }
-        
-        m_bombRange++;
-        if(m_bombRange > 10)
-        {
-            m_bombRange = 10;
-        }
-    }
-    else if(bonusType == Bonus::BOMB)
-    {
-        if(m_badBonusCountdownTimer->isActive())
-        {
-            m_badBonusCountdownTimer->stop();
-            slot_removeBadBonus();
-        }
-        
-        m_maxBombArmory++;
-        if(m_maxBombArmory > 10)
-        {
-            m_maxBombArmory = 10;
-        }
-        m_bombArmory++;
-        if(m_bombArmory > m_maxBombArmory)
-        {
-            m_bombArmory = m_maxBombArmory;
-        }
-    }
-    else if(bonusType == Bonus::HYPERACTIVE)
-    {
-        if(m_badBonusCountdownTimer->isActive())
-        {
-            m_badBonusCountdownTimer->stop();
-            slot_removeBadBonus();
-        }
-        
-        m_normalSpeed = m_speed;
-        m_speed = m_maxSpeed * 2;
-        m_badBonusType = Bonus::HYPERACTIVE;
-        m_badBonusCountdownTimer->start();
-    }
-    else if(bonusType == Bonus::SLOW)
-    {
-        if(m_badBonusCountdownTimer->isActive())
-        {
-            m_badBonusCountdownTimer->stop();
-            slot_removeBadBonus();
-        }
-        
-        m_normalSpeed = m_speed;
-        m_speed = 1;
-        m_badBonusType = Bonus::SLOW;
-        m_badBonusCountdownTimer->start();
-    }
-    else if(bonusType == Bonus::DRUG)
-    {
-        if(m_badBonusCountdownTimer->isActive())
-        {
-            m_badBonusCountdownTimer->stop();
-            slot_removeBadBonus();
-        }
-        
-        m_badBonusType = Bonus::DRUG;
-        m_badBonusCountdownTimer->start();
+        case Bonus::SPEED:
+            if(m_badBonusCountdownTimer->isActive())
+            {
+                m_badBonusCountdownTimer->stop();
+                slot_removeBadBonus();
+            }
+            
+            m_speed += 1;
+            if(m_speed > m_maxSpeed)
+            {
+                m_speed = m_maxSpeed;
+            }
+            break;
+        case Bonus::RANGE:
+            if(m_badBonusCountdownTimer->isActive())
+            {
+                m_badBonusCountdownTimer->stop();
+                slot_removeBadBonus();
+            }
+            
+            m_bombRange++;
+            if(m_bombRange > 10)
+            {
+                m_bombRange = 10;
+            }
+            break;
+        case Bonus::BOMB:
+            if(m_badBonusCountdownTimer->isActive())
+            {
+                m_badBonusCountdownTimer->stop();
+                slot_removeBadBonus();
+            }
+            
+            m_maxBombArmory++;
+            if(m_maxBombArmory > 10)
+            {
+                m_maxBombArmory = 10;
+            }
+            m_bombArmory++;
+            if(m_bombArmory > m_maxBombArmory)
+            {
+                m_bombArmory = m_maxBombArmory;
+            }
+            break;
+        case Bonus::HYPERACTIVE:
+            if(m_badBonusCountdownTimer->isActive())
+            {
+                m_badBonusCountdownTimer->stop();
+                slot_removeBadBonus();
+            }
+            
+            m_normalSpeed = m_speed;
+            m_speed = m_maxSpeed * 3;
+            m_badBonusType = Bonus::HYPERACTIVE;
+            m_badBonusCountdownTimer->start();
+            break;
+        case Bonus::SLOW:
+            if(m_badBonusCountdownTimer->isActive())
+            {
+                m_badBonusCountdownTimer->stop();
+                slot_removeBadBonus();
+            }
+            
+            m_normalSpeed = m_speed;
+            m_speed = 1;
+            m_badBonusType = Bonus::SLOW;
+            m_badBonusCountdownTimer->start();
+            break;
+        case Bonus::DRUG:
+            if(m_badBonusCountdownTimer->isActive())
+            {
+                m_badBonusCountdownTimer->stop();
+                slot_removeBadBonus();
+            }
+            
+            m_badBonusType = Bonus::DRUG;
+            m_badBonusCountdownTimer->start();
+            break;
+        default:
+            if(m_badBonusCountdownTimer->isActive())
+            {
+                m_badBonusCountdownTimer->stop();
+                slot_removeBadBonus();
+            }
+            break;
     }
 }
 
