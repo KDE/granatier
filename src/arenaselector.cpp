@@ -115,7 +115,6 @@ void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, A
     //graphicsscene for new arena preview
     m_graphicsScene = new QGraphicsScene();
     ui.arenaPreview->setScene(m_graphicsScene);
-    ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
     ui.arenaPreview->setBackgroundBrush(Qt::black);
     m_renderer = 0;
     
@@ -298,6 +297,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
             }
         }
     }
+    ui.arenaPreview->setSceneRect(0, 0, arena->getNbColumns()*Cell::SIZE, arena->getNbRows()*Cell::SIZE);
     ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
 }
 
