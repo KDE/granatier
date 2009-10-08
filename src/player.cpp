@@ -291,6 +291,13 @@ void Player::updateMove()
             move(m_x + deltaPerpendicularMove, m_y + deltaStraightMove);
         }
     }
+    
+    //check if bad bonus scatty and drop bombs
+    if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY  && m_bombArmory > 0)
+    {
+        //TODO: improve
+        emit bombDropped(this, m_x, m_y);
+    }
 }
 
 void Player::move(qreal x, qreal y)
@@ -382,6 +389,16 @@ void Player::addBonus(Bonus* p_bonus)
             }
             
             m_badBonusType = Bonus::MIRROR;
+            m_badBonusCountdownTimer->start();
+            break;
+        case Bonus::SCATTY:
+            if(m_badBonusCountdownTimer->isActive())
+            {
+                m_badBonusCountdownTimer->stop();
+                slot_removeBadBonus();
+            }
+            
+            m_badBonusType = Bonus::SCATTY;
             m_badBonusCountdownTimer->start();
             break;
         default:

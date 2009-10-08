@@ -276,6 +276,8 @@ void GameScene::init()
                                             break;
                         case Bonus::MIRROR: bonusItem->setElementId("bonus_bad_mirror");
                                             break;
+                        case Bonus::SCATTY: bonusItem->setElementId("bonus_bad_scatty");
+                                            break;
                         default:            bonusItem->setElementId("bonus_speed");
                     }
                     bonusItem->update(bonus->getX(), bonus->getY());

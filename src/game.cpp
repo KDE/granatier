@@ -375,13 +375,15 @@ void Game::createBonus()
         }
         else if (i-nBonusCount < nBadBonusCount)
         {
-            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 3))
+            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 4))
             {
                 case 0: bonusType = Bonus::HYPERACTIVE;
                         break;
                 case 1: bonusType = Bonus::SLOW;
                         break;
                 case 2: bonusType = Bonus::MIRROR;
+                        break;
+                case 3: bonusType = Bonus::SCATTY;
                         break;
                 default: bonusType = Bonus::HYPERACTIVE;
             }

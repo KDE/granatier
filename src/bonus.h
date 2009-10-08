@@ -40,7 +40,8 @@ public:
         KICK,
         SLOW,
         HYPERACTIVE,
-        MIRROR
+        MIRROR,
+        SCATTY
     };
 
     /**
