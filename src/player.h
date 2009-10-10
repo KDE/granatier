@@ -63,6 +63,9 @@ private:
     /** the speed before a bad bonus was taken */
     qreal m_normalSpeed;
     
+    /** the speed before a bad bonus was taken */
+    bool m_moveMirrored;
+    
     /** timer for the bad bonus to disapear */
     QTimer* m_badBonusCountdownTimer;
     

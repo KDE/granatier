@@ -38,7 +38,7 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
     
     m_badBonusCountdownTimer = new QTimer;
     m_badBonusCountdownTimer->setSingleShot(true);
-    m_badBonusCountdownTimer->setInterval(15000);
+    m_badBonusCountdownTimer->setInterval(10000);
     connect(m_badBonusCountdownTimer, SIGNAL(timeout()), this, SLOT(slot_removeBadBonus()));
     
     resurrect();
@@ -382,14 +382,32 @@ void Player::addBonus(Bonus* p_bonus)
             m_badBonusCountdownTimer->start();
             break;
         case Bonus::MIRROR:
-            if(m_badBonusCountdownTimer->isActive())
             {
-                m_badBonusCountdownTimer->stop();
-                slot_removeBadBonus();
+                if(m_badBonusCountdownTimer->isActive())
+                {
+                    m_badBonusCountdownTimer->stop();
+                    slot_removeBadBonus();
+                }
+                
+                int askedXSpeedTemp = m_askedXSpeed;
+                int askedYSpeedTemp = m_askedYSpeed;
+                m_askedXSpeed = -m_xSpeed;
+                m_askedYSpeed = -m_ySpeed;
+                updateDirection();
+                m_askedXSpeed = -askedXSpeedTemp;
+                m_askedYSpeed = -askedYSpeedTemp;
+                
+                QKeySequence tempKey = m_key.moveLeft;
+                m_key.moveLeft = m_key.moveRight;
+                m_key.moveRight = tempKey;
+                tempKey = m_key.moveUp;
+                m_key.moveUp = m_key.moveDown;
+                m_key.moveDown = tempKey;
+                
+                m_moveMirrored = true;
+                m_badBonusType = Bonus::MIRROR;
+                m_badBonusCountdownTimer->start();
             }
-            
-            m_badBonusType = Bonus::MIRROR;
-            m_badBonusCountdownTimer->start();
             break;
         case Bonus::SCATTY:
             if(m_badBonusCountdownTimer->isActive())
@@ -430,6 +448,8 @@ void Player::resurrect()
     m_death = false;
     m_maxSpeed = 10;
     m_speed = 2;
+    m_normalSpeed = 2;
+    m_moveMirrored = false;
     m_bombPower = 1;
     m_maxBombArmory = 1;
     m_bombArmory = m_maxBombArmory;
@@ -520,7 +540,24 @@ void Player::slot_removeBadBonus()
             m_speed = m_normalSpeed;
             break;
         case Bonus::MIRROR:
-            //nothing to do
+            {
+                int askedXSpeedTemp = m_askedXSpeed;
+                int askedYSpeedTemp = m_askedYSpeed;
+                m_askedXSpeed = -m_xSpeed;
+                m_askedYSpeed = -m_ySpeed;
+                updateDirection();
+                m_askedXSpeed = -askedXSpeedTemp;
+                m_askedYSpeed = -askedYSpeedTemp;
+                
+                QKeySequence tempKey = m_key.moveLeft;
+                m_key.moveLeft = m_key.moveRight;
+                m_key.moveRight = tempKey;
+                tempKey = m_key.moveUp;
+                m_key.moveUp = m_key.moveDown;
+                m_key.moveDown = tempKey;
+                
+                m_moveMirrored = false;
+            }
             break;
     }
 }
@@ -558,50 +595,22 @@ void Player::keyPressed(QKeyEvent* keyEvent)
 
     if(key == m_key.moveLeft)
     {
-        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::MIRROR)
-        {
-            goRight();
-        }
-        else
-        {
-            goLeft();
-        }
+        goLeft();
         updateDirection();
     }
     else if(key == m_key.moveRight)
     {
-        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::MIRROR)
-        {
-            goLeft();
-        }
-        else
-        {
-           goRight();
-        }
+        goRight();
         updateDirection();
     }
     else if(key == m_key.moveUp)
     {
-        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::MIRROR)
-        {
-            goDown();
-        }
-        else
-        {
-           goUp();
-        }
+        goUp();
         updateDirection();
     }
     else if(key == m_key.moveDown)
     {
-        if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::MIRROR)
-        {
-            goUp();
-        }
-        else
-        {
-           goDown();
-        }
+        goDown();
         updateDirection();
     }
     else if(key == m_key.dropBomb && m_bombArmory > 0)
