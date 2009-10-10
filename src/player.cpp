@@ -358,28 +358,48 @@ void Player::addBonus(Bonus* p_bonus)
             }
             break;
         case Bonus::HYPERACTIVE:
-            if(m_badBonusCountdownTimer->isActive())
             {
-                m_badBonusCountdownTimer->stop();
-                slot_removeBadBonus();
+                if(m_badBonusCountdownTimer->isActive())
+                {
+                    m_badBonusCountdownTimer->stop();
+                    slot_removeBadBonus();
+                }
+                
+                int askedXSpeedTemp = m_askedXSpeed;
+                int askedYSpeedTemp = m_askedYSpeed;
+                m_normalSpeed = m_speed;
+                m_speed = m_maxSpeed * 3;
+                m_askedXSpeed = sign(m_xSpeed) * m_speed;
+                m_askedYSpeed = sign(m_ySpeed) * m_speed;
+                updateDirection();
+                m_askedXSpeed = askedXSpeedTemp;
+                m_askedYSpeed = askedYSpeedTemp;
+                
+                m_badBonusType = Bonus::HYPERACTIVE;
+                m_badBonusCountdownTimer->start();
             }
-            
-            m_normalSpeed = m_speed;
-            m_speed = m_maxSpeed * 3;
-            m_badBonusType = Bonus::HYPERACTIVE;
-            m_badBonusCountdownTimer->start();
             break;
         case Bonus::SLOW:
-            if(m_badBonusCountdownTimer->isActive())
             {
-                m_badBonusCountdownTimer->stop();
-                slot_removeBadBonus();
+                if(m_badBonusCountdownTimer->isActive())
+                {
+                    m_badBonusCountdownTimer->stop();
+                    slot_removeBadBonus();
+                }
+                
+                int askedXSpeedTemp = m_askedXSpeed;
+                int askedYSpeedTemp = m_askedYSpeed;
+                m_normalSpeed = m_speed;
+                m_speed = 1;
+                m_askedXSpeed = sign(m_xSpeed) * m_speed;
+                m_askedYSpeed = sign(m_ySpeed) * m_speed;
+                updateDirection();
+                m_askedXSpeed = askedXSpeedTemp;
+                m_askedYSpeed = askedYSpeedTemp;
+                
+                m_badBonusType = Bonus::SLOW;
+                m_badBonusCountdownTimer->start();
             }
-            
-            m_normalSpeed = m_speed;
-            m_speed = 1;
-            m_badBonusType = Bonus::SLOW;
-            m_badBonusCountdownTimer->start();
             break;
         case Bonus::MIRROR:
             {
@@ -537,7 +557,16 @@ void Player::slot_removeBadBonus()
     {
         case Bonus::HYPERACTIVE:
         case Bonus::SLOW:
-            m_speed = m_normalSpeed;
+            {
+                int askedXSpeedTemp = m_askedXSpeed;
+                int askedYSpeedTemp = m_askedYSpeed;
+                m_speed = m_normalSpeed;
+                m_askedXSpeed = sign(m_xSpeed) * m_speed;
+                m_askedYSpeed = sign(m_ySpeed) * m_speed;
+                updateDirection();
+                m_askedXSpeed = askedXSpeedTemp;
+                m_askedYSpeed = askedYSpeedTemp;
+            }
             break;
         case Bonus::MIRROR:
             {
