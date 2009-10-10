@@ -293,7 +293,7 @@ void Player::updateMove()
     }
     
     //check if bad bonus scatty and drop bombs
-    if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY  && m_bombArmory > 0)
+    if(!m_death && m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY  && m_bombArmory > 0)
     {
         //TODO: improve
         emit bombDropped(this, m_x, m_y);
