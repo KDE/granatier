@@ -44,6 +44,8 @@ public:
 protected:
 
    Direction m_direction;
+   
+   int m_bombPower;
 
 public:
 
@@ -51,7 +53,7 @@ public:
      * Creates a new BombExplosionItem instance.
      * @param p_model the Bomb model
      */
-    BombExplosionItem(Bomb* p_model, Direction direction, int i);
+    BombExplosionItem(Bomb* p_model, Direction direction, int bombPower);
 
     /**
      * Deletes the BombExplosionItem instance.

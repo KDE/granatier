@@ -691,7 +691,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                         }
                     }
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, i);
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
@@ -740,7 +740,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                         }
                     }
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, i);
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
@@ -789,7 +789,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                         }
                     }
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, i);
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
@@ -838,7 +838,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                         }
                     }
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, i);
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
                 bombExplosionItem->update(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);

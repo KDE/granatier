@@ -22,30 +22,25 @@
 #include <QTimer>
 #include <KDebug>
 
-BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int i) : QGraphicsSvgItem()
+BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower) : QGraphicsSvgItem()
 {
-    QTransform transform;
     m_direction = direction;
+    m_bombPower = bombPower;
     switch(m_direction)
     {
         case NORTH:
             setElementId("bomb_exploded_north");
-            transform.translate(0, 20);
             break;
         case EAST:
             setElementId("bomb_exploded_east");
-            transform.translate(-20, 0);
             break;
         case SOUTH:
             setElementId("bomb_exploded_south");
-            transform.translate(0, -20);
             break;
         case WEST:
             setElementId("bomb_exploded_west");
-            transform.translate(20, 0);
             break;
     }
-    setTransform(transform);
     
     setVisible(true);
 }
@@ -61,7 +56,7 @@ QPainterPath BombExplosionItem::shape() const
     QRectF rect = boundingRect();
 
     // Calculation of the shape
-    QRectF shapeRect = QRectF( rect.x()+rect.width()/4, rect.y()+rect.height()/4, rect.width()/2, rect.height()/2 );
+    QRectF shapeRect = QRectF(rect.x(), rect.y(), rect.width(), rect.height());
     path.addEllipse(shapeRect);
     return path;
 }
@@ -73,4 +68,30 @@ void BombExplosionItem::update(qreal p_x, qreal p_y)
     qreal y = p_y - boundingRect().height() / 2;
     // Updates the view coordinates
     setPos(x, y);
+    
+    QTransform transform;
+    switch(m_direction)
+    {
+        case NORTH:
+            transform.translate(boundingRect().width() / 2.0, 0);
+            transform.scale(1 + 0.1 * m_bombPower, 1);
+            transform.translate(-boundingRect().width() / 2.0, 20);
+            break;
+        case EAST:
+            transform.translate(0, boundingRect().height() / 2.0);
+            transform.scale(1, 1 + 0.1 * m_bombPower);
+            transform.translate(-20, -boundingRect().height() / 2.0);
+            break;
+        case SOUTH:
+            transform.translate(boundingRect().width() / 2.0, 0);
+            transform.scale(1 + 0.1 * m_bombPower, 1);
+            transform.translate(-boundingRect().width() / 2.0, -20);
+            break;
+        case WEST:
+            transform.translate(0, boundingRect().height() / 2.0);
+            transform.scale(1, 1 + 0.1 * m_bombPower);
+            transform.translate(20, -boundingRect().height() / 2.0);
+            break;
+    }
+    setTransform(transform);
 }
