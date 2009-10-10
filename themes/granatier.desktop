@@ -1,0 +1,10 @@
+[KGameTheme]
+Name=Granatier
+Name[x-test]=xxGranatierxx
+Description=Granatier Theme
+Description[x-test]=xxGranatier Themexx
+Type=SVG
+FileName=granatier.svgz
+Preview=granatier_preview.png
+Author=Arturo Silva
+AuthorEmail=---

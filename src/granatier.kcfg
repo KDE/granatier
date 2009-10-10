@@ -11,7 +11,7 @@
     </entry>
     <entry name="Theme" type="String" key="Theme">
       <label>The graphical theme to be used.</label>
-      <default>themes/clanbomber.desktop</default>
+      <default>themes/granatier.desktop</default>
     </entry>
     <entry name="Arena" type="String" key="Arena">
       <label>The arena to be used.</label>

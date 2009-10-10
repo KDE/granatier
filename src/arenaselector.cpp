@@ -249,7 +249,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     }
     
     m_renderer = new KSvgRenderer;
-    m_renderer->load(KStandardDirs::locate("appdata", QString("themes/clanbomber.svgz")));
+    m_renderer->load(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
     
     for (int i = 0; i < arena->getNbRows(); ++i)
     {

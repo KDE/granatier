@@ -54,7 +54,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
 
     // Load the default SVG file as fallback
     m_rendererDefaultTheme = new KSvgRenderer();
-    m_rendererDefaultTheme->load(KStandardDirs::locate("appdata", "themes/clanbomber.svgz"));
+    m_rendererDefaultTheme->load(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
     // Load the selected SVG file
     m_rendererSelectedTheme = new KSvgRenderer();
     loadTheme();
