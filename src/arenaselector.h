@@ -46,31 +46,45 @@ class ArenaSelectorPrivate;
  **/
 class ArenaSelector : public QWidget
 {
-    Q_OBJECT
-    public:
-      enum NewStuffState {
-          NewStuffDisableDownload,
-          NewStuffEnableDownload
-        };
-        /**
-         * Load a specific arena file.
-         * @param groupName the title of the config group in the arena .desktop file
-         * @param directory subdirectory (of share/apps/appname) to search in
-         * @return true if the arena files and properties could be loaded
-         */
-        ArenaSelector(QWidget* parent, KConfigSkeleton* config, ArenaSelector::NewStuffState knsflags = ArenaSelector::NewStuffEnableDownload, const QString &groupName = QLatin1String("Arena"), const QString &directory = QLatin1String("arenas"));
-        virtual ~ArenaSelector();
+Q_OBJECT
+public:
+  enum NewStuffState
+  {
+      NewStuffDisableDownload,
+      NewStuffEnableDownload
+  };
+    /**
+    * Load a specific arena file.
+    * @param groupName the title of the config group in the arena .desktop file
+    * @param directory subdirectory (of share/apps/appname) to search in
+    * @return true if the arena files and properties could be loaded
+    */
+    ArenaSelector(QWidget* parent, KConfigSkeleton* config, ArenaSelector::NewStuffState knsflags = ArenaSelector::NewStuffEnableDownload, const QString &groupName = QLatin1String("Arena"), const QString &directory = QLatin1String("arenas"));
+    virtual ~ArenaSelector();
     
-    private:
-        class ArenaSelectorPrivate;
-        ArenaSelectorPrivate* const d;
+protected:
+    /**
+    * Resizes the items when the view is resized.
+    * @param p_event the resize event
+    */
+    void resizeEvent(QResizeEvent* p_event);
+    
+    /**
+    * Resizes the items when the view is showed.
+    * @param p_event the resize event
+    */
+    void showEvent(QShowEvent* p_event);
 
-        Q_DISABLE_COPY(ArenaSelector)
+private:
+    class ArenaSelectorPrivate;
+    ArenaSelectorPrivate* const d;
 
-        Q_PRIVATE_SLOT(d, void _k_updatePreview())
-        Q_PRIVATE_SLOT(d, void _k_updateArenaList(const QString&))
-        Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
-        Q_PRIVATE_SLOT(d, void _k_importArenasDialog())
+    Q_DISABLE_COPY(ArenaSelector)
+
+    Q_PRIVATE_SLOT(d, void _k_updatePreview())
+    Q_PRIVATE_SLOT(d, void _k_updateArenaList(const QString&))
+    Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
+    Q_PRIVATE_SLOT(d, void _k_importArenasDialog())
 };
 
 #endif

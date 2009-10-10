@@ -90,11 +90,22 @@ ArenaSelector::ArenaSelector(QWidget* parent, KConfigSkeleton * aconfig, ArenaSe
     d->lookupDirectory = directory;
     d->groupName = groupName;
     d->setupData(aconfig, knsflags);
+    d->_k_updatePreview();
 }
 
 ArenaSelector::~ArenaSelector()
 {
     delete d;
+}
+
+void ArenaSelector::resizeEvent(QResizeEvent*)
+{
+    d->_k_updatePreview();
+}
+
+void ArenaSelector::showEvent(QShowEvent*)
+{
+    d->_k_updatePreview();
 }
 
 void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, ArenaSelector::NewStuffState knsflags)

@@ -86,6 +86,16 @@ PlayerSelector::~PlayerSelector()
     delete d;
 }
 
+void PlayerSelector::resizeEvent(QResizeEvent*)
+{
+    d->slotUpdatePreview();
+}
+
+void PlayerSelector::showEvent(QShowEvent*)
+{
+    d->slotUpdatePreview();
+}
+
 void PlayerSelector::PlayerSelectorPrivate::setupData()
 {
     ui.setupUi(q);

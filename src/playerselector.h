@@ -31,7 +31,20 @@ Q_OBJECT
 public:
     PlayerSelector(QWidget* parent, PlayerSettings* playerSettings);
     virtual ~PlayerSelector();
+
+protected:
+    /**
+    * Resizes the items when the view is resized.
+    * @param p_event the resize event
+    */
+    void resizeEvent(QResizeEvent* p_event);
     
+    /**
+    * Resizes the items when the view is showed.
+    * @param p_event the resize event
+    */
+    void showEvent(QShowEvent* p_event);
+  
 private:
     class PlayerSelectorPrivate;
     PlayerSelectorPrivate* const d;
