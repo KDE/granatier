@@ -25,7 +25,7 @@ ArenaItem::ArenaItem(qreal p_x, qreal p_y) : QGraphicsSvgItem()
     setPos(p_x, p_y);
     // Configure the cache in order to increase the performance
     setCacheMode(DeviceCoordinateCache);
-    setMaximumCacheSize(QSize(2000, 2000));
+    setMaximumCacheSize(QSize(500, 500));
 }
 
 ArenaItem::~ArenaItem()

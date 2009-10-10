@@ -40,6 +40,7 @@ InfoOverlay::InfoOverlay (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
     int nTop = 0;
     int nLeft = 0;
     
+    //calculate max player name length and top-left position
     for(int i = 0; i < playerList.count(); i++)
     {
         QGraphicsTextItem playerName (playerList[i]->getPlayerName());
@@ -58,6 +59,7 @@ InfoOverlay::InfoOverlay (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
         }
     }
     
+    //create the labels
     for(int i = 0; i < playerList.count(); i++)
     {
         QList <QGraphicsSvgItem*> svgItemList;
@@ -72,6 +74,7 @@ InfoOverlay::InfoOverlay (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
             QGraphicsSvgItem* score = new QGraphicsSvgItem;
             score->setElementId("score_star_disabled");
             score->setSharedRenderer(m_renderer);
+            score->setCachingEnabled(false);
             score->setZValue(1001);
             score->setPos(nLeft + nMaxPlayerNameLength + 10 + j * (score->boundingRect().width()+2),
                           playerName->pos().y() + playerName->boundingRect().height()/2 - score->boundingRect().height()/2);
@@ -260,6 +263,7 @@ void InfoOverlay::showScore ()
 {
     int nWinPoints = m_game->getWinPoints();
     QList <Player*> players = m_game->getPlayers();
+    QGraphicsSvgItem* svgItem;
     
     hideItems();
     
@@ -278,11 +282,12 @@ void InfoOverlay::showScore ()
         
         for(int j = 0; j < nWinPoints; j++)
         {
-            QGraphicsSvgItem* svgItem = m_mapScore.value(players[i]).at(j);
+            svgItem = m_mapScore.value(players[i]).at(j);
             if (players[i]->points() > j)
             {
                 svgItem->setElementId("score_star_enabled");
             }
+            
             // if the score was not displayed yet
             if (!m_graphicsScene->items().contains(svgItem))
             {
