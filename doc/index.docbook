@@ -74,6 +74,8 @@
   </chapter>
   
   <chapter id="rules_and_tips"><title>Game Rules, Strategies and Tips</title> <!-- do not change this! -->
+    <sect1 id="test">
+    <title>The Items</title>
     <sect2>
       <title>The Arena</title>
       <para>
@@ -153,6 +155,7 @@
         Let you lay constantly bombs.
       </para>
     </sect2>
+    </sect1>
   </chapter>
 
   <chapter id="interface"><title>Interface Overview</title> <!-- do not change this! -->
