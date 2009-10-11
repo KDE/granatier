@@ -1,0 +1,415 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.2-Based Variant V1.1//EN" "dtd/kdex.dtd" [
+  <!ENTITY granatier "<application>Granatier</application>">
+  <!ENTITY kappname "&granatier;">
+  
+  <!ENTITY kappversion "0.8"><!-- Application version. Use this variable everywhere it's needed.-->
+  <!ENTITY docversion "0.8"><!-- Document version. Use this variable everywhere it's needed.-->
+  <!ENTITY docupdate "2009-10-11"><!-- Document version. Use this variable everywhere it's needed.-->
+  <!ENTITY package "kdegames">  <!-- do not change this! -->
+  <!ENTITY % English "INCLUDE" > <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"> <!-- do not change this! -->
+]>
+
+<book lang="&language;">
+  <bookinfo>
+    <title>&granatier; Handbook</title>
+    
+    <authorgroup>
+      <author>
+        <personname>
+          <firstname>Mathias</firstname>
+          <surname>Kraus</surname>
+        </personname>
+        <email>k.hias@gmx.de</email>
+      </author>
+    </authorgroup>
+    
+    <date>&docupdate;</date>
+    <releaseinfo>&docversion;</releaseinfo>
+    
+    <abstract>
+      <para>This documentation describes the game of &granatier; version &kappversion;</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword>KDE</keyword> <!-- do not change this! -->
+      <keyword>kdegames</keyword> <!-- do not change this! -->
+      <keyword>game</keyword> <!-- do not change this! -->
+      <keyword>Granatier</keyword><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword>arcade</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword>multiplayer</keyword>
+      <!--All other relevant keywords-->
+      <keyword>bomberman</keyword>
+      <keyword>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"><title>Introduction</title> <!-- do not change this! -->
+    <note><title>Gametype:</title><para>Arcade</para></note>
+    <note><title>Number of possible players:</title><para>Multiplayer</para></note>
+    <para>
+      &granatier; is a Clone of <application>Bomberman</application>. You must run through an Arena and try to eliminate your Opponents with Bombs. There are several Bonuses and Handicaps to help or hinder you doing this.
+    </para>
+    <screenshot>
+      <screeninfo>A &granatier; screenshot</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase>A &granatier; screenshot</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"><title>How to play</title> <!-- do not change this! -->
+    <note><title>Objective:</title><para>Eliminate all Opponents.</para></note>
+    <para>
+      Move your Player with the keys, lay Bombs to destroy Blocks and collect Bonuses which are hidden behind the blocks. There are Bonuses that make your faster or increase the Bomb power, but there are also Handicaps like mirroring the moving keys or slowing you down, so be careful what you collect. The more bonuses you get, the easier is it to eliminate the opponent Players and win the round. For each won round, the Player gets a point and the Player who at first reaches a defined number of points, wins the game.
+    </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"><title>Game Rules, Strategies and Tips</title> <!-- do not change this! -->
+    <sect2>
+      <title>The Arena</title>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="arena_wall.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Wall</phrase> </textobject>
+        </inlinemediaobject>
+        The Wall. Can not be destroyed.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="arena_ground.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Ground</phrase> </textobject>
+        </inlinemediaobject>
+        The Ground.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="arena_block.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Block</phrase> </textobject>
+        </inlinemediaobject>
+        The Block. The Blocks can be destroyed with bombs. Some of the Blocks contain Bonuses or Handicaps.
+      </para>
+    </sect2>
+    <sect2>
+      <title>The Bonuses</title>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_speed.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Speed</phrase> </textobject>
+        </inlinemediaobject>
+        Increases the speed.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_bomb.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Bomb</phrase> </textobject>
+        </inlinemediaobject>
+        Increases the bomb armory.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_power.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Power</phrase> </textobject>
+        </inlinemediaobject>
+        Increases the bomb power.
+      </para>
+    </sect2>
+    <sect2>
+      <title>The Handicaps</title>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_bad_slow.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Slow</phrase> </textobject>
+        </inlinemediaobject>
+        Slow down.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Hyperactive</phrase> </textobject>
+        </inlinemediaobject>
+        Makes very fast.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_bad_mirror.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Mirror</phrase> </textobject>
+        </inlinemediaobject>
+        Mirrors the moving keys.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_bad_scatty.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Scatty</phrase> </textobject>
+        </inlinemediaobject>
+        Let you lay constantly bombs.
+      </para>
+    </sect2>
+  </chapter>
+
+  <chapter id="interface"><title>Interface Overview</title> <!-- do not change this! -->
+  <!-- This section covers the menubar. Describe every single entry in order. Use <variablelist> and <varlistentry>. 
+  Split the chapter into sections using <sect1(2,3)> for better viewing.-->
+    <sect1 id="menubar">
+      <title>Menubar</title>
+      <sect2>
+        <title>The <guimenu>Game</guimenu> Menu</title>
+        <para>
+          <variablelist>
+            <varlistentry>
+              <term><menuchoice>
+                <shortcut><keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo></shortcut>
+                <guimenu>Game</guimenu><guimenuitem>New</guimenuitem>
+              </menuchoice></term>
+              <listitem><para><action>Starts a new game.</action></para></listitem>
+            </varlistentry>
+            <varlistentry>
+              <term><menuchoice>
+                <shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
+                <guimenu>Game</guimenu><guimenuitem>Quit</guimenuitem>
+              </menuchoice></term>
+              <listitem><para><action>Quits</action> &granatier;.</para></listitem>
+            </varlistentry>
+          </variablelist>
+        </para>
+      </sect2>
+      <sect2>
+        <title>The <guimenu>Settings</guimenu> Menu</title>
+        <para>
+          <variablelist>
+            <varlistentry>
+              <term><menuchoice>
+                <guimenu>Settings</guimenu><guimenuitem>Play Sounds</guimenuitem>
+              </menuchoice></term>
+              <listitem><para><action>Plays the sounds or mutes.</action></para></listitem>
+            </varlistentry>
+            <varlistentry>
+              <term><menuchoice>
+                <guimenu>Settings</guimenu><guimenuitem>Show Statusbar</guimenuitem>
+              </menuchoice></term>
+              <listitem><para><action>Shows or hides the statusbar.</action></para></listitem>
+            </varlistentry>
+            <varlistentry>
+              <term><menuchoice>
+                <guimenu>Settings</guimenu><guimenuitem>Configure Shortcuts...</guimenuitem>
+              </menuchoice></term>
+              <listitem><para><action>Brings up the shortcut configuration utility.</action></para></listitem>
+            </varlistentry>
+            <varlistentry>
+              <term><menuchoice>
+                <guimenu>Settings</guimenu><guimenuitem>Configure Toolbars...</guimenuitem>
+              </menuchoice></term>
+              <listitem><para><action>Brings up the toolbar configuration utility.</action></para></listitem>
+            </varlistentry>
+            <varlistentry>
+              <term><menuchoice>
+                <guimenu>Settings</guimenu><guimenuitem>Configure Granatier...</guimenuitem>
+              </menuchoice></term>
+              <listitem><para><action>Brings up the &granatier; configuration utility.</action></para></listitem>
+            </varlistentry>
+          </variablelist>
+        </para>
+      </sect2>
+      <sect2 id="help"><!-- This is a standard Help menubar entry. Only change if needed.-->
+        <title>The <guimenuitem>Help</guimenuitem> Menu</title>
+        &help.menu.documentation;
+      </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="faq"><title>Frequently asked questions</title> <!-- do not change this! -->
+    <qandaset>
+      <qandaentry>
+        <question><para>Who made this game?</para></question>
+        <answer><para>The kdegames team. You can find their website <ulink url="http://games.kde.org/">here</ulink>.</para></answer>
+      </qandaentry>
+      <qandaentry>
+        <question><para>Where can I get cheatcodes? </para></question>
+        <answer><para>You cannot get cheatcodes for &kde; games.</para></answer>
+      </qandaentry>
+      <qandaentry>
+        <question><para>How do I start a new game? </para></question>
+        <answer>
+          <para>
+            You can start a new game with <menuchoice><guimenu>Game</guimenu><guimenuitem>New</guimenuitem></menuchoice>.
+          </para>
+        </answer>
+      </qandaentry>
+      <qandaentry>
+        <question><para>How do I pause the game? </para></question>
+        <answer><para>Press 'P' to pause the game.</para></answer>
+      </qandaentry>
+      <qandaentry>
+        <question><para>I want to change the way this game looks. Can I? </para></question>
+        <answer>
+          <para>
+            You can select the &granatier; theme in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Granatier...</guimenuitem></menuchoice> dialog. See the <link linkend="config_theme">Game Configuration</link> chapter for more details.
+          </para>
+        </answer>
+      </qandaentry>
+      <qandaentry>
+        <question><para>I have to quit the game now, but I am not finished yet. Can I save my progress?</para></question>
+        <answer><para>&granatier; does not have this feature.</para></answer>
+      </qandaentry>
+      <qandaentry>
+        <question><para>Where are the highscores?</para></question>
+        <answer><para>&granatier; does not have this feature.</para></answer>
+      </qandaentry>
+      <qandaentry>
+        <question><para>I want to change the game configuration. Where do I go? </para></question>
+        <answer>
+          <para>
+            You can change the &granatier; configuration in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Granatier...</guimenuitem></menuchoice> dialog. See the <link linkend="configuration">Game Configuration</link> chapter for more details.
+          </para>
+        </answer>
+      </qandaentry>
+      <!--Please add more Q&As if needed-->
+    </qandaset>
+  </chapter>
+
+  <chapter id="configuration"><title>Game Configuration</title> <!-- do not change this! -->
+    <para>
+      To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Granatier...</guimenuitem></menuchoice>
+    </para>
+    <sect1 id="config_general">
+      <title>General</title>
+      <para>
+        You can change the points which are needed to win the game and the time for a round. After the time is over, the sudden death mode will start.
+      </para>
+      <screenshot>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>A &granatier; Config screenshot</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title>Theme</title>
+      <para>
+        To select the Theme you want to play, go to the Theme section. The Theme is loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Theme.
+      </para>
+      <screenshot>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>A &granatier; Config screenshot</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title>Arena</title>
+      <para>
+        To select the Arena you want to play, go to the Arena section. The Arena is loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Arena.
+      </para>
+      <para>
+        If you have Clanbomber installed, you can import the arenas from Clanbomber by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in ~/.clanbomber/maps, /usr/share/games/clanbomber/maps and at several other places for arenas. If your arenas are not imported, send me an e-mail to add that path to the search path.
+      </para>
+      <screenshot>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>A &granatier; Config screenshot</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title>Player</title>
+      <para>
+        To select the Player you want to play, go to the Player section and select the Players with the checkboxes. To change the name of the Player, double click on the Player and type the name you want. The Shortcuts can be changed by clicking on the button for the action you want to change and then pressing the key you want to use. The changes are loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Shortcuts.
+      </para>
+      <screenshot>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>A &granatier; Config screenshot</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="credits"><title>Credits and License</title> <!-- do not change this! -->
+    <para>
+      &granatier;  <!-- do not change this! -->
+    </para>
+    <!-- List all the copyright holders here-->
+    <para>
+      Program copyright 2009 Mathias Kraus <email>k.hias@gmx.de</email>
+    </para>
+    <para>
+      Graphics copyright 2009 Mathias Kraus <email>k.hias@gmx.de</email>
+    </para>
+    <para>
+      Graphics copyright 2009 Arturo Silva <email>---</email>
+    </para>
+    <para>
+      Documentation copyright 2009 Mathias Kraus <email>k.hias@gmx.de</email>
+    </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+  &underFDL;
+  &underGPL;
+
+  </chapter>
+
+  <appendix id="installation">
+    <title>Installation</title>
+
+    &install.intro.documentation;
+
+    <sect1 id="Compilation">
+      <title>Compilation and Installation</title>
+
+      &install.compile.documentation;
+
+    </sect1>
+  </appendix>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->
