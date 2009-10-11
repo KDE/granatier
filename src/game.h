@@ -20,6 +20,10 @@
 #ifndef GAME_H
 #define GAME_H
 
+#ifndef GRANATIER_USE_GLUON
+#define GRANATIER_USE_GLUON
+#endif
+
 #include <QObject>
 
 #ifndef GRANATIER_USE_GLUON
@@ -40,7 +44,6 @@ class QKeyEvent;
 
 #ifdef GRANATIER_USE_GLUON
 class KALEngine;
-class KALBuffer;
 class KALSound;
 #endif
 
@@ -124,8 +127,6 @@ private :
     KALSound* soundPutBomb;
     KALSound* soundExplode;
     KALSound* soundBonus;
-    KALBuffer* soundBufferDie;
-    KALBuffer* soundBufferWilhelmScream;
     KALSound* soundDie;
     QTimer* gluonDieTimer;
     KALSound* soundWilhelmScream;

@@ -39,7 +39,6 @@
 #ifdef GRANATIER_USE_GLUON
 #include <KDE/KALEngine>
 #include <KDE/KALSound>
-#include <KDE/KALBuffer>
 #else
 #include <Phonon/MediaObject>
 #endif
@@ -56,14 +55,12 @@ Game::Game(PlayerSettings* playerSettings)
     
     //init KALEngine
     #ifdef GRANATIER_USE_GLUON
-    soundEngine = KALEngine::instance();
-    soundPutBomb = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/putbomb.ogg")), soundEngine);
-    soundExplode = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/explode.ogg")), soundEngine);
-    soundBonus = new KALSound(new KALBuffer(KStandardDirs::locate("appdata", "sounds/wow.ogg")), soundEngine);
-    soundBufferDie = new KALBuffer(KStandardDirs::locate("appdata", "sounds/die.ogg"));
-    soundBufferWilhelmScream = new KALBuffer(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"));
-    soundDie = new KALSound(soundBufferDie, soundEngine);
-    soundWilhelmScream = new KALSound(soundBufferWilhelmScream, soundEngine);
+    soundEngine = KALEngine::instance();//TODO: use KALEngine::instance(Phonon::GameCategory) when it works
+    soundPutBomb = new KALSound(KStandardDirs::locate("appdata", "sounds/putbomb.ogg"), soundEngine);
+    soundExplode = new KALSound(KStandardDirs::locate("appdata", "sounds/explode.ogg"), soundEngine);
+    soundBonus = new KALSound(KStandardDirs::locate("appdata", "sounds/wow.ogg"), soundEngine);
+    soundDie = new KALSound(KStandardDirs::locate("appdata", "sounds/die.ogg"), soundEngine);
+    soundWilhelmScream = new KALSound(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"), soundEngine);
     gluonDieTimer = new QTimer(this);
     gluonDieTimer->setSingleShot(true);
     #else
@@ -206,8 +203,6 @@ Game::~Game()
     delete soundBonus;
     delete soundWilhelmScream;
     delete soundDie;
-    delete soundBufferWilhelmScream;
-    delete soundBufferDie;
     delete gluonDieTimer;
     #else
     while(!(m_phononPutBomb.isEmpty()))
