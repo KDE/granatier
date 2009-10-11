@@ -20,10 +20,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-#ifndef GRANATIER_USE_GLUON
-#define GRANATIER_USE_GLUON
-#endif
-
 #include <QObject>
 
 #ifndef GRANATIER_USE_GLUON
