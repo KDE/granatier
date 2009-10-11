@@ -105,6 +105,11 @@ void Player::goLeft()
 
 void Player::updateDirection()
 {
+    if(m_death)
+    {
+        return;
+    }
+    
     setXSpeed(m_askedXSpeed);
     setYSpeed(m_askedYSpeed);
     m_askedXSpeed = 0;
@@ -115,6 +120,11 @@ void Player::updateDirection()
 
 void Player::updateMove()
 {
+    if(m_death)
+    {
+        return;
+    }
+    
     //check if there is a hurdle in the way
     if(m_askedXSpeed != 0 || m_xSpeed != 0 || m_askedYSpeed != 0 || m_ySpeed != 0)
     {
@@ -293,7 +303,7 @@ void Player::updateMove()
     }
     
     //check if bad bonus scatty and drop bombs
-    if(!m_death && m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY  && m_bombArmory > 0)
+    if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY  && m_bombArmory > 0)
     {
         //TODO: improve
         emit bombDropped(this, m_x, m_y);
@@ -455,6 +465,14 @@ void Player::die()
     {
         m_death = true;
         emit dying(this);
+        m_xSpeed = 0;
+        m_xSpeed = 0;
+        
+        if(m_badBonusCountdownTimer->isActive())
+        {
+            m_badBonusCountdownTimer->stop();
+            slot_removeBadBonus();
+        }
     }
 }
 
@@ -651,6 +669,11 @@ void Player::keyPressed(QKeyEvent* keyEvent)
 
 void Player::keyReleased(QKeyEvent* keyEvent)
 {
+    if(m_death)
+    {
+        return;
+    }
+    
     QKeySequence key = QKeySequence(keyEvent->key());
 
     if(key == m_key.moveLeft || key == m_key.moveRight || key == m_key.moveUp || key == m_key.moveDown || key == m_key.dropBomb)

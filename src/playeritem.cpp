@@ -25,6 +25,7 @@
 
 #include <QTimeLine>
 #include <QGraphicsScene>
+#include <QDebug>
 #include <KSvgRenderer>
 #include <KStandardDirs>
 
@@ -107,10 +108,7 @@ void PlayerItem::manageCollision()
             if (collidingList[i]->zValue() >= 300 && collidingList[i]->zValue() < 400)
             {
                 //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Player*)getModel());
-                if(m_renderer->elementExists("player_death"))
-                {
-                    setElementId("player_death");
-                }
+                setDead();
                 dynamic_cast <Player*> (m_model)->die();
             }
             else if (collidingList[i]->zValue() == 100)
