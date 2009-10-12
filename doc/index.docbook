@@ -51,7 +51,10 @@
     <note><title>Gametype:</title><para>Arcade</para></note>
     <note><title>Number of possible players:</title><para>Multiplayer</para></note>
     <para>
-      &granatier; is a Clone of <application>Bomberman</application>. You must run through an Arena and try to eliminate your Opponents with Bombs. There are several Bonuses and Handicaps to help or hinder you doing this.
+      &granatier; is a clone of the classsic <application>Bomberman</application> game, inspired by the work of the <application>Clanbomber</application> clone.
+    </para>
+    <para>
+      The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents.  Several bonuses and handicaps are  hidden underneath the blocks -- these can either help or hinder your progress.
     </para>
     <screenshot>
       <screeninfo>A &granatier; screenshot</screeninfo>
@@ -107,21 +110,21 @@
           <imageobject> <imagedata fileref="bonus_speed.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Speed</phrase> </textobject>
         </inlinemediaobject>
-        Increases the speed.
+        Speed: Increases the speed.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bomb.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Bomb</phrase> </textobject>
         </inlinemediaobject>
-        Increases the bomb armory.
+        Bomb: Increases the bomb armory.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_power.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Power</phrase> </textobject>
         </inlinemediaobject>
-        Increases the bomb power.
+        Power: Increases the bomb power.
       </para>
     </sect2>
     <sect2>
@@ -131,28 +134,28 @@
           <imageobject> <imagedata fileref="bonus_bad_slow.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Slow</phrase> </textobject>
         </inlinemediaobject>
-        Slow down.
+        Slow: Makes the moves very slow.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Hyperactive</phrase> </textobject>
         </inlinemediaobject>
-        Makes very fast.
+        Hyperactive: Makes the moves very fast.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_mirror.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Mirror</phrase> </textobject>
         </inlinemediaobject>
-        Mirrors the moving keys.
+        Mirror: Mirrors the moving keys. Up becomes down and left becomes right.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_scatty.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Scatty</phrase> </textobject>
         </inlinemediaobject>
-        Let you lay constantly bombs.
+        Scatty: Lets you continually lose bombs.
       </para>
     </sect2>
     </sect1>
