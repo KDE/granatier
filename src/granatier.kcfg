@@ -6,7 +6,7 @@
   <kcfgfile name="granatierrc"/>
   <group name="General">
     <entry name="FirstRun" type="Int" key="FirstRun">
-      <label>Check if it's the first run of the game.</label>
+      <label>Check if it is the first run of the game.</label>
       <default>1</default>
     </entry>
     <entry name="Theme" type="String" key="Theme">
