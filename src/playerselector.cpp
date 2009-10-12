@@ -19,13 +19,10 @@
 #include "playersettings.h"
 #include <settings.h>
 
-#include <KLocale>
 #include <KStandardDirs>
 #include <knewstuff2/engine.h>
-#include <KComponentData>
 #include <KSvgRenderer>
 #include <QGraphicsSvgItem>
-#include <QDebug>
 
 #include "ui_playerselector.h"
 

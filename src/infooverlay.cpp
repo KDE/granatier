@@ -20,12 +20,10 @@
 #include "player.h"
 #include "settings.h"
 
-#include <QTimer>
 #include <QGraphicsScene>
 #include <QGraphicsSvgItem>
 #include <QGraphicsRectItem>
 #include <KSvgRenderer>
-#include <KStandardDirs>
 #include <KLocale>
 
 InfoOverlay::InfoOverlay (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene* p_scene)

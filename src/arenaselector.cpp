@@ -26,14 +26,13 @@
 #include <QGraphicsView>
 #include <QGraphicsSvgItem>
 #include <KSvgRenderer>
-#include <KLocale>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
-#include <KComponentData>
-#include <KFile>
 #include <KSaveFile>
 #include <QDebug>
+#include <QDir>
+#include <KComponentData>
 
 #include "ui_arenaselector.h"
 #include "arenasettings.h"

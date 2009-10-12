@@ -34,7 +34,6 @@
 #include <QKeyEvent>
 
 #include <KStandardDirs>
-#include <KComponentData>
 #include <KConfig>
 #ifdef GRANATIER_USE_GLUON
 #include <KDE/KALEngine>

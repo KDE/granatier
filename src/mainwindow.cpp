@@ -29,19 +29,15 @@
 
 #include <QGraphicsView>
 #include <QTimer>
-#include <KScoreDialog>
 #include <KActionCollection>
 #include <KStandardGameAction>
 #include <KToggleAction>
 #include <KMessageBox>
 #include <KConfigDialog>
 #include <KGameThemeSelector>
-#include <KInputDialog>
 #include <KLocale>
 
-#include <KStandardDirs>
 #include <QGraphicsSvgItem>
-#include <KSvgRenderer>
 
 class GeneralSettings : public QWidget
 {

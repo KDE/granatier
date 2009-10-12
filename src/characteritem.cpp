@@ -19,7 +19,6 @@
 #include "characteritem.h"
 #include "character.h"
 
-#include <QTimer>
 #include <KSvgRenderer>
 
 CharacterItem::CharacterItem(Character* p_model) : ElementItem (p_model)

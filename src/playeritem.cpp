@@ -25,9 +25,8 @@
 
 #include <QTimeLine>
 #include <QGraphicsScene>
-#include <QDebug>
-#include <KSvgRenderer>
 #include <KStandardDirs>
+#include <KSvgRenderer>
 
 const int PlayerItem::NB_FRAMES = 13;
 const int PlayerItem::ANIM_SPEED = 240;

@@ -33,7 +33,6 @@
 #include "bombexplosionitem.h"
 #include "infooverlay.h"
 
-#include <QTimer>
 #include <KGameTheme>
 #include <KLocale>
 #include <KPixmapCache>
