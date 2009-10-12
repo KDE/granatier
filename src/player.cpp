@@ -198,8 +198,8 @@ void Player::updateMove()
             {
                 if(fabs(deltaPerpendicularCellCenter) > Cell::SIZE/2 - fabs(deltaStraightMove - deltaStraightCellCenter))   //check if it already can collide with a hurdle
                 {
-                    cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                    cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                    cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                     if(!m_arena->getCell(cellRow, cellCol).isWalkable())
                     {
                         deltaPerpendicularMove = deltaPerpendicularCellCenter + signZeroPositive(deltaPerpendicularCellCenter) * (fabs(deltaStraightMove - deltaStraightCellCenter) - Cell::SIZE/2);
@@ -224,8 +224,8 @@ void Player::updateMove()
                 //move to perpendicular center if needed
                 if(deltaPerpendicularCellCenter != 0)
                 {
-                    cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                    cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                    cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                     if(!m_arena->getCell(cellRow, cellCol).isWalkable())
                     {
                         deltaPerpendicularMove = deltaPerpendicularCellCenter;
@@ -247,8 +247,8 @@ void Player::updateMove()
                         //move to perpendicular center if needed
                         if(deltaPerpendicularCellCenter != 0)
                         {
-                            cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                            cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                            cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                            cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             if(!m_arena->getCell(cellRow, cellCol).isWalkable())
                             {
                                 deltaPerpendicularMove = deltaPerpendicularCellCenter;
@@ -261,8 +261,8 @@ void Player::updateMove()
                         //move to perpendicular center if needed
                         if(deltaPerpendicularMove != deltaPerpendicularCellCenter && fabs(deltaPerpendicularCellCenter) > (Cell::SIZE/2 - fabs(deltaStraightMove - deltaStraightCellCenter)))   //check if it is in or already moved to perpendicular center and if it already can collide with a hurdle ***TODO: it seems to be wrong to use deltaStraightMove here, because ist could be greater than Cell::SIZE
                         {
-                            cellRow = curCellRow + yDirection - fabs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                            cellCol = curCellCol + xDirection - fabs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                            cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                            cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             if(!m_arena->getCell(cellRow, cellCol).isWalkable())
                             {
                                 deltaPerpendicularMove = signZeroPositive(deltaPerpendicularCellCenter) * fabs(deltaAskedMove);
