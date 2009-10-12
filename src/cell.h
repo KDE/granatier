@@ -78,13 +78,13 @@ public:
       * Returns if it is possible to move into the cell or not, because of a wall, bomb, etc.
       * @return true if it is possible to move into the cell
       */
-    bool isWalkable();
+    bool isWalkable() const;
 
     /**
       * Gets the Cell type.
       * @return the Cell type
       */
-    Type getType();
+    Type getType() const;
 
     /**
       * Sets the Cell type.
@@ -96,7 +96,7 @@ public:
       * Gets the Element that is on the Cell.
       * @return the Element that is on the Cell
       */
-    Element* getElement();
+    Element* getElement() const;
 
     /**
       * Sets the Element that is on the Cell.

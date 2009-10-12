@@ -55,7 +55,7 @@ Player::~Player()
     delete m_badBonusCountdownTimer;
 }
 
-void Player::setShortcuts(const Shortcuts keys)
+void Player::setShortcuts(const Shortcuts &keys)
 {
     m_key = keys;
 }

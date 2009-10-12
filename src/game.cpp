@@ -328,7 +328,7 @@ int Game::getWinPoints() const
     return m_winPoints; 
 }
 
-QList<Bonus*> Game::getBonus()
+QList<Bonus*> Game::getBonus() const
 {
     return m_bonus;
 }

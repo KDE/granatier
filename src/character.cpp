@@ -73,12 +73,12 @@ qreal Character::getYSpeed() const
     return m_ySpeed;
 }
 
-qreal Character::getSpeed()
+qreal Character::getSpeed() const
 {
     return m_speed;
 }
 
-qreal Character::getNormalSpeed()
+qreal Character::getNormalSpeed() const
 {
     return m_normalSpeed;
 }
@@ -100,7 +100,7 @@ void Character::initSpeed()
     m_speed = m_normalSpeed;
 }
 
-bool Character::isInLineSight(Character* p_character)
+bool Character::isInLineSight(Character* p_character) const
 {
     int curCallerRow;       // The current row of the Character
     int curCallerCol;       // The current column of the Character

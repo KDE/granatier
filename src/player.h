@@ -90,7 +90,7 @@ public:
     /**
       * Shortcuts for moving and dropping bombs
       */
-    void setShortcuts(const Shortcuts keys);
+    void setShortcuts(const Shortcuts &keys);
 
     /**
       * Gets the path to the Player SVG.

@@ -132,13 +132,13 @@ public:
       * Gets the Character speed.
       * @return the character speed
       */
-    qreal getSpeed();
+    qreal getSpeed() const;
 
     /**
       * Gets the Character normal speed.
       * @return the character speed reference, when in "normal" behaviour
       */
-    qreal getNormalSpeed();
+    qreal getNormalSpeed() const;
     
     /**
       * Set the Character x-speed value.
@@ -162,7 +162,7 @@ public:
       * @param p_character the other Character
       * @return true if the Character is in the same line than the given one
       */
-    bool isInLineSight(Character* p_character);
+    bool isInLineSight(Character* p_character) const;
 
 signals:
 

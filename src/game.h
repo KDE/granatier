@@ -197,7 +197,7 @@ public:
     /**
     * @return the Bonus instance
     */
-    QList<Bonus*> getBonus();
+    QList<Bonus*> getBonus() const;
 
     /**
     * @return the main timer

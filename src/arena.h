@@ -82,7 +82,7 @@ public:
       * Sets the Arena name
       * @param p_strArenaName the Arena name
       */
-    void setName (const QString p_strArenaName);
+    void setName (const QString &p_strArenaName);
     
     /**
       * Sets the CellType of the Cell whose coordinates are given in parameters.
@@ -113,14 +113,14 @@ public:
       * @param p_player the player number
       * @param p_position the player position
       */
-    void addPlayerPosition(QPointF p_position);
+    void addPlayerPosition(const QPointF &p_position);
     
     /**
       * Gets the player position on the arena.
       * @param p_player the player number
       * @return p_position the player position
       */
-    QPointF getPlayerPosition(int p_player);
+    QPointF getPlayerPosition(int p_player) const;
     
     /**
       * Gets the Cell at the given coordinates.

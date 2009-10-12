@@ -54,7 +54,7 @@ QString Arena::getName () const
     return m_strArenaName;
 }
     
-void Arena::setName (const QString p_strArenaName)
+void Arena::setName (const QString &p_strArenaName)
 {
     m_strArenaName = p_strArenaName;
 }
@@ -91,7 +91,7 @@ void Arena::removeCellElement(const int p_row, const int p_column, Element * p_e
     m_cells[p_row][p_column].removeElement(p_element);
 }
 
-void Arena::addPlayerPosition(QPointF p_position)
+void Arena::addPlayerPosition(const QPointF &p_position)
 {
     m_playerPosition.append(p_position);
     
@@ -113,7 +113,7 @@ void Arena::addPlayerPosition(QPointF p_position)
     }
 }
     
-QPointF Arena::getPlayerPosition(int p_player)
+QPointF Arena::getPlayerPosition(int p_player) const
 {
     if(m_playerPosition.count() > p_player)
     {

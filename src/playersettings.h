@@ -31,7 +31,7 @@ public:
     PlayerSettings();
     ~PlayerSettings();
     
-    const QStringList playerIDs();
+    const QStringList playerIDs() const;
     const QString playerName(const QString& strPlayerID) const;
     const QString playerFile(const QString& strPlayerID) const;
     const QString playerPreviewFile(const QString& strPlayerID) const;

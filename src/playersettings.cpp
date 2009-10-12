@@ -120,7 +120,7 @@ PlayerSettings::~PlayerSettings()
 {
 }
 
-const QStringList PlayerSettings::playerIDs()
+const QStringList PlayerSettings::playerIDs() const
 {
     return m_playerSettings.keys();
 }
