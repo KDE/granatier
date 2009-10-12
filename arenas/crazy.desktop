@@ -1,18 +1,6 @@
 [Arena]
 Name=Crazy
-Name[de]=Verrückt
-Name[pt]=Louco
-Name[sv]=Galen
-Name[tr]=Çılgın
-Name[uk]=Шалена
-Name[x-test]=xxCrazyxx
 Description=Crazy Arena
-Description[de]=Ein verrücktes Spielfeld.
-Description[pt]=Arena Louca
-Description[sv]=Galen arena
-Description[tr]=Çılgın Arena
-Description[uk]=Шалена арена
-Description[x-test]=xxCrazy Arenaxx
 Type=XML
 FileName=crazy.xml
 Author=Mathias Kraus

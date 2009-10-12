@@ -1,20 +1,6 @@
 [Player]
 Name=Player2
-Name[de]=Spieler 2
-Name[el]=Παίκτης 2
-Name[pt]=Jogador 2
-Name[sv]=Spelare 2
-Name[tr]=Oyuncu 2
-Name[uk]=Гравець2
-Name[x-test]=xxPlayer2xx
 Description=This is Player2
-Description[de]=Das ist Spieler 2.
-Description[el]=Αυτός είναι ο παίκτης 2
-Description[pt]=Este é o Jogador 2
-Description[sv]=Det här är andra spelaren
-Description[tr]=Bu 2. Oyuncu
-Description[uk]=Це Гравець2
-Description[x-test]=xxThis is Player2xx
 Type=SVG
 FileName=player2.svgz
 Preview=player2_preview.svgz
