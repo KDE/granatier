@@ -22,7 +22,6 @@
 #include <QGraphicsSvgItem>
 
 class Bomb;
-class QTimer;
 
 /**
  * @brief This class is the graphical representation of a Bomb explosion.

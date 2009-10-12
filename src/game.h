@@ -32,9 +32,7 @@ class Player;
 class Bonus;
 class Bomb;
 class Block;
-class Element;
 class PlayerSettings;
-class QPointF;
 class QTimer;
 class QKeyEvent;
 

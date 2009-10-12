@@ -25,8 +25,6 @@
 class Game;
 class GameView;
 class PlayerSettings;
-class QGraphicsView;
-class KScoreDialog;
 
 /**
  * @brief This class enables to create the main window for Granatier.

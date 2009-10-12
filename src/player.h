@@ -26,7 +26,7 @@ class Bonus;
 class QKeyEvent;
 class QString;
 class QTimer;
-
+class Cell;
 /**
  * @brief This class represents the main character of the game.
  */

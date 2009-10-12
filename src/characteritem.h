@@ -22,7 +22,6 @@
 #include "elementitem.h"
 
 class Character;
-class QTimer;
 class KSvgRenderer;
 
 /**

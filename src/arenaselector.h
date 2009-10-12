@@ -23,7 +23,6 @@
 
 #include <QtGui/QWidget>
 
-class ArenaSettings;
 class KConfigSkeleton; 
 class ArenaSelectorPrivate;
 

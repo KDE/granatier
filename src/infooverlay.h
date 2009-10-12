@@ -25,7 +25,6 @@ class QGraphicsScene;
 class QGraphicsTextItem;
 class QGraphicsSvgItem;
 class QGraphicsRectItem;
-class QTimer;
 class KSvgRenderer;
 class Game;
 class Player;
