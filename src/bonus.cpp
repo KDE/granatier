@@ -38,7 +38,7 @@ void Bonus::doActionOnCollision(Player* p_player)
     p_player->addBonus(this);
 }
 
-int Bonus::getBonusType()
+int Bonus::getBonusType() const
 {
   return m_bonusType;
 }
@@ -48,7 +48,7 @@ void Bonus::setTaken()
     m_taken = true;
 }
 
-bool Bonus::isTaken()
+bool Bonus::isTaken() const
 {
   return m_taken;
 }

@@ -39,14 +39,8 @@ BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
 
 BombItem::~BombItem()
 {
-    if(m_pulseTimer)
-    {
-        delete m_pulseTimer;
-    }
-    if(m_explosionTimer)
-    {
-        delete m_explosionTimer;
-    }
+    delete m_pulseTimer;
+    delete m_explosionTimer;
 }
 
 QPainterPath BombItem::shape() const

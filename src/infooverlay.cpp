@@ -172,49 +172,15 @@ InfoOverlay::~InfoOverlay()
         iteratorNames = m_mapPlayerNames.erase(iteratorNames);
     }
     
-    if(m_continueLabel)
-    {
-        delete m_continueLabel;
-    }
-    
-    if(m_newGameLabel)
-    {
-        delete m_newGameLabel;
-    }
-    
-    if(m_gameOverLabel)
-    {
-        delete m_gameOverLabel;
-    }
-    
-    if(m_getReadyLabel)
-    {
-        delete m_getReadyLabel;
-    }
-    
-    if(m_startGameLabel)
-    {
-        delete m_startGameLabel;
-    }
-    
-    if(m_pauseLabel)
-    {
-        delete m_pauseLabel;
-    }
-    
-    if (m_dimmOverlay)
-    {
-        delete m_dimmOverlay;
-    }
-    
-    if(m_continueAfterPauseLabel)
-    {
-        delete m_continueAfterPauseLabel;
-    }
-    if(m_renderer)
-    {
-        delete m_renderer;
-    }
+    delete m_continueLabel;
+    delete m_newGameLabel;
+    delete m_gameOverLabel;
+    delete m_getReadyLabel;
+    delete m_startGameLabel;
+    delete m_pauseLabel;
+    delete m_dimmOverlay;
+    delete m_continueAfterPauseLabel;
+    delete m_renderer;
 }
 
 void InfoOverlay::showGetReady ()

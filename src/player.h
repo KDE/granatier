@@ -173,7 +173,7 @@ public:
     /**
       *  returns if the player is alive
       */
-    bool isAlive();
+    bool isAlive() const;
     
     /**
       * resurrects the player
@@ -183,7 +183,7 @@ public:
     /**
       * returns the points
       */
-    int points();
+    int points() const;
     
     /**
       * adds a point

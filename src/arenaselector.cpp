@@ -56,10 +56,7 @@ class ArenaSelector::ArenaSelectorPrivate
                 }
                 delete m_graphicsScene;
             }
-            if(m_renderer)
-            {
-                delete m_renderer;
-            }
+            delete m_renderer;
         }
 
         ArenaSelector* q;
@@ -242,10 +239,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
         }
         delete m_arenaItems.takeLast();
     }
-    if(m_renderer)
-    {
-        delete m_renderer;
-    }
+    delete m_renderer;
     
     m_renderer = new KSvgRenderer;
     m_renderer->load(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));

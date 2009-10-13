@@ -64,11 +64,11 @@ public:
       */
     void doActionOnCollision(Player* p_player);
     
-    int getBonusType();
+    int getBonusType() const;
     
     void setTaken();
     
-    bool isTaken();
+    bool isTaken() const;
 
 private:
     /** The Bonus type */

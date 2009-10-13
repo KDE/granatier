@@ -476,7 +476,7 @@ void Player::die()
     }
 }
 
-bool Player::isAlive()
+bool Player::isAlive() const
 {
     return !m_death;
 }
@@ -498,7 +498,7 @@ void Player::resurrect()
     }
 }
 
-int Player::points()
+int Player::points() const
 {
     return m_points;
 }

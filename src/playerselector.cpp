@@ -171,10 +171,7 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()
         }
         delete m_playerPreview;
     }
-    if(m_renderer)
-    {
-        delete m_renderer;
-    }
+    delete m_renderer;
     int nIndex = ui.playerList->currentIndex().row();
     //TODO: check if renderer is needed
     m_renderer = new KSvgRenderer;
