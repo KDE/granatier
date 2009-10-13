@@ -51,7 +51,7 @@
     <note><title>Gametype:</title><para>Arcade</para></note>
     <note><title>Number of possible players:</title><para>Multiplayer</para></note>
     <para>
-      &granatier; is a clone of the classsic <application>Bomberman</application> game, inspired by the work of the <application>Clanbomber</application> clone.
+      &granatier; is a clone of the classsic <trademark><application>Bomberman</application></trademark> game, inspired by the work of the <application>Clanbomber</application> clone.
     </para>
     <para>
       The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents.  Several bonuses and handicaps are  hidden underneath the blocks -- these can either help or hinder your progress.
@@ -72,7 +72,13 @@
   <chapter id="howto"><title>How to play</title> <!-- do not change this! -->
     <note><title>Objective:</title><para>Eliminate all Opponents.</para></note>
     <para>
-      Move your Player with the keys, lay Bombs to destroy Blocks and collect Bonuses which are hidden behind the blocks. There are Bonuses that make your faster or increase the Bomb power, but there are also Handicaps like mirroring the moving keys or slowing you down, so be careful what you collect. The more bonuses you get, the easier is it to eliminate the opponent Players and win the round. For each won round, the Player gets a point and the Player who at first reaches a defined number of points, wins the game.
+      Each player is provided with five keys that they use to move their character and lay bombs.  For example, the default keys for Player 1 are the Up, Down, Left and Right arrow keys to move respectively in those directions, and the Enter key to lay a bomb.  Please refer to the <link linkend="config_player">Player Configuration</link> Section to find shortcut keys for other players, as well as how to configure them.
+    </para>
+    <para>
+      The purpose of laying bombs, aside from attacking other opponents, is to destroy the many blocks scattered throughout the arena in order to clear a path or uncover hidden bonuses.  Among the many bonuses that can be uncovered are those that make you move faster or increase your bomb blast range; the more bonuses of this type you collect, the easier it is to eliminate your opponents and win the round.  But be warned that just as many handicaps exist that can turn the tide against you, including those that slow you down or invert your moving keys. 
+    </para>
+    <para> 
+      For each won round, the player is awarded a point.  The first player to win a predefined number of points (the default is 3), wins the game!
     </para>
   </chapter>
   
@@ -86,21 +92,21 @@
           <imageobject> <imagedata fileref="arena_wall.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Wall</phrase> </textobject>
         </inlinemediaobject>
-        The Wall. Can not be destroyed.
+        The Wall -- this defines the outline of the arena map and cannot be destroyed.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="arena_ground.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Ground</phrase> </textobject>
         </inlinemediaobject>
-        The Ground.
+        The Ground -- this can be walked on safely.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="arena_block.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Block</phrase> </textobject>
         </inlinemediaobject>
-        The Block. The Blocks can be destroyed with bombs. Some of the Blocks contain Bonuses or Handicaps.
+        The Block -- this can be destroyed with a bomb, and may contain a bonus (or a handicap).
       </para>
     </sect2>
     <sect2>
@@ -110,21 +116,21 @@
           <imageobject> <imagedata fileref="bonus_speed.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Speed</phrase> </textobject>
         </inlinemediaobject>
-        Speed: Increases the speed.
+        Speed -- increases your speed slightly.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bomb.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Bomb</phrase> </textobject>
         </inlinemediaobject>
-        Bomb: Increases the bomb armory.
+        Bomb -- adds an extra bomb to your arsenal, allowing you to lay more than one bomb at a time.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_power.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Power</phrase> </textobject>
         </inlinemediaobject>
-        Power: Increases the bomb power.
+        Power -- increases the power of your bombs, extending their bomb blast range.
       </para>
     </sect2>
     <sect2>
@@ -134,28 +140,28 @@
           <imageobject> <imagedata fileref="bonus_bad_slow.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Slow</phrase> </textobject>
         </inlinemediaobject>
-        Slow: Makes the moves very slow.
+        Slow -- makes you move very slowly.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Hyperactive</phrase> </textobject>
         </inlinemediaobject>
-        Hyperactive: Makes the moves very fast.
+        Hyperactive -- makes you move a little TOO fast.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_mirror.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Mirror</phrase> </textobject>
         </inlinemediaobject>
-        Mirror: Mirrors the moving keys. Up becomes down and left becomes right.
+        Mirror -- inverts your moving keys, so that up becomes down and left becomes right.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_scatty.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Scatty</phrase> </textobject>
         </inlinemediaobject>
-        Scatty: Lets you continually lose bombs.
+        Scatty -- forces you to continuously lay bombs without control.
       </para>
     </sect2>
     </sect1>
@@ -195,7 +201,7 @@
               <term><menuchoice>
                 <guimenu>Settings</guimenu><guimenuitem>Play Sounds</guimenuitem>
               </menuchoice></term>
-              <listitem><para><action>Plays the sounds or mutes.</action></para></listitem>
+              <listitem><para><action>Plays or mutes the sounds.</action></para></listitem>
             </varlistentry>
             <varlistentry>
               <term><menuchoice>
@@ -370,7 +376,7 @@
       Graphics copyright 2009 Mathias Kraus <email>k.hias@gmx.de</email>
     </para>
     <para>
-      Graphics copyright 2009 Arturo Silva <email>---</email>
+      Graphics copyright 2009 Arturo Silva <email>jasilva28@gmail.com</email>
     </para>
     <para>
       Documentation copyright 2009 Mathias Kraus <email>k.hias@gmx.de</email>
