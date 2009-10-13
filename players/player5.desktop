@@ -1,6 +1,14 @@
 [Player]
 Name=Player5
+Name[pt]=Jogador 5
+Name[sv]=Spelare 5
+Name[tr]=Oyuncu 5
+Name[uk]=Гравець5
 Description=This is Player5
+Description[pt]=Este é o Jogador 5
+Description[sv]=Det här är femte spelaren
+Description[tr]=Bu 5. Oyuncu
+Description[uk]=Це Гравець5
 Type=SVG
 FileName=player5.svgz
 Preview=player5_preview.svgz

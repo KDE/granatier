@@ -1,7 +1,14 @@
 [Desktop Entry]
 Type=Application
 Name=Granatier
+Name[pt]=Granatier
+Name[sv]=Granatier
+Name[tr]=Granatier
+Name[uk]=Гренадер
 GenericName=Bomberman clone
+GenericName[pt]=Clone do Bomberman
+GenericName[sv]=Klon av Bomberman
+GenericName[uk]=Клон Bomberman
 Icon=granatier
 TryExec=granatier
 Exec=granatier

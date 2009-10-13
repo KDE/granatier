@@ -1,6 +1,14 @@
 [Arena]
 Name=Granatier
+Name[pt]=Granatier
+Name[sv]=Granatier
+Name[tr]=Granatier
+Name[uk]=Гренадер
 Description=Default Granatier Arena
+Description[pt]=Arena Predefinida do Granatier
+Description[sv]=Standardarena för Granatier
+Description[tr]=Öntanımlı Granatier Arenası
+Description[uk]=Типова арена «Гренадера»
 Type=XML
 FileName=granatier.xml
 Author=Mathias Kraus

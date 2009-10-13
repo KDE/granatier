@@ -1,6 +1,14 @@
 [Player]
 Name=Player2
+Name[pt]=Jogador 2
+Name[sv]=Spelare 2
+Name[tr]=Oyuncu 2
+Name[uk]=Гравець2
 Description=This is Player2
+Description[pt]=Este é o Jogador 2
+Description[sv]=Det här är andra spelaren
+Description[tr]=Bu 2. Oyuncu
+Description[uk]=Це Гравець2
 Type=SVG
 FileName=player2.svgz
 Preview=player2_preview.svgz

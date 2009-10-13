@@ -1,6 +1,14 @@
 [KGameTheme]
 Name=Granatier
+Name[pt]=Granatier
+Name[sv]=Granatier
+Name[tr]=Granatier
+Name[uk]=Гренадер
 Description=Granatier Theme
+Description[pt]=Tema do Granatier
+Description[sv]=Granatier-tema
+Description[tr]=Granatier Teması
+Description[uk]=Тема «Гренадера»
 Type=SVG
 FileName=granatier.svgz
 Preview=granatier_preview.png
