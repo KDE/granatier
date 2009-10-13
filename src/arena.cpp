@@ -47,6 +47,8 @@ void Arena::init(const int p_nbRows, const int p_nbColumns)
     {
         m_cells[i] = new Cell[m_nbColumns];
     }
+    
+    m_emptyCell.setType(Cell::HOLE);
 }
 
 QString Arena::getName () const
@@ -63,7 +65,7 @@ void Arena::setCellType(const int p_row, const int p_column, const Cell::Type p_
 {
     if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns)
     {
-        kError() << "Bad arena coordinates";
+        return;
     }
     m_cells[p_row][p_column].setType(p_type);
 }
@@ -72,21 +74,16 @@ void Arena::setCellElement(const int p_row, const int p_column, Element * p_elem
 {
     if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns) 
     {
-        kError() << "Bad arena coordinates";
+        return;
     }
     m_cells[p_row][p_column].setElement(p_element);
-    /*if (p_element != NULL)
-    {
-        m_totalNbElem++;
-        m_nbElem++;
-    }*/
 }
 
 void Arena::removeCellElement(const int p_row, const int p_column, Element * p_element)
 {
     if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns) 
     {
-        kError() << "Bad arena coordinates";
+        return;
     }
     m_cells[p_row][p_column].removeElement(p_element);
 }
@@ -126,7 +123,7 @@ Cell Arena::getCell(const int p_row, const int p_column) const
 {
     if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns)
     {
-        kError() << "Bad arena coordinates";
+        return m_emptyCell;
     }
     return m_cells[p_row][p_column];
 }

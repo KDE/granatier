@@ -50,6 +50,9 @@ private:
     /** The Arena Cells */
     Cell** m_cells;
     
+    /** The Arena Cells */
+    Cell m_emptyCell;
+    
     /** The Player position on the Arena */
     QList <QPointF> m_playerPosition;
 
