@@ -57,13 +57,16 @@ private:
     /** Points from the player */
     int m_points;
     
+    /** flag if the player is on ice */
+    bool m_onIce;
+    
     /** the bad bonus type */
     int m_badBonusType;
     
     /** the speed before a bad bonus was taken */
     qreal m_normalSpeed;
     
-    /** the speed before a bad bonus was taken */
+    /** flag if the mirror bad bunus was taken */
     bool m_moveMirrored;
     
     /** timer for the bad bonus to disapear */

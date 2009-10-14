@@ -28,6 +28,8 @@
 
 #include <cmath>
 
+const int onIceSpeedIncrease = 2;
+
 Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSettings* p_playerSettings, Arena* p_arena) : Character(p_x, p_y, p_arena)
 {
     m_type = Element::PLAYER;
@@ -82,24 +84,48 @@ void Player::init()
 void Player::goUp()
 {
     m_askedXSpeed = 0;
-    m_askedYSpeed = -m_speed;
+    
+    int nSpeed = m_speed;
+    if(m_onIce)
+    {
+        nSpeed = m_speed + onIceSpeedIncrease;
+    }
+    m_askedYSpeed = -nSpeed;
 }
 
 void Player::goDown()
 {
     m_askedXSpeed = 0;
-    m_askedYSpeed = m_speed;
+    
+    int nSpeed = m_speed;
+    if(m_onIce)
+    {
+        nSpeed = m_speed + onIceSpeedIncrease;
+    }
+    m_askedYSpeed = nSpeed;
 }
 
 void Player::goRight()
 {
-    m_askedXSpeed = m_speed;
+    int nSpeed = m_speed;
+    if(m_onIce)
+    {
+        nSpeed = m_speed + onIceSpeedIncrease;
+    }
+    m_askedXSpeed = nSpeed;
+    
     m_askedYSpeed = 0;
 }
 
 void Player::goLeft()
 {
-    m_askedXSpeed = -m_speed;
+    int nSpeed = m_speed;
+    if(m_onIce)
+    {
+        nSpeed = m_speed + onIceSpeedIncrease;
+    }
+    m_askedXSpeed = -nSpeed;
+    
     m_askedYSpeed = 0;
 }
 
@@ -300,6 +326,48 @@ void Player::updateMove()
         {
             move(m_x + deltaPerpendicularMove, m_y + deltaStraightMove);
         }
+        
+        //check if the player is on ice
+        // Get the current cell coordinates from the character coordinates
+        int newCellRow = m_arena->getRowFromY(m_y);
+        int newCellCol = m_arena->getColFromX(m_x);
+        if(!m_onIce)
+        {
+            if(m_arena->getCell(newCellRow, newCellCol).getType() == Cell::ICE)
+            {
+                qWarning() << "on Ice";
+                if(xDirection != 0)
+                {
+                    setXSpeed(m_xSpeed + xDirection * onIceSpeedIncrease);
+                }
+                else
+                {
+                    setYSpeed(m_ySpeed + yDirection * onIceSpeedIncrease);
+                }
+                m_onIce = true;
+            }
+        }
+        else
+        {
+            if(m_arena->getCell(newCellRow, newCellCol).getType() != Cell::ICE)
+            {
+                qWarning() << "not on Ice";
+                if(xDirection != 0)
+                {
+                    setXSpeed(m_xSpeed - xDirection * onIceSpeedIncrease);
+                }
+                else
+                {
+                    setYSpeed(m_ySpeed - yDirection * onIceSpeedIncrease);
+                }
+                m_onIce = false;
+                
+                if(m_xSpeed == 0 && m_ySpeed == 0 && m_askedXSpeed == 0 && m_askedYSpeed == 0)
+                {
+                    stopMoving();
+                }
+            }
+        }
     }
     
     //check if bad bonus scatty and drop bombs
@@ -483,6 +551,7 @@ bool Player::isAlive() const
 
 void Player::resurrect()
 {
+    m_onIce = false;
     m_death = false;
     m_maxSpeed = 10;
     m_speed = 2;
@@ -689,21 +758,27 @@ void Player::keyReleased(QKeyEvent* keyEvent)
         return;
     }
     
+    int nSpeed = 0;
+    if(m_onIce)
+    {
+        nSpeed = onIceSpeedIncrease;
+    }
+    
     if(key == m_key.moveLeft && m_xSpeed < 0)
     {
-        setXSpeed(0);
+        setXSpeed(-nSpeed);
     }
     else if(key == m_key.moveRight && m_xSpeed > 0)
     {
-        setXSpeed(0);
+        setXSpeed(nSpeed);
     }
     else if(key == m_key.moveUp && m_ySpeed < 0)
     {
-        setYSpeed(0);
+        setYSpeed(-nSpeed);
     }
     else if(key == m_key.moveDown && m_ySpeed > 0)
     {
-        setYSpeed(0);
+        setYSpeed(nSpeed);
     }
     else if(key == m_key.dropBomb)
     {

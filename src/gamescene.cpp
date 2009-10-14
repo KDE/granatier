@@ -61,7 +61,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     // set the renderer for the arena items TODO: add all the arena items
     if(m_rendererSelectedTheme->elementExists("arena_ground") &&
         m_rendererSelectedTheme->elementExists("arena_wall") &&
-        m_rendererSelectedTheme->elementExists("arena_block"))
+        m_rendererSelectedTheme->elementExists("arena_block") &&
+        m_rendererSelectedTheme->elementExists("arena_ice"))
     {
         m_rendererArenaItems = m_rendererSelectedTheme;
     }
@@ -74,7 +75,11 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("bonus_bomb") &&
         m_rendererSelectedTheme->elementExists("bonus_power") &&
         m_rendererSelectedTheme->elementExists("bonus_throw") &&
-        m_rendererSelectedTheme->elementExists("bonus_kick"))
+        m_rendererSelectedTheme->elementExists("bonus_kick") &&
+        m_rendererSelectedTheme->elementExists("bonus_bad_slow") &&
+        m_rendererSelectedTheme->elementExists("bonus_bad_hyperactive") &&
+        m_rendererSelectedTheme->elementExists("bonus_bad_mirror") &&
+        m_rendererSelectedTheme->elementExists("bonus_bad_scatty"))
     {
         m_rendererBonusItems = m_rendererSelectedTheme;
     }
@@ -176,12 +181,9 @@ void GameScene::init()
                     arenaItem = NULL;
                     break;
                 case Cell::ICE:
-                    if(Settings::self()->showAllTiles() == 1)
-                    {
-                        arenaItem->setElementId("arena_ice");
-                        arenaItem->setZValue(0);
-                        break;
-                    }
+                    arenaItem->setElementId("arena_ice");
+                    arenaItem->setZValue(0);
+                    break;
                 case Cell::BOMBTRAP:
                     if(Settings::self()->showAllTiles() == 1)
                     {
