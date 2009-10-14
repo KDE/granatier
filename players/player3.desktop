@@ -1,11 +1,15 @@
 [Player]
 Name=Player3
+Name[en_GB]=Player3
 Name[pt]=Jogador 3
+Name[pt_BR]=Jogador3
 Name[sv]=Spelare 3
 Name[tr]=Oyuncu 3
 Name[uk]=Гравець3
 Description=This is Player3
+Description[en_GB]=This is Player3
 Description[pt]=Este é o Jogador 3
+Description[pt_BR]=Este é o jogador3
 Description[sv]=Det här är tredje spelaren
 Description[tr]=Bu 3. Oyuncu
 Description[uk]=Це Гравець3

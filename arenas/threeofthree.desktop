@@ -1,10 +1,12 @@
 [Arena]
 Name=Three of Three
+Name[en_GB]=Three of Three
 Name[pt]=Três de Três
 Name[sv]=Tre av tre
 Name[tr]=Üçün Üçü
 Name[uk]=Три з трьох
 Description=Three of Three Arena
+Description[en_GB]=Three of Three Arena
 Description[pt]=Arena para Três de Três
 Description[sv]=Tre av tre-arena
 Description[tr]=Üçün Üçü Arenası

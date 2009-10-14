@@ -1,10 +1,13 @@
 [Arena]
 Name=Granatier
+Name[en_GB]=Granatier
 Name[pt]=Granatier
+Name[pt_BR]=Granatier
 Name[sv]=Granatier
 Name[tr]=Granatier
 Name[uk]=Гренадер
 Description=Default Granatier Arena
+Description[en_GB]=Default Granatier Arena
 Description[pt]=Arena Predefinida do Granatier
 Description[sv]=Standardarena för Granatier
 Description[tr]=Öntanımlı Granatier Arenası

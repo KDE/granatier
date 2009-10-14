@@ -1,11 +1,15 @@
 [Player]
 Name=Player4
+Name[en_GB]=Player4
 Name[pt]=Jogador 4
+Name[pt_BR]=Jogador4
 Name[sv]=Spelare 4
 Name[tr]=Oyuncu 4
 Name[uk]=Гравець4
 Description=This is Player4
+Description[en_GB]=This is Player4
 Description[pt]=Este é o Jogador 4
+Description[pt_BR]=Este é o jogador4
 Description[sv]=Det här är fjärde spelaren
 Description[tr]=Bu 4. Oyuncu
 Description[uk]=Це Гравець4

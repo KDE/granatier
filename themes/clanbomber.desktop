@@ -1,11 +1,15 @@
 [KGameTheme]
 Name=Clanbomber
+Name[en_GB]=Clanbomber
 Name[pt]=Clanbomber
+Name[pt_BR]=Clanbomber
 Name[sv]=Klanbombare
 Name[tr]=Clanbomber
 Name[uk]=Clanbomber
 Description=Clanbomber Theme
+Description[en_GB]=Clanbomber Theme
 Description[pt]=Tema do ClanBomber
+Description[pt_BR]=Tema do Clanbomber
 Description[sv]=Klanbombartema
 Description[tr]=Clanbomber Teması
 Description[uk]=Тема Clanbomber

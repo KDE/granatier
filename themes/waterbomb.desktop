@@ -1,10 +1,12 @@
 [KGameTheme]
 Name=Water Bomb
+Name[en_GB]=Water Bomb
 Name[pt]=Bomba de Água
 Name[sv]=Vattenbomb
 Name[tr]=Su Bombası
 Name[uk]=Водяна бомба
 Description=Water Bomb Theme
+Description[en_GB]=Water Bomb Theme
 Description[pt]=Tema de Bomba de Água
 Description[sv]=Vattenbombtema
 Description[tr]=Su Bombası Teması
