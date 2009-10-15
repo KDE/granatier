@@ -1,6 +1,7 @@
 [Player]
 Name=Player5
 Name[en_GB]=Player5
+Name[es]=Jugador 5
 Name[pt]=Jogador 5
 Name[pt_BR]=Jogador5
 Name[sv]=Spelare 5
@@ -8,6 +9,7 @@ Name[tr]=Oyuncu 5
 Name[uk]=Гравець5
 Description=This is Player5
 Description[en_GB]=This is Player5
+Description[es]=Este es el jugador 5
 Description[pt]=Este é o Jogador 5
 Description[pt_BR]=Este é o jogador5
 Description[sv]=Det här är femte spelaren

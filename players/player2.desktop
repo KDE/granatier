@@ -1,6 +1,7 @@
 [Player]
 Name=Player2
 Name[en_GB]=Player2
+Name[es]=Jugador 2
 Name[pt]=Jogador 2
 Name[pt_BR]=Jogador2
 Name[sv]=Spelare 2
@@ -8,6 +9,7 @@ Name[tr]=Oyuncu 2
 Name[uk]=Гравець2
 Description=This is Player2
 Description[en_GB]=This is Player2
+Description[es]=este es el jugador 2
 Description[pt]=Este é o Jogador 2
 Description[pt_BR]=Este é o jogador2
 Description[sv]=Det här är andra spelaren

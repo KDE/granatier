@@ -1,12 +1,14 @@
 [Arena]
 Name=Labyrinth
 Name[en_GB]=Labyrinth
+Name[es]=Laberinto
 Name[pt]=Labirinto
 Name[sv]=Labyrint
 Name[tr]=Labirent
 Name[uk]=Лабіринт
 Description=Labyrinth Arena
 Description[en_GB]=Labyrinth Arena
+Description[es]=Campo de juego laberinto
 Description[pt]=Arena em Labirinto
 Description[sv]=Labyrintarena
 Description[tr]=Labirent Arena

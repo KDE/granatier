@@ -1,6 +1,7 @@
 [KGameTheme]
 Name=Granatier
 Name[en_GB]=Granatier
+Name[es]=Granatier
 Name[pt]=Granatier
 Name[pt_BR]=Granatier
 Name[sv]=Granatier
@@ -8,6 +9,7 @@ Name[tr]=Granatier
 Name[uk]=Гренадер
 Description=Granatier Theme
 Description[en_GB]=Granatier Theme
+Description[es]=Tema Granatier
 Description[pt]=Tema do Granatier
 Description[pt_BR]=Tema do Granatier
 Description[sv]=Granatier-tema
