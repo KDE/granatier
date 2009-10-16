@@ -145,12 +145,22 @@ QPoint Arena::getCoords(Cell* p_cell) const
 
 int Arena::getRowFromY(const qreal p_y) const
 {
-    return (int)(p_y / Cell::SIZE);
+    int nRow = (p_y / Cell::SIZE);
+    if (p_y < 0)
+    {
+        nRow -= 1;
+    }
+    return nRow;
 }
 
 int Arena::getColFromX(const qreal p_x) const
 {
-    return (int)(p_x / Cell::SIZE);
+    int nCol = (p_x / Cell::SIZE);
+    if (p_x < 0)
+    {
+        nCol -= 1;
+    }
+    return nCol;
 }
 
 int Arena::getNbColumns() const

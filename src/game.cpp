@@ -58,6 +58,7 @@ Game::Game(PlayerSettings* playerSettings)
     soundPutBomb = new KALSound(KStandardDirs::locate("appdata", "sounds/putbomb.ogg"), soundEngine);
     soundExplode = new KALSound(KStandardDirs::locate("appdata", "sounds/explode.ogg"), soundEngine);
     soundBonus = new KALSound(KStandardDirs::locate("appdata", "sounds/wow.ogg"), soundEngine);
+    soundFalling = new KALSound(KStandardDirs::locate("appdata", "sounds/deepfall.ogg"), soundEngine);
     soundDie = new KALSound(KStandardDirs::locate("appdata", "sounds/die.ogg"), soundEngine);
     soundWilhelmScream = new KALSound(KStandardDirs::locate("appdata", "sounds/wilhelmscream.ogg"), soundEngine);
     gluonDieTimer = new QTimer(this);
@@ -82,6 +83,13 @@ Game::Game(PlayerSettings* playerSettings)
         m_phononBonus.append(Phonon::createPlayer(Phonon::GameCategory));
         m_phononBonus.last()->setCurrentSource(KStandardDirs::locate("appdata", "sounds/wow.ogg"));
     }
+    m_phononFallingTimer = new QTimer(this);
+    m_phononFallingTimer->setSingleShot(true);
+    for(int i = 0; i < 2; i++)
+    {
+        m_phononFalling.append(Phonon::createPlayer(Phonon::GameCategory));
+        m_phononFalling.last()->setCurrentSource(KStandardDirs::locate("appdata", "sounds/deepfall.ogg"));
+    }
     m_phononBonusTimer = new QTimer(this);
     m_phononBonusTimer->setSingleShot(true);
     for(int i = 0; i < 2; i++)
@@ -105,6 +113,7 @@ Game::Game(PlayerSettings* playerSettings)
             Player* player = new Player(qreal(Cell::SIZE * (-0.5)),qreal(Cell::SIZE * 0.5), strPlayerIDs[i], playerSettings, m_arena);
             m_players.append(player);
             connect(player, SIGNAL(dying(Player*)), this, SLOT(playerDeath(Player*)));
+            connect(player, SIGNAL(falling()), this, SLOT(playerFalling()));
         }
     }
     
@@ -201,6 +210,7 @@ Game::~Game()
     delete soundExplode;
     delete soundBonus;
     delete soundWilhelmScream;
+    delete soundFalling;
     delete soundDie;
     delete gluonDieTimer;
     #else
@@ -219,6 +229,11 @@ Game::~Game()
         delete m_phononBonus.takeLast();
     }
     delete m_phononBonusTimer;
+    while(!(m_phononFalling.isEmpty()))
+    {
+        delete m_phononFalling.takeLast();
+    }
+    delete m_phononFallingTimer;
     while(!(m_phononDie.isEmpty()))
     {
         delete m_phononDie.takeLast();
@@ -607,6 +622,35 @@ void Game::decrementRemainingRoundTime()
                 m_roundTimer->setInterval(m_roundTimer->interval() - 1);
             }
         }
+    }
+}
+
+void Game::playerFalling()
+{
+    if(m_soundEnabled)
+    {
+        #ifdef GRANATIER_USE_GLUON
+        soundFalling->play();
+        #else
+        qint64 nLastRemainingTime;
+        int nIndex = 0;
+        if(m_phononFallingTimer->isActive())
+        {
+            return;
+        }
+        nLastRemainingTime = m_phononFalling.first()->remainingTime();
+        nIndex = 0;
+        for(int i = 0; i < m_phononFalling.count(); i++)
+        {
+            if(nLastRemainingTime > m_phononFalling.at(i)->remainingTime())
+            {
+                nIndex = i;
+            }
+        }
+        
+        m_phononFalling.at(nIndex)->play();
+        m_phononFallingTimer->start(50);
+        #endif
     }
 }
 

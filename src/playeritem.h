@@ -42,6 +42,9 @@ private:
     /** Timer used to animate the PlayerItem */
     QTimeLine * m_animationTimer;
     
+    /** Counter for falling animation */
+    int m_fallingAnimationCounter;
+    
     /** player ID */
     QString m_strPlayerId;
 
@@ -57,6 +60,11 @@ public:
       * Deletes the PlayerItem instance.
       */
     ~PlayerItem();
+    
+    /**
+      * resurrects the playeritem
+      */
+    void resurrect();
 
 public slots:
 
@@ -97,6 +105,11 @@ public slots:
       */
     void stopAnim();
 
+    /**
+      * the animation when falling in a hole
+      */
+    void fallingAnimation();
+    
     /**
       * Sets the given frame to the PlayerItem.
       * @param p_frame the frame to set

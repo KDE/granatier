@@ -121,6 +121,7 @@ private :
     KALSound* soundPutBomb;
     KALSound* soundExplode;
     KALSound* soundBonus;
+    KALSound* soundFalling;
     KALSound* soundDie;
     QTimer* gluonDieTimer;
     KALSound* soundWilhelmScream;
@@ -132,6 +133,8 @@ private :
     QList <Phonon::MediaObject*> m_phononExplode;
     QTimer* m_phononBonusTimer;
     QList <Phonon::MediaObject*> m_phononBonus;
+    QTimer* m_phononFallingTimer;
+    QList <Phonon::MediaObject*> m_phononFalling;
     QTimer* m_phononDieTimer;
     QList <Phonon::MediaObject*> m_phononDie;
     #endif
@@ -301,6 +304,11 @@ private slots:
     * Updates the Game data.
     */
     void update();
+    
+    /**
+    * Plays the sound of a player falling in a hole.
+    */
+    void playerFalling();
     
     /**
     * Manages the loss of a life.

@@ -36,6 +36,7 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     connect(p_model, SIGNAL(directionChanged()), this, SLOT(updateDirection()));
     connect(p_model, SIGNAL(gameUpdated()), this, SLOT(manageCollision()));
     connect(p_model, SIGNAL(stopped()), this, SLOT(stopAnim()));
+    connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
 
     // load the SVG
     QString strPlayerId = ((Player*) p_model)->getGraphicsPath();
@@ -53,11 +54,23 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     {
         setElementId("player_0");
     }
+    
+    m_fallingAnimationCounter = 0;
 }
 
 PlayerItem::~PlayerItem()
 {
     delete m_animationTimer;
+}
+
+void PlayerItem::resurrect()
+{
+    m_fallingAnimationCounter = 0;
+    QTransform transform;
+    transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+    transform.scale(1, 1);
+    transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+    setTransform(transform);
 }
 
 void PlayerItem::updateDirection()
@@ -172,11 +185,33 @@ void PlayerItem::stopAnim()
     }
 }
 
+void PlayerItem::fallingAnimation()
+{
+    m_fallingAnimationCounter = 1;
+}
+
 void PlayerItem::setFrame(const int p_frame)
 {
     if(m_renderer->elementExists(QString("player_%1").arg(p_frame)))
     {
         setElementId(QString("player_%1").arg(p_frame));
+        
+        if(m_fallingAnimationCounter > 0)
+        {
+            // shrink the item
+            QTransform transform;
+            transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+            transform.scale(1-m_fallingAnimationCounter*0.02, 1-m_fallingAnimationCounter*0.02);
+            transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+            setTransform(transform);
+            m_fallingAnimationCounter++;
+        }
+        
+        if(m_fallingAnimationCounter > 50)
+        {
+            setDead();
+            dynamic_cast <Player*> (m_model)->die();
+        }
     }
 }
 

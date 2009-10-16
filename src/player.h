@@ -60,6 +60,9 @@ private:
     /** flag if the player is on ice */
     bool m_onIce;
     
+    /** flag if the player falls into a hole */
+    bool m_falling;
+    
     /** the bad bonus type */
     int m_badBonusType;
     
@@ -271,6 +274,11 @@ signals:
       * Emitted when the player is dying
       */
       void dying(Player* player);
+      
+      /**
+      * Emitted when the player is falling in a hole
+      */
+      void falling();
 };
 
 #endif

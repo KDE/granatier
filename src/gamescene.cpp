@@ -140,12 +140,6 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_arenaNameLabel->setZValue(0);
     
-    // Display each PlayerItem
-    for (int i = 0; i < m_playerItems.size(); i++)
-    {
-        addItem(m_playerItems[i]);
-    }
-    
     setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
                  m_game->getArena()->getNbColumns()*Cell::SIZE,
                  m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
@@ -328,6 +322,16 @@ void GameScene::init()
                 }
             }
         }
+    }
+    
+    // Display each PlayerItem
+    for (int i = 0; i < m_playerItems.size(); i++)
+    {
+        if(!items().contains(m_playerItems[i]))
+        {
+            addItem(m_playerItems[i]);
+        }
+        m_playerItems[i]->resurrect();
     }
     
     if (!items().contains(m_remainingTimeLabel))

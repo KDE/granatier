@@ -368,6 +368,38 @@ void Player::updateMove()
                 }
             }
         }
+        
+        //check if the player move in a hole
+        if(m_arena->getCell(newCellRow, newCellCol).getType() == Cell::HOLE)
+        {
+            m_falling = true;
+            //check if cell center passed
+            if(xDirection != 0)
+            {
+                if (newCellCol * Cell::SIZE + 0.5 * Cell::SIZE - m_x == 0)
+                {
+                    setXSpeed(0);
+                    emit falling();
+                }
+                else if ( qAbs(m_x + m_xSpeed) > qAbs(newCellCol * Cell::SIZE + 0.5 * Cell::SIZE))
+                {
+                    setXSpeed(newCellCol * Cell::SIZE + 0.5 * Cell::SIZE - m_x);
+                }
+            }
+            else if (yDirection != 0)
+            {
+                if (newCellRow * Cell::SIZE + 0.5 * Cell::SIZE - m_y == 0)
+                {
+                    setYSpeed(0);
+                    emit falling();
+                }
+                else if ( qAbs(m_y + m_xSpeed) > qAbs(newCellRow * Cell::SIZE + 0.5 * Cell::SIZE))
+                {
+                    setYSpeed(newCellRow * Cell::SIZE + 0.5 * Cell::SIZE - m_y);
+                }
+            }
+            //die();
+        }
     }
     
     //check if bad bonus scatty and drop bombs
@@ -552,6 +584,7 @@ bool Player::isAlive() const
 void Player::resurrect()
 {
     m_onIce = false;
+    m_falling = false;
     m_death = false;
     m_maxSpeed = 10;
     m_speed = 2;
@@ -689,7 +722,7 @@ void Player::stopMoving()
 
 void Player::keyPressed(QKeyEvent* keyEvent)
 {
-    if(m_death)
+    if(m_death || m_falling)
     {
         return;
     }
@@ -738,7 +771,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
 
 void Player::keyReleased(QKeyEvent* keyEvent)
 {
-    if(m_death)
+    if(m_death || m_falling)
     {
         return;
     }
