@@ -79,7 +79,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("bonus_bad_slow") &&
         m_rendererSelectedTheme->elementExists("bonus_bad_hyperactive") &&
         m_rendererSelectedTheme->elementExists("bonus_bad_mirror") &&
-        m_rendererSelectedTheme->elementExists("bonus_bad_scatty"))
+        m_rendererSelectedTheme->elementExists("bonus_bad_scatty") &&
+        m_rendererSelectedTheme->elementExists("bonus_neutral_pandora"))
     {
         m_rendererBonusItems = m_rendererSelectedTheme;
     }
@@ -250,7 +251,6 @@ void GameScene::init()
                 Bonus* bonus = (dynamic_cast <Block*> (element))->getBonus();
                 if(bonus)
                 {
-                  
                     ElementItem* bonusItem = new ElementItem(bonus);
                     bonusItem->setSharedRenderer(m_rendererBonusItems);
                     switch(bonus->getBonusType())
@@ -273,8 +273,14 @@ void GameScene::init()
                                             break;
                         case Bonus::SCATTY: bonusItem->setElementId("bonus_bad_scatty");
                                             break;
-                        default:            bonusItem->setElementId("bonus_speed");
+                        default:            bonusItem->setElementId("bonus_neutral_pandora");
                     }
+                    
+                    if((qrand()/1.0)/RAND_MAX * 10 > 9)
+                    {
+                        bonusItem->setElementId("bonus_neutral_pandora");
+                    }
+                    
                     bonusItem->update(bonus->getX(), bonus->getY());
                     bonusItem->setZValue(100);
                     m_bonusItems[i][j] = bonusItem;
