@@ -30,7 +30,6 @@
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
 #include <KSaveFile>
-#include <QDebug>
 #include <QDir>
 #include <KComponentData>
 
@@ -333,8 +332,6 @@ void ArenaSelector::ArenaSelectorPrivate::_k_openKNewStuffDialog()
 
 void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
 {
-    qWarning() << "Import...";
-    
     //find the clanbomber files
     QStringList listClanbomberPaths;
     listClanbomberPaths.append("/usr/share/games/clanbomber/maps/");

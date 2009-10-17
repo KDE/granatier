@@ -24,7 +24,6 @@
 
 #include <QKeyEvent>
 #include <QTimer>
-#include <kdebug.h>
 
 #include <cmath>
 
@@ -335,7 +334,6 @@ void Player::updateMove()
         {
             if(m_arena->getCell(newCellRow, newCellCol).getType() == Cell::ICE)
             {
-                qWarning() << "on Ice";
                 if(xDirection != 0)
                 {
                     setXSpeed(m_xSpeed + xDirection * onIceSpeedIncrease);
@@ -351,7 +349,6 @@ void Player::updateMove()
         {
             if(m_arena->getCell(newCellRow, newCellCol).getType() != Cell::ICE)
             {
-                qWarning() << "not on Ice";
                 if(xDirection != 0)
                 {
                     setXSpeed(m_xSpeed - xDirection * onIceSpeedIncrease);
