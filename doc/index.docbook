@@ -23,6 +23,7 @@
         </personname>
         <email>k.hias@gmx.de</email>
       </author>
+    <!-- TRANS:ROLES_OF_TRANSLATORS -->
     </authorgroup>
     
     <date>&docupdate;</date>
@@ -223,7 +224,7 @@
             </varlistentry>
             <varlistentry>
               <term><menuchoice>
-                <guimenu>Settings</guimenu><guimenuitem>Configure Granatier...</guimenuitem>
+                <guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem>
               </menuchoice></term>
               <listitem><para><action>Brings up the &granatier; configuration utility.</action></para></listitem>
             </varlistentry>
@@ -263,7 +264,7 @@
         <question><para>I want to change the way this game looks. Can I? </para></question>
         <answer>
           <para>
-            You can select the &granatier; theme in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Granatier...</guimenuitem></menuchoice> dialog. See the <link linkend="config_theme">Game Configuration</link> chapter for more details.
+            You can select the &granatier; theme in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice> dialog. See the <link linkend="config_theme">Game Configuration</link> chapter for more details.
           </para>
         </answer>
       </qandaentry>
@@ -279,7 +280,7 @@
         <question><para>I want to change the game configuration. Where do I go? </para></question>
         <answer>
           <para>
-            You can change the &granatier; configuration in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Granatier...</guimenuitem></menuchoice> dialog. See the <link linkend="configuration">Game Configuration</link> chapter for more details.
+            You can change the &granatier; configuration in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice> dialog. See the <link linkend="configuration">Game Configuration</link> chapter for more details.
           </para>
         </answer>
       </qandaentry>
@@ -289,7 +290,7 @@
 
   <chapter id="configuration"><title>Game Configuration</title> <!-- do not change this! -->
     <para>
-      To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure Granatier...</guimenuitem></menuchoice>
+      To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice>
     </para>
     <sect1 id="config_general">
       <title>General</title>
@@ -331,7 +332,7 @@
         To select the Arena you want to play, go to the Arena section. The Arena is loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Arena.
       </para>
       <para>
-        If you have Clanbomber installed, you can import the arenas from Clanbomber by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in ~/.clanbomber/maps, /usr/share/games/clanbomber/maps and at several other places for arenas. If your arenas are not imported, send me an e-mail to add that path to the search path.
+        If you have Clanbomber installed, you can import the arenas from Clanbomber by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in <filename class="directory">~/.clanbomber/maps</filename>, <filename class="directory">/usr/share/games/clanbomber/maps</filename> and at several other places for arenas. If your arenas are not imported, send me an email to add that path to the search path.
       </para>
       <screenshot>
         <screeninfo>A &granatier; Config screenshot</screeninfo>
