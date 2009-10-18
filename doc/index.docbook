@@ -51,7 +51,7 @@
     <note><title>Gametype:</title><para>Arcade</para></note>
     <note><title>Number of possible players:</title><para>Multiplayer</para></note>
     <para>
-      &granatier; is a clone of the classsic <trademark><application>Bomberman</application></trademark> game, inspired by the work of the <application>Clanbomber</application> clone.
+      &granatier; is a clone of the classic <trademark><application>Bomberman</application></trademark> game, inspired by the work of the <application>Clanbomber</application> clone.
     </para>
     <para>
       The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents.  Several bonuses and handicaps are  hidden underneath the blocks -- these can either help or hinder your progress.
@@ -72,7 +72,7 @@
   <chapter id="howto"><title>How to play</title> <!-- do not change this! -->
     <note><title>Objective:</title><para>Eliminate all Opponents.</para></note>
     <para>
-      Each player is provided with five keys that they use to move their character and lay bombs.  For example, the default keys for Player 1 are the Up, Down, Left and Right arrow keys to move respectively in those directions, and the Enter key to lay a bomb.  Please refer to the <link linkend="config_player">Player Configuration</link> Section to find shortcut keys for other players, as well as how to configure them.
+      Each player is provided with five keys that they use to move their character and lay bombs.  For example, the default keys for Player 1 are the Up, Down, Left and Right arrow keys to move respectively in those directions, and the &Enter; key to lay a bomb.  Please refer to the <link linkend="config_player">Player Configuration</link> Section to find shortcut keys for other players, as well as how to configure them.
     </para>
     <para>
       The purpose of laying bombs, aside from attacking other opponents, is to destroy the many blocks scattered throughout the arena in order to clear a path or uncover hidden bonuses.  Among the many bonuses that can be uncovered are those that make you move faster or increase your bomb blast range; the more bonuses of this type you collect, the easier it is to eliminate your opponents and win the round.  But be warned that just as many handicaps exist that can turn the tide against you, including those that slow you down or invert your moving keys. 
