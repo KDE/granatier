@@ -94,6 +94,9 @@ private :
     /** The Bonuses */
     QList<Bonus*> m_bonus;
 
+    /** The absolute number of bombs, used for the bomb and explosion ID */
+    int m_bombCount;
+    
     /** The points which are needed to win */
     int m_winPoints;
     

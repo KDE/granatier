@@ -22,6 +22,7 @@
 #include "characteritem.h"
 #include "player.h"
 #include "bonus.h"
+#include "bonusitem.h"
 
 #include <QTimeLine>
 #include <QGraphicsScene>
@@ -108,7 +109,7 @@ void PlayerItem::updateDirection()
 void PlayerItem::manageCollision()
 {
     QList<QGraphicsItem*> collidingList = collidingItems();
-    ElementItem* elementItem;
+    BonusItem* bonusItem;
 
     // The signal is emitted only if the list contains more than 1 items (to exclude the case
     // when the player only collides with the arena)
@@ -125,12 +126,12 @@ void PlayerItem::manageCollision()
             }
             else if (collidingList[i]->zValue() == 100)
             {
-                elementItem = dynamic_cast <ElementItem*> (collidingList[i]);
-                if(dynamic_cast <Bonus*> (elementItem->getModel())->isTaken() == false)
+                bonusItem = dynamic_cast <BonusItem*> (collidingList[i]);
+                if(dynamic_cast <Bonus*> (bonusItem->getModel())->isTaken() == false)
                 {
-                    dynamic_cast <Bonus*> (elementItem->getModel())->setTaken();
-                    elementItem->getModel()->doActionOnCollision(dynamic_cast <Player*> (this->getModel()));
-                    emit bonusItemTaken(elementItem);
+                    dynamic_cast <Bonus*> (bonusItem->getModel())->setTaken();
+                    bonusItem->getModel()->doActionOnCollision(dynamic_cast <Player*> (this->getModel()));
+                    emit bonusItemTaken(bonusItem);
                 }
             }
         }

@@ -6,7 +6,9 @@ set(granatierSources
     arenaselector.cpp
     arenasettings.cpp
     block.cpp
+    blockitem.cpp
     bonus.cpp
+    bonusitem.cpp
     bomb.cpp
     bombitem.cpp
     bombexplosionitem.cpp

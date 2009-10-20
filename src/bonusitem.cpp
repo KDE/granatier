@@ -1,8 +1,5 @@
 /*
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
- * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
- * Copyright 2007-2008 Gaël Courcelle <gael.courcelle@gmail.com>
- * Copyright 2007-2008 Alexia Allanic <alexia_allanic@yahoo.fr>
  * 
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
@@ -18,31 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "block.h"
+#include "bonusitem.h"
 #include "bonus.h"
 
-Block::Block(qreal p_x, qreal p_y, Arena* p_arena, const QString& p_imageId) : Element(p_x, p_y, p_arena)
+#include <QTimer>
+
+BonusItem::BonusItem(Bonus* p_model) : ElementItem (p_model)
 {
-    m_imageId = p_imageId;
-    m_type = Element::BLOCK;
-    m_bonus = NULL;
+    setElementId(p_model->getImageId());
 }
 
-Block::~Block()
+BonusItem::~BonusItem()
 {
-}
-
-void Block::setBonus(Bonus* bonus)
-{
-    m_bonus = bonus;
-}
-
-Bonus* Block::getBonus()
-{
-    return m_bonus;
-}
-
-void Block::startDestruction(int nExplosionID)
-{
-    emit startDestructionAnimation();
 }

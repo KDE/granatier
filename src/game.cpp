@@ -134,6 +134,7 @@ void Game::init()
 
     m_roundFinished = 0;
     m_remainingTime = Settings::roundTime();
+    m_bombCount = 0;
     
     // Create the parser that will parse the XML file in order to initialize the Arena instance
     // This also creates all the characters
@@ -608,7 +609,8 @@ void Game::decrementRemainingRoundTime()
             }
             while (!bFound);
             
-            Bomb* bomb = new Bomb((nCol + 0.5) * Cell::SIZE, (nRow + 0.5) * Cell::SIZE, m_arena, 1000);    // time in ms
+            m_bombCount++;
+            Bomb* bomb = new Bomb((nCol + 0.5) * Cell::SIZE, (nRow + 0.5) * Cell::SIZE, m_arena, m_bombCount, 1000);    // time in ms
             bomb->setBombPower(1);
             emit bombCreated(bomb);
             connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
@@ -758,7 +760,8 @@ void Game::createBomb(Player* player, qreal x, qreal y)
             return;
         }
     }
-    Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_arena, 2500);    // time in ms
+    m_bombCount++;
+    Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_arena, m_bombCount, 2500);    // time in ms
     bomb->setBombPower(player->getBombPower());
     emit bombCreated(bomb);
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));

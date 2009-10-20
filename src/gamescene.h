@@ -27,7 +27,8 @@
 #include <QList>
 #include <QHash>
 
-class ElementItem;
+class BlockItem;
+class BonusItem;
 class ArenaItem;
 class PlayerItem;
 class Bomb;
@@ -59,10 +60,10 @@ private:
     QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
     
     /** The ElementItem to be drawn (each Block) */
-    ElementItem*** m_blockItems;
+    BlockItem*** m_blockItems;
     
     /** The Bonus ElementItem */
-    ElementItem*** m_bonusItems;
+    BonusItem*** m_bonusItems;
     
     /** The overlay to show the score at the end of a round*/
     InfoOverlay* m_infoOverlay;
@@ -137,9 +138,14 @@ private slots:
     void setPaused(const bool p_pause, const bool p_fromUser);
     
     /**
+    * Remove the Block from the GameScene.
+    */
+    void removeBlockItem(BlockItem* blockItem);
+    
+    /**
     * Remove the Bonus from the GameScene.
     */
-    void removeBonusItem(ElementItem* bonusItem);
+    void removeBonusItem(BonusItem* bonusItem);
 
     /**
     * Upadates the Game information labels.

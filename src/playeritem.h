@@ -23,6 +23,7 @@
 
 class QTimeLine;
 class Player;
+class BonusItem;
 
 /**
  * @brief This class manage the display of the Player.
@@ -122,7 +123,7 @@ public slots:
     void setDead();
         
 signals:
-    void bonusItemTaken(ElementItem* bonusItem);
+    void bonusItemTaken(BonusItem* bonusItem);
 };
 
 #endif

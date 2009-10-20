@@ -20,13 +20,14 @@
 #include "gamescene.h"
 #include "cell.h"
 #include "bonus.h"
+#include "bonusitem.h"
 #include "settings.h"
 #include "game.h"
 #include "player.h"
 #include "block.h"
+#include "blockitem.h"
 #include "bomb.h"
 #include "arena.h"
-#include "elementitem.h"
 #include "arenaitem.h"
 #include "playeritem.h"
 #include "bombitem.h"
@@ -127,7 +128,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         
         m_playerItems.append(playerItem);
         
-        connect (playerItem, SIGNAL(bonusItemTaken(ElementItem*)), this, SLOT(removeBonusItem(ElementItem*)));
+        connect (playerItem, SIGNAL(bonusItemTaken(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
     }
 
     // The remaining time
@@ -225,33 +226,34 @@ void GameScene::init()
     }
     
     // Create the Block and Bonus items
-    m_blockItems = new ElementItem**[m_game->getArena()->getNbRows()];
-    m_bonusItems = new ElementItem**[m_game->getArena()->getNbRows()];
+    m_blockItems = new BlockItem**[m_game->getArena()->getNbRows()];
+    m_bonusItems = new BonusItem**[m_game->getArena()->getNbRows()];
     for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
     {
-        m_blockItems[i] = new ElementItem*[m_game->getArena()->getNbColumns()];
-        m_bonusItems[i] = new ElementItem*[m_game->getArena()->getNbColumns()];
+        m_blockItems[i] = new BlockItem*[m_game->getArena()->getNbColumns()];
+        m_bonusItems[i] = new BonusItem*[m_game->getArena()->getNbColumns()];
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             if (m_game->getArena()->getCell(i, j).getElement() != NULL && m_game->getArena()->getCell(i, j).getElement()->getType() == Element::BLOCK)
             {
                 // Create the element item and set the image
-                Element* element = m_game->getArena()->getCell(i, j).getElement();
-                ElementItem* elementItem = new ElementItem(element);
-                elementItem->setSharedRenderer(m_rendererArenaItems);
-                elementItem->setElementId(element->getImageId());
-                elementItem->update(element->getX(), element->getY());
-                elementItem->setZValue(200);
+                Block* block = dynamic_cast <Block*> (m_game->getArena()->getCell(i, j).getElement());
+                BlockItem* blockItem = new BlockItem(block);
+                blockItem->setSharedRenderer(m_rendererArenaItems);
+                blockItem->setElementId(block->getImageId());
+                blockItem->update(block->getX(), block->getY());
+                blockItem->setZValue(200);
                 if(Settings::self()->showAllTiles() == 1)
                 {
-                    elementItem->setZValue(99);
+                    blockItem->setZValue(99);
                 }
-                m_blockItems[i][j] = elementItem;
+                connect(blockItem, SIGNAL(blockItemDestroyed(BlockItem*)), this, SLOT(removeBlockItem(BlockItem*)));
+                m_blockItems[i][j] = blockItem;
                 // if the block contains a hidden bonus, create the bonus item 
-                Bonus* bonus = (dynamic_cast <Block*> (element))->getBonus();
+                Bonus* bonus = block->getBonus();
                 if(bonus)
                 {
-                    ElementItem* bonusItem = new ElementItem(bonus);
+                    BonusItem* bonusItem = new BonusItem(bonus);
                     bonusItem->setSharedRenderer(m_rendererBonusItems);
                     switch(bonus->getBonusType())
                     {
@@ -541,7 +543,28 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
     }
 }
 
-void GameScene::removeBonusItem(ElementItem* bonusItem)
+void GameScene::removeBlockItem(BlockItem* blockItem)
+{
+    // remove the Bonus Items
+    for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
+    {
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            if (m_blockItems[i][j] != NULL && m_blockItems[i][j] == blockItem)
+            {
+                if (items().contains(m_blockItems[i][j]))
+                {
+                    removeItem(m_blockItems[i][j]);
+                    m_blockItems[i][j] = NULL;
+                    m_game->blockDestroyed(i, j, dynamic_cast <Block*> (blockItem->getModel()));
+                    delete blockItem;
+                }
+            }
+        }
+    }
+}
+
+void GameScene::removeBonusItem(BonusItem* bonusItem)
 {
     // remove the Bonus Items
     for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
@@ -680,21 +703,20 @@ void GameScene::bombDetonated(Bomb* bomb)
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                 {
-                    dynamic_cast <Bomb*> (element)->setDetonationCountdown(nDetonationCountdownNorth);
+                    dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdownNorth);
                     nDetonationCountdownNorth += nDetonationCountdown;
                 }
                 else if(element && element->getType() == Element::BLOCK)
                 {
                     bNorthDone = true;
+                    dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
                     if (m_blockItems[nRow][nColumn] != NULL)
                     {
-                        removeItem(m_blockItems[nRow][nColumn]);
-                        m_game->blockDestroyed(nRow, nColumn, dynamic_cast <Block*> (element));
-                        delete m_blockItems[nRow][nColumn]; //this will also delete the block instance
-                        m_blockItems[nRow][nColumn] = NULL;
                         //display bonus if available
                         if (m_bonusItems[nRow][nColumn] != NULL)
                         {
+                            //m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                            
                             if (!items().contains(m_bonusItems[nRow][nColumn]))
                             {
                                 addItem(m_bonusItems[nRow][nColumn]);
@@ -729,18 +751,15 @@ void GameScene::bombDetonated(Bomb* bomb)
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                 {
-                    dynamic_cast <Bomb*> (element)->setDetonationCountdown(nDetonationCountdownEast);
+                    dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdownEast);
                     nDetonationCountdownEast += nDetonationCountdown;
                 }
                 else if(element && element->getType() == Element::BLOCK)
                 {
                     bEastDone = true;
+                    dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
                     if (m_blockItems[nRow][nColumn] != NULL)
                     {
-                        removeItem(m_blockItems[nRow][nColumn]);
-                        m_game->blockDestroyed(nRow, nColumn, dynamic_cast <Block*> (element));
-                        delete m_blockItems[nRow][nColumn]; //this will also delete the block instance
-                        m_blockItems[nRow][nColumn] = NULL;
                         //display bonus if available
                         if (m_bonusItems[nRow][nColumn] != NULL)
                         {
@@ -778,18 +797,15 @@ void GameScene::bombDetonated(Bomb* bomb)
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                 {
-                    dynamic_cast <Bomb*> (element)->setDetonationCountdown(nDetonationCountdownSouth);
+                    dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdownSouth);
                     nDetonationCountdownSouth += nDetonationCountdown;
                 }
                 else if(element && element->getType() == Element::BLOCK)
                 {
                     bSouthDone = true;
+                    dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
                     if (m_blockItems[nRow][nColumn] != NULL)
                     {
-                        removeItem(m_blockItems[nRow][nColumn]);
-                        m_game->blockDestroyed(nRow, nColumn, dynamic_cast <Block*> (element));
-                        delete m_blockItems[nRow][nColumn]; //this will also delete the block instance
-                        m_blockItems[nRow][nColumn] = NULL;
                         //display bonus if available
                         if (m_bonusItems[nRow][nColumn] != NULL)
                         {
@@ -827,18 +843,15 @@ void GameScene::bombDetonated(Bomb* bomb)
             {
                 if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                 {
-                    dynamic_cast <Bomb*> (element)->setDetonationCountdown(nDetonationCountdownWest);
+                    dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdownWest);
                     nDetonationCountdownWest += nDetonationCountdown;
                 }
                 else if(element && element->getType() == Element::BLOCK)
                 {
                     bWestDone = true;
+                    dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
                     if (m_blockItems[nRow][nColumn] != NULL)
                     {
-                        removeItem(m_blockItems[nRow][nColumn]);
-                        m_game->blockDestroyed(nRow, nColumn, dynamic_cast <Block*> (element));
-                        delete m_blockItems[nRow][nColumn]; //this will also delete the block instance
-                        m_blockItems[nRow][nColumn] = NULL;
                         //display bonus if available
                         if (m_bonusItems[nRow][nColumn] != NULL)
                         {

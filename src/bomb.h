@@ -50,6 +50,12 @@ protected:
     /** The Bomb detonation power */
     int m_bombPower;
     
+    /** The Bomb ID */
+    int m_bombID;
+    
+    /** The ID of the Bomb that causes the explosion */
+    int m_explosionID;
+    
     /** Timer used to make the bomb detonate */
     QTimer* m_detonationCountdownTimer;
 
@@ -60,9 +66,10 @@ public:
     * @param fX the initial x-coordinate
     * @param fY the initial y-coordinate
     * @param p_arena the Arena the Bomb is on
+    * @param nBombID the unique bomb ID
     * @param nDetonationCountdown the time until detonation
     */
-    Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown);
+    Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown);
 
     /**
     * Deletes the Bomb instance.
@@ -143,14 +150,21 @@ public:
     void setBombPower(int bombPower);
     
     /**
-    * returns if the bomb is already detonated
+    * @return state if the bomb is already detonated
     */
     bool isDetonated();
     
     /**
-    * sets the detonation countdown
+    * sets the explosion ID and detonation countdown
+    * @param nBombID the Bomb ID that causes the detonation
+    * @param nDetonationTimeout the new detonation timeout
     */
-    void setDetonationCountdown(int nDetonationTimeout);
+    void initDetonation(int nBombID, int nDetonationTimeout);
+    
+    /**
+    * @return the explosion ID
+    */
+    int explosionID();
     
     /**
     * Pauses bomb timer.
@@ -192,6 +206,7 @@ protected:
 signals:
     /**
     * Emitted when the Bomb is exploded.
+    * @param bomb this bomb
     */
     void bombDetonated(Bomb* bomb);
 };

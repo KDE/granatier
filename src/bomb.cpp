@@ -22,9 +22,8 @@
 #include "arena.h"
 
 #include <QTimer>
-#include <KDebug>
 
-Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
+Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
 {
     m_type = Element::BOMB;
     
@@ -38,6 +37,9 @@ Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nDetonationCountdown) : Eleme
     m_arena->setCellElement(m_arena->getRowFromY(m_y), m_arena->getColFromX(m_x), this);
     
     m_detonated = false;
+    
+    m_bombID = nBombID;
+    m_explosionID = nBombID;
     
     // Define the timer which sets the puls frequency
     m_detonationCountdownTimer = new QTimer(this);
@@ -211,8 +213,18 @@ bool Bomb::isDetonated()
     return m_detonated;
 }
 
-void Bomb::setDetonationCountdown(int nDetonationTimeout)
+int Bomb::explosionID()
 {
+    return m_explosionID;
+}
+
+void Bomb::initDetonation(int nBombID, int nDetonationTimeout)
+{
+    if(m_bombID == m_explosionID)
+    {
+        m_explosionID = nBombID;
+    }
+    
     if(m_detonationCountdownTimer->interval() > nDetonationTimeout)
     {
         m_detonationCountdownTimer->setInterval(nDetonationTimeout);

@@ -27,8 +27,11 @@ class Bonus;
 /**
  * @brief This class represents a block with the possibility of a bonus inside
  */
-class Block : public Element {
-
+class Block : public Element
+{
+  
+    Q_OBJECT
+  
 public:
 
     /**
@@ -43,16 +46,26 @@ public:
     
     /**
       * Sets the Bonus which is contained by the Block
+      * @param bonus the hidden Bonus
       */
     void setBonus(Bonus* bonus);
     
     /**
       * Returns the Bonus which is contained by the Block
+      * @return the hidden Bonus
       */
     Bonus* getBonus();
+    
+    /**
+      * destroys the block
+      */
+    void startDestruction(int nExplosionID);
         
 private:
     Bonus* m_bonus;
+
+signals:
+    void startDestructionAnimation();
 };
 
 #endif
