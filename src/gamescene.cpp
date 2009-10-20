@@ -75,6 +75,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     if(m_rendererSelectedTheme->elementExists("bonus_speed") &&
         m_rendererSelectedTheme->elementExists("bonus_bomb") &&
         m_rendererSelectedTheme->elementExists("bonus_power") &&
+        m_rendererSelectedTheme->elementExists("bonus_shield") &&
         m_rendererSelectedTheme->elementExists("bonus_throw") &&
         m_rendererSelectedTheme->elementExists("bonus_kick") &&
         m_rendererSelectedTheme->elementExists("bonus_bad_slow") &&
@@ -262,6 +263,8 @@ void GameScene::init()
                         case Bonus::BOMB:   bonusItem->setElementId("bonus_bomb");
                                             break;
                         case Bonus::POWER:  bonusItem->setElementId("bonus_power");
+                                            break;
+                        case Bonus::SHIELD: bonusItem->setElementId("bonus_shield");
                                             break;
                         case Bonus::THROW:  bonusItem->setElementId("bonus_throw");
                                             break;

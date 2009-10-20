@@ -19,12 +19,12 @@
 #include "bombexplosionitem.h"
 #include "bomb.h"
 
-#include <KDebug>
-
 BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower) : QGraphicsSvgItem()
 {
     m_direction = direction;
     m_bombPower = bombPower;
+    m_explosionID = p_model->explosionID();
+    
     switch(m_direction)
     {
         case NORTH:
@@ -58,6 +58,11 @@ QPainterPath BombExplosionItem::shape() const
     QRectF shapeRect = QRectF(rect.x(), rect.y(), rect.width(), rect.height());
     path.addEllipse(shapeRect);
     return path;
+}
+
+int BombExplosionItem::explosionID()
+{
+    return m_explosionID;
 }
 
 void BombExplosionItem::update(qreal p_x, qreal p_y)

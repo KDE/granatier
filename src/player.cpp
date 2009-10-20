@@ -464,6 +464,9 @@ void Player::addBonus(Bonus* p_bonus)
                 m_bombArmory = m_maxBombArmory;
             }
             break;
+        case Bonus::SHIELD:
+            m_listShield.append(0);
+            break;
         case Bonus::HYPERACTIVE:
             {
                 if(m_badBonusCountdownTimer->isActive())
@@ -556,6 +559,23 @@ void Player::addBonus(Bonus* p_bonus)
     }
 }
 
+bool Player::shield(int nExplosionID)
+{
+    for(int i = 0; i < m_listShield.count(); i++)
+    {
+        if(m_listShield[i] == nExplosionID)
+        {
+            return true;
+        }
+        else if(m_listShield[i] == 0)
+        {
+            m_listShield[i] = nExplosionID;
+            return true;
+        }
+    }
+    return false;
+}
+
 void Player::die()
 {
     if(!m_death)
@@ -590,6 +610,7 @@ void Player::resurrect()
     m_bombPower = 1;
     m_maxBombArmory = 1;
     m_bombArmory = m_maxBombArmory;
+    m_listShield.clear();
     if(m_badBonusCountdownTimer->isActive())
     {
         m_badBonusCountdownTimer->stop();

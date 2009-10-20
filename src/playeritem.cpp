@@ -23,6 +23,9 @@
 #include "player.h"
 #include "bonus.h"
 #include "bonusitem.h"
+#include "bomb.h"
+#include "bombitem.h"
+#include "bombexplosionitem.h"
 
 #include <QTimeLine>
 #include <QGraphicsScene>
@@ -121,8 +124,22 @@ void PlayerItem::manageCollision()
             if (collidingList[i]->zValue() >= 300 && collidingList[i]->zValue() < 400)
             {
                 //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Player*)getModel());
-                setDead();
-                dynamic_cast <Player*> (m_model)->die();
+                int nExplosionID;
+                if(collidingList[i]->zValue() == 315)
+                {
+                    BombItem* bombItem = dynamic_cast <BombItem*> (collidingList[i]);
+                    nExplosionID = dynamic_cast <Bomb*> (bombItem->getModel())->explosionID();
+                }
+                else
+                {
+                    nExplosionID = dynamic_cast <BombExplosionItem*> (collidingList[i])->explosionID();
+                }
+                
+                if(dynamic_cast <Player*> (m_model)->shield(nExplosionID) == false)
+                {
+                    setDead();
+                    dynamic_cast <Player*> (m_model)->die();
+                }
             }
             else if (collidingList[i]->zValue() == 100)
             {

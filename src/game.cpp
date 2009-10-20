@@ -362,10 +362,10 @@ void Game::createBonus()
         bonusType = Bonus::NONE;
         if(i < nBonusCount)
         {
-            int nNumberOfBonuses = 3;
+            int nNumberOfBonuses = 4;
             if(Settings::self()->showAllTiles() == 1)
             {
-                nNumberOfBonuses = 5;
+                nNumberOfBonuses = 6;
             }
             
             switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * nNumberOfBonuses))
@@ -376,9 +376,11 @@ void Game::createBonus()
                         break;
                 case 2: bonusType = Bonus::POWER;
                         break;
-                case 3: bonusType = Bonus::THROW;
+                case 3: bonusType = Bonus::SHIELD;
                         break;
-                case 4: bonusType = Bonus::KICK;
+                case 4: bonusType = Bonus::THROW;
+                        break;
+                case 5: bonusType = Bonus::KICK;
                         break;
                 default: bonusType = Bonus::SPEED;
             }

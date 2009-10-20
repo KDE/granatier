@@ -33,7 +33,8 @@ class BombExplosionItem : public QGraphicsSvgItem
 
 public:
     /** The Explosion directions */
-    enum Direction {
+    enum Direction
+    {
         NORTH,
         EAST,
         SOUTH,
@@ -42,9 +43,14 @@ public:
 
 protected:
 
-   Direction m_direction;
+    /** The direction of the blast */
+    Direction m_direction;
+    
+    /** The bomb power */
+    int m_bombPower;
    
-   int m_bombPower;
+    /** The ID of the Bomb that causes the explosion */
+    int m_explosionID;
 
 public:
 
@@ -65,6 +71,11 @@ public:
      * @return QPainterPath the new shape of the Bomb
      */
     QPainterPath shape() const;
+    
+    /**
+    * @return the explosion ID
+    */
+    int explosionID();
     
 public slots:
 

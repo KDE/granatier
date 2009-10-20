@@ -36,6 +36,7 @@ public:
         SPEED,
         BOMB,
         POWER,
+        SHIELD,
         THROW,
         KICK,
         SLOW,

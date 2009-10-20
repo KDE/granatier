@@ -63,6 +63,9 @@ private:
     /** flag if the player falls into a hole */
     bool m_falling;
     
+    /** a list with the gathered shields from the shield bonus */
+    QList <int> m_listShield;
+    
     /** the bad bonus type */
     int m_badBonusType;
     
@@ -170,6 +173,13 @@ public:
       * @param p_element reference to the element eaten
       */
     void addBonus(Bonus* p_bonus);
+    
+    /**
+      * Manages the points won
+      * @param n_ExplosionID the ID from the explosion which hit the player
+      * @return true if there is an unused shield, false otherwise
+      */
+    bool shield(int n_ExplosionID);
     
     /**
       * Implements the Character function
