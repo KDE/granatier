@@ -77,14 +77,13 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
         {
             switch(m_buffer.at(i).toAscii())
             {
-                case '_':
+                case ' ':
                     m_arena->setCellType(m_counterRows,i,Cell::HOLE);
                     break;
-                case '|':
                 case '=':
                     m_arena->setCellType(m_counterRows,i,Cell::WALL);
                     break;
-                case ' ':
+                case '_':
                     m_arena->setCellType(m_counterRows,i,Cell::GROUND);
                     break;
                 case '+':

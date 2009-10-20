@@ -385,7 +385,8 @@ void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
             }
             while(!readStream.atEnd());
             arena.replaceInStrings("*", "=");
-            arena.replaceInStrings("-", "_");
+            arena.replaceInStrings(" ", "_");
+            arena.replaceInStrings("-", " ");
             arena.replaceInStrings("S", "-");
             arena.replaceInStrings("R", "x");
             arena.replaceInStrings("^", "u");
