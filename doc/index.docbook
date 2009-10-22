@@ -55,7 +55,7 @@
       &granatier; is a clone of the classic <trademark><application>Bomberman</application></trademark> game, inspired by the work of the <application>Clanbomber</application> clone.
     </para>
     <para>
-      The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents.  Several bonuses and handicaps are  hidden underneath the blocks -- these can either help or hinder your progress.
+      The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents. Several bonuses and handicaps are hidden underneath the blocks -- these can either help or hinder your progress.
     </para>
     <screenshot>
       <screeninfo>A &granatier; screenshot</screeninfo>
@@ -89,6 +89,9 @@
     <sect2>
       <title>The Arena</title>
       <para>
+       The players are in an arena which consists of:
+      </para>
+      <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="arena_wall.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Wall</phrase> </textobject>
@@ -113,6 +116,9 @@
     <sect2>
       <title>The Bonuses</title>
       <para>
+       Bonuses are helpful for reaching the game goal and effects exists permanent - even after a handicap disappears. Currently there are following bonuses:
+      </para>
+      <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_speed.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Speed</phrase> </textobject>
@@ -136,6 +142,9 @@
     </sect2>
     <sect2>
       <title>The Handicaps</title>
+      <para>
+       Handicaps are the opposite of bonuses and hinder the player. The good thing is that effects get lost after some time (other than bonuses) and the player can play in is usual behavior (including bonuses) again. Currently there are following handicaps:
+      </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_slow.png" format="PNG" /> </imageobject>
@@ -245,11 +254,11 @@
         <answer><para>The kdegames team. You can find their website <ulink url="http://games.kde.org/">here</ulink>.</para></answer>
       </qandaentry>
       <qandaentry>
-        <question><para>Where can I get cheatcodes? </para></question>
+        <question><para>Where can I get cheatcodes?</para></question>
         <answer><para>You cannot get cheatcodes for &kde; games.</para></answer>
       </qandaentry>
       <qandaentry>
-        <question><para>How do I start a new game? </para></question>
+        <question><para>How do I start a new game?</para></question>
         <answer>
           <para>
             You can start a new game with <menuchoice><guimenu>Game</guimenu><guimenuitem>New</guimenuitem></menuchoice>.
@@ -257,11 +266,11 @@
         </answer>
       </qandaentry>
       <qandaentry>
-        <question><para>How do I pause the game? </para></question>
-        <answer><para>Press 'P' to pause the game.</para></answer>
+        <question><para>How do I pause the game?</para></question>
+        <answer><para>Press <keycap>P</keycap> to pause the game.</para></answer>
       </qandaentry>
       <qandaentry>
-        <question><para>I want to change the way this game looks. Can I? </para></question>
+        <question><para>I want to change the way this game looks. Can I?</para></question>
         <answer>
           <para>
             You can select the &granatier; theme in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice> dialog. See the <link linkend="config_theme">Game Configuration</link> chapter for more details.
@@ -270,14 +279,14 @@
       </qandaentry>
       <qandaentry>
         <question><para>I have to quit the game now, but I am not finished yet. Can I save my progress?</para></question>
-        <answer><para>&granatier; does not have this feature.</para></answer>
+        <answer><para>No. Saving the game is not possible in &granatier;.</para></answer>
       </qandaentry>
       <qandaentry>
         <question><para>Where are the highscores?</para></question>
-        <answer><para>&granatier; does not have this feature.</para></answer>
+        <answer><para>There are no highscores in &granatier;.</para></answer>
       </qandaentry>
       <qandaentry>
-        <question><para>I want to change the game configuration. Where do I go? </para></question>
+        <question><para>I want to change the game configuration. Where do I go?</para></question>
         <answer>
           <para>
             You can change the &granatier; configuration in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice> dialog. See the <link linkend="configuration">Game Configuration</link> chapter for more details.
