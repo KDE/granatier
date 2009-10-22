@@ -107,10 +107,20 @@
       </para>
       <para>
         <inlinemediaobject>
+          <imageobject> <imagedata fileref="arena_ice.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Ice</phrase> </textobject>
+        </inlinemediaobject>
+        The Ice -- this will make the ground slippery. The speed increases on the ice and it is not possible to completly stop moving.
+      </para>
+      <para>
+        <inlinemediaobject>
           <imageobject> <imagedata fileref="arena_block.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Block</phrase> </textobject>
         </inlinemediaobject>
         The Block -- this can be destroyed with a bomb, and may contain a bonus (or a handicap).
+      </para>
+      <para>
+        If there is none of the obove items, there is a hole at the ground and moving into it will result in falling into the deep and die. The same applies also if there is no wall at the edge of the arena and the player moves outside of the arena.
       </para>
     </sect2>
     <sect2>
@@ -138,6 +148,13 @@
           <textobject> <phrase>Bonus Power</phrase> </textobject>
         </inlinemediaobject>
         Power -- increases the power of your bombs, extending their bomb blast range.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_shield.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Shield</phrase> </textobject>
+        </inlinemediaobject>
+        Shield -- makes invincible for one bomb blast.
       </para>
     </sect2>
     <sect2>
@@ -172,6 +189,19 @@
           <textobject> <phrase>Handicap Scatty</phrase> </textobject>
         </inlinemediaobject>
         Scatty -- forces you to continuously lay bombs without control.
+      </para>
+    </sect2>
+    <sect2>
+      <title>The Neutral Bonuses (Please help me with a better name)</title>
+      <para>
+      This type of bonuses are neither good nor bad, it mostly depends on the environment. Currently there are following neutral bonuses:
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_neutral_pandora.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Neutral Pandora</phrase> </textobject>
+        </inlinemediaobject>
+        Pandora -- behind this there is either a bonus or a handicap.
       </para>
     </sect2>
     </sect1>
