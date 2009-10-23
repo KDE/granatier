@@ -404,6 +404,57 @@
     </sect1>
   </chapter>
 
+  <chapter id="create_arena"><title>Create a custom Arena</title> <!-- do not change this! -->
+    <para>
+      An Arena in &granatier; consists of two files, the <filename>myarena.desktop</filename> and the <filename>myarena.xml</filename>.
+    </para>
+
+    <para>
+      The .desktop file contains the meta data like the arena name or the author of the arena and consists of the following entries.
+      <programlisting>
+[Arena]
+Name=My Arena
+Description=This is my first Arena
+Type=XML
+FileName=myarena.xml
+Author=Joe User
+AuthorEmail=joe.user@foo.org
+      </programlisting>
+      You can choose whatever name you want, but FileName must be the name of the .xml file.
+    </para>
+    <para>
+      The .xml file contains the actual arena map.
+      <programlisting>
+&lt;?xml version="1.0"?&gt;
+&lt;Arena rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting>
+      There is no limit for rowCount and colCount, so you can choose the size of the arena by yourself. The following symbols are used for the arena map.
+      <programlisting>
+'=' a wall item
+' ' a hole item
+'_' a ground item
+'+' a block item
+'x' will randomly create a block or a ground item
+'-' an ice item
+'p' a player position
+      </programlisting>
+    </para>
+  </chapter>
+
   <chapter id="credits"><title>Credits and License</title> <!-- do not change this! -->
     <para>
       &granatier;  <!-- do not change this! -->
