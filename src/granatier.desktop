@@ -23,3 +23,4 @@ Icon=granatier
 TryExec=granatier
 Exec=granatier
 Categories=Qt;KDE;Game;ArcadeGame;
+X-DocPath=granatier/index.html
