@@ -350,3 +350,8 @@ void InfoOverlay::hideItems ()
         m_graphicsScene->removeItem(m_dimmOverlay);
     }
 }
+
+void InfoOverlay::resizeDimmOverlay(qreal x, qreal y, qreal width, qreal height)
+{
+    m_dimmOverlay->setRect(x, y, width, height);
+}

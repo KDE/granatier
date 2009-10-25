@@ -57,7 +57,9 @@ public:
 
     /**
       * Creates a new InfoOverlay instance.
-      * @param p_model the Character model
+      * @param p_game the game instance
+      * @param p_renderer the renderer instance
+      * @param p_scene the gamescene instance
       */
     InfoOverlay (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene* p_scene);
 
@@ -85,6 +87,15 @@ public:
       * Hides the info items.
       */
     void hideItems();
+    
+    /**
+      * Resize dimm overlay.
+      * @param x the new left position
+      * @param y the new top position
+      * @param width the new width
+      * @param height the new height
+      */
+    void resizeDimmOverlay(qreal x, qreal y, qreal width, qreal height);
 };
 
 #endif

@@ -59,6 +59,15 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_rendererSelectedTheme = new KSvgRenderer();
     loadTheme();
     
+    if(m_rendererSelectedTheme->elementExists("background"))
+    {
+        m_rendererBackground = m_rendererSelectedTheme;
+    }
+    else
+    {
+        m_rendererBackground = m_rendererDefaultTheme;
+    }
+    
     // set the renderer for the arena items TODO: add all the arena items
     if(m_rendererSelectedTheme->elementExists("arena_ground") &&
         m_rendererSelectedTheme->elementExists("arena_wall") &&
@@ -146,6 +155,19 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
                  m_game->getArena()->getNbColumns()*Cell::SIZE,
                  m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
+    
+    // create the background
+    m_arenaBackground = new QGraphicsSvgItem;
+    m_arenaBackground->setSharedRenderer(m_rendererBackground);
+    m_arenaBackground->setElementId("background");
+    m_arenaBackground->setZValue(-5);
+    QTransform transform;
+    transform.scale(sceneRect().width() / m_arenaBackground->boundingRect().width(), sceneRect().height() / m_arenaBackground->boundingRect().height());
+    m_arenaBackground->setTransform(transform);
+    m_arenaBackground->setPos(sceneRect().left(), sceneRect().top());
+    m_arenaBackground->setCachingEnabled(true);
+    m_arenaBackground->setMaximumCacheSize(QSize(2000, 2000));
+    addItem(m_arenaBackground);
     
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, m_rendererScoreItems, this);
@@ -377,6 +399,9 @@ GameScene::~GameScene()
         delete m_playerItems[i];
     }
     
+    removeItem(m_arenaBackground);
+    delete m_arenaBackground;
+    
     delete m_infoOverlay;
     delete m_remainingTimeLabel;
     delete m_arenaNameLabel;
@@ -472,6 +497,17 @@ void GameScene::cleanUp()
 void GameScene::showScore()
 {
     m_infoOverlay->showScore();
+}
+
+void GameScene::resizeBackground(qreal x, qreal y, qreal width, qreal height)
+{
+    QTransform transform;
+    transform.scale(width / m_arenaBackground->boundingRect().width(), height / m_arenaBackground->boundingRect().height());
+    m_arenaBackground->resetTransform();
+    m_arenaBackground->setTransform(transform);
+    m_arenaBackground->setPos(x, y);
+    
+    m_infoOverlay->resizeDimmOverlay(x, y, width, height);
 }
 
 Game* GameScene::getGame() const

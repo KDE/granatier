@@ -34,6 +34,7 @@ class PlayerItem;
 class Bomb;
 class BombItem;
 class BombExplosionItem;
+class QGraphicsSvgItem;
 class InfoOverlay;
 class KPixmapCache;
 class KSvgRenderer;
@@ -64,6 +65,9 @@ private:
     
     /** The Bonus ElementItem */
     BonusItem*** m_bonusItems;
+
+    /** The Arena background */
+    QGraphicsSvgItem* m_arenaBackground;
     
     /** The overlay to show the score at the end of a round*/
     InfoOverlay* m_infoOverlay;
@@ -80,6 +84,7 @@ private:
     /** The SVG renderer */
     KSvgRenderer* m_rendererSelectedTheme;
     KSvgRenderer* m_rendererDefaultTheme;
+    KSvgRenderer* m_rendererBackground;
     KSvgRenderer* m_rendererArenaItems;
     KSvgRenderer* m_rendererBonusItems;
     KSvgRenderer* m_rendererBombItems;
@@ -122,6 +127,15 @@ public:
      * Shows the labels with the points.
      */
     void showScore();
+    
+    /**
+     * Updates the background to fit into the QGraphicsView after a resize.
+     * @param x the new left position
+     * @param y the new top position
+     * @param width the new width
+     * @param height the new height
+     */
+    void resizeBackground(qreal x, qreal y, qreal width, qreal height);
     
 private slots:
     
