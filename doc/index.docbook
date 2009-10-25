@@ -207,98 +207,6 @@
     </sect1>
   </chapter>
 
-  <chapter id="interface"><title>Interface Overview</title> <!-- do not change this! -->
-  <!-- This section covers the menubar. Describe every single entry in order. Use <variablelist> and <varlistentry>. 
-  Split the chapter into sections using <sect1(2,3)> for better viewing.-->
-    <sect1 id="menubar">
-      <title>Menubar</title>
-      <sect2>
-        <title>The <guimenu>Game</guimenu> Menu</title>
-        <para>
-          <variablelist>
-            <varlistentry>
-              <term><menuchoice>
-                <shortcut><keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo></shortcut>
-                <guimenu>Game</guimenu><guimenuitem>New</guimenuitem>
-              </menuchoice></term>
-              <listitem><para><action>Starts a new game.</action></para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><menuchoice>
-                <shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
-                <guimenu>Game</guimenu><guimenuitem>Quit</guimenuitem>
-              </menuchoice></term>
-              <listitem><para><action>Quits</action> &granatier;.</para></listitem>
-            </varlistentry>
-          </variablelist>
-        </para>
-      </sect2>
-      <sect2>
-        <title>The <guimenu>Settings</guimenu> Menu</title>
-        <para>
-          <variablelist>
-            <varlistentry>
-              <term><menuchoice>
-                <guimenu>Settings</guimenu><guimenuitem>Play Sounds</guimenuitem>
-              </menuchoice></term>
-              <listitem><para><action>Plays or mutes the sounds.</action></para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><menuchoice>
-                <guimenu>Settings</guimenu><guimenuitem>Show Statusbar</guimenuitem>
-              </menuchoice></term>
-              <listitem><para><action>Shows or hides the statusbar.</action></para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><menuchoice>
-                <guimenu>Settings</guimenu><guimenuitem>Configure Shortcuts...</guimenuitem>
-              </menuchoice></term>
-              <listitem><para><action>Brings up the shortcut configuration utility.</action></para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><menuchoice>
-                <guimenu>Settings</guimenu><guimenuitem>Configure Toolbars...</guimenuitem>
-              </menuchoice></term>
-              <listitem><para><action>Brings up the toolbar configuration utility.</action></para></listitem>
-            </varlistentry>
-            <varlistentry>
-              <term><menuchoice>
-                <guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem>
-              </menuchoice></term>
-              <listitem><para><action>Brings up the &granatier; configuration utility.</action></para></listitem>
-            </varlistentry>
-          </variablelist>
-        </para>
-      </sect2>
-      <sect2 id="help"><!-- This is a standard Help menubar entry. Only change if needed.-->
-        <title>The <guimenuitem>Help</guimenuitem> Menu</title>
-        &help.menu.documentation;
-      </sect2>
-    </sect1>
-  </chapter>
-
-  <chapter id="faq"><title>Frequently asked questions</title> <!-- do not change this! -->
-    <qandaset>
-      <qandaentry>
-        <question><para>I want to change the way this game looks. Can I?</para></question>
-        <answer>
-          <para>
-            You can select the theme in the <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice> dialog. See the <link linkend="config_theme">Game Configuration</link> chapter for more details.
-          </para>
-        </answer>
-      </qandaentry>
-      <qandaentry>
-        <question><para>I have to quit the game now, but I am not finished yet. Can I save my progress?</para></question>
-        <answer><para>No. Saving the game is not possible.</para></answer>
-      </qandaentry>
-      <qandaentry>
-        <question><para>Where are the highscores?</para></question>
-        <answer><para>There are no highscores.</para></answer>
-      </qandaentry>
-      <!--Please add more Q&As if needed-->
-    </qandaset>
-  </chapter>
-
   <chapter id="configuration"><title>Game Configuration</title> <!-- do not change this! -->
     <para>
       To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice>
@@ -451,19 +359,6 @@ AuthorEmail=joe.user@foo.org
   &underGPL;
 
   </chapter>
-
-  <appendix id="installation">
-    <title>Installation</title>
-
-    &install.intro.documentation;
-
-    <sect1 id="Compilation">
-      <title>Compilation and Installation</title>
-
-      &install.compile.documentation;
-
-    </sect1>
-  </appendix>
 
   &documentation.index; 
 </book>
