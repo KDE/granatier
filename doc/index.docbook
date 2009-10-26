@@ -290,7 +290,7 @@
     </para>
 
     <para>
-      The .desktop file contains the meta data like the arena name or the author of the arena and consists of the following entries.
+      The .desktop file contains the metadata like the arena name or the author of the arena and consists of the following entries.
       <programlisting>
 [Arena]
 Name=My Arena
