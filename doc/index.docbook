@@ -55,7 +55,7 @@
       &granatier; is a clone of the classic <trademark><application>Bomberman</application></trademark> game, inspired by the work of the <application>Clanbomber</application> clone.
     </para>
     <para>
-      The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents. Several bonuses and handicaps are hidden underneath the blocks -- these can either help or hinder your progress.
+      The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents. Several bonuses and handicaps are hidden underneath the blocks &ndash; these can either help or hinder your progress.
     </para>
     <screenshot>
       <screeninfo>A &granatier; screenshot</screeninfo>
@@ -96,31 +96,31 @@
           <imageobject> <imagedata fileref="arena_wall.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Wall</phrase> </textobject>
         </inlinemediaobject>
-        The Wall -- this defines the outline of the arena map and cannot be destroyed.
+        The Wall &ndash; this defines the outline of the arena map and cannot be destroyed.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="arena_ground.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Ground</phrase> </textobject>
         </inlinemediaobject>
-        The Ground -- this can be walked on safely.
+        The Ground &ndash; this can be walked on safely.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="arena_ice.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Ice</phrase> </textobject>
         </inlinemediaobject>
-        The Ice -- this will make the ground slippery. The speed increases on the ice and it is not possible to completly stop moving.
+        The Ice &ndash; this will make the ground slippery. The speed increases on the ice and it is not possible to completly stop moving.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="arena_block.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Arena Block</phrase> </textobject>
         </inlinemediaobject>
-        The Block -- this can be destroyed with a bomb, and may contain a bonus (or a handicap).
+        The Block &ndash; this can be destroyed with a bomb, and may contain a bonus (or a handicap).
       </para>
       <para>
-        If there is none of the obove items, there is a hole at the ground and moving into it will result in falling into the deep and die. The same applies also if there is no wall at the edge of the arena and the player moves outside of the arena.
+        If there is none of the above items, there is a hole at the ground and moving into it will result in falling into the deep and die. The same applies also if there is no wall at the edge of the arena and the player moves outside of the arena.
       </para>
     </sect2>
     <sect2>
@@ -133,28 +133,28 @@
           <imageobject> <imagedata fileref="bonus_speed.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Speed</phrase> </textobject>
         </inlinemediaobject>
-        Speed -- increases your speed slightly.
+        Speed &ndas; increases your speed slightly.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bomb.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Bomb</phrase> </textobject>
         </inlinemediaobject>
-        Bomb -- adds an extra bomb to your arsenal, allowing you to lay more than one bomb at a time.
+        Bomb &ndash; adds an extra bomb to your arsenal, allowing you to lay more than one bomb at a time.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_power.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Power</phrase> </textobject>
         </inlinemediaobject>
-        Power -- increases the power of your bombs, extending their bomb blast range.
+        Power &ndash; increases the power of your bombs, extending their bomb blast range.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_shield.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Shield</phrase> </textobject>
         </inlinemediaobject>
-        Shield -- makes invincible for one bomb blast.
+        Shield &ndash; makes invincible for one bomb blast.
       </para>
     </sect2>
     <sect2>
@@ -167,28 +167,28 @@
           <imageobject> <imagedata fileref="bonus_bad_slow.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Slow</phrase> </textobject>
         </inlinemediaobject>
-        Slow -- makes you move very slowly.
+        Slow &ndash; makes you move very slowly.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Hyperactive</phrase> </textobject>
         </inlinemediaobject>
-        Hyperactive -- makes you move a little TOO fast.
+        Hyperactive &ndash; makes you move a little TOO fast.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_mirror.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Mirror</phrase> </textobject>
         </inlinemediaobject>
-        Mirror -- inverts your moving keys, so that up becomes down and left becomes right.
+        Mirror &ndash; inverts your moving keys, so that up becomes down and left becomes right.
       </para>
       <para>
         <inlinemediaobject>
           <imageobject> <imagedata fileref="bonus_bad_scatty.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Handicap Scatty</phrase> </textobject>
         </inlinemediaobject>
-        Scatty -- forces you to continuously lay bombs without control.
+        Scatty &ndash; forces you to continuously lay bombs without control.
       </para>
     </sect2>
     <sect2>
@@ -201,7 +201,7 @@
           <imageobject> <imagedata fileref="bonus_neutral_pandora.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Neutral Pandora</phrase> </textobject>
         </inlinemediaobject>
-        Pandora -- behind this there is either a bonus or a handicap.
+        Pandora &ndash; behind this there is either a bonus or a handicap.
       </para>
     </sect2>
     </sect1>
