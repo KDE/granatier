@@ -40,7 +40,7 @@ public:
         GROUND,
         BLOCK,
         ICE,
-        BOMBTRAP,
+        BOMBMORTAR,
         HOLE,
         ARROWUP,
         ARROWLEFT,

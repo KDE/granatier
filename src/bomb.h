@@ -105,7 +105,7 @@ public:
     * Moves the Bomb function of its current coordinates and speed.
     * If the Bomb reaches a border, it circles around the arena and continue its way from the other side.
     */
-    void move();
+    void move(qreal x, qreal y);
 
     /**
     * Gets the Bomb x-speed value.

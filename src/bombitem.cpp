@@ -99,6 +99,9 @@ void BombItem::startDetonation(Bomb* bomb)
     delete m_pulseTimer;
     m_pulseTimer = 0;
     
+    dynamic_cast <Bomb*> (m_model)->setXSpeed(0);
+    dynamic_cast <Bomb*> (m_model)->setYSpeed(0);
+    
     // Define the timer which sets the explosion frequency
     m_explosionCounter = 0;
     m_explosionTimer = new QTimer(this);

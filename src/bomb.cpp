@@ -20,6 +20,7 @@
 #include "bomb.h"
 #include "cell.h"
 #include "arena.h"
+#include "settings.h"
 
 #include <QTimer>
 
@@ -34,7 +35,9 @@ Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCount
     
     m_bombPower = 1;
     
-    m_arena->setCellElement(m_arena->getRowFromY(m_y), m_arena->getColFromX(m_x), this);
+    int currentRow = m_arena->getRowFromY(m_y);
+    int currentCol = m_arena->getColFromX(m_x);
+    m_arena->setCellElement(currentRow, currentCol, this);
     
     m_detonated = false;
     
@@ -77,13 +80,84 @@ void Bomb::goLeft()
 
 void Bomb::updateMove()
 {
+    if(Settings::self()->showAllTiles() == 0)
+    {
+        return;
+    }
+    int currentRow = m_arena->getRowFromY(m_y);
+    int currentCol = m_arena->getColFromX(m_x);
+    //check if the bomb is on an arrow
+    switch (m_arena->getCell(currentRow, currentCol).getType())
+    {
+        case Cell::ARROWUP:
+            setYSpeed(-5);
+            break;
+        case Cell::ARROWRIGHT:
+            setXSpeed(5);
+            break;
+        case Cell::ARROWDOWN:
+            setYSpeed(5);
+            break;
+        case Cell::ARROWLEFT:
+            setXSpeed(-5);
+            break;
+        default:
+            break;
+    }
+    
+    if(m_xSpeed != 0 || m_ySpeed != 0)
+    {
+        int xDirection = 0;
+        if (m_xSpeed > 0)
+        {
+            xDirection = 1;
+        }
+        else if (m_xSpeed < 0)
+        {
+            xDirection = -1;
+        }
+        int yDirection = 0;
+        if (m_ySpeed > 0)
+        {
+            yDirection = 1;
+        }
+        else if (m_ySpeed < 0)
+        {
+            yDirection = -1;
+        }
+        int newRow = m_arena->getRowFromY(m_y + m_ySpeed);
+        int newCol = m_arena->getColFromX(m_x + m_xSpeed);
+        int nextRow = m_arena->getRowFromY(m_y + m_ySpeed + yDirection * Cell::SIZE/2);
+        int nextCol = m_arena->getColFromX(m_x + m_xSpeed + xDirection * Cell::SIZE/2);
+        
+        if(newRow != currentRow || newCol != currentCol)
+        {
+            //move to next cell
+            if(m_arena->getCell(newRow, newCol).isWalkable())
+            {
+                m_arena->removeCellElement(currentRow, currentCol, this);
+                move(m_x + m_xSpeed, m_y + m_ySpeed);
+                m_arena->setCellElement(newRow, newCol, this);
+            }
+            else    //move to last cell center
+            {
+                move((currentCol+0.5) * Cell::SIZE, (currentRow+0.5) * Cell::SIZE);
+                setXSpeed(0);
+                setYSpeed(0);
+            }
+        }
+        else
+        {
+            move(m_x + m_xSpeed, m_y + m_ySpeed);
+        }
+    }
 }
 
-void Bomb::move()
+void Bomb::move(qreal x, qreal y)
 {
     // Move the Bomb
-    m_x += m_xSpeed;
-    m_y += m_ySpeed;
+    m_x = x;
+    m_y = y;
     emit(moved(m_x, m_y));
 }
 

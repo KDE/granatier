@@ -268,8 +268,8 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
                     arenaItem->setElementId("arena_ice");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::BOMBTRAP:
-                    arenaItem->setElementId("arena_bomb_trap");
+                case Cell::BOMBMORTAR:
+                    arenaItem->setElementId("arena_bomb_mortar");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWUP:

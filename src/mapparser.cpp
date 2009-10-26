@@ -101,7 +101,7 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                     }
                     break; 
                 case 'o':
-                    m_arena->setCellType(m_counterRows,i,Cell::BOMBTRAP);
+                    m_arena->setCellType(m_counterRows,i,Cell::BOMBMORTAR);
                     break;
                 case '-':
                     m_arena->setCellType(m_counterRows,i,Cell::ICE);
