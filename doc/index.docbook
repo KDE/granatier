@@ -133,7 +133,7 @@
           <imageobject> <imagedata fileref="bonus_speed.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Speed</phrase> </textobject>
         </inlinemediaobject>
-        Speed &ndas; increases your speed slightly.
+        Speed &ndash; increases your speed slightly.
       </para>
       <para>
         <inlinemediaobject>
