@@ -101,11 +101,11 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     }
     // set the renderer for the bomb items
     if(m_rendererSelectedTheme->elementExists("bomb") &&
-        m_rendererSelectedTheme->elementExists("bomb_exploded") &&
-        m_rendererSelectedTheme->elementExists("bomb_exploded_north") &&
-        m_rendererSelectedTheme->elementExists("bomb_exploded_east") &&
-        m_rendererSelectedTheme->elementExists("bomb_exploded_south") &&
-        m_rendererSelectedTheme->elementExists("bomb_exploded_west"))
+        m_rendererSelectedTheme->elementExists("bomb_blast_core") &&
+        m_rendererSelectedTheme->elementExists("bomb_blast_north") &&
+        m_rendererSelectedTheme->elementExists("bomb_blast_east") &&
+        m_rendererSelectedTheme->elementExists("bomb_blast_south") &&
+        m_rendererSelectedTheme->elementExists("bomb_blast_west"))
     {
         m_rendererBombItems = m_rendererSelectedTheme;
     }
@@ -790,8 +790,9 @@ void GameScene::bombDetonated(Bomb* bomb)
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
-                bombExplosionItem->update(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
+                bombExplosionItem->setPosition(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
+                connect(bombItem, SIGNAL(animationFrameChanged(int)), bombExplosionItem, SLOT(updateAnimationn(int)));
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -836,8 +837,9 @@ void GameScene::bombDetonated(Bomb* bomb)
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
-                bombExplosionItem->update(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
+                bombExplosionItem->setPosition(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
+                connect(bombItem, SIGNAL(animationFrameChanged(int)), bombExplosionItem, SLOT(updateAnimationn(int)));
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -882,8 +884,9 @@ void GameScene::bombDetonated(Bomb* bomb)
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
-                bombExplosionItem->update(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
+                bombExplosionItem->setPosition(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
+                connect(bombItem, SIGNAL(animationFrameChanged(int)), bombExplosionItem, SLOT(updateAnimationn(int)));
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }
@@ -928,8 +931,9 @@ void GameScene::bombDetonated(Bomb* bomb)
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i);
                 bombExplosionItem->setSharedRenderer(m_rendererBombItems);
-                bombExplosionItem->update(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
+                bombExplosionItem->setPosition(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
+                connect(bombItem, SIGNAL(animationFrameChanged(int)), bombExplosionItem, SLOT(updateAnimationn(int)));
                 addItem(bombExplosionItem);
                 m_bombItems[bombItem].append(bombExplosionItem);
             }

@@ -35,6 +35,11 @@ BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
     connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
     
     m_explosionTimer = NULL;
+    m_listExplosionTiming.append(30);
+    m_listExplosionTiming.append(70);
+    m_listExplosionTiming.append(200);
+    m_listExplosionTiming.append(100);
+    m_listExplosionTiming.append(100);
 }
 
 BombItem::~BombItem()
@@ -94,7 +99,7 @@ void BombItem::update(qreal p_x, qreal p_y)
 
 void BombItem::startDetonation(Bomb* bomb)
 {
-    m_numberPulse = 0;
+    m_animationCounter = 0;
     m_pulseTimer->stop();
     delete m_pulseTimer;
     m_pulseTimer = 0;
@@ -103,23 +108,23 @@ void BombItem::startDetonation(Bomb* bomb)
     dynamic_cast <Bomb*> (m_model)->setYSpeed(0);
     
     // Define the timer which sets the explosion frequency
-    m_explosionCounter = 0;
     m_explosionTimer = new QTimer(this);
-    m_explosionTimer->setInterval(600);
+    m_explosionTimer->setInterval(m_listExplosionTiming.at(0));
     m_explosionTimer->setSingleShot(true);
     m_explosionTimer->start();
-    connect(m_explosionTimer, SIGNAL(timeout()), this, SLOT(explode()));
+    connect(m_explosionTimer, SIGNAL(timeout()), this, SLOT(updateAnimation()));
     
-    setElementId("bomb_exploded");
+    setElementId("bomb_blast_core");
+    setOpacity(0.3);
     setZValue(300+15); //300+maxBombPower+5
     update(m_x, m_y);
 }
 
 void BombItem::pulse()
 {
-    m_numberPulse++;
+    m_animationCounter++;
     QTransform transform;
-    if (m_numberPulse % 2 == 0)
+    if (m_animationCounter % 2 == 0)
     {
         // shrink the item
         transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
@@ -133,7 +138,35 @@ void BombItem::pulse()
     }
 }
 
-void BombItem::explode()
+void BombItem::updateAnimation()
 {
-    emit bombItemFinished(this);
+    m_animationCounter++;
+    switch (m_animationCounter)
+    {
+        case 1:
+            setOpacity(0.8);
+            m_explosionTimer->setInterval(m_listExplosionTiming.at(1));
+            m_explosionTimer->start();
+            break;
+        case 2:
+            setOpacity(1);
+            m_explosionTimer->setInterval(m_listExplosionTiming.at(2));
+            m_explosionTimer->start();
+            break;
+        case 3:
+            setOpacity(0.8);
+            m_explosionTimer->setInterval(m_listExplosionTiming.at(3));
+            m_explosionTimer->start();
+            break;
+        case 4:
+            setOpacity(0.3);
+            m_explosionTimer->setInterval(m_listExplosionTiming.at(4));
+            m_explosionTimer->start();
+            break;
+        default:
+            emit bombItemFinished(this);
+            m_animationCounter = 0;
+            return;
+    }
+    emit animationFrameChanged(m_animationCounter);
 }

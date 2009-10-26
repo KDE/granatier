@@ -39,11 +39,12 @@ protected:
     
     /** Timer used to animate explosion */
     QTimer* m_explosionTimer;
-
-    /** Number of ticks of the pulse timer */
-    int m_numberPulse;
     
-    int m_explosionCounter;
+    /** Timing for the explosion */
+    QList <int> m_listExplosionTiming;
+
+    /** Counter for the animaton frames */
+    int m_animationCounter;
     
     int m_x;
     int m_y;
@@ -101,10 +102,20 @@ private slots:
     /**
     * Animates the explosion
     */
-    virtual void explode();
+    virtual void updateAnimation();
 
 signals:
+    /**
+     * signals end of the explosion
+     * @param bombItem this bombItem
+     */
     void bombItemFinished(BombItem* bombItem);  //explosion finished
+    
+    /**
+     * signals next animation frame
+     * @param nFrame the next animation frame
+     */
+    void animationFrameChanged(int nFrame);
 };
 
 #endif

@@ -22,6 +22,7 @@
 #include <QGraphicsSvgItem>
 
 class Bomb;
+class BombItem;
 
 /**
  * @brief This class is the graphical representation of a Bomb explosion.
@@ -76,15 +77,20 @@ public:
     * @return the explosion ID
     */
     int explosionID();
-    
-public slots:
 
     /**
      * Updates the BombExplosionItem coordinates.
      * @param p_x the new x-coordinate
      * @param p_y the new y-coordinate
      */
-    virtual void update(qreal p_x, qreal p_y);
+    virtual void setPosition(qreal p_x, qreal p_y);
+
+public slots:
+    /**
+     * updates the animation
+     * @param nFrame the next animation frame
+     */
+     void updateAnimationn(int nFrame);
 };
 
 #endif
