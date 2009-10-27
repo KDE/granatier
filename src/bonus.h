@@ -42,7 +42,8 @@ public:
         SLOW,
         HYPERACTIVE,
         MIRROR,
-        SCATTY
+        SCATTY,
+        RESTRAIN
     };
 
     /**

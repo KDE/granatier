@@ -91,6 +91,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("bonus_bad_hyperactive") &&
         m_rendererSelectedTheme->elementExists("bonus_bad_mirror") &&
         m_rendererSelectedTheme->elementExists("bonus_bad_scatty") &&
+        m_rendererSelectedTheme->elementExists("bonus_bad_restrain") &&
         m_rendererSelectedTheme->elementExists("bonus_neutral_pandora"))
     {
         m_rendererBonusItems = m_rendererSelectedTheme;
@@ -324,6 +325,8 @@ void GameScene::init()
                         case Bonus::MIRROR: bonusItem->setElementId("bonus_bad_mirror");
                                             break;
                         case Bonus::SCATTY: bonusItem->setElementId("bonus_bad_scatty");
+                                            break;
+                        case Bonus::RESTRAIN:   bonusItem->setElementId("bonus_bad_restrain");
                                             break;
                         default:            bonusItem->setElementId("bonus_neutral_pandora");
                     }

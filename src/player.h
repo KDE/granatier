@@ -72,6 +72,9 @@ private:
     /** the speed before a bad bonus was taken */
     qreal m_normalSpeed;
     
+    /** the bomb armory before a bad bonus was taken */
+    int m_normalBombArmory;
+    
     /** flag if the mirror bad bunus was taken */
     bool m_moveMirrored;
     

@@ -515,6 +515,12 @@ void Player::addBonus(Bonus* p_bonus)
             m_badBonusType = Bonus::SCATTY;
             m_badBonusCountdownTimer->start();
             break;
+        case Bonus::RESTRAIN:
+            m_normalBombArmory = m_bombArmory;
+            m_bombArmory = 0;
+            m_badBonusType = Bonus::RESTRAIN;
+            m_badBonusCountdownTimer->start();
+            break;
         default:
             break;
     }
@@ -641,10 +647,15 @@ void Player::decrementBombArmory()
 
 void Player::slot_refillBombArmory()
 {
-    m_bombArmory++;
-    if(m_bombArmory > m_maxBombArmory)
+    int* bombArmory = &m_bombArmory;
+    if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::RESTRAIN)
     {
-        m_bombArmory = m_maxBombArmory;
+        bombArmory = &m_normalBombArmory;
+    }
+    (*bombArmory)++;
+    if((*bombArmory) > m_maxBombArmory)
+    {
+        (*bombArmory) = m_maxBombArmory;
     }
 }
 
@@ -686,6 +697,9 @@ void Player::slot_removeBadBonus()
                 
                 m_moveMirrored = false;
             }
+            break;
+        case Bonus::RESTRAIN:
+            m_bombArmory = m_normalBombArmory;
             break;
     }
 }
