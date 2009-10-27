@@ -190,6 +190,13 @@
         </inlinemediaobject>
         Scatty &ndash; forces you to continuously lay bombs without control.
       </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_bad_restrain.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Restrain</phrase> </textobject>
+        </inlinemediaobject>
+        Restrain &ndash; prevents you to lay bombs.
+      </para>
     </sect2>
     <sect2>
       <title>The Neutral Bonuses (Please help me with a better name)</title>
@@ -201,7 +208,7 @@
           <imageobject> <imagedata fileref="bonus_neutral_pandora.png" format="PNG" /> </imageobject>
           <textobject> <phrase>Bonus Neutral Pandora</phrase> </textobject>
         </inlinemediaobject>
-        Pandora &ndash; behind this there is either a bonus or a handicap.
+        Pandora &ndash; this contains either a bonus or a handicap.
       </para>
     </sect2>
     </sect1>
