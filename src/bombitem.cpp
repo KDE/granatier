@@ -18,9 +18,9 @@
 
 #include "bombitem.h"
 #include "bomb.h"
+#include "settings.h"
 
 #include <QTimer>
-#include <KDebug>
 
 BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
 {
@@ -35,11 +35,11 @@ BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
     connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
     
     m_explosionTimer = NULL;
-    m_listExplosionTiming.append(30);
-    m_listExplosionTiming.append(70);
-    m_listExplosionTiming.append(200);
-    m_listExplosionTiming.append(100);
-    m_listExplosionTiming.append(100);
+    m_listExplosionTiming.append(Settings::self()->blastTime1());
+    m_listExplosionTiming.append(Settings::self()->blastTime2());
+    m_listExplosionTiming.append(Settings::self()->blastTime3());
+    m_listExplosionTiming.append(Settings::self()->blastTime4());
+    m_listExplosionTiming.append(Settings::self()->blastTime5());
 }
 
 BombItem::~BombItem()
@@ -114,8 +114,7 @@ void BombItem::startDetonation(Bomb* bomb)
     m_explosionTimer->start();
     connect(m_explosionTimer, SIGNAL(timeout()), this, SLOT(updateAnimation()));
     
-    setElementId("bomb_blast_core");
-    setOpacity(0.3);
+    setElementId("bomb_blast_core_0");
     setZValue(300+15); //300+maxBombPower+5
     update(m_x, m_y);
 }
@@ -141,32 +140,15 @@ void BombItem::pulse()
 void BombItem::updateAnimation()
 {
     m_animationCounter++;
-    switch (m_animationCounter)
+    if (m_animationCounter > 4)
     {
-        case 1:
-            setOpacity(0.8);
-            m_explosionTimer->setInterval(m_listExplosionTiming.at(1));
-            m_explosionTimer->start();
-            break;
-        case 2:
-            setOpacity(1);
-            m_explosionTimer->setInterval(m_listExplosionTiming.at(2));
-            m_explosionTimer->start();
-            break;
-        case 3:
-            setOpacity(0.8);
-            m_explosionTimer->setInterval(m_listExplosionTiming.at(3));
-            m_explosionTimer->start();
-            break;
-        case 4:
-            setOpacity(0.3);
-            m_explosionTimer->setInterval(m_listExplosionTiming.at(4));
-            m_explosionTimer->start();
-            break;
-        default:
-            emit bombItemFinished(this);
-            m_animationCounter = 0;
-            return;
+        emit bombItemFinished(this);
+        m_animationCounter = 0;
+        return;
     }
+    QString strElemetId = QString("bomb_blast_core_%1").arg(m_animationCounter);
+    setElementId(strElemetId);
     emit animationFrameChanged(m_animationCounter);
+    m_explosionTimer->setInterval(m_listExplosionTiming.at(m_animationCounter));
+    m_explosionTimer->start();
 }

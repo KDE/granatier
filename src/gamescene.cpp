@@ -101,11 +101,11 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     }
     // set the renderer for the bomb items
     if(m_rendererSelectedTheme->elementExists("bomb") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_core") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_north") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_east") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_south") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_west"))
+        m_rendererSelectedTheme->elementExists("bomb_blast_core_0") &&
+        m_rendererSelectedTheme->elementExists("bomb_blast_north_0") &&
+        m_rendererSelectedTheme->elementExists("bomb_blast_east_0") &&
+        m_rendererSelectedTheme->elementExists("bomb_blast_south_0") &&
+        m_rendererSelectedTheme->elementExists("bomb_blast_west_0"))
     {
         m_rendererBombItems = m_rendererSelectedTheme;
     }

@@ -21,6 +21,7 @@
 #include "bonus.h"
 #include "arena.h"
 #include "playersettings.h"
+#include "settings.h"
 
 #include <QKeyEvent>
 #include <QTimer>
@@ -418,15 +419,16 @@ void Player::move(qreal x, qreal y)
 void Player::addBonus(Bonus* p_bonus)
 {
     int bonusType = p_bonus->getBonusType();
+    
+    if(m_badBonusCountdownTimer->isActive())
+    {
+        m_badBonusCountdownTimer->stop();
+        slot_removeBadBonus();
+    }
+    
     switch (bonusType)
     {
         case Bonus::SPEED:
-            if(m_badBonusCountdownTimer->isActive())
-            {
-                m_badBonusCountdownTimer->stop();
-                slot_removeBadBonus();
-            }
-            
             m_speed += 1;
             if(m_speed > m_maxSpeed)
             {
@@ -434,12 +436,6 @@ void Player::addBonus(Bonus* p_bonus)
             }
             break;
         case Bonus::POWER:
-            if(m_badBonusCountdownTimer->isActive())
-            {
-                m_badBonusCountdownTimer->stop();
-                slot_removeBadBonus();
-            }
-            
             m_bombPower++;
             if(m_bombPower > 10)
             {
@@ -447,12 +443,6 @@ void Player::addBonus(Bonus* p_bonus)
             }
             break;
         case Bonus::BOMB:
-            if(m_badBonusCountdownTimer->isActive())
-            {
-                m_badBonusCountdownTimer->stop();
-                slot_removeBadBonus();
-            }
-            
             m_maxBombArmory++;
             if(m_maxBombArmory > 10)
             {
@@ -469,12 +459,6 @@ void Player::addBonus(Bonus* p_bonus)
             break;
         case Bonus::HYPERACTIVE:
             {
-                if(m_badBonusCountdownTimer->isActive())
-                {
-                    m_badBonusCountdownTimer->stop();
-                    slot_removeBadBonus();
-                }
-                
                 int askedXSpeedTemp = m_askedXSpeed;
                 int askedYSpeedTemp = m_askedYSpeed;
                 m_normalSpeed = m_speed;
@@ -491,12 +475,6 @@ void Player::addBonus(Bonus* p_bonus)
             break;
         case Bonus::SLOW:
             {
-                if(m_badBonusCountdownTimer->isActive())
-                {
-                    m_badBonusCountdownTimer->stop();
-                    slot_removeBadBonus();
-                }
-                
                 int askedXSpeedTemp = m_askedXSpeed;
                 int askedYSpeedTemp = m_askedYSpeed;
                 m_normalSpeed = m_speed;
@@ -513,12 +491,6 @@ void Player::addBonus(Bonus* p_bonus)
             break;
         case Bonus::MIRROR:
             {
-                if(m_badBonusCountdownTimer->isActive())
-                {
-                    m_badBonusCountdownTimer->stop();
-                    slot_removeBadBonus();
-                }
-                
                 int askedXSpeedTemp = m_askedXSpeed;
                 int askedYSpeedTemp = m_askedYSpeed;
                 m_askedXSpeed = -m_xSpeed;
@@ -540,21 +512,10 @@ void Player::addBonus(Bonus* p_bonus)
             }
             break;
         case Bonus::SCATTY:
-            if(m_badBonusCountdownTimer->isActive())
-            {
-                m_badBonusCountdownTimer->stop();
-                slot_removeBadBonus();
-            }
-            
             m_badBonusType = Bonus::SCATTY;
             m_badBonusCountdownTimer->start();
             break;
         default:
-            if(m_badBonusCountdownTimer->isActive())
-            {
-                m_badBonusCountdownTimer->stop();
-                slot_removeBadBonus();
-            }
             break;
     }
 }
@@ -604,11 +565,11 @@ void Player::resurrect()
     m_falling = false;
     m_death = false;
     m_maxSpeed = 10;
-    m_speed = 2;
-    m_normalSpeed = 2;
+    m_speed = Settings::self()->initialSpeed();
+    m_normalSpeed = m_speed;
     m_moveMirrored = false;
-    m_bombPower = 1;
-    m_maxBombArmory = 1;
+    m_bombPower = Settings::self()->initialBombPower();
+    m_maxBombArmory = Settings::self()->initialBombArmory();
     m_bombArmory = m_maxBombArmory;
     m_listShield.clear();
     if(m_badBonusCountdownTimer->isActive())

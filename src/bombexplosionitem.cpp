@@ -21,8 +21,6 @@
 #include "bombitem.h"
 #include "cell.h"
 
-#include <QDebug>
-
 BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower) : QGraphicsSvgItem()
 {
     m_direction = direction;
@@ -32,20 +30,19 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bom
     switch(m_direction)
     {
         case NORTH:
-            setElementId("bomb_blast_north");
+            setElementId("bomb_blast_north_0");
             break;
         case EAST:
-            setElementId("bomb_blast_east");
+            setElementId("bomb_blast_east_0");
             break;
         case SOUTH:
-            setElementId("bomb_blast_south");
+            setElementId("bomb_blast_south_0");
             break;
         case WEST:
-            setElementId("bomb_blast_west");
+            setElementId("bomb_blast_west_0");
             break;
     }
     
-    setOpacity(0.3);
     setVisible(true);
 }
 
@@ -83,7 +80,6 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
             y = p_y - (Cell::SIZE);
             setPos(x, y);
             transform.translate(boundingRect().width() / 2.0, 0);
-            transform.scale(1 + 0.1 * m_bombPower, 1);
             transform.translate(-boundingRect().width() / 2.0, 20);
             break;
         case EAST:
@@ -91,7 +87,6 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
             y = p_y - boundingRect().height() / 2;
             setPos(x, y);
             transform.translate(0, boundingRect().height() / 2.0);
-            transform.scale(1, 1 + 0.1 * m_bombPower);
             transform.translate(-20, -boundingRect().height() / 2.0);
             break;
         case SOUTH:
@@ -99,7 +94,6 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
             y = p_y - (Cell::SIZE/2);
             setPos(x, y);
             transform.translate(boundingRect().width() / 2.0, 0);
-            transform.scale(1 + 0.1 * m_bombPower, 1);
             transform.translate(-boundingRect().width() / 2.0, -20);
             break;
         case WEST:
@@ -107,7 +101,6 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
             y = p_y - boundingRect().height() / 2;
             setPos(x, y);
             transform.translate(0, boundingRect().height() / 2.0);
-            transform.scale(1, 1 + 0.1 * m_bombPower);
             transform.translate(20, -boundingRect().height() / 2.0);
             break;
     }
@@ -116,21 +109,21 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
 
 void BombExplosionItem::updateAnimationn(int nFrame)
 {
-    switch (nFrame)
+    QString strElemetId;
+    switch(m_direction)
     {
-        case 1:
-            setOpacity(0.8);
+        case NORTH:
+            strElemetId = QString("bomb_blast_north_%1").arg(nFrame);
             break;
-        case 2:
-            setOpacity(1);
+        case EAST:
+            strElemetId = QString("bomb_blast_east_%1").arg(nFrame);
             break;
-        case 3:
-            setOpacity(0.8);
+        case SOUTH:
+            strElemetId = QString("bomb_blast_south_%1").arg(nFrame);
             break;
-        case 4:
-            setOpacity(0.3);
-            break;
-        default:
+        case WEST:
+            strElemetId = QString("bomb_blast_west_%1").arg(nFrame);
             break;
     }
+    setElementId(strElemetId);
 }
