@@ -1,24 +1,8 @@
 [Arena]
 Name=Three of Three
-Name[en_GB]=Three of Three
-Name[es]=Tres de tres
-Name[fr]=Trois de trois
-Name[gl]=Tres de Tres
-Name[pt]=Três de Três
-Name[sv]=Tre av tre
-Name[tr]=Üçün Üçü
-Name[uk]=Три з трьох
-Name[x-test]=xxThree of Threexx
+Name[de]=Drei-von-Drei
 Description=Three of Three Arena
-Description[en_GB]=Three of Three Arena
-Description[es]=Campo de juego tres de tres
-Description[fr]=Arène Trois de trois
-Description[gl]=Escenario Tres de Tres
-Description[pt]=Arena para Três de Três
-Description[sv]=Tre av tre-arena
-Description[tr]=Üçün Üçü Arenası
-Description[uk]=Арена «Три з трьох»
-Description[x-test]=xxThree of Three Arenaxx
+Description[de]=Ein Drei-von-Drei-Spielfeld.
 Type=XML
 FileName=threeofthree.xml
 Author=Mathias Kraus
