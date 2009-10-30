@@ -39,10 +39,11 @@ kde4_add_kcfg_files(granatierSources settings.kcfgc)
 
 kde4_add_executable(granatier ${granatierSources})
 
+target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} kdegames ${KDE4_KNEWSTUFF2_LIBRARY})
 if(GLUON_FOUND)
-    target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${KDEGAMES_LIBRARY} kal ${KDE4_KNEWSTUFF2_LIBRARY})
+    target_link_libraries(granatier ${QT_QTXML_LIBRARY} kal)
 else(GLUON_FOUND)
-    target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${KDE4_PHONON_LIBS} ${QT_QTXML_LIBRARY} ${KDEGAMES_LIBRARY} ${KDE4_KNEWSTUFF2_LIBRARY})
+    target_link_libraries(granatier ${KDE4_PHONON_LIBS})
 endif(GLUON_FOUND)
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
