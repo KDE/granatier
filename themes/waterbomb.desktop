@@ -1,8 +1,16 @@
 [KGameTheme]
 Name=Water Bomb
 Name[de]=Wasserbombe
+Name[en_GB]=Water Bomb
+Name[pt]=Bomba de Água
+Name[uk]=Водяна бомба
+Name[x-test]=xxWater Bombxx
 Description=Water Bomb Theme
 Description[de]=Das Wasserbomben-Design von Granatier.
+Description[en_GB]=Water Bomb Theme
+Description[pt]=Tema de Bomba de Água
+Description[uk]=Тема «Водяна бомба»
+Description[x-test]=xxWater Bomb Themexx
 Type=SVG
 FileName=waterbomb.svgz
 Preview=waterbomb_preview.png

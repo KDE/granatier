@@ -1,8 +1,16 @@
 [KGameTheme]
 Name=Clanbomber
 Name[de]=Clanbomber
+Name[en_GB]=Clanbomber
+Name[pt]=Clanbomber
+Name[uk]=Clanbomber
+Name[x-test]=xxClanbomberxx
 Description=Clanbomber Theme
 Description[de]=Das Clanbomber-Design von Granatier.
+Description[en_GB]=Clanbomber Theme
+Description[pt]=Tema do ClanBomber
+Description[uk]=Тема «Clanbomber»
+Description[x-test]=xxClanbomber Themexx
 Type=SVG
 FileName=clanbomber.svgz
 Preview=clanbomber_preview.png

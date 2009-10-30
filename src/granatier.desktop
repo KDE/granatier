@@ -2,8 +2,17 @@
 Type=Application
 Name=Granatier
 Name[de]=Granatier
+Name[en_GB]=Granatier
+Name[pt]=Granatier
+Name[sv]=Granatier
+Name[uk]=Гренадер
+Name[x-test]=xxGranatierxx
 GenericName=Bomberman clone
 GenericName[de]=„Bomberman“-Spiel
+GenericName[en_GB]=Bomberman clone
+GenericName[pt]=Clone do Bomberman
+GenericName[uk]=Клон Bomberman
+GenericName[x-test]=xxBomberman clonexx
 Icon=granatier
 TryExec=granatier
 Exec=granatier

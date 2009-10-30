@@ -1,8 +1,16 @@
 [Player]
 Name=Player4
 Name[de]=Spieler 4
+Name[en_GB]=Player4
+Name[pt]=Jogador 4
+Name[uk]=Гравець4
+Name[x-test]=xxPlayer4xx
 Description=This is Player4
 Description[de]=Das ist Spieler 4.
+Description[en_GB]=This is Player4
+Description[pt]=Este é o Jogador 4
+Description[uk]=Це Гравець4
+Description[x-test]=xxThis is Player4xx
 Type=SVG
 FileName=player4.svgz
 Preview=player4_preview.svgz
