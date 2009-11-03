@@ -2,6 +2,7 @@
 Name=Three of Three
 Name[de]=Drei-von-Drei
 Name[en_GB]=Three of Three
+Name[et]=Kolm kolmest
 Name[pt]=Três de Três
 Name[sv]=Tre av tre
 Name[tr]=Üçün Üçü
@@ -10,6 +11,7 @@ Name[x-test]=xxThree of Threexx
 Description=Three of Three Arena
 Description[de]=Ein Drei-von-Drei-Spielfeld.
 Description[en_GB]=Three of Three Arena
+Description[et]=Kolm kolmest areen
 Description[pt]=Arena para Três de Três
 Description[sv]=Tre av tre-arena
 Description[tr]=Üçün Üçü Arenası

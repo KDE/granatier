@@ -2,6 +2,7 @@
 Name=Crazy
 Name[de]=Verrückt
 Name[en_GB]=Crazy
+Name[et]=Hullumeelne
 Name[pt]=Louco
 Name[sv]=Galen
 Name[tr]=Çılgın
@@ -10,6 +11,7 @@ Name[x-test]=xxCrazyxx
 Description=Crazy Arena
 Description[de]=Ein verrücktes Spielfeld.
 Description[en_GB]=Crazy Arena
+Description[et]=Hullumeelne areen
 Description[pt]=Arena Louca
 Description[sv]=Galen arena
 Description[tr]=Çılgın Arena

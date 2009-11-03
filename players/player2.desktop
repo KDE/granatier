@@ -2,6 +2,7 @@
 Name=Player2
 Name[de]=Spieler 2
 Name[en_GB]=Player2
+Name[et]=Mängija2
 Name[pt]=Jogador 2
 Name[sv]=Spelare2
 Name[tr]=Oyuncu2
@@ -10,6 +11,7 @@ Name[x-test]=xxPlayer2xx
 Description=This is Player2
 Description[de]=Das ist Spieler 2.
 Description[en_GB]=This is Player2
+Description[et]=See on mängija2
 Description[pt]=Este é o Jogador 2
 Description[sv]=Det här är andra spelaren
 Description[tr]=Bu 2. Oyuncu

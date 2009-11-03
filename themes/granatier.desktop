@@ -2,6 +2,7 @@
 Name=Granatier
 Name[de]=Granatier
 Name[en_GB]=Granatier
+Name[et]=Granatier
 Name[pt]=Granatier
 Name[sv]=Granatier
 Name[tr]=Granatier
@@ -10,6 +11,7 @@ Name[x-test]=xxGranatierxx
 Description=Granatier Theme
 Description[de]=Das Standard-Design von Granatier.
 Description[en_GB]=Granatier Theme
+Description[et]=Granatieri teema
 Description[pt]=Tema do Granatier
 Description[sv]=Granatier-tema
 Description[tr]=Granatier Teması

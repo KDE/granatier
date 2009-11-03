@@ -2,6 +2,7 @@
 Name=Player4
 Name[de]=Spieler 4
 Name[en_GB]=Player4
+Name[et]=Mängija4
 Name[pt]=Jogador 4
 Name[sv]=Spelare4
 Name[tr]=Oyuncu4
@@ -10,6 +11,7 @@ Name[x-test]=xxPlayer4xx
 Description=This is Player4
 Description[de]=Das ist Spieler 4.
 Description[en_GB]=This is Player4
+Description[et]=See on mängija4
 Description[pt]=Este é o Jogador 4
 Description[sv]=Det här är fjärde spelaren
 Description[tr]=Bu 4. Oyuncu

@@ -2,6 +2,7 @@
 Name=Player3
 Name[de]=Spieler 3
 Name[en_GB]=Player3
+Name[et]=Mängija3
 Name[pt]=Jogador 3
 Name[sv]=Spelare3
 Name[tr]=Oyuncu3
@@ -10,6 +11,7 @@ Name[x-test]=xxPlayer3xx
 Description=This is Player3
 Description[de]=Das ist Spieler 3.
 Description[en_GB]=This is Player3
+Description[et]=See on mängija3
 Description[pt]=Este é o Jogador 3
 Description[sv]=Det här är tredje spelaren
 Description[tr]=Bu 3. Oyuncu
