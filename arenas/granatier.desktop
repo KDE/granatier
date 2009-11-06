@@ -2,6 +2,7 @@
 Name=Granatier
 Name[de]=Granatier
 Name[en_GB]=Granatier
+Name[es]=Granatier
 Name[et]=Granatier
 Name[pt]=Granatier
 Name[sv]=Granatier
@@ -11,6 +12,7 @@ Name[x-test]=xxGranatierxx
 Description=Default Granatier Arena
 Description[de]=Das Standard-Spielfeld von Granatier.
 Description[en_GB]=Default Granatier Arena
+Description[es]=Area predeterminada de Granatier
 Description[et]=Granatieri vaikimisi areen
 Description[pt]=Arena Predefinida do Granatier
 Description[sv]=Standardarena i Granatier
