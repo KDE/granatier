@@ -22,10 +22,6 @@
 
 #include <QObject>
 
-#ifndef GRANATIER_USE_GLUON
-#include <Phonon/MediaObject>
-#endif
-
 class GameScene;
 class Arena;
 class Player;
@@ -36,10 +32,7 @@ class PlayerSettings;
 class QTimer;
 class QKeyEvent;
 
-#ifdef GRANATIER_USE_GLUON
-class KALEngine;
-class KALSound;
-#endif
+class Sound;
 
 /**
  * @brief This class manages the game main loop : it regularly checks the key press events, computes the character moves and updates their coordinates.
@@ -118,29 +111,11 @@ private :
     /** Flag to use wilhelm scream for dying  */
     bool m_wilhelmScream;
     
-    #ifdef GRANATIER_USE_GLUON
-    /** User KALEngine for sound */
-    KALEngine* soundEngine;
-    KALSound* soundPutBomb;
-    KALSound* soundExplode;
-    KALSound* soundBonus;
-    KALSound* soundFalling;
-    KALSound* soundDie;
-    QTimer* gluonDieTimer;
-    KALSound* soundWilhelmScream;
-    #else
-    /** Use Phonon for sound */
-    QTimer* m_phononPutBombTimer;
-    QList <Phonon::MediaObject*> m_phononPutBomb;
-    QTimer* m_phononExplodeTimer;
-    QList <Phonon::MediaObject*> m_phononExplode;
-    QTimer* m_phononBonusTimer;
-    QList <Phonon::MediaObject*> m_phononBonus;
-    QTimer* m_phononFallingTimer;
-    QList <Phonon::MediaObject*> m_phononFalling;
-    QTimer* m_phononDieTimer;
-    QList <Phonon::MediaObject*> m_phononDie;
-    #endif
+    Sound* m_soundPutBomb;
+    Sound* m_soundExplode;
+    Sound* m_soundBonus;
+    Sound* m_soundFalling;
+    Sound* m_soundDie;
     
 public:
 

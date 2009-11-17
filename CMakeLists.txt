@@ -1,6 +1,7 @@
 project(granatier)
 
-macro_optional_find_package(Gluon)
+macro_optional_find_package(Gluon QUIET)
+macro_log_feature(GLUON_FOUND "Gluon" "Gluon is a high-level game development library for the KDE desktop enviornment." "http://gluon.tuxfamily.org" FALSE "" "Grantier will use QtMultimedia for sound output. For better sound experience please use gluon.")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})

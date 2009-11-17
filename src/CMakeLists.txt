@@ -20,6 +20,7 @@ set(granatierSources
     game.cpp
     gamescene.cpp
     gameview.cpp
+    infooverlay.cpp
     main.cpp
     mainwindow.cpp
     mapparser.cpp
@@ -27,7 +28,7 @@ set(granatierSources
     playeritem.cpp
     playerselector.cpp
     playersettings.cpp
-    infooverlay.cpp
+    sound.cpp
 )
 set(granatierData
     granatierui.rc
@@ -43,7 +44,7 @@ target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} kdegames 
 if(GLUON_FOUND)
     target_link_libraries(granatier ${QT_QTXML_LIBRARY} ${KAL_LIBRARY})
 else(GLUON_FOUND)
-    target_link_libraries(granatier ${KDE4_PHONON_LIBS})
+    target_link_libraries(granatier QtMultimedia)
 endif(GLUON_FOUND)
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
