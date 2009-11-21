@@ -34,7 +34,7 @@ class PlayerItem;
 class Bomb;
 class BombItem;
 class BombExplosionItem;
-class QGraphicsSvgItem;
+class QGraphicsPixmapItem;
 class InfoOverlay;
 class KPixmapCache;
 class KSvgRenderer;
@@ -67,7 +67,7 @@ private:
     BonusItem*** m_bonusItems;
 
     /** The Arena background */
-    QGraphicsSvgItem* m_arenaBackground;
+    QGraphicsPixmapItem* m_arenaBackground;
     
     /** The overlay to show the score at the end of a round*/
     InfoOverlay* m_infoOverlay;

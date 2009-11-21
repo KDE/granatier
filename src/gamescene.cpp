@@ -36,9 +36,11 @@
 
 #include <KGameTheme>
 #include <KLocale>
+#include <QPainter>
 #include <KPixmapCache>
 #include <KSvgRenderer>
 #include <KStandardDirs>
+#include <QGraphicsView>
 
 GameScene::GameScene(Game* p_game) : m_game(p_game)
 {
@@ -114,6 +116,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         m_rendererBombItems = m_rendererDefaultTheme;
     }
+    
     // set the renderer for the score items
     if(m_rendererSelectedTheme->elementExists("score_star_enabled") &&
         m_rendererSelectedTheme->elementExists("score_star_disabled"))
@@ -157,17 +160,22 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
                  m_game->getArena()->getNbColumns()*Cell::SIZE,
                  m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
     
-    // create the background
-    m_arenaBackground = new QGraphicsSvgItem;
-    m_arenaBackground->setSharedRenderer(m_rendererBackground);
-    m_arenaBackground->setElementId("background");
+    //create the background
+    QSize backgroundSize = m_rendererBackground->boundsOnElement("background").size().toSize();
+    //paint svg to pixmap
+    QPixmap pixmapBG = backgroundSize;
+    pixmapBG.fill(Qt::black);
+    QPainter painterBG(&pixmapBG);
+    m_rendererBombItems->render(&painterBG, "background");
+    painterBG.end();
+    
+    //set pixmap
+    m_arenaBackground = new QGraphicsPixmapItem();
     m_arenaBackground->setZValue(-5);
-    QTransform transform;
-    transform.scale(sceneRect().width() / m_arenaBackground->boundingRect().width(), sceneRect().height() / m_arenaBackground->boundingRect().height());
-    m_arenaBackground->setTransform(transform);
-    m_arenaBackground->setPos(sceneRect().left(), sceneRect().top());
-    m_arenaBackground->setCachingEnabled(true);
-    m_arenaBackground->setMaximumCacheSize(QSize(2000, 2000));
+    m_arenaBackground->setPixmap(pixmapBG);
+    m_arenaBackground->setPos(0, 0);
+    m_arenaBackground->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+    m_arenaBackground->setCacheMode(QGraphicsItem::DeviceCoordinateCache, backgroundSize);
     addItem(m_arenaBackground);
     
     // create the info overlay
@@ -529,12 +537,38 @@ void GameScene::showScore()
 
 void GameScene::resizeBackground(qreal x, qreal y, qreal width, qreal height)
 {
-    QTransform transform;
-    transform.scale(width / m_arenaBackground->boundingRect().width(), height / m_arenaBackground->boundingRect().height());
-    m_arenaBackground->resetTransform();
-    m_arenaBackground->setTransform(transform);
-    m_arenaBackground->setPos(x, y);
+    //calculate the scale factor between graphicsscene and graphicsview
+    QPoint topLeft(0, 0);
+    QPoint bottomRight(100, 100);
+    topLeft = views().at(0)->mapFromScene(topLeft);
+    bottomRight = views().at(0)->mapFromScene(bottomRight);
+    qreal svgScale = 100.0 / (bottomRight.x() - topLeft.x());
     
+    //calculate the graphicsview size
+    QSize svgSize = QSize(width, height);
+    topLeft = QPoint(x, y); 
+    topLeft = views().at(0)->mapFromScene(topLeft);
+    bottomRight = QPoint(x + svgSize.width(), y + svgSize.height()); 
+    bottomRight = views().at(0)->mapFromScene(bottomRight);
+    svgSize.setHeight(bottomRight.y() - topLeft.y());
+    svgSize.setWidth(bottomRight.x() - topLeft.x());
+    
+    //paint svg to pixmap
+    QPixmap pixmap;
+    pixmap = svgSize;
+    pixmap.fill(Qt::black);
+    QPainter painter(&pixmap);
+    m_rendererBombItems->render(&painter, "background");
+    painter.end();
+    
+    //set pixmap
+    m_arenaBackground->setPixmap(pixmap);
+    m_arenaBackground->setPos(x, y);
+    m_arenaBackground->setScale(svgScale);
+    m_arenaBackground->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+    m_arenaBackground->setCacheMode(QGraphicsItem::DeviceCoordinateCache, svgSize);
+    
+    //update overlay
     m_infoOverlay->resizeDimmOverlay(x, y, width, height);
 }
 
