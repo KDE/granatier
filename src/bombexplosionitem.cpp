@@ -21,26 +21,39 @@
 #include "bombitem.h"
 #include "cell.h"
 
-BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower) : QGraphicsSvgItem()
+#include <QPixmapCache>
+
+BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, QPixmapCache* sharedPixmapCache, qreal svgScaleFactor) : QGraphicsPixmapItem()
 {
     m_direction = direction;
     m_bombPower = bombPower;
     m_explosionID = p_model->explosionID();
     
+    m_sharedPixmapCache = sharedPixmapCache;
+    m_svgScaleFactor = svgScaleFactor;
+    
+    QString strElemetId;
     switch(m_direction)
     {
         case NORTH:
-            setElementId("bomb_blast_north_0");
+            strElemetId = QString("bomb_blast_north_0");
             break;
         case EAST:
-            setElementId("bomb_blast_east_0");
+            strElemetId = QString("bomb_blast_east_0");
             break;
         case SOUTH:
-            setElementId("bomb_blast_south_0");
+            strElemetId = QString("bomb_blast_south_0");
             break;
         case WEST:
-            setElementId("bomb_blast_west_0");
+            strElemetId = QString("bomb_blast_west_0");
             break;
+    }
+    
+    if(m_sharedPixmapCache->find(strElemetId))
+    {
+        QPixmap pixmap = *(m_sharedPixmapCache->find(strElemetId));
+        setPixmap(pixmap);
+        setScale(m_svgScaleFactor);
     }
     
     setVisible(true);
@@ -72,39 +85,29 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
     qreal x;
     qreal y;
     
-    QTransform transform;
     switch(m_direction)
     {
         case NORTH:
-            x = p_x - boundingRect().width() / 2;
-            y = p_y - (Cell::SIZE);
+            x = p_x - boundingRect().width() * m_svgScaleFactor / 2;
+            y = p_y - (Cell::SIZE) + 20;
             setPos(x, y);
-            transform.translate(boundingRect().width() / 2.0, 0);
-            transform.translate(-boundingRect().width() / 2.0, 20);
             break;
         case EAST:
-            x = p_x - (Cell::SIZE/2);
-            y = p_y - boundingRect().height() / 2;
+            x = p_x - (Cell::SIZE/2) - 20;
+            y = p_y - boundingRect().height() * m_svgScaleFactor / 2;
             setPos(x, y);
-            transform.translate(0, boundingRect().height() / 2.0);
-            transform.translate(-20, -boundingRect().height() / 2.0);
             break;
         case SOUTH:
-            x = p_x - boundingRect().width() / 2;
-            y = p_y - (Cell::SIZE/2);
+            x = p_x - boundingRect().width() * m_svgScaleFactor / 2;
+            y = p_y - (Cell::SIZE/2) - 20;
             setPos(x, y);
-            transform.translate(boundingRect().width() / 2.0, 0);
-            transform.translate(-boundingRect().width() / 2.0, -20);
             break;
         case WEST:
-            x = p_x - (Cell::SIZE);
-            y = p_y - boundingRect().height() / 2;
+            x = p_x - (Cell::SIZE) + 20;
+            y = p_y - boundingRect().height() * m_svgScaleFactor / 2;
             setPos(x, y);
-            transform.translate(0, boundingRect().height() / 2.0);
-            transform.translate(20, -boundingRect().height() / 2.0);
             break;
     }
-    setTransform(transform);
 }
 
 void BombExplosionItem::updateAnimationn(int nFrame)
@@ -125,5 +128,12 @@ void BombExplosionItem::updateAnimationn(int nFrame)
             strElemetId = QString("bomb_blast_west_%1").arg(nFrame);
             break;
     }
-    setElementId(strElemetId);
+    
+    QPixmap pixmapNew;
+    if(m_sharedPixmapCache->find(strElemetId, &pixmapNew))
+    {
+        m_sharedPixmapCache->find(strElemetId), &pixmapNew;
+        setPixmap(pixmapNew);
+        setScale(m_svgScaleFactor);
+    }
 }

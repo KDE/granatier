@@ -148,7 +148,7 @@ void BombItem::updateAnimation()
     }
     QString strElemetId = QString("bomb_blast_core_%1").arg(m_animationCounter);
     setElementId(strElemetId);
-    emit animationFrameChanged(m_animationCounter);
+    emit animationFrameChanged(this, m_animationCounter);
     m_explosionTimer->setInterval(m_listExplosionTiming.at(m_animationCounter));
     m_explosionTimer->start();
 }

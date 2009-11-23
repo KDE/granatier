@@ -19,19 +19,17 @@
 #ifndef BOMBEXPLOSIONITEM_H
 #define BOMBEXPLOSIONITEM_H
 
-#include <QGraphicsSvgItem>
+#include <QGraphicsPixmapItem>
 
 class Bomb;
 class BombItem;
+class QPixmapCache;
 
 /**
  * @brief This class is the graphical representation of a Bomb explosion.
  */
-class BombExplosionItem : public QGraphicsSvgItem
+class BombExplosionItem : public QGraphicsPixmapItem
 {
-
-    Q_OBJECT
-
 public:
     /** The Explosion directions */
     enum Direction
@@ -52,6 +50,12 @@ protected:
    
     /** The ID of the Bomb that causes the explosion */
     int m_explosionID;
+    
+    /** The shared pixmap cache */
+    QPixmapCache* m_sharedPixmapCache;
+    
+    /** The scale factor from the svg for the pixmap */
+    qreal m_svgScaleFactor;
 
 public:
 
@@ -59,7 +63,7 @@ public:
      * Creates a new BombExplosionItem instance.
      * @param p_model the Bomb model
      */
-    BombExplosionItem(Bomb* p_model, Direction direction, int bombPower);
+    BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, QPixmapCache* sharedPixmapCache, qreal svgScaleFactor);
 
     /**
      * Deletes the BombExplosionItem instance.
@@ -85,7 +89,7 @@ public:
      */
     virtual void setPosition(qreal p_x, qreal p_y);
 
-public slots:
+public:
     /**
      * updates the animation
      * @param nFrame the next animation frame

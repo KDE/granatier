@@ -36,6 +36,7 @@ class BombItem;
 class BombExplosionItem;
 class QGraphicsPixmapItem;
 class InfoOverlay;
+class QPixmapCache;
 class KPixmapCache;
 class KSvgRenderer;
 
@@ -78,6 +79,10 @@ private:
     /** The labels to displayed the remaining time */
     QGraphicsTextItem* m_remainingTimeLabel;
 
+    /** The pixmap cache */
+    QPixmapCache* m_pixmapCache;
+    qreal m_SvgScaleFactor;
+    
     /** The pixmap cache */
     KPixmapCache* m_cache; //TODO: check if the cache is used
 
@@ -181,6 +186,11 @@ private slots:
     * Creates the explosion items
     */
     void bombDetonated(Bomb* bomb);
+    
+    /**
+    * Updates the BombExplosionItems
+    */
+    void updateBombExplosionItemAnimation(BombItem* bombItem, int nFrame);
 };
 
 #endif
