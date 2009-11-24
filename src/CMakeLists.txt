@@ -44,7 +44,7 @@ target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} kdegames 
 if(GLUON_FOUND)
     target_link_libraries(granatier ${QT_QTXML_LIBRARY} ${KAL_LIBRARY})
 else(GLUON_FOUND)
-    target_link_libraries(granatier QtMultimedia)
+    target_link_libraries(granatier ${QT_QTMULTIMEDIA_LIBRARY})
 endif(GLUON_FOUND)
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
