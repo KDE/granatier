@@ -17,6 +17,10 @@
       <label>The arena to be used.</label>
       <default>arenas/granatier.desktop</default>
     </entry>
+    <entry name="RandomArenaMode" type="Bool" key="RandomArenaMode">
+      <label>Use random arenas.</label>
+      <default>false</default>
+    </entry>
     <entry name="PointsToWin" type="Int" key="PointsToWin">
       <label>The points a user needs to win the game.</label>
       <default>3</default>

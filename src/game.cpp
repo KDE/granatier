@@ -36,6 +36,7 @@
 
 #include <KStandardDirs>
 #include <KConfig>
+#include <KComponentData>
 
 const int Game::FPS = 40;
 
@@ -92,7 +93,30 @@ void Game::init()
     // This also creates all the characters
     MapParser mapParser(m_arena);
     // Set the XML file as input source for the parser
-    QString filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
+    QString filePath;
+    if(Settings::self()->randomArenaMode())
+    {
+        QStringList arenasAvailable;
+        KGlobal::dirs()->addResourceType("arenaselector", "data", KGlobal::mainComponent().componentName() + "/arenas/");
+        KGlobal::dirs()->findAllResources("arenaselector", "*.desktop", KStandardDirs::Recursive, arenasAvailable);
+        
+        qsrand(QDateTime::currentDateTime().toTime_t());
+        int nIndex = ((double) qrand() / RAND_MAX) * (arenasAvailable.count()-1);
+        if(nIndex < 0)
+        {
+            nIndex = 0;
+        }
+        else if(nIndex >= arenasAvailable.count())
+        {
+            nIndex = arenasAvailable.count() - 1;
+        }
+        filePath = KStandardDirs::locate("appdata", "arenas/" + arenasAvailable.at(nIndex));
+    }
+    else
+    {
+        filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
+    }
+    
     KConfig arenaConfig(filePath, KConfig::SimpleConfig);
     KConfigGroup group = arenaConfig.group("Arena");
     QString arenaFileName = group.readEntry("FileName");
