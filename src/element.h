@@ -42,6 +42,14 @@ public:
         BONUS
     };
     
+    enum Direction
+    {
+        NORTH,
+        EAST,
+        SOUTH,
+        WEST
+    };
+    
 protected:
 
     /** The Element type */

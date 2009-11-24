@@ -159,16 +159,16 @@ void BombItem::updateAnimation()
 
 void BombItem::updateMortar(int nState)
 {
-    qWarning() << "updateMortar enter";
+    if(m_pulseTimer)
+    {
+        m_pulseTimer->stop();
+        delete m_pulseTimer;
+        m_pulseTimer = 0;
+    }
+    
     switch(nState)
     {
-        case 0:
-            if(m_pulseTimer)
-            {
-                m_pulseTimer->stop();
-                delete m_pulseTimer;
-                m_pulseTimer = 0;
-            }
+      case 0:
             setVisible(false);
             setZValue(-1);
             break;
@@ -203,5 +203,4 @@ void BombItem::updateMortar(int nState)
             setZValue(200);
             break;
     }
-    qWarning() << "updateMortar exit";
 }

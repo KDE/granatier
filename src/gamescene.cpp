@@ -217,16 +217,8 @@ void GameScene::init()
                     arenaItem->setZValue(0);
                     break;
                 case Cell::BOMBMORTAR:
-                    if(Settings::self()->showAllTiles() == 1)
-                    {
-                        arenaItem->setElementId("arena_bomb_mortar");
-                        arenaItem->setZValue(0);
-                    }
-                    else
-                    {
-                        arenaItem->setElementId("arena_ground");
-                        arenaItem->setZValue(-1);
-                    }
+                    arenaItem->setElementId("arena_bomb_mortar");
+                    arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWUP:
                     if(Settings::self()->showAllTiles() == 1)

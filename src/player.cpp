@@ -91,6 +91,8 @@ void Player::goUp()
         nSpeed = m_speed + onIceSpeedIncrease;
     }
     m_askedYSpeed = -nSpeed;
+    
+    m_direction = Element::NORTH;
 }
 
 void Player::goDown()
@@ -103,6 +105,8 @@ void Player::goDown()
         nSpeed = m_speed + onIceSpeedIncrease;
     }
     m_askedYSpeed = nSpeed;
+    
+    m_direction = Element::SOUTH;
 }
 
 void Player::goRight()
@@ -115,6 +119,8 @@ void Player::goRight()
     m_askedXSpeed = nSpeed;
     
     m_askedYSpeed = 0;
+    
+    m_direction = Element::EAST;
 }
 
 void Player::goLeft()
@@ -127,6 +133,8 @@ void Player::goLeft()
     m_askedXSpeed = -nSpeed;
     
     m_askedYSpeed = 0;
+    
+    m_direction = Element::WEST;
 }
 
 void Player::updateDirection()
@@ -457,6 +465,9 @@ void Player::addBonus(Bonus* p_bonus)
         case Bonus::SHIELD:
             m_listShield.append(0);
             break;
+        case Bonus::THROW:
+            m_throwBomb = true;
+            break;
         case Bonus::HYPERACTIVE:
             {
                 int askedXSpeedTemp = m_askedXSpeed;
@@ -543,6 +554,11 @@ bool Player::shield(int nExplosionID)
     return false;
 }
 
+bool Player::hasThrowBomb()
+{
+    return m_throwBomb;
+}
+
 void Player::die()
 {
     if(!m_death)
@@ -567,6 +583,7 @@ bool Player::isAlive() const
 
 void Player::resurrect()
 {
+    m_direction = Element::EAST;
     m_onIce = false;
     m_falling = false;
     m_death = false;
@@ -578,6 +595,7 @@ void Player::resurrect()
     m_maxBombArmory = Settings::self()->initialBombArmory();
     m_bombArmory = m_maxBombArmory;
     m_listShield.clear();
+    m_throwBomb = false;
     if(m_badBonusCountdownTimer->isActive())
     {
         m_badBonusCountdownTimer->stop();
@@ -629,6 +647,11 @@ Cell Player::getAskedNextCell()
     }
 
     return nextCell;
+}
+
+int Player::direction()
+{
+    return m_direction;
 }
 
 int Player::getBombPower() const

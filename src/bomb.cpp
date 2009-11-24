@@ -81,11 +81,6 @@ void Bomb::goLeft()
 
 void Bomb::updateMove()
 {
-    if(Settings::self()->showAllTiles() == 0)
-    {
-        return;
-    }
-    
     if(m_detonated)
     {
         return;
@@ -205,6 +200,43 @@ void Bomb::setXSpeed(qreal p_xSpeed)
 void Bomb::setYSpeed(qreal p_ySpeed) 
 {
     m_ySpeed = p_ySpeed;
+}
+
+void Bomb::setThrown(int nDirection)
+{
+    if(!m_mortarTimer)
+    {
+        m_mortarTimer = new QTimer;
+        m_mortarTimer->setSingleShot(true);
+        if(m_detonationCountdownTimer)
+        {
+            m_detonationCountdownTimer->stop();
+        }
+        connect(m_mortarTimer, SIGNAL(timeout()), this, SLOT(updateMortarState()));
+    }
+    qreal fSpeed = 2 * Cell::SIZE / (1380 / 40/*Game::FPS*/);
+    switch(nDirection)
+    {
+        case Element::NORTH:
+            setXSpeed(0);
+            setYSpeed(-fSpeed);
+            break;
+        case Element::EAST:
+            setXSpeed(fSpeed);
+            setYSpeed(0);
+            break;
+        case Element::SOUTH:
+            setXSpeed(0);
+            setYSpeed(fSpeed);
+            break;
+        case Element::WEST:
+            setXSpeed(-fSpeed);
+            setYSpeed(0);
+            break;
+    }
+    
+    m_mortarState = 1;
+    updateMortarState();
 }
 
 Cell Bomb::getNextCell()
@@ -370,9 +402,6 @@ void Bomb::updateMortarState()
               
               setXSpeed((nCol - curCellCol) * Cell::SIZE / (1380 / 40/*Game::FPS*/));
               setYSpeed((nRow - curCellRow) * Cell::SIZE / (1380 / 40/*Game::FPS*/));
-              
-              qWarning() << curCellCol << ":" << curCellRow;
-              qWarning() << nCol << ":" << nRow;
               
               m_mortarState++;
               emit mortar(m_mortarState);

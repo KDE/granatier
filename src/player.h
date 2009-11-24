@@ -42,6 +42,9 @@ private:
     /** Player asked speed */
     qreal m_askedXSpeed, m_askedYSpeed;
     
+    /** the direction the player is moving/looking */
+    int m_direction;
+    
     /** Player bomb power */
     int m_bombPower;
     
@@ -62,6 +65,9 @@ private:
     
     /** flag if the player falls into a hole */
     bool m_falling;
+    
+    /** flag if the player player has the throw bomb bonus */
+    bool m_throwBomb;
     
     /** a list with the gathered shields from the shield bonus */
     QList <int> m_listShield;
@@ -160,6 +166,11 @@ public:
       * @return the asked y speed value
       */
     qreal getAskedYSpeed() const;
+    
+    /**
+      * @return the direction the player is moving/looking
+      */
+    int direction();
 
     /**
       * @return the bomb power
@@ -183,6 +194,11 @@ public:
       * @return true if there is an unused shield, false otherwise
       */
     bool shield(int n_ExplosionID);
+    
+    /**
+      * @return true if the player has the throw bonus
+      */
+    bool hasThrowBomb();
     
     /**
       * Implements the Character function

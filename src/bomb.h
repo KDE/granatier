@@ -143,6 +143,12 @@ public:
     void setYSpeed(qreal p_ySpeed);
     
     /**
+    * The direction to throw
+    * @param nDirection direction
+    */
+    void setThrown(int nDirection);
+    
+    /**
     * Power of the bomb
     * @return the Bomb power
     */

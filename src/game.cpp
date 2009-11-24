@@ -308,7 +308,7 @@ void Game::createBonus()
         bonusType = Bonus::NONE;
         if(i < nBonusCount)
         {
-            int nNumberOfBonuses = 4;
+            int nNumberOfBonuses = 5;
             if(Settings::self()->showAllTiles() == 1)
             {
                 nNumberOfBonuses = 6;
@@ -632,6 +632,10 @@ void Game::createBomb(Player* player, qreal x, qreal y)
     {
         if(m_arena->getCell(row, col).getElement() != NULL && m_arena->getCell(row, col).getElement()->getType() == Element::BOMB)
         {
+            if(player->hasThrowBomb())
+            {
+                dynamic_cast <Bomb*> (m_arena->getCell(row, col).getElement())->setThrown(player->direction());
+            }
             return;
         }
     }
