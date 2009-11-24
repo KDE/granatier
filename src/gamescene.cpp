@@ -759,13 +759,12 @@ void GameScene::createBombItem(Bomb* bomb)
     // Create the Bombs
     BombItem* bombItem = new BombItem(bomb);
     bombItem->setSharedRenderer(m_rendererBombItems);
-    bombItem->setElementId("bomb");
     // Corrects the position of the BombItem
     bombItem->update(bomb->getX(), bomb->getY());
-    bombItem->setZValue(200);
     addItem(bombItem);
     m_bombItems[bombItem].append(NULL);
     
+    connect(bomb, SIGNAL(mortar(int)), bombItem, SLOT(updateMortar(int)));
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
     connect(bombItem, SIGNAL(bombItemFinished(BombItem*)), this, SLOT(removeBombItem(BombItem*)));
     connect(bombItem, SIGNAL(animationFrameChanged(BombItem*, int)), this, SLOT(updateBombExplosionItemAnimation(BombItem*, int)));

@@ -25,6 +25,7 @@
 BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
 {
     setElementId("bomb");
+    setZValue(200);
     connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation(Bomb*)));
     connect(this, SIGNAL(bombItemFinished(BombItem*)), p_model, SLOT(slot_detonationCompleted()));
     
@@ -100,9 +101,12 @@ void BombItem::update(qreal p_x, qreal p_y)
 void BombItem::startDetonation(Bomb* bomb)
 {
     m_animationCounter = 0;
-    m_pulseTimer->stop();
-    delete m_pulseTimer;
-    m_pulseTimer = 0;
+    if(m_pulseTimer)
+    {
+        m_pulseTimer->stop();
+        delete m_pulseTimer;
+        m_pulseTimer = 0;
+    }
     
     dynamic_cast <Bomb*> (m_model)->setXSpeed(0);
     dynamic_cast <Bomb*> (m_model)->setYSpeed(0);
@@ -122,10 +126,10 @@ void BombItem::startDetonation(Bomb* bomb)
 void BombItem::pulse()
 {
     m_animationCounter++;
-    QTransform transform;
     if (m_animationCounter % 2 == 0)
     {
         // shrink the item
+        QTransform transform;
         transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
         transform.scale(0.95, 0.95);
         transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
@@ -151,4 +155,53 @@ void BombItem::updateAnimation()
     emit animationFrameChanged(this, m_animationCounter);
     m_explosionTimer->setInterval(m_listExplosionTiming.at(m_animationCounter));
     m_explosionTimer->start();
+}
+
+void BombItem::updateMortar(int nState)
+{
+    qWarning() << "updateMortar enter";
+    switch(nState)
+    {
+        case 0:
+            if(m_pulseTimer)
+            {
+                m_pulseTimer->stop();
+                delete m_pulseTimer;
+                m_pulseTimer = 0;
+            }
+            setVisible(false);
+            setZValue(-1);
+            break;
+        case 1:
+            {
+                // shrink the item
+                QTransform transform;
+                transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+                transform.scale(0.5, 0.5);
+                transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+                setTransform(transform);
+                setVisible(true);
+                setZValue(800);
+            }
+            break;
+        case 2:
+            {
+                // expand the item
+                QTransform transform;
+                transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+                transform.scale(1.3, 1.3);
+                transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+                setTransform(transform);
+                setVisible(true);
+                setZValue(800);
+            }
+            break;
+        case 3:
+        default:
+            resetTransform();
+            setVisible(true);
+            setZValue(200);
+            break;
+    }
+    qWarning() << "updateMortar exit";
 }

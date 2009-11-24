@@ -103,6 +103,11 @@ private slots:
     * Animates the explosion
     */
     virtual void updateAnimation();
+    
+    /**
+    * Animates the explosion
+    */
+    virtual void updateMortar(int nState);
 
 signals:
     /**

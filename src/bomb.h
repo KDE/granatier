@@ -58,6 +58,11 @@ protected:
     
     /** Timer used to make the bomb detonate */
     QTimer* m_detonationCountdownTimer;
+    
+    /** Timer used for the throw bonus and mortar */
+    QTimer* m_mortarTimer;
+    
+    int m_mortarState;
 
 public:
 
@@ -183,6 +188,8 @@ public slots:
     void detonate();
     
     void slot_detonationCompleted();
+    
+    void updateMortarState();
 
 protected:
 
@@ -209,6 +216,12 @@ signals:
     * @param bomb this bomb
     */
     void bombDetonated(Bomb* bomb);
+    
+    /**
+    * Emitted when the Bomb is thrown by the mortar or by the player.
+    * @param nState the current state of the mortar
+    */
+    void mortar(int nState);
 };
 
 #endif

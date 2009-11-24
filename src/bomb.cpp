@@ -51,15 +51,16 @@ Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCount
     m_detonationCountdownTimer->start();
     connect(m_detonationCountdownTimer, SIGNAL(timeout()), this, SLOT(detonate()));
     
+    m_mortarTimer = 0;
+    m_mortarState = -1;
+    
     moveOnCenter();
 }
 
 Bomb::~Bomb()
 {
-    if(m_detonationCountdownTimer)
-    {
-        delete m_detonationCountdownTimer;
-    }
+    delete m_detonationCountdownTimer;
+    delete m_mortarTimer;
 }
 
 void Bomb::goUp()
@@ -84,25 +85,45 @@ void Bomb::updateMove()
     {
         return;
     }
+    
+    if(m_detonated)
+    {
+        return;
+    }
+    
     int currentRow = m_arena->getRowFromY(m_y);
     int currentCol = m_arena->getColFromX(m_x);
-    //check if the bomb is on an arrow
-    switch (m_arena->getCell(currentRow, currentCol).getType())
+    //check if the bomb is on an arrow or mortar
+    if(m_mortarState == -1)
     {
-        case Cell::ARROWUP:
-            setYSpeed(-5);
-            break;
-        case Cell::ARROWRIGHT:
-            setXSpeed(5);
-            break;
-        case Cell::ARROWDOWN:
-            setYSpeed(5);
-            break;
-        case Cell::ARROWLEFT:
-            setXSpeed(-5);
-            break;
-        default:
-            break;
+        switch (m_arena->getCell(currentRow, currentCol).getType())
+        {
+            case Cell::ARROWUP:
+                setYSpeed(-5);
+                break;
+            case Cell::ARROWRIGHT:
+                setXSpeed(5);
+                break;
+            case Cell::ARROWDOWN:
+                setYSpeed(5);
+                break;
+            case Cell::ARROWLEFT:
+                setXSpeed(-5);
+                break;
+            case Cell::BOMBMORTAR:
+                m_mortarTimer = new QTimer;
+                m_mortarTimer->setSingleShot(true);
+                m_mortarTimer->setInterval(1500);
+                m_mortarTimer->start();
+                m_detonationCountdownTimer->stop();
+                connect(m_mortarTimer, SIGNAL(timeout()), this, SLOT(updateMortarState()));
+                m_mortarState = 0;
+                setXSpeed(0);
+                setYSpeed(0);
+                emit mortar(m_mortarState);
+            default:
+                break;
+        }
     }
     
     if(m_xSpeed != 0 || m_ySpeed != 0)
@@ -130,7 +151,7 @@ void Bomb::updateMove()
         int nextRow = m_arena->getRowFromY(m_y + m_ySpeed + yDirection * Cell::SIZE/2);
         int nextCol = m_arena->getColFromX(m_x + m_xSpeed + xDirection * Cell::SIZE/2);
         
-        if(newRow != currentRow || newCol != currentCol)
+        if((newRow != currentRow || newCol != currentCol) && m_mortarState == -1)
         {
             //move to next cell
             if(m_arena->getCell(newRow, newCol).isWalkable())
@@ -299,9 +320,19 @@ void Bomb::initDetonation(int nBombID, int nDetonationTimeout)
         m_explosionID = nBombID;
     }
     
+    if((!m_detonationCountdownTimer))
+    {
+        return;
+    }
+    
     if(m_detonationCountdownTimer->interval() > nDetonationTimeout)
     {
         m_detonationCountdownTimer->setInterval(nDetonationTimeout);
+    }
+    
+    if(!(m_detonationCountdownTimer->isActive()))
+    {
+        m_detonationCountdownTimer->start();
     }
 }
 
@@ -309,4 +340,61 @@ void Bomb::slot_detonationCompleted()
 {
     //TODO: call from game
     m_arena->removeCellElement(m_arena->getRowFromY(m_y), m_arena->getColFromX(m_x), this);
+}
+
+void Bomb::updateMortarState()
+{
+    switch(m_mortarState)
+    {
+      case 0:
+          {
+              int nRow;
+              int nCol;
+              bool bFound = false;
+              do
+              {
+                  nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
+                  nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
+                  if(m_arena->getCell(nRow, nCol).getType() != Cell::WALL)
+                  {
+                      if(m_arena->getCell(nRow, nCol).getElement() == 0 || m_arena->getCell(nRow, nCol).getElement()->getType() != Element::BLOCK)
+                      {
+                          bFound = true;
+                      }
+                  }
+              }
+              while (!bFound);
+              
+              int curCellRow = m_arena->getRowFromY(m_y);
+              int curCellCol = m_arena->getColFromX(m_x);
+              
+              setXSpeed((nCol - curCellCol) * Cell::SIZE / (1380 / 40/*Game::FPS*/));
+              setYSpeed((nRow - curCellRow) * Cell::SIZE / (1380 / 40/*Game::FPS*/));
+              
+              qWarning() << curCellCol << ":" << curCellRow;
+              qWarning() << nCol << ":" << nRow;
+              
+              m_mortarState++;
+              emit mortar(m_mortarState);
+              m_mortarTimer->start(50);
+          }
+          
+          break;
+      case 1:
+          m_mortarState++;
+          emit mortar(m_mortarState);
+          m_mortarTimer->start(800);
+          break;
+      case 2:
+          setXSpeed(0);
+          setYSpeed(0);
+          m_mortarState++;
+          emit mortar(m_mortarState);
+          m_mortarState = -1;
+          if(m_detonationCountdownTimer)
+          {
+              initDetonation(m_bombID, 20);
+          }
+          break;
+    }
 }
