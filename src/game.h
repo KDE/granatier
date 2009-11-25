@@ -294,6 +294,11 @@ private slots:
     void playerDeath(Player* player);
     
     /**
+    * Resurrects the death players
+    */
+    void resurrectBonusTaken();
+    
+    /**
     * Plays the detonation sound
     */
     void bombDetonated(Bomb* bomb);

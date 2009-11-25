@@ -543,6 +543,9 @@ void Player::addBonus(Bonus* p_bonus)
             m_badBonusType = Bonus::RESTRAIN;
             m_badBonusCountdownTimer->start();
             break;
+        case Bonus::RESURRECT:
+            emit resurrectBonusTaken();
+            break;
         default:
             break;
     }

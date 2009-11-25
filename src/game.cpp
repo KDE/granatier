@@ -67,6 +67,7 @@ Game::Game(PlayerSettings* playerSettings)
             m_players.append(player);
             connect(player, SIGNAL(dying(Player*)), this, SLOT(playerDeath(Player*)));
             connect(player, SIGNAL(falling()), this, SLOT(playerFalling()));
+            connect(player, SIGNAL(resurrectBonusTaken()), this, SLOT(resurrectBonusTaken()));
         }
     }
     
@@ -301,6 +302,7 @@ void Game::createBonus()
     qsrand(QDateTime::currentDateTime().toTime_t());
     int nBonusCount = 0.3 * m_blocks.size();
     int nBadBonusCount = 0.1 * m_blocks.size();
+    int nNeutralBonusCount = static_cast <int> ((qrand()/1.0)/RAND_MAX * 2);
     QList<Bonus::BonusType> bonusTypeList;
     Bonus::BonusType bonusType;
     for (int i = 0; i < m_blocks.size(); i++)
@@ -342,6 +344,10 @@ void Game::createBonus()
                         break;
                 default: bonusType = Bonus::HYPERACTIVE;
             }
+        }
+        else if(i-nBonusCount-nBadBonusCount < nNeutralBonusCount)
+        {
+            bonusType = Bonus::RESURRECT;
         }
         bonusTypeList.append(bonusType);
     }
@@ -567,6 +573,17 @@ void Game::playerDeath(Player* player)
     if(m_soundEnabled)
     {
         m_soundDie->play();
+    }
+}
+
+void Game::resurrectBonusTaken()
+{
+    for(int i = 0; i < m_players.length(); i++)
+    {
+        if(!(m_players[i]->isAlive()))
+        {
+            m_players[i]->resurrect();
+        }
     }
 }
 

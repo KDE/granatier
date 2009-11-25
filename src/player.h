@@ -311,6 +311,11 @@ signals:
       * Emitted when the player is falling in a hole
       */
       void falling();
+      
+      /**
+      * Emitted when the player has taken the resurrect bonus
+      */
+      void resurrectBonusTaken();
 };
 
 #endif

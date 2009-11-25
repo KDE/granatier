@@ -99,7 +99,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("bonus_bad_mirror") &&
         m_rendererSelectedTheme->elementExists("bonus_bad_scatty") &&
         m_rendererSelectedTheme->elementExists("bonus_bad_restrain") &&
-        m_rendererSelectedTheme->elementExists("bonus_neutral_pandora"))
+        m_rendererSelectedTheme->elementExists("bonus_neutral_pandora") &&
+        m_rendererSelectedTheme->elementExists("bonus_neutral_resurrect"))
     {
         m_rendererBonusItems = m_rendererSelectedTheme;
     }
@@ -304,10 +305,12 @@ void GameScene::init()
                                             break;
                         case Bonus::RESTRAIN:   bonusItem->setElementId("bonus_bad_restrain");
                                             break;
+                        case Bonus::RESURRECT:   bonusItem->setElementId("bonus_neutral_resurrect");
+                                            break;
                         default:            bonusItem->setElementId("bonus_neutral_pandora");
                     }
                     
-                    if((qrand()/1.0)/RAND_MAX * 10 > 9)
+                    if((qrand()/1.0)/RAND_MAX * 10 > 9 && bonusItem->elementId() != "bonus_neutral_resurrect")
                     {
                         bonusItem->setElementId("bonus_neutral_pandora");
                     }

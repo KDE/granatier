@@ -43,7 +43,8 @@ public:
         HYPERACTIVE,
         MIRROR,
         SCATTY,
-        RESTRAIN
+        RESTRAIN,
+        RESURRECT
     };
 
     /**
