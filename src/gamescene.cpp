@@ -33,6 +33,7 @@
 #include "bombitem.h"
 #include "bombexplosionitem.h"
 #include "infooverlay.h"
+#include "infosidebar.h"
 
 #include <KGameTheme>
 #include <KLocale>
@@ -181,6 +182,9 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_arenaBackground->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
     m_arenaBackground->setCacheMode(QGraphicsItem::DeviceCoordinateCache, backgroundSize);
     addItem(m_arenaBackground);
+    
+    // create the info sidebar
+    m_infoSidebar = new InfoSidebar(m_game, /*TODO*/m_rendererBonusItems, this);
     
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, m_rendererScoreItems, this);
@@ -403,6 +407,7 @@ GameScene::~GameScene()
     delete m_arenaBackground;
     
     delete m_infoOverlay;
+    delete m_infoSidebar;
     delete m_remainingTimeLabel;
     delete m_arenaNameLabel;
     

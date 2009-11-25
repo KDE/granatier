@@ -21,6 +21,7 @@ set(granatierSources
     gamescene.cpp
     gameview.cpp
     infooverlay.cpp
+    infosidebar.cpp
     main.cpp
     mainwindow.cpp
     mapparser.cpp

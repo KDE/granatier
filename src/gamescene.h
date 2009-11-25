@@ -36,6 +36,7 @@ class BombItem;
 class BombExplosionItem;
 class QGraphicsPixmapItem;
 class InfoOverlay;
+class InfoSidebar;
 class QPixmapCache;
 class KPixmapCache;
 class KSvgRenderer;
@@ -72,6 +73,9 @@ private:
     
     /** The overlay to show the score at the end of a round*/
     InfoOverlay* m_infoOverlay;
+    
+    /** The sidebar to show the players game info*/
+    InfoSidebar* m_infoSidebar;
     
     /** The labels to displayed the arena name */
     QGraphicsTextItem* m_arenaNameLabel;
