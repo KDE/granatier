@@ -69,6 +69,9 @@ private:
     /** flag if the player player has the throw bomb bonus */
     bool m_throwBomb;
     
+    /** flag if the player player has the kick bomb bonus */
+    bool m_kickBomb;
+    
     /** a list with the gathered shields from the shield bonus */
     QList <int> m_listShield;
     

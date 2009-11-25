@@ -19,6 +19,7 @@
 
 #include "player.h"
 #include "bonus.h"
+#include "bomb.h"
 #include "arena.h"
 #include "playersettings.h"
 #include "settings.h"
@@ -315,6 +316,13 @@ void Player::updateMove()
                 else    //there is a hurdle in the next cell, so don't stop moving
                 {
                     deltaAskedMove = 0;
+                    cellRow = curCellRow + yDirection;
+                    cellCol = curCellCol + xDirection;
+                    //check if bomb
+                    if(m_kickBomb && m_arena->getCell(cellRow, cellCol).getElement() != NULL && m_arena->getCell(cellRow, cellCol).getElement()->getType() == Element::BOMB)
+                    {
+                        dynamic_cast <Bomb*> (m_arena->getCell(cellRow, cellCol).getElement())->setKicked(m_direction);
+                    }
                 }
             }
         }
@@ -468,6 +476,9 @@ void Player::addBonus(Bonus* p_bonus)
         case Bonus::THROW:
             m_throwBomb = true;
             break;
+        case Bonus::KICK:
+            m_kickBomb = true;
+            break;
         case Bonus::HYPERACTIVE:
             {
                 int askedXSpeedTemp = m_askedXSpeed;
@@ -596,6 +607,7 @@ void Player::resurrect()
     m_bombArmory = m_maxBombArmory;
     m_listShield.clear();
     m_throwBomb = false;
+    m_kickBomb = false;
     if(m_badBonusCountdownTimer->isActive())
     {
         m_badBonusCountdownTimer->stop();

@@ -36,6 +36,7 @@ public:
     /** The Element possible types */
     enum Type
     {
+        NONE,
         BLOCK,
         PLAYER,
         BOMB,

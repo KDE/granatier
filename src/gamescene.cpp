@@ -221,52 +221,20 @@ void GameScene::init()
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWUP:
-                    if(Settings::self()->showAllTiles() == 1)
-                    {
-                        arenaItem->setElementId("arena_arrow_up");
-                        arenaItem->setZValue(0);
-                    }
-                    else
-                    {
-                        arenaItem->setElementId("arena_ground");
-                        arenaItem->setZValue(-1);
-                    }
+                    arenaItem->setElementId("arena_arrow_up");
+                    arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWRIGHT:
-                    if(Settings::self()->showAllTiles() == 1)
-                    {
-                        arenaItem->setElementId("arena_arrow_right");
-                        arenaItem->setZValue(0);
-                    }
-                    else
-                    {
-                        arenaItem->setElementId("arena_ground");
-                        arenaItem->setZValue(-1);
-                    }
+                    arenaItem->setElementId("arena_arrow_right");
+                    arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWDOWN:
-                    if(Settings::self()->showAllTiles() == 1)
-                    {
-                        arenaItem->setElementId("arena_arrow_down");
-                        arenaItem->setZValue(0);
-                    }
-                    else
-                    {
-                        arenaItem->setElementId("arena_ground");
-                        arenaItem->setZValue(-1);
-                    }
+                    arenaItem->setElementId("arena_arrow_down");
+                    arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWLEFT:
-                    if(Settings::self()->showAllTiles() == 1)
-                    {
-                        arenaItem->setElementId("arena_arrow_left");
-                        arenaItem->setZValue(0);
-                    }
-                    else
-                    {
-                        arenaItem->setElementId("arena_ground");
-                        arenaItem->setZValue(-1);
-                    }
+                    arenaItem->setElementId("arena_arrow_left");
+                    arenaItem->setZValue(0);
                     break;
                 case Cell::GROUND:
                 case Cell::BLOCK:

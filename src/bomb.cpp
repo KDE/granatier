@@ -115,6 +115,7 @@ void Bomb::updateMove()
                 m_mortarState = 0;
                 setXSpeed(0);
                 setYSpeed(0);
+                m_type = Element::NONE;
                 emit mortar(m_mortarState);
             default:
                 break;
@@ -237,6 +238,29 @@ void Bomb::setThrown(int nDirection)
     
     m_mortarState = 1;
     updateMortarState();
+}
+
+void Bomb::setKicked(int nDirection)
+{
+    switch(nDirection)
+    {
+        case Element::NORTH:
+            setXSpeed(0);
+            setYSpeed(-5);
+            break;
+        case Element::EAST:
+            setXSpeed(5);
+            setYSpeed(0);
+            break;
+        case Element::SOUTH:
+            setXSpeed(0);
+            setYSpeed(5);
+            break;
+        case Element::WEST:
+            setXSpeed(-5);
+            setYSpeed(0);
+            break;
+    }
 }
 
 Cell Bomb::getNextCell()

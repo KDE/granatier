@@ -149,6 +149,12 @@ public:
     void setThrown(int nDirection);
     
     /**
+    * The direction to move
+    * @param nDirection direction
+    */
+    void setKicked(int nDirection);
+    
+    /**
     * Power of the bomb
     * @return the Bomb power
     */
