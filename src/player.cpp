@@ -568,9 +568,32 @@ bool Player::shield(int nExplosionID)
     return false;
 }
 
+bool Player::hasShield()
+{
+    if(m_listShield.count() > 0)
+    {
+        return true;
+    }
+    return false;
+}
+
 bool Player::hasThrowBomb()
 {
     return m_throwBomb;
+}
+
+bool Player::hasKickBomb()
+{
+    return m_kickBomb;
+}
+
+bool Player::hasBadBonus()
+{
+    if(m_badBonusCountdownTimer->isActive())
+    {
+        return true;
+    }
+    return false;
 }
 
 void Player::die()

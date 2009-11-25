@@ -199,9 +199,24 @@ public:
     bool shield(int n_ExplosionID);
     
     /**
+      * @return true if the player has the shield bonus
+      */
+    bool hasShield();
+    
+    /**
       * @return true if the player has the throw bonus
       */
     bool hasThrowBomb();
+    
+    /**
+      * @return true if the player has the kick bonus
+      */
+    bool hasKickBomb();
+    
+    /**
+      * @return true if the player has a bad bonus
+      */
+    bool hasBadBonus();
     
     /**
       * Implements the Character function

@@ -24,6 +24,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsSvgItem>
 #include <QGraphicsRectItem>
+#include <QTimer>
 #include <KSvgRenderer>
 #include <KLocale>
 #include <KStandardDirs>
@@ -106,6 +107,12 @@ InfoSidebar::InfoSidebar (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
             m_graphicsScene->addItem(svgItem);
             m_mapBonusShieldSvgs.insert(playerList[i], svgItem);
         }
+        QGraphicsRectItem* rectItem = new QGraphicsRectItem();
+        rectItem->setBrush(QBrush(QColor(0,0,0,200)));
+        rectItem->setZValue(2);
+        rectItem->setRect(nLeft, nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4), Cell::SIZE / 2, Cell::SIZE / 2);
+        m_graphicsScene->addItem(rectItem);
+        m_mapBonusShieldDimm.insert(playerList[i], rectItem);
         
         //create the bonus throw icons
         svgItem = new QGraphicsSvgItem;
@@ -119,6 +126,12 @@ InfoSidebar::InfoSidebar (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
             m_graphicsScene->addItem(svgItem);
             m_mapBonusThrowSvgs.insert(playerList[i], svgItem);
         }
+        rectItem = new QGraphicsRectItem();
+        rectItem->setBrush(QBrush(QColor(0,0,0,200)));
+        rectItem->setZValue(2);
+        rectItem->setRect(nLeft + Cell::SIZE / 2 + 2, nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4), Cell::SIZE / 2, Cell::SIZE / 2);
+        m_graphicsScene->addItem(rectItem);
+        m_mapBonusThrowDimm.insert(playerList[i], rectItem);
         
         //create the bonus kick icons
         svgItem = new QGraphicsSvgItem;
@@ -132,6 +145,12 @@ InfoSidebar::InfoSidebar (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
             m_graphicsScene->addItem(svgItem);
             m_mapBonusKickSvgs.insert(playerList[i], svgItem);
         }
+        rectItem = new QGraphicsRectItem();
+        rectItem->setBrush(QBrush(QColor(0,0,0,200)));
+        rectItem->setZValue(2);
+        rectItem->setRect(nLeft + 2 * (Cell::SIZE / 2 + 2), nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4), Cell::SIZE / 2, Cell::SIZE / 2);
+        m_graphicsScene->addItem(rectItem);
+        m_mapBonusKickDimm.insert(playerList[i], rectItem);
         
         //create the bad bonus icons
         svgItem = new QGraphicsSvgItem;
@@ -143,8 +162,14 @@ InfoSidebar::InfoSidebar (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
             svgItem->setScale(0.5);
             svgItem->setPos(nLeft + 3 * (Cell::SIZE / 2 + 2), nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4));
             m_graphicsScene->addItem(svgItem);
-            m_mapBonusThrowSvgs.insert(playerList[i], svgItem);
+            m_mapBadBonusSvgs.insert(playerList[i], svgItem);
         }
+        rectItem = new QGraphicsRectItem();
+        rectItem->setBrush(QBrush(QColor(0,0,0,200)));
+        rectItem->setZValue(2);
+        rectItem->setRect(nLeft + 3 * (Cell::SIZE / 2 + 2), nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4), Cell::SIZE / 2, Cell::SIZE / 2);
+        m_graphicsScene->addItem(rectItem);
+        m_mapBadBonuswDimm.insert(playerList[i], rectItem);
     }
     
     m_background = new QGraphicsRectItem();
@@ -152,6 +177,12 @@ InfoSidebar::InfoSidebar (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
     m_background->setZValue(0);
     m_background->setRect(nLeft - 10 , nTop - 10, nWidth + 20, playerList.count() * (nHeight + 4) + 16);
     m_graphicsScene->addItem(m_background);
+    
+    updateTimer = new QTimer;
+    updateTimer->setInterval(1000);
+    connect(updateTimer, SIGNAL(timeout()), this, SLOT(update()));
+    updateTimer->start();
+    nBadBonusTime = 10;
 }
 
 InfoSidebar::~InfoSidebar()
@@ -179,4 +210,47 @@ InfoSidebar::~InfoSidebar()
     }
     
     delete m_renderer;
+}
+
+void InfoSidebar::update()
+{
+    QList <Player*> playerList = m_game->getPlayers();
+    
+    //calculate max player name length and top-left position
+    for(int i = 0; i < playerList.count(); i++)
+    {
+        if(playerList[i])
+        {
+            if(playerList[i]->hasShield())
+            {
+                m_mapBonusShieldDimm.value(playerList[i])->setVisible(false);
+            }
+            if(playerList[i]->hasThrowBomb())
+            {
+                m_mapBonusThrowDimm.value(playerList[i])->setVisible(false);
+            }
+            if(playerList[i]->hasKickBomb())
+            {
+                m_mapBonusKickDimm.value(playerList[i])->setVisible(false);
+            }
+            if(playerList[i]->hasBadBonus())
+            {
+                if(nBadBonusTime > 0)
+                {
+                    QRectF rect = m_mapBadBonuswDimm.value(playerList[i])->rect();
+                    m_mapBadBonuswDimm.value(playerList[i])->setRect(rect.left(), rect.top() + Cell::SIZE/20, rect.width(), rect.height() - Cell::SIZE/20);
+                    nBadBonusTime--;
+                }
+            }
+            else
+            {
+                if(nBadBonusTime < 10)
+                {
+                    QRectF rect = m_mapBadBonuswDimm.value(playerList[i])->rect();
+                    m_mapBadBonuswDimm.value(playerList[i])->setRect(rect.left(), rect.top() - Cell::SIZE/2, rect.width(), Cell::SIZE/2);
+                    nBadBonusTime = 10;
+                }
+            }
+        }
+    }
 }

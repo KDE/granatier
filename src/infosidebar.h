@@ -18,6 +18,7 @@
 #ifndef INFOSIDEBAR_H
 #define INFOSIDEBAR_H
 
+#include <QObject>
 #include <QMap>
 #include <QList>
 
@@ -28,12 +29,16 @@ class QGraphicsRectItem;
 class KSvgRenderer;
 class Game;
 class Player;
+class QTimer;
 
 /**
  * @brief This class represents the game sidebar with game information about the player.
  */
-class InfoSidebar
+class InfoSidebar : public QObject
 {
+
+    Q_OBJECT
+  
 private:
     QGraphicsScene* m_graphicsScene;
     Game* m_game;
@@ -42,11 +47,18 @@ private:
     QMap <Player*, QGraphicsSvgItem*> m_mapPlayerSvgs;
     QMap <Player*, QGraphicsTextItem*> m_mapPlayerNames;
     QMap <Player*, QGraphicsSvgItem*> m_mapBonusThrowSvgs;
+    QMap <Player*, QGraphicsRectItem*> m_mapBonusThrowDimm;
     QMap <Player*, QGraphicsSvgItem*> m_mapBonusKickSvgs;
+    QMap <Player*, QGraphicsRectItem*> m_mapBonusKickDimm;
     QMap <Player*, QGraphicsSvgItem*> m_mapBonusShieldSvgs;
+    QMap <Player*, QGraphicsRectItem*> m_mapBonusShieldDimm;
     QMap <Player*, QGraphicsSvgItem*> m_mapBadBonusSvgs;
+    QMap <Player*, QGraphicsRectItem*> m_mapBadBonuswDimm;
     
     QGraphicsRectItem* m_background;
+    
+    QTimer* updateTimer;
+    int     nBadBonusTime;
 
 public:
 
@@ -62,6 +74,12 @@ public:
       * Deletes the InfoSidebar instance.
       */
     ~InfoSidebar();
+
+private slots:
+    /**
+      * Updates the player states
+      */
+    void update();
 };
 
 #endif
