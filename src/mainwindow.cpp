@@ -45,6 +45,7 @@ public:
     GeneralSettings(QWidget *parent) : QWidget(parent)
     {
         ui.setupUi(this);
+        ui.groupBox->setVisible(false);
     }
 private:
     Ui::GeneralSettings ui;
