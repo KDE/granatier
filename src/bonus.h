@@ -67,7 +67,7 @@ public:
       */
     void doActionOnCollision(Player* p_player);
     
-    int getBonusType() const;
+    BonusType getBonusType() const;
     
     void setTaken();
     

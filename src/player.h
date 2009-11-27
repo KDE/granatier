@@ -20,9 +20,9 @@
 #define PLAYER_H
 
 #include "character.h"
+#include "bonus.h"
 
 class PlayerSettings;
-class Bonus;
 class QKeyEvent;
 class QString;
 class QTimer;
@@ -76,7 +76,7 @@ private:
     QList <int> m_listShield;
     
     /** the bad bonus type */
-    int m_badBonusType;
+    Bonus::BonusType m_badBonusType;
     
     /** the speed before a bad bonus was taken */
     qreal m_normalSpeed;
@@ -89,6 +89,8 @@ private:
     
     /** timer for the bad bonus to disapear */
     QTimer* m_badBonusCountdownTimer;
+    /** elapsed milliseconds since the last bad bonus */
+    int m_badBonusMillisecondsElapsed;
     
     
 
@@ -295,6 +297,11 @@ private slots:
      * removes the bad bonus from the player
      */
     void slot_removeBadBonus();
+    
+    /**
+     * emits the signal with the elapsed bad bonus time for the infosidebar
+     */
+    void slot_badBonusTimerTimeout();
 
 signals:
     /**
@@ -331,6 +338,14 @@ signals:
       * Emitted when the player has taken the resurrect bonus
       */
       void resurrectBonusTaken();
+      
+       /**
+      * Emitted when the player has taken a bonus
+      * @param player the player which info changed
+      * @param bonusType the bonus that was taken
+      * @param percentageElapsed the bad bonus time that has elapsed
+      */
+      void bonusUpdated(Player* player, Bonus::BonusType bonusType, int percentageElapsed);
 };
 
 #endif

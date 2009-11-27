@@ -30,6 +30,8 @@
 #include <cmath>
 
 const int onIceSpeedIncrease = 2;
+const int badBonusTimerTimeout = 100;
+const int badBonusCountdown = 10000;
 
 Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSettings* p_playerSettings, Arena* p_arena) : Character(p_x, p_y, p_arena)
 {
@@ -40,9 +42,9 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
     m_points = 0;
     
     m_badBonusCountdownTimer = new QTimer;
-    m_badBonusCountdownTimer->setSingleShot(true);
-    m_badBonusCountdownTimer->setInterval(10000);
-    connect(m_badBonusCountdownTimer, SIGNAL(timeout()), this, SLOT(slot_removeBadBonus()));
+    m_badBonusCountdownTimer->setInterval(badBonusTimerTimeout);
+    m_badBonusMillisecondsElapsed = 0;
+    connect(m_badBonusCountdownTimer, SIGNAL(timeout()), this, SLOT(slot_badBonusTimerTimeout()));
     
     resurrect();
     
@@ -434,7 +436,7 @@ void Player::move(qreal x, qreal y)
 
 void Player::addBonus(Bonus* p_bonus)
 {
-    int bonusType = p_bonus->getBonusType();
+    Bonus::BonusType bonusType = p_bonus->getBonusType();
     
     if(m_badBonusCountdownTimer->isActive())
     {
@@ -549,6 +551,8 @@ void Player::addBonus(Bonus* p_bonus)
         default:
             break;
     }
+    
+    bonusUpdated(this, bonusType, 0);
 }
 
 bool Player::shield(int nExplosionID)
@@ -562,6 +566,10 @@ bool Player::shield(int nExplosionID)
         else if(m_listShield[i] == 0)
         {
             m_listShield[i] = nExplosionID;
+            if(i == m_listShield.count()-1)
+            {
+                emit bonusUpdated(this, Bonus::SHIELD, 100);
+            }
             return true;
         }
     }
@@ -570,7 +578,7 @@ bool Player::shield(int nExplosionID)
 
 bool Player::hasShield()
 {
-    if(m_listShield.count() > 0)
+    if(m_listShield.count() > 0 && m_listShield.last() == 0)
     {
         return true;
     }
@@ -720,9 +728,24 @@ void Player::slot_refillBombArmory()
     }
 }
 
+void Player::slot_badBonusTimerTimeout()
+{
+    m_badBonusMillisecondsElapsed += badBonusTimerTimeout;
+    if(m_badBonusMillisecondsElapsed >= badBonusCountdown)
+    {
+        m_badBonusCountdownTimer->stop();
+        slot_removeBadBonus();
+    }
+    else
+    {
+        bonusUpdated(this, m_badBonusType, m_badBonusMillisecondsElapsed/(badBonusCountdown / 100));
+    }
+}
+
 void Player::slot_removeBadBonus()
 {
     m_badBonusCountdownTimer->stop();
+    m_badBonusMillisecondsElapsed = 0;
     
     switch (m_badBonusType)
     {
@@ -763,6 +786,8 @@ void Player::slot_removeBadBonus()
             m_bombArmory = m_normalBombArmory;
             break;
     }
+    
+    bonusUpdated(this, m_badBonusType, 100);
 }
 
 void Player::stopMoving()

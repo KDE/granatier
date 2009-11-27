@@ -186,6 +186,16 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     
     // create the info sidebar
     m_infoSidebar = new InfoSidebar(m_game, /*TODO*/m_rendererBonusItems, this);
+    //update the sceneRect
+    QRectF oldSceneRect = sceneRect();
+    QRectF sidebarRect = m_infoSidebar->rect();
+    QRectF newSceneRect;
+    newSceneRect.setLeft(oldSceneRect.left() < sidebarRect.left() ? oldSceneRect.left() : sidebarRect.left());
+    newSceneRect.setRight(oldSceneRect.right() > sidebarRect.right() ? oldSceneRect.right() : sidebarRect.right());
+    newSceneRect.setTop(oldSceneRect.top() < sidebarRect.top() ? oldSceneRect.top() : sidebarRect.top());
+    newSceneRect.setBottom(oldSceneRect.bottom() > sidebarRect.bottom() ? oldSceneRect.bottom() : sidebarRect.bottom());
+    newSceneRect.adjust(-5, -5, 5, 5);
+    setSceneRect(newSceneRect);
     
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, m_rendererScoreItems, this);
@@ -381,7 +391,7 @@ void GameScene::init()
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     int nTime = m_game->getRemainingTime();
     m_remainingTimeLabel->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
-    m_remainingTimeLabel->setPos((width() - m_remainingTimeLabel->boundingRect().width()), - m_remainingTimeLabel->boundingRect().height());
+    m_remainingTimeLabel->setPos(Cell::SIZE * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
     
     if (!items().contains(m_arenaNameLabel))
     {
@@ -389,6 +399,8 @@ void GameScene::init()
     }
     m_arenaNameLabel->setPlainText(m_game->getArena()->getName());
     m_arenaNameLabel->setPos(0, - m_arenaNameLabel->boundingRect().height());
+    
+    m_infoSidebar->reset();
     
     m_infoOverlay->showGetReady();
 }

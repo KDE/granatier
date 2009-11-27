@@ -38,7 +38,7 @@ void Bonus::doActionOnCollision(Player* p_player)
     p_player->addBonus(this);
 }
 
-int Bonus::getBonusType() const
+Bonus::BonusType Bonus::getBonusType() const
 {
   return m_bonusType;
 }

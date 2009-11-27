@@ -18,6 +18,8 @@
 #ifndef INFOSIDEBAR_H
 #define INFOSIDEBAR_H
 
+#include "bonus.h"
+
 #include <QObject>
 #include <QMap>
 #include <QList>
@@ -29,7 +31,7 @@ class QGraphicsRectItem;
 class KSvgRenderer;
 class Game;
 class Player;
-class QTimer;
+class QRectF;
 
 /**
  * @brief This class represents the game sidebar with game information about the player.
@@ -53,12 +55,9 @@ private:
     QMap <Player*, QGraphicsSvgItem*> m_mapBonusShieldSvgs;
     QMap <Player*, QGraphicsRectItem*> m_mapBonusShieldDimm;
     QMap <Player*, QGraphicsSvgItem*> m_mapBadBonusSvgs;
-    QMap <Player*, QGraphicsRectItem*> m_mapBadBonuswDimm;
+    QMap <Player*, QGraphicsRectItem*> m_mapBadBonusDimm;
     
     QGraphicsRectItem* m_background;
-    
-    QTimer* updateTimer;
-    int     nBadBonusTime;
 
 public:
 
@@ -73,13 +72,26 @@ public:
     /**
       * Deletes the InfoSidebar instance.
       */
-    ~InfoSidebar();
+    virtual ~InfoSidebar();
+    
+    /**
+      * Resets the player states
+      */
+    void reset();
+    
+    /**
+      * Returns the background rect of the infoSidebar
+      */
+    QRectF rect();
 
 private slots:
     /**
-      * Updates the player states
+      * sets the bonus info
+      * @param player the player which info changed
+      * @param bonusType the bonus that was taken
+      * @param percentageElapsed the bad bonus time that has elapsed
       */
-    void update();
+    void bonusInfoChanged(Player* player, Bonus::BonusType bonusType, int percentageElapsed);
 };
 
 #endif
