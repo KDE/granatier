@@ -1,12 +1,5 @@
 <?xml version="1.0"?>
-
-<!-- Legend :
-  '='               : wall
-  '_'               : corridor
-  '+'               : block
--->
-
-<Arena rowCount="13" colCount="17">
+<Arena arenaFileVersion="1" rowCount="13" colCount="17">
   <Row>    ==== ====    </Row>
   <Row>  ===+++++++===  </Row>
   <Row>  =+++++_+++++=  </Row>

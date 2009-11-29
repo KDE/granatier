@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Arena arenaFileVersion="1" rowCount="13" colCount="17">
+  <Row> === === === === </Row>
+  <Row>=p__=xxx=xxx=__p=</Row>
+  <Row>=___+xxx+xxx+___=</Row>
+  <Row>=___=xxx=xxx=___=</Row>
+  <Row> === =+= =+= === </Row>
+  <Row>=___=xxx=xxx=___=</Row>
+  <Row>=p__+xxx+xxx+__p=</Row>
+  <Row>=___=xxx=xxx=___=</Row>
+  <Row> === =+= =+= === </Row>
+  <Row>=___=xxx=xxx=___=</Row>
+  <Row>=___+xxx+xxx+___=</Row>
+  <Row>=p__=xxx=xxx=__p=</Row>
+  <Row> === === === === </Row>
+</Arena>

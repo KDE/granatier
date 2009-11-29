@@ -59,6 +59,11 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
             {
                 nbColumns = p_atts.value(i).toInt();
             }
+            //TODO:check for the right arenaFileVersion
+            //if (p_atts.qName(i) == "arenaFileVersion")
+            //{
+            //    m_arenaFileVersion = p_atts.value(i).toInt();
+            //}
         }
         // Create the Arena matrix
         m_arena->init(nbRows, nbColumns);

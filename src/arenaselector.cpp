@@ -334,12 +334,6 @@ void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
 {
     //find the clanbomber files
     QStringList listClanbomberPaths;
-    listClanbomberPaths.append("/usr/share/games/clanbomber/maps/");
-    listClanbomberPaths.append("/usr/share/apps/clanbomber/maps/");
-    listClanbomberPaths.append("/usr/local/share/games/clanbomber/maps/");
-    listClanbomberPaths.append("/usr/local/share/apps/clanbomber/maps/");
-    listClanbomberPaths.append("/usr/games/clanbomber/maps/");
-    listClanbomberPaths.append("/usr/local/games/clanbomber/maps/");
     listClanbomberPaths.append(QDir::homePath() + "/.clanbomber/maps/");
     for(int i = 0; i < listClanbomberPaths.count(); i++)
     {
@@ -411,7 +405,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
             QTextStream streamArenaFile(&arenaFile);
             
             streamArenaFile << "<?xml version=\"1.0\"?>\n";
-            streamArenaFile << "<Arena rowCount=\"" << arena.count() << "\" colCount=\"" << arena[0].count() << "\">\n";
+            streamArenaFile << "<Arena arenaFileVersion=\"1\" rowCount=\"" << arena.count() << "\" colCount=\"" << arena[0].count() << "\">\n";
             for(int j = 0; j < arena.count(); j++)
             {
                 streamArenaFile << "  <Row>" << arena[j] << "</Row>\n";

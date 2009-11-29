@@ -1,26 +1,16 @@
 <?xml version="1.0"?>
-
-<!-- Legend :
-  '='               : wall
-  '_'               : corridor
-  '+'               : block
-  'l','r','u','d'   : arrows
-  'o'               : bomb hole
-  '-'               : ice
--->
-
-<Arena rowCount="13" colCount="17">
+<Arena arenaFileVersion="1" rowCount="13" colCount="17">
   <Row>=================</Row>
   <Row>=o+_++_l+r_++_+o=</Row>
-  <Row>=++=++-+++-++=++=</Row>
+  <Row>=++=++ +++ ++=++=</Row>
   <Row>=+++++_+_+_+++++=</Row>
-  <Row>=__-_+=+_+=+_-__=</Row>
+  <Row>=__ _+=+_+=+_ __=</Row>
   <Row>=u_++++=p=++++_u=</Row>
   <Row>=+++__p===p__+++=</Row>
   <Row>=d_++++=p=++++_d=</Row>
-  <Row>=__-_+=+_+=+_-__=</Row>
+  <Row>=__ _+=+_+=+_ __=</Row>
   <Row>=+++_+_+_+_+++++=</Row>
-  <Row>=++=++-+++-++=++=</Row>
+  <Row>=++=++ +++ ++=++=</Row>
   <Row>=o+_++_l+r_++_+o=</Row>
   <Row>=================</Row>
 </Arena>
