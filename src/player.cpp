@@ -422,7 +422,7 @@ void Player::updateMove()
     if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY  && m_bombArmory > 0)
     {
         //TODO: improve
-        emit bombDropped(this, m_x, m_y);
+        emit bombDropped(this, m_x, m_y, 0);
     }
 }
 
@@ -843,7 +843,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
     }
     else if(key == m_key.dropBomb && m_bombArmory > 0)
     {
-        emit bombDropped(this, m_x, m_y);
+        emit bombDropped(this, m_x, m_y, 2);
     }
     
 }

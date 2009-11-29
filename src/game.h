@@ -274,7 +274,7 @@ public slots:
     /**
     * Creates a bomb in the Cell with the coordinates x and y
     */
-    void createBomb(Player* player, qreal x, qreal y);
+    void createBomb(Player* player, qreal x, qreal y, int throwDistance);
 
 private slots:
 

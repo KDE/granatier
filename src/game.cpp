@@ -75,7 +75,7 @@ Game::Game(PlayerSettings* playerSettings)
     
     for (int i = 0; i < m_players.size(); i++)
     {
-        connect(m_players[i], SIGNAL(bombDropped(Player*, qreal, qreal)), this, SLOT(createBomb(Player*, qreal, qreal)));
+        connect(m_players[i], SIGNAL(bombDropped(Player*, qreal, qreal, int)), this, SLOT(createBomb(Player*, qreal, qreal, int)));
     }
     
     m_gameOver = false;
@@ -636,7 +636,7 @@ void Game::checkRoundFinished()
     
 }
 
-void Game::createBomb(Player* player, qreal x, qreal y)
+void Game::createBomb(Player* player, qreal x, qreal y, int throwDistance)
 {
     int col = m_arena->getColFromX(x);
     int row = m_arena->getRowFromY(y);
@@ -644,7 +644,7 @@ void Game::createBomb(Player* player, qreal x, qreal y)
     {
         if(m_arena->getCell(row, col).getElement() != NULL && m_arena->getCell(row, col).getElement()->getType() == Element::BOMB)
         {
-            if(player->hasThrowBomb())
+            if(player->hasThrowBomb() && throwDistance > 0)
             {
                 dynamic_cast <Bomb*> (m_arena->getCell(row, col).getElement())->setThrown(player->direction());
             }
