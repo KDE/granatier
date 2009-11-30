@@ -120,6 +120,20 @@
         The Block &ndash; this can be destroyed with a bomb, and may contain a bonus (or a handicap).
       </para>
       <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="arena_bomb_mortar.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Bomb Mortar</phrase> </textobject>
+        </inlinemediaobject>
+        The Bomb Mortar &ndash; this will throw bombs that are placed on it to random places.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="arena_arrow_right.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Arrow Right</phrase> </textobject>
+        </inlinemediaobject>
+        The Arrows &ndash; this will move the bombs that are placed on it to the direction they point.
+      </para>
+      <para>
         If there is none of the above items, there is a hole at the ground and moving into it will result in falling into the deep and die. The same applies also if there is no wall at the edge of the arena and the player moves outside of the arena.
       </para>
     </sect2>
@@ -155,6 +169,20 @@
           <textobject> <phrase>Bonus Shield</phrase> </textobject>
         </inlinemediaobject>
         Shield &ndash; makes invincible for one bomb blast.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_throw.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Throw</phrase> </textobject>
+        </inlinemediaobject>
+        Throw &ndash; adds the ability to throw bombs. Just press the key for laying bombs while a bomb is below you.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_kick.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Kick</phrase> </textobject>
+        </inlinemediaobject>
+        Kick &ndash; adds the ability to move bombs. Just run against an bomb and the bomb will move.
       </para>
     </sect2>
     <sect2>
@@ -199,7 +227,7 @@
       </para>
     </sect2>
     <sect2>
-      <title>The Neutral Bonuses (Please help me with a better name)</title>
+      <title>The ambivalent Items</title>
       <para>
       This type of bonuses are neither good nor bad, it mostly depends on the environment. Currently there are following neutral bonuses:
       </para>
@@ -209,6 +237,13 @@
           <textobject> <phrase>Bonus Neutral Pandora</phrase> </textobject>
         </inlinemediaobject>
         Pandora &ndash; this contains either a bonus or a handicap.
+      </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Neutral Resurrect</phrase> </textobject>
+        </inlinemediaobject>
+        Resurrect &ndash; this will resurrect any dead player.
       </para>
     </sect2>
     </sect1>
@@ -313,7 +348,7 @@ AuthorEmail=joe.user@foo.org
       The .xml file contains the actual arena map.
       <programlisting>
 &lt;?xml version="1.0"?&gt;
-&lt;Arena rowCount="13" colCount="17"&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
   &lt;Row&gt;    ==== ====    &lt;/Row&gt;
   &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
   &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
@@ -337,6 +372,11 @@ AuthorEmail=joe.user@foo.org
 '+' a block item
 'x' will randomly create a block or a ground item
 '-' an ice item
+'o' a mortar item
+'u' an arrow up
+'r' an arrow right
+'d' an arrow down
+'l' an arrow left
 'p' a player position
       </programlisting>
     </para>
