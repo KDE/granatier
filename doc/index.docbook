@@ -258,6 +258,9 @@
       <para>
         You can change the points which are needed to win the game and the time for a round. After the time is over, the sudden death mode will start.
       </para>
+      <para>
+        Additionally you can adjust the initial speed, bomb range and bomb armory.
+      </para>
       <screenshot>
         <screeninfo>A &granatier; Config screenshot</screeninfo>
         <mediaobject>
@@ -293,7 +296,10 @@
         To select the Arena you want to play, go to the Arena section. The Arena is loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Arena.
       </para>
       <para>
-        If you have Clanbomber installed, you can import the arenas from Clanbomber by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in <filename class="directory">~/.clanbomber/maps</filename>, <filename class="directory">/usr/share/games/clanbomber/maps</filename> and at several other places for arenas. If your arenas are not imported, send me an email to add that path to the search path.
+        If you have self-made <application>Clanbomber</application> arenas, you can import them by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in <filename class="directory">~/.clanbomber/maps</filename> for the arenas. The default <application>Clanbomber</application> arenas are already shiped with &granatier;.
+      </para>
+      <para>
+        If you select <guibutton>Random Mode</guibutton>, a random arena will be used for each new round.
       </para>
       <screenshot>
         <screeninfo>A &granatier; Config screenshot</screeninfo>
