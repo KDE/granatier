@@ -1,6 +1,18 @@
 [Arena]
 Name=Bomb Attack
+Name[en_GB]=Bomb Attack
+Name[et]=Pommirünnak
+Name[pt]=Ataque de Bombas
+Name[sv]=Bombattack
+Name[uk]=Бомбовий напад
+Name[x-test]=xxBomb Attackxx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Bomb_Attack.xml
 Author=Denis Oliver Kropp

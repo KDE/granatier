@@ -1,6 +1,18 @@
 [Arena]
 Name=Whole Mess
+Name[en_GB]=Whole Mess
+Name[et]=Täielik segadus
+Name[pt]=Grande Confusão
+Name[sv]=Hela röran
+Name[uk]=Плутанина
+Name[x-test]=xxWhole Messxx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Whole_Mess.xml
 Author=Denis Oliver Kropp

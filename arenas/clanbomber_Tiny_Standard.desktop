@@ -1,6 +1,18 @@
 [Arena]
 Name=Clanbomber Tiny Standard
+Name[en_GB]=Clanbomber Tiny Standard
+Name[et]=Clanbomberi tilluke standardne
+Name[pt]=Normal Minúsculo do Clanbomber
+Name[sv]=Mycket liten Clanbomber-standard
+Name[uk]=Малюсінька стандартна Clanbomber
+Name[x-test]=xxClanbomber Tiny Standardxx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Tiny_Standard.xml
 Author=Andreas Hundt

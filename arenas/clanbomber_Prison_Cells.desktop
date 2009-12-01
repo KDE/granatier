@@ -1,6 +1,18 @@
 [Arena]
 Name=Prison Cells
+Name[en_GB]=Prison Cells
+Name[et]=Vangikong
+Name[pt]=Celas de Prisão
+Name[sv]=Fängelseceller
+Name[uk]=Тюремні камери
+Name[x-test]=xxPrison Cellsxx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Prison_Cells.xml
 Author=Andreas Hundt

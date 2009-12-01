@@ -1,6 +1,18 @@
 [Arena]
 Name=Overkill
+Name[en_GB]=Overkill
+Name[et]=Ülepingutus
+Name[pt]=Exagero
+Name[sv]=Överdödlighet
+Name[uk]=Підірвати все
+Name[x-test]=xxOverkillxx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Overkill.xml
 Author=Denis Oliver Kropp

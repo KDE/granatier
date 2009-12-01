@@ -1,6 +1,18 @@
 [Arena]
 Name=Sixty Nine
+Name[en_GB]=Sixty Nine
+Name[et]=69
+Name[pt]=Sessenta e Nove
+Name[sv]=Sextionio
+Name[uk]=Шістдесят дев’ять
+Name[x-test]=xxSixty Ninexx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Sixty_Nine.xml
 Author=Clanner

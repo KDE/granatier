@@ -1,6 +1,18 @@
 [Arena]
 Name=Bloody Ring
+Name[en_GB]=Bloody Ring
+Name[et]=Verine ring
+Name[pt]=Anel Sangrento
+Name[sv]=Blodig ring
+Name[uk]=Криваве кільце
+Name[x-test]=xxBloody Ringxx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Bloody_Ring.xml
 Author=Denis Oliver Kropp

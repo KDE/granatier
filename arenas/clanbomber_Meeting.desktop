@@ -1,6 +1,18 @@
 [Arena]
 Name=Meeting
+Name[en_GB]=Meeting
+Name[et]=Kohtumine
+Name[pt]=Reunião
+Name[sv]=Möte
+Name[uk]=Зустріч
+Name[x-test]=xxMeetingxx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Meeting.xml
 Author=Clanner

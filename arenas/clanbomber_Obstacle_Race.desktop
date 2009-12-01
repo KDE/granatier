@@ -1,6 +1,18 @@
 [Arena]
 Name=Obstacle Race
+Name[en_GB]=Obstacle Race
+Name[et]=Takistusrada
+Name[pt]=Corrida de Obstáculos
+Name[sv]=Hinderbana
+Name[uk]=Біг з перепонами
+Name[x-test]=xxObstacle Racexx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Obstacle_Race.xml
 Author=Andreas Hundt

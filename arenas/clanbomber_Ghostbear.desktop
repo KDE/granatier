@@ -1,6 +1,18 @@
 [Arena]
 Name=Ghostbear
+Name[en_GB]=Ghostbear
+Name[et]=Tontlik
+Name[pt]=Urso-Fantasma
+Name[sv]=Spökbjörnen
+Name[uk]=Ведмідь-привид
+Name[x-test]=xxGhostbearxx
 Description=Clanbomber Import
+Description[en_GB]=Clanbomber Import
+Description[et]=Clanbomberi import
+Description[pt]=Importação do Clanbomber
+Description[sv]=Import från Clanbomber
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Ghostbear.xml
 Author=Clanner
