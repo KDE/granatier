@@ -296,7 +296,7 @@
         To select the Arena you want to play, go to the Arena section. The Arena is loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Arena.
       </para>
       <para>
-        If you have self-made <application>Clanbomber</application> arenas, you can import them by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in <filename class="directory">~/.clanbomber/maps</filename> for the arenas. The default <application>Clanbomber</application> arenas are already shiped with &granatier;.
+        If you have self-made <application>Clanbomber</application> arenas, you can import them by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in <filename class="directory">~/.clanbomber/maps</filename> for the arenas. The default <application>Clanbomber</application> arenas are already shipped with &granatier;.
       </para>
       <para>
         If you select <guibutton>Random Mode</guibutton>, a random arena will be used for each new round.
