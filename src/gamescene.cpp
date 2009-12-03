@@ -729,7 +729,7 @@ void GameScene::updateInfo(const Game::InformationTypes p_info)
         {
             m_remainingTimeLabel->setPlainText(i18n("Sudden Death"));
             m_remainingTimeLabel->setDefaultTextColor(QColor("#FF0000"));
-            m_remainingTimeLabel->setPos((width() - m_remainingTimeLabel->boundingRect().width()), - m_remainingTimeLabel->boundingRect().height());
+            m_remainingTimeLabel->setPos(Cell::SIZE * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
         }
     }
 }
