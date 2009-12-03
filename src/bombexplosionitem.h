@@ -62,6 +62,10 @@ public:
     /**
      * Creates a new BombExplosionItem instance.
      * @param p_model the Bomb model
+     * @param direction the dirction of the explosion
+     * @param bombPower the power of the bomb at the position of this BombExplosionItem
+     * @param sharedPixmapCache the pixmap cache with the blast pixmaps
+     * @param svgScaleFactor the scale factor of the pixmap
      */
     BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, QPixmapCache* sharedPixmapCache, qreal svgScaleFactor);
 

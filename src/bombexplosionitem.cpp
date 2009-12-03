@@ -26,7 +26,6 @@
 BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, QPixmapCache* sharedPixmapCache, qreal svgScaleFactor) : QGraphicsPixmapItem()
 {
     m_direction = direction;
-    m_bombPower = bombPower;
     m_explosionID = p_model->explosionID();
     
     m_sharedPixmapCache = sharedPixmapCache;

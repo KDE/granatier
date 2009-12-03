@@ -112,8 +112,7 @@ public:
     void removeCellElement(const int p_row, const int p_column, Element* p_element);
     
     /**
-      * Sets the player position on the arena.
-      * @param p_player the player number
+      * Sets a player position on the arena.
       * @param p_position the player position
       */
     void addPlayerPosition(const QPointF &p_position);

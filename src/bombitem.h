@@ -118,6 +118,7 @@ signals:
     
     /**
      * signals next animation frame
+     * @param bombItem this BombItem
      * @param nFrame the next animation frame
      */
     void animationFrameChanged(BombItem* bombItem, int nFrame);

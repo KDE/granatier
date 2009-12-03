@@ -189,7 +189,7 @@ public:
     
     /**
       * Manages the points won
-      * @param p_element reference to the element eaten
+      * @param p_bonus reference to the bonus taken
       */
     void addBonus(Bonus* p_bonus);
     

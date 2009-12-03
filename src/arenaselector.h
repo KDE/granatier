@@ -54,6 +54,9 @@ public:
   };
     /**
     * Load a specific arena file.
+    * @param parent the parent widget
+    * @param config the KConfigSceleton
+    * @param knsflags the hot new stuff flags
     * @param groupName the title of the config group in the arena .desktop file
     * @param directory subdirectory (of share/apps/appname) to search in
     * @return true if the arena files and properties could be loaded
