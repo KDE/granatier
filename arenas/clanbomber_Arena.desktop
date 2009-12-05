@@ -41,6 +41,7 @@ Description[pt]=Importação do Clanbomber
 Description[sv]=Import från Clanbomber
 Description[uk]=Імпорт з Clanbomber
 Description[x-test]=xxClanbomber Importxx
+Description[zh_TW]=Clanbomber 炸彈超人匯入
 Type=XML
 FileName=clanbomber_Arena.xml
 Author=Denis Oliver Kropp
