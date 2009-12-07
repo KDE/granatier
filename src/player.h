@@ -322,7 +322,7 @@ signals:
       /**
       * Emitted when the player drops a bomb
       */
-      void bombDropped(Player* player, qreal x, qreal y, int throwDistance);
+      void bombDropped(Player* player, qreal x, qreal y, bool newBomb, int throwDistance);
       
       /**
       * Emitted when the player is dying

@@ -821,6 +821,32 @@ void GameScene::bombDetonated(Bomb* bomb)
         return;
     }
     
+    //check if there is a bomb or block at the position where the bomb exploded (possible when thrown)
+    nColumn = m_game->getArena()->getColFromX(bomb->getX());
+    nRow = m_game->getArena()->getRowFromY(bomb->getY());
+    element = m_game->getArena()->getCell(nRow, nColumn).getElement();
+    if(element && element->getType() == Element::BOMB && dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
+    {
+        dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdown);
+    }
+    else if(element && element->getType() == Element::BLOCK)
+    {
+        dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
+        if (m_blockItems[nRow][nColumn] != NULL)
+        {
+            //display bonus if available
+            if (m_bonusItems[nRow][nColumn] != NULL)
+            {
+                //m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                
+                if (!items().contains(m_bonusItems[nRow][nColumn]))
+                {
+                    addItem(m_bonusItems[nRow][nColumn]);
+                }
+            }
+        }
+    }
+    
     for(int i = 0; i < nBombPower; i++)
     {
         // north

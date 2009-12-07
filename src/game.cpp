@@ -75,7 +75,7 @@ Game::Game(PlayerSettings* playerSettings)
     
     for (int i = 0; i < m_players.size(); i++)
     {
-        connect(m_players[i], SIGNAL(bombDropped(Player*, qreal, qreal, int)), this, SLOT(createBomb(Player*, qreal, qreal, int)));
+        connect(m_players[i], SIGNAL(bombDropped(Player*, qreal, qreal, bool, int)), this, SLOT(createBomb(Player*, qreal, qreal, bool, int)));
     }
     
     m_gameOver = false;
@@ -636,7 +636,7 @@ void Game::checkRoundFinished()
     
 }
 
-void Game::createBomb(Player* player, qreal x, qreal y, int throwDistance)
+void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwDistance)
 {
     int col = m_arena->getColFromX(x);
     int row = m_arena->getRowFromY(y);
@@ -651,6 +651,12 @@ void Game::createBomb(Player* player, qreal x, qreal y, int throwDistance)
             return;
         }
     }
+    
+    if(!newBomb)
+    {
+        return;
+    }
+    
     m_bombCount++;
     Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_arena, m_bombCount, 2500);    // time in ms
     bomb->setBombPower(player->getBombPower());

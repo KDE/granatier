@@ -272,9 +272,14 @@ public slots:
     void checkRoundFinished();
     
     /**
-    * Creates a bomb in the Cell with the coordinates x and y
+    * Creates a bomb in the Cell with the coordinates x and y or throws the bomb from that possition if the player has the throw bonus
+    * @param player the player who dropped the bomb
+    * @param x the x-position where to put the bomb
+    * @param y the x-position where to put the bomb
+    * @param newBomb flag if a new bomb can be created or if only throwing is possible
+    * @param throwDistance the throw distance if the player has the throw bonus and the bomb shall be thrown
     */
-    void createBomb(Player* player, qreal x, qreal y, int throwDistance);
+    void createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwDistance);
 
 private slots:
 

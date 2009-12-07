@@ -422,7 +422,7 @@ void Player::updateMove()
     if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY  && m_bombArmory > 0)
     {
         //TODO: improve
-        emit bombDropped(this, m_x, m_y, 0);
+        emit bombDropped(this, m_x, m_y, true, 0);
     }
 }
 
@@ -785,6 +785,8 @@ void Player::slot_removeBadBonus()
         case Bonus::RESTRAIN:
             m_bombArmory = m_normalBombArmory;
             break;
+        default:
+            break;
     }
     
     bonusUpdated(this, m_badBonusType, 100);
@@ -841,9 +843,16 @@ void Player::keyPressed(QKeyEvent* keyEvent)
         goDown();
         updateDirection();
     }
-    else if(key == m_key.dropBomb && m_bombArmory > 0)
+    else if(key == m_key.dropBomb)
     {
-        emit bombDropped(this, m_x, m_y, 2);
+        if(m_bombArmory > 0)
+        {
+            emit bombDropped(this, m_x, m_y, true, 2);
+        }
+        else
+        {
+            emit bombDropped(this, m_x, m_y, false, 2);
+        }
     }
     
 }
