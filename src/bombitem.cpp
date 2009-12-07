@@ -25,7 +25,7 @@
 BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
 {
     setElementId("bomb");
-    setZValue(200);
+    setZValue(210);
     connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation(Bomb*)));
     connect(this, SIGNAL(bombItemFinished(BombItem*)), p_model, SLOT(slot_detonationCompleted()));
     
@@ -198,9 +198,16 @@ void BombItem::updateMortar(int nState)
             break;
         case 3:
         default:
+            if(!m_pulseTimer)
+            {
+                m_pulseTimer = new QTimer(this);
+                m_pulseTimer->setInterval(100);
+                m_pulseTimer->start();
+                connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
+            }
             resetTransform();
             setVisible(true);
-            setZValue(200);
+            setZValue(210);
             break;
     }
 }

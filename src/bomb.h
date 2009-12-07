@@ -63,6 +63,9 @@ protected:
     QTimer* m_mortarTimer;
     
     int m_mortarState;
+    
+    bool m_thrown;
+    bool m_stopOnCenter;
 
 public:
 

@@ -531,10 +531,7 @@ void Game::decrementRemainingRoundTime()
                 nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
                 if(m_arena->getCell(nRow, nCol).getType() == Cell::GROUND)
                 {
-                    if(m_arena->getCell(nRow, nCol).getElement() == 0 || m_arena->getCell(nRow, nCol).getElement()->getType() != Element::BLOCK)
-                    {
-                        bFound = true;
-                    }
+                    bFound = true;
                 }
             }
             while (!bFound);

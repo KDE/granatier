@@ -79,7 +79,13 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     if(m_rendererSelectedTheme->elementExists("arena_ground") &&
         m_rendererSelectedTheme->elementExists("arena_wall") &&
         m_rendererSelectedTheme->elementExists("arena_block") &&
-        m_rendererSelectedTheme->elementExists("arena_ice"))
+        m_rendererSelectedTheme->elementExists("arena_block_highlight") &&
+        m_rendererSelectedTheme->elementExists("arena_ice") &&
+        m_rendererSelectedTheme->elementExists("arena_bomb_mortar") &&
+        m_rendererSelectedTheme->elementExists("arena_arrow_up") &&
+        m_rendererSelectedTheme->elementExists("arena_arrow_right") &&
+        m_rendererSelectedTheme->elementExists("arena_arrow_down") &&
+        m_rendererSelectedTheme->elementExists("arena_arrow_left"))
     {
         m_rendererArenaItems = m_rendererSelectedTheme;
     }
