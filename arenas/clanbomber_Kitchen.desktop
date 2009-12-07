@@ -1,5 +1,6 @@
 [Arena]
 Name=Kitchen
+Name[ca]=Gatet
 Name[en_GB]=Kitchen
 Name[et]=Köök
 Name[pt]=Cozinha
@@ -9,6 +10,7 @@ Name[uk]=Кухня
 Name[x-test]=xxKitchenxx
 Name[zh_TW]=廚房
 Description=Clanbomber Import
+Description[ca]=Importació del Clanbomber
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import
 Description[pt]=Importação do Clanbomber

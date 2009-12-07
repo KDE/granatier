@@ -1,5 +1,6 @@
 [Arena]
 Name=Four Instance
+Name[ca]=Quatre instàncies
 Name[en_GB]=Four Instance
 Name[et]=Neli juhust
 Name[pt]=Instância de Quatro
@@ -8,6 +9,7 @@ Name[uk]=Четвертий примірник
 Name[x-test]=xxFour Instancexx
 Name[zh_TW]=四個實體
 Description=Clanbomber Import
+Description[ca]=Importació del Clanbomber
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import
 Description[pt]=Importação do Clanbomber

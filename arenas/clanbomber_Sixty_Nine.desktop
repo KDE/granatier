@@ -1,5 +1,6 @@
 [Arena]
 Name=Sixty Nine
+Name[ca]=Seixanta-nou
 Name[en_GB]=Sixty Nine
 Name[et]=69
 Name[pt]=Sessenta e Nove
@@ -8,6 +9,7 @@ Name[uk]=Шістдесят дев’ять
 Name[x-test]=xxSixty Ninexx
 Name[zh_TW]=69
 Description=Clanbomber Import
+Description[ca]=Importació del Clanbomber
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import
 Description[pt]=Importação do Clanbomber

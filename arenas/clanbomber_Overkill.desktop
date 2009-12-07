@@ -1,5 +1,6 @@
 [Arena]
 Name=Overkill
+Name[ca]=Rematada
 Name[en_GB]=Overkill
 Name[et]=Ülepingutus
 Name[pt]=Exagero
@@ -8,6 +9,7 @@ Name[uk]=Підірвати все
 Name[x-test]=xxOverkillxx
 Name[zh_TW]=過度殺傷
 Description=Clanbomber Import
+Description[ca]=Importació del Clanbomber
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import
 Description[pt]=Importação do Clanbomber
