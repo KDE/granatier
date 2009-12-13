@@ -174,11 +174,11 @@ void Game::init()
 
 Game::~Game()
 {
-    for (int i = 0; i < m_players.size(); i++)
+    while(!(m_players.isEmpty()))
     {
-        delete m_players[i];
+        delete m_players.takeLast();
     }
-        
+    
     //bombs, bonuses and blocks are deletet by the destructor of their elementitem
     
     cleanUp();
