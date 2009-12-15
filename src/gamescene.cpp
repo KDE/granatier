@@ -59,14 +59,20 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_pixmapCache = new QPixmapCache;
     m_SvgScaleFactor = 1;
 
-    // Load the default SVG file as fallback
-    m_rendererDefaultTheme = new KSvgRenderer();
-    m_rendererDefaultTheme->load(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
     // Load the selected SVG file
     m_rendererSelectedTheme = new KSvgRenderer();
     loadTheme();
+    // Load the default SVG file as fallback
+    bool selectedThemeIsDefault = true;
+    m_rendererDefaultTheme = 0;
+    if(Settings::self()->theme() != "themes/granatier.svgz")
+    {
+        selectedThemeIsDefault = false;
+        m_rendererDefaultTheme = new KSvgRenderer();
+        m_rendererDefaultTheme->load(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
+    }
     
-    if(m_rendererSelectedTheme->elementExists("background"))
+    if(selectedThemeIsDefault || m_rendererSelectedTheme->elementExists("background"))
     {
         m_rendererBackground = m_rendererSelectedTheme;
     }
@@ -76,7 +82,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     }
     
     // set the renderer for the arena items TODO: add all the arena items
-    if(m_rendererSelectedTheme->elementExists("arena_ground") &&
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("arena_ground") &&
         m_rendererSelectedTheme->elementExists("arena_wall") &&
         m_rendererSelectedTheme->elementExists("arena_block") &&
         m_rendererSelectedTheme->elementExists("arena_block_highlight") &&
@@ -85,7 +91,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("arena_arrow_up") &&
         m_rendererSelectedTheme->elementExists("arena_arrow_right") &&
         m_rendererSelectedTheme->elementExists("arena_arrow_down") &&
-        m_rendererSelectedTheme->elementExists("arena_arrow_left"))
+        m_rendererSelectedTheme->elementExists("arena_arrow_left")))
     {
         m_rendererArenaItems = m_rendererSelectedTheme;
     }
@@ -94,7 +100,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererArenaItems = m_rendererDefaultTheme;
     }
     // set the renderer for the bonus items TODO: add all the bonus items
-    if(m_rendererSelectedTheme->elementExists("bonus_speed") &&
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("bonus_speed") &&
         m_rendererSelectedTheme->elementExists("bonus_bomb") &&
         m_rendererSelectedTheme->elementExists("bonus_power") &&
         m_rendererSelectedTheme->elementExists("bonus_shield") &&
@@ -106,7 +112,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("bonus_bad_scatty") &&
         m_rendererSelectedTheme->elementExists("bonus_bad_restrain") &&
         m_rendererSelectedTheme->elementExists("bonus_neutral_pandora") &&
-        m_rendererSelectedTheme->elementExists("bonus_neutral_resurrect"))
+        m_rendererSelectedTheme->elementExists("bonus_neutral_resurrect")))
     {
         m_rendererBonusItems = m_rendererSelectedTheme;
     }
@@ -115,12 +121,12 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererBonusItems = m_rendererDefaultTheme;
     }
     // set the renderer for the bomb items
-    if(m_rendererSelectedTheme->elementExists("bomb") &&
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("bomb") &&
         m_rendererSelectedTheme->elementExists("bomb_blast_core_0") &&
         m_rendererSelectedTheme->elementExists("bomb_blast_north_0") &&
         m_rendererSelectedTheme->elementExists("bomb_blast_east_0") &&
         m_rendererSelectedTheme->elementExists("bomb_blast_south_0") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_west_0"))
+        m_rendererSelectedTheme->elementExists("bomb_blast_west_0")))
     {
         m_rendererBombItems = m_rendererSelectedTheme;
     }
@@ -130,8 +136,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     }
     
     // set the renderer for the score items
-    if(m_rendererSelectedTheme->elementExists("score_star_enabled") &&
-        m_rendererSelectedTheme->elementExists("score_star_disabled"))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("score_star_enabled") &&
+        m_rendererSelectedTheme->elementExists("score_star_disabled")))
     {
         m_rendererScoreItems = m_rendererSelectedTheme;
     }
