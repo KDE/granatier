@@ -23,10 +23,7 @@
 #ifdef GRANATIER_USE_GLUON
     class KALSound;
 #else
-    #include <QtMultimedia/qaudio.h>
-    class QAudioOutput;
-    class QBuffer;
-    class QByteArray;
+    #include <Phonon/MediaObject>
 #endif
 
 class QString;
@@ -40,16 +37,15 @@ class Sound : public QObject
 Q_OBJECT
 
 private:
-    qint64 m_lastPlayed;
-    
     #ifdef GRANATIER_USE_GLUON
         /** User KALEngine for sound */
         KALSound* m_sound;
     #else
-        /** Use QtMultimedia for sound */
-        QAudioOutput* m_sound;
-        QBuffer* m_soundBuffer;
-        QByteArray* m_soundData;
+        /** Use Phonon for sound */
+        qint64 m_lastPlayedTime;
+        int m_nextSource;
+        Phonon::MediaObject* m_sound1;
+        Phonon::MediaObject* m_sound2;
     #endif
 
 public:
@@ -69,11 +65,6 @@ public:
       * Plays the sound file.
       */
     void play();
-
-private slots:
-    #ifndef GRANATIER_USE_GLUON
-        void finishedPlaying(QAudio::State state);
-    #endif
 };
 
 #endif

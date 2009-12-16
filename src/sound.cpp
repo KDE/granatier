@@ -22,14 +22,8 @@
 #include <QDateTime>
 
 #ifdef GRANATIER_USE_GLUON
-#include <KDE/KALEngine>
-#include <KDE/KALSound>
-#else
-#include <QFile>
-#include <QBuffer>
-#include <QtMultimedia/QAudioDeviceInfo>
-#include <QtMultimedia/QAudioOutput>
-#include <QtMultimedia/qaudio.h>
+    #include <KDE/KALEngine>
+    #include <KDE/KALSound>
 #endif
 
 Sound::Sound (QString strFilePath)
@@ -39,36 +33,15 @@ Sound::Sound (QString strFilePath)
         m_sound = new KALSound;
         m_sound->load(strFilePath);
     #else
-        QFile soundFile;
-        soundFile.setFileName(strFilePath);
-        soundFile.open(QIODevice::ReadOnly);
+        m_lastPlayedTime = 0;
+        m_nextSource = 1;
         
-        m_soundData = new QByteArray(soundFile.readAll());
-        soundFile.close();
+        m_sound1 = Phonon::createPlayer(Phonon::GameCategory);
+        m_sound1->setCurrentSource(strFilePath);
         
-        m_soundBuffer = new QBuffer(m_soundData, this);
-        m_soundBuffer->open(QIODevice::ReadOnly);
-        
-        QAudioFormat format;
-        // Set up the format, eg.
-        format.setFrequency(44100);
-        format.setChannels(1);
-        format.setSampleSize(8);
-        format.setCodec("audio/pcm");
-        format.setByteOrder(QAudioFormat::LittleEndian);
-        format.setSampleType(QAudioFormat::UnSignedInt);
-        
-        QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());
-        if (!info.isFormatSupported(format))
-        {
-            format = info.nearestFormat(format);
-        }
-
-        m_sound = new QAudioOutput(QAudioDeviceInfo::defaultOutputDevice(), format, this);
-        connect(m_sound,SIGNAL(stateChanged(QAudio::State)),SLOT(finishedPlaying(QAudio::State)));
+        m_sound2 = Phonon::createPlayer(Phonon::GameCategory);
+        m_sound2->setCurrentSource(strFilePath);
     #endif
-    
-    m_lastPlayed = 0;
 }
 
 Sound::~Sound()
@@ -76,11 +49,8 @@ Sound::~Sound()
     #ifdef GRANATIER_USE_GLUON
         delete m_sound;
     #else
-        m_sound->stop();
-        m_soundBuffer->close();
-        delete m_soundBuffer;
-        delete m_soundData;
-        delete m_sound;
+        delete m_sound1;
+        delete m_sound2;
     #endif
 }
 
@@ -92,30 +62,35 @@ void Sound::play()
         QDateTime now = QDateTime::currentDateTime();
         qint64 timeNow = now.toTime_t() * 1000 + now.time().msec();
         
-        if(m_sound->state() == QAudio::ActiveState)
+        if(timeNow - m_lastPlayedTime > 20)
         {
-            if(timeNow - m_lastPlayed > 20)
-            {
-                m_soundBuffer->reset();
-                m_sound->start(m_soundBuffer);
-                m_lastPlayed = timeNow;
+            if(m_nextSource == 1)
+            {                    
+                if(m_sound1->state() == Phonon::StoppedState)
+                {
+                    m_nextSource = 2;
+                    m_sound1->play();
+                }
+                else
+                {
+                    m_sound1->stop();
+                }
             }
-        }
-        else
-        {
-            m_sound->start(m_soundBuffer);
-            m_lastPlayed = timeNow;
+            else
+            {
+                if(m_sound2->state() == Phonon::StoppedState)
+                {
+                    m_nextSource = 1;
+                    m_sound2->play();
+                    m_sound1->stop();
+                }
+                else
+                {
+                    m_nextSource = 1;
+                    m_sound1->stop();
+                }
+            }
+            m_lastPlayedTime = timeNow;
         }
     #endif
 }
-
-#ifndef GRANATIER_USE_GLUON
-void Sound::finishedPlaying(QAudio::State state)
-{
-    if(state == QAudio::IdleState)
-    {
-        m_sound->stop();
-        m_soundBuffer->reset();
-    }
-}
-#endif
