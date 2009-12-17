@@ -39,6 +39,8 @@ kde4_add_ui_files(granatierSources arenaselector.ui generalsettings.ui playersel
 
 kde4_add_kcfg_files(granatierSources settings.kcfgc)
 
+kde4_add_app_icon(granatierSources "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/hi*-app-granatier.png")
+
 kde4_add_executable(granatier ${granatierSources})
 
 target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} kdegames ${KDE4_KNEWSTUFF2_LIBRARY})
