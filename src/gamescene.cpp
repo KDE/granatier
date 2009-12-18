@@ -415,6 +415,8 @@ void GameScene::init()
     m_infoSidebar->reset();
     
     m_infoOverlay->showGetReady();
+    
+    resizeBackground();
 }
 
 GameScene::~GameScene()
@@ -531,23 +533,36 @@ void GameScene::showScore()
     m_infoOverlay->showScore();
 }
 
-void GameScene::resizeBackground(qreal x, qreal y, qreal width, qreal height)
+//TODO: rename this fuction
+void GameScene::resizeBackground()
 {
+    if(views().isEmpty())
+    {
+        return;
+    }
+    
+    qreal x = views().at(0)->x();
+    qreal y = views().at(0)->y();
+    qreal width = views().at(0)->width();
+    qreal height = views().at(0)->height();
+    QPointF topLeftView = views().at(0)->mapToScene(0, 0);
+    QPointF bottomRightView = views().at(0)->mapToScene(width, height);
+    
+    x = topLeftView.x();
+    y = topLeftView.y();
+    width = bottomRightView.x() - x;
+    height = bottomRightView.y() - y;
+    
     //calculate the scale factor between graphicsscene and graphicsview
+    //TODO: calcute with width and views().at(0)->width();
     QPoint topLeft(0, 0);
     QPoint bottomRight(100, 100);
     topLeft = views().at(0)->mapFromScene(topLeft);
     bottomRight = views().at(0)->mapFromScene(bottomRight);
     m_SvgScaleFactor = 100.0 / (bottomRight.x() - topLeft.x());
     
-    //calculate the graphicsview size
-    QSize svgSize = QSize(width, height);
-    topLeft = QPoint(x, y); 
-    topLeft = views().at(0)->mapFromScene(topLeft);
-    bottomRight = QPoint(x + svgSize.width(), y + svgSize.height()); 
-    bottomRight = views().at(0)->mapFromScene(bottomRight);
-    svgSize.setHeight(bottomRight.y() - topLeft.y());
-    svgSize.setWidth(bottomRight.x() - topLeft.x());
+    //get the graphicsview size
+    QSize svgSize = views().at(0)->size();
     
     //paint svg to pixmap
     QPixmap pixmap;
@@ -563,6 +578,44 @@ void GameScene::resizeBackground(qreal x, qreal y, qreal width, qreal height)
     m_arenaBackground->setScale(m_SvgScaleFactor);
     m_arenaBackground->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
     m_arenaBackground->setCacheMode(QGraphicsItem::DeviceCoordinateCache, svgSize);
+    
+    //update pixmaps
+    updatePixmapGraphics();
+    
+    //update overlay
+    m_infoOverlay->resizeDimmOverlay(x, y, width, height);
+}
+
+void GameScene::updatePixmapGraphics()
+{
+    if(views().isEmpty())
+    {
+        return;
+    }
+    
+    qreal x = views().at(0)->x();
+    qreal y = views().at(0)->y();
+    qreal width = views().at(0)->width();
+    qreal height = views().at(0)->height();
+    QPointF topLeftView = views().at(0)->mapToScene(0, 0);
+    QPointF bottomRightView = views().at(0)->mapToScene(width, height);
+    QPixmap pixmap;
+    
+    x = topLeftView.x();
+    y = topLeftView.y();
+    width = bottomRightView.x() - x;
+    height = bottomRightView.y() - y;
+    
+    //calculate the scale factor between graphicsscene and graphicsview
+    //TODO: calcute with width and views().at(0)->width();
+    QPoint topLeft(0, 0);
+    QPoint bottomRight(100, 100);
+    topLeft = views().at(0)->mapFromScene(topLeft);
+    bottomRight = views().at(0)->mapFromScene(bottomRight);
+    m_SvgScaleFactor = 100.0 / (bottomRight.x() - topLeft.x());
+    
+    //the svg size
+    QSize svgSize;;
     
     //update the blast pixmaps
     QString strElementID;
@@ -608,10 +661,6 @@ void GameScene::resizeBackground(qreal x, qreal y, qreal width, qreal height)
             m_pixmapCache->insert(strElementID, pixmap);
         }
     }
-    
-    
-    //update overlay
-    m_infoOverlay->resizeDimmOverlay(x, y, width, height);
 }
 
 Game* GameScene::getGame() const
@@ -894,6 +943,12 @@ void GameScene::bombDetonated(Bomb* bomb)
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
+                if(bombExplosionItem->pixmapMissing())
+                {
+                    delete bombExplosionItem;
+                    updatePixmapGraphics();
+                    bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
+                }
                 bombExplosionItem->setPosition(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
@@ -939,6 +994,12 @@ void GameScene::bombDetonated(Bomb* bomb)
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
+                if(bombExplosionItem->pixmapMissing())
+                {
+                    delete bombExplosionItem;
+                    updatePixmapGraphics();
+                    bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
+                }
                 bombExplosionItem->setPosition(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
@@ -984,6 +1045,12 @@ void GameScene::bombDetonated(Bomb* bomb)
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
+                if(bombExplosionItem->pixmapMissing())
+                {
+                    delete bombExplosionItem;
+                    updatePixmapGraphics();
+                    bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
+                }
                 bombExplosionItem->setPosition(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
@@ -1029,6 +1096,12 @@ void GameScene::bombDetonated(Bomb* bomb)
                     }
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
+                if(bombExplosionItem->pixmapMissing())
+                {
+                    delete bombExplosionItem;
+                    updatePixmapGraphics();
+                    bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
+                }
                 bombExplosionItem->setPosition(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);

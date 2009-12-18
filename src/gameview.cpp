@@ -39,9 +39,7 @@ GameView::~GameView()
 void GameView::resizeEvent(QResizeEvent*)
 {
     fitInView(sceneRect(), Qt::KeepAspectRatio);
-    QPointF topLeft = mapToScene(0, 0);
-    QPointF bottomRight = mapToScene(width(), height());
-    dynamic_cast <GameScene*> (scene())->resizeBackground(topLeft.x(), topLeft.y(), bottomRight.x()-topLeft.x(), bottomRight.y() - topLeft.y());
+    dynamic_cast <GameScene*> (scene())->resizeBackground();
 }
 
 void GameView::focusOutEvent(QFocusEvent*)

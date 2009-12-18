@@ -139,12 +139,13 @@ public:
     
     /**
      * Updates the background to fit into the QGraphicsView after a resize.
-     * @param x the new left position
-     * @param y the new top position
-     * @param width the new width
-     * @param height the new height
      */
-    void resizeBackground(qreal x, qreal y, qreal width, qreal height);
+    void resizeBackground();
+    
+    /**
+     * Updates the qpixmapitems
+     */
+    void updatePixmapGraphics();
     
 private slots:
     

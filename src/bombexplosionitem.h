@@ -56,6 +56,9 @@ protected:
     
     /** The scale factor from the svg for the pixmap */
     qreal m_svgScaleFactor;
+    
+    /** flag if the pixmap is not in the pixmap cache */
+    bool m_pixmapMissing;
 
 public:
 
@@ -93,12 +96,17 @@ public:
      */
     virtual void setPosition(qreal p_x, qreal p_y);
 
-public:
     /**
      * updates the animation
      * @param nFrame the next animation frame
      */
      void updateAnimationn(int nFrame);
+     
+     /**
+     * indicator if the current pixmap is not found in the pixmap cache
+     * @return indicator if pixmap is missing
+     */
+     bool pixmapMissing();
 };
 
 #endif

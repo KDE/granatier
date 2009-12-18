@@ -53,9 +53,13 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bom
         QPixmap pixmap = *(m_sharedPixmapCache->find(strElemetId));
         setPixmap(pixmap);
         setScale(m_svgScaleFactor);
+        setVisible(true);
+        m_pixmapMissing = false;
     }
-    
-    setVisible(true);
+    else
+    {
+        m_pixmapMissing = true;
+    }
 }
 
 BombExplosionItem::~BombExplosionItem()
@@ -135,4 +139,9 @@ void BombExplosionItem::updateAnimationn(int nFrame)
         setPixmap(pixmapNew);
         setScale(m_svgScaleFactor);
     }
+}
+
+bool BombExplosionItem::pixmapMissing()
+{
+    return m_pixmapMissing;
 }
