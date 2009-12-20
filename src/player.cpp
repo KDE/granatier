@@ -368,13 +368,16 @@ void Player::updateMove()
         {
             if(m_arena->getCell(newCellRow, newCellCol).getType() != Cell::ICE)
             {
-                if(xDirection != 0)
+                if(m_arena->getCell(newCellRow, newCellCol).getType() != Cell::HOLE)
                 {
-                    setXSpeed(m_xSpeed - xDirection * onIceSpeedIncrease);
-                }
-                else
-                {
-                    setYSpeed(m_ySpeed - yDirection * onIceSpeedIncrease);
+                    if(xDirection != 0)
+                    {
+                        setXSpeed(m_xSpeed - xDirection * onIceSpeedIncrease);
+                    }
+                    else
+                    {
+                        setYSpeed(m_ySpeed - yDirection * onIceSpeedIncrease);
+                    }
                 }
                 m_onIce = false;
                 
@@ -414,7 +417,6 @@ void Player::updateMove()
                     setYSpeed(newCellRow * Cell::SIZE + 0.5 * Cell::SIZE - m_y);
                 }
             }
-            //die();
         }
     }
     
@@ -647,6 +649,19 @@ void Player::resurrect()
         m_badBonusCountdownTimer->stop();
         slot_removeBadBonus();
     }
+    
+    //check if the player is above a hole
+    if(m_arena)
+    {
+        int cellRow = m_arena->getRowFromY(m_y);
+        int cellCol = m_arena->getColFromX(m_x);
+        if(m_arena->getCell(cellRow, cellCol).getType() == Cell::HOLE)
+        {
+            move(m_xInit, m_yInit);
+        }
+    }
+    
+    emit resurrected();
 }
 
 int Player::points() const

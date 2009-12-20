@@ -154,7 +154,6 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         playerItem = new PlayerItem(players[i]);
         // Corrects the position of the player
         playerItem->update(players[i]->getX(), players[i]->getY());
-        playerItem->setZValue(210+i);
         // Stops the player animation
         playerItem->stopAnim();
         

@@ -339,6 +339,11 @@ signals:
       */
       void resurrectBonusTaken();
       
+      /**
+      * Emitted when the player has resurrected
+      */
+      void resurrected();
+      
        /**
       * Emitted when the player has taken a bonus
       * @param player the player which info changed

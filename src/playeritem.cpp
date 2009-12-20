@@ -41,6 +41,7 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     connect(p_model, SIGNAL(gameUpdated()), this, SLOT(manageCollision()));
     connect(p_model, SIGNAL(stopped()), this, SLOT(stopAnim()));
     connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
+    connect(p_model, SIGNAL(resurrected()), this, SLOT(resurrect()));
 
     // load the SVG
     QString strPlayerId = ((Player*) p_model)->getGraphicsPath();
@@ -59,7 +60,10 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
         setElementId("player_0");
     }
     
+    setZValue(250);
+    
     m_fallingAnimationCounter = 0;
+    m_ressurectionAnimationCounter = 0;
 }
 
 PlayerItem::~PlayerItem()
@@ -69,12 +73,21 @@ PlayerItem::~PlayerItem()
 
 void PlayerItem::resurrect()
 {
+    setZValue(250);
     m_fallingAnimationCounter = 0;
+    m_ressurectionAnimationCounter = 10;
+    resetTransform();
+    if(m_renderer->elementExists("player_0"))
+    {
+        setElementId("player_0");
+    }
     QTransform transform;
     transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
     transform.scale(1, 1);
     transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
     setTransform(transform);
+    
+    startAnim();
 }
 
 void PlayerItem::updateDirection()
@@ -216,6 +229,8 @@ void PlayerItem::setFrame(const int p_frame)
         
         if(m_fallingAnimationCounter > 0)
         {
+            // set z-value below the ground
+            setZValue(-2);
             // shrink the item
             QTransform transform;
             transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
@@ -230,12 +245,72 @@ void PlayerItem::setFrame(const int p_frame)
             setDead();
             dynamic_cast <Player*> (m_model)->die();
         }
+        
+        if(m_ressurectionAnimationCounter > 0)
+        {
+            QTransform transform;
+            transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+            if(m_ressurectionAnimationCounter > 9)
+            {
+                transform.scale(1.1, 1.1);
+            }
+            else if(m_ressurectionAnimationCounter > 8)
+            {
+                transform.scale(0.9, 0.9);
+            }
+            else if(m_ressurectionAnimationCounter > 7)
+            {
+                transform.scale(0.6, 0.6);
+            }
+            else if(m_ressurectionAnimationCounter > 6)
+            {
+                transform.scale(0.7, 0.7);
+            }
+            else if(m_ressurectionAnimationCounter > 5)
+            {
+                transform.scale(0.85, 0.85);
+            }
+            else if(m_ressurectionAnimationCounter > 4)
+            {
+                transform.scale(1.0, 1.0);
+            }
+            else if(m_ressurectionAnimationCounter > 3)
+            {
+                transform.scale(1.05, 1.05);
+            }
+            else if(m_ressurectionAnimationCounter > 2)
+            {
+                transform.scale(1.1, 1.1);
+            }
+            else if(m_ressurectionAnimationCounter > 1)
+            {
+                transform.scale(1.05, 1.05);
+            }
+            else if(m_ressurectionAnimationCounter > 0)
+            {
+                transform.scale(1.0, 1.0);
+            }
+            transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+            setTransform(transform);
+            
+            m_ressurectionAnimationCounter--;
+            if(m_ressurectionAnimationCounter == 0)
+            {
+                resetTransform();
+                stopAnim();
+            }
+        }
     }
 }
 
 void PlayerItem::setDead()
 {
     stopAnim();
+    setZValue(1);
+    if(m_ressurectionAnimationCounter != 0)
+    {
+        resetTransform();
+    }
     if(m_renderer->elementExists("player_death"))
     {
         setElementId("player_death");

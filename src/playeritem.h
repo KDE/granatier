@@ -46,6 +46,9 @@ private:
     /** Counter for falling animation */
     int m_fallingAnimationCounter;
     
+    /** Counter for ressurection animation */
+    int m_ressurectionAnimationCounter;
+    
     /** player ID */
     QString m_strPlayerId;
 
@@ -61,11 +64,6 @@ public:
       * Deletes the PlayerItem instance.
       */
     ~PlayerItem();
-    
-    /**
-      * resurrects the playeritem
-      */
-    void resurrect();
 
 public slots:
 
@@ -121,6 +119,11 @@ public slots:
       * Implements the CharacterItem method.
       */
     void setDead();
+    
+    /**
+      * resurrects the playeritem
+      */
+    void resurrect();
         
 signals:
     void bonusItemTaken(BonusItem* bonusItem);
