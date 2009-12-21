@@ -31,8 +31,19 @@ class BonusItem : public ElementItem
 
     Q_OBJECT
 
-public:
+private:
+    
+    /** The explosion ID that destroyed the block that contained this bonus and therefore cannot destroy this bonus */
+    int m_undestroyableExplosionID;
+    
+    /** Timer used to animate explosion */
+    QTimer* m_destructionTimer;
 
+    /** Number of frames for the destruction */
+    int m_destructionCounter;
+
+public:
+    
     /**
      * Creates a new BonusItem instance.
      * @param p_model the Bonus model
@@ -43,6 +54,31 @@ public:
      * Deletes the BonusItem instance.
      */
     ~BonusItem();
+    
+    /**
+     * Sets the undestroyable explosion IDs  
+     * @param nExplosionID the explosion that destroyed the block that contained this bonus and therefore can't destroy this bonus
+     */
+    void setUndestroyable(int nExplosionID);
+    
+    /**
+     * Inits the destruction
+     * @param nExplosionID the explosion ID from the blast that hit the bonus
+     */
+    void initDestruction(int nExplosionID);
+
+private slots:
+    /**
+     * destruction animation
+     */
+    void destructionAnimation();
+    
+signals:
+    /**
+     * signals the end of the destruction animation
+     * @param bonusItem this bonus item
+     */
+    void bonusItemDestroyed(BonusItem* bonusItem);
 };
 
 #endif

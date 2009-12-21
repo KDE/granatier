@@ -340,6 +340,8 @@ void GameScene::init()
                     bonusItem->setZValue(100);
                     m_bonusItems[i][j] = bonusItem;
                     
+                    connect(bonusItem, SIGNAL(bonusItemDestroyed(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
+                    
                     if(Settings::self()->showAllTiles() == 1)
                     {
                         addItem(bonusItem);
@@ -884,26 +886,33 @@ void GameScene::bombDetonated(Bomb* bomb)
     //check if there is a bomb or block at the position where the bomb exploded (possible when thrown)
     nColumn = m_game->getArena()->getColFromX(bomb->getX());
     nRow = m_game->getArena()->getRowFromY(bomb->getY());
-    element = m_game->getArena()->getCell(nRow, nColumn).getElement();
-    if(element && element->getType() == Element::BOMB && dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
+    if(nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
     {
-        dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdown);
-    }
-    else if(element && element->getType() == Element::BLOCK)
-    {
-        dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
-        if (m_blockItems[nRow][nColumn] != NULL)
+        element = m_game->getArena()->getCell(nRow, nColumn).getElement();
+        if(element && element->getType() == Element::BOMB && dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
         {
-            //display bonus if available
-            if (m_bonusItems[nRow][nColumn] != NULL)
+            dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdown);
+        }
+        else if(element && element->getType() == Element::BLOCK)
+        {
+            dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
+            if (m_blockItems[nRow][nColumn] != NULL)
             {
-                //m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
-                
-                if (!items().contains(m_bonusItems[nRow][nColumn]))
+                //display bonus if available
+                if (m_bonusItems[nRow][nColumn] != NULL)
                 {
-                    addItem(m_bonusItems[nRow][nColumn]);
+                    m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                    
+                    if (!items().contains(m_bonusItems[nRow][nColumn]))
+                    {
+                        addItem(m_bonusItems[nRow][nColumn]);
+                    }
                 }
             }
+        }
+        else if(m_bonusItems[nRow][nColumn] != NULL)
+        {
+            m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
         }
     }
     
@@ -932,7 +941,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                         //display bonus if available
                         if (m_bonusItems[nRow][nColumn] != NULL)
                         {
-                            //m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                            m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
                             
                             if (!items().contains(m_bonusItems[nRow][nColumn]))
                             {
@@ -940,6 +949,10 @@ void GameScene::bombDetonated(Bomb* bomb)
                             }
                         }
                     }
+                }
+                else if(m_bonusItems[nRow][nColumn] != NULL)
+                {
+                    m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
                 if(bombExplosionItem->pixmapMissing())
@@ -985,12 +998,18 @@ void GameScene::bombDetonated(Bomb* bomb)
                         //display bonus if available
                         if (m_bonusItems[nRow][nColumn] != NULL)
                         {
+                            m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                            
                             if (!items().contains(m_bonusItems[nRow][nColumn]))
                             {
                                 addItem(m_bonusItems[nRow][nColumn]);
                             }
                         }
                     }
+                }
+                else if(m_bonusItems[nRow][nColumn] != NULL)
+                {
+                    m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
                 if(bombExplosionItem->pixmapMissing())
@@ -1036,12 +1055,18 @@ void GameScene::bombDetonated(Bomb* bomb)
                         //display bonus if available
                         if (m_bonusItems[nRow][nColumn] != NULL)
                         {
+                            m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                            
                             if (!items().contains(m_bonusItems[nRow][nColumn]))
                             {
                                 addItem(m_bonusItems[nRow][nColumn]);
                             }
                         }
                     }
+                }
+                else if(m_bonusItems[nRow][nColumn] != NULL)
+                {
+                    m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
                 if(bombExplosionItem->pixmapMissing())
@@ -1087,12 +1112,18 @@ void GameScene::bombDetonated(Bomb* bomb)
                         //display bonus if available
                         if (m_bonusItems[nRow][nColumn] != NULL)
                         {
+                            m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                            
                             if (!items().contains(m_bonusItems[nRow][nColumn]))
                             {
                                 addItem(m_bonusItems[nRow][nColumn]);
                             }
                         }
                     }
+                }
+                else if(m_bonusItems[nRow][nColumn] != NULL)
+                {
+                    m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
                 bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
                 if(bombExplosionItem->pixmapMissing())

@@ -23,8 +23,47 @@
 BonusItem::BonusItem(Bonus* p_model) : ElementItem (p_model)
 {
     setElementId(p_model->getImageId());
+    m_undestroyableExplosionID = 0;
+    m_destructionTimer = NULL;
+    m_destructionCounter = 0;
 }
 
 BonusItem::~BonusItem()
 {
+    delete m_destructionTimer;
+}
+
+void BonusItem::setUndestroyable(int nExplosionID)
+{
+    m_undestroyableExplosionID = nExplosionID;
+}
+
+void BonusItem::initDestruction(int nExplosionID)
+{
+    if(m_undestroyableExplosionID == nExplosionID || dynamic_cast <Bonus*> (m_model)->isTaken())
+    {
+        return;
+    }
+    
+    dynamic_cast <Bonus*> (m_model)->setDestroyed();
+    
+    m_destructionCounter = 0;
+    m_destructionTimer = new QTimer(this);
+    m_destructionTimer->setInterval(300);
+    m_destructionTimer->start();
+    connect(m_destructionTimer, SIGNAL(timeout()), this, SLOT(destructionAnimation()));
+}
+
+void BonusItem::destructionAnimation()
+{
+    m_destructionCounter++;
+    m_destructionTimer->setInterval(50);
+    setOpacity((5-m_destructionCounter)/5.0);
+    if(m_destructionCounter >= 5)
+    {
+        m_destructionTimer->stop();
+        delete m_destructionTimer;
+        m_destructionTimer = 0;
+        emit bonusItemDestroyed(this);
+    }
 }

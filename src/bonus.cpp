@@ -26,6 +26,7 @@ Bonus::Bonus(qreal p_x, qreal p_y, Arena* p_arena, Bonus::BonusType bonusType) :
     m_type = Element::BONUS;
     m_bonusType = bonusType;
     m_taken = false;
+    m_destroyed = false;
 }
 
 Bonus::~Bonus()
@@ -50,5 +51,16 @@ void Bonus::setTaken()
 
 bool Bonus::isTaken() const
 {
-  return m_taken;
+    return m_taken;
+}
+
+void Bonus::setDestroyed()
+{
+    m_destroyed = true;
+    m_taken = true;
+}
+
+bool Bonus::isDestroyed() const
+{
+    return m_destroyed;
 }

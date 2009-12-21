@@ -382,7 +382,7 @@ void Game::removeBonus(Bonus* bonus)
 {
     m_bonus.removeAt(m_bonus.indexOf(bonus));
     //do not delete the Bonus, because the ElementItem will delete it
-    if(m_soundEnabled)
+    if(m_soundEnabled && !bonus->isDestroyed())
     {
         m_soundBonus->play();
     }

@@ -72,12 +72,17 @@ public:
     void setTaken();
     
     bool isTaken() const;
+    
+    void setDestroyed();
+    
+    bool isDestroyed() const;
 
 private:
     /** The Bonus type */
     BonusType m_bonusType;
     
     bool m_taken;
+    bool m_destroyed;
 };
 
 #endif
