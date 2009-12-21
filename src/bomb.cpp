@@ -55,6 +55,7 @@ Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCount
     m_mortarState = -1;
     m_thrown = false;
     m_stopOnCenter = false;
+    m_falling = false;
     
     moveOnCenter();
 }
@@ -90,7 +91,7 @@ void Bomb::updateMove()
     
     int currentRow = m_arena->getRowFromY(m_y);
     int currentCol = m_arena->getColFromX(m_x);
-    //check if the bomb is on an arrow or mortar
+    //check if the bomb is on an arrow, mortar or hole
     if(m_mortarState == -1)
     {
         switch (m_arena->getCell(currentRow, currentCol).getType())
@@ -134,6 +135,16 @@ void Bomb::updateMove()
                     m_type = Element::NONE;
                     m_arena->removeCellElement(currentRow, currentCol, this);
                     emit mortar(m_mortarState);
+                }
+                break;
+            case Cell::HOLE:
+                if(m_xSpeed == 0 && m_ySpeed == 0 && !m_falling)
+                {
+                    m_falling = true;
+                    m_type = Element::NONE;
+                    m_detonationCountdownTimer->stop();
+                    emit falling();
+                    emit releaseBombArmory();
                 }
                 break;
             default:
@@ -210,6 +221,9 @@ void Bomb::updateMove()
                     break;
                 case Cell::BOMBMORTAR:
                     bIsMortar = true;
+                    break;
+                case Cell::HOLE:
+                    m_stopOnCenter = true;
                     break;
                 default:
                     break;
@@ -436,6 +450,7 @@ void Bomb::detonate()
         delete m_detonationCountdownTimer;
         m_detonationCountdownTimer = 0;
         emit bombDetonated(this);
+        emit releaseBombArmory();
     }
 }
 

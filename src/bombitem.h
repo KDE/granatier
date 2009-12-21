@@ -46,6 +46,12 @@ protected:
     /** Counter for the animaton frames */
     int m_animationCounter;
     
+    /** Counter for falling animation */
+    int m_fallingAnimationCounter;
+    
+    /** Flag to stop the animation if the bomb is fallin in a hole or TODO: a dud bomb */
+    bool m_dudBomb;
+    
     int m_x;
     int m_y;
 
@@ -108,6 +114,11 @@ private slots:
     * Animates the explosion
     */
     virtual void updateMortar(int nState);
+    
+    /**
+    * the animation when falling in a hole
+    */
+    virtual void fallingAnimation();
 
 signals:
     /**

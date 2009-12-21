@@ -27,6 +27,7 @@ BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
     setElementId("bomb");
     setZValue(210);
     connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation(Bomb*)));
+    connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
     connect(this, SIGNAL(bombItemFinished(BombItem*)), p_model, SLOT(slot_detonationCompleted()));
     
     // Define the timer which sets the puls frequency
@@ -41,6 +42,9 @@ BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
     m_listExplosionTiming.append(Settings::self()->blastTime3());
     m_listExplosionTiming.append(Settings::self()->blastTime4());
     m_listExplosionTiming.append(Settings::self()->blastTime5());
+    
+    m_fallingAnimationCounter = 0;
+    m_dudBomb = false;
 }
 
 BombItem::~BombItem()
@@ -76,7 +80,7 @@ void BombItem::pauseAnim()
 
 void BombItem::resumeAnim()
 {
-    if(m_pulseTimer)
+    if(m_pulseTimer && !m_dudBomb)
     {
         m_pulseTimer->start();
     }
@@ -125,19 +129,39 @@ void BombItem::startDetonation(Bomb* bomb)
 
 void BombItem::pulse()
 {
-    m_animationCounter++;
-    if (m_animationCounter % 2 == 0)
+    if(m_fallingAnimationCounter == 0)
+    {
+        m_animationCounter++;
+        if (m_animationCounter % 2 == 0)
+        {
+            // shrink the item
+            QTransform transform;
+            transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+            transform.scale(0.95, 0.95);
+            transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+            setTransform(transform);
+        }
+        else
+        {
+            resetTransform();
+        }
+    }
+    else
     {
         // shrink the item
         QTransform transform;
         transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
-        transform.scale(0.95, 0.95);
+        transform.scale(1-m_fallingAnimationCounter*0.02, 1-m_fallingAnimationCounter*0.02);
         transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
         setTransform(transform);
-    }
-    else
-    {
-        resetTransform();
+        m_fallingAnimationCounter++;
+        
+        if(m_fallingAnimationCounter > 50)
+        {
+            m_pulseTimer->stop();
+            m_dudBomb = true;
+            emit bombItemFinished(this);
+        }
     }
 }
 
@@ -210,4 +234,12 @@ void BombItem::updateMortar(int nState)
             setZValue(210);
             break;
     }
+}
+
+void BombItem::fallingAnimation()
+{
+    m_fallingAnimationCounter = 1;
+    // set z-value below the ground
+    setZValue(-2);
+    m_pulseTimer->setInterval(25);
 }

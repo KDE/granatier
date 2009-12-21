@@ -659,7 +659,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     bomb->setBombPower(player->getBombPower());
     emit bombCreated(bomb);
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
-    connect(bomb, SIGNAL(bombDetonated(Bomb*)), player, SLOT(slot_refillBombArmory()));
+    connect(bomb, SIGNAL(releaseBombArmory()), player, SLOT(slot_refillBombArmory()));
     m_bombs.append(bomb);
     player->decrementBombArmory();
     

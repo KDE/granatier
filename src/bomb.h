@@ -66,6 +66,8 @@ protected:
     
     bool m_thrown;
     bool m_stopOnCenter;
+    
+    bool m_falling;
 
 public:
 
@@ -233,10 +235,20 @@ signals:
     void bombDetonated(Bomb* bomb);
     
     /**
+    * Emitted to refill the player bomb armory
+    */
+    void releaseBombArmory();
+    
+    /**
     * Emitted when the Bomb is thrown by the mortar or by the player.
     * @param nState the current state of the mortar
     */
     void mortar(int nState);
+    
+    /**
+    * Emitted when the bomb is falling in a hole
+    */
+    void falling();
 };
 
 #endif
