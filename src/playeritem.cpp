@@ -88,6 +88,8 @@ void PlayerItem::resurrect()
     setTransform(transform);
     
     startAnim();
+    
+    setVisible(true);
 }
 
 void PlayerItem::updateDirection()
@@ -198,7 +200,7 @@ void PlayerItem::pauseAnim()
 
 void PlayerItem::resumeAnim()
 {
-    if (m_animationTimer->state() == QTimeLine::Running)
+    if (m_animationTimer->state() == QTimeLine::Paused)
     {
         m_animationTimer->setPaused(false);
     }
@@ -210,7 +212,7 @@ void PlayerItem::stopAnim()
     {
         setElementId("player_0");
     }
-    if (m_animationTimer->state() == QTimeLine::Running)
+    if (m_animationTimer->state() != QTimeLine::NotRunning)
     {
         m_animationTimer->stop();
     }
@@ -244,6 +246,7 @@ void PlayerItem::setFrame(const int p_frame)
         {
             setDead();
             dynamic_cast <Player*> (m_model)->die();
+            setVisible(false);
         }
         
         if(m_ressurectionAnimationCounter > 0)
