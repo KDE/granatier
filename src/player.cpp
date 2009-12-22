@@ -41,6 +41,8 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
     
     m_points = 0;
     
+    m_direction = Element::EAST;
+    
     m_badBonusCountdownTimer = new QTimer;
     m_badBonusCountdownTimer->setInterval(badBonusTimerTimeout);
     m_badBonusMillisecondsElapsed = 0;
@@ -77,11 +79,8 @@ QString Player::getPlayerName() const
 
 void Player::init()
 {
-    goRight();
     updateDirection();
     stopMoving();
-    // Stop animation
-    emit stopped();
 }
 
 void Player::goUp()
@@ -395,26 +394,30 @@ void Player::updateMove()
             //check if cell center passed
             if(xDirection != 0)
             {
-                if (newCellCol * Cell::SIZE + 0.5 * Cell::SIZE - m_x == 0)
+                qreal cellCenter = newCellCol * Cell::SIZE + 0.5 * Cell::SIZE;
+                qreal deltaCellCenter = cellCenter - (m_x + m_xSpeed);
+                if (cellCenter - m_x == 0)
                 {
                     setXSpeed(0);
                     emit falling();
                 }
-                else if ( qAbs(m_x + m_xSpeed) > qAbs(newCellCol * Cell::SIZE + 0.5 * Cell::SIZE))
+                else if (xDirection * deltaCellCenter < 0)
                 {
-                    setXSpeed(newCellCol * Cell::SIZE + 0.5 * Cell::SIZE - m_x);
+                    setXSpeed(cellCenter - m_x);
                 }
             }
             else if (yDirection != 0)
             {
-                if (newCellRow * Cell::SIZE + 0.5 * Cell::SIZE - m_y == 0)
+                qreal cellCenter = newCellRow * Cell::SIZE + 0.5 * Cell::SIZE;
+                qreal deltaCellCenter = cellCenter - (m_y + m_ySpeed);
+                if (cellCenter - m_y == 0)
                 {
                     setYSpeed(0);
                     emit falling();
                 }
-                else if ( qAbs(m_y + m_xSpeed) > qAbs(newCellRow * Cell::SIZE + 0.5 * Cell::SIZE))
+                else if (yDirection * deltaCellCenter < 0)
                 {
-                    setYSpeed(newCellRow * Cell::SIZE + 0.5 * Cell::SIZE - m_y);
+                    setYSpeed(cellCenter - m_y);
                 }
             }
         }
@@ -521,6 +524,21 @@ void Player::addBonus(Bonus* p_bonus)
                 int askedYSpeedTemp = m_askedYSpeed;
                 m_askedXSpeed = -m_xSpeed;
                 m_askedYSpeed = -m_ySpeed;
+                switch(m_direction)
+                {
+                    case Element::EAST:
+                        m_direction = Element::WEST;
+                        break;
+                    case Element::WEST:
+                        m_direction = Element::EAST;
+                        break;
+                    case Element::NORTH:
+                        m_direction = Element::SOUTH;
+                        break;
+                    case Element::SOUTH:
+                        m_direction = Element::NORTH;
+                        break;
+                }
                 updateDirection();
                 m_askedXSpeed = -askedXSpeedTemp;
                 m_askedYSpeed = -askedYSpeedTemp;
@@ -630,7 +648,6 @@ bool Player::isAlive() const
 
 void Player::resurrect()
 {
-    m_direction = Element::EAST;
     m_onIce = false;
     m_falling = false;
     m_death = false;
@@ -783,6 +800,21 @@ void Player::slot_removeBadBonus()
                 int askedYSpeedTemp = m_askedYSpeed;
                 m_askedXSpeed = -m_xSpeed;
                 m_askedYSpeed = -m_ySpeed;
+                switch(m_direction)
+                {
+                    case Element::EAST:
+                        m_direction = Element::WEST;
+                        break;
+                    case Element::WEST:
+                        m_direction = Element::EAST;
+                        break;
+                    case Element::NORTH:
+                        m_direction = Element::SOUTH;
+                        break;
+                    case Element::SOUTH:
+                        m_direction = Element::NORTH;
+                        break;
+                }
                 updateDirection();
                 m_askedXSpeed = -askedXSpeedTemp;
                 m_askedYSpeed = -askedYSpeedTemp;

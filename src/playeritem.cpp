@@ -32,6 +32,8 @@
 #include <KStandardDirs>
 #include <KSvgRenderer>
 
+static int nCounter = 0;
+
 const int PlayerItem::NB_FRAMES = 13;
 const int PlayerItem::ANIM_SPEED = 240;
 
@@ -73,6 +75,7 @@ PlayerItem::~PlayerItem()
 
 void PlayerItem::resurrect()
 {
+    int nDirection = dynamic_cast <Player*> (m_model)->direction();
     setZValue(250);
     m_fallingAnimationCounter = 0;
     m_ressurectionAnimationCounter = 10;
@@ -83,6 +86,25 @@ void PlayerItem::resurrect()
     }
     QTransform transform;
     transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+    // get the angle
+    switch(nDirection)
+    {
+        case Element::EAST:
+            transform.rotate(0);
+            break;
+        case Element::SOUTH:
+            transform.rotate(90);
+            break;
+        case Element::NORTH:
+            transform.rotate(-90);
+            break;
+        case Element::WEST:
+            transform.rotate(180);
+            break;
+        default:
+            transform.rotate(0);
+            break;
+    }
     transform.scale(1, 1);
     transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
     setTransform(transform);
@@ -94,32 +116,29 @@ void PlayerItem::resurrect()
 
 void PlayerItem::updateDirection()
 {
-    QTransform transform;
-    int angle = 0;
-    Player* model = (Player*)getModel();
-
-    // Compute the angle
-    if (model->getXSpeed() > 0)
-    {
-        angle = 0;
-    }
-    else if (model->getXSpeed() < 0)
-    {
-        angle = 180;	// The default image is right oriented
-    }
-    
-    if (model->getYSpeed() > 0)
-    {
-        angle = 90;
-    }
-    else if (model->getYSpeed() < 0)
-    {
-        angle = -90;
-    }
-    
+    int nDirection = dynamic_cast <Player*> (m_model)->direction();
     // Rotate the item
+    QTransform transform;
     transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
-    transform.rotate(angle);
+    // get the angle
+    switch(nDirection)
+    {
+        case Element::EAST:
+            transform.rotate(0);
+            break;
+        case Element::SOUTH:
+            transform.rotate(90);
+            break;
+        case Element::NORTH:
+            transform.rotate(-90);
+            break;
+        case Element::WEST:
+            transform.rotate(180);
+            break;
+        default:
+            transform.rotate(0);
+            break;
+    }
     transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
     setTransform(transform);
 }
@@ -212,7 +231,7 @@ void PlayerItem::stopAnim()
     {
         setElementId("player_0");
     }
-    if (m_animationTimer->state() != QTimeLine::NotRunning)
+    if (m_animationTimer->state() != QTimeLine::NotRunning && m_ressurectionAnimationCounter == 0)
     {
         m_animationTimer->stop();
     }
@@ -229,78 +248,107 @@ void PlayerItem::setFrame(const int p_frame)
     {
         setElementId(QString("player_%1").arg(p_frame));
         
-        if(m_fallingAnimationCounter > 0)
+        if(m_fallingAnimationCounter > 0 || m_ressurectionAnimationCounter > 0)
         {
-            // set z-value below the ground
-            setZValue(-2);
-            // shrink the item
-            QTransform transform;
-            transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
-            transform.scale(1-m_fallingAnimationCounter*0.02, 1-m_fallingAnimationCounter*0.02);
-            transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
-            setTransform(transform);
-            m_fallingAnimationCounter++;
-        }
-        
-        if(m_fallingAnimationCounter > 50)
-        {
-            setDead();
-            dynamic_cast <Player*> (m_model)->die();
-            setVisible(false);
-        }
-        
-        if(m_ressurectionAnimationCounter > 0)
-        {
-            QTransform transform;
-            transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
-            if(m_ressurectionAnimationCounter > 9)
+            int angle = 0;
+            int nDirection = dynamic_cast <Player*> (m_model)->direction();
+
+            // get the angle
+            switch(nDirection)
             {
-                transform.scale(1.1, 1.1);
+                case Element::EAST:
+                    angle = 0;
+                    break;
+                case Element::SOUTH:
+                    angle = 90;
+                    break;
+                case Element::NORTH:
+                    angle = -90;
+                    break;
+                case Element::WEST:
+                    angle = 180;
+                    break;
+                default:
+                    angle = 0;
+                    break;
             }
-            else if(m_ressurectionAnimationCounter > 8)
-            {
-                transform.scale(0.9, 0.9);
-            }
-            else if(m_ressurectionAnimationCounter > 7)
-            {
-                transform.scale(0.6, 0.6);
-            }
-            else if(m_ressurectionAnimationCounter > 6)
-            {
-                transform.scale(0.7, 0.7);
-            }
-            else if(m_ressurectionAnimationCounter > 5)
-            {
-                transform.scale(0.85, 0.85);
-            }
-            else if(m_ressurectionAnimationCounter > 4)
-            {
-                transform.scale(1.0, 1.0);
-            }
-            else if(m_ressurectionAnimationCounter > 3)
-            {
-                transform.scale(1.05, 1.05);
-            }
-            else if(m_ressurectionAnimationCounter > 2)
-            {
-                transform.scale(1.1, 1.1);
-            }
-            else if(m_ressurectionAnimationCounter > 1)
-            {
-                transform.scale(1.05, 1.05);
-            }
-            else if(m_ressurectionAnimationCounter > 0)
-            {
-                transform.scale(1.0, 1.0);
-            }
-            transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
-            setTransform(transform);
             
-            m_ressurectionAnimationCounter--;
-            if(m_ressurectionAnimationCounter == 0)
+            if(m_fallingAnimationCounter > 0)
             {
-                resetTransform();
-                stopAnim();
+                // set z-value below the ground
+                setZValue(-2);
+                // shrink the item
+                QTransform transform;
+                transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+                transform.rotate(angle);
+                transform.scale(1-m_fallingAnimationCounter*0.02, 1-m_fallingAnimationCounter*0.02);
+                transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+                setTransform(transform);
+                m_fallingAnimationCounter++;
+                
+                if(m_fallingAnimationCounter > 50)
+                {
+                    setDead();
+                    dynamic_cast <Player*> (m_model)->die();
+                    setVisible(false);
+                }
+            }
+            
+            if(m_ressurectionAnimationCounter > 0)
+            {
+                QTransform transform;
+                transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+                transform.rotate(angle);
+                if(m_ressurectionAnimationCounter > 9)
+                {
+                    transform.scale(1.1, 1.1);
+                }
+                else if(m_ressurectionAnimationCounter > 8)
+                {
+                    transform.scale(0.9, 0.9);
+                }
+                else if(m_ressurectionAnimationCounter > 7)
+                {
+                    transform.scale(0.6, 0.6);
+                }
+                else if(m_ressurectionAnimationCounter > 6)
+                {
+                    transform.scale(0.7, 0.7);
+                }
+                else if(m_ressurectionAnimationCounter > 5)
+                {
+                    transform.scale(0.85, 0.85);
+                }
+                else if(m_ressurectionAnimationCounter > 4)
+                {
+                    transform.scale(1.0, 1.0);
+                }
+                else if(m_ressurectionAnimationCounter > 3)
+                {
+                    transform.scale(1.05, 1.05);
+                }
+                else if(m_ressurectionAnimationCounter > 2)
+                {
+                    transform.scale(1.1, 1.1);
+                }
+                else if(m_ressurectionAnimationCounter > 1)
+                {
+                    transform.scale(1.05, 1.05);
+                }
+                else if(m_ressurectionAnimationCounter > 0)
+                {
+                    transform.scale(1.0, 1.0);
+                }
+                
+                m_ressurectionAnimationCounter--;
+                if(m_ressurectionAnimationCounter == 0)
+                {
+                    transform.scale(1.0, 1.0);
+                    stopAnim();
+                }
+                
+                transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+                setTransform(transform);
             }
         }
     }

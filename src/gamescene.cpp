@@ -430,6 +430,7 @@ GameScene::~GameScene()
         {
             removeItem(m_playerItems[i]);
         }
+        m_playerItems[i]->stopAnim();
         delete m_playerItems[i];
     }
     

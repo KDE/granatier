@@ -41,7 +41,7 @@ private:
     static const int ANIM_SPEED;
 
     /** Timer used to animate the PlayerItem */
-    QTimeLine * m_animationTimer;
+    QTimeLine* m_animationTimer;
     
     /** Counter for falling animation */
     int m_fallingAnimationCounter;
