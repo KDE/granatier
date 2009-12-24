@@ -1,6 +1,7 @@
 [Arena]
 Name=Fear Circle
 Name[ca]=Cercle ferotge
+Name[de]=Angstkreis
 Name[en_GB]=Fear Circle
 Name[et]=Hirmuring
 Name[nb]=Fryktens sirkel
@@ -11,6 +12,7 @@ Name[x-test]=xxFear Circlexx
 Name[zh_TW]=恐懼之圓
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
+Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import
 Description[nb]=Clanbomber import

@@ -1,6 +1,7 @@
 [Arena]
 Name=Mungo Bane
 Name[ca]=La perdició den Mungo
+Name[de]=Mungo-Fluch
 Name[en_GB]=Mungo Bane
 Name[et]=Tapjakoll
 Name[nb]=Mungo Bane
@@ -11,6 +12,7 @@ Name[x-test]=xxMungo Banexx
 Name[zh_TW]=Mungo Bane
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
+Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import
 Description[nb]=Clanbomber import
