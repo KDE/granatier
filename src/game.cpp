@@ -118,9 +118,17 @@ void Game::init()
         filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
     }
     
+    if(!QFile::exists(filePath))
+    {
+        Settings::self()->useDefaults(true);
+        filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
+        Settings::self()->useDefaults(false);
+    }
+    
     KConfig arenaConfig(filePath, KConfig::SimpleConfig);
     KConfigGroup group = arenaConfig.group("Arena");
     QString arenaFileName = group.readEntry("FileName");
+    
     QFile arenaXmlFile(KStandardDirs::locate("appdata", QString("arenas/%1").arg(arenaFileName)));
     //QFile arenaXmlFile(KStandardDirs::locate("appdata", "arenas/granatier.xml"));
     QXmlInputSource source(&arenaXmlFile);
@@ -174,6 +182,9 @@ void Game::init()
 
 Game::~Game()
 {
+    //pause is needed to stop all animations and therefore the access of the *items to their model
+    pause(true);
+    
     while(!(m_players.isEmpty()))
     {
         delete m_players.takeLast();
