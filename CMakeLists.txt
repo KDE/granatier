@@ -1,15 +1,22 @@
 project(granatier)
 
-macro_optional_find_package(Gluon QUIET)
-macro_log_feature(GLUON_FOUND "Gluon" "Gluon is a high-level game development library for the KDE desktop enviornment." "http://gluon.tuxfamily.org" FALSE "" "Granatier will use Phonon for sound output. For better sound experience please use gluon.")
+macro_optional_find_package(GluonCommon QUIET)
+macro_optional_find_package(KAL QUIET)
+macro_optional_find_package(Eigen2 QUIET)
+if(GLUONCOMMON_FOUND AND KAL_FOUND AND EIGEN2_FOUND)
+  set(GRANATIER_KAL_SOUND TRUE)
+endif(GLUONCOMMON_FOUND AND KAL_FOUND AND EIGEN2_FOUND)
+macro_log_feature(GRANATIER_KAL_SOUND "Gluon is a high-level game development library for the KDE desktop enviornment. Granatier uses KAL for sound output." "http://gluon.tuxfamily.org" FALSE "" "Granatier will use Phonon for sound output. For better sound experience please use KAL from the gluon project.")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
-if(GLUON_FOUND)
-    include_directories(${GLUON_INCLUDES})
+if(GRANATIER_KAL_SOUND)
+    include_directories(${GLUONCOMMON_INCLUDES})
+    include_directories(${KAL_INCLUDES})
+    include_directories(${EIGEN2_INCLUDE_DIR})
     ADD_DEFINITIONS(-DGRANATIER_USE_GLUON)
-endif(GLUON_FOUND)
+endif(GRANATIER_KAL_SOUND)
 
 include(MacroLibrary)
 

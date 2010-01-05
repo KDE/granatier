@@ -26,7 +26,7 @@
 int main(int argc, char** argv)
 {
     // About Granatier
-    KAboutData about("granatier", 0, ki18n("Granatier"), "0.0.2",
+    KAboutData about("granatier", 0, ki18n("Granatier"), "0.9.0",
         ki18n("Granatier is a Bomberman Clone!"),
         KAboutData::License_GPL, ki18n("Copyright (c) 2009 The Granatier Team!"));
     about.addAuthor(ki18n("Mathias Kraus"), ki18n("Maintainer"), "k.hias@gmx.de", 0);
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
     // Insert libkdegames catalog, for translation of libkdegames messages
     KGlobal::locale()->insertCatalog("libkdegames");
     #ifndef GRANATIER_USE_GLUON
-        qWarning() << "Using Phonon for sound. For the best sound experience you have to build granatier with gluon.";
+        qWarning() << "Using Phonon for sound. For the best sound experience you have to build granatier with KAL from the gluon project.";
     #endif
     // Create the main window
     MainWindow* window = new MainWindow();
