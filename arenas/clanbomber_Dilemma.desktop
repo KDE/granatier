@@ -1,6 +1,7 @@
 [Arena]
 Name=Dilemma
 Name[ca]=Dil·lema
+Name[ca@valencia]=Dil·lema
 Name[de]=Zwickmühle
 Name[en_GB]=Dilemma
 Name[et]=Dilemma
@@ -17,6 +18,7 @@ Name[x-test]=xxDilemmaxx
 Name[zh_TW]=兩難
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
+Description[ca@valencia]=Importació del Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

@@ -1,6 +1,7 @@
 [Arena]
 Name=Labyrinth
 Name[ca]=Laberint
+Name[ca@valencia]=Laberint
 Name[cs]=Labyrint
 Name[da]=Labyrint
 Name[de]=Labyrinth
@@ -36,6 +37,7 @@ Name[zh_CN]=迷宫
 Name[zh_TW]=迷宮
 Description=Labyrinth Arena
 Description[ca]=Camp de batalla laberíntic
+Description[ca@valencia]=Camp de batalla laberíntic
 Description[de]=Ein Labyrinth als Spielfeld.
 Description[en_GB]=Labyrinth Arena
 Description[es]=Zona de combate de Labyrinth

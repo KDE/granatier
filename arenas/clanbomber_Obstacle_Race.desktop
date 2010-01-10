@@ -1,6 +1,7 @@
 [Arena]
 Name=Obstacle Race
 Name[ca]=Carrera d'obstacles
+Name[ca@valencia]=Carrera d'obstacles
 Name[de]=Hindernisrennen
 Name[en_GB]=Obstacle Race
 Name[et]=Takistusrada
@@ -17,6 +18,7 @@ Name[x-test]=xxObstacle Racexx
 Name[zh_TW]=障礙賽跑
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
+Description[ca@valencia]=Importació del Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

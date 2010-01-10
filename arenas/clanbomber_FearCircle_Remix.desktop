@@ -1,6 +1,7 @@
 [Arena]
 Name=Fear Circle Remix
 Name[ca]=Remix del cercle ferotge
+Name[ca@valencia]=Remix del cercle ferotge
 Name[de]=Angstkreis (neu)
 Name[en_GB]=Fear Circle Remix
 Name[et]=Hirmuringi remiks
@@ -17,6 +18,7 @@ Name[x-test]=xxFear Circle Remixxx
 Name[zh_TW]=恐懼之圓重新混合
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
+Description[ca@valencia]=Importació del Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

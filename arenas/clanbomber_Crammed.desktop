@@ -1,6 +1,7 @@
 [Arena]
 Name=Crammed
 Name[ca]=Amuntegats
+Name[ca@valencia]=Amuntegats
 Name[de]=Vollgepackt
 Name[en_GB]=Crammed
 Name[et]=Täis tuubitud
@@ -17,6 +18,7 @@ Name[x-test]=xxCrammedxx
 Name[zh_TW]=塞滿
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
+Description[ca@valencia]=Importació del Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

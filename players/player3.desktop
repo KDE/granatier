@@ -1,6 +1,7 @@
 [Player]
 Name=Player3
 Name[ca]=Jugador3
+Name[ca@valencia]=Jugador3
 Name[de]=Spieler 3
 Name[en_GB]=Player3
 Name[es]=Jugador3
@@ -20,6 +21,7 @@ Name[x-test]=xxPlayer3xx
 Name[zh_TW]=玩家 3
 Description=This is Player3
 Description[ca]=Aquest és el jugador3
+Description[ca@valencia]=Este és el jugador3
 Description[de]=Das ist Spieler 3.
 Description[en_GB]=This is Player3
 Description[es]=Este es el jugador3

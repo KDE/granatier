@@ -1,6 +1,7 @@
 [Arena]
 Name=Granatier
 Name[ca]=Granatier
+Name[ca@valencia]=Granatier
 Name[cs]=Granatier
 Name[de]=Granatier
 Name[en_GB]=Granatier
@@ -22,6 +23,7 @@ Name[x-test]=xxGranatierxx
 Name[zh_TW]=Granatier
 Description=Default Granatier Arena
 Description[ca]=Camp de batalla per omissió del Granatier
+Description[ca@valencia]=Camp de batalla per omissió del Granatier
 Description[de]=Das Standard-Spielfeld von Granatier.
 Description[en_GB]=Default Granatier Arena
 Description[es]=Zona de combate predeterminada de Granatier

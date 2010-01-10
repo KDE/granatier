@@ -1,6 +1,7 @@
 [Arena]
 Name=Snake Race
 Name[ca]=Cursa de serps
+Name[ca@valencia]=Cursa de serps
 Name[de]=Schlangenrennen
 Name[en_GB]=Snake Race
 Name[et]=Ussiralli
@@ -17,6 +18,7 @@ Name[x-test]=xxSnake Racexx
 Name[zh_TW]=蛇賽跑
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
+Description[ca@valencia]=Importació del Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

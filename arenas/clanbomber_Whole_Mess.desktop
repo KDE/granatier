@@ -1,6 +1,7 @@
 [Arena]
 Name=Whole Mess
 Name[ca]=Desordre total
+Name[ca@valencia]=Desordre total
 Name[de]=Richtiges Chaos
 Name[en_GB]=Whole Mess
 Name[et]=Täielik segadus
@@ -17,6 +18,7 @@ Name[x-test]=xxWhole Messxx
 Name[zh_TW]=一團糟
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
+Description[ca@valencia]=Importació del Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import
