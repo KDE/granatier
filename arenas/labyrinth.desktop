@@ -53,6 +53,7 @@ Description[sv]=Labyrintarena
 Description[tr]=Labirent Arena
 Description[uk]=Арена-лабіринт
 Description[x-test]=xxLabyrinth Arenaxx
+Description[zh_CN]=迷宫竞技场
 Description[zh_TW]=迷宮競技場
 Type=XML
 FileName=labyrinth.xml

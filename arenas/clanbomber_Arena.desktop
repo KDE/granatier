@@ -55,6 +55,7 @@ Description[sr@latin]=Uvezeno iz ClanBombera
 Description[sv]=Import från Clanbomber
 Description[uk]=Імпорт з Clanbomber
 Description[x-test]=xxClanbomber Importxx
+Description[zh_CN]=炸弹人导入
 Description[zh_TW]=Clanbomber 炸彈超人匯入
 Type=XML
 FileName=clanbomber_Arena.xml
