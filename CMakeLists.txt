@@ -1,10 +1,15 @@
 project(granatier)
 
-macro_optional_find_package(GluonCommon QUIET)
-macro_optional_find_package(KAL QUIET)
-macro_optional_find_package(Eigen2 QUIET)
+option(GRANATIER_USE_GLUON_SOUND_BACKEND "Enable compilation with KAL from Gluon as sound backend")
+
+if(GRANATIER_USE_GLUON_SOUND_BACKEND)
+    macro_optional_find_package(GluonCommon QUIET)
+    macro_optional_find_package(KAL QUIET)
+    macro_optional_find_package(Eigen2 QUIET)
+endif(GRANATIER_USE_GLUON_SOUND_BACKEND)
+
 if(GLUONCOMMON_FOUND AND KAL_FOUND AND EIGEN2_FOUND)
-  set(GRANATIER_KAL_SOUND TRUE)
+    set(GRANATIER_KAL_SOUND TRUE)
 endif(GLUONCOMMON_FOUND AND KAL_FOUND AND EIGEN2_FOUND)
 macro_log_feature(GRANATIER_KAL_SOUND "Gluon is a high-level game development library for the KDE desktop enviornment. Granatier uses KAL for sound output." "http://gluon.tuxfamily.org" FALSE "" "Granatier will use Phonon for sound output. For better sound experience please use KAL from the gluon project.")
 
