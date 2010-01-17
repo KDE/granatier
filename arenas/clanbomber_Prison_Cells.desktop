@@ -2,6 +2,7 @@
 Name=Prison Cells
 Name[ca]=Cel·les de presó
 Name[ca@valencia]=Cel·les de presó
+Name[da]=Fængselsceller
 Name[de]=Gefängniszellen
 Name[en_GB]=Prison Cells
 Name[et]=Vangikong
@@ -22,6 +23,7 @@ Name[zh_TW]=囚房
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

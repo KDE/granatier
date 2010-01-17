@@ -2,6 +2,7 @@
 Name=Three of Three
 Name[ca]=Tres de tres
 Name[ca@valencia]=Tres de tres
+Name[da]=Tre ud af tre
 Name[de]=Drei-von-Drei
 Name[en_GB]=Three of Three
 Name[es]=Tres de tres
@@ -25,6 +26,7 @@ Name[zh_TW]=三之三
 Description=Three of Three Arena
 Description[ca]=Camp de batalla tres de tres
 Description[ca@valencia]=Camp de batalla tres de tres
+Description[da]=Tre ud af tre-arena
 Description[de]=Ein Drei-von-Drei-Spielfeld.
 Description[en_GB]=Three of Three Arena
 Description[es]=Zona de combate de Tres de Tres

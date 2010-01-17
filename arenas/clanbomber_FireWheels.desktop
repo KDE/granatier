@@ -2,6 +2,7 @@
 Name=Fire Wheels
 Name[ca]=Rodes de foc
 Name[ca@valencia]=Rodes de foc
+Name[da]=Ildhjul
 Name[de]=Feuerräder
 Name[en_GB]=Fire Wheels
 Name[et]=Tulirattad
@@ -22,6 +23,7 @@ Name[zh_TW]=火輪
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

@@ -2,6 +2,7 @@
 Name=Boiling Egg
 Name[ca]=Ou bullint
 Name[ca@valencia]=Ou bullint
+Name[da]=Kogende æg
 Name[de]=Kochendes Ei
 Name[en_GB]=Boiling Egg
 Name[et]=Keedumuna
@@ -22,6 +23,7 @@ Name[zh_TW]=煮蛋
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

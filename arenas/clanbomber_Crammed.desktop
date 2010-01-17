@@ -2,6 +2,7 @@
 Name=Crammed
 Name[ca]=Amuntegats
 Name[ca@valencia]=Amuntegats
+Name[da]=Tætpakket
 Name[de]=Vollgepackt
 Name[en_GB]=Crammed
 Name[et]=Täis tuubitud
@@ -22,6 +23,7 @@ Name[zh_TW]=塞滿
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

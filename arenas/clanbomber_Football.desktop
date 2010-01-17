@@ -2,6 +2,7 @@
 Name=Football
 Name[ca]=Futbol
 Name[ca@valencia]=Futbol
+Name[da]=Fodbold
 Name[de]=Fußball
 Name[en_GB]=Football
 Name[et]=Jalgpall
@@ -23,6 +24,7 @@ Name[zh_TW]=足球
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

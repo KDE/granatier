@@ -2,6 +2,7 @@
 Name=Bomb Attack
 Name[ca]=Bombardeig
 Name[ca@valencia]=Bombardeig
+Name[da]=Bombeangreb
 Name[de]=Bombenangriff
 Name[en_GB]=Bomb Attack
 Name[et]=Pommirünnak
@@ -22,6 +23,7 @@ Name[zh_TW]=炸彈攻擊
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

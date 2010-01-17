@@ -2,6 +2,7 @@
 Name=Bloody Ring
 Name[ca]=Anell sagnant
 Name[ca@valencia]=Anell sagnant
+Name[da]=Blodig ring
 Name[de]=Blutiger Ring
 Name[en_GB]=Bloody Ring
 Name[et]=Verine ring
@@ -22,6 +23,7 @@ Name[zh_TW]=血腥之環
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

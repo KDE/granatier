@@ -2,6 +2,7 @@
 Name=Meeting
 Name[ca]=Trobada
 Name[ca@valencia]=Trobada
+Name[da]=Møde
 Name[de]=Treffen
 Name[en_GB]=Meeting
 Name[et]=Kohtumine
@@ -23,6 +24,7 @@ Name[zh_TW]=會議
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

@@ -2,6 +2,7 @@
 Name=Obstacle Race
 Name[ca]=Carrera d'obstacles
 Name[ca@valencia]=Carrera d'obstacles
+Name[da]=Forhindringsløb
 Name[de]=Hindernisrennen
 Name[en_GB]=Obstacle Race
 Name[et]=Takistusrada
@@ -22,6 +23,7 @@ Name[zh_TW]=障礙賽跑
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

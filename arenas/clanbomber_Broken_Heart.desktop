@@ -2,6 +2,7 @@
 Name=Broken Heart
 Name[ca]=Cor trencat
 Name[ca@valencia]=Cor trencat
+Name[da]=Knust hjerte
 Name[de]=Gebrochenes Herz
 Name[en_GB]=Broken Heart
 Name[et]=Murtud süda
@@ -22,6 +23,7 @@ Name[zh_TW]=心碎
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

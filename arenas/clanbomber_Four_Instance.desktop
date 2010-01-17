@@ -2,6 +2,7 @@
 Name=Four Instance
 Name[ca]=Quatre instàncies
 Name[ca@valencia]=Quatre instàncies
+Name[da]=Fire afdelinger
 Name[de]=Vier Abteilungen
 Name[en_GB]=Four Instance
 Name[et]=Neli juhust
@@ -22,6 +23,7 @@ Name[zh_TW]=四個實體
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

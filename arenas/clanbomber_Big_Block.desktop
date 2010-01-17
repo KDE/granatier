@@ -2,6 +2,7 @@
 Name=Big Block
 Name[ca]=Gran bloc
 Name[ca@valencia]=Gran bloc
+Name[da]=Stor blog
 Name[de]=Großer Block
 Name[en_GB]=Big Block
 Name[et]=Suur plokk
@@ -22,6 +23,7 @@ Name[zh_TW]=大區塊
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

@@ -2,6 +2,7 @@
 Name=Overkill
 Name[ca]=Rematada
 Name[ca@valencia]=Rematada
+Name[da]=Overkill
 Name[de]=Übermaß
 Name[en_GB]=Overkill
 Name[et]=Ülepingutus
@@ -22,6 +23,7 @@ Name[zh_TW]=過度殺傷
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

@@ -2,6 +2,7 @@
 Name=Ghostbear
 Name[ca]=Ós fantasma
 Name[ca@valencia]=Ós fantasma
+Name[da]=Spøgelsesbjørn
 Name[de]=Geisterbahn
 Name[en_GB]=Ghostbear
 Name[et]=Tontlik
@@ -22,6 +23,7 @@ Name[zh_TW]=鬼熊
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import

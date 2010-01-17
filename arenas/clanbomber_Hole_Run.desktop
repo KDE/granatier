@@ -2,6 +2,7 @@
 Name=Hole Run
 Name[ca]=Forat ràpid
 Name[ca@valencia]=Forat ràpid
+Name[da]=Hulløb
 Name[de]=Lochrennen
 Name[en_GB]=Hole Run
 Name[et]=Otse auku
@@ -22,6 +23,7 @@ Name[zh_TW]=洞穴奔跑
 Description=Clanbomber Import
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
+Description[da]=Import fra Clanbomber
 Description[de]=Importiert von Clanbomber.
 Description[en_GB]=Clanbomber Import
 Description[et]=Clanbomberi import
