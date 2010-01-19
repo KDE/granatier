@@ -65,7 +65,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     // Load the default SVG file as fallback
     bool selectedThemeIsDefault = true;
     m_rendererDefaultTheme = 0;
-    if(Settings::self()->theme() != "themes/granatier.svgz")
+    if(Settings::self()->theme() != "themes/granatier.desktop")
     {
         selectedThemeIsDefault = false;
         m_rendererDefaultTheme = new KSvgRenderer();
@@ -183,7 +183,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     QPixmap pixmapBG = backgroundSize;
     pixmapBG.fill(Qt::black);
     QPainter painterBG(&pixmapBG);
-    m_rendererBombItems->render(&painterBG, "background");
+    m_rendererBackground->render(&painterBG, "background");
     painterBG.end();
     
     //set pixmap
@@ -535,7 +535,7 @@ void GameScene::showScore()
     m_infoOverlay->showScore();
 }
 
-//TODO: rename this fuction
+//TODO: rename this function
 void GameScene::resizeBackground()
 {
     if(views().isEmpty())
@@ -571,7 +571,7 @@ void GameScene::resizeBackground()
     pixmap = svgSize;
     pixmap.fill(Qt::black);
     QPainter painter(&pixmap);
-    m_rendererBombItems->render(&painter, "background");
+    m_rendererBackground->render(&painter, "background");
     painter.end();
     
     //set pixmap
