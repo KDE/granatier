@@ -5,7 +5,6 @@
   
   <!ENTITY kappversion "1.0"><!-- Application version. Use this variable everywhere it's needed.-->
   <!ENTITY docversion "1.0"><!-- Document version. Use this variable everywhere it's needed.-->
-  <!ENTITY docupdate "2010-01-27"><!-- Document version. Use this variable everywhere it's needed.-->
   <!ENTITY package "kdegames">  <!-- do not change this! -->
   <!ENTITY % English "INCLUDE" > <!-- change language only here -->
   <!ENTITY % addindex "IGNORE"> <!-- do not change this! -->
@@ -26,7 +25,7 @@
     <!-- TRANS:ROLES_OF_TRANSLATORS -->
     </authorgroup>
     
-    <date>&docupdate;</date>
+    <date>2010-01-27</date>
     <releaseinfo>&docversion;</releaseinfo>
     
     <abstract>
