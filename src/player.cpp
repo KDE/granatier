@@ -478,7 +478,10 @@ void Player::addBonus(Bonus* p_bonus)
             }
             break;
         case Bonus::SHIELD:
-            m_listShield.append(0);
+            if(m_listShield.isEmpty() || m_listShield.last() != 0)
+            {
+                m_listShield.append(0);
+            }
             break;
         case Bonus::THROW:
             m_throwBomb = true;
