@@ -69,7 +69,7 @@ MainWindow::MainWindow()
     // init game
     initGame();
     // Setup the window
-    setupGUI();
+    setupGUI(Keys | Save | Create);
 }
 
 MainWindow::~MainWindow()
