@@ -185,10 +185,8 @@ Game::~Game()
     //pause is needed to stop all animations and therefore the access of the *items to their model
     pause(true);
     
-    while(!(m_players.isEmpty()))
-    {
-        delete m_players.takeLast();
-    }
+    qDeleteAll(m_players);
+    m_players.clear();
     
     //bombs, bonuses and blocks are deletet by the destructor of their elementitem
     

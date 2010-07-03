@@ -45,14 +45,7 @@ class ArenaSelector::ArenaSelectorPrivate
             qDeleteAll(arenaMap);
             if(m_graphicsScene)
             {
-                while(!m_arenaItems.isEmpty())
-                {
-                    if(m_graphicsScene->items().contains(m_arenaItems.last()))
-                    {
-                        m_graphicsScene->removeItem(m_arenaItems.last());
-                    }
-                    delete m_arenaItems.takeLast();
-                }
+                qDeleteAll(m_arenaItems);
                 delete m_graphicsScene;
             }
             delete m_renderer;

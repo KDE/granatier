@@ -152,25 +152,14 @@ InfoOverlay::~InfoOverlay()
     hideItems();
     
     // Find the score items and remove them
-    QMap<Player*, QList<QGraphicsSvgItem*> >::iterator iteratorScore = m_mapScore.begin();
-    while (iteratorScore != m_mapScore.end())
+    foreach (const QList<QGraphicsSvgItem*>& scoreItems, m_mapScore)
     {
-        while(!iteratorScore.value().isEmpty())
-        {
-            delete iteratorScore.value().takeFirst();
-        }
-        iteratorScore = m_mapScore.erase(iteratorScore);
+        qDeleteAll(scoreItems);
     }
+    m_mapScore.clear(); //TODO: necessary?
     // Find the player name labels and remove them
-    QMap<Player*, QGraphicsTextItem*>::iterator iteratorNames = m_mapPlayerNames.begin();
-    while (iteratorNames != m_mapPlayerNames.end())
-    {
-        if(iteratorNames.value())
-        {
-            delete iteratorNames.value();
-        }
-        iteratorNames = m_mapPlayerNames.erase(iteratorNames);
-    }
+    qDeleteAll(m_mapPlayerNames);
+    m_mapPlayerNames.clear(); //TODO: necessary?
     
     delete m_continueLabel;
     delete m_newGameLabel;
