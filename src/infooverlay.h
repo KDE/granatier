@@ -25,7 +25,7 @@ class QGraphicsScene;
 class QGraphicsTextItem;
 class QGraphicsSvgItem;
 class QGraphicsRectItem;
-class KSvgRenderer;
+class QSvgRenderer;
 class Game;
 class Player;
 
@@ -37,7 +37,7 @@ class InfoOverlay
 private:
     QGraphicsScene* m_graphicsScene;
     Game* m_game;
-    KSvgRenderer* m_renderer;
+    QSvgRenderer* m_renderer;
     
     QMap <Player*, QList<QGraphicsSvgItem*> > m_mapScore;
     QMap <Player*, QGraphicsTextItem*> m_mapPlayerNames;
@@ -61,7 +61,7 @@ public:
       * @param p_renderer the renderer instance
       * @param p_scene the gamescene instance
       */
-    InfoOverlay (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene* p_scene);
+    InfoOverlay (Game* p_game, QSvgRenderer* p_renderer, QGraphicsScene* p_scene);
 
     /**
       * Deletes the InfoOverlay instance.

@@ -39,7 +39,7 @@ class InfoOverlay;
 class InfoSidebar;
 class QPixmapCache;
 class KPixmapCache;
-class KSvgRenderer;
+class QSvgRenderer;
 
 /**
  * @brief This class contains all the Game elements to be drawn on the screen by the GameView instance.
@@ -91,13 +91,13 @@ private:
     KPixmapCache* m_cache; //TODO: check if the cache is used
 
     /** The SVG renderer */
-    KSvgRenderer* m_rendererSelectedTheme;
-    KSvgRenderer* m_rendererDefaultTheme;
-    KSvgRenderer* m_rendererBackground;
-    KSvgRenderer* m_rendererArenaItems;
-    KSvgRenderer* m_rendererBonusItems;
-    KSvgRenderer* m_rendererBombItems;
-    KSvgRenderer* m_rendererScoreItems;
+    QSvgRenderer* m_rendererSelectedTheme;
+    QSvgRenderer* m_rendererDefaultTheme;
+    QSvgRenderer* m_rendererBackground;
+    QSvgRenderer* m_rendererArenaItems;
+    QSvgRenderer* m_rendererBonusItems;
+    QSvgRenderer* m_rendererBombItems;
+    QSvgRenderer* m_rendererScoreItems;
     
 public:
 

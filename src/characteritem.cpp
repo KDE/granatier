@@ -19,11 +19,11 @@
 #include "characteritem.h"
 #include "character.h"
 
-#include <KSvgRenderer>
+#include <QSvgRenderer>
 
 CharacterItem::CharacterItem(Character* p_model) : ElementItem (p_model)
 {
-    m_renderer = new KSvgRenderer();
+    m_renderer = new QSvgRenderer();
     setSharedRenderer(m_renderer);
     connect(p_model, SIGNAL(dead()), this, SLOT(setDead()));
 }

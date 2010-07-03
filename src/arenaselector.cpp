@@ -25,7 +25,7 @@
 
 #include <QGraphicsView>
 #include <QGraphicsSvgItem>
-#include <KSvgRenderer>
+#include <QSvgRenderer>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
@@ -58,7 +58,7 @@ class ArenaSelector::ArenaSelectorPrivate
         QString lookupDirectory;
         QString groupName;
         
-        KSvgRenderer* m_renderer;
+        QSvgRenderer* m_renderer;
         QGraphicsScene* m_graphicsScene;
         QList <QGraphicsSvgItem*> m_arenaItems;
 
@@ -233,7 +233,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     }
     delete m_renderer;
     
-    m_renderer = new KSvgRenderer;
+    m_renderer = new QSvgRenderer;
     m_renderer->load(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
     
     for (int i = 0; i < arena->getNbRows(); ++i)

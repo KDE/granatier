@@ -22,7 +22,7 @@
 #include "elementitem.h"
 
 class Character;
-class KSvgRenderer;
+class QSvgRenderer;
 
 /**
  * @brief This class is the graphical representation of a Character.
@@ -33,7 +33,7 @@ Q_OBJECT
 
 protected:
     /** Shared renderer for the player frames */
-    KSvgRenderer* m_renderer;
+    QSvgRenderer* m_renderer;
 
 public:
 

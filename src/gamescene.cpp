@@ -40,7 +40,7 @@
 #include <QPainter>
 #include <QPixmapCache>
 #include <KPixmapCache>
-#include <KSvgRenderer>
+#include <QSvgRenderer>
 #include <KStandardDirs>
 #include <QGraphicsView>
 
@@ -60,7 +60,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_SvgScaleFactor = 1;
 
     // Load the selected SVG file
-    m_rendererSelectedTheme = new KSvgRenderer();
+    m_rendererSelectedTheme = new QSvgRenderer();
     loadTheme();
     // Load the default SVG file as fallback
     bool selectedThemeIsDefault = true;
@@ -68,7 +68,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     if(Settings::self()->theme() != "themes/granatier.desktop")
     {
         selectedThemeIsDefault = false;
-        m_rendererDefaultTheme = new KSvgRenderer();
+        m_rendererDefaultTheme = new QSvgRenderer();
         m_rendererDefaultTheme->load(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
     }
     

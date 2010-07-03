@@ -21,7 +21,7 @@
 
 #include <KStandardDirs>
 #include <knewstuff2/engine.h>
-#include <KSvgRenderer>
+#include <QSvgRenderer>
 #include <QGraphicsSvgItem>
 
 #include "ui_playerselector.h"
@@ -56,7 +56,7 @@ public:
     PlayerSelector* q;
     
     Ui::PlayerSelectorBase ui;
-    KSvgRenderer* m_renderer;
+    QSvgRenderer* m_renderer;
     QGraphicsScene* m_graphicsScene;
     QGraphicsSvgItem* m_playerPreview;
     
@@ -174,7 +174,7 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()
     delete m_renderer;
     int nIndex = ui.playerList->currentIndex().row();
     //TODO: check if renderer is needed
-    m_renderer = new KSvgRenderer;
+    m_renderer = new QSvgRenderer;
     m_renderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(m_playerSettings->playerPreviewFile(strPlayerIDs[nIndex]))));
     int nDummy = ui.kcfg_Dummy->value() + 1;
     ui.kcfg_Dummy->setValue(nDummy);

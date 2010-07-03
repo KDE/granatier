@@ -30,7 +30,7 @@
 #include <QTimeLine>
 #include <QGraphicsScene>
 #include <KStandardDirs>
-#include <KSvgRenderer>
+#include <QSvgRenderer>
 
 static int nCounter = 0;
 

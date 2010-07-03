@@ -25,11 +25,11 @@
 #include <QGraphicsSvgItem>
 #include <QGraphicsRectItem>
 #include <QTimer>
-#include <KSvgRenderer>
+#include <QSvgRenderer>
 #include <KLocale>
 #include <KStandardDirs>
 
-InfoSidebar::InfoSidebar (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene* p_scene) : QObject()
+InfoSidebar::InfoSidebar (Game* p_game, QSvgRenderer* p_renderer, QGraphicsScene* p_scene) : QObject()
 {
     m_game = p_game;
     m_renderer = p_renderer;
@@ -77,7 +77,7 @@ InfoSidebar::InfoSidebar (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene
         QBrush dimmRectBrush(QColor(0,0,0,200));
         //create the player icons
         QGraphicsSvgItem* svgItem = new QGraphicsSvgItem;
-        KSvgRenderer* playerRenderer = new KSvgRenderer;
+        QSvgRenderer* playerRenderer = new QSvgRenderer;
         playerRenderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(playerList[i]->getGraphicsPath())));
         svgItem->setSharedRenderer(playerRenderer);
         if(playerRenderer->elementExists("player_0"))

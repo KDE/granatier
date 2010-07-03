@@ -28,7 +28,7 @@ class QGraphicsScene;
 class QGraphicsTextItem;
 class QGraphicsSvgItem;
 class QGraphicsRectItem;
-class KSvgRenderer;
+class QSvgRenderer;
 class Game;
 class Player;
 class QRectF;
@@ -44,7 +44,7 @@ class InfoSidebar : public QObject
 private:
     QGraphicsScene* m_graphicsScene;
     Game* m_game;
-    KSvgRenderer* m_renderer;
+    QSvgRenderer* m_renderer;
     
     QMap <Player*, QGraphicsSvgItem*> m_mapPlayerSvgs;
     QMap <Player*, QGraphicsTextItem*> m_mapPlayerNames;
@@ -67,7 +67,7 @@ public:
       * @param p_renderer the renderer instance
       * @param p_scene the gamescene instance
       */
-    InfoSidebar (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene* p_scene);
+    InfoSidebar (Game* p_game, QSvgRenderer* p_renderer, QGraphicsScene* p_scene);
 
     /**
       * Deletes the InfoSidebar instance.

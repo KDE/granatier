@@ -23,10 +23,10 @@
 #include <QGraphicsScene>
 #include <QGraphicsSvgItem>
 #include <QGraphicsRectItem>
-#include <KSvgRenderer>
+#include <QSvgRenderer>
 #include <KLocale>
 
-InfoOverlay::InfoOverlay (Game* p_game, KSvgRenderer* p_renderer, QGraphicsScene* p_scene)
+InfoOverlay::InfoOverlay (Game* p_game, QSvgRenderer* p_renderer, QGraphicsScene* p_scene)
 {
     m_game = p_game;
     m_renderer = p_renderer;
