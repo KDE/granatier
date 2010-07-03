@@ -47,10 +47,10 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bom
             strElemetId = QString("bomb_blast_west_0");
             break;
     }
-    
-    if(m_sharedPixmapCache->find(strElemetId))
+
+    QPixmap pixmap;
+    if(m_sharedPixmapCache->find(strElemetId, &pixmap))
     {
-        QPixmap pixmap = *(m_sharedPixmapCache->find(strElemetId));
         setPixmap(pixmap);
         setScale(m_svgScaleFactor);
         setVisible(true);
@@ -135,7 +135,6 @@ void BombExplosionItem::updateAnimationn(int nFrame)
     QPixmap pixmapNew;
     if(m_sharedPixmapCache->find(strElemetId, &pixmapNew))
     {
-        m_sharedPixmapCache->find(strElemetId), &pixmapNew;
         setPixmap(pixmapNew);
         setScale(m_svgScaleFactor);
     }
