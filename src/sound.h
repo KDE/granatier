@@ -21,7 +21,8 @@
 #include <QObject>
 
 #ifdef GRANATIER_USE_GLUON
-    class KALSound;
+    #include <gluon/audio/engine.h>
+    #include <gluon/audio/sound.h>
 #else
     #include <Phonon/MediaObject>
 #endif
@@ -39,7 +40,7 @@ Q_OBJECT
 private:
     #ifdef GRANATIER_USE_GLUON
         /** User KALEngine for sound */
-        KALSound* m_sound;
+        GluonAudio::Sound* m_sound;
     #else
         /** Use Phonon for sound */
         qint64 m_lastPlayedTime;

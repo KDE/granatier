@@ -21,16 +21,11 @@
 #include <KConfig>
 #include <QDateTime>
 
-#ifdef GRANATIER_USE_GLUON
-    #include <KDE/KALEngine>
-    #include <KDE/KALSound>
-#endif
-
 Sound::Sound (QString strFilePath)
 {
     #ifdef GRANATIER_USE_GLUON
-        KALEngine::instance();//TODO: use KALEngine::instance(Phonon::GameCategory) when it works
-        m_sound = new KALSound;
+        GluonAudio::Engine::instance();
+        m_sound = new GluonAudio::Sound;
         m_sound->load(strFilePath);
     #else
         m_lastPlayedTime = 0;

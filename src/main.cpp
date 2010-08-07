@@ -42,7 +42,7 @@ int main(int argc, char** argv)
     // Insert libkdegames catalog, for translation of libkdegames messages
     KGlobal::locale()->insertCatalog("libkdegames");
     #ifndef GRANATIER_USE_GLUON
-        qWarning() << "Using Phonon for sound. For the best sound experience you have to build granatier with KAL from the gluon project.";
+    qWarning() << "Using Phonon for sound. GluonAudio provides a better sound experience, but there is no stable release of Gluon, yet. The current supported version is 0.70.";
     #endif
     // Create the main window
     MainWindow* window = new MainWindow();

@@ -44,11 +44,11 @@ kde4_add_app_icon(granatierSources "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/hi*-
 kde4_add_executable(granatier ${granatierSources})
 
 target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} kdegames ${KDE4_KNEWSTUFF2_LIBRARY})
-if(GRANATIER_KAL_SOUND)
-    target_link_libraries(granatier ${KAL_LIBRARY})
-else(GRANATIER_KAL_SOUND)
+if(GRANATIER_GLUON_AUDIO)
+    target_link_libraries(granatier ${GLUON_AUDIO_LIBS})
+else(GRANATIER_GLUON_AUDIO)
     target_link_libraries(granatier ${KDE4_PHONON_LIBS})
-endif(GRANATIER_KAL_SOUND)
+endif(GRANATIER_GLUON_AUDIO)
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
 
