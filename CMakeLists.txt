@@ -16,7 +16,7 @@ if(GRANATIER_USE_GLUON_SOUND_BACKEND)
         message(WARNING "Gluon was not found! Using Phonon instead!")
     endif(GLUONAUDIO_FOUND)
 endif(GRANATIER_USE_GLUON_SOUND_BACKEND)
-macro_log_feature(GRANATIER_GLUON_AUDIO "Gluon is a Free and Open Source framework for creating and distributing games. Granatier uses GluonAudio for sound output if available." "http://gluon.gamingfreedom.org/" FALSE "0.70" "GluonAudio provides a better sound experience than Phonon for games, but there is no stable release of Gluon, yet. The current supported version is 0.70. If Gluon is not found, Phonon is used instead.")
+macro_log_feature(GRANATIER_GLUON_AUDIO "Gluon" "Free and Open Source framework for creating and distributing games" "http://gluon.gamingfreedom.org/" FALSE "0.70" "Granatier uses GluonAudio for sound output if available. GluonAudio provides a better sound experience than Phonon for games, but there is no stable release of Gluon, yet. The current supported version is 0.70. If Gluon is not found, Phonon is used instead.")
 
 add_subdirectory(themes) 
 add_subdirectory(sounds)
