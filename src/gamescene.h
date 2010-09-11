@@ -36,8 +36,6 @@ class BombItem;
 class BombExplosionItem;
 class InfoOverlay;
 class InfoSidebar;
-class QPixmapCache;
-class KPixmapCache;
 class QSvgRenderer;
 
 class KGameRenderer;
@@ -85,12 +83,7 @@ private:
     /** The labels to displayed the remaining time */
     QGraphicsTextItem* m_remainingTimeLabel;
 
-    /** The pixmap cache */
-    QPixmapCache* m_pixmapCache;
     qreal m_SvgScaleFactor;
-    
-    /** The pixmap cache */
-    KPixmapCache* m_cache; //TODO: check if the cache is used
 
     /** The SVG renderer */
     QSvgRenderer* m_rendererSelectedTheme;
@@ -105,6 +98,7 @@ private:
     KGameRenderer* m_krendererDefaultTheme;
     KGameRenderer* m_rendererBackground;
     KGameRenderer* m_krendererArenaItems;
+    KGameRenderer* m_krendererBombItems;
     
 public:
 

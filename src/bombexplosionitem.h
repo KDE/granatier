@@ -19,16 +19,16 @@
 #ifndef BOMBEXPLOSIONITEM_H
 #define BOMBEXPLOSIONITEM_H
 
-#include <QGraphicsPixmapItem>
+#include <KGameRenderedItem>
 
 class Bomb;
 class BombItem;
-class QPixmapCache;
+class KGameRenderer;
 
 /**
  * @brief This class is the graphical representation of a Bomb explosion.
  */
-class BombExplosionItem : public QGraphicsPixmapItem
+class BombExplosionItem : public KGameRenderedItem
 {
 public:
     /** The Explosion directions */
@@ -51,14 +51,8 @@ protected:
     /** The ID of the Bomb that causes the explosion */
     int m_explosionID;
     
-    /** The shared pixmap cache */
-    QPixmapCache* m_sharedPixmapCache;
-    
     /** The scale factor from the svg for the pixmap */
     qreal m_svgScaleFactor;
-    
-    /** flag if the pixmap is not in the pixmap cache */
-    bool m_pixmapMissing;
 
 public:
 
@@ -70,7 +64,7 @@ public:
      * @param sharedPixmapCache the pixmap cache with the blast pixmaps
      * @param svgScaleFactor the scale factor of the pixmap
      */
-    BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, QPixmapCache* sharedPixmapCache, qreal svgScaleFactor);
+    BombExplosionItem(Bomb* p_model, BombExplosionItem::Direction direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor);
 
     /**
      * Deletes the BombExplosionItem instance.
@@ -101,12 +95,6 @@ public:
      * @param nFrame the next animation frame
      */
      void updateAnimationn(int nFrame);
-     
-     /**
-     * indicator if the current pixmap is not found in the pixmap cache
-     * @return indicator if pixmap is missing
-     */
-     bool pixmapMissing();
 };
 
 #endif

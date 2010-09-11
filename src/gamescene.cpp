@@ -38,8 +38,6 @@
 #include <KGameTheme>
 #include <KLocale>
 #include <QPainter>
-#include <QPixmapCache>
-#include <KPixmapCache>
 #include <QSvgRenderer>
 #include <KStandardDirs>
 #include <QGraphicsView>
@@ -53,13 +51,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     connect(p_game, SIGNAL(pauseChanged(bool, bool)), this, SLOT(setPaused(bool, bool)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
     connect(p_game, SIGNAL(infoChanged(Game::InformationTypes)), this, SLOT(updateInfo(const Game::InformationTypes)));
-
-    // Set the pixmap cache limit to improve performance
-    setItemIndexMethod(NoIndex);
-    m_cache = new KPixmapCache("granatier_cache");
-    m_cache->setCacheLimit(3 * 1024);
     
-    m_pixmapCache = new QPixmapCache;
     m_SvgScaleFactor = 1;
     
     // Load the selected SVG file
@@ -139,10 +131,12 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("bomb_blast_west_0")))
     {
         m_rendererBombItems = m_rendererSelectedTheme;
+        m_krendererBombItems = m_krendererSelectedTheme;
     }
     else
     {
         m_rendererBombItems = m_rendererDefaultTheme;
+        m_krendererBombItems = m_krendererDefaultTheme;
     }
     
     // set the renderer for the score items
@@ -443,7 +437,6 @@ GameScene::~GameScene()
     delete m_remainingTimeLabel;
     delete m_arenaNameLabel;
     
-    delete m_cache;
     delete m_rendererSelectedTheme;
     delete m_rendererDefaultTheme;
     
@@ -580,32 +573,6 @@ void GameScene::resizeBackground()
     //update pixmaps
     updatePixmapGraphics();
     
-    //update KGameRenderedItems TODO:move to updatePixmapGraphics after BombExplosionItem is ported to KameRendererItem
-    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
-    {
-        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
-        {
-            if(m_arenaItem[i][j] != NULL)
-            {
-                svgSize = m_krendererArenaItems->boundsOnSprite(m_arenaItem[i][j]->spriteKey()).size().toSize();
-                
-                QPoint topLeft(0, 0); 
-                topLeft = views().at(0)->mapFromScene(topLeft);
-                
-                QPoint bottomRight(svgSize.width(), svgSize.height()); 
-                bottomRight = views().at(0)->mapFromScene(bottomRight);
-                
-                svgSize.setHeight(bottomRight.y() - topLeft.y());
-                svgSize.setWidth(bottomRight.x() - topLeft.x());
-                
-                //TODO: squeeze into a hard pixel grid
-                //m_arenaItem[i][j]->setRenderSize(QSize(Cell::SIZE / m_SvgScaleFactor, Cell::SIZE / m_SvgScaleFactor));
-                m_arenaItem[i][j]->setRenderSize(svgSize);
-                m_arenaItem[i][j]->setScale(m_SvgScaleFactor);
-            }
-        }
-    }
-    
     //update overlay
     m_infoOverlay->resizeDimmOverlay(x, y, width, height);
 }
@@ -642,9 +609,9 @@ void GameScene::updatePixmapGraphics()
     QSize svgSize;
     
     //update the blast pixmaps
-    QString strElementID;
+    QString strSpriteKey;
     QString strDirection;
-    m_pixmapCache->clear();
+    
     for(int nDirection = BombExplosionItem::NORTH; nDirection < 4; nDirection++)
     {
         switch(nDirection)
@@ -665,8 +632,8 @@ void GameScene::updatePixmapGraphics()
         
         for(int i = 0; i < 5; i++)
         {
-            strElementID = QString("bomb_blast_%1_%2").arg(strDirection).arg(i);
-            svgSize = m_rendererBombItems->boundsOnElement(strElementID).size().toSize();
+            strSpriteKey = QString("bomb_blast_%1_%2").arg(strDirection).arg(i);
+            svgSize = m_rendererBombItems->boundsOnElement(strSpriteKey).size().toSize();
             
             QPoint topLeft(0, 0); 
             topLeft = views().at(0)->mapFromScene(topLeft);
@@ -676,13 +643,32 @@ void GameScene::updatePixmapGraphics()
             
             svgSize.setHeight(bottomRight.y() - topLeft.y());
             svgSize.setWidth(bottomRight.x() - topLeft.x());
-            
-            pixmap = svgSize;
-            pixmap.fill(Qt::transparent);
-            QPainter painter(&pixmap);
-            m_rendererBombItems->render(&painter, strElementID);
-            painter.end();
-            m_pixmapCache->insert(strElementID, pixmap);
+        }
+    }
+    
+    //update ArenaItems
+    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
+    {
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            if(m_arenaItem[i][j] != NULL)
+            {
+                svgSize = m_krendererArenaItems->boundsOnSprite(m_arenaItem[i][j]->spriteKey()).size().toSize();
+                
+                QPoint topLeft(0, 0); 
+                topLeft = views().at(0)->mapFromScene(topLeft);
+                
+                QPoint bottomRight(svgSize.width(), svgSize.height()); 
+                bottomRight = views().at(0)->mapFromScene(bottomRight);
+                
+                svgSize.setHeight(bottomRight.y() - topLeft.y());
+                svgSize.setWidth(bottomRight.x() - topLeft.x());
+                
+                //TODO: squeeze into a hard pixel grid
+                //m_arenaItem[i][j]->setRenderSize(QSize(Cell::SIZE / m_SvgScaleFactor, Cell::SIZE / m_SvgScaleFactor));
+                m_arenaItem[i][j]->setRenderSize(svgSize);
+                m_arenaItem[i][j]->setScale(m_SvgScaleFactor);
+            }
         }
     }
 }
@@ -703,7 +689,6 @@ void GameScene::loadTheme()
     {
         return;
     }
-    m_cache->discard();
     
     m_krendererSelectedTheme = new KGameRenderer(Settings::self()->theme());
     
@@ -980,13 +965,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
-                if(bombExplosionItem->pixmapMissing())
-                {
-                    delete bombExplosionItem;
-                    updatePixmapGraphics();
-                    bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
-                }
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_krendererBombItems, m_SvgScaleFactor);
                 bombExplosionItem->setPosition(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
@@ -1037,13 +1016,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
-                if(bombExplosionItem->pixmapMissing())
-                {
-                    delete bombExplosionItem;
-                    updatePixmapGraphics();
-                    bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
-                }
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_krendererBombItems, m_SvgScaleFactor);
                 bombExplosionItem->setPosition(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
@@ -1094,13 +1067,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
-                if(bombExplosionItem->pixmapMissing())
-                {
-                    delete bombExplosionItem;
-                    updatePixmapGraphics();
-                    bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
-                }
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_krendererBombItems, m_SvgScaleFactor);
                 bombExplosionItem->setPosition(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);
@@ -1151,13 +1118,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
-                if(bombExplosionItem->pixmapMissing())
-                {
-                    delete bombExplosionItem;
-                    updatePixmapGraphics();
-                    bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_pixmapCache, m_SvgScaleFactor);
-                }
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_krendererBombItems, m_SvgScaleFactor);
                 bombExplosionItem->setPosition(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 addItem(bombExplosionItem);

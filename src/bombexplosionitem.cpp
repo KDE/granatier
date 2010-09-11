@@ -21,45 +21,35 @@
 #include "bombitem.h"
 #include "cell.h"
 
-#include <QPixmapCache>
+#include <KGameRenderer>
 
-BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, QPixmapCache* sharedPixmapCache, qreal svgScaleFactor) : QGraphicsPixmapItem()
+BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor) : KGameRenderedItem(renderer, "")
 {
     m_direction = direction;
     m_explosionID = p_model->explosionID();
     
-    m_sharedPixmapCache = sharedPixmapCache;
     m_svgScaleFactor = svgScaleFactor;
     
     QString strElemetId;
     switch(m_direction)
     {
         case NORTH:
-            strElemetId = QString("bomb_blast_north_0");
+            setSpriteKey("bomb_blast_north_0");
             break;
         case EAST:
-            strElemetId = QString("bomb_blast_east_0");
+            setSpriteKey("bomb_blast_east_0");
             break;
         case SOUTH:
-            strElemetId = QString("bomb_blast_south_0");
+            setSpriteKey("bomb_blast_south_0");
             break;
         case WEST:
-            strElemetId = QString("bomb_blast_west_0");
+            setSpriteKey("bomb_blast_west_0");
             break;
     }
-
-    QPixmap pixmap;
-    if(m_sharedPixmapCache->find(strElemetId, &pixmap))
-    {
-        setPixmap(pixmap);
-        setScale(m_svgScaleFactor);
-        setVisible(true);
-        m_pixmapMissing = false;
-    }
-    else
-    {
-        m_pixmapMissing = true;
-    }
+    
+    QSize svgSize = renderer->boundsOnSprite(spriteKey()).size().toSize() / m_svgScaleFactor;
+    setRenderSize(svgSize);
+    setScale(m_svgScaleFactor);
 }
 
 BombExplosionItem::~BombExplosionItem()
@@ -119,28 +109,16 @@ void BombExplosionItem::updateAnimationn(int nFrame)
     switch(m_direction)
     {
         case NORTH:
-            strElemetId = QString("bomb_blast_north_%1").arg(nFrame);
+            setSpriteKey(QString("bomb_blast_north_%1").arg(nFrame));
             break;
         case EAST:
-            strElemetId = QString("bomb_blast_east_%1").arg(nFrame);
+            setSpriteKey(QString("bomb_blast_east_%1").arg(nFrame));
             break;
         case SOUTH:
-            strElemetId = QString("bomb_blast_south_%1").arg(nFrame);
+            setSpriteKey(QString("bomb_blast_south_%1").arg(nFrame));
             break;
         case WEST:
-            strElemetId = QString("bomb_blast_west_%1").arg(nFrame);
+            setSpriteKey(QString("bomb_blast_west_%1").arg(nFrame));
             break;
     }
-    
-    QPixmap pixmapNew;
-    if(m_sharedPixmapCache->find(strElemetId, &pixmapNew))
-    {
-        setPixmap(pixmapNew);
-        setScale(m_svgScaleFactor);
-    }
-}
-
-bool BombExplosionItem::pixmapMissing()
-{
-    return m_pixmapMissing;
 }
