@@ -34,12 +34,14 @@ class PlayerItem;
 class Bomb;
 class BombItem;
 class BombExplosionItem;
-class QGraphicsPixmapItem;
 class InfoOverlay;
 class InfoSidebar;
 class QPixmapCache;
 class KPixmapCache;
 class QSvgRenderer;
+
+class KGameRenderer;
+class KGameRenderedItem;
 
 /**
  * @brief This class contains all the Game elements to be drawn on the screen by the GameView instance.
@@ -69,7 +71,7 @@ private:
     BonusItem*** m_bonusItems;
 
     /** The Arena background */
-    QGraphicsPixmapItem* m_arenaBackground;
+    KGameRenderedItem* m_arenaBackground;
     
     /** The overlay to show the score at the end of a round*/
     InfoOverlay* m_infoOverlay;
@@ -93,11 +95,15 @@ private:
     /** The SVG renderer */
     QSvgRenderer* m_rendererSelectedTheme;
     QSvgRenderer* m_rendererDefaultTheme;
-    QSvgRenderer* m_rendererBackground;
     QSvgRenderer* m_rendererArenaItems;
     QSvgRenderer* m_rendererBonusItems;
     QSvgRenderer* m_rendererBombItems;
     QSvgRenderer* m_rendererScoreItems;
+    
+    /** The KGameRenderer */
+    KGameRenderer* m_krendererSelectedTheme;
+    KGameRenderer* m_krendererDefaultTheme;
+    KGameRenderer* m_rendererBackground;
     
 public:
 

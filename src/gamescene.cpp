@@ -44,6 +44,9 @@
 #include <KStandardDirs>
 #include <QGraphicsView>
 
+#include <KGameRenderer>
+#include <KGameRenderedItem>
+
 GameScene::GameScene(Game* p_game) : m_game(p_game)
 {
     connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
@@ -58,27 +61,30 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     
     m_pixmapCache = new QPixmapCache;
     m_SvgScaleFactor = 1;
-
+    
     // Load the selected SVG file
     m_rendererSelectedTheme = new QSvgRenderer();
+    m_krendererSelectedTheme = 0;
     loadTheme();
     // Load the default SVG file as fallback
     bool selectedThemeIsDefault = true;
     m_rendererDefaultTheme = 0;
-    if(Settings::self()->theme() != "themes/granatier.desktop")
+    m_krendererDefaultTheme = 0;
+    if(Settings::self()->theme() != "themes/granatier.desktop") //TODO: || m_krendererSelectedTheme == 0
     {
         selectedThemeIsDefault = false;
         m_rendererDefaultTheme = new QSvgRenderer();
         m_rendererDefaultTheme->load(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
+        m_krendererDefaultTheme = new KGameRenderer(KStandardDirs::locate("appdata", "themes/granatier.desktop"));
     }
     
-    if(selectedThemeIsDefault || m_rendererSelectedTheme->elementExists("background"))
+    if(selectedThemeIsDefault || m_krendererSelectedTheme->spriteExists("background"))
     {
-        m_rendererBackground = m_rendererSelectedTheme;
+        m_rendererBackground = m_krendererSelectedTheme;
     }
     else
     {
-        m_rendererBackground = m_rendererDefaultTheme;
+        m_rendererBackground = m_krendererDefaultTheme;
     }
     
     // set the renderer for the arena items TODO: add all the arena items
@@ -99,6 +105,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         m_rendererArenaItems = m_rendererDefaultTheme;
     }
+    
     // set the renderer for the bonus items TODO: add all the bonus items
     if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("bonus_speed") &&
         m_rendererSelectedTheme->elementExists("bonus_bomb") &&
@@ -120,6 +127,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         m_rendererBonusItems = m_rendererDefaultTheme;
     }
+    
     // set the renderer for the bomb items
     if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("bomb") &&
         m_rendererSelectedTheme->elementExists("bomb_blast_core_0") &&
@@ -148,6 +156,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
 
     // Create the PlayerItems and the points labels
     QList <Player*> players = p_game->getPlayers();
+    
     PlayerItem* playerItem;
     for(int i = 0; i < players.size(); i++)
     {
@@ -161,7 +170,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         
         connect (playerItem, SIGNAL(bonusItemTaken(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
     }
-
+    
     // The remaining time
     m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
     m_remainingTimeLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
@@ -177,22 +186,11 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
                  m_game->getArena()->getNbColumns()*Cell::SIZE,
                  m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
     
-    //create the background
-    QSize backgroundSize = m_rendererBackground->boundsOnElement("background").size().toSize();
-    //paint svg to pixmap
-    QPixmap pixmapBG = backgroundSize;
-    pixmapBG.fill(Qt::black);
-    QPainter painterBG(&pixmapBG);
-    m_rendererBackground->render(&painterBG, "background");
-    painterBG.end();
-    
-    //set pixmap
-    m_arenaBackground = new QGraphicsPixmapItem();
+    //create the background    
+    m_rendererBackground->setStrategyEnabled(KGameRenderer::UseDiskCache, false); //TODO: why does it crash with disc cache on?
+    m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
     m_arenaBackground->setZValue(-5);
-    m_arenaBackground->setPixmap(pixmapBG);
     m_arenaBackground->setPos(0, 0);
-    m_arenaBackground->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
-    m_arenaBackground->setCacheMode(QGraphicsItem::DeviceCoordinateCache, backgroundSize);
     addItem(m_arenaBackground);
     
     // create the info sidebar
@@ -445,6 +443,9 @@ GameScene::~GameScene()
     delete m_cache;
     delete m_rendererSelectedTheme;
     delete m_rendererDefaultTheme;
+    
+    delete m_krendererSelectedTheme;
+    delete m_krendererDefaultTheme;
 }
 
 void GameScene::cleanUp()
@@ -566,20 +567,12 @@ void GameScene::resizeBackground()
     //get the graphicsview size
     QSize svgSize = views().at(0)->size();
     
-    //paint svg to pixmap
-    QPixmap pixmap;
-    pixmap = svgSize;
-    pixmap.fill(Qt::black);
-    QPainter painter(&pixmap);
-    m_rendererBackground->render(&painter, "background");
-    painter.end();
-    
     //set pixmap
-    m_arenaBackground->setPixmap(pixmap);
+    m_arenaBackground->setRenderSize(svgSize);
     m_arenaBackground->setPos(x, y);
     m_arenaBackground->setScale(m_SvgScaleFactor);
-    m_arenaBackground->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
-    m_arenaBackground->setCacheMode(QGraphicsItem::DeviceCoordinateCache, svgSize);
+    //m_arenaBackground->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
+    //m_arenaBackground->setCacheMode(QGraphicsItem::DeviceCoordinateCache, svgSize);
     
     //update pixmaps
     updatePixmapGraphics();
@@ -682,6 +675,9 @@ void GameScene::loadTheme()
         return;
     }
     m_cache->discard();
+    
+    m_krendererSelectedTheme = new KGameRenderer(Settings::self()->theme());
+    
     update(0, 0, width(), height());
 
     // Update the theme config: if the default theme is selected, no theme entry is written -> the theme selector does not select the theme
