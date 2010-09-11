@@ -24,8 +24,7 @@
 #include "mapparser.h"
 
 #include <QGraphicsView>
-#include <QGraphicsSvgItem>
-#include <QSvgRenderer>
+#include <KGameRenderer>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
 #include <knewstuff2/engine.h>
@@ -58,9 +57,9 @@ class ArenaSelector::ArenaSelectorPrivate
         QString lookupDirectory;
         QString groupName;
         
-        QSvgRenderer* m_renderer;
+        KGameRenderer* m_renderer;
         QGraphicsScene* m_graphicsScene;
-        QList <QGraphicsSvgItem*> m_arenaItems;
+        QList <KGameRenderedItem*> m_arenaItems;
 
         void setupData(KConfigSkeleton* config, ArenaSelector::NewStuffState knsflags);
         void findArenas(const QString &initialSelection);
@@ -233,24 +232,50 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     }
     delete m_renderer;
     
-    m_renderer = new QSvgRenderer;
-    m_renderer->load(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
+    m_renderer = new KGameRenderer(KStandardDirs::locate("appdata", QString("themes/granatier.desktop")));
+    
+    ui.arenaPreview->setSceneRect(0, 0, arena->getNbColumns()*Cell::SIZE, arena->getNbRows()*Cell::SIZE);
+    ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
+    
+    qreal x = m_graphicsScene->views().at(0)->x();
+    qreal y = m_graphicsScene->views().at(0)->y();
+    qreal width = m_graphicsScene->views().at(0)->width();
+    qreal height = m_graphicsScene->views().at(0)->height();
+    QPointF topLeftView = m_graphicsScene->views().at(0)->mapToScene(0, 0);
+    QPointF bottomRightView = m_graphicsScene->views().at(0)->mapToScene(width, height);
+    QPixmap pixmap;
+    
+    x = topLeftView.x();
+    y = topLeftView.y();
+    width = bottomRightView.x() - x;
+    height = bottomRightView.y() - y;
+    
+    //calculate the scale factor between graphicsscene and graphicsview
+    //TODO: calcute with width and views().at(0)->width();
+    QPoint topLeft(0, 0);
+    QPoint bottomRight(100, 100);
+    topLeft = m_graphicsScene->views().at(0)->mapFromScene(topLeft);
+    bottomRight = m_graphicsScene->views().at(0)->mapFromScene(bottomRight);
+    qreal svgScaleFactor = 100.0 / (bottomRight.x() - topLeft.x());
+    
+    //the svg size
+    QSize svgSize;
     
     for (int i = 0; i < arena->getNbRows(); ++i)
     {
         for (int j = 0; j < arena->getNbColumns(); ++j)
         {
             // Create the ArenaItem and set the image
-            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE);
-            arenaItem->setSharedRenderer(m_renderer);
+            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE, m_renderer, "");
+            
             switch(arena->getCell(i,j).getType())
             {
                 case Cell::WALL:
-                    arenaItem->setElementId("arena_wall");
+                    arenaItem->setSpriteKey("arena_wall");
                     arenaItem->setZValue(-2);
                     break;
                 case Cell::BLOCK:
-                    arenaItem->setElementId("arena_block");
+                    arenaItem->setSpriteKey("arena_block");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::HOLE:
@@ -258,43 +283,55 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
                     arenaItem = NULL;
                     break;
                 case Cell::ICE:
-                    arenaItem->setElementId("arena_ice");
+                    arenaItem->setSpriteKey("arena_ice");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::BOMBMORTAR:
-                    arenaItem->setElementId("arena_bomb_mortar");
+                    arenaItem->setSpriteKey("arena_bomb_mortar");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWUP:
-                    arenaItem->setElementId("arena_arrow_up");
+                    arenaItem->setSpriteKey("arena_arrow_up");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWRIGHT:
-                    arenaItem->setElementId("arena_arrow_right");
+                    arenaItem->setSpriteKey("arena_arrow_right");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWDOWN:
-                    arenaItem->setElementId("arena_arrow_down");
+                    arenaItem->setSpriteKey("arena_arrow_down");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWLEFT:
-                    arenaItem->setElementId("arena_arrow_left");
+                    arenaItem->setSpriteKey("arena_arrow_left");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::GROUND:
                 default:
-                    arenaItem->setElementId("arena_ground");
+                    arenaItem->setSpriteKey("arena_ground");
                     arenaItem->setZValue(-1);
             }
             if(arenaItem)
             {
+                svgSize = m_renderer->boundsOnSprite(arenaItem->spriteKey()).size().toSize();
+                
+                QPoint topLeft(0, 0); 
+                topLeft = m_graphicsScene->views().at(0)->mapFromScene(topLeft);
+                
+                QPoint bottomRight(svgSize.width(), svgSize.height()); 
+                bottomRight = m_graphicsScene->views().at(0)->mapFromScene(bottomRight);
+                
+                svgSize.setHeight(bottomRight.y() - topLeft.y());
+                svgSize.setWidth(bottomRight.x() - topLeft.x());
+                
+                arenaItem->setRenderSize(svgSize);
+                arenaItem->setScale(svgScaleFactor);
+                
                 m_arenaItems.append(arenaItem);
                 m_graphicsScene->addItem(arenaItem);
             }
         }
     }
-    ui.arenaPreview->setSceneRect(0, 0, arena->getNbColumns()*Cell::SIZE, arena->getNbRows()*Cell::SIZE);
-    ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
 }
 
 void ArenaSelector::ArenaSelectorPrivate::_k_updateArenaList(const QString& strArena)

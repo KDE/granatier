@@ -19,13 +19,15 @@
 
 #include "arenaitem.h"
 
-ArenaItem::ArenaItem(qreal p_x, qreal p_y) : QGraphicsSvgItem()
+#include <KGameRenderer>
+
+ArenaItem::ArenaItem(qreal p_x, qreal p_y, KGameRenderer* renderer, const QString& spriteKey) : KGameRenderedItem(renderer, spriteKey)
 {
     // Init the view coordinates
     setPos(p_x, p_y);
     // Configure the cache in order to increase the performance
-    setCacheMode(DeviceCoordinateCache);
-    setMaximumCacheSize(QSize(500, 500));
+    //setCacheMode(DeviceCoordinateCache);
+    //setMaximumCacheSize(QSize(500, 500));
 }
 
 ArenaItem::~ArenaItem()

@@ -100,10 +100,12 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
         m_rendererSelectedTheme->elementExists("arena_arrow_left")))
     {
         m_rendererArenaItems = m_rendererSelectedTheme;
+        m_krendererArenaItems = m_krendererSelectedTheme;
     }
     else
     {
         m_rendererArenaItems = m_rendererDefaultTheme;
+        m_krendererArenaItems = m_krendererDefaultTheme;
     }
     
     // set the renderer for the bonus items TODO: add all the bonus items
@@ -216,20 +218,21 @@ void GameScene::init()
 {
     // Create the ArenaItems
     m_arenaItem = new ArenaItem**[m_game->getArena()->getNbRows()];
+    
     for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
     {
         m_arenaItem[i] = new ArenaItem*[m_game->getArena()->getNbColumns()];
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             // Create the ArenaItem and set the image
-            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE);
-            arenaItem->setSharedRenderer(m_rendererArenaItems);
+            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE, m_krendererArenaItems, "");
+            
             //TODO: use this function call
             //arenaItem->setElementId(m_game->getArena()->getCell(i,j).getElement()->getImageId());
             switch(m_game->getArena()->getCell(i,j).getType())
             {
                 case Cell::WALL:
-                    arenaItem->setElementId("arena_wall");
+                    arenaItem->setSpriteKey("arena_wall");
                     arenaItem->setZValue(-2);
                     break;
                 case Cell::HOLE:
@@ -237,33 +240,33 @@ void GameScene::init()
                     arenaItem = NULL;
                     break;
                 case Cell::ICE:
-                    arenaItem->setElementId("arena_ice");
+                    arenaItem->setSpriteKey("arena_ice");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::BOMBMORTAR:
-                    arenaItem->setElementId("arena_bomb_mortar");
+                    arenaItem->setSpriteKey("arena_bomb_mortar");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWUP:
-                    arenaItem->setElementId("arena_arrow_up");
+                    arenaItem->setSpriteKey("arena_arrow_up");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWRIGHT:
-                    arenaItem->setElementId("arena_arrow_right");
+                    arenaItem->setSpriteKey("arena_arrow_right");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWDOWN:
-                    arenaItem->setElementId("arena_arrow_down");
+                    arenaItem->setSpriteKey("arena_arrow_down");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::ARROWLEFT:
-                    arenaItem->setElementId("arena_arrow_left");
+                    arenaItem->setSpriteKey("arena_arrow_left");
                     arenaItem->setZValue(0);
                     break;
                 case Cell::GROUND:
                 case Cell::BLOCK:
                 default:
-                    arenaItem->setElementId("arena_ground");
+                    arenaItem->setSpriteKey("arena_ground");
                     arenaItem->setZValue(-1);
             }
             m_arenaItem[i][j] = arenaItem;
@@ -577,6 +580,32 @@ void GameScene::resizeBackground()
     //update pixmaps
     updatePixmapGraphics();
     
+    //update KGameRenderedItems TODO:move to updatePixmapGraphics after BombExplosionItem is ported to KameRendererItem
+    for (int i = 0; i < m_game->getArena()->getNbRows();++i)
+    {
+        for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
+        {
+            if(m_arenaItem[i][j] != NULL)
+            {
+                svgSize = m_krendererArenaItems->boundsOnSprite(m_arenaItem[i][j]->spriteKey()).size().toSize();
+                
+                QPoint topLeft(0, 0); 
+                topLeft = views().at(0)->mapFromScene(topLeft);
+                
+                QPoint bottomRight(svgSize.width(), svgSize.height()); 
+                bottomRight = views().at(0)->mapFromScene(bottomRight);
+                
+                svgSize.setHeight(bottomRight.y() - topLeft.y());
+                svgSize.setWidth(bottomRight.x() - topLeft.x());
+                
+                //TODO: squeeze into a hard pixel grid
+                //m_arenaItem[i][j]->setRenderSize(QSize(Cell::SIZE / m_SvgScaleFactor, Cell::SIZE / m_SvgScaleFactor));
+                m_arenaItem[i][j]->setRenderSize(svgSize);
+                m_arenaItem[i][j]->setScale(m_SvgScaleFactor);
+            }
+        }
+    }
+    
     //update overlay
     m_infoOverlay->resizeDimmOverlay(x, y, width, height);
 }
@@ -610,7 +639,7 @@ void GameScene::updatePixmapGraphics()
     m_SvgScaleFactor = 100.0 / (bottomRight.x() - topLeft.x());
     
     //the svg size
-    QSize svgSize;;
+    QSize svgSize;
     
     //update the blast pixmaps
     QString strElementID;

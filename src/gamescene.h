@@ -104,6 +104,7 @@ private:
     KGameRenderer* m_krendererSelectedTheme;
     KGameRenderer* m_krendererDefaultTheme;
     KGameRenderer* m_rendererBackground;
+    KGameRenderer* m_krendererArenaItems;
     
 public:
 

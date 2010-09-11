@@ -20,21 +20,23 @@
 #ifndef ARENAITEM_H
 #define ARENAITEM_H
 
-#include <QGraphicsSvgItem>
+#include <KGameRenderedItem>
+
+class KGameRenderer;
 
 /**
  * @brief This class is the graphical view of the Arena.
  */
-class ArenaItem : public QGraphicsSvgItem
+class ArenaItem : public KGameRenderedItem
 {
-    Q_OBJECT
+//    Q_OBJECT
 
 public:
 
     /**
       * Creates a new ArenaItem instances.
       */
-    ArenaItem(qreal p_x, qreal p_y);
+    ArenaItem(qreal p_x, qreal p_y, KGameRenderer* renderer, const QString& spriteKey);
 
     /**
       * Deletes the ArenaItem instances.
