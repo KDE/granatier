@@ -37,7 +37,8 @@ class Player : public Character
 private:
     /** The path to the Player image */
     QString m_playerName;
-    QString m_graphicsPath;
+    QString m_desktopFilePath;
+    QString m_graphicsFile;
     
     /** Player asked speed */
     qreal m_askedXSpeed, m_askedYSpeed;
@@ -116,14 +117,20 @@ public:
     void setShortcuts(const Shortcuts &keys);
 
     /**
-      * Gets the path to the Player SVG.
-      * @return the path to the Player SVG
+      * Gets the file for the Player SVG.
+      * @return the file for the Player SVG
       */
-    QString getGraphicsPath() const;
+    QString getGraphicsFile() const;
     
     /**
-      * Gets the path to the Player image.
-      * @return the path to the Player image
+     * Gets the path to the Player Desktop file.
+     * @return the path to the Player Desktop file
+     */
+    QString getDesktopFilePath() const;
+    
+    /**
+      * Gets the Player name.
+      * @return the Player name
       */
     QString getPlayerName() const;
 

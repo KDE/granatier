@@ -24,6 +24,7 @@
 class QTimeLine;
 class Player;
 class BonusItem;
+class KGameRenderer;
 
 /**
  * @brief This class manage the display of the Player.
@@ -57,8 +58,9 @@ public:
     /**
       * Creates a new PlayerItem instance.
       * @param p_model the Player model
+      * @param renderer the KGameRenderer
       */
-    PlayerItem(Player* p_model);
+    PlayerItem(Player* p_model, KGameRenderer* renderer);
 
     /**
       * Deletes the PlayerItem instance.

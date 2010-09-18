@@ -19,6 +19,8 @@
 
 #include "arenaitem.h"
 
+#include <QGraphicsScene>
+#include <QGraphicsView>
 #include <KGameRenderer>
 
 ArenaItem::ArenaItem(qreal p_x, qreal p_y, KGameRenderer* renderer, const QString& spriteKey) : KGameRenderedItem(renderer, spriteKey)
@@ -34,3 +36,21 @@ ArenaItem::~ArenaItem()
 {
 }
 
+void ArenaItem::updateGraphics(qreal svgScaleFactor)
+{
+    QSize svgSize = renderer()->boundsOnSprite(spriteKey()).size().toSize();
+    
+    QPoint topLeft(0, 0);
+    topLeft = scene()->views().at(0)->mapFromScene(topLeft);
+    
+    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+    bottomRight = scene()->views().at(0)->mapFromScene(bottomRight);
+    
+    svgSize.setHeight(bottomRight.y() - topLeft.y());
+    svgSize.setWidth(bottomRight.x() - topLeft.x());
+    
+    //TODO: squeeze into a hard pixel grid
+    //m_arenaItem[i][j]->setRenderSize(QSize(Cell::SIZE / m_SvgScaleFactor, Cell::SIZE / m_SvgScaleFactor));
+    setRenderSize(svgSize);
+    setScale(svgScaleFactor);
+}

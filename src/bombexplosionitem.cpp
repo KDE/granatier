@@ -21,6 +21,8 @@
 #include "bombitem.h"
 #include "cell.h"
 
+#include <QGraphicsScene>
+#include <QGraphicsView>
 #include <KGameRenderer>
 
 BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor) : KGameRenderedItem(renderer, "")
@@ -61,7 +63,7 @@ QPainterPath BombExplosionItem::shape() const
     QPainterPath path;
     // Temporary variable to keep the boundingRect available
     QRectF rect = boundingRect();
-
+    
     // Calculation of the shape
     QRectF shapeRect = QRectF(rect.x(), rect.y(), rect.width(), rect.height());
     path.addEllipse(shapeRect);
@@ -81,23 +83,23 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
     switch(m_direction)
     {
         case NORTH:
-            x = p_x - boundingRect().width() * m_svgScaleFactor / 2;
-            y = p_y - (Cell::SIZE) + 20;
+            x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
+            y = p_y - Cell::SIZE/2;
             setPos(x, y);
             break;
         case EAST:
-            x = p_x - (Cell::SIZE/2) - 20;
-            y = p_y - boundingRect().height() * m_svgScaleFactor / 2;
+            x = p_x - Cell::SIZE;
+            y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
             setPos(x, y);
             break;
         case SOUTH:
-            x = p_x - boundingRect().width() * m_svgScaleFactor / 2;
-            y = p_y - (Cell::SIZE/2) - 20;
+            x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
+            y = p_y - Cell::SIZE;
             setPos(x, y);
             break;
         case WEST:
-            x = p_x - (Cell::SIZE) + 20;
-            y = p_y - boundingRect().height() * m_svgScaleFactor / 2;
+            x = p_x - Cell::SIZE/2;
+            y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
             setPos(x, y);
             break;
     }
@@ -121,4 +123,23 @@ void BombExplosionItem::updateAnimationn(int nFrame)
             setSpriteKey(QString("bomb_blast_west_%1").arg(nFrame));
             break;
     }
+}
+
+void BombExplosionItem::updateGraphics(qreal svgScaleFactor)
+{
+    QSize svgSize = renderer()->boundsOnSprite(spriteKey()).size().toSize();
+    
+    QPoint topLeft(0, 0);
+    topLeft = scene()->views().at(0)->mapFromScene(topLeft);
+    
+    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+    bottomRight = scene()->views().at(0)->mapFromScene(bottomRight);
+    
+    svgSize.setHeight(bottomRight.y() - topLeft.y());
+    svgSize.setWidth(bottomRight.x() - topLeft.x());
+    
+    //TODO: squeeze into a hard pixel grid
+    //m_arenaItem[i][j]->setRenderSize(QSize(Cell::SIZE / m_SvgScaleFactor, Cell::SIZE / m_SvgScaleFactor));
+    setRenderSize(svgSize);
+    setScale(svgScaleFactor);
 }

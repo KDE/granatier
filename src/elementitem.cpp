@@ -19,15 +19,20 @@
 #include "elementitem.h"
 #include "element.h"
 
-ElementItem::ElementItem(Element* p_model) : QGraphicsSvgItem()
+#include <QGraphicsScene>
+#include <QGraphicsView>
+
+#include <KGameRenderer>
+
+ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRenderedItem(renderer, "")
 {
     m_model = p_model;
     // Init the view coordinates
-    setPos(p_model->getX() - boundingRect().width() / 2, p_model->getY() - boundingRect().height() / 2);
+    update(p_model->getX(), p_model->getY());
     // Connects the model to the view
     connect(p_model, SIGNAL(moved(qreal, qreal)), this, SLOT(update(qreal, qreal)));
-    setCacheMode(DeviceCoordinateCache);
-    setMaximumCacheSize(QSize(500, 500));
+    //setCacheMode(DeviceCoordinateCache);
+    //setMaximumCacheSize(QSize(500, 500));
 }
 
 ElementItem::~ElementItem()
@@ -51,9 +56,33 @@ QPainterPath ElementItem::shape() const
 void ElementItem::update(qreal p_x, qreal p_y)
 {
     // Compute the top-right coordinates of the item
-    qreal x = p_x - boundingRect().width() / 2;
-    qreal y = p_y - boundingRect().height() / 2;
+    qreal x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
+    qreal y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
 
     // Updates the view coordinates
     setPos(x, y);
+}
+
+void ElementItem::updateGraphics(qreal svgScaleFactor)
+{
+    if(scene()->views().isEmpty())
+    {
+        return;
+    }
+    
+    QSize svgSize = renderer()->boundsOnSprite(spriteKey()).size().toSize();
+    
+    QPoint topLeft(0, 0);
+    topLeft = scene()->views().at(0)->mapFromScene(topLeft);
+    
+    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+    bottomRight = scene()->views().at(0)->mapFromScene(bottomRight);
+    
+    svgSize.setHeight(bottomRight.y() - topLeft.y());
+    svgSize.setWidth(bottomRight.x() - topLeft.x());
+    
+    //TODO: squeeze into a hard pixel grid
+    //m_arenaItem[i][j]->setRenderSize(QSize(Cell::SIZE / m_SvgScaleFactor, Cell::SIZE / m_SvgScaleFactor));
+    setRenderSize(svgSize);
+    setScale(svgScaleFactor);
 }

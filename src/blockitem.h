@@ -22,6 +22,7 @@
 
 class Block;
 class QTimer;
+class KGameRenderer;
 
 /**
  * @brief This class is the graphical representation of a Block.
@@ -44,8 +45,9 @@ public:
     /**
      * Creates a new BlockItem instance.
      * @param p_model the Block model
+     * @param renderer the KGameRenderer
      */
-    BlockItem(Block* p_model);
+    BlockItem(Block* p_model, KGameRenderer* renderer);
 
     /**
      * Deletes the BlockItem instance.

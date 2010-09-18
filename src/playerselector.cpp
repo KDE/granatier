@@ -188,9 +188,9 @@ void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()
     ui.playerPreview->fitInView(ui.playerPreview->sceneRect(), Qt::KeepAspectRatio);
     
     KConfig desktopFile(KStandardDirs::locate("appdata", "players/" + strPlayerIDs[nIndex]), KConfig::SimpleConfig);
-    ui.playerAuthor->setText(desktopFile.group("Player").readEntry<QString>("Author", ""));
-    ui.playerContact->setText(QString("<a href=\"mailto:%1\">%1</a>").arg(desktopFile.group("Player").readEntry<QString>("AuthorEmail", "")));
-    ui.playerDescription->setText(desktopFile.group("Player").readEntry<QString>("Description", ""));
+    ui.playerAuthor->setText(desktopFile.group("KGameTheme").readEntry<QString>("Author", ""));
+    ui.playerContact->setText(QString("<a href=\"mailto:%1\">%1</a>").arg(desktopFile.group("KGameTheme").readEntry<QString>("AuthorEmail", "")));
+    ui.playerDescription->setText(desktopFile.group("KGameTheme").readEntry<QString>("Description", ""));
     
     ui.keyUp->setObjectName(strPlayerIDs[nIndex]);
     ui.keyUp->setKeySequence(m_playerSettings->keyUp(strPlayerIDs[nIndex]));

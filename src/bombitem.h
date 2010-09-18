@@ -23,6 +23,7 @@
 
 class Bomb;
 class QTimer;
+class KGameRenderer;
 
 /**
  * @brief This class is the graphical representation of a Bomb.
@@ -60,8 +61,9 @@ public:
     /**
      * Creates a new BombItem instance.
      * @param p_model the Bomb model
+     * @param renderer the KGameRenderer
      */
-    BombItem(Bomb* p_model);
+    BombItem(Bomb* p_model, KGameRenderer* renderer);
 
     /**
      * Deletes the BombItem instance.

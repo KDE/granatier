@@ -78,7 +78,7 @@ InfoSidebar::InfoSidebar (Game* p_game, QSvgRenderer* p_renderer, QGraphicsScene
         //create the player icons
         QGraphicsSvgItem* svgItem = new QGraphicsSvgItem;
         QSvgRenderer* playerRenderer = new QSvgRenderer;
-        playerRenderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(playerList[i]->getGraphicsPath())));
+        playerRenderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(playerList[i]->getGraphicsFile())));
         svgItem->setSharedRenderer(playerRenderer);
         if(playerRenderer->elementExists("player_0"))
         {

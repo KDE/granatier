@@ -22,7 +22,7 @@
 #include "elementitem.h"
 
 class Character;
-class QSvgRenderer;
+class KGameRenderer;
 
 /**
  * @brief This class is the graphical representation of a Character.
@@ -33,15 +33,16 @@ Q_OBJECT
 
 protected:
     /** Shared renderer for the player frames */
-    QSvgRenderer* m_renderer;
+    KGameRenderer* m_renderer;
 
 public:
 
     /**
       * Creates a new CharacterItem instance.
       * @param p_model the Character model
+      * @param renderer the KGameRenderer
       */
-    CharacterItem(Character* p_model);
+    CharacterItem(Character* p_model, KGameRenderer* renderer);
 
     /**
       * Deletes the CharacterItem instance.

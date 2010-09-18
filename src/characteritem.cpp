@@ -19,12 +19,11 @@
 #include "characteritem.h"
 #include "character.h"
 
-#include <QSvgRenderer>
+#include <KGameRenderer>
 
-CharacterItem::CharacterItem(Character* p_model) : ElementItem (p_model)
+CharacterItem::CharacterItem(Character* p_model, KGameRenderer* renderer) : ElementItem (p_model, renderer)
 {
-    m_renderer = new QSvgRenderer();
-    setSharedRenderer(m_renderer);
+    m_renderer = renderer;
     connect(p_model, SIGNAL(dead()), this, SLOT(setDead()));
 }
 
@@ -38,9 +37,9 @@ QPainterPath CharacterItem::shape() const
     QPainterPath path;
     // Temporary variable to keep the boundingRect available
     QRectF rect = boundingRect();
-
+    
     // Calculation of the shape
-    QRectF shapeRect = QRectF( rect.x()+rect.width()/4, rect.y()+rect.height()/4, rect.width()/2, rect.height()/2 );
+    QRectF shapeRect = QRectF( rect.x()+rect.width()/8, rect.y()+rect.height()/8, rect.width()*3.0/4.0, rect.height()*3.0/4.0 );
     path.addEllipse(shapeRect);
     return path;
 }
@@ -48,8 +47,8 @@ QPainterPath CharacterItem::shape() const
 void CharacterItem::update(qreal p_x, qreal p_y)
 {
     // Compute the top-right coordinates of the item
-    qreal x = p_x - boundingRect().width() / 2;
-    qreal y = p_y - boundingRect().height() / 2;
+    qreal x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
+    qreal y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
     // Updates the view coordinates
     setPos(x, y);
 }

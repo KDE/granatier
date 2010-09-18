@@ -19,14 +19,16 @@
 #ifndef ELEMENTITEM_H
 #define ELEMENTITEM_H
 
-#include <QGraphicsSvgItem>
+#include <KGameRenderedItem>
 
 class Element;
+class KGameRenderer;
 
 /**
  * @brief This class is the graphical representation of a game Element.
  */
-class ElementItem : public QGraphicsSvgItem {
+class ElementItem : public QObject, public KGameRenderedItem
+{
 
 Q_OBJECT
 
@@ -42,8 +44,9 @@ public:
     /**
       * Creates a new ElementItem instance.
       * @param p_model the Element model
+      * @param renderer the KGameRenderer
       */
-    ElementItem(Element* p_model);
+    ElementItem(Element* p_model, KGameRenderer* renderer);
 
     /**
       * Deletes the ElementItem instance.
@@ -69,6 +72,12 @@ public slots:
       * @param p_y the new y-coordinate
       */
     virtual void update(qreal p_x, qreal p_y);
+    
+    /**
+     * Updates the graphics after a resize
+     * @param svgScaleFactor the scaling factor between svg and rendered pixmap
+     */
+    virtual void updateGraphics(qreal svgScaleFactor);
 };
 
 #endif

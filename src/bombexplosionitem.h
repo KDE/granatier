@@ -28,8 +28,11 @@ class KGameRenderer;
 /**
  * @brief This class is the graphical representation of a Bomb explosion.
  */
-class BombExplosionItem : public KGameRenderedItem
+class BombExplosionItem : public QObject, public KGameRenderedItem
 {
+
+Q_OBJECT
+
 public:
     /** The Explosion directions */
     enum Direction
@@ -61,7 +64,7 @@ public:
      * @param p_model the Bomb model
      * @param direction the dirction of the explosion
      * @param bombPower the power of the bomb at the position of this BombExplosionItem
-     * @param sharedPixmapCache the pixmap cache with the blast pixmaps
+     * @param renderer the KGameRenderer
      * @param svgScaleFactor the scale factor of the pixmap
      */
     BombExplosionItem(Bomb* p_model, BombExplosionItem::Direction direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor);
@@ -95,6 +98,14 @@ public:
      * @param nFrame the next animation frame
      */
      void updateAnimationn(int nFrame);
+     
+public slots:
+    
+    /**
+     * Updates the graphics after a resize
+     * @param svgScaleFactor the scaling factor between svg and rendered pixmap
+     */
+    virtual void updateGraphics(qreal svgScaleFactor);
 };
 
 #endif

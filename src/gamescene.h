@@ -88,9 +88,6 @@ private:
     /** The SVG renderer */
     QSvgRenderer* m_rendererSelectedTheme;
     QSvgRenderer* m_rendererDefaultTheme;
-    QSvgRenderer* m_rendererArenaItems;
-    QSvgRenderer* m_rendererBonusItems;
-    QSvgRenderer* m_rendererBombItems;
     QSvgRenderer* m_rendererScoreItems;
     
     /** The KGameRenderer */
@@ -98,6 +95,7 @@ private:
     KGameRenderer* m_krendererDefaultTheme;
     KGameRenderer* m_rendererBackground;
     KGameRenderer* m_krendererArenaItems;
+    KGameRenderer* m_rendererBonusItems;
     KGameRenderer* m_krendererBombItems;
     
 public:
@@ -142,11 +140,6 @@ public:
      * Updates the background to fit into the QGraphicsView after a resize.
      */
     void resizeBackground();
-    
-    /**
-     * Updates the qpixmapitems
-     */
-    void updatePixmapGraphics();
     
 private slots:
     
@@ -197,6 +190,13 @@ private slots:
     * Updates the BombExplosionItems
     */
     void updateBombExplosionItemAnimation(BombItem* bombItem, int nFrame);
+    
+signals:
+    
+    /**
+     * Signals that the graphics need an update
+     */
+    void resizeGraphics(qreal svgScaleFactor);
 };
 
 #endif

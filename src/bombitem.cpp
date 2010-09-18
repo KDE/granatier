@@ -21,10 +21,14 @@
 #include "settings.h"
 
 #include <QTimer>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
-BombItem::BombItem(Bomb* p_model) : ElementItem (p_model)
+#include <KGameRenderer>
+
+BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_model, renderer)
 {
-    setElementId("bomb");
+    setSpriteKey("bomb");
     setZValue(210);
     connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation(Bomb*)));
     connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
@@ -60,7 +64,7 @@ QPainterPath BombItem::shape() const
     QRectF rect = boundingRect();
 
     // Calculation of the shape
-    QRectF shapeRect = QRectF( rect.x()+rect.width()/4, rect.y()+rect.height()/4, rect.width()/2, rect.height()/2 );
+    QRectF shapeRect = QRectF( rect.x()+rect.width()/8, rect.y()+rect.height()/8, rect.width()*3.0/4.0, rect.height()*3.0/4.0 );
     path.addEllipse(shapeRect);
     return path;
 }
@@ -94,8 +98,8 @@ void BombItem::resumeAnim()
 void BombItem::update(qreal p_x, qreal p_y)
 {
     // Compute the top-right coordinates of the item
-    qreal x = p_x - boundingRect().width() / 2;
-    qreal y = p_y - boundingRect().height() / 2;
+    qreal x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
+    qreal y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
     // Updates the view coordinates
     setPos(x, y);
     m_x = p_x;
@@ -122,7 +126,7 @@ void BombItem::startDetonation(Bomb* bomb)
     m_explosionTimer->start();
     connect(m_explosionTimer, SIGNAL(timeout()), this, SLOT(updateAnimation()));
     
-    setElementId("bomb_blast_core_0");
+    setSpriteKey("bomb_blast_core_0");
     setZValue(300+15); //300+maxBombPower+5
     update(m_x, m_y);
 }
@@ -136,9 +140,9 @@ void BombItem::pulse()
         {
             // shrink the item
             QTransform transform;
-            transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+            transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
             transform.scale(0.95, 0.95);
-            transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+            transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
             setTransform(transform);
         }
         else
@@ -150,9 +154,9 @@ void BombItem::pulse()
     {
         // shrink the item
         QTransform transform;
-        transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+        transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
         transform.scale(1-m_fallingAnimationCounter*0.02, 1-m_fallingAnimationCounter*0.02);
-        transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+        transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
         setTransform(transform);
         m_fallingAnimationCounter++;
         
@@ -175,7 +179,9 @@ void BombItem::updateAnimation()
         return;
     }
     QString strElemetId = QString("bomb_blast_core_%1").arg(m_animationCounter);
-    setElementId(strElemetId);
+    setSpriteKey(strElemetId);
+    update(m_x, m_y);
+    
     emit animationFrameChanged(this, m_animationCounter);
     m_explosionTimer->setInterval(m_listExplosionTiming.at(m_animationCounter));
     m_explosionTimer->start();
@@ -200,9 +206,9 @@ void BombItem::updateMortar(int nState)
             {
                 // shrink the item
                 QTransform transform;
-                transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+                transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 transform.scale(0.5, 0.5);
-                transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 setTransform(transform);
                 setVisible(true);
                 setZValue(800);
@@ -212,9 +218,9 @@ void BombItem::updateMortar(int nState)
             {
                 // expand the item
                 QTransform transform;
-                transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+                transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 transform.scale(1.3, 1.3);
-                transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 setTransform(transform);
                 setVisible(true);
                 setZValue(800);

@@ -20,9 +20,11 @@
 
 #include <QTimer>
 
-BlockItem::BlockItem(Block* p_model) : ElementItem (p_model)
+#include <KGameRenderer>
+
+BlockItem::BlockItem(Block* p_model, KGameRenderer* renderer) : ElementItem (p_model, renderer)
 {
-    setElementId(p_model->getImageId());
+    setSpriteKey(p_model->getImageId());
     m_destructionTimer = NULL;
     connect(p_model, SIGNAL(startDestructionAnimation()), this, SLOT(startDestructionAnimation()));
 }
@@ -40,7 +42,7 @@ void BlockItem::startDestructionAnimation()
     m_destructionTimer->start();
     connect(m_destructionTimer, SIGNAL(timeout()), this, SLOT(destructionAnimation()));
     
-    setElementId("arena_block_highlight");
+    setSpriteKey("arena_block_highlight");
 }
 
 void BlockItem::destructionAnimation()

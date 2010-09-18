@@ -28,16 +28,16 @@
 #include "bombexplosionitem.h"
 
 #include <QTimeLine>
-#include <QGraphicsScene>
+
 #include <KStandardDirs>
-#include <QSvgRenderer>
+#include <KGameRenderer>
 
 static int nCounter = 0;
 
 const int PlayerItem::NB_FRAMES = 13;
 const int PlayerItem::ANIM_SPEED = 240;
 
-PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
+PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem(p_model, renderer)
 {
     connect(p_model, SIGNAL(directionChanged()), this, SLOT(updateDirection()));
     connect(p_model, SIGNAL(gameUpdated()), this, SLOT(manageCollision()));
@@ -45,9 +45,6 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
     connect(p_model, SIGNAL(resurrected()), this, SLOT(resurrect()));
 
-    // load the SVG
-    QString strPlayerId = ((Player*) p_model)->getGraphicsPath();
-    m_renderer->load(KStandardDirs::locate("appdata", QString("players/%1").arg(strPlayerId)));
     // A timeLine for the Player animation
     m_animationTimer = new QTimeLine();
     m_animationTimer->setCurveShape(QTimeLine::LinearCurve);
@@ -57,9 +54,9 @@ PlayerItem::PlayerItem(Player* p_model) : CharacterItem(p_model)
     m_animationTimer->setDuration(PlayerItem::ANIM_SPEED);
     connect(m_animationTimer, SIGNAL(frameChanged(int)), this, SLOT(setFrame(int)));
     
-    if(m_renderer->elementExists("player_0"))
+    if(m_renderer->spriteExists("player_0"))
     {
-        setElementId("player_0");
+        setSpriteKey("player_0");
     }
     
     setZValue(250);
@@ -80,12 +77,12 @@ void PlayerItem::resurrect()
     m_fallingAnimationCounter = 0;
     m_ressurectionAnimationCounter = 10;
     resetTransform();
-    if(m_renderer->elementExists("player_0"))
+    if(m_renderer->spriteExists("player_0"))
     {
-        setElementId("player_0");
+        setSpriteKey("player_0");
     }
     QTransform transform;
-    transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+    transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
     // get the angle
     switch(nDirection)
     {
@@ -106,7 +103,7 @@ void PlayerItem::resurrect()
             break;
     }
     transform.scale(1, 1);
-    transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+    transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
     setTransform(transform);
     
     startAnim();
@@ -119,7 +116,7 @@ void PlayerItem::updateDirection()
     int nDirection = dynamic_cast <Player*> (m_model)->direction();
     // Rotate the item
     QTransform transform;
-    transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+    transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
     // get the angle
     switch(nDirection)
     {
@@ -139,7 +136,7 @@ void PlayerItem::updateDirection()
             transform.rotate(0);
             break;
     }
-    transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+    transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
     setTransform(transform);
 }
 
@@ -227,9 +224,9 @@ void PlayerItem::resumeAnim()
 
 void PlayerItem::stopAnim()
 {
-    if(m_renderer->elementExists("player_0"))
+    if(m_renderer->spriteExists("player_0"))
     {
-        setElementId("player_0");
+        setSpriteKey("player_0");
     }
     if (m_animationTimer->state() != QTimeLine::NotRunning && m_ressurectionAnimationCounter == 0)
     {
@@ -244,9 +241,9 @@ void PlayerItem::fallingAnimation()
 
 void PlayerItem::setFrame(const int p_frame)
 {
-    if(m_renderer->elementExists(QString("player_%1").arg(p_frame)))
+    if(m_renderer->spriteExists(QString("player_%1").arg(p_frame)))
     {
-        setElementId(QString("player_%1").arg(p_frame));
+        setSpriteKey(QString("player_%1").arg(p_frame));
         
         if(m_fallingAnimationCounter > 0 || m_ressurectionAnimationCounter > 0)
         {
@@ -279,10 +276,10 @@ void PlayerItem::setFrame(const int p_frame)
                 setZValue(-2);
                 // shrink the item
                 QTransform transform;
-                transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+                transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 transform.rotate(angle);
                 transform.scale(1-m_fallingAnimationCounter*0.02, 1-m_fallingAnimationCounter*0.02);
-                transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 setTransform(transform);
                 m_fallingAnimationCounter++;
                 
@@ -297,7 +294,7 @@ void PlayerItem::setFrame(const int p_frame)
             if(m_ressurectionAnimationCounter > 0)
             {
                 QTransform transform;
-                transform.translate(boundingRect().width() / 2, boundingRect().height() / 2);
+                transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 transform.rotate(angle);
                 if(m_ressurectionAnimationCounter > 9)
                 {
@@ -347,7 +344,7 @@ void PlayerItem::setFrame(const int p_frame)
                     stopAnim();
                 }
                 
-                transform.translate(-boundingRect().width() / 2, -boundingRect().height() / 2);
+                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 setTransform(transform);
             }
         }
@@ -362,8 +359,8 @@ void PlayerItem::setDead()
     {
         resetTransform();
     }
-    if(m_renderer->elementExists("player_death"))
+    if(m_renderer->spriteExists("player_death"))
     {
-        setElementId("player_death");
+        setSpriteKey("player_death");
     }
 }

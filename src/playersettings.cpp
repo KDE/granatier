@@ -38,9 +38,10 @@ PlayerSettings::PlayerSettings()
         
         KConfig desktopFile(KStandardDirs::locate("appdata", "players/" + settings.strPlayerID), KConfig::SimpleConfig);
         
-        settings.strPlayerName = desktopFile.group("Player").readEntry<QString>("Name", "");
-        settings.strPlayerFile = desktopFile.group("Player").readEntry<QString>("FileName", "");
-        settings.strPlayerPreviewFile = desktopFile.group("Player").readEntry<QString>("Preview", "");
+        settings.strPlayerDesktopFilePath = desktopFile.name();
+        settings.strPlayerName = desktopFile.group("KGameTheme").readEntry<QString>("Name", "");
+        settings.strPlayerGraphicsFile = desktopFile.group("KGameTheme").readEntry<QString>("FileName", "");
+        settings.strPlayerPreviewFile = desktopFile.group("KGameTheme").readEntry<QString>("Preview", "");
         settings.enabled = false;
         
         m_playerSettings.insert(settings.strPlayerID, settings);
@@ -130,9 +131,14 @@ const QString PlayerSettings::playerName(const QString& strPlayerID) const
     return m_playerSettings.value(strPlayerID).strPlayerName;
 }
 
-const QString PlayerSettings::playerFile(const QString& strPlayerID) const
+const QString PlayerSettings::playerDesktopFilePath(const QString& strPlayerID) const
 {
-    return m_playerSettings.value(strPlayerID).strPlayerFile;
+  return m_playerSettings.value(strPlayerID).strPlayerDesktopFilePath;
+}
+
+const QString PlayerSettings::playerGraphicsFile(const QString& strPlayerID) const
+{
+    return m_playerSettings.value(strPlayerID).strPlayerGraphicsFile;
 }
 
 const QString PlayerSettings::playerPreviewFile(const QString& strPlayerID) const

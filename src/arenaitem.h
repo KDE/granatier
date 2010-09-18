@@ -27,14 +27,19 @@ class KGameRenderer;
 /**
  * @brief This class is the graphical view of the Arena.
  */
-class ArenaItem : public KGameRenderedItem
+class ArenaItem : public QObject, public KGameRenderedItem
 {
-//    Q_OBJECT
+
+    Q_OBJECT
 
 public:
 
     /**
       * Creates a new ArenaItem instances.
+      * @param p_x the x-coordinate
+      * @param p_y the y-coordinate
+      * @param renderer the KGameRenderer
+      * @param spriteKey the spriteKey for the ArenaItem
       */
     ArenaItem(qreal p_x, qreal p_y, KGameRenderer* renderer, const QString& spriteKey);
 
@@ -42,6 +47,14 @@ public:
       * Deletes the ArenaItem instances.
       */
     ~ArenaItem();
+    
+public slots:
+    
+    /**
+     * Updates the graphics after a resize
+     * @param svgScaleFactor the scaling factor between svg and rendered pixmap
+     */
+    virtual void updateGraphics(qreal svgScaleFactor);
 };
 
 #endif

@@ -22,6 +22,7 @@
 
 class Bonus;
 class QTimer;
+class KGameRenderer;
 
 /**
  * @brief This class is the graphical representation of a Bonus.
@@ -47,8 +48,9 @@ public:
     /**
      * Creates a new BonusItem instance.
      * @param p_model the Bonus model
+     * @param renderer the KGameRenderer
      */
-    BonusItem(Bonus* p_model);
+    BonusItem(Bonus* p_model, KGameRenderer* renderer);
 
     /**
      * Deletes the BonusItem instance.

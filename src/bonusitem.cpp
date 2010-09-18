@@ -20,9 +20,11 @@
 
 #include <QTimer>
 
-BonusItem::BonusItem(Bonus* p_model) : ElementItem (p_model)
+#include <KGameRenderer>
+
+BonusItem::BonusItem(Bonus* p_model, KGameRenderer* renderer) : ElementItem (p_model, renderer)
 {
-    setElementId(p_model->getImageId());
+    setSpriteKey(p_model->getImageId());
     m_undestroyableExplosionID = 0;
     m_destructionTimer = NULL;
     m_destructionCounter = 0;
