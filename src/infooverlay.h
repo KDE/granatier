@@ -21,13 +21,12 @@
 #include <QMap>
 #include <QList>
 
-class QGraphicsScene;
 class QGraphicsTextItem;
-class QGraphicsSvgItem;
 class QGraphicsRectItem;
-class QSvgRenderer;
 class Game;
+class GameScene;
 class Player;
+class KGameRenderedItem;
 
 /**
  * @brief This class the game info if paused or a round is over.
@@ -35,11 +34,10 @@ class Player;
 class InfoOverlay
 {
 private:
-    QGraphicsScene* m_graphicsScene;
+    GameScene* m_gameScene;
     Game* m_game;
-    QSvgRenderer* m_renderer;
     
-    QMap <Player*, QList<QGraphicsSvgItem*> > m_mapScore;
+    QMap <Player*, QList<KGameRenderedItem*> > m_mapScore;
     QMap <Player*, QGraphicsTextItem*> m_mapPlayerNames;
     QGraphicsTextItem* m_continueLabel;
     QGraphicsTextItem* m_newGameLabel;
@@ -58,10 +56,9 @@ public:
     /**
       * Creates a new InfoOverlay instance.
       * @param p_game the game instance
-      * @param p_renderer the renderer instance
       * @param p_scene the gamescene instance
       */
-    InfoOverlay (Game* p_game, QSvgRenderer* p_renderer, QGraphicsScene* p_scene);
+    InfoOverlay (Game* p_game, GameScene* p_scene);
 
     /**
       * Deletes the InfoOverlay instance.

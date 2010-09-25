@@ -38,7 +38,6 @@
 #include <KGameTheme>
 #include <KLocale>
 #include <QPainter>
-#include <QSvgRenderer>
 #include <KStandardDirs>
 #include <QGraphicsView>
 
@@ -55,92 +54,88 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_SvgScaleFactor = 1;
     
     // Load the selected SVG file
-    m_rendererSelectedTheme = new QSvgRenderer();
-    m_krendererSelectedTheme = 0;
+    m_rendererSelectedTheme = 0;
     loadTheme();
-    m_krendererSelectedTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
+    m_rendererSelectedTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
     // Load the default SVG file as fallback
     bool selectedThemeIsDefault = true;
     m_rendererDefaultTheme = 0;
-    m_krendererDefaultTheme = 0;
     
-    if(Settings::self()->theme() != "themes/granatier.desktop") //TODO: || m_krendererSelectedTheme == 0
+    if(Settings::self()->theme() != "themes/granatier.desktop" || m_rendererSelectedTheme == 0)
     {
         selectedThemeIsDefault = false;
-        m_rendererDefaultTheme = new QSvgRenderer();
-        m_rendererDefaultTheme->load(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
-        m_krendererDefaultTheme = new KGameRenderer(KStandardDirs::locate("appdata", "themes/granatier.desktop"));
-        m_krendererDefaultTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
+        m_rendererDefaultTheme = new KGameRenderer(KStandardDirs::locate("appdata", "themes/granatier.desktop"));
+        m_rendererDefaultTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
     }
     
-    if(selectedThemeIsDefault || m_krendererSelectedTheme->spriteExists("background"))
+    if(selectedThemeIsDefault || m_rendererSelectedTheme->spriteExists("background"))
     {
-        m_rendererBackground = m_krendererSelectedTheme;
+        m_rendererBackground = m_rendererSelectedTheme;
     }
     else
     {
-        m_rendererBackground = m_krendererDefaultTheme;
+        m_rendererBackground = m_rendererDefaultTheme;
     }
     
     // set the renderer for the arena items TODO: add all the arena items
-    if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("arena_ground") &&
-        m_rendererSelectedTheme->elementExists("arena_wall") &&
-        m_rendererSelectedTheme->elementExists("arena_block") &&
-        m_rendererSelectedTheme->elementExists("arena_block_highlight") &&
-        m_rendererSelectedTheme->elementExists("arena_ice") &&
-        m_rendererSelectedTheme->elementExists("arena_bomb_mortar") &&
-        m_rendererSelectedTheme->elementExists("arena_arrow_up") &&
-        m_rendererSelectedTheme->elementExists("arena_arrow_right") &&
-        m_rendererSelectedTheme->elementExists("arena_arrow_down") &&
-        m_rendererSelectedTheme->elementExists("arena_arrow_left")))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists("arena_ground") &&
+        m_rendererSelectedTheme->spriteExists("arena_wall") &&
+        m_rendererSelectedTheme->spriteExists("arena_block") &&
+        m_rendererSelectedTheme->spriteExists("arena_block_highlight") &&
+        m_rendererSelectedTheme->spriteExists("arena_ice") &&
+        m_rendererSelectedTheme->spriteExists("arena_bomb_mortar") &&
+        m_rendererSelectedTheme->spriteExists("arena_arrow_up") &&
+        m_rendererSelectedTheme->spriteExists("arena_arrow_right") &&
+        m_rendererSelectedTheme->spriteExists("arena_arrow_down") &&
+        m_rendererSelectedTheme->spriteExists("arena_arrow_left")))
     {
-        m_krendererArenaItems = m_krendererSelectedTheme;
+        m_rendererArenaItems = m_rendererSelectedTheme;
     }
     else
     {
-        m_krendererArenaItems = m_krendererDefaultTheme;
+        m_rendererArenaItems = m_rendererDefaultTheme;
     }
     
     // set the renderer for the bonus items TODO: add all the bonus items
-    if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("bonus_speed") &&
-        m_rendererSelectedTheme->elementExists("bonus_bomb") &&
-        m_rendererSelectedTheme->elementExists("bonus_power") &&
-        m_rendererSelectedTheme->elementExists("bonus_shield") &&
-        m_rendererSelectedTheme->elementExists("bonus_throw") &&
-        m_rendererSelectedTheme->elementExists("bonus_kick") &&
-        m_rendererSelectedTheme->elementExists("bonus_bad_slow") &&
-        m_rendererSelectedTheme->elementExists("bonus_bad_hyperactive") &&
-        m_rendererSelectedTheme->elementExists("bonus_bad_mirror") &&
-        m_rendererSelectedTheme->elementExists("bonus_bad_scatty") &&
-        m_rendererSelectedTheme->elementExists("bonus_bad_restrain") &&
-        m_rendererSelectedTheme->elementExists("bonus_neutral_pandora") &&
-        m_rendererSelectedTheme->elementExists("bonus_neutral_resurrect")))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists("bonus_speed") &&
+        m_rendererSelectedTheme->spriteExists("bonus_bomb") &&
+        m_rendererSelectedTheme->spriteExists("bonus_power") &&
+        m_rendererSelectedTheme->spriteExists("bonus_shield") &&
+        m_rendererSelectedTheme->spriteExists("bonus_throw") &&
+        m_rendererSelectedTheme->spriteExists("bonus_kick") &&
+        m_rendererSelectedTheme->spriteExists("bonus_bad_slow") &&
+        m_rendererSelectedTheme->spriteExists("bonus_bad_hyperactive") &&
+        m_rendererSelectedTheme->spriteExists("bonus_bad_mirror") &&
+        m_rendererSelectedTheme->spriteExists("bonus_bad_scatty") &&
+        m_rendererSelectedTheme->spriteExists("bonus_bad_restrain") &&
+        m_rendererSelectedTheme->spriteExists("bonus_neutral_pandora") &&
+        m_rendererSelectedTheme->spriteExists("bonus_neutral_resurrect")))
     {
-        m_rendererBonusItems = m_krendererSelectedTheme;
+        m_rendererBonusItems = m_rendererSelectedTheme;
     }
     else
     {
-        m_rendererBonusItems = m_krendererDefaultTheme;
+        m_rendererBonusItems = m_rendererDefaultTheme;
     }
     
     // set the renderer for the bomb items
-    if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("bomb") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_core_0") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_north_0") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_east_0") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_south_0") &&
-        m_rendererSelectedTheme->elementExists("bomb_blast_west_0")))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists("bomb") &&
+        m_rendererSelectedTheme->spriteExists("bomb_blast_core_0") &&
+        m_rendererSelectedTheme->spriteExists("bomb_blast_north_0") &&
+        m_rendererSelectedTheme->spriteExists("bomb_blast_east_0") &&
+        m_rendererSelectedTheme->spriteExists("bomb_blast_south_0") &&
+        m_rendererSelectedTheme->spriteExists("bomb_blast_west_0")))
     {
-        m_krendererBombItems = m_krendererSelectedTheme;
+        m_rendererBombItems = m_rendererSelectedTheme;
     }
     else
     {
-        m_krendererBombItems = m_krendererDefaultTheme;
+        m_rendererBombItems = m_rendererDefaultTheme;
     }
     
     // set the renderer for the score items
-    if(selectedThemeIsDefault || (m_rendererSelectedTheme->elementExists("score_star_enabled") &&
-        m_rendererSelectedTheme->elementExists("score_star_disabled")))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists("score_star_enabled") &&
+        m_rendererSelectedTheme->spriteExists("score_star_disabled")))
     {
         m_rendererScoreItems = m_rendererSelectedTheme;
     }
@@ -157,6 +152,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         KGameRenderer* playerRenderer = new KGameRenderer(players[i]->getDesktopFilePath());
         playerRenderer->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
+        m_mapRendererPlayerItems.insert(players[i], playerRenderer);
         playerItem = new PlayerItem(players[i], playerRenderer);
         // Corrects the position of the player
         playerItem->update(players[i]->getX(), players[i]->getY());
@@ -192,7 +188,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     addItem(m_arenaBackground);
     
     // create the info sidebar
-    m_infoSidebar = new InfoSidebar(m_game, /*TODO: make own renderer*/ m_rendererScoreItems, this);
+    m_infoSidebar = new InfoSidebar(m_game, this);
     //update the sceneRect
     QRectF oldSceneRect = sceneRect();
     QRectF sidebarRect = m_infoSidebar->rect();
@@ -205,7 +201,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     setSceneRect(newSceneRect);
     
     // create the info overlay
-    m_infoOverlay = new InfoOverlay(m_game, m_rendererScoreItems, this);
+    m_infoOverlay = new InfoOverlay(m_game, this);
     
     init();
 }
@@ -221,7 +217,7 @@ void GameScene::init()
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             // Create the ArenaItem and set the image
-            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE, m_krendererArenaItems, "");
+            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE, m_rendererArenaItems, "");
             connect(this, SIGNAL(resizeGraphics(qreal)), arenaItem, SLOT(updateGraphics(qreal)));
             
             //TODO: use this function call
@@ -283,7 +279,7 @@ void GameScene::init()
             {
                 // Create the element item and set the image
                 Block* block = dynamic_cast <Block*> (m_game->getArena()->getCell(i, j).getElement());
-                BlockItem* blockItem = new BlockItem(block, m_krendererArenaItems);
+                BlockItem* blockItem = new BlockItem(block, m_rendererArenaItems);
                 connect(this, SIGNAL(resizeGraphics(qreal)), blockItem, SLOT(updateGraphics(qreal)));
                 blockItem->setSpriteKey(block->getImageId());
                 blockItem->update(block->getX(), block->getY());
@@ -424,7 +420,6 @@ GameScene::~GameScene()
 {
     cleanUp();
     
-    KGameRenderer* playerRenderer;
     for (int i = 0; i < m_playerItems.size(); i++)
     {
         if(items().contains(m_playerItems[i]))
@@ -432,9 +427,13 @@ GameScene::~GameScene()
             removeItem(m_playerItems[i]);
         }
         m_playerItems[i]->stopAnim();
-        playerRenderer = m_playerItems[i]->renderer();
         delete m_playerItems[i];
-        delete playerRenderer;
+    }
+    
+    QMap <Player*, KGameRenderer*>::iterator iteratorRendererPlayer = m_mapRendererPlayerItems.begin();
+    while (iteratorRendererPlayer != m_mapRendererPlayerItems.end())
+    {
+        delete iteratorRendererPlayer.value();
     }
     
     removeItem(m_arenaBackground);
@@ -447,9 +446,6 @@ GameScene::~GameScene()
     
     delete m_rendererSelectedTheme;
     delete m_rendererDefaultTheme;
-    
-    delete m_krendererSelectedTheme;
-    delete m_krendererDefaultTheme;
 }
 
 void GameScene::cleanUp()
@@ -535,6 +531,25 @@ void GameScene::cleanUp()
     }
 }
 
+KGameRenderer* GameScene::renderer(Element::Type type, Player* player)
+{
+    switch(type)
+    {
+        case Element::BLOCK:
+            return m_rendererArenaItems;
+        case Element::BONUS:
+            return m_rendererBonusItems;
+        case Element::BOMB:
+            return m_rendererBombItems;
+        case Element::PLAYER:
+            return m_mapRendererPlayerItems.value(player);
+        case Element::SCORE:
+            return m_rendererScoreItems;
+        default:
+            return NULL;
+    }
+}
+
 void GameScene::showScore()
 {
     m_infoOverlay->showScore();
@@ -592,17 +607,7 @@ Game* GameScene::getGame() const
 
 void GameScene::loadTheme()
 {
-    KGameTheme theme;
-    if (!theme.load(Settings::self()->theme()))
-    {
-        return;
-    }
-    if (!m_rendererSelectedTheme->load(theme.graphics()))
-    {
-        return;
-    }
-    
-    m_krendererSelectedTheme = new KGameRenderer(Settings::self()->theme());
+    m_rendererSelectedTheme = new KGameRenderer(Settings::self()->theme());
     
     update(0, 0, width(), height());
 
@@ -722,7 +727,7 @@ void GameScene::updateInfo(const Game::InformationTypes p_info)
 void GameScene::createBombItem(Bomb* bomb)
 {
     // Create the Bombs
-    BombItem* bombItem = new BombItem(bomb, m_krendererBombItems);
+    BombItem* bombItem = new BombItem(bomb, m_rendererBombItems);
     // Corrects the position of the BombItem
     bombItem->update(bomb->getX(), bomb->getY());
     addItem(bombItem);
@@ -871,7 +876,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_krendererBombItems, m_SvgScaleFactor);
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
                 bombExplosionItem->setPosition(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
@@ -919,7 +924,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_krendererBombItems, m_SvgScaleFactor);
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
                 bombExplosionItem->setPosition(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
@@ -967,7 +972,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_krendererBombItems, m_SvgScaleFactor);
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
                 bombExplosionItem->setPosition(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
@@ -1015,7 +1020,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_krendererBombItems, m_SvgScaleFactor);
+                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
                 bombExplosionItem->setPosition(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
                 bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                 connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));

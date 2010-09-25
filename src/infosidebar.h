@@ -26,12 +26,13 @@
 
 class QGraphicsScene;
 class QGraphicsTextItem;
-class QGraphicsSvgItem;
 class QGraphicsRectItem;
-class QSvgRenderer;
 class Game;
+class GameScene;
 class Player;
 class QRectF;
+class KGameRenderedItem;
+
 
 /**
  * @brief This class represents the game sidebar with game information about the player.
@@ -42,19 +43,18 @@ class InfoSidebar : public QObject
     Q_OBJECT
   
 private:
-    QGraphicsScene* m_graphicsScene;
+    GameScene* m_gameScene;
     Game* m_game;
-    QSvgRenderer* m_renderer;
     
-    QMap <Player*, QGraphicsSvgItem*> m_mapPlayerSvgs;
+    QMap <Player*, KGameRenderedItem*> m_mapPlayerSvgs;
     QMap <Player*, QGraphicsTextItem*> m_mapPlayerNames;
-    QMap <Player*, QGraphicsSvgItem*> m_mapBonusThrowSvgs;
+    QMap <Player*, KGameRenderedItem*> m_mapBonusThrowSvgs;
     QMap <Player*, QGraphicsRectItem*> m_mapBonusThrowDimm;
-    QMap <Player*, QGraphicsSvgItem*> m_mapBonusKickSvgs;
+    QMap <Player*, KGameRenderedItem*> m_mapBonusKickSvgs;
     QMap <Player*, QGraphicsRectItem*> m_mapBonusKickDimm;
-    QMap <Player*, QGraphicsSvgItem*> m_mapBonusShieldSvgs;
+    QMap <Player*, KGameRenderedItem*> m_mapBonusShieldSvgs;
     QMap <Player*, QGraphicsRectItem*> m_mapBonusShieldDimm;
-    QMap <Player*, QGraphicsSvgItem*> m_mapBadBonusSvgs;
+    QMap <Player*, KGameRenderedItem*> m_mapBadBonusSvgs;
     QMap <Player*, QGraphicsRectItem*> m_mapBadBonusDimm;
     
     QGraphicsRectItem* m_background;
@@ -67,7 +67,7 @@ public:
       * @param p_renderer the renderer instance
       * @param p_scene the gamescene instance
       */
-    InfoSidebar (Game* p_game, QSvgRenderer* p_renderer, QGraphicsScene* p_scene);
+    InfoSidebar (Game* p_game, GameScene* p_scene);
 
     /**
       * Deletes the InfoSidebar instance.

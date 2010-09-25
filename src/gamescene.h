@@ -26,10 +26,13 @@
 
 #include <QList>
 #include <QHash>
+#include <QMap>
+#include "element.h"
 
 class BlockItem;
 class BonusItem;
 class ArenaItem;
+class Player;
 class PlayerItem;
 class Bomb;
 class BombItem;
@@ -84,19 +87,17 @@ private:
     QGraphicsTextItem* m_remainingTimeLabel;
 
     qreal m_SvgScaleFactor;
-
-    /** The SVG renderer */
-    QSvgRenderer* m_rendererSelectedTheme;
-    QSvgRenderer* m_rendererDefaultTheme;
-    QSvgRenderer* m_rendererScoreItems;
     
     /** The KGameRenderer */
-    KGameRenderer* m_krendererSelectedTheme;
-    KGameRenderer* m_krendererDefaultTheme;
+    KGameRenderer* m_rendererSelectedTheme;
+    KGameRenderer* m_rendererDefaultTheme;
     KGameRenderer* m_rendererBackground;
-    KGameRenderer* m_krendererArenaItems;
+    KGameRenderer* m_rendererArenaItems;
     KGameRenderer* m_rendererBonusItems;
-    KGameRenderer* m_krendererBombItems;
+    KGameRenderer* m_rendererBombItems;
+    KGameRenderer* m_rendererScoreItems;
+    KGameRenderer* m_rendererInfoSidebar;
+    QMap <Player*, KGameRenderer*> m_mapRendererPlayerItems;
     
 public:
 
@@ -140,6 +141,13 @@ public:
      * Updates the background to fit into the QGraphicsView after a resize.
      */
     void resizeBackground();
+    
+    /**
+     * Returns the renderer for the requestet Element Type
+     * @param type
+     * @param strPlayerID
+     */
+    KGameRenderer* renderer(Element::Type type, Player* player = NULL);
     
 private slots:
     

@@ -40,7 +40,8 @@ public:
         BLOCK,
         PLAYER,
         BOMB,
-        BONUS
+        BONUS,
+        SCORE
     };
     
     enum Direction
