@@ -100,7 +100,7 @@ void PlayerSelector::PlayerSelectorPrivate::setupData()
     //hide dummy kcfg
     ui.kcfg_Dummy->hide();
     
-    ui.getNewButton->setIcon(KIcon("get-hot-new-stuff"));
+    ui.getNewButton->setIcon(KIcon( QLatin1String( "get-hot-new-stuff" )));
     ui.getNewButton->hide();
     
     strPlayerIDs = m_playerSettings->playerIDs();

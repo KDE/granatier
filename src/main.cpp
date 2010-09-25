@@ -40,7 +40,7 @@ int main(int argc, char** argv)
     // Create the application
     KApplication app;
     // Insert libkdegames catalog, for translation of libkdegames messages
-    KGlobal::locale()->insertCatalog("libkdegames");
+    KGlobal::locale()->insertCatalog( QLatin1String( "libkdegames" ));
     #ifndef GRANATIER_USE_GLUON
     qWarning() << "Using Phonon for sound. GluonAudio provides a better sound experience, but there is no stable release of Gluon, yet. The current supported version is 0.70.";
     #endif

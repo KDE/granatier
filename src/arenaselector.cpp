@@ -98,7 +98,7 @@ void ArenaSelector::showEvent(QShowEvent*)
 void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, ArenaSelector::NewStuffState knsflags)
 {
     ui.setupUi(q);
-    ui.getNewButton->setIcon(KIcon("get-hot-new-stuff"));
+    ui.getNewButton->setIcon(KIcon( QLatin1String( "get-hot-new-stuff" )));
 
     //The lineEdit widget holds our arena path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.

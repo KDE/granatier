@@ -64,7 +64,7 @@ MainWindow::MainWindow()
     KStandardGameAction::quit(this, SLOT(close()), actionCollection());
     KAction* soundAction = new KToggleAction(i18n("&Play sounds"), this);
     soundAction->setChecked(Settings::sounds());
-    actionCollection()->addAction("sounds", soundAction);
+    actionCollection()->addAction( QLatin1String( "sounds" ), soundAction);
     connect(soundAction, SIGNAL(triggered(bool)), this, SLOT(setSoundsEnabled(bool)));
     // init game
     initGame();
