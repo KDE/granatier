@@ -52,7 +52,7 @@ endif(GRANATIER_GLUON_AUDIO)
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(FILES granatier.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(PROGRAMS granatier.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES granatier.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 install(FILES ${granatierData} DESTINATION ${DATA_INSTALL_DIR}/granatier)
 
