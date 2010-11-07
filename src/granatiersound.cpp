@@ -15,18 +15,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "sound.h"
+#include "granatiersound.h"
 
 #include <KStandardDirs>
 #include <KConfig>
 #include <QDateTime>
 
-Sound::Sound (QString strFilePath)
+GranatierSound::GranatierSound (QString strFilePath)
 {
-    #ifdef GRANATIER_USE_GLUON
-        GluonAudio::Engine::instance();
-        m_sound = new GluonAudio::Sound;
-        m_sound->load(strFilePath);
+    #ifdef GRANATIER_USE_OPENAL
+        m_sound = new Tagaro::Sound(strFilePath);
     #else
         m_lastPlayedTime = 0;
         m_nextSource = 1;
@@ -39,9 +37,9 @@ Sound::Sound (QString strFilePath)
     #endif
 }
 
-Sound::~Sound()
+GranatierSound::~GranatierSound()
 {
-    #ifdef GRANATIER_USE_GLUON
+    #ifdef GRANATIER_USE_OPENAL
         delete m_sound;
     #else
         delete m_sound1;
@@ -49,10 +47,10 @@ Sound::~Sound()
     #endif
 }
 
-void Sound::play()
+void GranatierSound::play()
 {
-    #ifdef GRANATIER_USE_GLUON
-        m_sound->play();
+    #ifdef GRANATIER_USE_OPENAL
+        m_sound->start();
     #else
         QDateTime now = QDateTime::currentDateTime();
         qint64 timeNow = now.toTime_t() * 1000 + now.time().msec();

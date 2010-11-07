@@ -28,7 +28,7 @@
 #include "bomb.h"
 #include "block.h"
 #include "playersettings.h"
-#include "sound.h"
+#include "granatiersound.h"
 
 #include <QPointF>
 #include <QTimer>
@@ -48,11 +48,11 @@ Game::Game(PlayerSettings* playerSettings)
     setSoundsEnabled(Settings::sounds());
     m_wilhelmScream = Settings::useWilhelmScream();
     
-    m_soundPutBomb = new Sound(KStandardDirs::locate("appdata", "sounds/putbomb.ogg"));
-    m_soundExplode = new Sound(KStandardDirs::locate("appdata", "sounds/explode.ogg"));
-    m_soundBonus = new Sound(KStandardDirs::locate("appdata", "sounds/wow.ogg"));
-    m_soundFalling = new Sound(KStandardDirs::locate("appdata", "sounds/deepfall.ogg"));
-    m_soundDie = new Sound(KStandardDirs::locate("appdata", "sounds/die.ogg"));
+    m_soundPutBomb = new GranatierSound(KStandardDirs::locate("appdata", "sounds/putbomb.wav"));
+    m_soundExplode = new GranatierSound(KStandardDirs::locate("appdata", "sounds/explode.wav"));
+    m_soundBonus = new GranatierSound(KStandardDirs::locate("appdata", "sounds/wow.wav"));
+    m_soundFalling = new GranatierSound(KStandardDirs::locate("appdata", "sounds/deepfall.wav"));
+    m_soundDie = new GranatierSound(KStandardDirs::locate("appdata", "sounds/die.wav"));
     
     m_arena = 0;
     m_gameScene = 0;

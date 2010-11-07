@@ -15,14 +15,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SOUND_H
-#define SOUND_H
+#ifndef GRANATIER_SOUND_H
+#define GRANATIER_SOUND_H
 
 #include <QObject>
 
-#ifdef GRANATIER_USE_GLUON
-    #include <gluon/audio/engine.h>
-    #include <gluon/audio/sound.h>
+#ifdef GRANATIER_USE_OPENAL
+    #include <TagaroAudio/Sound>
 #else
     #include <Phonon/MediaObject>
 #endif
@@ -32,15 +31,15 @@ class QString;
 /**
  * @brief This class the game info if paused or a round is over.
  */
-class Sound : public QObject
+class GranatierSound : public QObject
 {
 
 Q_OBJECT
 
 private:
-    #ifdef GRANATIER_USE_GLUON
-        /** User KALEngine for sound */
-        GluonAudio::Sound* m_sound;
+    #ifdef GRANATIER_USE_OPENAL
+        /** User TagaroAudio for sound */
+        Tagaro::Sound* m_sound;
     #else
         /** Use Phonon for sound */
         qint64 m_lastPlayedTime;
@@ -55,12 +54,12 @@ public:
       * Creates a new Sound instance.
       * @param strFilePath the path to the sound file
       */
-    Sound (QString strFilePath);
+    GranatierSound (QString strFilePath);
 
     /**
       * Deletes the InfoOverlay instance.
       */
-    ~Sound();
+    ~GranatierSound();
     
     /**
       * Plays the sound file.
