@@ -1,16 +1,20 @@
 [Arena]
 Name=The four-leaf clover
+Name[es]=El trébol de cuatro hojas
 Name[pt]=O trevo de quatro folhas
 Name[pt_BR]=O trevo de quatro folhas
 Name[sv]=Fyrklövern
 Name[uk]=Чотирипелюсткова конюшина
 Name[x-test]=xxThe four-leaf cloverxx
+Name[zh_TW]=幸運四葉草
 Description=The four-leaf clover is an uncommon variation of the common, three-leaved clover. According to tradition, such leaves bring good luck to their finders, especially if found accidentally. According to legend, each leaf represents something: the first is for hope, the second is for faith, the third is for love, and the fourth is for luck.
+Description[es]=El trébol de cuatro hojas es una variante poco común del trébol de tres hojas. Según la tradición, estas hojas le traen buena suerte a quien los encuentra, especialmente si se encuentran por accidente. Según la leyenda, cada hoja representa algo: la primera es la esperanza, la segunda la fe, la tercera es el amor, y la cuarta es la suerte.
 Description[pt]=O trevo de quatro folhas é uma variante pouco comum do trevo normal de três folhas. De acordo com a tradição, estas plantas normalmente dão boa sorte a quem as encontra, especialmente se for por acaso. De acordo com a lenda, cada folha representa algo: a primeira é a esperança, a segunda é a fé, a terceira é o amor e a quarta é a sorte.
 Description[pt_BR]=O trevo de quatro folhas é uma variante pouco comum do trevo normal de três folhas. De acordo com a tradição, estas plantas normalmente dão boa sorte a quem as encontra, especialmente se for por acaso. De acordo com a lenda, cada folha representa algo: a primeira é a esperança, a segunda é a fé, a terceira é o amor e a quarta é a sorte.
 Description[sv]=Fyrklövern är en ovanlig variant av den vanliga klövern med tre blad. Enligt traditionen, ger en sådan tur till upphittaren, särskilt om den hittas av en slump. Enligt legenden, representerar varje blad någonting: det första står för hopp, det andra för tro, det tredje för kärlek och det fjärde för tur.
 Description[uk]=Чотирипелюстковий листок конюшини є незвичним різновидом звичайного трійчастого листка. Традиційно вважається, що тому, хто знайде такий листок, особливо випадково, має поталанити. Згідно до повір’я, кожна з пелюсток щось символізує: перша — надію, друга — віру, третя — любов, четверта — удачу.
 Description[x-test]=xxThe four-leaf clover is an uncommon variation of the common, three-leaved clover. According to tradition, such leaves bring good luck to their finders, especially if found accidentally. According to legend, each leaf represents something: the first is for hope, the second is for faith, the third is for love, and the fourth is for luck.xx
+Description[zh_TW]=四葉草是三葉草的一種突變種。傳統上四葉草可以帶來好運，尤其是當您意外發現它時。傳說中，這四葉分別代表不同的事情：第一個是希望，第二個是信仰，第三個是愛，第四個則是幸運。
 Type=XML
 FileName=clover.xml
 Author=Samarina Nastya
