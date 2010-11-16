@@ -1,6 +1,8 @@
 [Arena]
 Name=The four-leaf clover
 Name[es]=El trébol de cuatro hojas
+Name[et]=Neljaleheline ristik
+Name[nl]=Het vierbladige klaver
 Name[pt]=O trevo de quatro folhas
 Name[pt_BR]=O trevo de quatro folhas
 Name[sv]=Fyrklövern
@@ -9,6 +11,8 @@ Name[x-test]=xxThe four-leaf cloverxx
 Name[zh_TW]=幸運四葉草
 Description=The four-leaf clover is an uncommon variation of the common, three-leaved clover. According to tradition, such leaves bring good luck to their finders, especially if found accidentally. According to legend, each leaf represents something: the first is for hope, the second is for faith, the third is for love, and the fourth is for luck.
 Description[es]=El trébol de cuatro hojas es una variante poco común del trébol de tres hojas. Según la tradición, estas hojas le traen buena suerte a quien los encuentra, especialmente si se encuentran por accidente. Según la leyenda, cada hoja representa algo: la primera es la esperanza, la segunda la fe, la tercera es el amor, y la cuarta es la suerte.
+Description[et]=Neljaleheline ristikhein on levinud kolmelehelise ristiku haruldane variant. Traditsiooni kohaselt toob see leidjale õnne, eriti kui see leitakse juhuslikult. Legendi järgi tähistab iga leht midagi: esimene lootust, teine usku, kolmas armastust ja neljas õnne.
+Description[nl]=Het vierbladige klaver is een ongewone variatie van de gewone, driebladige klaver. Volgens de traditie, brengen zulke bladeren geluk aan hun vinders, speciaal wanneer ze toevallig zijn gevonden. volgens de legende, representeert elk blad iets: de eerste is hoop, de tweede is geloof, de derde is liefde en de vierde geluk.
 Description[pt]=O trevo de quatro folhas é uma variante pouco comum do trevo normal de três folhas. De acordo com a tradição, estas plantas normalmente dão boa sorte a quem as encontra, especialmente se for por acaso. De acordo com a lenda, cada folha representa algo: a primeira é a esperança, a segunda é a fé, a terceira é o amor e a quarta é a sorte.
 Description[pt_BR]=O trevo de quatro folhas é uma variante pouco comum do trevo normal de três folhas. De acordo com a tradição, estas plantas normalmente dão boa sorte a quem as encontra, especialmente se for por acaso. De acordo com a lenda, cada folha representa algo: a primeira é a esperança, a segunda é a fé, a terceira é o amor e a quarta é a sorte.
 Description[sv]=Fyrklövern är en ovanlig variant av den vanliga klövern med tre blad. Enligt traditionen, ger en sådan tur till upphittaren, särskilt om den hittas av en slump. Enligt legenden, representerar varje blad någonting: det första står för hopp, det andra för tro, det tredje för kärlek och det fjärde för tur.
