@@ -1,5 +1,6 @@
 [Arena]
 Name=The four-leaf clover
+Name[ca]=El trèvol de quatre fulles
 Name[es]=El trébol de cuatro hojas
 Name[et]=Neljaleheline ristik
 Name[nl]=Het vierbladige klaver
@@ -10,6 +11,7 @@ Name[uk]=Чотирипелюсткова конюшина
 Name[x-test]=xxThe four-leaf cloverxx
 Name[zh_TW]=幸運四葉草
 Description=The four-leaf clover is an uncommon variation of the common, three-leaved clover. According to tradition, such leaves bring good luck to their finders, especially if found accidentally. According to legend, each leaf represents something: the first is for hope, the second is for faith, the third is for love, and the fourth is for luck.
+Description[ca]=El trèvol de quatre fulles és una variació poc comuna del comú trèvol de tres fulles trèvol. Segons la tradició, aquestes fulles, porten bona sort als seus cercadors, especialment si es troben accidentalment. Segons la llegenda, cada fulla representa una cosa: la primera és per a l'esperança, la segona és per la fe, la tercera és per a l'amor, i la quarta és per a la sort.
 Description[es]=El trébol de cuatro hojas es una variante poco común del trébol de tres hojas. Según la tradición, estas hojas le traen buena suerte a quien los encuentra, especialmente si se encuentran por accidente. Según la leyenda, cada hoja representa algo: la primera es la esperanza, la segunda la fe, la tercera es el amor, y la cuarta es la suerte.
 Description[et]=Neljaleheline ristikhein on levinud kolmelehelise ristiku haruldane variant. Traditsiooni kohaselt toob see leidjale õnne, eriti kui see leitakse juhuslikult. Legendi järgi tähistab iga leht midagi: esimene lootust, teine usku, kolmas armastust ja neljas õnne.
 Description[nl]=Het vierbladige klaver is een ongewone variatie van de gewone, driebladige klaver. Volgens de traditie, brengen zulke bladeren geluk aan hun vinders, speciaal wanneer ze toevallig zijn gevonden. volgens de legende, representeert elk blad iets: de eerste is hoop, de tweede is geloof, de derde is liefde en de vierde geluk.
