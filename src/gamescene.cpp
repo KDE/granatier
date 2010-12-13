@@ -38,7 +38,6 @@
 #include <KGameTheme>
 #include <KLocale>
 #include <QPainter>
-#include <KStandardDirs>
 #include <QGraphicsView>
 
 #include <KGameRenderer>
@@ -56,7 +55,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     // Load the selected SVG file
     m_rendererSelectedTheme = 0;
     loadTheme();
-    m_rendererSelectedTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
+    //uncomment this if the crash in KSharedDataCache appears again
+    //m_rendererSelectedTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
     // Load the default SVG file as fallback
     bool selectedThemeIsDefault = true;
     m_rendererDefaultTheme = 0;
@@ -64,8 +64,9 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     if(Settings::self()->theme() != "themes/granatier.desktop" || m_rendererSelectedTheme == 0)
     {
         selectedThemeIsDefault = false;
-        m_rendererDefaultTheme = new KGameRenderer(KStandardDirs::locate("appdata", "themes/granatier.desktop"));
-        m_rendererDefaultTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
+        m_rendererDefaultTheme = new KGameRenderer("themes/granatier.desktop");
+        //uncomment this if the crash in KSharedDataCache appears again
+        //m_rendererDefaultTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
     }
     
     if(selectedThemeIsDefault || m_rendererSelectedTheme->spriteExists("background"))
