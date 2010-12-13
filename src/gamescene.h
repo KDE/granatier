@@ -53,6 +53,9 @@ Q_OBJECT
     
 private:
 
+    /** The min size for the gamescene */
+    QRectF m_minSize;
+    
     /** The Game instance */
     Game* m_game;
 

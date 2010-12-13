@@ -20,6 +20,7 @@
 #define GAMEVIEW_H
 
 #include <QGraphicsView>
+#include <QTimer>;
 
 class QKeyEvent;
 class Game;
@@ -70,6 +71,14 @@ protected:
       * @param p_event the focus event
       */
     void focusOutEvent(QFocusEvent* p_event);
+    
+private:
+    
+    QTimer m_resizeTimer;
+    
+private slots:
+    
+    void updateGameScene();
 
 signals:
 

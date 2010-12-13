@@ -204,6 +204,14 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_infoOverlay = new InfoOverlay(m_game, this);
     
     init();
+    
+    //at this point, sceneRect() has the minimum size for the scene
+    m_minSize = sceneRect();
+    m_minSize.setX((int) ((int)m_minSize.x() - ((int)m_minSize.x() % (int)Cell::SIZE)));
+    m_minSize.setY((int) ((int)m_minSize.y() - ((int)m_minSize.y() % (int)Cell::SIZE)));
+    m_minSize.setHeight(((int) (m_minSize.height() / Cell::SIZE) + 1) * Cell::SIZE);
+    m_minSize.setWidth(((int) (m_minSize.width() / Cell::SIZE) + 1) * Cell::SIZE);
+    setSceneRect(m_minSize);
 }
 
 void GameScene::init()
@@ -562,6 +570,26 @@ void GameScene::resizeBackground()
     {
         return;
     }
+    
+    //calculate the size of the view, that a Cell fits into whole pixels
+    qreal rows = m_game->getArena()->getNbRows();
+    qreal columns = m_game->getArena()->getNbColumns();
+    
+    QPoint topLeftArena = views().at(0)->mapFromScene(0, 0);
+    QPoint bottomRightArena = views().at(0)->mapFromScene(Cell::SIZE * columns, Cell::SIZE * rows);
+    
+    qreal columnRatio = (bottomRightArena.x() - topLeftArena.x()) / columns;
+    qreal rowRatio = (bottomRightArena.y() - topLeftArena.y()) / rows;
+    
+    QRectF newSceneRect = views().at(0)->sceneRect();
+    newSceneRect.setSize(QSizeF(m_minSize.width() * columnRatio / (int) columnRatio, m_minSize.height() * rowRatio / (int) rowRatio));
+    
+    qreal newWidth = m_minSize.width() * views().at(0)->size().width() / (((int) (views().at(0)->size().width() / (m_minSize.width() / Cell::SIZE))) * m_minSize.width() / Cell::SIZE);
+    qreal newHeigth = m_minSize.height() * views().at(0)->size().height() / (((int) (views().at(0)->size().height() / (m_minSize.height() / Cell::SIZE))) * m_minSize.height() / Cell::SIZE);
+    newSceneRect.setSize(QSizeF(newWidth, newHeigth));
+    
+    views().at(0)->setSceneRect(newSceneRect);
+    
     
     qreal x = views().at(0)->x();
     qreal y = views().at(0)->y();
