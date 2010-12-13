@@ -152,7 +152,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     for(int i = 0; i < players.size(); i++)
     {
         KGameRenderer* playerRenderer = new KGameRenderer(players[i]->getDesktopFilePath());
-        playerRenderer->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
+        //uncomment this if the crash in KSharedDataCache appears again
+        //playerRenderer->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
         m_mapRendererPlayerItems.insert(players[i], playerRenderer);
         playerItem = new PlayerItem(players[i], playerRenderer);
         // Corrects the position of the player
@@ -182,7 +183,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
                  m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
     
     //create the background    
-    m_rendererBackground->setStrategyEnabled(KGameRenderer::UseDiskCache, false); //TODO: why does it crash with disc cache on?
+    //uncomment this if the crash in KSharedDataCache appears again
+    //m_rendererBackground->setStrategyEnabled(KGameRenderer::UseDiskCache, false); //TODO: why does it crash with disc cache on?
     m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
     m_arenaBackground->setZValue(-5);
     m_arenaBackground->setPos(0, 0);
