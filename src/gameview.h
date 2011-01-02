@@ -20,7 +20,7 @@
 #define GAMEVIEW_H
 
 #include <QGraphicsView>
-#include <QTimer>;
+#include <QTimer>
 
 class QKeyEvent;
 class Game;
