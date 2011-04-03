@@ -81,8 +81,6 @@ void ElementItem::updateGraphics(qreal svgScaleFactor)
     svgSize.setHeight(bottomRight.y() - topLeft.y());
     svgSize.setWidth(bottomRight.x() - topLeft.x());
     
-    //TODO: squeeze into a hard pixel grid
-    //m_arenaItem[i][j]->setRenderSize(QSize(Cell::SIZE / m_SvgScaleFactor, Cell::SIZE / m_SvgScaleFactor));
     setRenderSize(svgSize);
     setScale(svgScaleFactor);
 }

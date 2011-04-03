@@ -58,6 +58,8 @@ private:
     QMap <Player*, QGraphicsRectItem*> m_mapBadBonusDimm;
     
     QGraphicsRectItem* m_background;
+    
+    qreal m_svgScaleFactor;
 
 public:
 
@@ -92,6 +94,13 @@ private slots:
       * @param percentageElapsed the bad bonus time that has elapsed
       */
     void bonusInfoChanged(Player* player, Bonus::BonusType bonusType, int percentageElapsed);
+    
+public slots:
+    /**
+     * Updates the graphics after a resize
+     * @param svgScaleFactor the scaling factor between svg and rendered pixmap
+     */
+    virtual void updateGraphics(qreal svgScaleFactor);
 };
 
 #endif
