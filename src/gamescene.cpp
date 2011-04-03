@@ -192,6 +192,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     
     // create the info sidebar
     m_infoSidebar = new InfoSidebar(m_game, this);
+    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoSidebar, SLOT(updateGraphics(qreal)));
+    
     //update the sceneRect
     QRectF oldSceneRect = sceneRect();
     QRectF sidebarRect = m_infoSidebar->rect();

@@ -23,6 +23,7 @@
 #include "cell.h"
 
 #include <QGraphicsScene>
+#include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <QTimer>
 #include <KLocale>
@@ -35,6 +36,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
 {
     m_game = p_game;
     m_gameScene = p_scene;
+    m_svgScaleFactor = 1;
     
     QList <Player*> playerList = m_game->getPlayers();
     int nMaxPlayerNameLength = 0;
@@ -447,15 +449,176 @@ void InfoSidebar::bonusInfoChanged(Player* player, Bonus::BonusType bonusType, i
                     
                     //hide the dimm overlay
                     m_mapBadBonusDimm.value(player)->setVisible(false);
+                    
+                    //calculate graphics size
+                    QSize svgSize;
+                    QPoint topLeft(0, 0);
+                    topLeft = m_gameScene->views().at(0)->mapFromScene(topLeft);
+                    QGraphicsRectItem* rectItem;
+                    QRectF rect;
+                    
+                    svgSize = renderer->boundsOnSprite(m_mapBadBonusSvgs.value(player)->spriteKey()).size().toSize();
+                    
+                    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+                    bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+                    
+                    svgSize.setHeight(bottomRight.y() - topLeft.y());
+                    svgSize.setWidth(bottomRight.x() - topLeft.x());
+                    
+                    m_mapBadBonusSvgs.value(player)->setRenderSize(svgSize * 0.5);
+                    m_mapBadBonusSvgs.value(player)->setScale(m_svgScaleFactor);
+                    
+                    rectItem = m_mapBadBonusDimm.value(player);
+                    rect = rectItem->rect();
+                    rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
+                    rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+                    rectItem->setRect(rect);
                 }
             }
             else
             {
                 m_mapBadBonusDimm.value(player)->setVisible(true);
                 QRectF rect = m_mapBadBonusDimm.value(player)->rect();
-                rect.setHeight((m_mapBadBonusSvgs.value(player)->boundingRect().height()/2.0+1) * percentageElapsed/100.0);
+                rect.setHeight(rect.width() * percentageElapsed/100.0);
                 m_mapBadBonusDimm.value(player)->setRect(rect);
             }
             break;
+    }
+}
+
+void InfoSidebar::updateGraphics(qreal svgScaleFactor)
+{
+    if(m_gameScene->views().isEmpty())
+    {
+        return;
+    }
+    
+    KGameRenderer* renderer;
+    QSize svgSize;
+    QPoint topLeft(0, 0);
+    topLeft = m_gameScene->views().at(0)->mapFromScene(topLeft);
+    QGraphicsRectItem* rectItem;
+    QRectF rect;
+    
+    m_svgScaleFactor = svgScaleFactor;
+    
+    //update player
+    QMap <Player*, KGameRenderedItem*>::iterator i = m_mapPlayerSvgs.begin();
+    while (i != m_mapPlayerSvgs.end())
+    {
+        renderer = m_gameScene->renderer(Element::PLAYER, i.key());
+    
+        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
+        
+        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        
+        svgSize.setHeight(bottomRight.y() - topLeft.y());
+        svgSize.setWidth(bottomRight.x() - topLeft.x());
+        
+        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setScale(m_svgScaleFactor);
+        
+        i++;
+    }
+    
+    //update bonus throw
+    i = m_mapBonusThrowSvgs.begin();
+    while (i != m_mapBonusThrowSvgs.end())
+    {
+        renderer = m_gameScene->renderer(Element::BONUS);
+        
+        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
+        
+        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        
+        svgSize.setHeight(bottomRight.y() - topLeft.y());
+        svgSize.setWidth(bottomRight.x() - topLeft.x());
+        
+        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setScale(m_svgScaleFactor);
+        
+        rectItem = m_mapBonusThrowDimm.value(i.key());
+        rect = rectItem->rect();
+        rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
+        rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+        rectItem->setRect(rect);
+        i++;
+    }
+    
+    //update bonus kick
+    i = m_mapBonusKickSvgs.begin();
+    while (i != m_mapBonusKickSvgs.end())
+    {
+        renderer = m_gameScene->renderer(Element::BONUS);
+    
+        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
+        
+        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        
+        svgSize.setHeight(bottomRight.y() - topLeft.y());
+        svgSize.setWidth(bottomRight.x() - topLeft.x());
+        
+        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setScale(m_svgScaleFactor);
+        
+        rectItem = m_mapBonusKickDimm.value(i.key());
+        rect = rectItem->rect();
+        rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
+        rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+        rectItem->setRect(rect);
+        i++;
+    }
+    
+    //update bonus shield
+    i = m_mapBonusShieldSvgs.begin();
+    while (i != m_mapBonusShieldSvgs.end())
+    {
+        renderer = m_gameScene->renderer(Element::BONUS);
+    
+        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
+        
+        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        
+        svgSize.setHeight(bottomRight.y() - topLeft.y());
+        svgSize.setWidth(bottomRight.x() - topLeft.x());
+        
+        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setScale(m_svgScaleFactor);
+        
+        rectItem = m_mapBonusShieldDimm.value(i.key());
+        rect = rectItem->rect();
+        rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
+        rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+        rectItem->setRect(rect);
+        i++;
+    }
+    
+    //update bad bonus
+    i = m_mapBadBonusSvgs.begin();
+    while (i != m_mapBadBonusSvgs.end())
+    {
+        renderer = m_gameScene->renderer(Element::BONUS);
+    
+        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
+        
+        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        
+        svgSize.setHeight(bottomRight.y() - topLeft.y());
+        svgSize.setWidth(bottomRight.x() - topLeft.x());
+        
+        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setScale(m_svgScaleFactor);
+        
+        rectItem = m_mapBadBonusDimm.value(i.key());
+        rect = rectItem->rect();
+        rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
+        rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+        rectItem->setRect(rect);
+        i++;
     }
 }
