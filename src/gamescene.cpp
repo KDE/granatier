@@ -207,6 +207,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, this);
+    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoOverlay, SLOT(updateGraphics(qreal)));
     
     init();
     

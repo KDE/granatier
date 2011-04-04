@@ -18,6 +18,7 @@
 #ifndef INFOOVERLAY_H
 #define INFOOVERLAY_H
 
+#include <QObject>
 #include <QMap>
 #include <QList>
 
@@ -31,8 +32,10 @@ class KGameRenderedItem;
 /**
  * @brief This class the game info if paused or a round is over.
  */
-class InfoOverlay
+class InfoOverlay : public QObject
 {
+    Q_OBJECT
+    
 private:
     GameScene* m_gameScene;
     Game* m_game;
@@ -50,6 +53,8 @@ private:
     QGraphicsTextItem* m_continueAfterPauseLabel;
     
     QGraphicsRectItem* m_dimmOverlay;
+    
+    qreal m_svgScaleFactor;
 
 public:
 
@@ -93,6 +98,13 @@ public:
       * @param height the new height
       */
     void resizeDimmOverlay(qreal x, qreal y, qreal width, qreal height);
+    
+public slots:
+    /**
+     * Updates the graphics after a resize
+     * @param svgScaleFactor the scaling factor between svg and rendered pixmap
+     */
+    virtual void updateGraphics(qreal svgScaleFactor);
 };
 
 #endif

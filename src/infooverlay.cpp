@@ -21,16 +21,18 @@
 #include "player.h"
 #include "settings.h"
 
+#include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsRectItem>
 #include <KLocale>
 #include <KGameRenderer>
 #include <KGameRenderedItem>
 
-InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene)
+InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
 {
     m_game = p_game;
     m_gameScene = p_scene;
+    m_svgScaleFactor = 1;
     
     int nWinPoints = m_game->getWinPoints();
     QList <Player*> playerList = m_game->getPlayers();
@@ -40,6 +42,7 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene)
     
     KGameRenderer* renderer;
     renderer = m_gameScene->renderer(Element::SCORE);
+    QGraphicsTextItem em ("M");
     //calculate max player name length and top-left position
     for(int i = 0; i < playerList.count(); i++)
     {
@@ -53,7 +56,7 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene)
         {
             KGameRenderedItem score(renderer, "score_star_enabled");
             nLeft = m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + 10 + nWinPoints * (score.boundingRect().width()+2))/2;
-            nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * playerName.boundingRect().height();
+            nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * em.boundingRect().height();
         }
     }
     
@@ -65,14 +68,11 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene)
         playerName->setFont(QFont("Helvetica", 15, QFont::Bold, false));
         playerName->setDefaultTextColor(QColor("#FFFF00"));
         playerName->setZValue(1001);
-        playerName->setPos(nLeft, nTop + i * (playerName->boundingRect().height()));
         
         for(int j = 0; j < nWinPoints; j++)
         {
-            KGameRenderedItem* score = new KGameRenderedItem(renderer, "score_star_enabled");
+            KGameRenderedItem* score = new KGameRenderedItem(renderer, "score_star_disabled");
             score->setZValue(1001);
-            score->setPos(nLeft + nMaxPlayerNameLength + 10 + j * (score->boundingRect().width()+2),
-                          playerName->pos().y() + playerName->boundingRect().height()/2 - score->boundingRect().height()/2);
             svgItemList.append(score);
         }
         m_mapScore.insert(playerList[i], svgItemList);
@@ -85,23 +85,17 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene)
     m_continueLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
     m_continueLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_continueLabel->setZValue(1001);
-    m_continueLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_continueLabel->boundingRect().width())/2,
-                            nTop + (playerList.count()+1) * (m_continueLabel->boundingRect().height()));
     
     m_newGameLabel = new QGraphicsTextItem(i18n("Press Space to start a new Game"));
     m_newGameLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
     m_newGameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_newGameLabel->setZValue(1001);
-    m_newGameLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_newGameLabel->boundingRect().width())/2,
-                           nTop + (playerList.count()+1) * (m_newGameLabel->boundingRect().height()));
     
     m_gameOverLabel = new QGraphicsTextItem;;
     m_gameOverLabel->setFont(QFont("Helvetica", 20, QFont::Bold, false));
     m_gameOverLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_gameOverLabel->setZValue(1001);
-    m_gameOverLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_gameOverLabel->boundingRect().width())/2,
-                            nTop - m_gameOverLabel->boundingRect().height());
-   
+    
     m_getReadyLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
     m_getReadyLabel->setFont(QFont("Helvetica", 25, QFont::Bold, false));
     m_getReadyLabel->setDefaultTextColor(QColor("#FFFF00"));
@@ -112,11 +106,6 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene)
     m_startGameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_startGameLabel->setZValue(1001);
     
-    m_getReadyLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_getReadyLabel->boundingRect().width()) / 2,
-                            m_gameScene->sceneRect().y() + (m_gameScene->height() - m_getReadyLabel->boundingRect().height() -  m_startGameLabel->boundingRect().height()) / 2);
-    m_startGameLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_startGameLabel->boundingRect().width()) / 2,
-                             m_gameScene->sceneRect().y() + (m_gameScene->height() + m_getReadyLabel->boundingRect().height() - m_startGameLabel->boundingRect().height()) / 2);
-    
     m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
     m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
     m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
@@ -126,11 +115,6 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene)
     m_continueAfterPauseLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
     m_continueAfterPauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_continueAfterPauseLabel->setZValue(1001);
-    
-    m_pauseLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_pauseLabel->boundingRect().width()) / 2,
-                         m_gameScene->sceneRect().y() + (m_gameScene->height() - m_pauseLabel->boundingRect().height() - m_continueAfterPauseLabel->boundingRect().height()) / 2);
-    m_continueAfterPauseLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_continueAfterPauseLabel->boundingRect().width()) / 2,
-                                      m_gameScene->sceneRect().y() + (m_gameScene->height() + m_pauseLabel->boundingRect().height() - m_continueAfterPauseLabel->boundingRect().height()) / 2);
     
     m_dimmOverlay = new QGraphicsRectItem();
     m_dimmOverlay->setBrush(QBrush(QColor(0,0,0,175)));
@@ -339,4 +323,87 @@ void InfoOverlay::hideItems ()
 void InfoOverlay::resizeDimmOverlay(qreal x, qreal y, qreal width, qreal height)
 {
     m_dimmOverlay->setRect(x, y, width, height);
+}
+
+void InfoOverlay::updateGraphics(qreal svgScaleFactor)
+{
+    if(m_gameScene->views().isEmpty())
+    {
+        return;
+    }
+    
+    int nWinPoints = m_game->getWinPoints();
+    QList <Player*> playerList = m_game->getPlayers();
+    int nMaxPlayerNameLength = 0;
+    int nTop = 0;
+    int nLeft = 0;
+    
+    KGameRenderer* renderer;
+    renderer = m_gameScene->renderer(Element::SCORE);
+    QGraphicsTextItem em ("M");
+    //calculate max player name length and top-left position
+    for(int i = 0; i < playerList.count(); i++)
+    {
+        QGraphicsTextItem playerName (playerList[i]->getPlayerName());
+        playerName.setFont(QFont("Helvetica", 15, QFont::Bold, false));
+        if(nMaxPlayerNameLength < playerName.boundingRect().width())
+        {
+            nMaxPlayerNameLength = playerName.boundingRect().width();
+        }
+        if(i == playerList.count() - 1)
+        {
+            KGameRenderedItem score(renderer, "score_star_enabled");
+            nLeft = m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + 10 + nWinPoints * (renderer->boundsOnSprite("score_star_enabled").width()+2))/2;
+            nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * em.boundingRect().height();
+        }
+    }
+    
+    QSize svgSize;
+    QPoint topLeft(0, 0);
+    topLeft = m_gameScene->views().at(0)->mapFromScene(topLeft);
+    
+    QGraphicsTextItem* playerName;
+    KGameRenderedItem* score;
+    renderer = m_gameScene->renderer(Element::SCORE);
+    for(int i = 0; i < playerList.count(); i++)
+    {
+        
+        playerName = m_mapPlayerNames.value(playerList.at(i));
+        playerName->setPos(nLeft, nTop + i * (em.boundingRect().height() * 1.5));
+        
+        for(int j = 0; j < nWinPoints; j++)
+        {
+            score = m_mapScore.value(playerList.at(i)).at(j);
+            
+            svgSize = renderer->boundsOnSprite(score->spriteKey()).size().toSize();
+            
+            QPoint bottomRight(svgSize.width(), svgSize.height()); 
+            bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+            
+            svgSize.setHeight(bottomRight.y() - topLeft.y());
+            svgSize.setWidth(bottomRight.x() - topLeft.x());
+            
+            score->setRenderSize(svgSize);
+            score->setScale(svgScaleFactor);
+            
+            score->setPos(nLeft + nMaxPlayerNameLength + 10 + j * (renderer->boundsOnSprite(score->spriteKey()).width()+2),
+                          playerName->pos().y() + em.boundingRect().height()*2/3 - renderer->boundsOnSprite(score->spriteKey()).height()/2);
+            
+        }
+    }
+    
+    m_continueLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_continueLabel->boundingRect().width())/2,
+                            nTop + (playerList.count()+1) * (m_continueLabel->boundingRect().height()));
+    m_newGameLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_newGameLabel->boundingRect().width())/2,
+                           nTop + (playerList.count()+1) * (m_newGameLabel->boundingRect().height()));
+    m_gameOverLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_gameOverLabel->boundingRect().width())/2,
+                            nTop - m_gameOverLabel->boundingRect().height());
+    m_getReadyLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_getReadyLabel->boundingRect().width()) / 2,
+                            m_gameScene->sceneRect().y() + (m_gameScene->height() - m_getReadyLabel->boundingRect().height() -  m_startGameLabel->boundingRect().height()) / 2);
+    m_startGameLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_startGameLabel->boundingRect().width()) / 2,
+                             m_gameScene->sceneRect().y() + (m_gameScene->height() + m_getReadyLabel->boundingRect().height() - m_startGameLabel->boundingRect().height()) / 2);
+    m_pauseLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_pauseLabel->boundingRect().width()) / 2,
+                         m_gameScene->sceneRect().y() + (m_gameScene->height() - m_pauseLabel->boundingRect().height() - m_continueAfterPauseLabel->boundingRect().height()) / 2);
+    m_continueAfterPauseLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_continueAfterPauseLabel->boundingRect().width()) / 2,
+                                      m_gameScene->sceneRect().y() + (m_gameScene->height() + m_pauseLabel->boundingRect().height() - m_continueAfterPauseLabel->boundingRect().height()) / 2);
 }
