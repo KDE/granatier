@@ -75,12 +75,10 @@ void GranatierSound::play()
                 {
                     m_nextSource = 1;
                     m_sound2->play();
-                    m_sound1->stop();
                 }
                 else
                 {
-                    m_nextSource = 1;
-                    m_sound1->stop();
+                    m_sound2->stop();
                 }
             }
             m_lastPlayedTime = timeNow;
