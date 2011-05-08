@@ -1,5 +1,6 @@
 [KGameTheme]
 Name=Water Bomb
+Name[bs]=Vodena bomba
 Name[ca]=Bomba d'aigua
 Name[ca@valencia]=Bomba d'aigua
 Name[da]=Vandballon
@@ -34,6 +35,7 @@ Name[x-test]=xxWater Bombxx
 Name[zh_CN]=水中炸弹
 Name[zh_TW]=水炸彈
 Description=Water Bomb Theme
+Description[bs]=Tema vodena bomba
 Description[ca]=Tema bomba d'aigua
 Description[ca@valencia]=Tema bomba d'aigua
 Description[da]=Vandballon-tema

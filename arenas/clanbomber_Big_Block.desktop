@@ -1,5 +1,6 @@
 [Arena]
 Name=Big Block
+Name[bs]=Veliki blok
 Name[ca]=Gran bloc
 Name[ca@valencia]=Gran bloc
 Name[da]=Stor blok
@@ -34,6 +35,7 @@ Name[x-test]=xxBig Blockxx
 Name[zh_CN]=大区块
 Name[zh_TW]=大區塊
 Description=Clanbomber Import
+Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[da]=Import fra Clanbomber

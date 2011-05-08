@@ -1,5 +1,6 @@
 [Arena]
 Name=Prison Cells
+Name[bs]=Zatvorske ćelije
 Name[ca]=Cel·les de presó
 Name[ca@valencia]=Cel·les de presó
 Name[da]=Fængselsceller
@@ -34,6 +35,7 @@ Name[x-test]=xxPrison Cellsxx
 Name[zh_CN]=囚牢
 Name[zh_TW]=囚房
 Description=Clanbomber Import
+Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[da]=Import fra Clanbomber

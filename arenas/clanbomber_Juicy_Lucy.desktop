@@ -1,5 +1,6 @@
 [Arena]
 Name=Juicy Lucy
+Name[bs]=Juicy Lucy
 Name[ca]=Saborosa Lucy
 Name[ca@valencia]=Saborosa Lucy
 Name[da]=Lækre Lucy
@@ -33,6 +34,7 @@ Name[x-test]=xxJuicy Lucyxx
 Name[zh_CN]=Juicy Lucy
 Name[zh_TW]=Juicy Lucy
 Description=Clanbomber Import
+Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[da]=Import fra Clanbomber

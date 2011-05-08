@@ -1,5 +1,6 @@
 [KGameTheme]
 Name=Player1
+Name[bs]=Igrač1
 Name[ca]=Jugador1
 Name[ca@valencia]=Jugador1
 Name[da]=Spiller 1
@@ -35,6 +36,7 @@ Name[x-test]=xxPlayer1xx
 Name[zh_CN]=玩家 1
 Name[zh_TW]=玩家 1
 Description=This is Player1
+Description[bs]=Ovo je igrač1
 Description[ca]=Aquest és el jugador1
 Description[ca@valencia]=Este és el jugador1
 Description[da]=Dette er spiller 1

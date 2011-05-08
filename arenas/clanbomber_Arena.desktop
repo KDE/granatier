@@ -1,6 +1,7 @@
 [Arena]
 Name=Arena
 Name[ast]=Sable
+Name[bs]=Arena
 Name[ca]=Arena
 Name[ca@valencia]=Arena
 Name[cs]=Aréna
@@ -45,6 +46,7 @@ Name[x-test]=xxArenaxx
 Name[zh_CN]=竞技场
 Name[zh_TW]=競技場
 Description=Clanbomber Import
+Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[da]=Import fra Clanbomber
