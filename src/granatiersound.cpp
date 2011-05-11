@@ -17,71 +17,17 @@
 
 #include "granatiersound.h"
 
-#include <KStandardDirs>
-#include <KConfig>
-#include <QDateTime>
-
 GranatierSound::GranatierSound (QString strFilePath)
 {
-    #ifdef GRANATIER_USE_OPENAL
-        m_sound = new Tagaro::Sound(strFilePath);
-    #else
-        m_lastPlayedTime = 0;
-        m_nextSource = 1;
-        
-        m_sound1 = Phonon::createPlayer(Phonon::GameCategory);
-        m_sound1->setCurrentSource(strFilePath);
-        
-        m_sound2 = Phonon::createPlayer(Phonon::GameCategory);
-        m_sound2->setCurrentSource(strFilePath);
-    #endif
+    m_sound = new Tagaro::Sound(strFilePath);
 }
 
 GranatierSound::~GranatierSound()
 {
-    #ifdef GRANATIER_USE_OPENAL
-        delete m_sound;
-    #else
-        delete m_sound1;
-        delete m_sound2;
-    #endif
+    delete m_sound;
 }
 
 void GranatierSound::play()
 {
-    #ifdef GRANATIER_USE_OPENAL
-        m_sound->start();
-    #else
-        QDateTime now = QDateTime::currentDateTime();
-        qint64 timeNow = now.toTime_t() * 1000 + now.time().msec();
-        
-        if(timeNow - m_lastPlayedTime > 20)
-        {
-            if(m_nextSource == 1)
-            {                    
-                if(m_sound1->state() == Phonon::StoppedState)
-                {
-                    m_nextSource = 2;
-                    m_sound1->play();
-                }
-                else
-                {
-                    m_sound1->stop();
-                }
-            }
-            else
-            {
-                if(m_sound2->state() == Phonon::StoppedState)
-                {
-                    m_nextSource = 1;
-                    m_sound2->play();
-                }
-                else
-                {
-                    m_sound2->stop();
-                }
-            }
-            m_lastPlayedTime = timeNow;
-        }
-    #endif
+    m_sound->start();
 }

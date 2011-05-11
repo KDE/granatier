@@ -41,9 +41,6 @@ int main(int argc, char** argv)
     KApplication app;
     // Insert libkdegames catalog, for translation of libkdegames messages
     KGlobal::locale()->insertCatalog( QLatin1String( "libkdegames" ));
-    #ifndef GRANATIER_USE_OPENAL
-    qWarning() << "Using Phonon for sound. OpenAL provides a better sound experience. Consider building Granatier with OpenAL.";
-    #endif
     // Create the main window
     MainWindow* window = new MainWindow();
     // Show the main window

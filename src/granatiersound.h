@@ -18,35 +18,19 @@
 #ifndef GRANATIER_SOUND_H
 #define GRANATIER_SOUND_H
 
-#include <QObject>
-
-#ifdef GRANATIER_USE_OPENAL
-    #include <TagaroAudio/Sound>
-#else
-    #include <Phonon/MediaObject>
-#endif
+#include <TagaroAudio/Sound>
 
 class QString;
 
 /**
  * @brief This class the game info if paused or a round is over.
  */
-class GranatierSound : public QObject
+class GranatierSound
 {
 
-Q_OBJECT
-
 private:
-    #ifdef GRANATIER_USE_OPENAL
-        /** User TagaroAudio for sound */
-        Tagaro::Sound* m_sound;
-    #else
-        /** Use Phonon for sound */
-        qint64 m_lastPlayedTime;
-        int m_nextSource;
-        Phonon::MediaObject* m_sound1;
-        Phonon::MediaObject* m_sound2;
-    #endif
+    /** User TagaroAudio for sound */
+    Tagaro::Sound* m_sound;
 
 public:
 
