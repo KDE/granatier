@@ -143,17 +143,25 @@ void Tagaro::Sound::setVolume(qreal volume)
 
 void Tagaro::Sound::start()
 {
-	if (d->m_valid)
-	{
-		new Tagaro::PlaybackEvent(this, d->m_pos);
-	}
+	start(d->m_pos);
 }
 
 void Tagaro::Sound::start(const QPointF& pos)
 {
 	if (d->m_valid)
 	{
-		new Tagaro::PlaybackEvent(this, pos);
+		Tagaro::OpenALRuntime* runtime = Tagaro::OpenALRuntime::instance();
+		if(runtime->instance()->m_soundsEvents[this].count() > 0)
+		{
+			if(runtime->instance()->m_soundsEvents[this].last()->replay(pos) == false)
+			{
+					new Tagaro::PlaybackEvent(this, pos);
+			}
+		}
+		else
+		{   
+			new Tagaro::PlaybackEvent(this, pos);
+		}
 	}
 }
 
@@ -201,7 +209,7 @@ Tagaro::PlaybackEvent::PlaybackEvent(Tagaro::Sound* sound, const QPointF& pos)
 
 Tagaro::PlaybackEvent::~PlaybackEvent()
 {
-	if (m_valid)
+	if(alIsSource(m_source) == AL_TRUE)
 	{
 		alSourceStop(m_source);
 		alDeleteSources(1, &m_source);
@@ -213,6 +221,21 @@ bool Tagaro::PlaybackEvent::isRunning() const
 	ALint state;
 	alGetSourcei(m_source, AL_SOURCE_STATE, &state);
 	return state == AL_PLAYING;
+}
+
+bool Tagaro::PlaybackEvent::replay(const QPointF& pos) const
+{
+	if(alIsSource(m_source) == AL_TRUE)
+	{
+		alSourceStop(m_source);
+		alSourcePlay(m_source);
+	}
+	else
+	{
+		return false;
+	}
+	
+	return true;
 }
 
 //END Tagaro::PlaybackEvent

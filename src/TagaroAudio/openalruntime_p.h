@@ -40,6 +40,7 @@ class PlaybackEvent
 
 		//Is playback still running?
 		bool isRunning() const;
+		bool replay(const QPointF& pos) const;
 	private:
 		ALuint m_source;
 		bool m_valid;
