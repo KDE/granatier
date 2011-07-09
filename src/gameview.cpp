@@ -24,6 +24,7 @@
 
 GameView::GameView(Game * p_game) : QGraphicsView(new GameScene(p_game))
 {
+    setFrameStyle(QFrame::NoFrame);
     setFocusPolicy(Qt::StrongFocus);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
