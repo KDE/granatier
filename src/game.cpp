@@ -436,6 +436,11 @@ void Game::initCharactersPosition()
 
 void Game::keyPressEvent(QKeyEvent* p_event)
 {
+    if(p_event->isAutoRepeat())
+    {
+        return;
+    }
+    
     // At the beginning or when paused, we start the timer when a key is pressed
     if (!m_timer->isActive())
     {
@@ -496,6 +501,10 @@ void Game::keyPressEvent(QKeyEvent* p_event)
 
 void Game::keyReleaseEvent(QKeyEvent* p_event)
 {
+    if(p_event->isAutoRepeat())
+    {
+        return;
+    }
     //TODO: make signal
     for(int i = 0; i < m_players.size(); i++)
     {
