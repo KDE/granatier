@@ -46,13 +46,11 @@ GameView::~GameView()
 void GameView::resizeEvent(QResizeEvent*)
 {
     m_resizeTimer.start(150);
- }
+}
 
 void GameView::updateGameScene()
 {
-    fitInView(sceneRect(), Qt::KeepAspectRatio);
     dynamic_cast <GameScene*> (scene())->resizeBackground();
-    
 }
 
 void GameView::focusOutEvent(QFocusEvent*)
@@ -66,10 +64,18 @@ void GameView::focusOutEvent(QFocusEvent*)
 
 void GameView::keyPressEvent(QKeyEvent* p_event)
 {
+    if(p_event->isAutoRepeat())
+    {
+        return;
+    }
     emit(keyPressed(p_event));
 }
 
 void GameView::keyReleaseEvent(QKeyEvent* p_event)
 {
+    if(p_event->isAutoRepeat())
+    {
+        return;
+    }
     emit(keyReleased(p_event));
 }

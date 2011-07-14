@@ -188,6 +188,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
     m_arenaBackground->setZValue(-5);
     m_arenaBackground->setPos(0, 0);
+    m_arenaBackground->setCacheMode(QGraphicsItem::NoCache);
     addItem(m_arenaBackground);
     
     // create the info sidebar
@@ -213,8 +214,8 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     
     //at this point, sceneRect() has the minimum size for the scene
     m_minSize = sceneRect();
-    m_minSize.setX((int) ((int)m_minSize.x() - ((int)m_minSize.x() % (int)Cell::SIZE)));
-    m_minSize.setY((int) ((int)m_minSize.y() - ((int)m_minSize.y() % (int)Cell::SIZE)));
+    m_minSize.setX((int) ((int)m_minSize.x() - ((int)m_minSize.x() % (int)Cell::SIZE)) - Cell::SIZE/4);
+    m_minSize.setY((int) ((int)m_minSize.y() - ((int)m_minSize.y() % (int)Cell::SIZE)) - Cell::SIZE/4);
     m_minSize.setHeight(((int) (m_minSize.height() / Cell::SIZE) + 1) * Cell::SIZE);
     m_minSize.setWidth(((int) (m_minSize.width() / Cell::SIZE) + 1) * Cell::SIZE);
     setSceneRect(m_minSize);
@@ -577,61 +578,36 @@ void GameScene::resizeBackground()
         return;
     }
     
-    //calculate the size of the view, that a Cell fits into whole pixels
-    qreal rows = m_game->getArena()->getNbRows();
-    qreal columns = m_game->getArena()->getNbColumns();
-    
-    QPoint topLeftArena = views().at(0)->mapFromScene(0, 0);
-    QPoint bottomRightArena = views().at(0)->mapFromScene(Cell::SIZE * columns, Cell::SIZE * rows);
-    
-    qreal columnRatio = (bottomRightArena.x() - topLeftArena.x()) / columns;
-    qreal rowRatio = (bottomRightArena.y() - topLeftArena.y()) / rows;
-    
-    QRectF newSceneRect = views().at(0)->sceneRect();
-    newSceneRect.setSize(QSizeF(m_minSize.width() * columnRatio / (int) columnRatio, m_minSize.height() * rowRatio / (int) rowRatio));
-    
-    qreal newWidth = m_minSize.width() * views().at(0)->size().width() / (((int) (views().at(0)->size().width() / (m_minSize.width() / Cell::SIZE))) * m_minSize.width() / Cell::SIZE);
-    qreal newHeigth = m_minSize.height() * views().at(0)->size().height() / (((int) (views().at(0)->size().height() / (m_minSize.height() / Cell::SIZE))) * m_minSize.height() / Cell::SIZE);
-    newSceneRect.setSize(QSizeF(newWidth, newHeigth));
-    
-    views().at(0)->setSceneRect(newSceneRect);
-    
-    
-    qreal x = views().at(0)->x();
-    qreal y = views().at(0)->y();
-    qreal width = views().at(0)->width();
-    qreal height = views().at(0)->height();
-    QPointF topLeftView = views().at(0)->mapToScene(0, 0);
-    QPointF bottomRightView = views().at(0)->mapToScene(width, height);
-    
-    x = topLeftView.x();
-    y = topLeftView.y();
-    width = bottomRightView.x() - x;
-    height = bottomRightView.y() - y;
-    
-    //calculate the scale factor between graphicsscene and graphicsview
-    //TODO: calcute with width and views().at(0)->width();
-    QPoint topLeft(0, 0);
-    QPoint bottomRight(100, 100);
-    topLeft = views().at(0)->mapFromScene(topLeft);
-    bottomRight = views().at(0)->mapFromScene(bottomRight);
-    m_SvgScaleFactor = 100.0 / (bottomRight.x() - topLeft.x());
-    
-    //get the graphicsview size
-    QSize svgSize = views().at(0)->size();
-    
-    //set pixmap
-    m_arenaBackground->setRenderSize(svgSize);
-    m_arenaBackground->setPos(x, y);
-    m_arenaBackground->setScale(m_SvgScaleFactor);
-    //m_arenaBackground->setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
-    //m_arenaBackground->setCacheMode(QGraphicsItem::DeviceCoordinateCache, svgSize);
+    //calculate the scaling factor for the SVGs
+    int horizontalPixelsPerCell = views().first()->size().width() / (m_minSize.width()/Cell::SIZE);
+    int verticalPixelsPerCell = views().first()->size().height() / (m_minSize.height()/Cell::SIZE);
+    if(horizontalPixelsPerCell < verticalPixelsPerCell)
+    {
+        m_SvgScaleFactor = Cell::SIZE / horizontalPixelsPerCell;
+    }
+    else
+    {
+        m_SvgScaleFactor = Cell::SIZE / verticalPixelsPerCell;
+    }
+    QTransform transform;
+    transform.scale(1/m_SvgScaleFactor, 1/m_SvgScaleFactor);
+    //transform.translate(-20,-10);
+    views().first()->setTransform(transform);
+    views().first()->centerOn(sceneRect().center());
+    views().first()->updateSceneRect(m_minSize);;
     
     //update pixmaps
     emit resizeGraphics(m_SvgScaleFactor);
     
     //update overlay
-    m_infoOverlay->resizeDimmOverlay(x, y, width, height);
+    QRect viewRect = views().first()->rect();
+    QRectF viewRectToScene = QRectF(views().first()->mapToScene(viewRect.topLeft()), views().first()->mapToScene(viewRect.bottomRight()));
+    m_infoOverlay->resizeDimmOverlay(viewRectToScene.x(), viewRectToScene.y(), viewRectToScene.width(), viewRectToScene.height());
+    
+    //update background pixmap
+    m_arenaBackground->setRenderSize(viewRect.size());
+    m_arenaBackground->setPos(views().first()->mapToScene(QPoint(0, 0)));
+    m_arenaBackground->setScale(m_SvgScaleFactor);
 }
 
 Game* GameScene::getGame() const

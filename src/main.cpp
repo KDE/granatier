@@ -26,7 +26,7 @@
 int main(int argc, char** argv)
 {
     // About Granatier
-    KAboutData about("granatier", 0, ki18n("Granatier"), "1.0.0",
+    KAboutData about("granatier", 0, ki18n("Granatier"), "1.1.50",
         ki18n("Granatier is a Bomberman Clone!"),
         KAboutData::License_GPL, ki18n("Copyright (c) 2009 The Granatier Team!"));
     about.addAuthor(ki18n("Mathias Kraus"), ki18n("Maintainer"), "k.hias@gmx.de", 0);
