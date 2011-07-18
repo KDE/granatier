@@ -606,7 +606,7 @@ void GameScene::resizeBackground()
     
     //update background pixmap
     m_arenaBackground->setRenderSize(viewRect.size());
-    m_arenaBackground->setPos(views().first()->mapToScene(QPoint(0, 0)));
+    m_arenaBackground->setPos(views().first()->mapToScene(viewRect.topLeft()));
     m_arenaBackground->setScale(m_SvgScaleFactor);
 }
 
