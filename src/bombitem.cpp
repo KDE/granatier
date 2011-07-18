@@ -128,7 +128,7 @@ void BombItem::startDetonation(Bomb* bomb)
     
     setSpriteKey("bomb_blast_core_0");
     setZValue(300+15); //300+maxBombPower+5
-    update(m_x, m_y);
+    updateGraphics(scale());
 }
 
 void BombItem::pulse()
