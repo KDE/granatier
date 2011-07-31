@@ -75,7 +75,7 @@ Game::Game(PlayerSettings* playerSettings)
     
     for (int i = 0; i < m_players.size(); i++)
     {
-        connect(m_players[i], SIGNAL(bombDropped(Player*, qreal, qreal, bool, int)), this, SLOT(createBomb(Player*, qreal, qreal, bool, int)));
+        connect(m_players[i], SIGNAL(bombDropped(Player*,qreal,qreal,bool,int)), this, SLOT(createBomb(Player*,qreal,qreal,bool,int)));
     }
     
     m_gameOver = false;

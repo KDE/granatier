@@ -167,7 +167,7 @@ void MainWindow::showSettings()
     // Player
     settingsDialog->addPage(new PlayerSelector(settingsDialog, m_playerSettings), i18n("Player"), "games-config-custom");
     
-    connect(settingsDialog, SIGNAL(settingsChanged(const QString&)), this, SLOT(applyNewSettings()));
+    connect(settingsDialog, SIGNAL(settingsChanged(QString)), this, SLOT(applyNewSettings()));
     connect(settingsDialog, SIGNAL(cancelClicked()), this, SLOT(settingsDialogCanceled()));
     settingsDialog->show();
 }

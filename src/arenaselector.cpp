@@ -103,7 +103,7 @@ void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, A
     //The lineEdit widget holds our arena path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.
     ui.kcfg_Arena->hide();
-    connect(ui.kcfg_Arena, SIGNAL(textChanged(const QString&)), q, SLOT(_k_updateArenaList(const QString&)));
+    connect(ui.kcfg_Arena, SIGNAL(textChanged(QString)), q, SLOT(_k_updateArenaList(QString)));
 
     //Disable KNS button?
     if (knsflags==ArenaSelector::NewStuffDisableDownload) {
@@ -186,7 +186,7 @@ void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelec
     }
 
     //Reconnect the arenaList
-    connect(ui.arenaList, SIGNAL(currentItemChanged ( QListWidgetItem * , QListWidgetItem * )), q, SLOT(_k_updatePreview()));
+    connect(ui.arenaList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), q, SLOT(_k_updatePreview()));
 }
 
 void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()

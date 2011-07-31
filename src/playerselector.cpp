@@ -154,11 +154,11 @@ void PlayerSelector::PlayerSelectorPrivate::setupData()
         ui.keyPutBomb->setMultiKeyShortcutsAllowed(false);
     }
     
-    connect(ui.keyUp, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
-    connect(ui.keyRight, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
-    connect(ui.keyDown, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
-    connect(ui.keyLeft, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
-    connect(ui.keyPutBomb, SIGNAL(keySequenceChanged(const QKeySequence&)), q, SLOT(slotUpdateShortcut(const QKeySequence&)));
+    connect(ui.keyUp, SIGNAL(keySequenceChanged(QKeySequence)), q, SLOT(slotUpdateShortcut(QKeySequence)));
+    connect(ui.keyRight, SIGNAL(keySequenceChanged(QKeySequence)), q, SLOT(slotUpdateShortcut(QKeySequence)));
+    connect(ui.keyDown, SIGNAL(keySequenceChanged(QKeySequence)), q, SLOT(slotUpdateShortcut(QKeySequence)));
+    connect(ui.keyLeft, SIGNAL(keySequenceChanged(QKeySequence)), q, SLOT(slotUpdateShortcut(QKeySequence)));
+    connect(ui.keyPutBomb, SIGNAL(keySequenceChanged(QKeySequence)), q, SLOT(slotUpdateShortcut(QKeySequence)));
 }
 
 void PlayerSelector::PlayerSelectorPrivate::slotUpdatePreview()

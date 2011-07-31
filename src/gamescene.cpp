@@ -46,9 +46,9 @@
 GameScene::GameScene(Game* p_game) : m_game(p_game)
 {
     connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
-    connect(p_game, SIGNAL(pauseChanged(bool, bool)), this, SLOT(setPaused(bool, bool)));
+    connect(p_game, SIGNAL(pauseChanged(bool,bool)), this, SLOT(setPaused(bool,bool)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
-    connect(p_game, SIGNAL(infoChanged(Game::InformationTypes)), this, SLOT(updateInfo(const Game::InformationTypes)));
+    connect(p_game, SIGNAL(infoChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
     
     m_SvgScaleFactor = 1;
     
@@ -749,7 +749,7 @@ void GameScene::createBombItem(Bomb* bomb)
     connect(bomb, SIGNAL(mortar(int)), bombItem, SLOT(updateMortar(int)));
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
     connect(bombItem, SIGNAL(bombItemFinished(BombItem*)), this, SLOT(removeBombItem(BombItem*)));
-    connect(bombItem, SIGNAL(animationFrameChanged(BombItem*, int)), this, SLOT(updateBombExplosionItemAnimation(BombItem*, int)));
+    connect(bombItem, SIGNAL(animationFrameChanged(BombItem*,int)), this, SLOT(updateBombExplosionItemAnimation(BombItem*,int)));
 }
 
 void GameScene::removeBombItem(BombItem* bombItem)

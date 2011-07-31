@@ -175,7 +175,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         }
         
         //connect player
-        connect(playerList[i], SIGNAL(bonusUpdated(Player*, Bonus::BonusType, int)), this, SLOT(bonusInfoChanged(Player*, Bonus::BonusType, int)));
+        connect(playerList[i], SIGNAL(bonusUpdated(Player*,Bonus::BonusType,int)), this, SLOT(bonusInfoChanged(Player*,Bonus::BonusType,int)));
     }
     
     m_background = new QGraphicsRectItem();
