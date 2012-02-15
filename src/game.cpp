@@ -28,7 +28,6 @@
 #include "bomb.h"
 #include "block.h"
 #include "playersettings.h"
-#include "granatiersound.h"
 
 #include <QPointF>
 #include <QTimer>
@@ -37,6 +36,7 @@
 #include <KStandardDirs>
 #include <KConfig>
 #include <KComponentData>
+#include <kgsound.h>
 
 const int Game::FPS = 40;
 
@@ -48,11 +48,11 @@ Game::Game(PlayerSettings* playerSettings)
     setSoundsEnabled(Settings::sounds());
     m_wilhelmScream = Settings::useWilhelmScream();
     
-    m_soundPutBomb = new GranatierSound(KStandardDirs::locate("appdata", "sounds/putbomb.wav"));
-    m_soundExplode = new GranatierSound(KStandardDirs::locate("appdata", "sounds/explode.wav"));
-    m_soundBonus = new GranatierSound(KStandardDirs::locate("appdata", "sounds/wow.wav"));
-    m_soundFalling = new GranatierSound(KStandardDirs::locate("appdata", "sounds/deepfall.wav"));
-    m_soundDie = new GranatierSound(KStandardDirs::locate("appdata", "sounds/die.wav"));
+    m_soundPutBomb = new KgSound(KStandardDirs::locate("appdata", "sounds/putbomb.wav"));
+    m_soundExplode = new KgSound(KStandardDirs::locate("appdata", "sounds/explode.wav"));
+    m_soundBonus = new KgSound(KStandardDirs::locate("appdata", "sounds/wow.wav"));
+    m_soundFalling = new KgSound(KStandardDirs::locate("appdata", "sounds/deepfall.wav"));
+    m_soundDie = new KgSound(KStandardDirs::locate("appdata", "sounds/die.wav"));
     
     m_arena = 0;
     m_gameScene = 0;
@@ -393,7 +393,7 @@ void Game::removeBonus(Bonus* bonus)
     //do not delete the Bonus, because the ElementItem will delete it
     if(m_soundEnabled && !bonus->isDestroyed())
     {
-        m_soundBonus->play();
+        m_soundBonus->start();
     }
 }
 
@@ -576,7 +576,7 @@ void Game::playerFalling()
 {
     if(m_soundEnabled)
     {
-        m_soundFalling->play();
+        m_soundFalling->start();
     }
 }
 
@@ -587,7 +587,7 @@ void Game::playerDeath(Player* player)
 
     if(m_soundEnabled)
     {
-        m_soundDie->play();
+        m_soundDie->start();
     }
 }
 
@@ -683,7 +683,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     
     if(m_soundEnabled)
     {
-        m_soundPutBomb->play();
+        m_soundPutBomb->start();
     }
 }
 
@@ -703,7 +703,7 @@ void Game::bombDetonated(Bomb* bomb)
 {
     if(m_soundEnabled)
     {
-        m_soundExplode->play();
+        m_soundExplode->start();
     }
 }
 

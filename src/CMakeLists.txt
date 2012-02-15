@@ -29,9 +29,6 @@ set(granatierSources
     playeritem.cpp
     playerselector.cpp
     playersettings.cpp
-    granatiersound.cpp
-    TagaroAudio/audioscene.cpp
-    TagaroAudio/sound.cpp
 )
 
 set(granatierData
@@ -46,7 +43,7 @@ kde4_add_app_icon(granatierSources "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/hi*-
 
 kde4_add_executable(granatier ${granatierSources})
 
-target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} kdegames ${KDE4_KNEWSTUFF2_LIBRARY} ${OPENAL_LIBRARY} ${SNDFILE_LIBRARIES})
+target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${KDEGAMES_LIBRARY} ${KDE4_KNEWSTUFF2_LIBRARY})
 
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
