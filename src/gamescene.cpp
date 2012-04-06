@@ -39,6 +39,7 @@
 #include <KLocale>
 #include <QPainter>
 #include <QGraphicsView>
+#include <QTimer>
 
 #include <KGameRenderer>
 #include <KGameRenderedItem>
@@ -51,6 +52,10 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     connect(p_game, SIGNAL(infoChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
     
     m_SvgScaleFactor = 1;
+    
+    m_backgroundResizeTimer = new QTimer();
+    m_backgroundResizeTimer->setSingleShot(true);
+    connect(m_backgroundResizeTimer, SIGNAL(timeout()), this, SLOT(resizeBackground()));
     
     // Load the selected SVG file
     m_rendererSelectedTheme = 0;
@@ -189,6 +194,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_arenaBackground->setZValue(-5);
     m_arenaBackground->setPos(0, 0);
     m_arenaBackground->setCacheMode(QGraphicsItem::NoCache);
+    m_arenaBackground->setRenderSize(QSize(100, 100)); //just to get something in the background, until the right size is rendered
     addItem(m_arenaBackground);
     
     // create the info sidebar
@@ -428,11 +434,14 @@ void GameScene::init()
     
     m_infoOverlay->showGetReady();
     
+    resizeSprites();
     resizeBackground();
 }
 
 GameScene::~GameScene()
 {
+    delete m_backgroundResizeTimer;
+    
     cleanUp();
     
     for (int i = 0; i < m_playerItems.size(); i++)
@@ -570,8 +579,7 @@ void GameScene::showScore()
     m_infoOverlay->showScore();
 }
 
-//TODO: rename this function
-void GameScene::resizeBackground()
+void GameScene::resizeSprites()
 {
     if(views().isEmpty())
     {
@@ -605,9 +613,23 @@ void GameScene::resizeBackground()
     m_infoOverlay->resizeDimmOverlay(viewRectToScene.x(), viewRectToScene.y(), viewRectToScene.width(), viewRectToScene.height());
     
     //update background pixmap
-    m_arenaBackground->setRenderSize(viewRect.size());
     m_arenaBackground->setPos(views().first()->mapToScene(viewRect.topLeft()));
     m_arenaBackground->setScale(m_SvgScaleFactor);
+    
+    m_arenaBackground->setPixmap(m_arenaBackground->pixmap().scaled(viewRect.size()));
+    
+    m_backgroundResizeTimer->stop();
+    m_backgroundResizeTimer->start(250);
+}
+
+void GameScene::resizeBackground()
+{
+    if(views().isEmpty())
+    {
+        return;
+    }
+    QRect viewRect = views().first()->rect();
+    m_arenaBackground->setRenderSize(viewRect.size());
 }
 
 Game* GameScene::getGame() const

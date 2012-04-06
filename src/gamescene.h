@@ -39,7 +39,7 @@ class BombItem;
 class BombExplosionItem;
 class InfoOverlay;
 class InfoSidebar;
-class QSvgRenderer;
+class QTimer;
 
 class KGameRenderer;
 class KGameRenderedItem;
@@ -102,6 +102,8 @@ private:
     KGameRenderer* m_rendererInfoSidebar;
     QMap <Player*, KGameRenderer*> m_mapRendererPlayerItems;
     
+    QTimer* m_backgroundResizeTimer;
+    
 public:
 
     /**
@@ -141,9 +143,9 @@ public:
     void showScore();
     
     /**
-     * Updates the background to fit into the QGraphicsView after a resize.
+     * Updates the sprites after a resize.
      */
-    void resizeBackground();
+    void resizeSprites();
     
     /**
      * Returns the renderer for the requestet Element Type
@@ -158,6 +160,11 @@ private slots:
     * Updates the elements to be drawn when the Game starts.
     */
     void start();
+    
+    /**
+     * Updates the background to fit into the QGraphicsView after a resize.
+     */
+    void resizeBackground();
     
     /**
     * Updates the elements to be drawn considering the Game state (paused or running).

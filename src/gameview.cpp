@@ -32,10 +32,6 @@ GameView::GameView(Game * p_game) : QGraphicsView(new GameScene(p_game))
     // Forward the key press events to the Game instance
     connect(this, SIGNAL(keyPressed(QKeyEvent*)), p_game, SLOT(keyPressEvent(QKeyEvent*)));
     connect(this, SIGNAL(keyReleased(QKeyEvent*)), p_game, SLOT(keyReleaseEvent(QKeyEvent*)));
-    
-    m_resizeTimer.setSingleShot(true);
-    
-    connect(&m_resizeTimer, SIGNAL(timeout()), this, SLOT(updateGameScene()));
 }
 
 GameView::~GameView()
@@ -45,12 +41,7 @@ GameView::~GameView()
 
 void GameView::resizeEvent(QResizeEvent*)
 {
-    m_resizeTimer.start(150);
-}
-
-void GameView::updateGameScene()
-{
-    dynamic_cast <GameScene*> (scene())->resizeBackground();
+    dynamic_cast <GameScene*> (scene())->resizeSprites();
 }
 
 void GameView::focusOutEvent(QFocusEvent*)
