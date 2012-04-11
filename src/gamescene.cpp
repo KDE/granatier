@@ -35,8 +35,9 @@
 #include "infooverlay.h"
 #include "infosidebar.h"
 
-#include <KGameTheme>
+#include <KgTheme>
 #include <KLocale>
+#include <KStandardDirs>
 #include <QPainter>
 #include <QGraphicsView>
 #include <QTimer>
@@ -69,7 +70,9 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     if(Settings::self()->theme() != "themes/granatier.desktop" || m_rendererSelectedTheme == 0)
     {
         selectedThemeIsDefault = false;
-        m_rendererDefaultTheme = new KGameRenderer("themes/granatier.desktop");
+        KgTheme* theme = new KgTheme("themes/granatier.desktop");
+        theme->setSvgPath(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
+        m_rendererDefaultTheme = new KGameRenderer(theme);
         //uncomment this if the crash in KSharedDataCache appears again
         //m_rendererDefaultTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
     }
@@ -156,7 +159,10 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     PlayerItem* playerItem;
     for(int i = 0; i < players.size(); i++)
     {
-        KGameRenderer* playerRenderer = new KGameRenderer(players[i]->getDesktopFilePath());
+        const QString desktopPath = players[i]->getDesktopFilePath();
+        KgTheme* theme = new KgTheme(desktopPath.toUtf8());
+        theme->readFromDesktopFile(KStandardDirs::locate("appdata", desktopPath));
+        KGameRenderer* playerRenderer = new KGameRenderer(theme);
         //uncomment this if the crash in KSharedDataCache appears again
         //playerRenderer->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
         m_mapRendererPlayerItems.insert(players[i], playerRenderer);
@@ -639,7 +645,9 @@ Game* GameScene::getGame() const
 
 void GameScene::loadTheme()
 {
-    m_rendererSelectedTheme = new KGameRenderer(Settings::self()->theme());
+    KgTheme* theme = new KgTheme(Settings::self()->theme().toUtf8());
+    theme->readFromDesktopFile(KStandardDirs::locate("appdata", Settings::self()->theme()));
+    m_rendererSelectedTheme = new KGameRenderer(theme);
     
     update(0, 0, width(), height());
 

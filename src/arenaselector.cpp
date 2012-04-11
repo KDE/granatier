@@ -24,6 +24,7 @@
 #include "mapparser.h"
 
 #include <QGraphicsView>
+#include <KgTheme>
 #include <KGameRenderer>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
@@ -232,7 +233,9 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     }
     delete m_renderer;
     
-    m_renderer = new KGameRenderer(KStandardDirs::locate("appdata", QString("themes/granatier.desktop")));
+    KgTheme* theme = new KgTheme(QByteArray());
+    theme->setSvgPath(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
+    m_renderer = new KGameRenderer(theme);
     
     ui.arenaPreview->setSceneRect(0, 0, arena->getNbColumns()*Cell::SIZE, arena->getNbRows()*Cell::SIZE);
     ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
