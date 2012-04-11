@@ -71,7 +71,7 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         selectedThemeIsDefault = false;
         KgTheme* theme = new KgTheme("themes/granatier.desktop");
-        theme->setSvgPath(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
+        theme->setGraphicsPath(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
         m_rendererDefaultTheme = new KGameRenderer(theme);
         //uncomment this if the crash in KSharedDataCache appears again
         //m_rendererDefaultTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);

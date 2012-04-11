@@ -234,7 +234,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     delete m_renderer;
     
     KgTheme* theme = new KgTheme(QByteArray());
-    theme->setSvgPath(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
+    theme->setGraphicsPath(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
     m_renderer = new KGameRenderer(theme);
     
     ui.arenaPreview->setSceneRect(0, 0, arena->getNbColumns()*Cell::SIZE, arena->getNbRows()*Cell::SIZE);
