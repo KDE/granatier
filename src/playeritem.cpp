@@ -62,7 +62,7 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
     setZValue(250);
     
     m_fallingAnimationCounter = 0;
-    m_ressurectionAnimationCounter = 0;
+    m_resurrectionAnimationCounter = 0;
 }
 
 PlayerItem::~PlayerItem()
@@ -75,12 +75,14 @@ void PlayerItem::resurrect()
     int nDirection = dynamic_cast <Player*> (m_model)->direction();
     setZValue(250);
     m_fallingAnimationCounter = 0;
-    m_ressurectionAnimationCounter = 10;
+    m_resurrectionAnimationCounter = 10;
+    setRenderSize(m_renderSize);
     resetTransform();
     if(m_renderer->spriteExists("player_0"))
     {
         setSpriteKey("player_0");
     }
+    
     QTransform transform;
     transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
     // get the angle
@@ -102,7 +104,6 @@ void PlayerItem::resurrect()
             transform.rotate(0);
             break;
     }
-    transform.scale(1, 1);
     transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
     setTransform(transform);
     
@@ -228,7 +229,7 @@ void PlayerItem::stopAnim()
     {
         setSpriteKey("player_0");
     }
-    if (m_animationTimer->state() != QTimeLine::NotRunning && m_ressurectionAnimationCounter == 0)
+    if (m_animationTimer->state() != QTimeLine::NotRunning && m_resurrectionAnimationCounter == 0)
     {
         m_animationTimer->stop();
     }
@@ -245,7 +246,7 @@ void PlayerItem::setFrame(const int p_frame)
     {
         setSpriteKey(QString("player_%1").arg(p_frame));
         
-        if(m_fallingAnimationCounter > 0 || m_ressurectionAnimationCounter > 0)
+        if(m_fallingAnimationCounter > 0 || m_resurrectionAnimationCounter > 0)
         {
             int angle = 0;
             int nDirection = dynamic_cast <Player*> (m_model)->direction();
@@ -278,8 +279,8 @@ void PlayerItem::setFrame(const int p_frame)
                 QTransform transform;
                 transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 transform.rotate(angle);
-                transform.scale(1-m_fallingAnimationCounter*0.02, 1-m_fallingAnimationCounter*0.02);
-                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
+                setRenderSize(m_renderSize * (1-m_fallingAnimationCounter*0.02));
+                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() * (1-m_fallingAnimationCounter*0.02) / 2, -renderer()->boundsOnSprite(spriteKey()).height() * (1-m_fallingAnimationCounter*0.02) / 2);
                 setTransform(transform);
                 m_fallingAnimationCounter++;
                 
@@ -291,60 +292,62 @@ void PlayerItem::setFrame(const int p_frame)
                 }
             }
             
-            if(m_ressurectionAnimationCounter > 0)
+            if(m_resurrectionAnimationCounter > 0)
             {
+                qreal resurrectionScale = 1;
                 QTransform transform;
                 transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
                 transform.rotate(angle);
-                if(m_ressurectionAnimationCounter > 9)
+                if(m_resurrectionAnimationCounter > 9)
                 {
-                    transform.scale(1.1, 1.1);
+                    resurrectionScale = 1.1;
                 }
-                else if(m_ressurectionAnimationCounter > 8)
+                else if(m_resurrectionAnimationCounter > 8)
                 {
-                    transform.scale(0.9, 0.9);
+                    resurrectionScale = 0.9;
                 }
-                else if(m_ressurectionAnimationCounter > 7)
+                else if(m_resurrectionAnimationCounter > 7)
                 {
-                    transform.scale(0.6, 0.6);
+                    resurrectionScale = 0.6;
                 }
-                else if(m_ressurectionAnimationCounter > 6)
+                else if(m_resurrectionAnimationCounter > 6)
                 {
-                    transform.scale(0.7, 0.7);
+                    resurrectionScale = 0.7;
                 }
-                else if(m_ressurectionAnimationCounter > 5)
+                else if(m_resurrectionAnimationCounter > 5)
                 {
-                    transform.scale(0.85, 0.85);
+                    resurrectionScale = 0.85;
                 }
-                else if(m_ressurectionAnimationCounter > 4)
+                else if(m_resurrectionAnimationCounter > 4)
                 {
-                    transform.scale(1.0, 1.0);
+                    resurrectionScale = 1;
                 }
-                else if(m_ressurectionAnimationCounter > 3)
+                else if(m_resurrectionAnimationCounter > 3)
                 {
-                    transform.scale(1.05, 1.05);
+                    resurrectionScale = 1.05;
                 }
-                else if(m_ressurectionAnimationCounter > 2)
+                else if(m_resurrectionAnimationCounter > 2)
                 {
-                    transform.scale(1.1, 1.1);
+                    resurrectionScale = 1.1;
                 }
-                else if(m_ressurectionAnimationCounter > 1)
+                else if(m_resurrectionAnimationCounter > 1)
                 {
-                    transform.scale(1.05, 1.05);
+                    resurrectionScale = 1.05;
                 }
-                else if(m_ressurectionAnimationCounter > 0)
+                else if(m_resurrectionAnimationCounter > 0)
                 {
-                    transform.scale(1.0, 1.0);
+                    resurrectionScale = 1;
                 }
                 
-                m_ressurectionAnimationCounter--;
-                if(m_ressurectionAnimationCounter == 0)
+                m_resurrectionAnimationCounter--;
+                if(m_resurrectionAnimationCounter == 0)
                 {
-                    transform.scale(1.0, 1.0);
+                    resurrectionScale = 1;
                     stopAnim();
                 }
                 
-                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
+                setRenderSize(m_renderSize * resurrectionScale);
+                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() * resurrectionScale / 2, -renderer()->boundsOnSprite(spriteKey()).height() * resurrectionScale / 2);
                 setTransform(transform);
             }
         }
@@ -355,8 +358,9 @@ void PlayerItem::setDead()
 {
     stopAnim();
     setZValue(1);
-    if(m_ressurectionAnimationCounter != 0)
+    if(m_resurrectionAnimationCounter != 0)
     {
+        setRenderSize(m_renderSize);
         resetTransform();
     }
     if(m_renderer->spriteExists("player_death"))

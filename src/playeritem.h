@@ -47,8 +47,8 @@ private:
     /** Counter for falling animation */
     int m_fallingAnimationCounter;
     
-    /** Counter for ressurection animation */
-    int m_ressurectionAnimationCounter;
+    /** Counter for resurrection animation */
+    int m_resurrectionAnimationCounter;
     
     /** player ID */
     QString m_strPlayerId;

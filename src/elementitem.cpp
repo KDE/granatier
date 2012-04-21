@@ -33,6 +33,8 @@ ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRende
     connect(p_model, SIGNAL(moved(qreal,qreal)), this, SLOT(update(qreal,qreal)));
     //setCacheMode(DeviceCoordinateCache);
     //setMaximumCacheSize(QSize(500, 500));
+    
+    m_renderSize = QSize(1, 1);
 }
 
 ElementItem::~ElementItem()
@@ -83,4 +85,5 @@ void ElementItem::updateGraphics(qreal svgScaleFactor)
     
     setRenderSize(svgSize);
     setScale(svgScaleFactor);
+    m_renderSize = svgSize;
 }

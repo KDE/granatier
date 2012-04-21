@@ -41,6 +41,9 @@ protected:
     /** Timer used to animate explosion */
     QTimer* m_explosionTimer;
     
+    /** Timer used to animate explosion */
+    QTimer* m_mortarAnimationTimer;
+    
     /** Timing for the explosion */
     QList <int> m_listExplosionTiming;
 
@@ -49,6 +52,9 @@ protected:
     
     /** Counter for falling animation */
     int m_fallingAnimationCounter;
+    
+    /** Counter for mortar and throw animation */
+    int m_mortarAnimationCounter;
     
     /** Flag to stop the animation if the bomb is fallin in a hole or TODO: a dud bomb */
     bool m_dudBomb;
@@ -111,6 +117,11 @@ private slots:
     * Animates the explosion
     */
     virtual void updateAnimation();
+    
+    /**
+     * Animates the mortar
+     */
+    void updateMortarAnimation();
     
     /**
     * Animates the explosion
