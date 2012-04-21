@@ -29,8 +29,12 @@ Cell::~Cell()
 {
 }
 
-bool Cell::isWalkable() const
+bool Cell::isWalkable(Element* p_element) const
 {
+    if(p_element != NULL && p_element == m_element)
+    {
+        return true;
+    }
     if(m_type == Cell::WALL)
     {
         return false;

@@ -78,7 +78,7 @@ public:
       * Returns if it is possible to move into the cell or not, because of a wall, bomb, etc.
       * @return true if it is possible to move into the cell
       */
-    bool isWalkable() const;
+    bool isWalkable(Element* p_element = NULL) const;
 
     /**
       * Gets the Cell type.
