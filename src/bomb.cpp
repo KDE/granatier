@@ -92,53 +92,38 @@ void Bomb::updateMove()
     int currentRow = m_arena->getRowFromY(m_y);
     int currentCol = m_arena->getColFromX(m_x);
     //check if the bomb is on an arrow, mortar or hole
-    if(m_mortarState == -1)
+    if(m_mortarState == -1 && m_xSpeed == 0 && m_ySpeed == 0)
     {
         switch (m_arena->getCell(currentRow, currentCol).getType())
         {
             case Cell::ARROWUP:
-                if(m_xSpeed == 0 && m_ySpeed == 0)
-                {
-                    setYSpeed(-5);
-                }
+                setYSpeed(-5);
                 break;
             case Cell::ARROWRIGHT:
-                if(m_xSpeed == 0 && m_ySpeed == 0)
-                {
-                    setXSpeed(5);
-                }
+                setXSpeed(5);
                 break;
             case Cell::ARROWDOWN:
-                if(m_xSpeed == 0 && m_ySpeed == 0)
-                {
-                    setYSpeed(5);
-                }
+                setYSpeed(5);
                 break;
             case Cell::ARROWLEFT:
-                if(m_xSpeed == 0 && m_ySpeed == 0)
-                {
-                    setXSpeed(-5);
-                }
+                setXSpeed(-5);
                 break;
             case Cell::BOMBMORTAR:
-                if(m_xSpeed == 0 && m_ySpeed == 0)
-                {
-                    m_mortarTimer = new QTimer;
-                    m_mortarTimer->setSingleShot(true);
-                    m_mortarTimer->setInterval(1500);
-                    m_mortarTimer->start();
-                    m_detonationCountdownTimer->stop();
-                    connect(m_mortarTimer, SIGNAL(timeout()), this, SLOT(updateMortarState()));
-                    m_mortarState = 0;
-                    setXSpeed(0);
-                    setYSpeed(0);
-                    m_type = Element::NONE;
-                    m_arena->removeCellElement(currentRow, currentCol, this);
-                    emit mortar(m_mortarState);
-                }
+                m_mortarTimer = new QTimer;
+                m_mortarTimer->setSingleShot(true);
+                m_mortarTimer->setInterval(1500);
+                m_mortarTimer->start();
+                m_detonationCountdownTimer->stop();
+                connect(m_mortarTimer, SIGNAL(timeout()), this, SLOT(updateMortarState()));
+                m_mortarState = 0;
+                setXSpeed(0);
+                setYSpeed(0);
+                m_type = Element::NONE;
+                m_arena->removeCellElement(currentRow, currentCol, this);
+                emit mortar(m_mortarState);
                 break;
             case Cell::HOLE:
-                if(m_xSpeed == 0 && m_ySpeed == 0 && !m_falling)
+                if(!m_falling)
                 {
                     m_falling = true;
                     m_type = Element::NONE;
@@ -183,15 +168,26 @@ void Bomb::updateMove()
         
         int newRow = m_arena->getRowFromY(m_y + m_ySpeed);
         int newCol = m_arena->getColFromX(m_x + m_xSpeed);
-        int nextRow = m_arena->getRowFromY(m_y + m_ySpeed + yDirection * Cell::SIZE/2);
-        int nextCol = m_arena->getColFromX(m_x + m_xSpeed + xDirection * Cell::SIZE/2);
+        int nextRow;
+        int nextCol;
+        if(xDirection > 0 || yDirection > 0)
+        {
+            nextRow = m_arena->getRowFromY(m_y + yDirection * Cell::SIZE/2); //this is needed because the bombs won't move if they are coming from the top, hit an up arrow and there is a hurdle below the arrow
+            nextCol = m_arena->getColFromX(m_x + xDirection * Cell::SIZE/2);
+        }
+        else
+        {
+            nextRow = m_arena->getRowFromY(m_y + m_ySpeed + yDirection * Cell::SIZE/2);
+            nextCol = m_arena->getColFromX(m_x + m_xSpeed + xDirection * Cell::SIZE/2);
+        }
         
         //at first, check if move over cell center or currently on cell center
-        if((bOnCenter || (xDirection * xDeltaCenter < 0 && xDirection * (m_xSpeed + xDeltaCenter >= 0)) || (yDirection * yDeltaCenter < 0 && yDirection * (m_ySpeed + yDeltaCenter >= 0))) && m_mortarState == -1)
+        if((bOnCenter || (xDirection * xDeltaCenter < 0 && xDirection * (m_xSpeed + xDeltaCenter) >= 0) || (yDirection * yDeltaCenter < 0 && yDirection * (m_ySpeed + yDeltaCenter) >= 0)) && m_mortarState == -1)
         {
             bool bIsMortar = false;
             bool bIsNewDirection = false;
-            bool bIsHurdle = false;
+            bool bIsHurdleCurrentCell = false;
+            bool bIsHurdleNextCell = false;
             
             switch (m_arena->getCell(currentRow, currentCol).getType())
             {
@@ -229,13 +225,28 @@ void Bomb::updateMove()
                     break;
             }
             
-            if(!(m_arena->getCell(nextRow, nextCol).isWalkable()))
+            
+            bIsHurdleCurrentCell = !(m_arena->getCell(currentRow, currentCol).isWalkable(this));
+            bIsHurdleNextCell = !(m_arena->getCell(nextRow, nextCol).isWalkable(this));
+            
+            //if two bombs move towards them, stop them and move them to the next cell center
+            if((bIsHurdleCurrentCell || bIsHurdleNextCell) && !m_stopOnCenter)
             {
-                bIsHurdle = true;
+                if(bOnCenter)
+                {
+                    setXSpeed(0);
+                    setYSpeed(0);
+                }
+                else
+                {
+                    m_stopOnCenter = true;
+                    setXSpeed(-m_xSpeed);
+                    setYSpeed(-m_ySpeed);
+                }
             }
             
-            //stop at cell center if hurdle in next cell, direction change or bomb mortar in current cell
-            if(bIsMortar || bIsNewDirection || bIsHurdle || m_stopOnCenter)
+            //stop at cell center if direction change or bomb mortar in current cell
+            else if(bIsMortar || bIsNewDirection || m_stopOnCenter)
             {
                 move((currentCol+0.5) * Cell::SIZE, (currentRow+0.5) * Cell::SIZE);
                 setXSpeed(0);
@@ -253,12 +264,30 @@ void Bomb::updateMove()
         }
         else
         {
-            if((newRow != currentRow || newCol != currentCol) && m_mortarState == -1)
+            //if two bombs move towards them, stop them and move them to the next cell center
+            if((!(m_arena->getCell(nextRow, nextCol).isWalkable(this)) || !(m_arena->getCell(currentRow, currentCol).isWalkable(this))) && m_mortarState == -1 && !m_stopOnCenter)
             {
-                m_arena->removeCellElement(currentRow, currentCol, this);
-                m_arena->setCellElement(newRow, newCol, this);
+                if(bOnCenter)
+                {
+                    setXSpeed(0);
+                    setYSpeed(0);
+                }
+                else
+                {
+                    m_stopOnCenter = true;
+                    setXSpeed(-m_xSpeed);
+                    setYSpeed(-m_ySpeed);
+                }
             }
-            move(m_x + m_xSpeed, m_y + m_ySpeed);
+            else
+            {
+                if((newRow != currentRow || newCol != currentCol) && m_mortarState == -1)
+                {
+                    m_arena->removeCellElement(currentRow, currentCol, this);
+                    m_arena->setCellElement(newRow, newCol, this);
+                }
+                move(m_x + m_xSpeed, m_y + m_ySpeed);
+            }
         }
     }
 }
@@ -308,7 +337,7 @@ void Bomb::setThrown(int nDirection)
         }
         connect(m_mortarTimer, SIGNAL(timeout()), this, SLOT(updateMortarState()));
     }
-    qreal fSpeed = 2 * Cell::SIZE / (1380 / 40/*Game::FPS*/);
+    qreal fSpeed = 2 * Cell::SIZE / 32.0;//800ms with 40FPS are 32 frames
     switch(nDirection)
     {
         case Element::NORTH:
@@ -499,25 +528,8 @@ void Bomb::updateMortarState()
     {
       case 0:
           {
-              int nRow;
-              int nCol;
-              bool bFound = false;
-              do
-              {
-                  nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
-                  nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
-                  if(m_arena->getCell(nRow, nCol).getType() != Cell::WALL)
-                  {
-                      bFound = true;
-                  }
-              }
-              while (!bFound);
-              
               int curCellRow = m_arena->getRowFromY(m_y);
               int curCellCol = m_arena->getColFromX(m_x);
-              
-              setXSpeed((nCol - curCellCol) * Cell::SIZE / (1380 / 40/*Game::FPS*/));
-              setYSpeed((nRow - curCellRow) * Cell::SIZE / (1380 / 40/*Game::FPS*/));
               
               m_thrown = false;
               m_type = Element::NONE;
@@ -533,6 +545,28 @@ void Bomb::updateMortarState()
           {
               int curCellRow = m_arena->getRowFromY(m_y);
               int curCellCol = m_arena->getColFromX(m_x);
+              
+              if(!m_thrown)
+              {
+                  int nRow;
+                  int nCol;
+                  bool bFound = false;
+
+                  do
+                  {
+                      nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
+                      nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
+                      if(m_arena->getCell(nRow, nCol).getType() != Cell::WALL)
+                      {
+                          bFound = true;
+                      }
+                  }
+                  while (!bFound);
+                  
+                  setXSpeed((nCol - curCellCol) * Cell::SIZE / 32.0);//800ms with 40FPS are 32 frames
+                  setYSpeed((nRow - curCellRow) * Cell::SIZE / 32.0);//800ms with 40FPS are 32 frames
+              }
+              
               m_type = Element::NONE;
               m_arena->removeCellElement(curCellRow, curCellCol, this);
               
@@ -556,15 +590,14 @@ void Bomb::updateMortarState()
               m_mortarState = -1;
               if(m_detonationCountdownTimer)
               {
+                  setXSpeed(0);
+                  setYSpeed(0);
                   if(!m_thrown)
                   {
-                      setXSpeed(0);
-                      setYSpeed(0);
                       initDetonation(m_bombID, 40);
                   }
                   else
                   {
-                      m_stopOnCenter = true;
                       m_detonationCountdownTimer->setInterval(2000);
                       m_detonationCountdownTimer->start();
                   }
