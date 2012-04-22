@@ -562,12 +562,14 @@ void Game::decrementRemainingRoundTime()
             //create bombs at randoms places
             int nRow;
             int nCol;
+            Cell::Type cellType;
             bool bFound = false;
             do
             {
                 nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
                 nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
-                if(m_arena->getCell(nRow, nCol).getType() == Cell::GROUND)
+                cellType = m_arena->getCell(nRow, nCol).getType();
+                if(cellType != Cell::WALL && cellType != Cell::HOLE && cellType != Cell::BLOCK)
                 {
                     bFound = true;
                 }
