@@ -182,12 +182,12 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
     m_remainingTimeLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
-    m_remainingTimeLabel->setZValue(0);
+    m_remainingTimeLabel->setZValue(1000);
     
     m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
     m_arenaNameLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
     m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
-    m_arenaNameLabel->setZValue(0);
+    m_arenaNameLabel->setZValue(1000);
     
     setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
                  m_game->getArena()->getNbColumns()*Cell::SIZE,

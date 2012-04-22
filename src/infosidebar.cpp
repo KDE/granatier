@@ -85,7 +85,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         if(renderer)
         {
             svgItem = new KGameRenderedItem(renderer, "player_0");
-            svgItem->setZValue(1);
+            svgItem->setZValue(1001);
             svgItem->setScale(0.5);
             svgItem->setPos(nLeft, nTop + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
@@ -96,7 +96,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         QGraphicsTextItem* playerName = new QGraphicsTextItem(playerList[i]->getPlayerName());
         playerName->setFont(QFont("Helvetica", 10, QFont::Bold, false));
         playerName->setDefaultTextColor(QColor("#FFFF00"));
-        playerName->setZValue(1);
+        playerName->setZValue(1001);
         playerName->setPos(nLeft + Cell::SIZE / 2 + 2, nTop + i * (nHeight+4) - 4);//(playerName->boundingRect().height() + Cell::SIZE / 2 + 4));
         m_gameScene->addItem(playerName);
         m_mapPlayerNames.insert(playerList[i], playerName);
@@ -107,7 +107,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         {
             //create the bonus shield icons
             svgItem = new KGameRenderedItem(renderer, "bonus_shield");
-            svgItem->setZValue(1);
+            svgItem->setZValue(1001);
             svgItem->setScale(0.5);
             svgItem->setPos(nLeft, nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
@@ -116,7 +116,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             rectItem = new QGraphicsRectItem();
             rectItem->setBrush(dimmRectBrush);
             rectItem->setPen(dimmRectPen);
-            rectItem->setZValue(2);
+            rectItem->setZValue(1002);
             rectItem->setRect(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5, svgItem->boundingRect().width()/2.0+1, svgItem->boundingRect().height()/2.0+1);
             //rectItem->setRect(nLeft, nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4), Cell::SIZE / 2, Cell::SIZE / 2);
             m_gameScene->addItem(rectItem);
@@ -124,7 +124,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             
             //create the bonus throw icons
             svgItem = new KGameRenderedItem(renderer, "bonus_throw");
-            svgItem->setZValue(1);
+            svgItem->setZValue(1001);
             svgItem->setScale(0.5);
             svgItem->setPos(nLeft + Cell::SIZE / 2 + 4, nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
@@ -133,7 +133,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             rectItem = new QGraphicsRectItem();
             rectItem->setBrush(dimmRectBrush);
             rectItem->setPen(dimmRectPen);
-            rectItem->setZValue(2);
+            rectItem->setZValue(1002);
             rectItem->setRect(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5, svgItem->boundingRect().width()/2.0+1, svgItem->boundingRect().height()/2.0+1);
             //rectItem->setRect(nLeft + Cell::SIZE / 2 + 2, nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4), Cell::SIZE / 2, Cell::SIZE / 2);
             m_gameScene->addItem(rectItem);
@@ -141,7 +141,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             
             //create the bonus kick icons
             svgItem = new KGameRenderedItem(renderer, "bonus_kick");
-            svgItem->setZValue(1);
+            svgItem->setZValue(1001);
             svgItem->setScale(0.5);
             svgItem->setPos(nLeft + 2 * (Cell::SIZE / 2 + 4), nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
@@ -150,7 +150,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             rectItem = new QGraphicsRectItem();
             rectItem->setBrush(dimmRectBrush);
             rectItem->setPen(dimmRectPen);
-            rectItem->setZValue(2);
+            rectItem->setZValue(1002);
             rectItem->setRect(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5, svgItem->boundingRect().width()/2.0+1, svgItem->boundingRect().height()/2.0+1);
             //rectItem->setRect(nLeft + 2 * (Cell::SIZE / 2 + 2), nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4), Cell::SIZE / 2, Cell::SIZE / 2);
             m_gameScene->addItem(rectItem);
@@ -158,7 +158,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             
             //create the bad bonus icons
             svgItem = new KGameRenderedItem(renderer, "bonus_bad_restrain");
-            svgItem->setZValue(1);
+            svgItem->setZValue(1001);
             svgItem->setScale(0.5);
             svgItem->setPos(nLeft + 3 * (Cell::SIZE / 2 + 4), nTop + Cell::SIZE / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
@@ -167,7 +167,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             rectItem = new QGraphicsRectItem();
             rectItem->setBrush(dimmRectBrush);
             rectItem->setPen(dimmRectPen);
-            rectItem->setZValue(2);
+            rectItem->setZValue(1002);
             rectItem->setRect(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5, svgItem->boundingRect().width()/2.0+1, svgItem->boundingRect().height()/2.0+1);
             //rectItem->setRect(nLeft +1 + 3 * (Cell::SIZE / 2 + 1), nTop -1 + Cell::SIZE / 2 + 1 + i * (nHeight + 4), Cell::SIZE / 2, Cell::SIZE / 2);
             m_gameScene->addItem(rectItem);
@@ -180,7 +180,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
     
     m_background = new QGraphicsRectItem();
     m_background->setBrush(QBrush(QColor(0,0,0,175)));
-    m_background->setZValue(0);
+    m_background->setZValue(1000);
     m_background->setRect(nLeft - 10 , nTop - 10, nWidth + 16, playerList.count() * (nHeight + 4) + 16);
     m_gameScene->addItem(m_background);
 }
@@ -441,7 +441,7 @@ void InfoSidebar::bonusInfoChanged(Player* player, Bonus::BonusType bonusType, i
                             }
                             break;
                     }
-                    svgItem->setZValue(1);
+                    svgItem->setZValue(1001);
                     svgItem->setScale(0.5);
                     svgItem->setPos(svgItemPosition);
                     m_gameScene->addItem(svgItem);
