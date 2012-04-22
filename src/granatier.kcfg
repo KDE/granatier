@@ -21,6 +21,9 @@
       <label>Use random arenas.</label>
       <default>false</default>
     </entry>
+    <entry name="RandomArenaModeArenaList" type="StringList" key="RandomArenaModeArenaList">
+        <label>List of arenas, used in random mode.</label>
+    </entry>
     <entry name="PointsToWin" type="Int" key="PointsToWin">
       <label>The points a user needs to win the game.</label>
       <default>3</default>

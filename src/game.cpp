@@ -98,20 +98,40 @@ void Game::init()
     if(Settings::self()->randomArenaMode())
     {
         QStringList arenasAvailable;
+        QStringList randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
+        
         KGlobal::dirs()->addResourceType("arenaselector", "data", KGlobal::mainComponent().componentName() + "/arenas/");
         KGlobal::dirs()->findAllResources("arenaselector", "*.desktop", KStandardDirs::Recursive, arenasAvailable);
         
+        QStringList::Iterator i = randomArenaModeArenaList.begin();
+        while(i != randomArenaModeArenaList.end())
+        {
+            if(arenasAvailable.contains(*i))
+            {
+                i++;
+            }
+            else
+            {
+                i = randomArenaModeArenaList.erase(i);
+            }
+        }
+        
+        if(randomArenaModeArenaList.isEmpty())
+        {
+            randomArenaModeArenaList = arenasAvailable;
+        }
+        
         qsrand(QDateTime::currentDateTime().toTime_t());
-        int nIndex = ((double) qrand() / RAND_MAX) * (arenasAvailable.count()-1);
+        int nIndex = ((double) qrand() / RAND_MAX) * randomArenaModeArenaList.count();
         if(nIndex < 0)
         {
             nIndex = 0;
         }
-        else if(nIndex >= arenasAvailable.count())
+        else if(nIndex >= randomArenaModeArenaList.count())
         {
-            nIndex = arenasAvailable.count() - 1;
+            nIndex = randomArenaModeArenaList.count() - 1;
         }
-        filePath = KStandardDirs::locate("appdata", "arenas/" + arenasAvailable.at(nIndex));
+        filePath = KStandardDirs::locate("appdata", "arenas/" + randomArenaModeArenaList.at(nIndex));
     }
     else
     {

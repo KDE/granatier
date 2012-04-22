@@ -36,6 +36,8 @@
 #include "ui_arenaselector.h"
 #include "arenasettings.h"
 
+#include <QDebug>
+
 class ArenaSelector::ArenaSelectorPrivate
 {
     public:
@@ -61,6 +63,9 @@ class ArenaSelector::ArenaSelectorPrivate
         KGameRenderer* m_renderer;
         QGraphicsScene* m_graphicsScene;
         QList <KGameRenderedItem*> m_arenaItems;
+        
+        QStringList* m_randomArenaModeArenaList;
+        QStringList m_tempRandomArenaModeArenaList;
 
         void setupData(KConfigSkeleton* config, ArenaSelector::NewStuffState knsflags);
         void findArenas(const QString &initialSelection);
@@ -70,11 +75,14 @@ class ArenaSelector::ArenaSelectorPrivate
         void _k_updateArenaList(const QString& strArena);
         void _k_openKNewStuffDialog();
         void _k_importArenasDialog();
+        void _k_setRandomArenaMode(bool randomModeEnabled);
+        void _k_updateRandomArenaModeArenaList(QListWidgetItem* item);
 };
 
-ArenaSelector::ArenaSelector(QWidget* parent, KConfigSkeleton * aconfig, ArenaSelector::NewStuffState knsflags, const QString &groupName, const QString &directory)
+ArenaSelector::ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, ArenaSelector::NewStuffState knsflags, const QString& groupName, const QString& directory)
     : QWidget(parent), d(new ArenaSelectorPrivate(this))
 {
+    d->m_randomArenaModeArenaList = randomArenaModeArenaList;
     d->lookupDirectory = directory;
     d->groupName = groupName;
     d->setupData(aconfig, knsflags);
@@ -121,12 +129,17 @@ void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, A
     KConfigSkeletonItem * configItem = aconfig->findItem("Arena");
     QString lastUsedArena = configItem->property().toString();
 
+    configItem = aconfig->findItem("RandomArenaModeArenaList");
+    m_tempRandomArenaModeArenaList = configItem->property().toStringList();
+    m_tempRandomArenaModeArenaList.removeDuplicates();
+    
     //Now get our arenas into the list widget
     KGlobal::dirs()->addResourceType("arenaselector", "data", KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
     findArenas(lastUsedArena);
 
     connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
     connect(ui.importArenas, SIGNAL(clicked()), q, SLOT(_k_importArenasDialog()));
+    connect(ui.kcfg_RandomArenaMode, SIGNAL(toggled(bool)), q, SLOT(_k_setRandomArenaMode(bool)));
 }
 
 void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelection)
@@ -141,7 +154,25 @@ void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelec
 
     QStringList arenasAvailable;
     KGlobal::dirs()->findAllResources("arenaselector", "*.desktop", KStandardDirs::Recursive, arenasAvailable);
-
+    
+    QStringList::Iterator i = m_tempRandomArenaModeArenaList.begin();
+    while(i != m_tempRandomArenaModeArenaList.end())
+    {
+        if(arenasAvailable.contains(*i))
+        {
+            i++;
+        }
+        else
+        {
+            i = m_tempRandomArenaModeArenaList.erase(i);
+        }
+    }
+    
+    if(m_tempRandomArenaModeArenaList.isEmpty())
+    {
+        m_tempRandomArenaModeArenaList = arenasAvailable;
+    }
+    
     bool initialFound = false;
     foreach (const QString &file, arenasAvailable)
     {
@@ -155,6 +186,23 @@ void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelec
           arenaName += '_';
         arenaMap.insert(arenaName, arenaSettings);
         QListWidgetItem * item = new QListWidgetItem(arenaName, ui.arenaList);
+        if(ui.kcfg_RandomArenaMode->isChecked())
+        {
+            if(m_tempRandomArenaModeArenaList.contains(file))
+            {
+                item->setCheckState(Qt::Checked);
+            }
+            else
+            {
+                item->setCheckState(Qt::Unchecked);
+            }
+            item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+        }
+        else
+        {
+            item->setCheckState(Qt::PartiallyChecked);
+            item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
+        }
 
         //Find if this is our currently configured arena
         if (arenaPath==initialSelection) {
@@ -188,6 +236,10 @@ void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelec
 
     //Reconnect the arenaList
     connect(ui.arenaList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), q, SLOT(_k_updatePreview()));
+    if(ui.kcfg_RandomArenaMode->isChecked())
+    {
+        connect(ui.arenaList, SIGNAL(itemChanged(QListWidgetItem*)), q, SLOT(_k_updateRandomArenaModeArenaList(QListWidgetItem*)));
+    }
 }
 
 void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
@@ -451,4 +503,64 @@ void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
     findArenas(selArena->fileName());
 }
 
+void ArenaSelector::ArenaSelectorPrivate::_k_setRandomArenaMode(bool randomModeEnabled)
+{
+    if(!randomModeEnabled)
+    {
+        disconnect(ui.arenaList, SIGNAL(itemChanged(QListWidgetItem*)), q, SLOT(_k_updateRandomArenaModeArenaList(QListWidgetItem*)));
+    }
+    
+    m_randomArenaModeArenaList->clear();
+    
+    int numberOfItems = ui.arenaList->count();
+    for(int i = 0; i < numberOfItems; i++)
+    {
+        QListWidgetItem* item = ui.arenaList->item(i);
+        if(randomModeEnabled)
+        {
+            QString arenaName = arenaMap.value(item->text())->fileName();
+            arenaName.remove(0, 7); //length of "arenas/"
+            if(m_tempRandomArenaModeArenaList.contains(arenaName))
+            {
+                item->setCheckState(Qt::Checked);
+            }
+            else
+            {
+                item->setCheckState(Qt::Unchecked);
+            }
+            item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+        }
+        else
+        {
+            item->setCheckState(Qt::PartiallyChecked);
+            item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
+        }
+    }
+    
+    if(randomModeEnabled)
+    {
+        *m_randomArenaModeArenaList = m_tempRandomArenaModeArenaList;
+        connect(ui.arenaList, SIGNAL(itemChanged(QListWidgetItem*)), q, SLOT(_k_updateRandomArenaModeArenaList(QListWidgetItem*)));
+    }
+}
+
+void ArenaSelector::ArenaSelectorPrivate::_k_updateRandomArenaModeArenaList(QListWidgetItem* item)
+{
+    QString arenaName = arenaMap.value(item->text())->fileName();
+    arenaName.remove(0, 7); //length of "arenas/"
+    if(item->checkState() == Qt::Checked)
+    {
+        m_tempRandomArenaModeArenaList.append(arenaName);
+    }
+    else
+    {
+        int index = m_tempRandomArenaModeArenaList.indexOf(arenaName);
+        if(index >= 0)
+        {
+            m_tempRandomArenaModeArenaList.removeAt(index);
+        }
+    }
+    m_tempRandomArenaModeArenaList.removeDuplicates();
+    *m_randomArenaModeArenaList = m_tempRandomArenaModeArenaList;
+}
 #include "arenaselector.moc"

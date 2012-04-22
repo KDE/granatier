@@ -163,7 +163,7 @@ void MainWindow::showSettings()
     // Theme
     settingsDialog->addPage(new KGameThemeSelector(settingsDialog, Settings::self(), KGameThemeSelector::NewStuffDisableDownload), i18n("Theme"), "games-config-theme");
     // Arena
-    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
+    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
     // Player
     settingsDialog->addPage(new PlayerSelector(settingsDialog, m_playerSettings), i18n("Player"), "games-config-custom");
     
@@ -176,12 +176,17 @@ void MainWindow::applyNewSettings()
 {
     Settings::self()->setDummy(0);
     m_playerSettings->savePlayerSettings();
+    if(!m_tempRandomArenaModeArenaList.isEmpty())
+    {
+        Settings::self()->setRandomArenaModeArenaList(m_tempRandomArenaModeArenaList);
+    }
     initGame();
 }
 
 void MainWindow::settingsDialogCanceled()
 {
     m_playerSettings->discardUnsavedSettings();
+    m_tempRandomArenaModeArenaList.clear();
 }
 
 void MainWindow::close()

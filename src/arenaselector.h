@@ -61,7 +61,7 @@ public:
     * @param directory subdirectory (of share/apps/appname) to search in
     * @return true if the arena files and properties could be loaded
     */
-    ArenaSelector(QWidget* parent, KConfigSkeleton* config, ArenaSelector::NewStuffState knsflags = ArenaSelector::NewStuffEnableDownload, const QString &groupName = QLatin1String("Arena"), const QString &directory = QLatin1String("arenas"));
+    ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, ArenaSelector::NewStuffState knsflags = ArenaSelector::NewStuffEnableDownload, const QString& groupName = QLatin1String("Arena"), const QString& directory = QLatin1String("arenas"));
     virtual ~ArenaSelector();
     
 protected:
@@ -87,6 +87,8 @@ private:
     Q_PRIVATE_SLOT(d, void _k_updateArenaList(const QString&))
     Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
     Q_PRIVATE_SLOT(d, void _k_importArenasDialog())
+    Q_PRIVATE_SLOT(d, void _k_setRandomArenaMode(bool randomModeEnabled))
+    Q_PRIVATE_SLOT(d, void _k_updateRandomArenaModeArenaList(QListWidgetItem* item))
 };
 
 #endif

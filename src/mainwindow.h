@@ -44,6 +44,9 @@ private :
     /** The PlayerSettings instance for player name, shortcuts ...  */
     PlayerSettings* m_playerSettings;
     
+    /**  */
+    QStringList m_tempRandomArenaModeArenaList;
+    
 public:
 
     /**
