@@ -440,14 +440,16 @@ void Game::initCharactersPosition()
             m_players[i]->init();
         }
         // Initialize the Block coordinates
+        QList<Element*> blockElements;
         for (int i = 0; i < m_arena->getNbRows(); ++i)
         {
             for (int j = 0; j < m_arena->getNbColumns(); ++j)
             {
-                if (m_arena->getCell(i,j).getElement() != NULL && m_arena->getCell(i,j).getElement()->getType() == Element::BLOCK)
+                blockElements =  m_arena->getCell(i, j).getElements(Element::BLOCK);
+                foreach(Element* element, blockElements)
                 {
-                    m_arena->getCell(i,j).getElement()->setX(Cell::SIZE * (j + 0.5));
-                    m_arena->getCell(i,j).getElement()->setY(Cell::SIZE * (i + 0.5));
+                    element->setX(Cell::SIZE * (j + 0.5));
+                    element->setY(Cell::SIZE * (i + 0.5));
                 }
             }
         }
@@ -679,11 +681,15 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     int row = m_arena->getRowFromY(y);
     if(col >= 0 && col < m_arena->getNbColumns() && row >= 0 && row < m_arena->getNbRows())
     {
-        if(m_arena->getCell(row, col).getElement() != NULL && m_arena->getCell(row, col).getElement()->getType() == Element::BOMB)
+        QList<Element*> bombElements =  m_arena->getCell(row, col).getElements(Element::BOMB);
+        if (!bombElements.isEmpty())
         {
             if(player->hasThrowBomb() && throwDistance > 0)
             {
-                dynamic_cast <Bomb*> (m_arena->getCell(row, col).getElement())->setThrown(player->direction());
+                foreach(Element* element, bombElements)
+                {
+                    dynamic_cast <Bomb*> (element)->setThrown(player->direction());
+                }
             }
             return;
         }

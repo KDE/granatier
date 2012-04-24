@@ -326,9 +326,15 @@ void Player::updateMove()
                     cellRow = curCellRow + yDirection;
                     cellCol = curCellCol + xDirection;
                     //check if bomb
-                    if(m_kickBomb && m_arena->getCell(cellRow, cellCol).getElement() != NULL && m_arena->getCell(cellRow, cellCol).getElement()->getType() == Element::BOMB)
+                    if(m_kickBomb)
                     {
-                        dynamic_cast <Bomb*> (m_arena->getCell(cellRow, cellCol).getElement())->setKicked(m_direction);
+                        QList<Element*> bombElements =  m_arena->getCell(cellRow, cellCol).getElements(Element::BOMB);
+                        {
+                            foreach(Element* element, bombElements)
+                            {
+                                dynamic_cast <Bomb*> (element)->setKicked(m_direction);
+                            }
+                        }
                     }
                 }
             }

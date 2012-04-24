@@ -296,83 +296,88 @@ void GameScene::init()
     // Create the Block and Bonus items
     m_blockItems = new BlockItem**[m_game->getArena()->getNbRows()];
     m_bonusItems = new BonusItem**[m_game->getArena()->getNbRows()];
+    QList<Element*> blockElements;
     for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
     {
         m_blockItems[i] = new BlockItem*[m_game->getArena()->getNbColumns()];
         m_bonusItems[i] = new BonusItem*[m_game->getArena()->getNbColumns()];
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if (m_game->getArena()->getCell(i, j).getElement() != NULL && m_game->getArena()->getCell(i, j).getElement()->getType() == Element::BLOCK)
+            blockElements = m_game->getArena()->getCell(i, j).getElements(Element::BLOCK);
+            if (!blockElements.isEmpty())
             {
                 // Create the element item and set the image
-                Block* block = dynamic_cast <Block*> (m_game->getArena()->getCell(i, j).getElement());
-                BlockItem* blockItem = new BlockItem(block, m_rendererArenaItems);
-                connect(this, SIGNAL(resizeGraphics(qreal)), blockItem, SLOT(updateGraphics(qreal)));
-                blockItem->setSpriteKey(block->getImageId());
-                blockItem->update(block->getX(), block->getY());
-                blockItem->setZValue(200);
-                if(Settings::self()->showAllTiles() == 1)
+                foreach(Element* element, blockElements)
                 {
-                    blockItem->setZValue(99);
-                }
-                connect(this, SIGNAL(resizeGraphics(qreal)), blockItem, SLOT(updateGraphics(qreal)));
-                connect(blockItem, SIGNAL(blockItemDestroyed(BlockItem*)), this, SLOT(removeBlockItem(BlockItem*)));
-                m_blockItems[i][j] = blockItem;
-                // if the block contains a hidden bonus, create the bonus item 
-                Bonus* bonus = block->getBonus();
-                if(bonus)
-                {
-                    BonusItem* bonusItem = new BonusItem(bonus, m_rendererBonusItems);
-                    switch(bonus->getBonusType())
+                    Block* block = dynamic_cast <Block*> (element);
+                    BlockItem* blockItem = new BlockItem(block, m_rendererArenaItems);
+                    connect(this, SIGNAL(resizeGraphics(qreal)), blockItem, SLOT(updateGraphics(qreal)));
+                    blockItem->setSpriteKey(block->getImageId());
+                    blockItem->update(block->getX(), block->getY());
+                    blockItem->setZValue(200);
+                    if(Settings::self()->showAllTiles() == 1)
                     {
-                        case Bonus::SPEED:  bonusItem->setSpriteKey("bonus_speed");
-                                            break;
-                        case Bonus::BOMB:   bonusItem->setSpriteKey("bonus_bomb");
-                                            break;
-                        case Bonus::POWER:  bonusItem->setSpriteKey("bonus_power");
-                                            break;
-                        case Bonus::SHIELD: bonusItem->setSpriteKey("bonus_shield");
-                                            break;
-                        case Bonus::THROW:  bonusItem->setSpriteKey("bonus_throw");
-                                            break;
-                        case Bonus::KICK:   bonusItem->setSpriteKey("bonus_kick");
-                                            break;
-                        case Bonus::HYPERACTIVE:   bonusItem->setSpriteKey("bonus_bad_hyperactive");
-                                            break;
-                        case Bonus::SLOW:   bonusItem->setSpriteKey("bonus_bad_slow");
-                                            break;
-                        case Bonus::MIRROR: bonusItem->setSpriteKey("bonus_bad_mirror");
-                                            break;
-                        case Bonus::SCATTY: bonusItem->setSpriteKey("bonus_bad_scatty");
-                                            break;
-                        case Bonus::RESTRAIN:   bonusItem->setSpriteKey("bonus_bad_restrain");
-                                            break;
-                        case Bonus::RESURRECT:   bonusItem->setSpriteKey("bonus_neutral_resurrect");
-                                            break;
-                        default:            bonusItem->setSpriteKey("bonus_neutral_pandora");
+                        blockItem->setZValue(99);
                     }
-                    
-                    if((qrand()/1.0)/RAND_MAX * 10 > 9 && bonusItem->spriteKey() != "bonus_neutral_resurrect")
+                    connect(this, SIGNAL(resizeGraphics(qreal)), blockItem, SLOT(updateGraphics(qreal)));
+                    connect(blockItem, SIGNAL(blockItemDestroyed(BlockItem*)), this, SLOT(removeBlockItem(BlockItem*)));
+                    m_blockItems[i][j] = blockItem;
+                    // if the block contains a hidden bonus, create the bonus item 
+                    Bonus* bonus = block->getBonus();
+                    if(bonus)
                     {
-                        bonusItem->setSpriteKey("bonus_neutral_pandora");
+                        BonusItem* bonusItem = new BonusItem(bonus, m_rendererBonusItems);
+                        switch(bonus->getBonusType())
+                        {
+                            case Bonus::SPEED:  bonusItem->setSpriteKey("bonus_speed");
+                                                break;
+                            case Bonus::BOMB:   bonusItem->setSpriteKey("bonus_bomb");
+                                                break;
+                            case Bonus::POWER:  bonusItem->setSpriteKey("bonus_power");
+                                                break;
+                            case Bonus::SHIELD: bonusItem->setSpriteKey("bonus_shield");
+                                                break;
+                            case Bonus::THROW:  bonusItem->setSpriteKey("bonus_throw");
+                                                break;
+                            case Bonus::KICK:   bonusItem->setSpriteKey("bonus_kick");
+                                                break;
+                            case Bonus::HYPERACTIVE:   bonusItem->setSpriteKey("bonus_bad_hyperactive");
+                                                break;
+                            case Bonus::SLOW:   bonusItem->setSpriteKey("bonus_bad_slow");
+                                                break;
+                            case Bonus::MIRROR: bonusItem->setSpriteKey("bonus_bad_mirror");
+                                                break;
+                            case Bonus::SCATTY: bonusItem->setSpriteKey("bonus_bad_scatty");
+                                                break;
+                            case Bonus::RESTRAIN:   bonusItem->setSpriteKey("bonus_bad_restrain");
+                                                break;
+                            case Bonus::RESURRECT:   bonusItem->setSpriteKey("bonus_neutral_resurrect");
+                                                break;
+                            default:            bonusItem->setSpriteKey("bonus_neutral_pandora");
+                        }
+                        
+                        if((qrand()/1.0)/RAND_MAX * 10 > 9 && bonusItem->spriteKey() != "bonus_neutral_resurrect")
+                        {
+                            bonusItem->setSpriteKey("bonus_neutral_pandora");
+                        }
+                        
+                        bonusItem->update(bonus->getX(), bonus->getY());
+                        bonusItem->setZValue(100);
+                        m_bonusItems[i][j] = bonusItem;
+                        
+                        connect(this, SIGNAL(resizeGraphics(qreal)), bonusItem, SLOT(updateGraphics(qreal)));
+                        connect(bonusItem, SIGNAL(bonusItemDestroyed(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
+                        
+                        addItem(bonusItem);
+                        if(Settings::self()->showAllTiles() == 0)
+                        {
+                            bonusItem->hide();
+                        }
                     }
-                    
-                    bonusItem->update(bonus->getX(), bonus->getY());
-                    bonusItem->setZValue(100);
-                    m_bonusItems[i][j] = bonusItem;
-                    
-                    connect(this, SIGNAL(resizeGraphics(qreal)), bonusItem, SLOT(updateGraphics(qreal)));
-                    connect(bonusItem, SIGNAL(bonusItemDestroyed(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
-                    
-                    addItem(bonusItem);
-                    if(Settings::self()->showAllTiles() == 0)
+                    else
                     {
-                        bonusItem->hide();
+                        m_bonusItems[i][j] = NULL;
                     }
-                }
-                else
-                {
-                    m_bonusItems[i][j] = NULL;
                 }
             }
             else
@@ -821,20 +826,18 @@ void GameScene::bombDetonated(Bomb* bomb)
     BombItem* bombItem = NULL;
     BombExplosionItem* bombExplosionItem = NULL;
     Element* element = NULL;
+    QList<Element*> blockElements;
+    QList<Element*> bombElements;
     int nBombPower = bomb->bombPower();
     int nNumberOfColums = m_game->getArena()->getNbColumns();
     int nNumberOfRows = m_game->getArena()->getNbRows();
     int nColumn;
     int nRow;
-    bool bNorthDone = false;
-    bool bEastDone = false;
-    bool bSouthDone = false;
-    bool bWestDone = false;
+    qreal xPos = 0;
+    qreal yPos = 0;
+    bool abDirectionsDone[] = {false, false, false, false};
     int nDetonationCountdown = 75;
-    int nDetonationCountdownNorth = nDetonationCountdown;
-    int nDetonationCountdownEast = nDetonationCountdown;
-    int nDetonationCountdownSouth = nDetonationCountdown;
-    int nDetonationCountdownWest = nDetonationCountdown;
+    int anDirectionDetonationCountdown[] = {nDetonationCountdown, nDetonationCountdown, nDetonationCountdown, nDetonationCountdown};
     
     // Find the BombItem from the Bomb
     QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
@@ -858,21 +861,31 @@ void GameScene::bombDetonated(Bomb* bomb)
     nRow = m_game->getArena()->getRowFromY(bomb->getY());
     if(nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
     {
-        element = m_game->getArena()->getCell(nRow, nColumn).getElement();
-        if(element && element->getType() == Element::BOMB && dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
+        bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BOMB);
+        int tempBombDetonationCountdown = nDetonationCountdown;
+        foreach(element, bombElements)
         {
-            dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdown);
-        }
-        else if(element && element->getType() == Element::BLOCK)
-        {
-            dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
-            if (m_blockItems[nRow][nColumn] != NULL)
+            if(dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
             {
-                //display bonus if available
-                if (m_bonusItems[nRow][nColumn] != NULL)
+                dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), tempBombDetonationCountdown);
+                tempBombDetonationCountdown += 10;
+            }
+        }
+        
+        blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BLOCK);
+        if(!blockElements.isEmpty())
+        {
+            foreach(element, blockElements)
+            {
+                dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
+                if (m_blockItems[nRow][nColumn] != NULL)
                 {
-                    m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
-                    m_bonusItems[nRow][nColumn]->show();
+                    //display bonus if available
+                    if (m_bonusItems[nRow][nColumn] != NULL)
+                    {
+                        m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                        m_bonusItems[nRow][nColumn]->show();
+                    }
                 }
             }
         }
@@ -884,198 +897,109 @@ void GameScene::bombDetonated(Bomb* bomb)
     
     for(int i = 0; i < nBombPower; i++)
     {
-        // north
-        nColumn = m_game->getArena()->getColFromX(bomb->getX());
-        nRow = m_game->getArena()->getRowFromY(bomb->getY() - (i+1)*Cell::SIZE);
-        if(!bNorthDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
+        BombExplosionItem::Direction direction = BombExplosionItem::NORTH;
+        do
         {
-            element = m_game->getArena()->getCell(nRow, nColumn).getElement();
-            if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() ||
-                (element && (element->getType() == Element::BOMB || element->getType() == Element::BLOCK)))
+            switch(direction)
             {
-                if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
+                case BombExplosionItem::NORTH:
+                    xPos = bomb->getX();
+                    yPos = bomb->getY() - (i+1)*Cell::SIZE;
+                    break;
+                case BombExplosionItem::EAST:
+                    xPos = bomb->getX() + (i+1)*Cell::SIZE;
+                    yPos = bomb->getY();
+                    break;
+                case BombExplosionItem::SOUTH:
+                    xPos = bomb->getX();
+                    yPos = bomb->getY() + (i+1)*Cell::SIZE;
+                    break;
+                case BombExplosionItem::WEST:
+                    xPos = bomb->getX() - (i+1)*Cell::SIZE;
+                    yPos = bomb->getY();
+                    break;
+            }
+            nColumn = m_game->getArena()->getColFromX(xPos);
+            nRow = m_game->getArena()->getRowFromY(yPos);
+            
+            if(!abDirectionsDone[direction] && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
+            {
+                bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BOMB);
+                blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BLOCK);
+                if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() || !bombElements.isEmpty() || !blockElements.isEmpty())
                 {
-                    dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdownNorth);
-                    nDetonationCountdownNorth += nDetonationCountdown;
-                }
-                else if(element && element->getType() == Element::BLOCK)
-                {
-                    bNorthDone = true;
-                    dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
-                    if (m_blockItems[nRow][nColumn] != NULL)
+                    int tempBombDetonationCountdown = anDirectionDetonationCountdown[direction];
+                    bool increaseDetonationTimeout = false;
+                    foreach(element, bombElements)
                     {
-                        //display bonus if available
-                        if (m_bonusItems[nRow][nColumn] != NULL)
+                        if(dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                         {
-                            m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
-                            m_bonusItems[nRow][nColumn]->show();
+                            dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), tempBombDetonationCountdown);
+                            tempBombDetonationCountdown += 10;
+                            increaseDetonationTimeout = true;
                         }
                     }
+                    if(increaseDetonationTimeout)
+                    {
+                        anDirectionDetonationCountdown[direction] += nDetonationCountdown;
+                    }
+                    
+                    if(!blockElements.isEmpty())
+                    {
+                        foreach(element, blockElements)
+                        {
+                            abDirectionsDone[direction] = true;
+                            dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
+                            if (m_blockItems[nRow][nColumn] != NULL)
+                            {
+                                //display bonus if available
+                                if (m_bonusItems[nRow][nColumn] != NULL)
+                                {
+                                    m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
+                                    m_bonusItems[nRow][nColumn]->show();
+                                }
+                            }
+                        }
+                    }
+                    else if(m_bonusItems[nRow][nColumn] != NULL)
+                    {
+                        m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
+                    }
+                    
+                    bombExplosionItem = new BombExplosionItem (bomb, direction, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
+                    bombExplosionItem->setPosition(xPos, yPos);
+                    bombExplosionItem->setZValue(300 + nBombPower+3 - i);
+                    connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
+                    addItem(bombExplosionItem);
+                    m_bombItems[bombItem].append(bombExplosionItem);
                 }
-                else if(m_bonusItems[nRow][nColumn] != NULL)
+                else
                 {
-                    m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
+                    abDirectionsDone[direction] = true;
                 }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::NORTH, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
-                bombExplosionItem->setPosition(bomb->getX(), bomb->getY() - (i+1)*Cell::SIZE);
-                bombExplosionItem->setZValue(300 + nBombPower+3 - i);
-                connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
-                addItem(bombExplosionItem);
-                m_bombItems[bombItem].append(bombExplosionItem);
             }
             else
             {
-                bNorthDone = true;
+                abDirectionsDone[direction] = true;
             }
-        }
-        else
-        {
-          bNorthDone = true;
-        }
-        // east
-        nColumn = m_game->getArena()->getColFromX(bomb->getX() + (i+1)*Cell::SIZE);
-        nRow = m_game->getArena()->getRowFromY(bomb->getY());
-        if(!bEastDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
-        {
-            element = m_game->getArena()->getCell(nRow, nColumn).getElement();
-            if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() ||
-                (element && (element->getType() == Element::BOMB || element->getType() == Element::BLOCK)))
+            
+            switch(direction)
             {
-                if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
-                {
-                    dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdownEast);
-                    nDetonationCountdownEast += nDetonationCountdown;
-                }
-                else if(element && element->getType() == Element::BLOCK)
-                {
-                    bEastDone = true;
-                    dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
-                    if (m_blockItems[nRow][nColumn] != NULL)
-                    {
-                        //display bonus if available
-                        if (m_bonusItems[nRow][nColumn] != NULL)
-                        {
-                            m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
-                            m_bonusItems[nRow][nColumn]->show();
-                        }
-                    }
-                }
-                else if(m_bonusItems[nRow][nColumn] != NULL)
-                {
-                    m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
-                }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::EAST, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
-                bombExplosionItem->setPosition(bomb->getX() + (i+1)*Cell::SIZE, bomb->getY());
-                bombExplosionItem->setZValue(300 + nBombPower+3 - i);
-                connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
-                addItem(bombExplosionItem);
-                m_bombItems[bombItem].append(bombExplosionItem);
-            }
-            else
-            {
-                bEastDone = true;
+                case BombExplosionItem::NORTH:
+                    direction = BombExplosionItem::EAST;
+                    break;
+                case BombExplosionItem::EAST:
+                    direction = BombExplosionItem::SOUTH;
+                    break;
+                case BombExplosionItem::SOUTH:
+                    direction = BombExplosionItem::WEST;
+                    break;
+                case BombExplosionItem::WEST:
+                    direction = BombExplosionItem::NORTH;
+                    break;
             }
         }
-        else
-        {
-          bEastDone = true;
-        }
-        // south
-        nColumn = m_game->getArena()->getColFromX(bomb->getX());
-        nRow = m_game->getArena()->getRowFromY(bomb->getY() + (i+1)*Cell::SIZE);
-        if(!bSouthDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
-        {
-            element = m_game->getArena()->getCell(nRow, nColumn).getElement();
-            if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() ||
-                (element && (element->getType() == Element::BOMB || element->getType() == Element::BLOCK)))
-            {
-                if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
-                {
-                    dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdownSouth);
-                    nDetonationCountdownSouth += nDetonationCountdown;
-                }
-                else if(element && element->getType() == Element::BLOCK)
-                {
-                    bSouthDone = true;
-                    dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
-                    if (m_blockItems[nRow][nColumn] != NULL)
-                    {
-                        //display bonus if available
-                        if (m_bonusItems[nRow][nColumn] != NULL)
-                        {
-                            m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
-                            m_bonusItems[nRow][nColumn]->show();
-                        }
-                    }
-                }
-                else if(m_bonusItems[nRow][nColumn] != NULL)
-                {
-                    m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
-                }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::SOUTH, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
-                bombExplosionItem->setPosition(bomb->getX(), bomb->getY() + (i+1)*Cell::SIZE);
-                bombExplosionItem->setZValue(300 + nBombPower+3 - i);
-                connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
-                addItem(bombExplosionItem);
-                m_bombItems[bombItem].append(bombExplosionItem);
-            }
-            else
-            {
-                bSouthDone = true;
-            }
-        }
-        else
-        {
-          bSouthDone = true;
-        }
-        //west
-        nColumn = m_game->getArena()->getColFromX(bomb->getX() - (i+1)*Cell::SIZE);
-        nRow = m_game->getArena()->getRowFromY(bomb->getY());
-        if(!bWestDone && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
-        {
-            element = m_game->getArena()->getCell(nRow, nColumn).getElement();
-            if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() ||
-                (element && (element->getType() == Element::BOMB || element->getType() == Element::BLOCK)))
-            {
-                if(element && element->getType() == Element::BOMB && !(dynamic_cast <Bomb*> (element)->isDetonated()))
-                {
-                    dynamic_cast <Bomb*> (element)->initDetonation(bomb->explosionID(), nDetonationCountdownWest);
-                    nDetonationCountdownWest += nDetonationCountdown;
-                }
-                else if(element && element->getType() == Element::BLOCK)
-                {
-                    bWestDone = true;
-                    dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
-                    if (m_blockItems[nRow][nColumn] != NULL)
-                    {
-                        //display bonus if available
-                        if (m_bonusItems[nRow][nColumn] != NULL)
-                        {
-                            m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
-                            m_bonusItems[nRow][nColumn]->show();
-                        }
-                    }
-                }
-                else if(m_bonusItems[nRow][nColumn] != NULL)
-                {
-                    m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
-                }
-                bombExplosionItem = new BombExplosionItem (bomb, BombExplosionItem::WEST, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
-                bombExplosionItem->setPosition(bomb->getX() - (i+1)*Cell::SIZE, bomb->getY());
-                bombExplosionItem->setZValue(300 + nBombPower+3 - i);
-                connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
-                addItem(bombExplosionItem);
-                m_bombItems[bombItem].append(bombExplosionItem);
-            }
-            else
-            {
-                bWestDone = true;
-            }
-        }
-        else
-        {
-          bWestDone = true;
-        }
+        while(direction != BombExplosionItem::NORTH);
     }
 }
 

@@ -19,9 +19,10 @@
 #ifndef CELL_H
 #define CELL_H
 
-#include <QtGlobal>
+#include "element.h"
 
-class Element;
+#include <QtGlobal>
+#include <QList>
 
 /**
  * @brief This class represents a Cell of the Arena.
@@ -53,14 +54,8 @@ private:
     /** The Cell type */
     Type m_type;
 
-    /** A reference on the Element that is on the Cell */
-    Element* m_element;
-
-    /** Cost used in A* pathfinding algorithm : lower is the cost, closer to the target Cell is this Cell */
-    int m_cost;
-
-    /** Parent node used in A* pathfinding algorithm : the Cell which enables to go to this Cell */
-    Cell* m_parent;
+    /** A list of references of all Elements that are on the Cell */
+    QList<Element*> m_elements;
 
 public:
 
@@ -93,10 +88,16 @@ public:
     void setType(Type p_type);
 
     /**
-      * Gets the Element that is on the Cell.
-      * @return the Element that is on the Cell
-      */
-    Element* getElement() const;
+     * Gets all the Elements that are on the Cell.
+     * @return the Elements that are on the Cell
+     */
+    QList <Element*> getElements() const;
+    
+    /**
+     * Gets the Elements of Element::Type type that are on the Cell.
+     * @return the Elements of Element::Type type that are on the Cell
+     */
+    QList <Element*> getElements(Element::Type type) const;
 
     /**
       * Sets the Element that is on the Cell.
@@ -109,30 +110,6 @@ public:
       * @param p_element the Element to remove from the Cell
       */
     void removeElement(Element* p_element);
-
-    /**
-      * Gets the Cell cost for A* pathfinding algorithm.
-      * @return the Cell cost for A* pathfinding algorithm
-      */
-    int getCost() const;
-
-    /**
-      * Sets a cost for the Cell, for A* pathfinding algorithm.
-      * @param p_cost the cost of the Cell for A* pathfinding algorithm
-      */
-    void setCost(const int p_cost);
-
-    /**
-      * Gets the parent Cell of this Cell for A* pathfinding algorithm.
-      * @return the Cell parent for A* pathfinding algorithm
-      */
-    Cell* getParent() const;
-
-    /**
-      * Sets the parent Cell of this Cell for A* pathfinding algorithm.
-      * @param p_parent the parent of the Cell for A* pathfinding algorithm
-      */
-    void setParent(Cell* p_parent);
 };
 
 #endif

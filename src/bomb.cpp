@@ -580,10 +580,7 @@ void Bomb::updateMortarState()
               int curCellRow = m_arena->getRowFromY(m_y);
               int curCellCol = m_arena->getColFromX(m_x);
               m_type = Element::BOMB;
-              if(!(m_arena->getCell(curCellRow, curCellCol).getElement()))
-              {
-                  m_arena->setCellElement(curCellRow, curCellCol, this);
-              }
+              m_arena->setCellElement(curCellRow, curCellCol, this);
               
               m_mortarState++;
               emit mortar(m_mortarState);

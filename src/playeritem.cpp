@@ -32,8 +32,6 @@
 #include <KStandardDirs>
 #include <KGameRenderer>
 
-static int nCounter = 0;
-
 const int PlayerItem::NB_FRAMES = 13;
 const int PlayerItem::ANIM_SPEED = 240;
 

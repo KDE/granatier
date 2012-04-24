@@ -17,12 +17,12 @@
  */
 
 #include "cell.h"
-#include "element.h"
 
 const qreal Cell::SIZE = 40.0;
 
-Cell::Cell() : m_type(Cell::WALL), m_element(NULL), m_cost(0), m_parent(NULL)
+Cell::Cell() : m_type(Cell::WALL)
 {
+    m_elements.clear();
 }
 
 Cell::~Cell()
@@ -31,17 +31,24 @@ Cell::~Cell()
 
 bool Cell::isWalkable(Element* p_element) const
 {
-    if(p_element != NULL && p_element == m_element)
-    {
-        return true;
-    }
+    
     if(m_type == Cell::WALL)
     {
         return false;
     }
-    else if(m_element != NULL && (m_element->getType() == Element::BLOCK || m_element->getType() == Element::BOMB))
+    else if(p_element != NULL && m_elements.size() == 1 && m_elements.contains(p_element))
     {
-        return false;
+        return true;
+    }
+    else if(!m_elements.isEmpty())
+    {
+        foreach(Element* element, m_elements)
+        {
+            if(element->getType() == Element::BLOCK || element->getType() == Element::BOMB)
+            {
+                return false;
+            }
+        }
     }
     return true;
 }
@@ -56,40 +63,37 @@ void Cell::setType(Cell::Type p_type)
     m_type = p_type;
 }
 
-Element* Cell::getElement() const
+QList <Element*> Cell::getElements() const
 {
-    return m_element;
+    return m_elements;
+}
+
+QList <Element*> Cell::getElements(Element::Type type) const
+{
+    QList<Element*> elements;
+    foreach(Element* element, m_elements)
+    {
+        if(element->getType() == type)
+        {
+            elements.append(element);
+        }
+    }
+    return elements;
 }
 
 void Cell::setElement(Element* p_element)
 {
-    m_element = p_element;
+    if(!m_elements.contains(p_element))
+    {
+        m_elements.append(p_element);
+    }
 }
 
 void Cell::removeElement(Element* p_element)
 {
-    if(p_element == m_element)
+    int index = m_elements.indexOf(p_element);
+    if(index >= 0)
     {
-        m_element = NULL;
+        m_elements.removeAt(index);
     }
-}
-
-int Cell::getCost() const
-{
-    return m_cost;
-}
-
-void Cell::setCost(const int p_cost)
-{
-    m_cost = p_cost;
-}
-
-Cell* Cell::getParent() const
-{
-    return m_parent;
-}
-
-void Cell::setParent(Cell* p_parent) 
-{
-    m_parent = p_parent;
 }
