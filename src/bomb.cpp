@@ -251,6 +251,7 @@ void Bomb::updateMove()
                 move((currentCol+0.5) * Cell::SIZE, (currentRow+0.5) * Cell::SIZE);
                 setXSpeed(0);
                 setYSpeed(0);
+                m_stopOnCenter = false;
             }
             else
             {
