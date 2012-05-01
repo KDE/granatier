@@ -34,8 +34,10 @@
 #include <KToggleAction>
 #include <KMessageBox>
 #include <KConfigDialog>
-#include <KGameThemeSelector>
 #include <KLocale>
+
+#define USE_UNSTABLE_LIBKDEGAMESPRIVATE_API
+#include <libkdegamesprivate/kgamethemeselector.h>
 
 #include <QGraphicsSvgItem>
 

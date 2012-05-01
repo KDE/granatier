@@ -6,8 +6,10 @@ if (NOT KDE4_FOUND)
   find_package(LibKDEGames REQUIRED)
   include(KDE4Defaults)
   include_directories(${KDE4_INCLUDES} ${KDEGAMES_INCLUDE_DIRS})
+  # TODO: define KDEGAMESPRIVATE_LIBRARY
 else (NOT KDE4_FOUND)
   set(KDEGAMES_LIBRARY kdegames)
+  set(KDEGAMESPRIVATE_LIBRARY kdegamesprivate)
 endif (NOT KDE4_FOUND)
 
 add_subdirectory(themes) 
