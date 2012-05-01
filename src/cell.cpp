@@ -36,15 +36,13 @@ bool Cell::isWalkable(Element* p_element) const
     {
         return false;
     }
-    else if(p_element != NULL && m_elements.size() == 1 && m_elements.contains(p_element))
-    {
-        return true;
-    }
     else if(!m_elements.isEmpty())
     {
         foreach(Element* element, m_elements)
         {
-            if(element->getType() == Element::BLOCK || element->getType() == Element::BOMB)
+            if(element->getType() == Element::BLOCK ||
+                (element->getType() == Element::BOMB && p_element != element) ||
+                (element->getType() == Element::PLAYER && p_element->getType() != Element::PLAYER))
             {
                 return false;
             }

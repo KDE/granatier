@@ -926,7 +926,7 @@ void GameScene::bombDetonated(Bomb* bomb)
             {
                 bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BOMB);
                 blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BLOCK);
-                if(m_game->getArena()->getCell(nRow, nColumn).isWalkable() || !bombElements.isEmpty() || !blockElements.isEmpty())
+                if(m_game->getArena()->getCell(nRow, nColumn).getType() != Cell::WALL)
                 {
                     int tempBombDetonationCountdown = anDirectionDetonationCountdown[direction];
                     bool increaseDetonationTimeout = false;
@@ -946,9 +946,9 @@ void GameScene::bombDetonated(Bomb* bomb)
                     
                     if(!blockElements.isEmpty())
                     {
+                        abDirectionsDone[direction] = true;
                         foreach(element, blockElements)
                         {
-                            abDirectionsDone[direction] = true;
                             dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
                             if (m_blockItems[nRow][nColumn] != NULL)
                             {

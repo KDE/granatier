@@ -87,6 +87,9 @@ void Player::init()
 {
     updateDirection();
     stopMoving();
+    int row = m_arena->getRowFromY(m_y);
+    int column = m_arena->getColFromX(m_x);
+    m_arena->setCellElement(row, column, this);
 }
 
 void Player::goUp()
@@ -185,8 +188,10 @@ void Player::updateMove()
         int cellRow;
         
         // Get the current cell coordinates from the character coordinates
-        int curCellRow = m_arena->getRowFromY(m_y);
-        int curCellCol = m_arena->getColFromX(m_x);
+        int moveStartRow = m_arena->getRowFromY(m_y);
+        int moveStartCol = m_arena->getColFromX(m_x);
+        int curCellRow = moveStartRow;
+        int curCellCol = moveStartCol;
         
         //set variables for right/left move
         if(m_askedXSpeed != 0 || m_xSpeed != 0)
@@ -234,20 +239,56 @@ void Player::updateMove()
         //the move is within two cell centers
         if(bMoveWithinNextCellCenter)
         {
-            deltaStraightMove += deltaAskedMove;
-            //move to perpendicular center if needed
-            if(deltaPerpendicularCellCenter != 0 && (straightDirection * deltaStraightCellCenter) < 0)  //not in perpendicular center and entering a new cell
+            bool isHurdle = false;
+            if(!(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY))
             {
-                if(fabs(deltaPerpendicularCellCenter) > Cell::SIZE/2 - fabs(deltaStraightMove - deltaStraightCellCenter))   //check if it already can collide with a hurdle
+                bool kickBomb = false;
+                QList<Element*> bombElements;
+                //moving towards cell center; don't move if there is a bomb in the cell
+                if(deltaStraightCellCenter * straightDirection > 0 && !m_arena->getCell(moveStartRow, moveStartCol).isWalkable(this) && !m_omitBombKickCurrentCell)
                 {
-                    cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    if(!m_arena->getCell(cellRow, cellCol).isWalkable())
+                    isHurdle = true;
+                    if(m_kickBomb)
                     {
-                        deltaPerpendicularMove = deltaPerpendicularCellCenter + signZeroPositive(deltaPerpendicularCellCenter) * (fabs(deltaStraightMove - deltaStraightCellCenter) - Cell::SIZE/2);
-                        if(fabs(deltaPerpendicularMove) > fabs(deltaPerpendicularCellCenter))       //check if moved over perpendicular center
+                        kickBomb = true;
+                        bombElements =  m_arena->getCell(moveStartRow, moveStartCol).getElements(Element::BOMB);
+                    }
+                }
+                //moving away of cell center; don't move if there is a bomb in the next cell; ignore a bomb in the current cell
+                else if(deltaStraightCellCenter * straightDirection < 0 && !m_arena->getCell(moveStartRow + yDirection, moveStartCol + xDirection).isWalkable(this))
+                {
+                    isHurdle = true;
+                    if(m_kickBomb)
+                    {
+                        kickBomb = true;
+                        bombElements =  m_arena->getCell(moveStartRow + yDirection, moveStartCol + xDirection).getElements(Element::BOMB);
+                    }
+                }
+                if(kickBomb)
+                {
+                    foreach(Element* element, bombElements)
+                    {
+                        dynamic_cast <Bomb*> (element)->setKicked(m_direction);
+                    }
+                }
+            }
+            if(!isHurdle)
+            {
+                deltaStraightMove += deltaAskedMove;
+                //move to perpendicular center if needed
+                if(deltaPerpendicularCellCenter != 0 && (straightDirection * deltaStraightCellCenter) < 0)  //not in perpendicular center and entering a new cell
+                {
+                    if(fabs(deltaPerpendicularCellCenter) > Cell::SIZE/2 - fabs(deltaStraightMove - deltaStraightCellCenter))   //check if it already can collide with a hurdle
+                    {
+                        cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                        cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
+                        if(!m_arena->getCell(cellRow, cellCol).isWalkable(this))
                         {
-                            deltaPerpendicularMove = deltaPerpendicularCellCenter;
+                            deltaPerpendicularMove = deltaPerpendicularCellCenter + signZeroPositive(deltaPerpendicularCellCenter) * (fabs(deltaStraightMove - deltaStraightCellCenter) - Cell::SIZE/2);
+                            if(fabs(deltaPerpendicularMove) > fabs(deltaPerpendicularCellCenter))       //check if moved over perpendicular center
+                            {
+                                deltaPerpendicularMove = deltaPerpendicularCellCenter;
+                            }
                         }
                     }
                 }
@@ -268,7 +309,7 @@ void Player::updateMove()
                 {
                     cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                     cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                    if(!m_arena->getCell(cellRow, cellCol).isWalkable())
+                    if(!m_arena->getCell(cellRow, cellCol).isWalkable(this))
                     {
                         deltaPerpendicularMove = deltaPerpendicularCellCenter;
                     }
@@ -280,7 +321,7 @@ void Player::updateMove()
             }
             while(fabs(deltaAskedMove) > 0)     //complete the move
             {
-                if(m_arena->getCell(curCellRow + yDirection, curCellCol + xDirection).isWalkable())     //check if next cell is walkable
+                if(m_arena->getCell(curCellRow + yDirection, curCellCol + xDirection).isWalkable(this))     //check if next cell is walkable
                 {
                     if(fabs(deltaAskedMove) > Cell::SIZE)   //move to next cell center if the remaining move exceeds a cell center
                     {
@@ -291,7 +332,7 @@ void Player::updateMove()
                         {
                             cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                            if(!m_arena->getCell(cellRow, cellCol).isWalkable())
+                            if(!m_arena->getCell(cellRow, cellCol).isWalkable(this))
                             {
                                 deltaPerpendicularMove = deltaPerpendicularCellCenter;
                             }
@@ -305,7 +346,7 @@ void Player::updateMove()
                         {
                             cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
-                            if(!m_arena->getCell(cellRow, cellCol).isWalkable())
+                            if(!m_arena->getCell(cellRow, cellCol).isWalkable(this))
                             {
                                 deltaPerpendicularMove = signZeroPositive(deltaPerpendicularCellCenter) * fabs(deltaAskedMove);
                                 if(fabs(deltaPerpendicularMove) > fabs(deltaPerpendicularCellCenter))
@@ -320,7 +361,7 @@ void Player::updateMove()
                     curCellCol += xDirection;
                     curCellRow += yDirection;
                 }
-                else    //there is a hurdle in the next cell, so don't stop moving
+                else    //there is a hurdle in the next cell, so stop moving
                 {
                     deltaAskedMove = 0;
                     cellRow = curCellRow + yDirection;
@@ -432,6 +473,13 @@ void Player::updateMove()
                     setYSpeed(cellCenter - m_y);
                 }
             }
+        }
+        
+        if(moveStartCol != newCellCol || moveStartRow != newCellRow)
+        {
+            m_arena->removeCellElement(curCellRow, curCellCol, this);
+            m_arena->setCellElement(newCellRow, newCellCol, this);
+            m_omitBombKickCurrentCell = false;
         }
     }
     
@@ -653,6 +701,9 @@ void Player::die()
             m_badBonusCountdownTimer->stop();
             slot_removeBadBonus();
         }
+        int row = m_arena->getRowFromY(m_y);
+        int column = m_arena->getColFromX(m_x);
+        m_arena->removeCellElement(row, column, this);
     }
 }
 
@@ -676,6 +727,7 @@ void Player::resurrect()
     m_listShield.clear();
     m_throwBomb = false;
     m_kickBomb = false;
+    m_omitBombKickCurrentCell = false;
     if(m_badBonusCountdownTimer->isActive())
     {
         m_badBonusCountdownTimer->stop();
@@ -687,10 +739,17 @@ void Player::resurrect()
     {
         int cellRow = m_arena->getRowFromY(m_y);
         int cellCol = m_arena->getColFromX(m_x);
+        
+        m_arena->removeCellElement(cellRow, cellCol, this); //just to be really shure 
+        
         if(m_arena->getCell(cellRow, cellCol).getType() == Cell::HOLE)
         {
             move(m_xInit, m_yInit);
+            cellRow = m_arena->getRowFromY(m_yInit);
+            cellCol = m_arena->getColFromX(m_xInit);
         }
+        
+        m_arena->setCellElement(cellRow, cellCol, this);
     }
     
     emit resurrected();
@@ -879,6 +938,11 @@ void Player::keyPressed(QKeyEvent* keyEvent)
         {
             return;
         }
+        
+        if(key != m_key.dropBomb)
+        {
+            m_omitBombKickCurrentCell = false;
+        }
     }
     else
     {
@@ -910,6 +974,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
         if(m_bombArmory > 0)
         {
             emit bombDropped(this, m_x, m_y, true, 2);
+            m_omitBombKickCurrentCell = true;
         }
         else
         {
@@ -934,6 +999,11 @@ void Player::keyReleased(QKeyEvent* keyEvent)
         if(keyEvent->isAutoRepeat())
         {
             return;
+        }
+        
+        if(key != m_key.dropBomb)
+        {
+            m_omitBombKickCurrentCell = false;
         }
     }
     else

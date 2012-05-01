@@ -142,6 +142,10 @@ void Bomb::updateMove()
         bool bOnCenter = false;
         int xDirection = 0;
         int xDeltaCenter = Cell::SIZE/2 - (m_x - currentCol * Cell::SIZE);
+        bool bMoveAwayFromCenter = false;
+        bool bIsHurdleCurrentCell = false;
+        bool bIsHurdleNextCell = false;
+        
         if (m_xSpeed > 0)
         {
             xDirection = 1;
@@ -181,13 +185,19 @@ void Bomb::updateMove()
             nextCol = m_arena->getColFromX(m_x + m_xSpeed + xDirection * Cell::SIZE/2);
         }
         
+        bIsHurdleCurrentCell = !(m_arena->getCell(currentRow, currentCol).isWalkable(this));
+        bIsHurdleNextCell = !(m_arena->getCell(nextRow, nextCol).isWalkable(this));
+        
+        if(xDirection * xDeltaCenter <= 0 || yDirection * yDeltaCenter <= 0)
+        {
+            bMoveAwayFromCenter = true;
+        }
+        
         //at first, check if move over cell center or currently on cell center
         if((bOnCenter || (xDirection * xDeltaCenter < 0 && xDirection * (m_xSpeed + xDeltaCenter) >= 0) || (yDirection * yDeltaCenter < 0 && yDirection * (m_ySpeed + yDeltaCenter) >= 0)) && m_mortarState == -1)
         {
             bool bIsMortar = false;
             bool bIsNewDirection = false;
-            bool bIsHurdleCurrentCell = false;
-            bool bIsHurdleNextCell = false;
             
             switch (m_arena->getCell(currentRow, currentCol).getType())
             {
@@ -195,24 +205,28 @@ void Bomb::updateMove()
                     if(yDirection != -1)
                     {
                         bIsNewDirection = true;
+                        bMoveAwayFromCenter = true;
                     }
                     break;
                 case Cell::ARROWRIGHT:
                     if(xDirection != 1)
                     {
                         bIsNewDirection = true;
+                        bMoveAwayFromCenter = true;
                     }
                     break;
                 case Cell::ARROWDOWN:
                     if(yDirection != 1)
                     {
                         bIsNewDirection = true;
+                        bMoveAwayFromCenter = true;
                     }
                     break;
                 case Cell::ARROWLEFT:
                     if(xDirection != -1)
                     {
                         bIsNewDirection = true;
+                        bMoveAwayFromCenter = true;
                     }
                     break;
                 case Cell::BOMBMORTAR:
@@ -225,12 +239,8 @@ void Bomb::updateMove()
                     break;
             }
             
-            
-            bIsHurdleCurrentCell = !(m_arena->getCell(currentRow, currentCol).isWalkable(this));
-            bIsHurdleNextCell = !(m_arena->getCell(nextRow, nextCol).isWalkable(this));
-            
             //if two bombs move towards them, stop them and move them to the next cell center
-            if((bIsHurdleCurrentCell || bIsHurdleNextCell) && !m_stopOnCenter)
+            if(((bIsHurdleCurrentCell && !bMoveAwayFromCenter) || bIsHurdleNextCell) && !m_stopOnCenter)
             {
                 if(bOnCenter)
                 {
@@ -251,6 +261,7 @@ void Bomb::updateMove()
                 move((currentCol+0.5) * Cell::SIZE, (currentRow+0.5) * Cell::SIZE);
                 setXSpeed(0);
                 setYSpeed(0);
+                m_stopOnCenter = false;
             }
             else
             {
@@ -265,7 +276,7 @@ void Bomb::updateMove()
         else
         {
             //if two bombs move towards them, stop them and move them to the next cell center
-            if((!(m_arena->getCell(nextRow, nextCol).isWalkable(this)) || !(m_arena->getCell(currentRow, currentCol).isWalkable(this))) && m_mortarState == -1 && !m_stopOnCenter)
+            if(((bIsHurdleCurrentCell && !bMoveAwayFromCenter) || bIsHurdleNextCell) && !m_stopOnCenter && m_mortarState == -1)
             {
                 if(bOnCenter)
                 {
