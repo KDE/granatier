@@ -74,7 +74,7 @@ private:
     bool m_kickBomb;
     
     /** flag if the player should omit bomb kicking if it's the bomb currently dropped and the player hasn't stopped in the mean time or changed direction */
-    bool m_omitBombKickCurrentCell;
+    bool m_omitBombCurrentCell;
     
     /** a list with the gathered shields from the shield bonus */
     QList <int> m_listShield;

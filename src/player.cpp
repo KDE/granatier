@@ -245,7 +245,7 @@ void Player::updateMove()
                 bool kickBomb = false;
                 QList<Element*> bombElements;
                 //moving towards cell center; don't move if there is a bomb in the cell
-                if(deltaStraightCellCenter * straightDirection > 0 && !m_arena->getCell(moveStartRow, moveStartCol).isWalkable(this) && !m_omitBombKickCurrentCell)
+                if(deltaStraightCellCenter * straightDirection > 0 && !m_arena->getCell(moveStartRow, moveStartCol).isWalkable(this) && !m_omitBombCurrentCell)
                 {
                     isHurdle = true;
                     if(m_kickBomb)
@@ -479,7 +479,7 @@ void Player::updateMove()
         {
             m_arena->removeCellElement(moveStartRow, moveStartCol, this);
             m_arena->setCellElement(newCellRow, newCellCol, this);
-            m_omitBombKickCurrentCell = false;
+            m_omitBombCurrentCell = false;
         }
     }
     
@@ -727,7 +727,7 @@ void Player::resurrect()
     m_listShield.clear();
     m_throwBomb = false;
     m_kickBomb = false;
-    m_omitBombKickCurrentCell = false;
+    m_omitBombCurrentCell = false;
     if(m_badBonusCountdownTimer->isActive())
     {
         m_badBonusCountdownTimer->stop();
@@ -938,11 +938,6 @@ void Player::keyPressed(QKeyEvent* keyEvent)
         {
             return;
         }
-        
-        if(key != m_key.dropBomb)
-        {
-            m_omitBombKickCurrentCell = false;
-        }
     }
     else
     {
@@ -974,7 +969,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
         if(m_bombArmory > 0)
         {
             emit bombDropped(this, m_x, m_y, true, 2);
-            m_omitBombKickCurrentCell = true;
+            m_omitBombCurrentCell = true;
         }
         else
         {
@@ -999,11 +994,6 @@ void Player::keyReleased(QKeyEvent* keyEvent)
         if(keyEvent->isAutoRepeat())
         {
             return;
-        }
-        
-        if(key != m_key.dropBomb)
-        {
-            m_omitBombKickCurrentCell = false;
         }
     }
     else
