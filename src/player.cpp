@@ -477,7 +477,7 @@ void Player::updateMove()
         
         if(moveStartCol != newCellCol || moveStartRow != newCellRow)
         {
-            m_arena->removeCellElement(curCellRow, curCellCol, this);
+            m_arena->removeCellElement(moveStartRow, moveStartCol, this);
             m_arena->setCellElement(newCellRow, newCellCol, this);
             m_omitBombKickCurrentCell = false;
         }
