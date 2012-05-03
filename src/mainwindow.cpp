@@ -53,6 +53,7 @@ private:
 
 MainWindow::MainWindow()
 {
+    m_settingsDialog = NULL;
     // Initialize the game
     m_game = NULL;
     m_view = NULL;
@@ -79,6 +80,7 @@ MainWindow::~MainWindow()
     delete m_game;
     delete m_view;
     delete m_playerSettings;
+    delete m_settingsDialog;
 }
 
 void MainWindow::initGame()
@@ -155,22 +157,26 @@ void MainWindow::setSoundsEnabled(bool p_enabled) {
 
 void MainWindow::showSettings()
 {
-    if (KConfigDialog::showDialog("settings"))
+    if (m_settingsDialog)//(KConfigDialog::showDialog("settings"))
     {
-        return;
+        delete m_settingsDialog;
     }
     KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", Settings::self());
     // General Settings
     settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), "games-config-options");
     // Theme
     m_themeProvider->rediscoverThemes();
-    settingsDialog->addPage(new KgThemeSelector(m_themeProvider), i18n("Theme"), "games-config-theme");
+    m_currentThemeIdentifier = m_themeProvider->currentTheme()->identifier();
+    settingsDialog->addPage(new KgThemeSelector(m_themeProvider, KgThemeSelector::DefaultBehavior, settingsDialog), i18n("Theme"), "games-config-theme");
     // Arena
     settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
     // Player
     settingsDialog->addPage(new PlayerSelector(settingsDialog, m_playerSettings), i18n("Player"), "games-config-custom");
     
+    m_settingsDialog = settingsDialog;
+    
     connect(settingsDialog, SIGNAL(settingsChanged(QString)), this, SLOT(applyNewSettings()));
+    connect(m_themeProvider, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(settingsChanged()));
     connect(settingsDialog, SIGNAL(cancelClicked()), this, SLOT(settingsDialogCanceled()));
     settingsDialog->show();
 }
@@ -190,6 +196,24 @@ void MainWindow::settingsDialogCanceled()
 {
     m_playerSettings->discardUnsavedSettings();
     m_tempRandomArenaModeArenaList.clear();
+    if(m_currentThemeIdentifier != m_themeProvider->currentTheme()->identifier())
+    {
+        QList<const KgTheme*> themeList = m_themeProvider->themes();
+        foreach(const KgTheme* theme, themeList)
+        {
+            if(theme->identifier() == m_currentThemeIdentifier)
+            {
+                m_themeProvider->setCurrentTheme(theme);
+                break;
+            }
+        }
+    }
+}
+
+void MainWindow::settingsChanged()
+{
+    m_settingsDialog->enableButtonApply(true);
+    Settings::self()->setDummy(Settings::self()->dummy() + 3);
 }
 
 void MainWindow::close()

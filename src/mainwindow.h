@@ -26,6 +26,7 @@ class Game;
 class GameView;
 class PlayerSettings;
 class KgThemeProvider;
+class KConfigDialog;
 
 /**
  * @brief This class enables to create the main window for Granatier.
@@ -47,9 +48,12 @@ private :
     
     /** The KgThemeProvider instance */
     KgThemeProvider* m_themeProvider;
+    QString m_currentThemeIdentifier;
     
     /**  */
     QStringList m_tempRandomArenaModeArenaList;
+    
+    KConfigDialog* m_settingsDialog;
     
 public:
 
@@ -97,6 +101,11 @@ private slots:
       * Cancel at settings dialog clicked.
       */
     void settingsDialogCanceled();
+    
+    /**
+     * The settings changed, but the dialog didn't notice it, so this slot enables the apply button from the dialog
+     */
+    void settingsChanged();
 
     /**
       * Closes the MainWindow.
