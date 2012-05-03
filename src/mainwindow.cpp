@@ -57,7 +57,7 @@ MainWindow::MainWindow()
     m_game = NULL;
     m_view = NULL;
     m_playerSettings = new PlayerSettings();
-    m_themeProvider = new KgThemeProvider(QByteArray("ThemProvider"), this);
+    m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
     m_themeProvider->discoverThemes("appdata", QLatin1String("themes"), "granatier");
     // Set the window menus
     KStandardGameAction::gameNew(this, SLOT(newGame(bool)), actionCollection());
