@@ -35,9 +35,7 @@
 #include <KMessageBox>
 #include <KConfigDialog>
 #include <KLocale>
-
-#define USE_UNSTABLE_LIBKDEGAMESPRIVATE_API
-#include <libkdegamesprivate/kgamethemeselector.h>
+#include <KgThemeSelector>
 
 #include <QGraphicsSvgItem>
 
@@ -59,6 +57,8 @@ MainWindow::MainWindow()
     m_game = NULL;
     m_view = NULL;
     m_playerSettings = new PlayerSettings();
+    m_themeProvider = new KgThemeProvider(QByteArray("ThemProvider"), this);
+    m_themeProvider->discoverThemes("appdata", QLatin1String("themes"), "granatier");
     // Set the window menus
     KStandardGameAction::gameNew(this, SLOT(newGame(bool)), actionCollection());
     //KStandardGameAction::highscores(this, SLOT(showHighscores()), actionCollection());
@@ -103,7 +103,7 @@ void MainWindow::initGame()
         delete m_view;
     }
     // Create a new GameView instance
-    m_view = new GameView(m_game);
+    m_view = new GameView(m_game, m_themeProvider);
     m_view->setBackgroundBrush(Qt::black);
     setCentralWidget(m_view);
     m_game->setGameScene(dynamic_cast <GameScene*> (m_view->scene()));
@@ -163,7 +163,8 @@ void MainWindow::showSettings()
     // General Settings
     settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), "games-config-options");
     // Theme
-    settingsDialog->addPage(new KGameThemeSelector(settingsDialog, Settings::self(), KGameThemeSelector::NewStuffDisableDownload), i18n("Theme"), "games-config-theme");
+    m_themeProvider->rediscoverThemes();
+    settingsDialog->addPage(new KgThemeSelector(m_themeProvider), i18n("Theme"), "games-config-theme");
     // Arena
     settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
     // Player

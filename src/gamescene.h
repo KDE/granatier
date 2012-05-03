@@ -43,6 +43,7 @@ class QTimer;
 
 class KGameRenderer;
 class KGameRenderedItem;
+class KgThemeProvider;
 
 /**
  * @brief This class contains all the Game elements to be drawn on the screen by the GameView instance.
@@ -101,7 +102,7 @@ private:
     KGameRenderer* m_rendererScoreItems;
     KGameRenderer* m_rendererInfoSidebar;
     QMap <Player*, KGameRenderer*> m_mapRendererPlayerItems;
-    
+    KgThemeProvider* m_themeProvider;
     QTimer* m_backgroundResizeTimer;
     
 public:
@@ -110,7 +111,7 @@ public:
       * Creates a new GameScene instance.
       * @param p_game the Game instance whose elements must be contained in the GameScene in order to be drawn
       */
-    GameScene(Game* p_game);
+    GameScene(Game* p_game, KgThemeProvider* p_themeProvider);
     
     /**
       * Deletes the Game instance.
@@ -121,11 +122,6 @@ public:
       * @return the Game instance
       */
     Game* getGame() const;
-
-    /**
-      * Loads the game theme.
-      */
-    void loadTheme();
     
     /**
      * Initializes class
@@ -153,6 +149,9 @@ public:
      * @param strPlayerID
      */
     KGameRenderer* renderer(Element::Type type, Player* player = NULL);
+    
+    /** setup the KGameRenderer for the selected theme and if necessary the default theme */
+    void setupThemeRenderer();
     
 private slots:
     

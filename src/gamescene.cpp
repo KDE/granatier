@@ -36,6 +36,7 @@
 #include "infosidebar.h"
 
 #include <KgTheme>
+#include <KgThemeProvider>
 #include <KLocale>
 #include <KStandardDirs>
 #include <QPainter>
@@ -45,7 +46,7 @@
 #include <KGameRenderer>
 #include <KGameRenderedItem>
 
-GameScene::GameScene(Game* p_game) : m_game(p_game)
+GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_game), m_themeProvider(p_themeProvider)
 {
     connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
     connect(p_game, SIGNAL(pauseChanged(bool,bool)), this, SLOT(setPaused(bool,bool)));
@@ -58,23 +59,103 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     m_backgroundResizeTimer->setSingleShot(true);
     connect(m_backgroundResizeTimer, SIGNAL(timeout()), this, SLOT(resizeBackground()));
     
-    // Load the selected SVG file
-    m_rendererSelectedTheme = 0;
-    loadTheme();
-    //uncomment this if the crash in KSharedDataCache appears again
-    //m_rendererSelectedTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
-    // Load the default SVG file as fallback
-    bool selectedThemeIsDefault = true;
+    // setup the theme renderer
+    KgTheme* theme = new KgTheme(m_themeProvider->currentTheme()->identifier());
+    theme->setGraphicsPath(m_themeProvider->currentTheme()->graphicsPath());
+    m_rendererSelectedTheme = new KGameRenderer(theme);
     m_rendererDefaultTheme = 0;
+    setupThemeRenderer();
+
+    // Create the PlayerItems and the points labels
+    QList <Player*> players = p_game->getPlayers();
     
-    if(Settings::self()->theme() != "themes/granatier.desktop" || m_rendererSelectedTheme == 0)
+    PlayerItem* playerItem;
+    for(int i = 0; i < players.size(); i++)
     {
+        const QString desktopPath = players[i]->getDesktopFilePath();
+        KgTheme* theme = new KgTheme(desktopPath.toUtf8());
+        theme->readFromDesktopFile(KStandardDirs::locate("appdata", desktopPath));
+        KGameRenderer* playerRenderer = new KGameRenderer(theme);
+        m_mapRendererPlayerItems.insert(players[i], playerRenderer);
+        playerItem = new PlayerItem(players[i], playerRenderer);
+        // Corrects the position of the player
+        playerItem->update(players[i]->getX(), players[i]->getY());
+        // Stops the player animation
+        playerItem->stopAnim();
+        
+        m_playerItems.append(playerItem);
+        
+        connect(this, SIGNAL(resizeGraphics(qreal)), playerItem, SLOT(updateGraphics(qreal)));
+        connect (playerItem, SIGNAL(bonusItemTaken(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
+    }
+    
+    // The remaining time
+    m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
+    m_remainingTimeLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_remainingTimeLabel->setZValue(1000);
+    
+    m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
+    m_arenaNameLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_arenaNameLabel->setZValue(1000);
+    
+    setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
+                 m_game->getArena()->getNbColumns()*Cell::SIZE,
+                 m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
+    
+    //create the background
+    m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
+    m_arenaBackground->setZValue(-5);
+    m_arenaBackground->setPos(0, 0);
+    m_arenaBackground->setCacheMode(QGraphicsItem::NoCache);  // if cache is set, there are some artifacts; pay attention, that the KGameRenderer cache is used nevertheless
+    m_arenaBackground->setRenderSize(QSize(100, 100)); //just to get something in the background, until the right size is rendered
+    addItem(m_arenaBackground);
+    
+    // create the info sidebar
+    m_infoSidebar = new InfoSidebar(m_game, this);
+    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoSidebar, SLOT(updateGraphics(qreal)));
+    
+    //update the sceneRect
+    QRectF oldSceneRect = sceneRect();
+    QRectF sidebarRect = m_infoSidebar->rect();
+    QRectF newSceneRect;
+    newSceneRect.setLeft(oldSceneRect.left() < sidebarRect.left() ? oldSceneRect.left() : sidebarRect.left());
+    newSceneRect.setRight(oldSceneRect.right() > sidebarRect.right() ? oldSceneRect.right() : sidebarRect.right());
+    newSceneRect.setTop(oldSceneRect.top() < sidebarRect.top() ? oldSceneRect.top() : sidebarRect.top());
+    newSceneRect.setBottom(oldSceneRect.bottom() > sidebarRect.bottom() ? oldSceneRect.bottom() : sidebarRect.bottom());
+    newSceneRect.adjust(-5, -5, 5, 5);
+    setSceneRect(newSceneRect);
+    
+    // create the info overlay
+    m_infoOverlay = new InfoOverlay(m_game, this);
+    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoOverlay, SLOT(updateGraphics(qreal)));
+    
+    init();
+    
+    //at this point, sceneRect() has the minimum size for the scene
+    m_minSize = sceneRect();
+    m_minSize.setX((int) ((int)m_minSize.x() - ((int)m_minSize.x() % (int)Cell::SIZE)) - Cell::SIZE/4);
+    m_minSize.setY((int) ((int)m_minSize.y() - ((int)m_minSize.y() % (int)Cell::SIZE)) - Cell::SIZE/4);
+    m_minSize.setHeight(((int) (m_minSize.height() / Cell::SIZE) + 1) * Cell::SIZE);
+    m_minSize.setWidth(((int) (m_minSize.width() / Cell::SIZE) + 1) * Cell::SIZE);
+    setSceneRect(m_minSize);
+}
+
+void GameScene::setupThemeRenderer()
+{
+    bool selectedThemeIsDefault = true;
+    
+    if(m_themeProvider->currentTheme() != m_themeProvider->defaultTheme())
+    {
+        // Load the default SVG file as fallback
         selectedThemeIsDefault = false;
-        KgTheme* theme = new KgTheme("themes/granatier.desktop");
-        theme->setGraphicsPath(KStandardDirs::locate("appdata", "themes/granatier.svgz"));
-        m_rendererDefaultTheme = new KGameRenderer(theme);
-        //uncomment this if the crash in KSharedDataCache appears again
-        //m_rendererDefaultTheme->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
+        if(m_rendererDefaultTheme == 0)
+        {
+            KgTheme* theme = new KgTheme(m_themeProvider->defaultTheme()->identifier());
+            theme->setGraphicsPath(m_themeProvider->defaultTheme()->graphicsPath());
+            m_rendererDefaultTheme = new KGameRenderer(theme);
+        }
     }
     
     if(selectedThemeIsDefault || m_rendererSelectedTheme->spriteExists("background"))
@@ -152,85 +233,6 @@ GameScene::GameScene(Game* p_game) : m_game(p_game)
     {
         m_rendererScoreItems = m_rendererDefaultTheme;
     }
-
-    // Create the PlayerItems and the points labels
-    QList <Player*> players = p_game->getPlayers();
-    
-    PlayerItem* playerItem;
-    for(int i = 0; i < players.size(); i++)
-    {
-        const QString desktopPath = players[i]->getDesktopFilePath();
-        KgTheme* theme = new KgTheme(desktopPath.toUtf8());
-        theme->readFromDesktopFile(KStandardDirs::locate("appdata", desktopPath));
-        KGameRenderer* playerRenderer = new KGameRenderer(theme);
-        //uncomment this if the crash in KSharedDataCache appears again
-        //playerRenderer->setStrategyEnabled(KGameRenderer::UseDiskCache, false);
-        m_mapRendererPlayerItems.insert(players[i], playerRenderer);
-        playerItem = new PlayerItem(players[i], playerRenderer);
-        // Corrects the position of the player
-        playerItem->update(players[i]->getX(), players[i]->getY());
-        // Stops the player animation
-        playerItem->stopAnim();
-        
-        m_playerItems.append(playerItem);
-        
-        connect(this, SIGNAL(resizeGraphics(qreal)), playerItem, SLOT(updateGraphics(qreal)));
-        connect (playerItem, SIGNAL(bonusItemTaken(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
-    }
-    
-    // The remaining time
-    m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
-    m_remainingTimeLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-    m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
-    m_remainingTimeLabel->setZValue(1000);
-    
-    m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
-    m_arenaNameLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
-    m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
-    m_arenaNameLabel->setZValue(1000);
-    
-    setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
-                 m_game->getArena()->getNbColumns()*Cell::SIZE,
-                 m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
-    
-    //create the background    
-    //uncomment this if the crash in KSharedDataCache appears again
-    //m_rendererBackground->setStrategyEnabled(KGameRenderer::UseDiskCache, false); //TODO: why does it crash with disc cache on?
-    m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
-    m_arenaBackground->setZValue(-5);
-    m_arenaBackground->setPos(0, 0);
-    m_arenaBackground->setCacheMode(QGraphicsItem::NoCache);
-    m_arenaBackground->setRenderSize(QSize(100, 100)); //just to get something in the background, until the right size is rendered
-    addItem(m_arenaBackground);
-    
-    // create the info sidebar
-    m_infoSidebar = new InfoSidebar(m_game, this);
-    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoSidebar, SLOT(updateGraphics(qreal)));
-    
-    //update the sceneRect
-    QRectF oldSceneRect = sceneRect();
-    QRectF sidebarRect = m_infoSidebar->rect();
-    QRectF newSceneRect;
-    newSceneRect.setLeft(oldSceneRect.left() < sidebarRect.left() ? oldSceneRect.left() : sidebarRect.left());
-    newSceneRect.setRight(oldSceneRect.right() > sidebarRect.right() ? oldSceneRect.right() : sidebarRect.right());
-    newSceneRect.setTop(oldSceneRect.top() < sidebarRect.top() ? oldSceneRect.top() : sidebarRect.top());
-    newSceneRect.setBottom(oldSceneRect.bottom() > sidebarRect.bottom() ? oldSceneRect.bottom() : sidebarRect.bottom());
-    newSceneRect.adjust(-5, -5, 5, 5);
-    setSceneRect(newSceneRect);
-    
-    // create the info overlay
-    m_infoOverlay = new InfoOverlay(m_game, this);
-    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoOverlay, SLOT(updateGraphics(qreal)));
-    
-    init();
-    
-    //at this point, sceneRect() has the minimum size for the scene
-    m_minSize = sceneRect();
-    m_minSize.setX((int) ((int)m_minSize.x() - ((int)m_minSize.x() % (int)Cell::SIZE)) - Cell::SIZE/4);
-    m_minSize.setY((int) ((int)m_minSize.y() - ((int)m_minSize.y() % (int)Cell::SIZE)) - Cell::SIZE/4);
-    m_minSize.setHeight(((int) (m_minSize.height() / Cell::SIZE) + 1) * Cell::SIZE);
-    m_minSize.setWidth(((int) (m_minSize.width() / Cell::SIZE) + 1) * Cell::SIZE);
-    setSceneRect(m_minSize);
 }
 
 void GameScene::init()
@@ -646,18 +648,6 @@ void GameScene::resizeBackground()
 Game* GameScene::getGame() const
 {
     return m_game;
-}
-
-void GameScene::loadTheme()
-{
-    KgTheme* theme = new KgTheme(Settings::self()->theme().toUtf8());
-    theme->readFromDesktopFile(KStandardDirs::locate("appdata", Settings::self()->theme()));
-    m_rendererSelectedTheme = new KGameRenderer(theme);
-    
-    update(0, 0, width(), height());
-
-    // Update the theme config: if the default theme is selected, no theme entry is written -> the theme selector does not select the theme
-    Settings::self()->config()->group("General").writeEntry("Theme", Settings::self()->theme());
 }
 
 void GameScene::start()

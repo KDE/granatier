@@ -24,6 +24,7 @@
 
 class QKeyEvent;
 class Game;
+class KgThemeProvider;
 
 /**
  * @brief This class manages the drawing of each element of the Game instance.
@@ -39,7 +40,7 @@ public:
       * Creates a new GameView instance.
       * @param p_game the Game instance whose elements have to be drawn
       */
-    GameView(Game* p_game);
+    GameView(Game* p_game, KgThemeProvider* p_themeProvider);
 
     /**
       * Deletes the GameView instance.

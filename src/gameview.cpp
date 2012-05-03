@@ -21,8 +21,9 @@
 #include "game.h"
 
 #include <QKeyEvent>
+#include <KgThemeProvider>
 
-GameView::GameView(Game * p_game) : QGraphicsView(new GameScene(p_game))
+GameView::GameView(Game * p_game, KgThemeProvider* p_themeProvider) : QGraphicsView(new GameScene(p_game, p_themeProvider))
 {
     setFrameStyle(QFrame::NoFrame);
     setFocusPolicy(Qt::StrongFocus);

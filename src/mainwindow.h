@@ -25,6 +25,7 @@
 class Game;
 class GameView;
 class PlayerSettings;
+class KgThemeProvider;
 
 /**
  * @brief This class enables to create the main window for Granatier.
@@ -43,6 +44,9 @@ private :
     
     /** The PlayerSettings instance for player name, shortcuts ...  */
     PlayerSettings* m_playerSettings;
+    
+    /** The KgThemeProvider instance */
+    KgThemeProvider* m_themeProvider;
     
     /**  */
     QStringList m_tempRandomArenaModeArenaList;
