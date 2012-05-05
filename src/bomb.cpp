@@ -18,15 +18,15 @@
  */
 
 #include "bomb.h"
-#include "cell.h"
 #include "arena.h"
-#include "settings.h"
 
 #include <QTimer>
 
+#include <cstdlib>
+
 Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
 {
-    m_type = Element::BOMB;
+    m_type = Granatier::Element::BOMB;
     
     m_xInit = fX;
     m_yInit = fY;
@@ -96,19 +96,19 @@ void Bomb::updateMove()
     {
         switch (m_arena->getCell(currentRow, currentCol).getType())
         {
-            case Cell::ARROWUP:
+            case Granatier::Cell::ARROWUP:
                 setYSpeed(-5);
                 break;
-            case Cell::ARROWRIGHT:
+            case Granatier::Cell::ARROWRIGHT:
                 setXSpeed(5);
                 break;
-            case Cell::ARROWDOWN:
+            case Granatier::Cell::ARROWDOWN:
                 setYSpeed(5);
                 break;
-            case Cell::ARROWLEFT:
+            case Granatier::Cell::ARROWLEFT:
                 setXSpeed(-5);
                 break;
-            case Cell::BOMBMORTAR:
+            case Granatier::Cell::BOMBMORTAR:
                 m_mortarTimer = new QTimer;
                 m_mortarTimer->setSingleShot(true);
                 m_mortarTimer->setInterval(1500);
@@ -118,15 +118,15 @@ void Bomb::updateMove()
                 m_mortarState = 0;
                 setXSpeed(0);
                 setYSpeed(0);
-                m_type = Element::NONE;
+                m_type = Granatier::Element::NONE;
                 m_arena->removeCellElement(currentRow, currentCol, this);
                 emit mortar(m_mortarState);
                 break;
-            case Cell::HOLE:
+            case Granatier::Cell::HOLE:
                 if(!m_falling)
                 {
                     m_falling = true;
-                    m_type = Element::NONE;
+                    m_type = Granatier::Element::NONE;
                     m_detonationCountdownTimer->stop();
                     emit falling();
                     emit releaseBombArmory();
@@ -141,7 +141,7 @@ void Bomb::updateMove()
     {
         bool bOnCenter = false;
         int xDirection = 0;
-        int xDeltaCenter = Cell::SIZE/2 - (m_x - currentCol * Cell::SIZE);
+        int xDeltaCenter = Granatier::CellSize/2 - (m_x - currentCol * Granatier::CellSize);
         bool bMoveAwayFromCenter = false;
         bool bIsHurdleCurrentCell = false;
         bool bIsHurdleNextCell = false;
@@ -155,7 +155,7 @@ void Bomb::updateMove()
             xDirection = -1;
         }
         int yDirection = 0;
-        int yDeltaCenter = Cell::SIZE/2 - (m_y - currentRow * Cell::SIZE);
+        int yDeltaCenter = Granatier::CellSize/2 - (m_y - currentRow * Granatier::CellSize);
         if (m_ySpeed > 0)
         {
             yDirection = 1;
@@ -176,13 +176,13 @@ void Bomb::updateMove()
         int nextCol;
         if(xDirection > 0 || yDirection > 0)
         {
-            nextRow = m_arena->getRowFromY(m_y + yDirection * Cell::SIZE/2); //this is needed because the bombs won't move if they are coming from the top, hit an up arrow and there is a hurdle below the arrow
-            nextCol = m_arena->getColFromX(m_x + xDirection * Cell::SIZE/2);
+            nextRow = m_arena->getRowFromY(m_y + yDirection * Granatier::CellSize/2); //this is needed because the bombs won't move if they are coming from the top, hit an up arrow and there is a hurdle below the arrow
+            nextCol = m_arena->getColFromX(m_x + xDirection * Granatier::CellSize/2);
         }
         else
         {
-            nextRow = m_arena->getRowFromY(m_y + m_ySpeed + yDirection * Cell::SIZE/2);
-            nextCol = m_arena->getColFromX(m_x + m_xSpeed + xDirection * Cell::SIZE/2);
+            nextRow = m_arena->getRowFromY(m_y + m_ySpeed + yDirection * Granatier::CellSize/2);
+            nextCol = m_arena->getColFromX(m_x + m_xSpeed + xDirection * Granatier::CellSize/2);
         }
         
         bIsHurdleCurrentCell = !(m_arena->getCell(currentRow, currentCol).isWalkable(this));
@@ -201,38 +201,38 @@ void Bomb::updateMove()
             
             switch (m_arena->getCell(currentRow, currentCol).getType())
             {
-                case Cell::ARROWUP:
+                case Granatier::Cell::ARROWUP:
                     if(yDirection != -1)
                     {
                         bIsNewDirection = true;
                         bMoveAwayFromCenter = true;
                     }
                     break;
-                case Cell::ARROWRIGHT:
+                case Granatier::Cell::ARROWRIGHT:
                     if(xDirection != 1)
                     {
                         bIsNewDirection = true;
                         bMoveAwayFromCenter = true;
                     }
                     break;
-                case Cell::ARROWDOWN:
+                case Granatier::Cell::ARROWDOWN:
                     if(yDirection != 1)
                     {
                         bIsNewDirection = true;
                         bMoveAwayFromCenter = true;
                     }
                     break;
-                case Cell::ARROWLEFT:
+                case Granatier::Cell::ARROWLEFT:
                     if(xDirection != -1)
                     {
                         bIsNewDirection = true;
                         bMoveAwayFromCenter = true;
                     }
                     break;
-                case Cell::BOMBMORTAR:
+                case Granatier::Cell::BOMBMORTAR:
                     bIsMortar = true;
                     break;
-                case Cell::HOLE:
+                case Granatier::Cell::HOLE:
                     m_stopOnCenter = true;
                     break;
                 default:
@@ -258,7 +258,7 @@ void Bomb::updateMove()
             //stop at cell center if direction change or bomb mortar in current cell
             else if(bIsMortar || bIsNewDirection || m_stopOnCenter)
             {
-                move((currentCol+0.5) * Cell::SIZE, (currentRow+0.5) * Cell::SIZE);
+                move((currentCol+0.5) * Granatier::CellSize, (currentRow+0.5) * Granatier::CellSize);
                 setXSpeed(0);
                 setYSpeed(0);
                 m_stopOnCenter = false;
@@ -348,22 +348,22 @@ void Bomb::setThrown(int nDirection)
         }
         connect(m_mortarTimer, SIGNAL(timeout()), this, SLOT(updateMortarState()));
     }
-    qreal fSpeed = 2 * Cell::SIZE / 32.0;//800ms with 40FPS are 32 frames
+    qreal fSpeed = 2 * Granatier::CellSize / 32.0;//800ms with 40FPS are 32 frames
     switch(nDirection)
     {
-        case Element::NORTH:
+        case Granatier::Direction::NORTH:
             setXSpeed(0);
             setYSpeed(-fSpeed);
             break;
-        case Element::EAST:
+        case Granatier::Direction::EAST:
             setXSpeed(fSpeed);
             setYSpeed(0);
             break;
-        case Element::SOUTH:
+        case Granatier::Direction::SOUTH:
             setXSpeed(0);
             setYSpeed(fSpeed);
             break;
-        case Element::WEST:
+        case Granatier::Direction::WEST:
             setXSpeed(-fSpeed);
             setYSpeed(0);
             break;
@@ -378,51 +378,30 @@ void Bomb::setKicked(int nDirection)
 {
     switch(nDirection)
     {
-        case Element::NORTH:
+        case Granatier::Direction::NORTH:
             setXSpeed(0);
             setYSpeed(-5);
             break;
-        case Element::EAST:
+        case Granatier::Direction::EAST:
             setXSpeed(5);
             setYSpeed(0);
             break;
-        case Element::SOUTH:
+        case Granatier::Direction::SOUTH:
             setXSpeed(0);
             setYSpeed(5);
             break;
-        case Element::WEST:
+        case Granatier::Direction::WEST:
             setXSpeed(-5);
             setYSpeed(0);
             break;
     }
 }
 
-Cell Bomb::getNextCell()
-{
-    Cell nextCell;
-    // Get the current cell coordinates from the character coordinates
-    int curCellRow = m_arena->getRowFromY(m_y);
-    int curCellCol = m_arena->getColFromX(m_x);
-
-    // Get the next cell function of the character direction
-    if (m_xSpeed > 0) {
-        nextCell = m_arena->getCell(curCellRow, curCellCol + 1);
-    } else if (m_xSpeed < 0) {
-        nextCell = m_arena->getCell(curCellRow, curCellCol - 1);
-    } else if (m_ySpeed > 0) {
-        nextCell = m_arena->getCell(curCellRow + 1, curCellCol);
-    } else if (m_ySpeed < 0) {
-        nextCell = m_arena->getCell(curCellRow - 1, curCellCol);
-    }
-
-    return nextCell;
-}
-
 bool Bomb::onCenter()
 {
     // Get the current cell center coordinates
-    qreal centerX = (m_arena->getColFromX(m_x) + 0.5) * Cell::SIZE;
-    qreal centerY = (m_arena->getRowFromY(m_y) + 0.5) * Cell::SIZE;
+    qreal centerX = (m_arena->getColFromX(m_x) + 0.5) * Granatier::CellSize;
+    qreal centerY = (m_arena->getRowFromY(m_y) + 0.5) * Granatier::CellSize;
     bool willGoPast = false;
 
     // Will the character go past the center of the cell it's on ?
@@ -452,8 +431,8 @@ bool Bomb::onCenter()
 
 void Bomb::moveOnCenter()
 {
-    setX((m_arena->getColFromX(m_x) + 0.5) * Cell::SIZE);
-    setY((m_arena->getRowFromY(m_y) + 0.5) * Cell::SIZE);
+    setX((m_arena->getColFromX(m_x) + 0.5) * Granatier::CellSize);
+    setY((m_arena->getRowFromY(m_y) + 0.5) * Granatier::CellSize);
 }
 
 int Bomb::bombPower()
@@ -543,7 +522,7 @@ void Bomb::updateMortarState()
               int curCellCol = m_arena->getColFromX(m_x);
               
               m_thrown = false;
-              m_type = Element::NONE;
+              m_type = Granatier::Element::NONE;
               m_arena->removeCellElement(curCellRow, curCellCol, this);
               
               m_mortarState++;
@@ -567,18 +546,18 @@ void Bomb::updateMortarState()
                   {
                       nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
                       nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
-                      if(m_arena->getCell(nRow, nCol).getType() != Cell::WALL)
+                      if(m_arena->getCell(nRow, nCol).getType() != Granatier::Cell::WALL)
                       {
                           bFound = true;
                       }
                   }
                   while (!bFound);
                   
-                  setXSpeed((nCol - curCellCol) * Cell::SIZE / 32.0);//800ms with 40FPS are 32 frames
-                  setYSpeed((nRow - curCellRow) * Cell::SIZE / 32.0);//800ms with 40FPS are 32 frames
+                  setXSpeed((nCol - curCellCol) * Granatier::CellSize / 32.0);//800ms with 40FPS are 32 frames
+                  setYSpeed((nRow - curCellRow) * Granatier::CellSize / 32.0);//800ms with 40FPS are 32 frames
               }
               
-              m_type = Element::NONE;
+              m_type = Granatier::Element::NONE;
               m_arena->removeCellElement(curCellRow, curCellCol, this);
               
               m_mortarState++;
@@ -590,7 +569,7 @@ void Bomb::updateMortarState()
           {
               int curCellRow = m_arena->getRowFromY(m_y);
               int curCellCol = m_arena->getColFromX(m_x);
-              m_type = Element::BOMB;
+              m_type = Granatier::Element::BOMB;
               m_arena->setCellElement(curCellRow, curCellCol, this);
               
               m_mortarState++;

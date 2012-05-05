@@ -16,7 +16,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 #include "player.h"
 #include "bonus.h"
 #include "bomb.h"
@@ -35,14 +34,14 @@ const int badBonusCountdown = 10000;
 
 Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSettings* p_playerSettings, Arena* p_arena) : Character(p_x, p_y, p_arena)
 {
-    m_type = Element::PLAYER;
+    m_type = Granatier::Element::PLAYER;
     m_desktopFilePath = p_playerSettings->playerDesktopFilePath(p_playerID);
     m_graphicsFile = p_playerSettings->playerGraphicsFile(p_playerID);
     m_playerName = p_playerSettings->playerName(p_playerID);
     
     m_points = 0;
     
-    m_direction = Element::EAST;
+    m_direction = Granatier::Direction::EAST;
     
     m_badBonusCountdownTimer = new QTimer;
     m_badBonusCountdownTimer->setInterval(badBonusTimerTimeout);
@@ -103,7 +102,7 @@ void Player::goUp()
     }
     m_askedYSpeed = -nSpeed;
     
-    m_direction = Element::NORTH;
+    m_direction = Granatier::Direction::NORTH;
 }
 
 void Player::goDown()
@@ -117,7 +116,7 @@ void Player::goDown()
     }
     m_askedYSpeed = nSpeed;
     
-    m_direction = Element::SOUTH;
+    m_direction = Granatier::Direction::SOUTH;
 }
 
 void Player::goRight()
@@ -131,7 +130,7 @@ void Player::goRight()
     
     m_askedYSpeed = 0;
     
-    m_direction = Element::EAST;
+    m_direction = Granatier::Direction::EAST;
 }
 
 void Player::goLeft()
@@ -145,7 +144,7 @@ void Player::goLeft()
     
     m_askedYSpeed = 0;
     
-    m_direction = Element::WEST;
+    m_direction = Granatier::Direction::WEST;
 }
 
 void Player::updateDirection()
@@ -203,8 +202,8 @@ void Player::updateMove()
             xDirection = sign(deltaAskedMove);
             straightDirection = xDirection;
             
-            deltaStraightCellCorner = m_x - curCellCol * Cell::SIZE;
-            deltaPerpendicularCellCorner = m_y - curCellRow * Cell::SIZE;
+            deltaStraightCellCorner = m_x - curCellCol * Granatier::CellSize;
+            deltaPerpendicularCellCorner = m_y - curCellRow * Granatier::CellSize;
         }
         else        //set variables for down/up move
         {
@@ -215,13 +214,13 @@ void Player::updateMove()
             yDirection = sign(deltaAskedMove);
             straightDirection = yDirection;
             
-            deltaStraightCellCorner = m_y - curCellRow * Cell::SIZE;
-            deltaPerpendicularCellCorner = m_x - curCellCol * Cell::SIZE;
+            deltaStraightCellCorner = m_y - curCellRow * Granatier::CellSize;
+            deltaPerpendicularCellCorner = m_x - curCellCol * Granatier::CellSize;
         }
         
         //how far to current cell center
-        deltaStraightCellCenter = Cell::SIZE/2 - deltaStraightCellCorner;
-        deltaPerpendicularCellCenter = Cell::SIZE/2 - deltaPerpendicularCellCorner;
+        deltaStraightCellCenter = Granatier::CellSize/2 - deltaStraightCellCorner;
+        deltaPerpendicularCellCenter = Granatier::CellSize/2 - deltaPerpendicularCellCorner;
         
         //check if the move exceeds a cell center
         if(straightDirection*deltaStraightCellCenter >= 0)
@@ -231,7 +230,7 @@ void Player::updateMove()
                 bMoveWithinNextCellCenter = true;
             }
         }
-        else if(fabs(deltaAskedMove) + fabs(deltaStraightCellCenter) <= Cell::SIZE)
+        else if(fabs(deltaAskedMove) + fabs(deltaStraightCellCenter) <= Granatier::CellSize)
         {
             bMoveWithinNextCellCenter = true;
         }
@@ -240,7 +239,7 @@ void Player::updateMove()
         if(bMoveWithinNextCellCenter)
         {
             bool isHurdle = false;
-            if(!(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY))
+            if(!(m_badBonusCountdownTimer->isActive() && m_badBonusType == Granatier::Bonus::SCATTY))
             {
                 bool kickBomb = false;
                 QList<Element*> bombElements;
@@ -251,7 +250,7 @@ void Player::updateMove()
                     if(m_kickBomb)
                     {
                         kickBomb = true;
-                        bombElements =  m_arena->getCell(moveStartRow, moveStartCol).getElements(Element::BOMB);
+                        bombElements =  m_arena->getCell(moveStartRow, moveStartCol).getElements(Granatier::Element::BOMB);
                     }
                 }
                 //moving away of cell center; don't move if there is a bomb in the next cell; ignore a bomb in the current cell
@@ -261,7 +260,7 @@ void Player::updateMove()
                     if(m_kickBomb)
                     {
                         kickBomb = true;
-                        bombElements =  m_arena->getCell(moveStartRow + yDirection, moveStartCol + xDirection).getElements(Element::BOMB);
+                        bombElements =  m_arena->getCell(moveStartRow + yDirection, moveStartCol + xDirection).getElements(Granatier::Element::BOMB);
                     }
                 }
                 if(kickBomb)
@@ -278,13 +277,13 @@ void Player::updateMove()
                 //move to perpendicular center if needed
                 if(deltaPerpendicularCellCenter != 0 && (straightDirection * deltaStraightCellCenter) < 0)  //not in perpendicular center and entering a new cell
                 {
-                    if(fabs(deltaPerpendicularCellCenter) > Cell::SIZE/2 - fabs(deltaStraightMove - deltaStraightCellCenter))   //check if it already can collide with a hurdle
+                    if(fabs(deltaPerpendicularCellCenter) > Granatier::CellSize/2 - fabs(deltaStraightMove - deltaStraightCellCenter))   //check if it already can collide with a hurdle
                     {
                         cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                         cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                         if(!m_arena->getCell(cellRow, cellCol).isWalkable(this))
                         {
-                            deltaPerpendicularMove = deltaPerpendicularCellCenter + signZeroPositive(deltaPerpendicularCellCenter) * (fabs(deltaStraightMove - deltaStraightCellCenter) - Cell::SIZE/2);
+                            deltaPerpendicularMove = deltaPerpendicularCellCenter + signZeroPositive(deltaPerpendicularCellCenter) * (fabs(deltaStraightMove - deltaStraightCellCenter) - Granatier::CellSize/2);
                             if(fabs(deltaPerpendicularMove) > fabs(deltaPerpendicularCellCenter))       //check if moved over perpendicular center
                             {
                                 deltaPerpendicularMove = deltaPerpendicularCellCenter;
@@ -301,8 +300,8 @@ void Player::updateMove()
             deltaAskedMove -= deltaStraightCellCenter;
             if(straightDirection * deltaStraightCellCenter < 0)     //the cell center to move is in the next cell
             {
-                deltaStraightMove += straightDirection * Cell::SIZE;
-                deltaAskedMove -= straightDirection * Cell::SIZE;
+                deltaStraightMove += straightDirection * Granatier::CellSize;
+                deltaAskedMove -= straightDirection * Granatier::CellSize;
 
                 //move to perpendicular center if needed
                 if(deltaPerpendicularCellCenter != 0)
@@ -323,10 +322,10 @@ void Player::updateMove()
             {
                 if(m_arena->getCell(curCellRow + yDirection, curCellCol + xDirection).isWalkable(this))     //check if next cell is walkable
                 {
-                    if(fabs(deltaAskedMove) > Cell::SIZE)   //move to next cell center if the remaining move exceeds a cell center
+                    if(fabs(deltaAskedMove) > Granatier::CellSize)   //move to next cell center if the remaining move exceeds a cell center
                     {
-                        deltaStraightMove += straightDirection * Cell::SIZE;
-                        deltaAskedMove -= straightDirection * Cell::SIZE;
+                        deltaStraightMove += straightDirection * Granatier::CellSize;
+                        deltaAskedMove -= straightDirection * Granatier::CellSize;
                         //move to perpendicular center if needed
                         if(deltaPerpendicularCellCenter != 0)
                         {
@@ -342,7 +341,7 @@ void Player::updateMove()
                     {
                         deltaStraightMove += deltaAskedMove;
                         //move to perpendicular center if needed
-                        if(deltaPerpendicularMove != deltaPerpendicularCellCenter && fabs(deltaPerpendicularCellCenter) > (Cell::SIZE/2 - fabs(deltaStraightMove - deltaStraightCellCenter)))   //check if it is in or already moved to perpendicular center and if it already can collide with a hurdle ***TODO: it seems to be wrong to use deltaStraightMove here, because ist could be greater than Cell::SIZE
+                        if(deltaPerpendicularMove != deltaPerpendicularCellCenter && fabs(deltaPerpendicularCellCenter) > (Granatier::CellSize/2 - fabs(deltaStraightMove - deltaStraightCellCenter)))   //check if it is in or already moved to perpendicular center and if it already can collide with a hurdle ***TODO: it seems to be wrong to use deltaStraightMove here, because ist could be greater than Granatier::CellSize
                         {
                             cellRow = curCellRow + yDirection - qAbs(xDirection)*signZeroPositive(deltaPerpendicularCellCenter);
                             cellCol = curCellCol + xDirection - qAbs(yDirection)*signZeroPositive(deltaPerpendicularCellCenter);
@@ -369,7 +368,7 @@ void Player::updateMove()
                     //check if bomb
                     if(m_kickBomb)
                     {
-                        QList<Element*> bombElements =  m_arena->getCell(cellRow, cellCol).getElements(Element::BOMB);
+                        QList<Element*> bombElements =  m_arena->getCell(cellRow, cellCol).getElements(Granatier::Element::BOMB);
                         {
                             foreach(Element* element, bombElements)
                             {
@@ -403,7 +402,7 @@ void Player::updateMove()
         int newCellCol = m_arena->getColFromX(m_x);
         if(!m_onIce)
         {
-            if(m_arena->getCell(newCellRow, newCellCol).getType() == Cell::ICE)
+            if(m_arena->getCell(newCellRow, newCellCol).getType() == Granatier::Cell::ICE)
             {
                 if(xDirection != 0)
                 {
@@ -418,9 +417,9 @@ void Player::updateMove()
         }
         else
         {
-            if(m_arena->getCell(newCellRow, newCellCol).getType() != Cell::ICE)
+            if(m_arena->getCell(newCellRow, newCellCol).getType() != Granatier::Cell::ICE)
             {
-                if(m_arena->getCell(newCellRow, newCellCol).getType() != Cell::HOLE)
+                if(m_arena->getCell(newCellRow, newCellCol).getType() != Granatier::Cell::HOLE)
                 {
                     if(xDirection != 0)
                     {
@@ -441,13 +440,13 @@ void Player::updateMove()
         }
         
         //check if the player move in a hole
-        if(m_arena->getCell(newCellRow, newCellCol).getType() == Cell::HOLE)
+        if(m_arena->getCell(newCellRow, newCellCol).getType() == Granatier::Cell::HOLE)
         {
             m_falling = true;
             //check if cell center passed
             if(xDirection != 0)
             {
-                qreal cellCenter = newCellCol * Cell::SIZE + 0.5 * Cell::SIZE;
+                qreal cellCenter = newCellCol * Granatier::CellSize + 0.5 * Granatier::CellSize;
                 qreal deltaCellCenter = cellCenter - (m_x + m_xSpeed);
                 if (cellCenter - m_x == 0)
                 {
@@ -461,7 +460,7 @@ void Player::updateMove()
             }
             else if (yDirection != 0)
             {
-                qreal cellCenter = newCellRow * Cell::SIZE + 0.5 * Cell::SIZE;
+                qreal cellCenter = newCellRow * Granatier::CellSize + 0.5 * Granatier::CellSize;
                 qreal deltaCellCenter = cellCenter - (m_y + m_ySpeed);
                 if (cellCenter - m_y == 0)
                 {
@@ -484,7 +483,7 @@ void Player::updateMove()
     }
     
     //check if bad bonus scatty and drop bombs
-    if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::SCATTY  && m_bombArmory > 0)
+    if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Granatier::Bonus::SCATTY  && m_bombArmory > 0)
     {
         //TODO: improve
         emit bombDropped(this, m_x, m_y, true, 0);
@@ -501,7 +500,7 @@ void Player::move(qreal x, qreal y)
 
 void Player::addBonus(Bonus* p_bonus)
 {
-    Bonus::BonusType bonusType = p_bonus->getBonusType();
+    Granatier::Bonus::Type bonusType = p_bonus->getBonusType();
     
     if(m_badBonusCountdownTimer->isActive())
     {
@@ -511,21 +510,21 @@ void Player::addBonus(Bonus* p_bonus)
     
     switch (bonusType)
     {
-        case Bonus::SPEED:
+        case Granatier::Bonus::SPEED:
             m_speed += 1;
             if(m_speed > m_maxSpeed)
             {
                 m_speed = m_maxSpeed;
             }
             break;
-        case Bonus::POWER:
+        case Granatier::Bonus::POWER:
             m_bombPower++;
             if(m_bombPower > 10)
             {
                 m_bombPower = 10;
             }
             break;
-        case Bonus::BOMB:
+        case Granatier::Bonus::BOMB:
             m_maxBombArmory++;
             if(m_maxBombArmory > 10)
             {
@@ -537,19 +536,19 @@ void Player::addBonus(Bonus* p_bonus)
                 m_bombArmory = m_maxBombArmory;
             }
             break;
-        case Bonus::SHIELD:
+        case Granatier::Bonus::SHIELD:
             if(m_listShield.isEmpty() || m_listShield.last() != 0)
             {
                 m_listShield.append(0);
             }
             break;
-        case Bonus::THROW:
+        case Granatier::Bonus::THROW:
             m_throwBomb = true;
             break;
-        case Bonus::KICK:
+        case Granatier::Bonus::KICK:
             m_kickBomb = true;
             break;
-        case Bonus::HYPERACTIVE:
+        case Granatier::Bonus::HYPERACTIVE:
             {
                 int askedXSpeedTemp = m_askedXSpeed;
                 int askedYSpeedTemp = m_askedYSpeed;
@@ -561,11 +560,11 @@ void Player::addBonus(Bonus* p_bonus)
                 m_askedXSpeed = askedXSpeedTemp;
                 m_askedYSpeed = askedYSpeedTemp;
                 
-                m_badBonusType = Bonus::HYPERACTIVE;
+                m_badBonusType = Granatier::Bonus::HYPERACTIVE;
                 m_badBonusCountdownTimer->start();
             }
             break;
-        case Bonus::SLOW:
+        case Granatier::Bonus::SLOW:
             {
                 int askedXSpeedTemp = m_askedXSpeed;
                 int askedYSpeedTemp = m_askedYSpeed;
@@ -577,11 +576,11 @@ void Player::addBonus(Bonus* p_bonus)
                 m_askedXSpeed = askedXSpeedTemp;
                 m_askedYSpeed = askedYSpeedTemp;
                 
-                m_badBonusType = Bonus::SLOW;
+                m_badBonusType = Granatier::Bonus::SLOW;
                 m_badBonusCountdownTimer->start();
             }
             break;
-        case Bonus::MIRROR:
+        case Granatier::Bonus::MIRROR:
             {
                 int askedXSpeedTemp = m_askedXSpeed;
                 int askedYSpeedTemp = m_askedYSpeed;
@@ -589,17 +588,17 @@ void Player::addBonus(Bonus* p_bonus)
                 m_askedYSpeed = -m_ySpeed;
                 switch(m_direction)
                 {
-                    case Element::EAST:
-                        m_direction = Element::WEST;
+                    case Granatier::Direction::EAST:
+                        m_direction = Granatier::Direction::WEST;
                         break;
-                    case Element::WEST:
-                        m_direction = Element::EAST;
+                    case Granatier::Direction::WEST:
+                        m_direction = Granatier::Direction::EAST;
                         break;
-                    case Element::NORTH:
-                        m_direction = Element::SOUTH;
+                    case Granatier::Direction::NORTH:
+                        m_direction = Granatier::Direction::SOUTH;
                         break;
-                    case Element::SOUTH:
-                        m_direction = Element::NORTH;
+                    case Granatier::Direction::SOUTH:
+                        m_direction = Granatier::Direction::NORTH;
                         break;
                 }
                 updateDirection();
@@ -614,21 +613,21 @@ void Player::addBonus(Bonus* p_bonus)
                 m_key.moveDown = tempKey;
                 
                 m_moveMirrored = true;
-                m_badBonusType = Bonus::MIRROR;
+                m_badBonusType = Granatier::Bonus::MIRROR;
                 m_badBonusCountdownTimer->start();
             }
             break;
-        case Bonus::SCATTY:
-            m_badBonusType = Bonus::SCATTY;
+        case Granatier::Bonus::SCATTY:
+            m_badBonusType = Granatier::Bonus::SCATTY;
             m_badBonusCountdownTimer->start();
             break;
-        case Bonus::RESTRAIN:
+        case Granatier::Bonus::RESTRAIN:
             m_normalBombArmory = m_bombArmory;
             m_bombArmory = 0;
-            m_badBonusType = Bonus::RESTRAIN;
+            m_badBonusType = Granatier::Bonus::RESTRAIN;
             m_badBonusCountdownTimer->start();
             break;
-        case Bonus::RESURRECT:
+        case Granatier::Bonus::RESURRECT:
             emit resurrectBonusTaken();
             break;
         default:
@@ -651,7 +650,7 @@ bool Player::shield(int nExplosionID)
             m_listShield[i] = nExplosionID;
             if(i == m_listShield.count()-1)
             {
-                emit bonusUpdated(this, Bonus::SHIELD, 100);
+                emit bonusUpdated(this, Granatier::Bonus::SHIELD, 100);
             }
             return true;
         }
@@ -742,7 +741,7 @@ void Player::resurrect()
         
         m_arena->removeCellElement(cellRow, cellCol, this); //just to be really shure 
         
-        if(m_arena->getCell(cellRow, cellCol).getType() == Cell::HOLE)
+        if(m_arena->getCell(cellRow, cellCol).getType() == Granatier::Cell::HOLE)
         {
             move(m_xInit, m_yInit);
             cellRow = m_arena->getRowFromY(m_yInit);
@@ -780,27 +779,6 @@ qreal Player::getAskedYSpeed() const
     return m_askedYSpeed;
 }
 
-Cell Player::getAskedNextCell()
-{
-    // Get the current cell coordinates from the character coordinates
-    int curCellRow = m_arena->getRowFromY(m_y);
-    int curCellCol = m_arena->getColFromX(m_x);
-    Cell nextCell;
-
-    // Get the next cell function of the character asked direction
-    if (m_askedXSpeed > 0) {
-        nextCell = m_arena->getCell(curCellRow, curCellCol + 1);
-    } else if (m_askedXSpeed < 0) {
-        nextCell = m_arena->getCell(curCellRow, curCellCol - 1);
-    } else if (m_askedYSpeed > 0) {
-        nextCell = m_arena->getCell(curCellRow + 1, curCellCol);
-    } else if (m_askedYSpeed < 0) {
-        nextCell = m_arena->getCell(curCellRow - 1, curCellCol);
-    }
-
-    return nextCell;
-}
-
 int Player::direction()
 {
     return m_direction;
@@ -823,7 +801,7 @@ void Player::decrementBombArmory()
 void Player::slot_refillBombArmory()
 {
     int* bombArmory = &m_bombArmory;
-    if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Bonus::RESTRAIN)
+    if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Granatier::Bonus::RESTRAIN)
     {
         bombArmory = &m_normalBombArmory;
     }
@@ -855,8 +833,8 @@ void Player::slot_removeBadBonus()
     
     switch (m_badBonusType)
     {
-        case Bonus::HYPERACTIVE:
-        case Bonus::SLOW:
+        case Granatier::Bonus::HYPERACTIVE:
+        case Granatier::Bonus::SLOW:
             {
                 int askedXSpeedTemp = m_askedXSpeed;
                 int askedYSpeedTemp = m_askedYSpeed;
@@ -868,7 +846,7 @@ void Player::slot_removeBadBonus()
                 m_askedYSpeed = askedYSpeedTemp;
             }
             break;
-        case Bonus::MIRROR:
+        case Granatier::Bonus::MIRROR:
             {
                 int askedXSpeedTemp = m_askedXSpeed;
                 int askedYSpeedTemp = m_askedYSpeed;
@@ -876,17 +854,17 @@ void Player::slot_removeBadBonus()
                 m_askedYSpeed = -m_ySpeed;
                 switch(m_direction)
                 {
-                    case Element::EAST:
-                        m_direction = Element::WEST;
+                    case Granatier::Direction::EAST:
+                        m_direction = Granatier::Direction::WEST;
                         break;
-                    case Element::WEST:
-                        m_direction = Element::EAST;
+                    case Granatier::Direction::WEST:
+                        m_direction = Granatier::Direction::EAST;
                         break;
-                    case Element::NORTH:
-                        m_direction = Element::SOUTH;
+                    case Granatier::Direction::NORTH:
+                        m_direction = Granatier::Direction::SOUTH;
                         break;
-                    case Element::SOUTH:
-                        m_direction = Element::NORTH;
+                    case Granatier::Direction::SOUTH:
+                        m_direction = Granatier::Direction::NORTH;
                         break;
                 }
                 updateDirection();
@@ -903,7 +881,7 @@ void Player::slot_removeBadBonus()
                 m_moveMirrored = false;
             }
             break;
-        case Bonus::RESTRAIN:
+        case Granatier::Bonus::RESTRAIN:
             m_bombArmory = m_normalBombArmory;
             break;
         default:

@@ -23,7 +23,6 @@
 
 class Element;
 class KGameRenderer;
-class QSize;
 
 /**
  * @brief This class is the graphical representation of a game Element.

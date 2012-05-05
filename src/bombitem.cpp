@@ -21,8 +21,6 @@
 #include "settings.h"
 
 #include <QTimer>
-#include <QGraphicsScene>
-#include <QGraphicsView>
 
 #include <KGameRenderer>
 

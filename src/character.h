@@ -34,9 +34,6 @@ Q_OBJECT
 
 public:
 
-    /** Speed on medium level */
-    static const qreal MEDIUM_SPEED;
-
     /** Keyboard shortcuts for moving and dropping a bomb */
     struct Shortcuts
     {

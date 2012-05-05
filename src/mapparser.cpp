@@ -17,12 +17,9 @@
  */
 
 #include "mapparser.h"
-#include "element.h"
-#include "block.h"
-#include "game.h"
 #include "arena.h"
 
-#include <stdlib.h>
+#include <cstdlib>
 #include <QPointF>
 #include <QDateTime>
 
@@ -83,52 +80,52 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
             switch(m_buffer.at(i).toAscii())
             {
                 case ' ':
-                    m_arena->setCellType(m_counterRows,i,Cell::HOLE);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::HOLE);
                     break;
                 case '=':
-                    m_arena->setCellType(m_counterRows,i,Cell::WALL);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::WALL);
                     break;
                 case '_':
-                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::GROUND);
                     break;
                 case '+':
-                    m_arena->setCellType(m_counterRows,i,Cell::BLOCK);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::BLOCK);
                     break;
                 case 'x':
                     // create a random block
                     if((qrand()/1.0)/RAND_MAX > 0.25)
                     {
-                        m_arena->setCellType(m_counterRows,i,Cell::BLOCK);
+                        m_arena->setCellType(m_counterRows,i,Granatier::Cell::BLOCK);
                     }
                     else
                     {
-                        m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                        m_arena->setCellType(m_counterRows,i,Granatier::Cell::GROUND);
                     }
                     break; 
                 case 'o':
-                    m_arena->setCellType(m_counterRows,i,Cell::BOMBMORTAR);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::BOMBMORTAR);
                     break;
                 case '-':
-                    m_arena->setCellType(m_counterRows,i,Cell::ICE);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::ICE);
                     break;
                 case 'u':
-                    m_arena->setCellType(m_counterRows,i,Cell::ARROWUP);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::ARROWUP);
                     break;
                 case 'r':
-                    m_arena->setCellType(m_counterRows,i,Cell::ARROWRIGHT);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::ARROWRIGHT);
                     break;
                 case 'd':
-                    m_arena->setCellType(m_counterRows,i,Cell::ARROWDOWN);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::ARROWDOWN);
                     break;
                 case 'l':
-                    m_arena->setCellType(m_counterRows,i,Cell::ARROWLEFT);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::ARROWLEFT);
                     break;
                 case 'p':
-                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::GROUND);
                     m_arena->addPlayerPosition(QPointF(i+0.5, m_counterRows+0.5));
                     break;
                 default:
-                    m_arena->setCellType(m_counterRows,i,Cell::GROUND);
+                    m_arena->setCellType(m_counterRows,i,Granatier::Cell::GROUND);
             }
         }
         m_counterRows ++;

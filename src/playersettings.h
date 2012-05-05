@@ -23,7 +23,6 @@
 #include <QMap>
 
 class QStringList;
-class QKeySequence;
 
 class PlayerSettings
 {

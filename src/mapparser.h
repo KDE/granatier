@@ -22,7 +22,6 @@
 
 #include <QXmlDefaultHandler>
 
-class Game;
 class Arena;
 
 /**

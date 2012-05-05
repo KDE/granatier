@@ -41,7 +41,7 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     int nLeft = 0;
     
     KGameRenderer* renderer;
-    renderer = m_gameScene->renderer(Element::SCORE);
+    renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     QGraphicsTextItem em ("M");
     //calculate max player name length and top-left position
     for(int i = 0; i < playerList.count(); i++)
@@ -339,7 +339,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     int nLeft = 0;
     
     KGameRenderer* renderer;
-    renderer = m_gameScene->renderer(Element::SCORE);
+    renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     QGraphicsTextItem em ("M");
     //calculate max player name length and top-left position
     for(int i = 0; i < playerList.count(); i++)
@@ -364,7 +364,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     
     QGraphicsTextItem* playerName;
     KGameRenderedItem* score;
-    renderer = m_gameScene->renderer(Element::SCORE);
+    renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     for(int i = 0; i < playerList.count(); i++)
     {
         

@@ -17,8 +17,6 @@
  */
 
 #include "element.h"
-#include "arena.h"
-#include "player.h"
 
 Element::Element(qreal p_x, qreal p_y, Arena* p_arena) : m_xInit(p_x), m_yInit(p_y),  m_arena(p_arena)
 {
@@ -67,7 +65,7 @@ void Element::setY(qreal p_y)
     emit(moved(m_x, m_y));
 }
 
-Element::Type Element::getType() const
+Granatier::Element::Type Element::getType() const
 {
     return m_type;
 }

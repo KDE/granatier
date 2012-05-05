@@ -18,10 +18,7 @@
  */
 
 #include "character.h"
-#include "cell.h"
 #include "arena.h"
-
-const qreal Character::MEDIUM_SPEED = 1;
 
 Character::Character(qreal p_x, qreal p_y, Arena* p_arena) : Element(p_x, p_y, p_arena), m_xSpeed(0), m_ySpeed(0)
 {
@@ -38,19 +35,19 @@ void Character::move()
     // Take care of the Arena borders
     if (m_arena->getColFromX(m_x + m_xSpeed) == 0)                                  // First column
     {
-        m_x = (m_arena->getNbColumns() - 1.5) * Cell::SIZE;
+        m_x = (m_arena->getNbColumns() - 1.5) * Granatier::CellSize;
     }
     else if (m_arena->getColFromX(m_x + m_xSpeed) == m_arena->getNbColumns() - 1)   // Last column
     {
-        m_x = 1.5 * Cell::SIZE;
+        m_x = 1.5 * Granatier::CellSize;
     }
     else if (m_arena->getRowFromY(m_y + m_ySpeed) == 0)                            // First row
     {
-        m_y = (m_arena->getNbRows() - 1.5) * Cell::SIZE;
+        m_y = (m_arena->getNbRows() - 1.5) * Granatier::CellSize;
     }
     else if (m_arena->getRowFromY(m_y + m_ySpeed) == m_arena->getNbRows() - 1)     // Last row
     {
-        m_y = 1.5 * Cell::SIZE;
+        m_y = 1.5 * Granatier::CellSize;
     }
     // Move the Character
     m_x += m_xSpeed;
@@ -96,7 +93,7 @@ void Character::setYSpeed(qreal p_ySpeed)
 void Character::initSpeed()
 {
     // Player speed
-    m_normalSpeed = Character::MEDIUM_SPEED;
+    m_normalSpeed = 1;
     m_speed = m_normalSpeed;
 }
 
@@ -121,7 +118,7 @@ bool Character::isInLineSight(Character* p_character) const
             // Check there is a wall between them
             for (int i = curCharacterCol; i < curCallerCol; ++i)
             {
-                if (m_arena->getCell(curCallerRow, i).getType() != Cell::GROUND)
+                if (m_arena->getCell(curCallerRow, i).getType() != Granatier::Cell::GROUND)
                 {
                     return false;
                 }
@@ -135,7 +132,7 @@ bool Character::isInLineSight(Character* p_character) const
             // Check there is a wall between them
             for (int i = curCallerCol; i < curCharacterCol; ++i)
             {
-                if (m_arena->getCell(curCallerRow, i).getType() != Cell::GROUND)
+                if (m_arena->getCell(curCallerRow, i).getType() != Granatier::Cell::GROUND)
                 {
                     return false;
                 }
@@ -153,7 +150,7 @@ bool Character::isInLineSight(Character* p_character) const
             // Check there is a wall between them
             for (int i = curCharacterRow; i < curCallerRow; ++i)
             {
-                if (m_arena->getCell(i, curCallerCol).getType() != Cell::GROUND)
+                if (m_arena->getCell(i, curCallerCol).getType() != Granatier::Cell::GROUND)
                 {
                     return false;
                 }
@@ -167,7 +164,7 @@ bool Character::isInLineSight(Character* p_character) const
             // Check there is a wall between them
             for (int i = curCallerRow; i < curCharacterRow; ++i)
             {
-                if (m_arena->getCell(i, curCallerCol).getType() != Cell::GROUND)
+                if (m_arena->getCell(i, curCallerCol).getType() != Granatier::Cell::GROUND)
                 {
                     return false;
                 }

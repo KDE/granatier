@@ -20,15 +20,14 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
+#include "granatierglobals.h"
+
 #include <QGraphicsScene>
-
-#include <game.h>
-
 #include <QList>
 #include <QHash>
 #include <QMap>
-#include "element.h"
 
+class Game;
 class BlockItem;
 class BonusItem;
 class ArenaItem;
@@ -148,7 +147,7 @@ public:
      * @param type
      * @param strPlayerID
      */
-    KGameRenderer* renderer(Element::Type type, Player* player = NULL);
+    KGameRenderer* renderer(Granatier::Element::Type type, Player* player = NULL);
     
     /** setup the KGameRenderer for the selected theme and if necessary the default theme */
     void setupThemeRenderer();
@@ -186,7 +185,7 @@ private slots:
     * Upadates the Game information labels.
     * @param p_info the type of the information to be updated
     */
-    void updateInfo(const Game::InformationTypes p_info);
+    void updateInfo(const Granatier::Info::Type p_info);
     
     /**
     * Creates a BombItem

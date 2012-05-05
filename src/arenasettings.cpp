@@ -26,8 +26,6 @@
 #include <KDebug>
 #include <QtCore/QFile>
 #include <QtCore/QFileInfo>
-#include <QtCore/QMap>
-#include <QtGui/QPixmap>
 
 class ArenaSettingsPrivate
 {
@@ -38,7 +36,6 @@ class ArenaSettingsPrivate
         QString fullPath; ///< Full path e.g. "/opt/kde/share/apps/appname/default.desktop"
         QString fileName; ///< just e.g. "default.desktop"
         QString graphics; ///< The full path of the svg file
-        QPixmap preview;
         QString prefix; ///< Filepath of the .desktop file without the filename e.g. "/opt/kde/share/apps/appname/"
         QString arenaGroup;
 
@@ -118,7 +115,6 @@ bool ArenaSettings::load(const QString &fileName) {
     QString previewName = group.readEntry("Preview");
     //QString graphicsPath = KStandardDirs::locate("appdata", previewName);
     QString graphicsPath = d->prefix + previewName;
-    d->preview = QPixmap(graphicsPath);
 
     d->fileName = fileName;
     d->fullPath = filePath;
@@ -163,15 +159,6 @@ QString ArenaSettings::graphics() const {
         return QString();
     }
     return d->graphics;
-}
-
-QPixmap ArenaSettings::preview() const {
-    if(!d->loaded)
-    {
-        kDebug(11000) << "No arena file has been loaded. ArenaSettings::load() or ArenaSettings::loadDefault() must be called.";
-        return QPixmap();
-    }
-    return d->preview;
 }
 
 QString ArenaSettings::arenaProperty(const QString &key) const {

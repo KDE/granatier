@@ -51,7 +51,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
     connect(p_game, SIGNAL(pauseChanged(bool,bool)), this, SLOT(setPaused(bool,bool)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
-    connect(p_game, SIGNAL(infoChanged(Game::InformationTypes)), this, SLOT(updateInfo(Game::InformationTypes)));
+    connect(p_game, SIGNAL(infoChanged(Granatier::Info::Type)), this, SLOT(updateInfo(Granatier::Info::Type)));
     
     m_SvgScaleFactor = 1;
     
@@ -101,8 +101,8 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     m_arenaNameLabel->setZValue(1000);
     
     setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
-                 m_game->getArena()->getNbColumns()*Cell::SIZE,
-                 m_game->getArena()->getNbRows()*Cell::SIZE + m_remainingTimeLabel->boundingRect().height());
+                 m_game->getArena()->getNbColumns()*Granatier::CellSize,
+                 m_game->getArena()->getNbRows()*Granatier::CellSize + m_remainingTimeLabel->boundingRect().height());
     
     //create the background
     m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
@@ -135,10 +135,10 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     
     //at this point, sceneRect() has the minimum size for the scene
     m_minSize = sceneRect();
-    m_minSize.setX((int) ((int)m_minSize.x() - ((int)m_minSize.x() % (int)Cell::SIZE)) - Cell::SIZE/4);
-    m_minSize.setY((int) ((int)m_minSize.y() - ((int)m_minSize.y() % (int)Cell::SIZE)) - Cell::SIZE/4);
-    m_minSize.setHeight(((int) (m_minSize.height() / Cell::SIZE) + 1) * Cell::SIZE);
-    m_minSize.setWidth(((int) (m_minSize.width() / Cell::SIZE) + 1) * Cell::SIZE);
+    m_minSize.setX((int) ((int)m_minSize.x() - ((int)m_minSize.x() % (int)Granatier::CellSize)) - Granatier::CellSize/4);
+    m_minSize.setY((int) ((int)m_minSize.y() - ((int)m_minSize.y() % (int)Granatier::CellSize)) - Granatier::CellSize/4);
+    m_minSize.setHeight(((int) (m_minSize.height() / Granatier::CellSize) + 1) * Granatier::CellSize);
+    m_minSize.setWidth(((int) (m_minSize.width() / Granatier::CellSize) + 1) * Granatier::CellSize);
     setSceneRect(m_minSize);
 }
 
@@ -246,47 +246,47 @@ void GameScene::init()
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             // Create the ArenaItem and set the image
-            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE, m_rendererArenaItems, "");
+            ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, "");
             connect(this, SIGNAL(resizeGraphics(qreal)), arenaItem, SLOT(updateGraphics(qreal)));
             
             //TODO: use this function call
             //arenaItem->setElementId(m_game->getArena()->getCell(i,j).getElement()->getImageId());
             switch(m_game->getArena()->getCell(i,j).getType())
             {
-                case Cell::WALL:
+                case Granatier::Cell::WALL:
                     arenaItem->setSpriteKey("arena_wall");
                     arenaItem->setZValue(-2);
                     break;
-                case Cell::HOLE:
+                case Granatier::Cell::HOLE:
                     delete arenaItem;
                     arenaItem = NULL;
                     break;
-                case Cell::ICE:
+                case Granatier::Cell::ICE:
                     arenaItem->setSpriteKey("arena_ice");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::BOMBMORTAR:
+                case Granatier::Cell::BOMBMORTAR:
                     arenaItem->setSpriteKey("arena_bomb_mortar");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::ARROWUP:
+                case Granatier::Cell::ARROWUP:
                     arenaItem->setSpriteKey("arena_arrow_up");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::ARROWRIGHT:
+                case Granatier::Cell::ARROWRIGHT:
                     arenaItem->setSpriteKey("arena_arrow_right");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::ARROWDOWN:
+                case Granatier::Cell::ARROWDOWN:
                     arenaItem->setSpriteKey("arena_arrow_down");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::ARROWLEFT:
+                case Granatier::Cell::ARROWLEFT:
                     arenaItem->setSpriteKey("arena_arrow_left");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::GROUND:
-                case Cell::BLOCK:
+                case Granatier::Cell::GROUND:
+                case Granatier::Cell::BLOCK:
                 default:
                     arenaItem->setSpriteKey("arena_ground");
                     arenaItem->setZValue(-1);
@@ -305,7 +305,7 @@ void GameScene::init()
         m_bonusItems[i] = new BonusItem*[m_game->getArena()->getNbColumns()];
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            blockElements = m_game->getArena()->getCell(i, j).getElements(Element::BLOCK);
+            blockElements = m_game->getArena()->getCell(i, j).getElements(Granatier::Element::BLOCK);
             if (!blockElements.isEmpty())
             {
                 // Create the element item and set the image
@@ -331,31 +331,44 @@ void GameScene::init()
                         BonusItem* bonusItem = new BonusItem(bonus, m_rendererBonusItems);
                         switch(bonus->getBonusType())
                         {
-                            case Bonus::SPEED:  bonusItem->setSpriteKey("bonus_speed");
-                                                break;
-                            case Bonus::BOMB:   bonusItem->setSpriteKey("bonus_bomb");
-                                                break;
-                            case Bonus::POWER:  bonusItem->setSpriteKey("bonus_power");
-                                                break;
-                            case Bonus::SHIELD: bonusItem->setSpriteKey("bonus_shield");
-                                                break;
-                            case Bonus::THROW:  bonusItem->setSpriteKey("bonus_throw");
-                                                break;
-                            case Bonus::KICK:   bonusItem->setSpriteKey("bonus_kick");
-                                                break;
-                            case Bonus::HYPERACTIVE:   bonusItem->setSpriteKey("bonus_bad_hyperactive");
-                                                break;
-                            case Bonus::SLOW:   bonusItem->setSpriteKey("bonus_bad_slow");
-                                                break;
-                            case Bonus::MIRROR: bonusItem->setSpriteKey("bonus_bad_mirror");
-                                                break;
-                            case Bonus::SCATTY: bonusItem->setSpriteKey("bonus_bad_scatty");
-                                                break;
-                            case Bonus::RESTRAIN:   bonusItem->setSpriteKey("bonus_bad_restrain");
-                                                break;
-                            case Bonus::RESURRECT:   bonusItem->setSpriteKey("bonus_neutral_resurrect");
-                                                break;
-                            default:            bonusItem->setSpriteKey("bonus_neutral_pandora");
+                            case Granatier::Bonus::SPEED:
+                                bonusItem->setSpriteKey("bonus_speed");
+                                break;
+                            case Granatier::Bonus::BOMB:
+                                bonusItem->setSpriteKey("bonus_bomb");
+                                break;
+                            case Granatier::Bonus::POWER:
+                                bonusItem->setSpriteKey("bonus_power");
+                                break;
+                            case Granatier::Bonus::SHIELD:
+                                bonusItem->setSpriteKey("bonus_shield");
+                                break;
+                            case Granatier::Bonus::THROW:
+                                bonusItem->setSpriteKey("bonus_throw");
+                                break;
+                            case Granatier::Bonus::KICK:
+                                bonusItem->setSpriteKey("bonus_kick");
+                                break;
+                            case Granatier::Bonus::HYPERACTIVE:
+                                bonusItem->setSpriteKey("bonus_bad_hyperactive");
+                                break;
+                            case Granatier::Bonus::SLOW:
+                                bonusItem->setSpriteKey("bonus_bad_slow");
+                                break;
+                            case Granatier::Bonus::MIRROR:
+                                bonusItem->setSpriteKey("bonus_bad_mirror");
+                                break;
+                            case Granatier::Bonus::SCATTY:
+                                bonusItem->setSpriteKey("bonus_bad_scatty");
+                                break;
+                            case Granatier::Bonus::RESTRAIN:
+                                bonusItem->setSpriteKey("bonus_bad_restrain");
+                                break;
+                            case Granatier::Bonus::RESURRECT:
+                                bonusItem->setSpriteKey("bonus_neutral_resurrect");
+                                break;
+                            default:
+                                bonusItem->setSpriteKey("bonus_neutral_pandora");
                         }
                         
                         if((qrand()/1.0)/RAND_MAX * 10 > 9 && bonusItem->spriteKey() != "bonus_neutral_resurrect")
@@ -434,7 +447,7 @@ void GameScene::init()
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     int nTime = m_game->getRemainingTime();
     m_remainingTimeLabel->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
-    m_remainingTimeLabel->setPos(Cell::SIZE * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
+    m_remainingTimeLabel->setPos(Granatier::CellSize * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
     
     if (!items().contains(m_arenaNameLabel))
     {
@@ -568,19 +581,19 @@ void GameScene::cleanUp()
     }
 }
 
-KGameRenderer* GameScene::renderer(Element::Type type, Player* player)
+KGameRenderer* GameScene::renderer(Granatier::Element::Type type, Player* player)
 {
     switch(type)
     {
-        case Element::BLOCK:
+        case Granatier::Element::BLOCK:
             return m_rendererArenaItems;
-        case Element::BONUS:
+        case Granatier::Element::BONUS:
             return m_rendererBonusItems;
-        case Element::BOMB:
+        case Granatier::Element::BOMB:
             return m_rendererBombItems;
-        case Element::PLAYER:
+        case Granatier::Element::PLAYER:
             return m_mapRendererPlayerItems.value(player);
-        case Element::SCORE:
+        case Granatier::Element::SCORE:
             return m_rendererScoreItems;
         default:
             return NULL;
@@ -600,15 +613,15 @@ void GameScene::resizeSprites()
     }
     
     //calculate the scaling factor for the SVGs
-    int horizontalPixelsPerCell = views().first()->size().width() / (m_minSize.width()/Cell::SIZE);
-    int verticalPixelsPerCell = views().first()->size().height() / (m_minSize.height()/Cell::SIZE);
+    int horizontalPixelsPerCell = views().first()->size().width() / (m_minSize.width()/Granatier::CellSize);
+    int verticalPixelsPerCell = views().first()->size().height() / (m_minSize.height()/Granatier::CellSize);
     if(horizontalPixelsPerCell < verticalPixelsPerCell)
     {
-        m_SvgScaleFactor = Cell::SIZE / horizontalPixelsPerCell;
+        m_SvgScaleFactor = Granatier::CellSize / horizontalPixelsPerCell;
     }
     else
     {
-        m_SvgScaleFactor = Cell::SIZE / verticalPixelsPerCell;
+        m_SvgScaleFactor = Granatier::CellSize / verticalPixelsPerCell;
     }
     QTransform transform;
     transform.scale(1/m_SvgScaleFactor, 1/m_SvgScaleFactor);
@@ -741,9 +754,9 @@ void GameScene::removeBonusItem(BonusItem* bonusItem)
     }
 }
 
-void GameScene::updateInfo(const Game::InformationTypes p_info)
+void GameScene::updateInfo(const Granatier::Info::Type p_info)
 {
-    if(p_info == Game::TimeInfo)
+    if(p_info == Granatier::Info::TimeInfo)
     {
         int nTime = m_game->getRemainingTime();
         if(nTime > 0)
@@ -754,7 +767,7 @@ void GameScene::updateInfo(const Game::InformationTypes p_info)
         {
             m_remainingTimeLabel->setPlainText(i18n("Sudden Death"));
             m_remainingTimeLabel->setDefaultTextColor(QColor("#FF0000"));
-            m_remainingTimeLabel->setPos(Cell::SIZE * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
+            m_remainingTimeLabel->setPos(Granatier::CellSize * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
         }
     }
 }
@@ -851,7 +864,7 @@ void GameScene::bombDetonated(Bomb* bomb)
     nRow = m_game->getArena()->getRowFromY(bomb->getY());
     if(nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
     {
-        bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BOMB);
+        bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BOMB);
         int tempBombDetonationCountdown = nDetonationCountdown;
         foreach(element, bombElements)
         {
@@ -862,7 +875,7 @@ void GameScene::bombDetonated(Bomb* bomb)
             }
         }
         
-        blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BLOCK);
+        blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BLOCK);
         if(!blockElements.isEmpty())
         {
             foreach(element, blockElements)
@@ -887,25 +900,25 @@ void GameScene::bombDetonated(Bomb* bomb)
     
     for(int i = 0; i < nBombPower; i++)
     {
-        BombExplosionItem::Direction direction = BombExplosionItem::NORTH;
+        Granatier::Direction::Type direction = Granatier::Direction::NORTH;
         do
         {
             switch(direction)
             {
-                case BombExplosionItem::NORTH:
+                case Granatier::Direction::NORTH:
                     xPos = bomb->getX();
-                    yPos = bomb->getY() - (i+1)*Cell::SIZE;
+                    yPos = bomb->getY() - (i+1)*Granatier::CellSize;
                     break;
-                case BombExplosionItem::EAST:
-                    xPos = bomb->getX() + (i+1)*Cell::SIZE;
+                case Granatier::Direction::EAST:
+                    xPos = bomb->getX() + (i+1)*Granatier::CellSize;
                     yPos = bomb->getY();
                     break;
-                case BombExplosionItem::SOUTH:
+                case Granatier::Direction::SOUTH:
                     xPos = bomb->getX();
-                    yPos = bomb->getY() + (i+1)*Cell::SIZE;
+                    yPos = bomb->getY() + (i+1)*Granatier::CellSize;
                     break;
-                case BombExplosionItem::WEST:
-                    xPos = bomb->getX() - (i+1)*Cell::SIZE;
+                case Granatier::Direction::WEST:
+                    xPos = bomb->getX() - (i+1)*Granatier::CellSize;
                     yPos = bomb->getY();
                     break;
             }
@@ -914,9 +927,9 @@ void GameScene::bombDetonated(Bomb* bomb)
             
             if(!abDirectionsDone[direction] && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
             {
-                bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BOMB);
-                blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Element::BLOCK);
-                if(m_game->getArena()->getCell(nRow, nColumn).getType() != Cell::WALL)
+                bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BOMB);
+                blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BLOCK);
+                if(m_game->getArena()->getCell(nRow, nColumn).getType() != Granatier::Cell::WALL)
                 {
                     int tempBombDetonationCountdown = anDirectionDetonationCountdown[direction];
                     bool increaseDetonationTimeout = false;
@@ -975,21 +988,21 @@ void GameScene::bombDetonated(Bomb* bomb)
             
             switch(direction)
             {
-                case BombExplosionItem::NORTH:
-                    direction = BombExplosionItem::EAST;
+                case Granatier::Direction::NORTH:
+                    direction = Granatier::Direction::EAST;
                     break;
-                case BombExplosionItem::EAST:
-                    direction = BombExplosionItem::SOUTH;
+                case Granatier::Direction::EAST:
+                    direction = Granatier::Direction::SOUTH;
                     break;
-                case BombExplosionItem::SOUTH:
-                    direction = BombExplosionItem::WEST;
+                case Granatier::Direction::SOUTH:
+                    direction = Granatier::Direction::WEST;
                     break;
-                case BombExplosionItem::WEST:
-                    direction = BombExplosionItem::NORTH;
+                case Granatier::Direction::WEST:
+                    direction = Granatier::Direction::NORTH;
                     break;
             }
         }
-        while(direction != BombExplosionItem::NORTH);
+        while(direction != Granatier::Direction::NORTH);
     }
 }
 

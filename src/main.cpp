@@ -18,7 +18,6 @@
 
 #include "mainwindow.h"
 
-#include <QDebug>
 #include <KAboutData>
 #include <KCmdLineArgs>
 #include <KApplication>

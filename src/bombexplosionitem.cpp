@@ -18,14 +18,11 @@
 
 #include "bombexplosionitem.h"
 #include "bomb.h"
-#include "bombitem.h"
-#include "cell.h"
 
-#include <QGraphicsScene>
 #include <QGraphicsView>
 #include <KGameRenderer>
 
-BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor) : KGameRenderedItem(renderer, "")
+BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor) : KGameRenderedItem(renderer, "")
 {
     m_direction = direction;
     m_explosionID = p_model->explosionID();
@@ -35,16 +32,16 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Direction direction, int bom
     QString strElemetId;
     switch(m_direction)
     {
-        case NORTH:
+        case Granatier::Direction::NORTH:
             setSpriteKey("bomb_blast_north_0");
             break;
-        case EAST:
+        case Granatier::Direction::EAST:
             setSpriteKey("bomb_blast_east_0");
             break;
-        case SOUTH:
+        case Granatier::Direction::SOUTH:
             setSpriteKey("bomb_blast_south_0");
             break;
-        case WEST:
+        case Granatier::Direction::WEST:
             setSpriteKey("bomb_blast_west_0");
             break;
     }
@@ -82,23 +79,23 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
     
     switch(m_direction)
     {
-        case NORTH:
+        case Granatier::Direction::NORTH:
             x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
-            y = p_y - Cell::SIZE/2;
+            y = p_y - Granatier::CellSize/2;
             setPos(x, y);
             break;
-        case EAST:
-            x = p_x - Cell::SIZE;
+        case Granatier::Direction::EAST:
+            x = p_x - Granatier::CellSize;
             y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
             setPos(x, y);
             break;
-        case SOUTH:
+        case Granatier::Direction::SOUTH:
             x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
-            y = p_y - Cell::SIZE;
+            y = p_y - Granatier::CellSize;
             setPos(x, y);
             break;
-        case WEST:
-            x = p_x - Cell::SIZE/2;
+        case Granatier::Direction::WEST:
+            x = p_x - Granatier::CellSize/2;
             y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
             setPos(x, y);
             break;
@@ -110,16 +107,16 @@ void BombExplosionItem::updateAnimationn(int nFrame)
     QString strElemetId;
     switch(m_direction)
     {
-        case NORTH:
+        case Granatier::Direction::NORTH:
             setSpriteKey(QString("bomb_blast_north_%1").arg(nFrame));
             break;
-        case EAST:
+        case Granatier::Direction::EAST:
             setSpriteKey(QString("bomb_blast_east_%1").arg(nFrame));
             break;
-        case SOUTH:
+        case Granatier::Direction::SOUTH:
             setSpriteKey(QString("bomb_blast_south_%1").arg(nFrame));
             break;
-        case WEST:
+        case Granatier::Direction::WEST:
             setSpriteKey(QString("bomb_blast_west_%1").arg(nFrame));
             break;
     }

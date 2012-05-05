@@ -20,13 +20,13 @@
 #define PLAYER_H
 
 #include "character.h"
-#include "bonus.h"
 
 class PlayerSettings;
 class QKeyEvent;
 class QString;
 class QTimer;
-class Cell;
+class Bonus;
+
 /**
  * @brief This class represents the main character of the game.
  */
@@ -80,7 +80,7 @@ private:
     QList <int> m_listShield;
     
     /** the bad bonus type */
-    Bonus::BonusType m_badBonusType;
+    Granatier::Bonus::Type m_badBonusType;
     
     /** the speed before a bad bonus was taken */
     qreal m_normalSpeed;
@@ -287,11 +287,6 @@ private:
     void updateDirection();
 
     /**
-      * @return the next cell the player will move on with its asked direction
-      */
-    Cell getAskedNextCell();
-
-    /**
       * Stops moving the Player
       */
     void stopMoving();
@@ -360,7 +355,7 @@ signals:
       * @param bonusType the bonus that was taken
       * @param percentageElapsed the bad bonus time that has elapsed
       */
-      void bonusUpdated(Player* player, Bonus::BonusType bonusType, int percentageElapsed);
+      void bonusUpdated(Player* player, Granatier::Bonus::Type bonusType, int percentageElapsed);
 };
 
 #endif

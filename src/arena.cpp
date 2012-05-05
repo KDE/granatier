@@ -20,10 +20,9 @@
 #include "arena.h"
 
 #include <QPoint>
-#include <KDebug>
 #include <QDateTime>
 
-#include <cmath>
+#include <cstdlib>
 
 Arena::Arena()
 {
@@ -48,7 +47,7 @@ void Arena::init(const int p_nbRows, const int p_nbColumns)
         m_cells[i] = new Cell[m_nbColumns];
     }
     
-    m_emptyCell.setType(Cell::HOLE);
+    m_emptyCell.setType(Granatier::Cell::HOLE);
 }
 
 QString Arena::getName () const
@@ -61,7 +60,7 @@ void Arena::setName (const QString &p_strArenaName)
     m_strArenaName = p_strArenaName;
 }
 
-void Arena::setCellType(const int p_row, const int p_column, const Cell::Type p_type)
+void Arena::setCellType(const int p_row, const int p_column, const Granatier::Cell::Type p_type)
 {
     if (p_row < 0 || p_row >= m_nbRows || p_column < 0 || p_column >= m_nbColumns)
     {
@@ -145,7 +144,7 @@ QPoint Arena::getCoords(Cell* p_cell) const
 
 int Arena::getRowFromY(const qreal p_y) const
 {
-    int nRow = (p_y / Cell::SIZE);
+    int nRow = (p_y / Granatier::CellSize);
     if (p_y < 0)
     {
         nRow -= 1;
@@ -155,7 +154,7 @@ int Arena::getRowFromY(const qreal p_y) const
 
 int Arena::getColFromX(const qreal p_x) const
 {
-    int nCol = (p_x / Cell::SIZE);
+    int nCol = (p_x / Granatier::CellSize);
     if (p_x < 0)
     {
         nCol -= 1;

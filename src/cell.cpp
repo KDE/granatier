@@ -18,9 +18,7 @@
 
 #include "cell.h"
 
-const qreal Cell::SIZE = 40.0;
-
-Cell::Cell() : m_type(Cell::WALL)
+Cell::Cell() : m_type(Granatier::Cell::WALL)
 {
     m_elements.clear();
 }
@@ -32,7 +30,7 @@ Cell::~Cell()
 bool Cell::isWalkable(Element* p_element) const
 {
     
-    if(m_type == Cell::WALL)
+    if(m_type == Granatier::Cell::WALL)
     {
         return false;
     }
@@ -40,9 +38,9 @@ bool Cell::isWalkable(Element* p_element) const
     {
         foreach(Element* element, m_elements)
         {
-            if(element->getType() == Element::BLOCK ||
-                (element->getType() == Element::BOMB && p_element != element) ||
-                (element->getType() == Element::PLAYER && p_element->getType() != Element::PLAYER))
+            if(element->getType() == Granatier::Element::BLOCK ||
+                (element->getType() == Granatier::Element::BOMB && p_element != element) ||
+                (element->getType() == Granatier::Element::PLAYER && p_element->getType() != Granatier::Element::PLAYER))
             {
                 return false;
             }
@@ -51,12 +49,12 @@ bool Cell::isWalkable(Element* p_element) const
     return true;
 }
 
-Cell::Type Cell::getType() const
+Granatier::Cell::Type Cell::getType() const
 {
     return m_type;
 }
 
-void Cell::setType(Cell::Type p_type)
+void Cell::setType(Granatier::Cell::Type p_type)
 {
     m_type = p_type;
 }
@@ -66,7 +64,7 @@ QList <Element*> Cell::getElements() const
     return m_elements;
 }
 
-QList <Element*> Cell::getElements(Element::Type type) const
+QList <Element*> Cell::getElements(Granatier::Element::Type type) const
 {
     QList<Element*> elements;
     foreach(Element* element, m_elements)

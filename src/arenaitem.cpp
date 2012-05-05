@@ -19,7 +19,6 @@
 
 #include "arenaitem.h"
 
-#include <QGraphicsScene>
 #include <QGraphicsView>
 #include <KGameRenderer>
 
@@ -27,9 +26,6 @@ ArenaItem::ArenaItem(qreal p_x, qreal p_y, KGameRenderer* renderer, const QStrin
 {
     // Init the view coordinates
     setPos(p_x, p_y);
-    // Configure the cache in order to increase the performance
-    //setCacheMode(DeviceCoordinateCache);
-    //setMaximumCacheSize(QSize(500, 500));
 }
 
 ArenaItem::~ArenaItem()

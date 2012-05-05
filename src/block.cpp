@@ -19,12 +19,11 @@
  */
 
 #include "block.h"
-#include "bonus.h"
 
 Block::Block(qreal p_x, qreal p_y, Arena* p_arena, const QString& p_imageId) : Element(p_x, p_y, p_arena)
 {
     m_imageId = p_imageId;
-    m_type = Element::BLOCK;
+    m_type = Granatier::Element::BLOCK;
     m_bonus = NULL;
 }
 

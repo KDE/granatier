@@ -37,8 +37,6 @@
 #include <KLocale>
 #include <KgThemeSelector>
 
-#include <QGraphicsSvgItem>
-
 class GeneralSettings : public QWidget
 {
 public:

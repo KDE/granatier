@@ -63,7 +63,7 @@ Game::Game(PlayerSettings* playerSettings)
     {
         if(m_playerSettings->enabled(strPlayerIDs[i]))
         {
-            Player* player = new Player(qreal(Cell::SIZE * (-0.5)),qreal(Cell::SIZE * 0.5), strPlayerIDs[i], playerSettings, m_arena);
+            Player* player = new Player(qreal(Granatier::CellSize * (-0.5)),qreal(Granatier::CellSize * 0.5), strPlayerIDs[i], playerSettings, m_arena);
             m_players.append(player);
             connect(player, SIGNAL(dying(Player*)), this, SLOT(playerDeath(Player*)));
             connect(player, SIGNAL(falling()), this, SLOT(playerFalling()));
@@ -166,7 +166,7 @@ void Game::init()
     {
         for (int j = 0; j < m_arena->getNbColumns(); ++j)
         {
-            if(m_arena->getCell(i,j).getType() == Cell::BLOCK)
+            if(m_arena->getCell(i,j).getType() == Granatier::Cell::BLOCK)
             {
                 Block* block = new Block(i, j, m_arena, "arena_block");
                 m_blocks.append(block);
@@ -192,7 +192,7 @@ void Game::init()
     {
         m_players[i]->setArena(m_arena);
         QPointF playerPosition = m_arena->getPlayerPosition(i);
-        m_players[i]->setInitialCoordinates(qreal(Cell::SIZE * playerPosition.x()), qreal(Cell::SIZE * playerPosition.y()));
+        m_players[i]->setInitialCoordinates(qreal(Granatier::CellSize * playerPosition.x()), qreal(Granatier::CellSize * playerPosition.y()));
     }
     initCharactersPosition();
     
@@ -332,51 +332,51 @@ void Game::createBonus()
     int nBonusCount = 0.3 * m_blocks.size();
     int nBadBonusCount = 0.1 * m_blocks.size();
     int nNeutralBonusCount = static_cast <int> ((qrand()/1.0)/RAND_MAX * 2);
-    QList<Bonus::BonusType> bonusTypeList;
-    Bonus::BonusType bonusType;
+    QList<Granatier::Bonus::Type> bonusTypeList;
+    Granatier::Bonus::Type bonusType;
     for (int i = 0; i < m_blocks.size(); i++)
     {
-        bonusType = Bonus::NONE;
+        bonusType = Granatier::Bonus::NONE;
         if(i < nBonusCount)
         {
             int nNumberOfBonuses = 6;
             switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * nNumberOfBonuses))
             {
-                case 0: bonusType = Bonus::SPEED;
+                case 0: bonusType = Granatier::Bonus::SPEED;
                         break;
-                case 1: bonusType = Bonus::BOMB;
+                case 1: bonusType = Granatier::Bonus::BOMB;
                         break;
-                case 2: bonusType = Bonus::POWER;
+                case 2: bonusType = Granatier::Bonus::POWER;
                         break;
-                case 3: bonusType = Bonus::SHIELD;
+                case 3: bonusType = Granatier::Bonus::SHIELD;
                         break;
-                case 4: bonusType = Bonus::THROW;
+                case 4: bonusType = Granatier::Bonus::THROW;
                         break;
-                case 5: bonusType = Bonus::KICK;
+                case 5: bonusType = Granatier::Bonus::KICK;
                         break;
-                default: bonusType = Bonus::SPEED;
+                default: bonusType = Granatier::Bonus::SPEED;
             }
         }
         else if (i-nBonusCount < nBadBonusCount)
         {
             switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 5))
             {
-                case 0: bonusType = Bonus::HYPERACTIVE;
+                case 0: bonusType = Granatier::Bonus::HYPERACTIVE;
                         break;
-                case 1: bonusType = Bonus::SLOW;
+                case 1: bonusType = Granatier::Bonus::SLOW;
                         break;
-                case 2: bonusType = Bonus::MIRROR;
+                case 2: bonusType = Granatier::Bonus::MIRROR;
                         break;
-                case 3: bonusType = Bonus::SCATTY;
+                case 3: bonusType = Granatier::Bonus::SCATTY;
                         break;
-                case 4: bonusType = Bonus::RESTRAIN;
+                case 4: bonusType = Granatier::Bonus::RESTRAIN;
                         break;
-                default: bonusType = Bonus::HYPERACTIVE;
+                default: bonusType = Granatier::Bonus::HYPERACTIVE;
             }
         }
         else if(i-nBonusCount-nBadBonusCount < nNeutralBonusCount)
         {
-            bonusType = Bonus::RESURRECT;
+            bonusType = Granatier::Bonus::RESURRECT;
         }
         bonusTypeList.append(bonusType);
     }
@@ -398,7 +398,7 @@ void Game::createBonus()
     
     for (int i = 0; i < m_blocks.size(); ++i)
     {
-        if(bonusTypeList[i] != Bonus::NONE)
+        if(bonusTypeList[i] != Granatier::Bonus::NONE)
         {
             bonus = new Bonus(m_blocks[i]->getX(), m_blocks[i]->getY(), m_arena, bonusTypeList[i]);
             m_bonus.append(bonus);
@@ -445,11 +445,11 @@ void Game::initCharactersPosition()
         {
             for (int j = 0; j < m_arena->getNbColumns(); ++j)
             {
-                blockElements =  m_arena->getCell(i, j).getElements(Element::BLOCK);
+                blockElements =  m_arena->getCell(i, j).getElements(Granatier::Element::BLOCK);
                 foreach(Element* element, blockElements)
                 {
-                    element->setX(Cell::SIZE * (j + 0.5));
-                    element->setY(Cell::SIZE * (i + 0.5));
+                    element->setX(Granatier::CellSize * (j + 0.5));
+                    element->setY(Granatier::CellSize * (i + 0.5));
                 }
             }
         }
@@ -555,7 +555,7 @@ void Game::decrementRemainingRoundTime()
     m_remainingTime--;
     if(m_remainingTime >= 0)
     {
-        emit(infoChanged(TimeInfo));
+        emit(infoChanged(Granatier::Info::TimeInfo));
     }
     else
     {
@@ -564,14 +564,14 @@ void Game::decrementRemainingRoundTime()
             //create bombs at randoms places
             int nRow;
             int nCol;
-            Cell::Type cellType;
+            Granatier::Cell::Type cellType;
             bool bFound = false;
             do
             {
                 nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
                 nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
                 cellType = m_arena->getCell(nRow, nCol).getType();
-                if(cellType != Cell::WALL && cellType != Cell::HOLE && cellType != Cell::BLOCK)
+                if(cellType != Granatier::Cell::WALL && cellType != Granatier::Cell::HOLE && cellType != Granatier::Cell::BLOCK)
                 {
                     bFound = true;
                 }
@@ -579,7 +579,7 @@ void Game::decrementRemainingRoundTime()
             while (!bFound);
             
             m_bombCount++;
-            Bomb* bomb = new Bomb((nCol + 0.5) * Cell::SIZE, (nRow + 0.5) * Cell::SIZE, m_arena, m_bombCount, 1000);    // time in ms
+            Bomb* bomb = new Bomb((nCol + 0.5) * Granatier::CellSize, (nRow + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 1000);    // time in ms
             bomb->setBombPower(1);
             emit bombCreated(bomb);
             connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
@@ -681,7 +681,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     int row = m_arena->getRowFromY(y);
     if(col >= 0 && col < m_arena->getNbColumns() && row >= 0 && row < m_arena->getNbRows())
     {
-        QList<Element*> bombElements =  m_arena->getCell(row, col).getElements(Element::BOMB);
+        QList<Element*> bombElements =  m_arena->getCell(row, col).getElements(Granatier::Element::BOMB);
         if (!bombElements.isEmpty())
         {
             if(player->hasThrowBomb() && throwDistance > 0)
@@ -701,7 +701,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     }
     
     m_bombCount++;
-    Bomb* bomb = new Bomb((col + 0.5) * Cell::SIZE, (row + 0.5) * Cell::SIZE, m_arena, m_bombCount, 2500);    // time in ms
+    Bomb* bomb = new Bomb((col + 0.5) * Granatier::CellSize, (row + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 2500);    // time in ms
     bomb->setBombPower(player->getBombPower());
     emit bombCreated(bomb);
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));

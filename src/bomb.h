@@ -22,7 +22,6 @@
 
 #include "element.h"
 
-class Cell;
 class QTimer;
 
 /**
@@ -209,12 +208,6 @@ public slots:
     void updateMortarState();
 
 protected:
-
-    /**
-    * Gets the next Cell the Bomb is going to reach.
-    * @return the next Cell the Bomb is going to reach
-    */
-    Cell getNextCell();
 
     /**
     * Checks the Bomb gets on a Cell center during its next movement.

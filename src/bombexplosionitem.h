@@ -19,6 +19,8 @@
 #ifndef BOMBEXPLOSIONITEM_H
 #define BOMBEXPLOSIONITEM_H
 
+#include "granatierglobals.h"
+
 #include <KGameRenderedItem>
 
 class Bomb;
@@ -34,19 +36,11 @@ class BombExplosionItem : public QObject, public KGameRenderedItem
 Q_OBJECT
 
 public:
-    /** The Explosion directions */
-    enum Direction
-    {
-        NORTH,
-        EAST,
-        SOUTH,
-        WEST
-    };
 
 protected:
 
     /** The direction of the blast */
-    Direction m_direction;
+    Granatier::Direction::Type m_direction;
     
     /** The bomb power */
     int m_bombPower;
@@ -67,7 +61,7 @@ public:
      * @param renderer the KGameRenderer
      * @param svgScaleFactor the scale factor of the pixmap
      */
-    BombExplosionItem(Bomb* p_model, BombExplosionItem::Direction direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor);
+    BombExplosionItem(Bomb* p_model, Granatier::Direction::Type direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor);
 
     /**
      * Deletes the BombExplosionItem instance.

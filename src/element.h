@@ -19,6 +19,8 @@
 #ifndef ELEMENT_H
 #define ELEMENT_H
 
+#include "granatierglobals.h"
+
 #include <QObject>
 
 class Arena;
@@ -30,32 +32,11 @@ class Player;
 class Element : public QObject {
 
 Q_OBJECT
-
-public:
-
-    /** The Element possible types */
-    enum Type
-    {
-        NONE,
-        BLOCK,
-        PLAYER,
-        BOMB,
-        BONUS,
-        SCORE
-    };
-    
-    enum Direction
-    {
-        NORTH,
-        EAST,
-        SOUTH,
-        WEST
-    };
     
 protected:
 
     /** The Element type */
-    Type m_type;
+    Granatier::Element::Type m_type;
 
     /** The Element initial x-coordinate */
     qreal m_xInit;
@@ -118,7 +99,7 @@ public:
       * Gets the type of the Element.
       * @return the Element type
       */
-    Element::Type getType() const;
+    Granatier::Element::Type getType() const;
 
     /**
       * Sets the Element image.

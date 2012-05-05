@@ -23,7 +23,6 @@
 #include "arenaitem.h"
 #include "mapparser.h"
 
-#include <QGraphicsView>
 #include <KgTheme>
 #include <KGameRenderer>
 #include <KStandardDirs>
@@ -35,8 +34,6 @@
 
 #include "ui_arenaselector.h"
 #include "arenasettings.h"
-
-#include <QDebug>
 
 class ArenaSelector::ArenaSelectorPrivate
 {
@@ -289,7 +286,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     theme->setGraphicsPath(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
     m_renderer = new KGameRenderer(theme);
     
-    ui.arenaPreview->setSceneRect(0, 0, arena->getNbColumns()*Cell::SIZE, arena->getNbRows()*Cell::SIZE);
+    ui.arenaPreview->setSceneRect(0, 0, arena->getNbColumns()*Granatier::CellSize, arena->getNbRows()*Granatier::CellSize);
     ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
     
     qreal x = m_graphicsScene->views().at(0)->x();
@@ -321,47 +318,47 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
         for (int j = 0; j < arena->getNbColumns(); ++j)
         {
             // Create the ArenaItem and set the image
-            ArenaItem* arenaItem = new ArenaItem(j * Cell::SIZE, i * Cell::SIZE, m_renderer, "");
+            ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_renderer, "");
             
             switch(arena->getCell(i,j).getType())
             {
-                case Cell::WALL:
+                case Granatier::Cell::WALL:
                     arenaItem->setSpriteKey("arena_wall");
                     arenaItem->setZValue(-2);
                     break;
-                case Cell::BLOCK:
+                case Granatier::Cell::BLOCK:
                     arenaItem->setSpriteKey("arena_block");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::HOLE:
+                case Granatier::Cell::HOLE:
                     delete arenaItem;
                     arenaItem = NULL;
                     break;
-                case Cell::ICE:
+                case Granatier::Cell::ICE:
                     arenaItem->setSpriteKey("arena_ice");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::BOMBMORTAR:
+                case Granatier::Cell::BOMBMORTAR:
                     arenaItem->setSpriteKey("arena_bomb_mortar");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::ARROWUP:
+                case Granatier::Cell::ARROWUP:
                     arenaItem->setSpriteKey("arena_arrow_up");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::ARROWRIGHT:
+                case Granatier::Cell::ARROWRIGHT:
                     arenaItem->setSpriteKey("arena_arrow_right");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::ARROWDOWN:
+                case Granatier::Cell::ARROWDOWN:
                     arenaItem->setSpriteKey("arena_arrow_down");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::ARROWLEFT:
+                case Granatier::Cell::ARROWLEFT:
                     arenaItem->setSpriteKey("arena_arrow_left");
                     arenaItem->setZValue(0);
                     break;
-                case Cell::GROUND:
+                case Granatier::Cell::GROUND:
                 default:
                     arenaItem->setSpriteKey("arena_ground");
                     arenaItem->setZValue(-1);

@@ -24,7 +24,6 @@
 #include <QtCore/QString>
 
 class ArenaSettingsPrivate;
-class QPixmap;
 
 /**
  * \class ArenaSettings arenasettings.h <ArenaSettings>
@@ -68,8 +67,6 @@ class ArenaSettings
         virtual QString graphics() const;
         /// @return a property directly from the .desktop file
         QString property(const QString &key) const;
-        /// @return a preview pixmap
-        QPixmap preview() const;
         /**
          * Possible keys:
          * - Name

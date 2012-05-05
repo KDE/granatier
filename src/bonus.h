@@ -29,24 +29,6 @@
 class Bonus : public Element {
 
 public:
-    /** The Bonus possible types */
-    enum BonusType
-    {
-        NONE,
-        SPEED,
-        BOMB,
-        POWER,
-        SHIELD,
-        THROW,
-        KICK,
-        SLOW,
-        HYPERACTIVE,
-        MIRROR,
-        SCATTY,
-        RESTRAIN,
-        RESURRECT
-    };
-
     /**
       * Creates a new Bonus instance.
       * @param p_x the initial x-coordinate
@@ -54,7 +36,7 @@ public:
       * @param p_arena a reference to the Arena the Bonus will be on
       * @param bonusType the Bonus Type
       */
-    Bonus(qreal p_x, qreal p_y, Arena* p_arena, Bonus::BonusType bonusType);
+    Bonus(qreal p_x, qreal p_y, Arena* p_arena, Granatier::Bonus::Type bonusType);
 
     /**
       * Deletes the Bonus instance.
@@ -67,7 +49,7 @@ public:
       */
     void doActionOnCollision(Player* p_player);
     
-    BonusType getBonusType() const;
+    Granatier::Bonus::Type getBonusType() const;
     
     void setTaken();
     
@@ -79,7 +61,7 @@ public:
 
 private:
     /** The Bonus type */
-    BonusType m_bonusType;
+    Granatier::Bonus::Type m_bonusType;
     
     bool m_taken;
     bool m_destroyed;

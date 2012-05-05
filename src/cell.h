@@ -21,7 +21,6 @@
 
 #include "element.h"
 
-#include <QtGlobal>
 #include <QList>
 
 /**
@@ -29,30 +28,10 @@
  */
 class Cell
 {
-public:
-
-    /** The Cell side size */
-    static const qreal SIZE;
-
-    /** The Cell possible types */
-    enum Type
-    {
-        WALL,
-        GROUND,
-        BLOCK,
-        ICE,
-        BOMBMORTAR,
-        HOLE,
-        ARROWUP,
-        ARROWLEFT,
-        ARROWDOWN,
-        ARROWRIGHT
-    };
-
 private:
 
     /** The Cell type */
-    Type m_type;
+    Granatier::Cell::Type m_type;
 
     /** A list of references of all Elements that are on the Cell */
     QList<Element*> m_elements;
@@ -79,13 +58,13 @@ public:
       * Gets the Cell type.
       * @return the Cell type
       */
-    Type getType() const;
+    Granatier::Cell::Type getType() const;
 
     /**
       * Sets the Cell type.
       * @param p_type the new type to set
       */
-    void setType(Type p_type);
+    void setType(Granatier::Cell::Type p_type);
 
     /**
      * Gets all the Elements that are on the Cell.
@@ -97,7 +76,7 @@ public:
      * Gets the Elements of Element::Type type that are on the Cell.
      * @return the Elements of Element::Type type that are on the Cell
      */
-    QList <Element*> getElements(Element::Type type) const;
+    QList <Element*> getElements(Granatier::Element::Type type) const;
 
     /**
       * Sets the Element that is on the Cell.

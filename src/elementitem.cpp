@@ -19,7 +19,6 @@
 #include "elementitem.h"
 #include "element.h"
 
-#include <QGraphicsScene>
 #include <QGraphicsView>
 
 #include <KGameRenderer>
@@ -31,8 +30,6 @@ ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRende
     update(p_model->getX(), p_model->getY());
     // Connects the model to the view
     connect(p_model, SIGNAL(moved(qreal,qreal)), this, SLOT(update(qreal,qreal)));
-    //setCacheMode(DeviceCoordinateCache);
-    //setMaximumCacheSize(QSize(500, 500));
     
     m_renderSize = QSize(1, 1);
 }

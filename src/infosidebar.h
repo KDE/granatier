@@ -18,7 +18,7 @@
 #ifndef INFOSIDEBAR_H
 #define INFOSIDEBAR_H
 
-#include "bonus.h"
+#include "granatierglobals.h"
 
 #include <QObject>
 #include <QMap>
@@ -93,7 +93,7 @@ private slots:
       * @param bonusType the bonus that was taken
       * @param percentageElapsed the bad bonus time that has elapsed
       */
-    void bonusInfoChanged(Player* player, Bonus::BonusType bonusType, int percentageElapsed);
+    void bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusType, int percentageElapsed);
     
 public slots:
     /**

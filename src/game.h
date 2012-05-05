@@ -20,6 +20,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "granatierglobals.h"
+
 #include <QObject>
 
 class GameScene;
@@ -118,18 +120,6 @@ private :
     KgSound* m_soundDie;
     
 public:
-
-    /** The different types of information about the game */
-    enum Information
-    {
-        NoInfo = 0,
-        TimeInfo = 1,     // Remaining time
-        ArenaInfo = 2,    // The name of the current arena
-        PlayerInfo = 4,   // Current level
-        AllInfo = TimeInfo | ArenaInfo | PlayerInfo
-    };
-    /** A flag for the Information enum */
-    Q_DECLARE_FLAGS(InformationTypes, Information)
 
     /**
     * Creates a new Game instance.
@@ -346,7 +336,7 @@ signals:
     /**
     * Emitted when something to display has changed.
     */
-    void infoChanged(const Game::InformationTypes p_info);
+    void infoChanged(const Granatier::Info::Type p_info);
 };
 
 #endif

@@ -93,7 +93,7 @@ public:
       * @param p_column the Cell column
       * @param p_type the Cell type
       */
-    void setCellType(const int p_row, const int p_column, const Cell::Type p_type);
+    void setCellType(const int p_row, const int p_column, const Granatier::Cell::Type p_type);
 
     /**
       * Sets the Element that is on the Cell whose coordinates are given in parameters.

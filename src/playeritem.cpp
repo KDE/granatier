@@ -19,7 +19,6 @@
 
 
 #include "playeritem.h"
-#include "characteritem.h"
 #include "player.h"
 #include "bonus.h"
 #include "bonusitem.h"
@@ -86,16 +85,16 @@ void PlayerItem::resurrect()
     // get the angle
     switch(nDirection)
     {
-        case Element::EAST:
+        case Granatier::Direction::EAST:
             transform.rotate(0);
             break;
-        case Element::SOUTH:
+        case Granatier::Direction::SOUTH:
             transform.rotate(90);
             break;
-        case Element::NORTH:
+        case Granatier::Direction::NORTH:
             transform.rotate(-90);
             break;
-        case Element::WEST:
+        case Granatier::Direction::WEST:
             transform.rotate(180);
             break;
         default:
@@ -119,16 +118,16 @@ void PlayerItem::updateDirection()
     // get the angle
     switch(nDirection)
     {
-        case Element::EAST:
+        case Granatier::Direction::EAST:
             transform.rotate(0);
             break;
-        case Element::SOUTH:
+        case Granatier::Direction::SOUTH:
             transform.rotate(90);
             break;
-        case Element::NORTH:
+        case Granatier::Direction::NORTH:
             transform.rotate(-90);
             break;
-        case Element::WEST:
+        case Granatier::Direction::WEST:
             transform.rotate(180);
             break;
         default:
@@ -252,16 +251,16 @@ void PlayerItem::setFrame(const int p_frame)
             // get the angle
             switch(nDirection)
             {
-                case Element::EAST:
+                case Granatier::Direction::EAST:
                     angle = 0;
                     break;
-                case Element::SOUTH:
+                case Granatier::Direction::SOUTH:
                     angle = 90;
                     break;
-                case Element::NORTH:
+                case Granatier::Direction::NORTH:
                     angle = -90;
                     break;
-                case Element::WEST:
+                case Granatier::Direction::WEST:
                     angle = 180;
                     break;
                 default:

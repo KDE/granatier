@@ -21,7 +21,7 @@
 #include "game.h"
 
 #include <QKeyEvent>
-#include <KgThemeProvider>
+#include <QTimer>
 
 GameView::GameView(Game * p_game, KgThemeProvider* p_themeProvider) : QGraphicsView(new GameScene(p_game, p_themeProvider))
 {
