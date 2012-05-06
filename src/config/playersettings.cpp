@@ -22,6 +22,8 @@
 #include <KConfig>
 #include <KConfigGroup>
 
+#include <QDebug>
+
 PlayerSettings::PlayerSettings()
 {
     QStringList playersAvailable;
@@ -194,11 +196,13 @@ void PlayerSettings::savePlayerSettings()
         }
         
         int nPlayersGroupIndex;
+        int nIndex;
         QMap<QString, StructPlayerSettings>::const_iterator i = m_playerSettings.constBegin();
         while (i != m_playerSettings.constEnd())
         {
-            nPlayersGroupIndex = strPlayerIDList.indexOf(i.key());
-            if(nPlayersGroupIndex < 0)
+            playersGroupList.sort();
+            nIndex = strPlayerIDList.indexOf(i.key());
+            if(nIndex < 0)
             {
                 for(int j = 0; j < playersGroupList.count(); j++)
                 {
@@ -206,18 +210,22 @@ void PlayerSettings::savePlayerSettings()
                     {
                         playersGroupList.append(QString("%1").arg(j+1));
                         strPlayerIDList.append(i.key());
-                        nPlayersGroupIndex = j;
+                        nPlayersGroupIndex = j+1;
+                        nIndex = nPlayersGroupIndex;
+                        break;
                     }
                 }
-                if(nPlayersGroupIndex < 0)
+                if(nIndex < 0)
                 {
-                    playersGroupList.append(QString("%1").arg(playersGroupList.count()));
+                    playersGroupList.append(QString("%1").arg(playersGroupList.count() + 1));
                     strPlayerIDList.append(i.key());
                     nPlayersGroupIndex = playersGroupList.count();
                 }
             }
-            
-            nPlayersGroupIndex += 1;
+            else
+            {
+                nPlayersGroupIndex = playersGroupList[nIndex].toInt();
+            }
             
             granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("PlayerID", i.value().strPlayerID);
             granatierConfig.group("Player").group(QString("%1").arg(nPlayersGroupIndex)).writeEntry("Name", i.value().strPlayerName);
