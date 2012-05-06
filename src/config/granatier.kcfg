@@ -26,7 +26,7 @@
     </entry>
     <entry name="PointsToWin" type="Int" key="PointsToWin">
       <label>The points a user needs to win the game.</label>
-      <default>3</default>
+      <default>5</default>
     </entry>
     <entry name="RoundTime" type="Int" key="RoundTime">
       <label>Time for a round.</label>

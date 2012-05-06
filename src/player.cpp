@@ -20,7 +20,7 @@
 #include "bonus.h"
 #include "bomb.h"
 #include "arena.h"
-#include "playersettings.h"
+#include "config/playersettings.h"
 #include "settings.h"
 
 #include <QKeyEvent>

@@ -27,7 +27,7 @@
 #include "bonus.h"
 #include "bomb.h"
 #include "block.h"
-#include "playersettings.h"
+#include "config/playersettings.h"
 
 #include <QPointF>
 #include <QTimer>

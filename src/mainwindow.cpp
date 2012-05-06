@@ -22,9 +22,9 @@
 #include "gameview.h"
 #include "gamescene.h"
 #include "settings.h"
-#include "arenaselector.h"
-#include "playerselector.h"
-#include "playersettings.h"
+#include "config/arenaselector.h"
+#include "config/playersettings.h"
+#include "config/playerselector.h"
 #include "ui_generalsettings.h"
 
 #include <QGraphicsView>
@@ -44,6 +44,7 @@ public:
     {
         ui.setupUi(this);
         ui.groupBox->setVisible(false);
+        ui.kcfg_Dummy->setVisible(false); // this is only to notify changes in playerselector
     }
 private:
     Ui::GeneralSettings ui;
@@ -169,7 +170,7 @@ void MainWindow::showSettings()
     // Arena
     settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
     // Player
-    settingsDialog->addPage(new PlayerSelector(settingsDialog, m_playerSettings), i18n("Player"), "games-config-custom");
+    settingsDialog->addPage(new PlayerSelector(m_playerSettings, PlayerSelector::DefaultBehavior, settingsDialog), i18n("Player"), "games-config-custom");
     
     m_settingsDialog = settingsDialog;
     

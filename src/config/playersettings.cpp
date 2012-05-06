@@ -16,6 +16,7 @@
  */
 
 #include "playersettings.h"
+#include "settings.h"
 
 #include <KStandardDirs>
 #include <KConfig>
@@ -263,6 +264,7 @@ void PlayerSettings::setPlayerName(const QString& strPlayerID, const QString& st
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
         m_tempPlayerSettings.find(strPlayerID).value().strPlayerName = strName;
+        Settings::self()->setDummy(Settings::self()->dummy() + 3);
     }
 }
 
@@ -271,6 +273,7 @@ void PlayerSettings::setEnabled(const QString& strPlayerID, const bool enabled)
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
         m_tempPlayerSettings.find(strPlayerID).value().enabled = enabled;
+        Settings::self()->setDummy(Settings::self()->dummy() + 3);
     }
 }
 
@@ -279,6 +282,7 @@ void PlayerSettings::setKeyUp(const QString& strPlayerID, const QKeySequence& ke
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
         m_tempPlayerSettings.find(strPlayerID).value().keyUp = key;
+        Settings::self()->setDummy(Settings::self()->dummy() + 3);
     }
 }
 
@@ -287,6 +291,7 @@ void PlayerSettings::setKeyRight(const QString& strPlayerID, const QKeySequence&
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
         m_tempPlayerSettings.find(strPlayerID).value().keyRight = key;
+        Settings::self()->setDummy(Settings::self()->dummy() + 3);
     }
 }
 
@@ -295,6 +300,7 @@ void PlayerSettings::setKeyDown(const QString& strPlayerID, const QKeySequence& 
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
         m_tempPlayerSettings.find(strPlayerID).value().keyDown = key;
+        Settings::self()->setDummy(Settings::self()->dummy() + 3);
     }
 }
 
@@ -303,6 +309,7 @@ void PlayerSettings::setKeyLeft(const QString& strPlayerID, const QKeySequence& 
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
         m_tempPlayerSettings.find(strPlayerID).value().keyLeft = key;
+        Settings::self()->setDummy(Settings::self()->dummy() + 3);
     }
 }
 
@@ -311,5 +318,6 @@ void PlayerSettings::setKeyPutBomb(const QString& strPlayerID, const QKeySequenc
     if(m_tempPlayerSettings.contains(strPlayerID))
     {
         m_tempPlayerSettings.find(strPlayerID).value().keyPutBomb = key;
+        Settings::self()->setDummy(Settings::self()->dummy() + 3);
     }
 }

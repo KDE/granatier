@@ -35,6 +35,8 @@
 #include "ui_arenaselector.h"
 #include "arenasettings.h"
 
+#include "QDebug"
+
 class ArenaSelector::ArenaSelectorPrivate
 {
     public:
@@ -252,12 +254,17 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
     QString authstr("Author");
     QString contactstr("AuthorEmail");
     QString descstr("Description");
-    QString emailstr;
-    if (!selArena->arenaProperty(contactstr).isEmpty() ) {
+    QString emailstr = selArena->arenaProperty(contactstr);
+    if(emailstr.compare("-") == 0) // the imported clanbomber arenas have a "-" if no email address was defined in the clanbomber arena file
+    {
+        emailstr.clear();
+    }
+    if (!emailstr.isEmpty())
+    {
         emailstr = QString("<a href=\"mailto:%1\">%1</a>").arg(selArena->arenaProperty(contactstr));
     }
-
-    ui.arenaAuthor->setText(selArena->arenaProperty(authstr));
+    
+    ui.arenaAuthor->setText(i18nc("Author attribution, e.g. \"by Jack\"", "by %1", selArena->arenaProperty(authstr)));
     ui.arenaContact->setText(emailstr);
     ui.arenaDescription->setText(selArena->arenaProperty(descstr));
     
