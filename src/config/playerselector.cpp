@@ -70,7 +70,7 @@ PlayerSelector::PlayerSelector(PlayerSettings* playerSettings, Options options, 
     PlayerSelectorDelegate* delegate = new PlayerSelectorDelegate(d->m_list);
     const QSize itemSizeHint = delegate->sizeHint(QStyleOptionViewItem(), QModelIndex());
     const QSize scrollBarSizeHint = d->m_list->verticalScrollBar()->sizeHint();
-    d->m_list->setMinimumSize(itemSizeHint.width() + 2 * scrollBarSizeHint.width(), 4.1 * itemSizeHint.height());
+    d->m_list->setMinimumSize(itemSizeHint.width() + 2 * scrollBarSizeHint.width(), 3.3 * itemSizeHint.height());
     //setup main layout
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setMargin(0);
