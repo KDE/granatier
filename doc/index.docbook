@@ -297,9 +297,6 @@
       <para>
         If you have self-made <application>Clanbomber</application> arenas, you can import them by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in <filename class="directory">~/.clanbomber/maps</filename> for the arenas. The default <application>Clanbomber</application> arenas are already shipped with &granatier;.
       </para>
-      <para>
-        If you select <guibutton>Random Mode</guibutton>, a random arena will be used for each new round.
-      </para>
       <screenshot>
         <screeninfo>A &granatier; Config screenshot</screeninfo>
         <mediaobject>
@@ -311,11 +308,25 @@
           </textobject>
         </mediaobject>
       </screenshot>
+      <para>
+        If you select <guibutton>Random Mode</guibutton>, a random arena will be used for each new round. If there are arenas you don't want to play, you can uncheck them.
+      </para>
+      <screenshot>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase>A &granatier; Config screenshot</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
     </sect1>
     <sect1 id="config_player">
       <title>Player</title>
       <para>
-        To select the Player you want to play, go to the Player section and select the Players with the checkboxes. To change the name of the Player, double click on the Player and type the name you want. The Shortcuts can be changed by clicking on the button for the action you want to change and then pressing the key you want to use. The changes are loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Shortcuts.
+        To select the Player you want to play, go to the Player section and select the Players with the checkboxes. The Shortcuts can be changed by clicking on the button for the action you want to change and then pressing the key you want to use. The changes are loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Shortcuts.
       </para>
       <screenshot>
         <screeninfo>A &granatier; Config screenshot</screeninfo>
