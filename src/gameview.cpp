@@ -23,7 +23,7 @@
 #include <QKeyEvent>
 #include <QTimer>
 
-GameView::GameView(Game * p_game, KgThemeProvider* p_themeProvider) : QGraphicsView(new GameScene(p_game, p_themeProvider))
+GameView::GameView(GameScene* p_scene, Game * p_game) : QGraphicsView(p_scene)
 {
     setFrameStyle(QFrame::NoFrame);
     setFocusPolicy(Qt::StrongFocus);

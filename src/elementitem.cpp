@@ -36,8 +36,6 @@ ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRende
 
 ElementItem::~ElementItem()
 {
-    delete m_model;
-
 }
 
 Element* ElementItem::getModel() const

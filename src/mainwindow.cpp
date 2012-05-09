@@ -56,6 +56,7 @@ MainWindow::MainWindow()
     // Initialize the game
     m_game = NULL;
     m_view = NULL;
+    m_scene = NULL;
     m_playerSettings = new PlayerSettings();
     m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
     m_themeProvider->discoverThemes("appdata", QLatin1String("themes"), "granatier");
@@ -76,8 +77,9 @@ MainWindow::MainWindow()
 
 MainWindow::~MainWindow()
 {
-    delete m_game;
     delete m_view;
+    delete m_scene;
+    delete m_game;
     delete m_playerSettings;
     delete m_settingsDialog;
 }
@@ -88,6 +90,21 @@ void MainWindow::initGame()
     //TODO: check why setting the focus only at the end doesn't work
     this->setFocusProxy(m_view);
     this->setFocus();
+    
+    // If a GameView instance already exists
+    if (m_view)
+    {
+        // Delete the GameView instance
+        delete m_view;
+    }
+    
+    // If a GameScene instance already exists
+    if (m_scene)
+    {
+        // Delete the GameScene instance
+        delete m_scene;
+    }
+    
     // If a Game instance already exists
     if (m_game)
     {
@@ -97,14 +114,11 @@ void MainWindow::initGame()
     // Create a new Game instance
     m_game = new Game(m_playerSettings);
     connect(m_game, SIGNAL(gameOver(bool)), this, SLOT(newGame(bool)));     // TODO Remove the useless bool parameter from gameOver()
-    // If a GameView instance already exists
-    if (m_view)
-    {
-        // Delete the GameView instance
-        delete m_view;
-    }
+    
+    m_scene = new GameScene(m_game, m_themeProvider);
+    
     // Create a new GameView instance
-    m_view = new GameView(m_game, m_themeProvider);
+    m_view = new GameView(m_scene, m_game);
     m_view->setBackgroundBrush(Qt::black);
     setCentralWidget(m_view);
     m_game->setGameScene(dynamic_cast <GameScene*> (m_view->scene()));
@@ -175,7 +189,6 @@ void MainWindow::showSettings()
     m_settingsDialog = settingsDialog;
     
     connect(settingsDialog, SIGNAL(settingsChanged(QString)), this, SLOT(applyNewSettings()));
-    connect(m_themeProvider, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(settingsChanged()));
     connect(settingsDialog, SIGNAL(cancelClicked()), this, SLOT(settingsDialogCanceled()));
     settingsDialog->show();
 }
@@ -207,12 +220,6 @@ void MainWindow::settingsDialogCanceled()
             }
         }
     }
-}
-
-void MainWindow::settingsChanged()
-{
-    m_settingsDialog->enableButtonApply(true);
-    Settings::self()->setDummy(Settings::self()->dummy() + 3);
 }
 
 void MainWindow::close()

@@ -29,7 +29,6 @@ CharacterItem::CharacterItem(Character* p_model, KGameRenderer* renderer) : Elem
 
 CharacterItem::~CharacterItem()
 {
-    delete m_renderer;
 }
 
 QPainterPath CharacterItem::shape() const

@@ -43,6 +43,7 @@ class QTimer;
 class KGameRenderer;
 class KGameRenderedItem;
 class KgThemeProvider;
+class KgTheme;
 
 /**
  * @brief This class contains all the Game elements to be drawn on the screen by the GameView instance.
@@ -67,6 +68,7 @@ private:
     
     /** The BombItem of each Bomb to be drawn */
     QHash<BombItem*, QList<BombExplosionItem*> > m_bombItems;
+    QList<Bomb*> m_tempBombList;
     
     /** The ElementItem to be drawn (each Block) */
     BlockItem*** m_blockItems;
@@ -128,9 +130,19 @@ public:
     void init();
     
     /**
+     * Initializes all items with graphics from the theme
+     */
+    void initItemsWithGraphicsFromTheme();
+    
+    /**
      * Cleans class
      */
     void cleanUp();
+    
+    /**
+     * Initializes all items with graphics from the theme
+     */
+    void cleanUpItemsWithGraphicsFromTheme();
     
     /**
      * Shows the labels with the points.
@@ -158,6 +170,8 @@ private slots:
     * Updates the elements to be drawn when the Game starts.
     */
     void start();
+    
+    void themeChanged(const KgTheme* newTheme);
     
     /**
      * Updates the background to fit into the QGraphicsView after a resize.

@@ -221,8 +221,11 @@ Game::~Game()
 
 void Game::cleanUp()
 {
+    qDeleteAll(m_blocks);
     m_blocks.clear();
+    qDeleteAll(m_bonus);
     m_bonus.clear();
+    qDeleteAll(m_bombs);
     m_bombs.clear();
     delete m_arena;
     m_arena = 0;

@@ -58,13 +58,6 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     m_backgroundResizeTimer = new QTimer();
     m_backgroundResizeTimer->setSingleShot(true);
     connect(m_backgroundResizeTimer, SIGNAL(timeout()), this, SLOT(resizeBackground()));
-    
-    // setup the theme renderer
-    KgTheme* theme = new KgTheme(m_themeProvider->currentTheme()->identifier());
-    theme->setGraphicsPath(m_themeProvider->currentTheme()->graphicsPath());
-    m_rendererSelectedTheme = new KGameRenderer(theme);
-    m_rendererDefaultTheme = 0;
-    setupThemeRenderer();
 
     // Create the PlayerItems and the points labels
     QList <Player*> players = p_game->getPlayers();
@@ -104,13 +97,14 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
                  m_game->getArena()->getNbColumns()*Granatier::CellSize,
                  m_game->getArena()->getNbRows()*Granatier::CellSize + m_remainingTimeLabel->boundingRect().height());
     
-    //create the background
-    m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
-    m_arenaBackground->setZValue(-5);
-    m_arenaBackground->setPos(0, 0);
-    m_arenaBackground->setCacheMode(QGraphicsItem::NoCache);  // if cache is set, there are some artifacts; pay attention, that the KGameRenderer cache is used nevertheless
-    m_arenaBackground->setRenderSize(QSize(100, 100)); //just to get something in the background, until the right size is rendered
-    addItem(m_arenaBackground);
+    // setup the theme renderer
+    //KgTheme* theme = new KgTheme(m_themeProvider->currentTheme()->identifier());
+    //theme->setGraphicsPath(m_themeProvider->currentTheme()->graphicsPath());
+    m_rendererSelectedTheme = new KGameRenderer(m_themeProvider);//theme);
+    m_rendererDefaultTheme = 0;
+    setupThemeRenderer();
+    
+    connect(m_themeProvider, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(themeChanged(const KgTheme*)));
     
     // create the info sidebar
     m_infoSidebar = new InfoSidebar(m_game, this);
@@ -236,6 +230,41 @@ void GameScene::setupThemeRenderer()
 }
 
 void GameScene::init()
+{
+    initItemsWithGraphicsFromTheme();
+    
+    // Display each PlayerItem
+    for (int i = 0; i < m_playerItems.size(); i++)
+    {
+        if(!items().contains(m_playerItems[i]))
+        {
+            addItem(m_playerItems[i]);
+        }
+        m_playerItems[i]->resurrect();
+    }
+    
+    if (!items().contains(m_remainingTimeLabel))
+    {
+        addItem(m_remainingTimeLabel);
+    }
+    m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
+    int nTime = m_game->getRemainingTime();
+    m_remainingTimeLabel->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
+    m_remainingTimeLabel->setPos(Granatier::CellSize * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
+    
+    if (!items().contains(m_arenaNameLabel))
+    {
+        addItem(m_arenaNameLabel);
+    }
+    m_arenaNameLabel->setPlainText(m_game->getArena()->getName());
+    m_arenaNameLabel->setPos(0, - m_arenaNameLabel->boundingRect().height());
+    
+    m_infoSidebar->reset();
+    
+    m_infoOverlay->showGetReady();
+}
+
+void GameScene::initItemsWithGraphicsFromTheme()
 {
     // Create the ArenaItems
     m_arenaItem = new ArenaItem**[m_game->getArena()->getNbRows()];
@@ -403,6 +432,22 @@ void GameScene::init()
         }
     }
     
+    // Create the Bomb items
+    foreach(Bomb* bomb, m_tempBombList)
+    {
+        createBombItem(bomb);
+    }
+    if(!m_tempBombList.isEmpty())
+    {
+        BombExplosionItem* bombExplosionItem;
+        QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
+        while (i != m_bombItems.end())
+        {
+            i.key()->pauseAnim();
+            i++;
+        }
+    }
+    
     // Display the ArenaItem
     for (int i = 0; i < m_game->getArena()->getNbRows();++i)
     {
@@ -430,35 +475,13 @@ void GameScene::init()
         }
     }
     
-    // Display each PlayerItem
-    for (int i = 0; i < m_playerItems.size(); i++)
-    {
-        if(!items().contains(m_playerItems[i]))
-        {
-            addItem(m_playerItems[i]);
-        }
-        m_playerItems[i]->resurrect();
-    }
-    
-    if (!items().contains(m_remainingTimeLabel))
-    {
-        addItem(m_remainingTimeLabel);
-    }
-    m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
-    int nTime = m_game->getRemainingTime();
-    m_remainingTimeLabel->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
-    m_remainingTimeLabel->setPos(Granatier::CellSize * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
-    
-    if (!items().contains(m_arenaNameLabel))
-    {
-        addItem(m_arenaNameLabel);
-    }
-    m_arenaNameLabel->setPlainText(m_game->getArena()->getName());
-    m_arenaNameLabel->setPos(0, - m_arenaNameLabel->boundingRect().height());
-    
-    m_infoSidebar->reset();
-    
-    m_infoOverlay->showGetReady();
+    //create the background
+    m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
+    m_arenaBackground->setZValue(-5);
+    m_arenaBackground->setPos(0, 0);
+    m_arenaBackground->setCacheMode(QGraphicsItem::NoCache);  // if cache is set, there are some artifacts; pay attention, that the KGameRenderer cache is used nevertheless
+    m_arenaBackground->setRenderSize(QSize(100, 100)); //just to get something in the background, until the right size is rendered
+    addItem(m_arenaBackground);
     
     resizeSprites();
     resizeBackground();
@@ -469,6 +492,9 @@ GameScene::~GameScene()
     delete m_backgroundResizeTimer;
     
     cleanUp();
+    
+    delete m_infoOverlay;
+    delete m_infoSidebar;
     
     for (int i = 0; i < m_playerItems.size(); i++)
     {
@@ -484,21 +510,31 @@ GameScene::~GameScene()
     while (iteratorRendererPlayer != m_mapRendererPlayerItems.end())
     {
         delete iteratorRendererPlayer.value();
+        iteratorRendererPlayer++;
     }
-    
-    removeItem(m_arenaBackground);
-    delete m_arenaBackground;
-    
-    delete m_infoOverlay;
-    delete m_infoSidebar;
-    delete m_remainingTimeLabel;
-    delete m_arenaNameLabel;
     
     delete m_rendererSelectedTheme;
     delete m_rendererDefaultTheme;
 }
 
 void GameScene::cleanUp()
+{
+    cleanUpItemsWithGraphicsFromTheme();
+    
+    m_infoOverlay->hideItems();
+    
+    if(items().contains(m_remainingTimeLabel))
+    {
+        removeItem(m_remainingTimeLabel);
+    }
+    
+    if(items().contains(m_arenaNameLabel))
+    {
+        removeItem(m_arenaNameLabel);
+    }
+}
+
+void GameScene::cleanUpItemsWithGraphicsFromTheme()
 {
     // remove the arena items
     for (int i = 0; i < m_game->getArena()->getNbRows();++i)
@@ -536,6 +572,10 @@ void GameScene::cleanUp()
         {
             removeItem(i.key());
         }
+        if(dynamic_cast <Bomb*> (i.key()->getModel())->isDetonated())
+        {
+            dynamic_cast <Bomb*> (i.key()->getModel())->slot_detonationCompleted();
+        }
         delete i.key();
         i = m_bombItems.erase(i);
     }
@@ -568,17 +608,28 @@ void GameScene::cleanUp()
     delete[] m_blockItems;
     delete[] m_bonusItems;
     
-    m_infoOverlay->hideItems();
-    
-    if(items().contains(m_remainingTimeLabel))
+    removeItem(m_arenaBackground);
+    delete m_arenaBackground;
+}
+
+void GameScene::themeChanged(const KgTheme* newTheme)
+{
+    m_tempBombList.clear();
+    QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
+    while (i != m_bombItems.end())
     {
-        removeItem(m_remainingTimeLabel);
+        if(!(dynamic_cast <Bomb*> (i.key()->getModel())->isDetonated()))
+        {
+            m_tempBombList.append(dynamic_cast <Bomb*> (i.key()->getModel()));
+        }
+        i++;
     }
     
-    if(items().contains(m_arenaNameLabel))
-    {
-        removeItem(m_arenaNameLabel);
-    }
+    cleanUpItemsWithGraphicsFromTheme();
+    setupThemeRenderer();
+    initItemsWithGraphicsFromTheme();
+    
+    m_tempBombList.clear();
 }
 
 KGameRenderer* GameScene::renderer(Granatier::Element::Type type, Player* player)

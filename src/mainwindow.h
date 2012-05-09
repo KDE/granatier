@@ -24,6 +24,7 @@
 
 class Game;
 class GameView;
+class GameScene;
 class PlayerSettings;
 class KgThemeProvider;
 class KConfigDialog;
@@ -39,6 +40,8 @@ private :
     
     /** The GameView instance that manages the game drawing and the collisions */
     GameView* m_view;
+    
+    GameScene* m_scene;
 
     /** The Game instance that manages the main loop and events */
     Game* m_game;
@@ -101,11 +104,6 @@ private slots:
       * Cancel at settings dialog clicked.
       */
     void settingsDialogCanceled();
-    
-    /**
-     * The settings changed, but the dialog didn't notice it, so this slot enables the apply button from the dialog
-     */
-    void settingsChanged();
 
     /**
       * Closes the MainWindow.

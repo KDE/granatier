@@ -391,6 +391,8 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview()
             }
         }
     }
+    
+    delete arena;
 }
 
 void ArenaSelector::ArenaSelectorPrivate::_k_updateArenaList(const QString& strArena)
