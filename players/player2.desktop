@@ -1,6 +1,10 @@
 [KGameTheme]
 Name=Player 2
+Name[uk]=Гравець 2
+Name[x-test]=xxPlayer 2xx
 Description=This is Player 2
+Description[uk]=Це Гравець 2
+Description[x-test]=xxThis is Player 2xx
 Type=SVG
 FileName=player2.svgz
 Preview=player2_preview.svgz
