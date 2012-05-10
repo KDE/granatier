@@ -1,8 +1,12 @@
 [KGameTheme]
 Name=Player 4
+Name[es]=Jugador 4
+Name[pt]=Jogador 4
 Name[uk]=Гравець 4
 Name[x-test]=xxPlayer 4xx
 Description=This is Player 4
+Description[es]=Este es el jugador 4
+Description[pt]=Este é o Jogador 4
 Description[uk]=Це Гравець 4
 Description[x-test]=xxThis is Player 4xx
 Type=SVG
