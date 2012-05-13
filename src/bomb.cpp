@@ -24,6 +24,10 @@
 
 #include <cstdlib>
 
+const int nMortarRampEnd = Granatier::FPS * 50 / 1000.0;
+const int nMortarPeak = (Granatier::FPS * 800 / 1000.0) / 2 + nMortarRampEnd;
+const int nMortarGround = (Granatier::FPS * 800 / 1000.0) + nMortarRampEnd;
+
 Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
 {
     m_type = Granatier::Element::BOMB;
@@ -92,7 +96,7 @@ void Bomb::updateMove()
     int currentRow = m_arena->getRowFromY(m_y);
     int currentCol = m_arena->getColFromX(m_x);
     //check if the bomb is on an arrow, mortar or hole
-    if(m_mortarState == -1 && m_xSpeed == 0 && m_ySpeed == 0)
+    if(m_mortarState < 0 && m_xSpeed == 0 && m_ySpeed == 0)
     {
         switch (m_arena->getCell(currentRow, currentCol).getType())
         {
@@ -114,13 +118,8 @@ void Bomb::updateMove()
                 m_mortarTimer->setInterval(1500);
                 m_mortarTimer->start();
                 m_detonationCountdownTimer->stop();
-                connect(m_mortarTimer, SIGNAL(timeout()), this, SLOT(updateMortarState()));
                 m_mortarState = 0;
-                setXSpeed(0);
-                setYSpeed(0);
-                m_type = Granatier::Element::NONE;
-                m_arena->removeCellElement(currentRow, currentCol, this);
-                emit mortar(m_mortarState);
+                updateMortarState();
                 break;
             case Granatier::Cell::HOLE:
                 if(!m_falling)
@@ -194,7 +193,7 @@ void Bomb::updateMove()
         }
         
         //at first, check if move over cell center or currently on cell center
-        if((bOnCenter || (xDirection * xDeltaCenter < 0 && xDirection * (m_xSpeed + xDeltaCenter) >= 0) || (yDirection * yDeltaCenter < 0 && yDirection * (m_ySpeed + yDeltaCenter) >= 0)) && m_mortarState == -1)
+        if((bOnCenter || (xDirection * xDeltaCenter < 0 && xDirection * (m_xSpeed + xDeltaCenter) >= 0) || (yDirection * yDeltaCenter < 0 && yDirection * (m_ySpeed + yDeltaCenter) >= 0)) && m_mortarState < 0)
         {
             bool bIsMortar = false;
             bool bIsNewDirection = false;
@@ -265,7 +264,7 @@ void Bomb::updateMove()
             }
             else
             {
-                if((newRow != currentRow || newCol != currentCol) && m_mortarState == -1)
+                if((newRow != currentRow || newCol != currentCol) && m_mortarState < 0)
                 {
                     m_arena->removeCellElement(currentRow, currentCol, this);
                     m_arena->setCellElement(newRow, newCol, this);
@@ -276,7 +275,7 @@ void Bomb::updateMove()
         else
         {
             //if two bombs move towards them, stop them and move them to the next cell center
-            if(((bIsHurdleCurrentCell && !bMoveAwayFromCenter) || bIsHurdleNextCell) && !m_stopOnCenter && m_mortarState == -1)
+            if(((bIsHurdleCurrentCell && !bMoveAwayFromCenter) || bIsHurdleNextCell) && !m_stopOnCenter && m_mortarState < 0)
             {
                 if(bOnCenter)
                 {
@@ -292,7 +291,7 @@ void Bomb::updateMove()
             }
             else
             {
-                if((newRow != currentRow || newCol != currentCol) && m_mortarState == -1)
+                if((newRow != currentRow || newCol != currentCol) && m_mortarState < 0)
                 {
                     m_arena->removeCellElement(currentRow, currentCol, this);
                     m_arena->setCellElement(newRow, newCol, this);
@@ -300,6 +299,11 @@ void Bomb::updateMove()
                 move(m_x + m_xSpeed, m_y + m_ySpeed);
             }
         }
+    }
+    
+    if(m_mortarState >= 0 && !(m_mortarTimer->isActive()))
+    {
+        updateMortarState();
     }
 }
 
@@ -346,9 +350,8 @@ void Bomb::setThrown(int nDirection)
         {
             m_detonationCountdownTimer->stop();
         }
-        connect(m_mortarTimer, SIGNAL(timeout()), this, SLOT(updateMortarState()));
     }
-    qreal fSpeed = 2 * Granatier::CellSize / 32.0;//800ms with 40FPS are 32 frames
+    qreal fSpeed = 2 * Granatier::CellSize / (Granatier::FPS * 800 / 1000.0 + 1);
     switch(nDirection)
     {
         case Granatier::Direction::NORTH:
@@ -369,9 +372,13 @@ void Bomb::setThrown(int nDirection)
             break;
     }
     
+    int curCellRow = m_arena->getRowFromY(m_y);
+    int curCellCol = m_arena->getColFromX(m_x);
+    m_arena->removeCellElement(curCellRow, curCellCol, this);
+    
+    m_type = Granatier::Element::NONE;
     m_thrown = true;
-    m_mortarState = 1;
-    updateMortarState();
+    m_mortarState = nMortarRampEnd;
 }
 
 void Bomb::setKicked(int nDirection)
@@ -514,82 +521,78 @@ void Bomb::slot_detonationCompleted()
 
 void Bomb::updateMortarState()
 {
-    switch(m_mortarState)
+    emit mortar(m_mortarState, nMortarRampEnd, nMortarPeak, nMortarGround);
+    
+    if(m_mortarState <= 0)
     {
-      case 0:
-          {
-              int curCellRow = m_arena->getRowFromY(m_y);
-              int curCellCol = m_arena->getColFromX(m_x);
-              
-              m_thrown = false;
-              m_type = Granatier::Element::NONE;
-              m_arena->removeCellElement(curCellRow, curCellCol, this);
-              
-              m_mortarState++;
-              emit mortar(m_mortarState);
-              m_mortarTimer->start(50);
-          }
-          
-          break;
-      case 1:
-          {
-              int curCellRow = m_arena->getRowFromY(m_y);
-              int curCellCol = m_arena->getColFromX(m_x);
-              
-              if(!m_thrown)
-              {
-                  int nRow;
-                  int nCol;
-                  bool bFound = false;
-
-                  do
-                  {
-                      nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
-                      nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
-                      if(m_arena->getCell(nRow, nCol).getType() != Granatier::Cell::WALL)
-                      {
-                          bFound = true;
-                      }
-                  }
-                  while (!bFound);
-                  
-                  setXSpeed((nCol - curCellCol) * Granatier::CellSize / 32.0);//800ms with 40FPS are 32 frames
-                  setYSpeed((nRow - curCellRow) * Granatier::CellSize / 32.0);//800ms with 40FPS are 32 frames
-              }
-              
-              m_type = Granatier::Element::NONE;
-              m_arena->removeCellElement(curCellRow, curCellCol, this);
-              
-              m_mortarState++;
-              emit mortar(m_mortarState);
-              m_mortarTimer->start(800);
-          }
-          break;
-      case 2:
-          {
-              int curCellRow = m_arena->getRowFromY(m_y);
-              int curCellCol = m_arena->getColFromX(m_x);
-              m_type = Granatier::Element::BOMB;
-              m_arena->setCellElement(curCellRow, curCellCol, this);
-              
-              m_mortarState++;
-              emit mortar(m_mortarState);
-              m_mortarState = -1;
-              if(m_detonationCountdownTimer)
-              {
-                  setXSpeed(0);
-                  setYSpeed(0);
-                  if(!m_thrown)
-                  {
-                      initDetonation(m_bombID, 40);
-                  }
-                  else
-                  {
-                      m_detonationCountdownTimer->setInterval(2000);
-                      m_detonationCountdownTimer->start();
-                  }
-              }
-          }
-          break;
+        int curCellRow = m_arena->getRowFromY(m_y);
+        int curCellCol = m_arena->getColFromX(m_x);
+        
+        setXSpeed(0);
+        setYSpeed(0);
+        
+        m_thrown = false;
+        m_type = Granatier::Element::NONE;
+        m_arena->removeCellElement(curCellRow, curCellCol, this);
+    }
+    else if(m_mortarState == nMortarRampEnd)
+    {
+        int curCellRow = m_arena->getRowFromY(m_y);
+        int curCellCol = m_arena->getColFromX(m_x);
+        
+        if(!m_thrown)
+        {
+            int nRow;
+            int nCol;
+            bool bFound = false;
+            
+            do
+            {
+                nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
+                nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
+                if(m_arena->getCell(nRow, nCol).getType() != Granatier::Cell::WALL)
+                {
+                    bFound = true;
+                }
+            }
+            while (!bFound);
+            
+            setXSpeed((nCol - curCellCol) * Granatier::CellSize / (Granatier::FPS * 800 / 1000.0));
+            setYSpeed((nRow - curCellRow) * Granatier::CellSize / (Granatier::FPS * 800 / 1000.0));
+        }
+        
+        m_type = Granatier::Element::NONE;
+        m_arena->removeCellElement(curCellRow, curCellCol, this);
+    }
+    else if(m_mortarState == nMortarGround)
+    {
+        setXSpeed(0);
+        setYSpeed(0);
+    }
+    else if (m_mortarState > nMortarGround)
+    {
+        int curCellRow = m_arena->getRowFromY(m_y);
+        int curCellCol = m_arena->getColFromX(m_x);
+        m_type = Granatier::Element::BOMB;
+        m_arena->setCellElement(curCellRow, curCellCol, this);
+        
+        m_mortarState = -1;
+        if(m_detonationCountdownTimer)
+        {
+            if(!m_thrown)
+            {
+                initDetonation(m_bombID, 40);
+            }
+            else
+            {
+                m_detonationCountdownTimer->setInterval(2000);
+                m_detonationCountdownTimer->start();
+            }
+        }
+    }
+    
+    if(m_mortarState >= 0)
+    {
+        m_mortarState++;
     }
 }

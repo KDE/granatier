@@ -38,8 +38,6 @@
 #include <KComponentData>
 #include <kgsound.h>
 
-const int Game::FPS = 40;
-
 Game::Game(PlayerSettings* playerSettings)
 {
     m_playerSettings = playerSettings;
@@ -177,7 +175,7 @@ void Game::init()
     
     // Start the Game timer
     m_timer = new QTimer(this);
-    m_timer->setInterval(int(1000 / Game::FPS));
+    m_timer->setInterval(int(1000 / Granatier::FPS));
     connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
     m_timer->start();
     m_state = RUNNING;
@@ -208,7 +206,7 @@ Game::~Game()
     qDeleteAll(m_players);
     m_players.clear();
     
-    //bombs, bonuses and blocks are deletet by the destructor of their elementitem
+    //TODO: delete bombs, bonuses and blocks
     
     cleanUp();
     

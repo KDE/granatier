@@ -24,6 +24,8 @@
 
 #include <KGameRenderer>
 
+const int nBombPulseTime = 100;
+
 BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_model, renderer)
 {
     setSpriteKey("bomb");
@@ -35,7 +37,7 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
     m_animationCounter = 0;
     // Define the timer which sets the puls frequency
     m_pulseTimer = new QTimer(this);
-    m_pulseTimer->setInterval(100);
+    m_pulseTimer->setInterval(nBombPulseTime);
     m_pulseTimer->start();
     connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
     
@@ -46,11 +48,7 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
     m_listExplosionTiming.append(Settings::self()->blastTime4());
     m_listExplosionTiming.append(Settings::self()->blastTime5());
     
-    m_mortarAnimationTimer = new QTimer(this);
-    m_mortarAnimationTimer->setInterval(25);
-    connect(m_mortarAnimationTimer, SIGNAL(timeout()), this, SLOT(updateMortarAnimation()));
     m_fallingAnimationCounter = 0;
-    m_mortarAnimationCounter = 0;
     m_dudBomb = false;
 }
 
@@ -58,7 +56,6 @@ BombItem::~BombItem()
 {
     delete m_pulseTimer;
     delete m_explosionTimer;
-    delete m_mortarAnimationTimer;
 }
 
 QPainterPath BombItem::shape() const
@@ -193,7 +190,7 @@ void BombItem::updateAnimation()
     m_explosionTimer->start();
 }
 
-void BombItem::updateMortar(int nState)
+void BombItem::updateMortar(int nMortarState, int nMortarRampEnd, int nMortarPeak, int nMortarGround)
 {
     if(m_pulseTimer)
     {
@@ -202,58 +199,39 @@ void BombItem::updateMortar(int nState)
         m_pulseTimer = 0;
     }
     
-    switch(nState)
+    if(nMortarState <= 0)
     {
-      case 0:
-            m_mortarAnimationCounter = 0;
-            setVisible(false);
-            setZValue(-1);
-            break;
-        case 1:
-            {
-                m_mortarAnimationCounter = 0;
-                if(!m_mortarAnimationTimer->isActive())
-                {
-                    m_mortarAnimationTimer->start();
-                }
-            }
-            break;
-        case 2:
-            {
-                if(!m_mortarAnimationTimer->isActive())
-                {
-                    m_mortarAnimationCounter = 2;
-                    m_mortarAnimationTimer->start();
-                }
-            }
-            break;
-        case 3:
-        default:
-            if(!m_pulseTimer)
-            {
-                m_pulseTimer = new QTimer(this);
-                m_pulseTimer->setInterval(100);
-                m_pulseTimer->start();
-                connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
-            }
-            m_mortarAnimationTimer->stop();
-            m_mortarAnimationCounter = 0;
-            setRenderSize(m_renderSize);
-            resetTransform();
-            setVisible(true);
-            setZValue(210);
-            break;
+        setVisible(false);
+        setZValue(-1);
+    }
+    else if(nMortarState <= nMortarGround)
+    {
+        updateMortarAnimation(nMortarState, nMortarRampEnd, nMortarPeak);
+    }
+    else
+    {
+        if(!m_pulseTimer)
+        {
+            m_pulseTimer = new QTimer(this);
+            m_pulseTimer->setInterval(nBombPulseTime);
+            m_animationCounter = 1; // set to one, to start pulsing with a small bomb
+            m_pulseTimer->start();
+            connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
+        }
+        setRenderSize(m_renderSize);
+        resetTransform();
+        setVisible(true);
+        setZValue(210);
     }
 }
 
-void BombItem::updateMortarAnimation()
+void BombItem::updateMortarAnimation(int animationCounter, int nMortarRampEnd, int nMortarPeak)
 {
     qreal mortarScale = 1;
     int mortarZValue = 210;
     QTransform transform;
-    
 
-    if(m_mortarAnimationCounter < 2)
+    if(animationCounter < nMortarRampEnd)
     {
         mortarZValue = 210;
     }
@@ -262,8 +240,10 @@ void BombItem::updateMortarAnimation()
         mortarZValue = 800;
     }
     
-    int frame = m_mortarAnimationCounter - 2;
-    mortarScale = 1.5 - (frame-16) * (frame-16) / (qreal) (16*16) * 0.5;
+    int frame = animationCounter - nMortarRampEnd;
+    int peak = nMortarPeak - nMortarRampEnd;
+    
+    mortarScale = 1.5 - (frame-peak) * (frame-peak) / (qreal) (peak*peak) * 0.5;
 
     transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
     setRenderSize(m_renderSize * mortarScale);
@@ -272,8 +252,6 @@ void BombItem::updateMortarAnimation()
     
     setVisible(true);
     setZValue(mortarZValue);
-    
-    m_mortarAnimationCounter++;
 }
 
 void BombItem::fallingAnimation()

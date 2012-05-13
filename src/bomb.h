@@ -236,7 +236,7 @@ signals:
     * Emitted when the Bomb is thrown by the mortar or by the player.
     * @param nState the current state of the mortar
     */
-    void mortar(int nState);
+    void mortar(int nMortarState, int nMortarRampEnd, int nMortarPeak, int nMortarGround);
     
     /**
     * Emitted when the bomb is falling in a hole

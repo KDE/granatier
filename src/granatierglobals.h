@@ -24,6 +24,9 @@
 
 namespace Granatier
 {
+    /** The Frames Per Second for the game */
+    const int FPS = 40;
+    
     /** The Cell size */
     const qreal CellSize = 40.0;
     
