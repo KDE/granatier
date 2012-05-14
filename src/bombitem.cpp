@@ -143,11 +143,22 @@ void BombItem::pulse()
         if (m_animationCounter % 2 == 0)
         {
             m_animationCounter = 0;
+            int width = m_renderSize.width() * 0.96;
+            int height = m_renderSize.height() * 0.96;
+            if(m_renderSize.width() - width < 2)
+            {
+                width = m_renderSize.width() - 2;
+            }
+            if(m_renderSize.height() - height < 2)
+            {
+                height = m_renderSize.height() - 2;
+            }
+            qreal scale =  width / (qreal) (m_renderSize.width());
             // shrink the item
             QTransform transform;
             transform.translate(m_itemSize.width() / 2.0, m_itemSize.height() / 2.0);
-            setRenderSize(m_renderSize * 0.96);
-            transform.translate(-m_itemSize.width() * 0.96 / 2.0, -m_itemSize.height() * 0.96 / 2.0);
+            setRenderSize(QSize(width, height));
+            transform.translate(-m_itemSize.width() * scale / 2.0, -m_itemSize.height() * scale / 2.0);
             setTransform(transform);
         }
         else

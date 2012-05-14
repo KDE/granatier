@@ -677,7 +677,6 @@ void GameScene::resizeSprites()
     }
     QTransform transform;
     transform.scale(1/m_SvgScaleFactor, 1/m_SvgScaleFactor);
-    //transform.translate(-20,-10);
     views().first()->setTransform(transform);
     views().first()->centerOn(sceneRect().center());
     views().first()->updateSceneRect(m_minSize);;

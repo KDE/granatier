@@ -206,8 +206,6 @@ Game::~Game()
     qDeleteAll(m_players);
     m_players.clear();
     
-    //TODO: delete bombs, bonuses and blocks
-    
     cleanUp();
     
     delete m_soundPutBomb;
