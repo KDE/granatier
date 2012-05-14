@@ -32,6 +32,7 @@ ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRende
     connect(p_model, SIGNAL(moved(qreal,qreal)), this, SLOT(update(qreal,qreal)));
     
     m_renderSize = QSize(1, 1);
+    m_itemSize = QSize(Granatier::CellSize, Granatier::CellSize);
 }
 
 ElementItem::~ElementItem()
@@ -53,8 +54,8 @@ QPainterPath ElementItem::shape() const
 void ElementItem::update(qreal p_x, qreal p_y)
 {
     // Compute the top-right coordinates of the item
-    qreal x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
-    qreal y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
+    qreal x = p_x - m_itemSize.width() / 2;
+    qreal y = p_y - m_itemSize.height() / 2;
 
     // Updates the view coordinates
     setPos(x, y);
@@ -67,14 +68,13 @@ void ElementItem::updateGraphics(qreal svgScaleFactor)
         return;
     }
     
-    QSize svgSize = renderer()->boundsOnSprite(spriteKey()).size().toSize();
-    
     QPoint topLeft(0, 0);
     topLeft = scene()->views().at(0)->mapFromScene(topLeft);
     
-    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+    QPoint bottomRight(m_itemSize.width(), m_itemSize.height()); 
     bottomRight = scene()->views().at(0)->mapFromScene(bottomRight);
     
+    QSize svgSize;
     svgSize.setHeight(bottomRight.y() - topLeft.y());
     svgSize.setWidth(bottomRight.x() - topLeft.x());
     

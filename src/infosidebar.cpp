@@ -47,7 +47,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
     for(int i = 0; i < playerList.count(); i++)
     {
         QGraphicsTextItem playerName (playerList[i]->getPlayerName());
-        playerName.setFont(QFont("Helvetica", 10, QFont::Bold, false));
+        playerName.setFont(QFont("Helvetica", Granatier::CellSize * 0.25, QFont::Bold, false));
         if(nMaxPlayerNameLength < playerName.boundingRect().width())
         {
             nMaxPlayerNameLength = playerName.boundingRect().width();
@@ -84,7 +84,6 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         {
             svgItem = new KGameRenderedItem(renderer, "player_0");
             svgItem->setZValue(1001);
-            svgItem->setScale(0.5);
             svgItem->setPos(nLeft, nTop + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
             m_mapPlayerSvgs.insert(playerList[i], svgItem);
@@ -92,10 +91,10 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         
         //create the player names
         QGraphicsTextItem* playerName = new QGraphicsTextItem(playerList[i]->getPlayerName());
-        playerName->setFont(QFont("Helvetica", 10, QFont::Bold, false));
+        playerName->setFont(QFont("Helvetica", Granatier::CellSize * 0.25, QFont::Bold, false));
         playerName->setDefaultTextColor(QColor("#FFFF00"));
         playerName->setZValue(1001);
-        playerName->setPos(nLeft + Granatier::CellSize / 2 + 2, nTop + i * (nHeight+4) - 4);//(playerName->boundingRect().height() + Granatier::CellSize / 2 + 4));
+        playerName->setPos(nLeft + Granatier::CellSize / 2 + 2, nTop + i * (nHeight+4) - 4);
         m_gameScene->addItem(playerName);
         m_mapPlayerNames.insert(playerList[i], playerName);
         
@@ -106,7 +105,6 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             //create the bonus shield icons
             svgItem = new KGameRenderedItem(renderer, "bonus_shield");
             svgItem->setZValue(1001);
-            svgItem->setScale(0.5);
             svgItem->setPos(nLeft, nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
             m_mapBonusShieldSvgs.insert(playerList[i], svgItem);
@@ -115,14 +113,13 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             rectItem->setBrush(dimmRectBrush);
             rectItem->setPen(dimmRectPen);
             rectItem->setZValue(1002);
-            rectItem->setRect(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5, svgItem->boundingRect().width()/2.0+1, svgItem->boundingRect().height()/2.0+1);
+            rectItem->setPos(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5);
             m_gameScene->addItem(rectItem);
             m_mapBonusShieldDimm.insert(playerList[i], rectItem);
             
             //create the bonus throw icons
             svgItem = new KGameRenderedItem(renderer, "bonus_throw");
             svgItem->setZValue(1001);
-            svgItem->setScale(0.5);
             svgItem->setPos(nLeft + Granatier::CellSize / 2 + 4, nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
             m_mapBonusThrowSvgs.insert(playerList[i], svgItem);
@@ -131,14 +128,13 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             rectItem->setBrush(dimmRectBrush);
             rectItem->setPen(dimmRectPen);
             rectItem->setZValue(1002);
-            rectItem->setRect(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5, svgItem->boundingRect().width()/2.0+1, svgItem->boundingRect().height()/2.0+1);
+            rectItem->setPos(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5);
             m_gameScene->addItem(rectItem);
             m_mapBonusThrowDimm.insert(playerList[i], rectItem);
             
             //create the bonus kick icons
             svgItem = new KGameRenderedItem(renderer, "bonus_kick");
             svgItem->setZValue(1001);
-            svgItem->setScale(0.5);
             svgItem->setPos(nLeft + 2 * (Granatier::CellSize / 2 + 4), nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
             m_mapBonusKickSvgs.insert(playerList[i], svgItem);
@@ -147,14 +143,13 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             rectItem->setBrush(dimmRectBrush);
             rectItem->setPen(dimmRectPen);
             rectItem->setZValue(1002);
-            rectItem->setRect(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5, svgItem->boundingRect().width()/2.0+1, svgItem->boundingRect().height()/2.0+1);
+            rectItem->setPos(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5);
             m_gameScene->addItem(rectItem);
             m_mapBonusKickDimm.insert(playerList[i], rectItem);
             
             //create the bad bonus icons
             svgItem = new KGameRenderedItem(renderer, "bonus_bad_restrain");
             svgItem->setZValue(1001);
-            svgItem->setScale(0.5);
             svgItem->setPos(nLeft + 3 * (Granatier::CellSize / 2 + 4), nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(svgItem);
             m_mapBadBonusSvgs.insert(playerList[i], svgItem);
@@ -163,7 +158,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             rectItem->setBrush(dimmRectBrush);
             rectItem->setPen(dimmRectPen);
             rectItem->setZValue(1002);
-            rectItem->setRect(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5, svgItem->boundingRect().width()/2.0+1, svgItem->boundingRect().height()/2.0+1);
+            rectItem->setPos(svgItem->pos().x()-0.5, svgItem->pos().y()-0.5);
             m_gameScene->addItem(rectItem);
             m_mapBadBonusDimm.insert(playerList[i], rectItem);
         }
@@ -351,9 +346,6 @@ void InfoSidebar::reset()
         m_mapBonusThrowDimm.value(playerList[i])->setVisible(true);
         m_mapBonusKickDimm.value(playerList[i])->setVisible(true);
         m_mapBadBonusDimm.value(playerList[i])->setVisible(true);
-        QRectF rect = m_mapBadBonusDimm.value(playerList[i])->rect();
-        rect.setHeight(m_mapBadBonusSvgs.value(playerList[i])->boundingRect().height()/2.0+1);
-        m_mapBadBonusDimm.value(playerList[i])->setRect(rect);
     }
 }
 
@@ -451,21 +443,19 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
                     QGraphicsRectItem* rectItem;
                     QRectF rect;
                     
-                    svgSize = renderer->boundsOnSprite(m_mapBadBonusSvgs.value(player)->spriteKey()).size().toSize();
-                    
-                    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+                    QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
                     bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
                     
                     svgSize.setHeight(bottomRight.y() - topLeft.y());
                     svgSize.setWidth(bottomRight.x() - topLeft.x());
                     
-                    m_mapBadBonusSvgs.value(player)->setRenderSize(svgSize * 0.5);
+                    m_mapBadBonusSvgs.value(player)->setRenderSize(svgSize);
                     m_mapBadBonusSvgs.value(player)->setScale(m_svgScaleFactor);
                     
                     rectItem = m_mapBadBonusDimm.value(player);
                     rect = rectItem->rect();
-                    rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
-                    rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+                    rect.setWidth(svgSize.width() * m_svgScaleFactor);
+                    rect.setHeight(svgSize.height() * m_svgScaleFactor);
                     rectItem->setRect(rect);
                 }
             }
@@ -502,15 +492,13 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     {
         renderer = m_gameScene->renderer(Granatier::Element::PLAYER, i.key());
     
-        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
-        
-        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        QPoint bottomRight(Granatier::CellSize * 0.45, Granatier::CellSize * 0.45); 
         bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
         
-        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setRenderSize(svgSize);
         i.value()->setScale(m_svgScaleFactor);
         
         i++;
@@ -522,21 +510,19 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     {
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
         
-        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
-        
-        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
         bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
         
-        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setRenderSize(svgSize);
         i.value()->setScale(m_svgScaleFactor);
         
         rectItem = m_mapBonusThrowDimm.value(i.key());
         rect = rectItem->rect();
-        rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
-        rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+        rect.setWidth(svgSize.width() * m_svgScaleFactor);
+        rect.setHeight(svgSize.height() * m_svgScaleFactor);
         rectItem->setRect(rect);
         i++;
     }
@@ -547,21 +533,19 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     {
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
     
-        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
-        
-        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
         bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
         
-        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setRenderSize(svgSize);
         i.value()->setScale(m_svgScaleFactor);
         
         rectItem = m_mapBonusKickDimm.value(i.key());
         rect = rectItem->rect();
-        rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
-        rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+        rect.setWidth(svgSize.width() * m_svgScaleFactor);
+        rect.setHeight(svgSize.height() * m_svgScaleFactor);
         rectItem->setRect(rect);
         i++;
     }
@@ -572,21 +556,19 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     {
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
     
-        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
-        
-        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
         bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
         
-        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setRenderSize(svgSize);
         i.value()->setScale(m_svgScaleFactor);
         
         rectItem = m_mapBonusShieldDimm.value(i.key());
         rect = rectItem->rect();
-        rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
-        rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+        rect.setWidth(svgSize.width() * m_svgScaleFactor);
+        rect.setHeight(svgSize.height() * m_svgScaleFactor);
         rectItem->setRect(rect);
         i++;
     }
@@ -597,21 +579,19 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     {
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
     
-        svgSize = renderer->boundsOnSprite(i.value()->spriteKey()).size().toSize();
-        
-        QPoint bottomRight(svgSize.width(), svgSize.height()); 
+        QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
         bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
         
-        i.value()->setRenderSize(svgSize * 0.5);
+        i.value()->setRenderSize(svgSize);
         i.value()->setScale(m_svgScaleFactor);
         
         rectItem = m_mapBadBonusDimm.value(i.key());
         rect = rectItem->rect();
-        rect.setWidth(svgSize.width() * 0.5 * m_svgScaleFactor +1);
-        rect.setHeight(svgSize.height() * 0.5 * m_svgScaleFactor +1);
+        rect.setWidth(svgSize.width() * m_svgScaleFactor);
+        rect.setHeight(svgSize.height() * m_svgScaleFactor);
         rectItem->setRect(rect);
         i++;
     }

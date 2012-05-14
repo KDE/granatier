@@ -40,6 +40,8 @@ protected:
     Element* m_model;
     
     QSize m_renderSize;
+    
+    QSize m_itemSize;
 
 public:
 

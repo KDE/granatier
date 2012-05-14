@@ -35,8 +35,6 @@
 #include "ui_arenaselector.h"
 #include "arenasettings.h"
 
-#include "QDebug"
-
 class ArenaSelector::ArenaSelectorPrivate
 {
     public:
@@ -411,14 +409,13 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview(QListWidgetItem* curr
 
 QSize ArenaSelector::ArenaSelectorPrivate::calculateSvgSize(KGameRenderedItem* arenaItem)
 {
-    QSize svgSize = m_renderer->boundsOnSprite(arenaItem->spriteKey()).size().toSize();
-    
     QPoint topLeft(0, 0); 
     topLeft = m_graphicsScene->views().at(0)->mapFromScene(topLeft);
     
-    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+    QPoint bottomRight(Granatier::CellSize, Granatier::CellSize); 
     bottomRight = m_graphicsScene->views().at(0)->mapFromScene(bottomRight);
     
+    QSize svgSize;
     svgSize.setHeight(bottomRight.y() - topLeft.y());
     svgSize.setWidth(bottomRight.x() - topLeft.x());
     

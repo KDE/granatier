@@ -34,19 +34,23 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
     {
         case Granatier::Direction::NORTH:
             setSpriteKey("bomb_blast_north_0");
+            m_itemSize = QSize(Granatier::CellSize * 0.5, Granatier::CellSize * 1.5);
             break;
         case Granatier::Direction::EAST:
             setSpriteKey("bomb_blast_east_0");
+            m_itemSize = QSize(Granatier::CellSize * 1.5, Granatier::CellSize * 0.5);
             break;
         case Granatier::Direction::SOUTH:
             setSpriteKey("bomb_blast_south_0");
+            m_itemSize = QSize(Granatier::CellSize * 0.5, Granatier::CellSize * 1.5);
             break;
         case Granatier::Direction::WEST:
             setSpriteKey("bomb_blast_west_0");
+            m_itemSize = QSize(Granatier::CellSize * 1.5, Granatier::CellSize * 0.5);
             break;
     }
     
-    QSize svgSize = renderer->boundsOnSprite(spriteKey()).size().toSize() / m_svgScaleFactor;
+    QSize svgSize = m_itemSize / m_svgScaleFactor;
     setRenderSize(svgSize);
     setScale(m_svgScaleFactor);
 }
@@ -80,23 +84,23 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
     switch(m_direction)
     {
         case Granatier::Direction::NORTH:
-            x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
+            x = p_x - m_itemSize.width() / 2;
             y = p_y - Granatier::CellSize/2;
             setPos(x, y);
             break;
         case Granatier::Direction::EAST:
             x = p_x - Granatier::CellSize;
-            y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
+            y = p_y - m_itemSize.height() / 2;
             setPos(x, y);
             break;
         case Granatier::Direction::SOUTH:
-            x = p_x - renderer()->boundsOnSprite(spriteKey()).width() / 2;
+            x = p_x - m_itemSize.width() / 2;
             y = p_y - Granatier::CellSize;
             setPos(x, y);
             break;
         case Granatier::Direction::WEST:
             x = p_x - Granatier::CellSize/2;
-            y = p_y - renderer()->boundsOnSprite(spriteKey()).height() / 2;
+            y = p_y - m_itemSize.height() / 2;
             setPos(x, y);
             break;
     }
@@ -124,14 +128,13 @@ void BombExplosionItem::updateAnimationn(int nFrame)
 
 void BombExplosionItem::updateGraphics(qreal svgScaleFactor)
 {
-    QSize svgSize = renderer()->boundsOnSprite(spriteKey()).size().toSize();
-    
     QPoint topLeft(0, 0);
     topLeft = scene()->views().at(0)->mapFromScene(topLeft);
     
-    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+    QPoint bottomRight(m_itemSize.width(), m_itemSize.height()); 
     bottomRight = scene()->views().at(0)->mapFromScene(bottomRight);
     
+    QSize svgSize;
     svgSize.setHeight(bottomRight.y() - topLeft.y());
     svgSize.setWidth(bottomRight.x() - topLeft.x());
     

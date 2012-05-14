@@ -51,6 +51,8 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
     m_animationTimer->setDuration(PlayerItem::ANIM_SPEED);
     connect(m_animationTimer, SIGNAL(frameChanged(int)), this, SLOT(setFrame(int)));
     
+    m_itemSize = QSize(Granatier::CellSize * 0.9, Granatier::CellSize * 0.9);
+    
     if(m_renderer->spriteExists("player_0"))
     {
         setSpriteKey("player_0");
@@ -81,7 +83,7 @@ void PlayerItem::resurrect()
     }
     
     QTransform transform;
-    transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
+    transform.translate(m_itemSize.width() / 2.0, m_itemSize.width() / 2.0);
     // get the angle
     switch(nDirection)
     {
@@ -101,7 +103,7 @@ void PlayerItem::resurrect()
             transform.rotate(0);
             break;
     }
-    transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
+    transform.translate(-m_itemSize.width() / 2.0, -m_itemSize.width() / 2.0);
     setTransform(transform);
     
     startAnim();
@@ -114,7 +116,7 @@ void PlayerItem::updateDirection()
     int nDirection = dynamic_cast <Player*> (m_model)->direction();
     // Rotate the item
     QTransform transform;
-    transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
+    transform.translate(m_itemSize.width() / 2.0, m_itemSize.width() / 2.0);
     // get the angle
     switch(nDirection)
     {
@@ -134,7 +136,7 @@ void PlayerItem::updateDirection()
             transform.rotate(0);
             break;
     }
-    transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() / 2, -renderer()->boundsOnSprite(spriteKey()).height() / 2);
+    transform.translate(-m_itemSize.width() / 2.0, -m_itemSize.width() / 2.0);
     setTransform(transform);
 }
 
@@ -274,10 +276,10 @@ void PlayerItem::setFrame(const int p_frame)
                 setZValue(-2);
                 // shrink the item
                 QTransform transform;
-                transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
+                transform.translate(m_itemSize.width() / 2.0, m_itemSize.width() / 2.0);
                 transform.rotate(angle);
                 setRenderSize(m_renderSize * (1-m_fallingAnimationCounter*0.02));
-                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() * (1-m_fallingAnimationCounter*0.02) / 2, -renderer()->boundsOnSprite(spriteKey()).height() * (1-m_fallingAnimationCounter*0.02) / 2);
+                transform.translate(-m_itemSize.width() * (1-m_fallingAnimationCounter*0.02) / 2.0, -m_itemSize.width() * (1-m_fallingAnimationCounter*0.02) / 2.0);
                 setTransform(transform);
                 m_fallingAnimationCounter++;
                 
@@ -293,7 +295,7 @@ void PlayerItem::setFrame(const int p_frame)
             {
                 qreal resurrectionScale = 1;
                 QTransform transform;
-                transform.translate(renderer()->boundsOnSprite(spriteKey()).width() / 2, renderer()->boundsOnSprite(spriteKey()).height() / 2);
+                transform.translate(m_itemSize.width() / 2.0, m_itemSize.width() / 2.0);
                 transform.rotate(angle);
                 if(m_resurrectionAnimationCounter > 9)
                 {
@@ -344,7 +346,7 @@ void PlayerItem::setFrame(const int p_frame)
                 }
                 
                 setRenderSize(m_renderSize * resurrectionScale);
-                transform.translate(-renderer()->boundsOnSprite(spriteKey()).width() * resurrectionScale / 2, -renderer()->boundsOnSprite(spriteKey()).height() * resurrectionScale / 2);
+                transform.translate(-m_itemSize.width() * resurrectionScale / 2.0, -m_itemSize.width() * resurrectionScale / 2.0);
                 setTransform(transform);
             }
         }

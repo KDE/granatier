@@ -18,6 +18,7 @@
  */
 
 #include "arenaitem.h"
+#include "granatierglobals.h"
 
 #include <QGraphicsView>
 #include <KGameRenderer>
@@ -34,14 +35,13 @@ ArenaItem::~ArenaItem()
 
 void ArenaItem::updateGraphics(qreal svgScaleFactor)
 {
-    QSize svgSize = renderer()->boundsOnSprite(spriteKey()).size().toSize();
-    
     QPoint topLeft(0, 0);
     topLeft = scene()->views().at(0)->mapFromScene(topLeft);
     
-    QPoint bottomRight(svgSize.width(), svgSize.height()); 
+    QPoint bottomRight(Granatier::CellSize, Granatier::CellSize); 
     bottomRight = scene()->views().at(0)->mapFromScene(bottomRight);
     
+    QSize svgSize;
     svgSize.setHeight(bottomRight.y() - topLeft.y());
     svgSize.setWidth(bottomRight.x() - topLeft.x());
     

@@ -50,6 +50,8 @@ protected:
     
     /** The scale factor from the svg for the pixmap */
     qreal m_svgScaleFactor;
+    
+    QSize m_itemSize;
 
 public:
 

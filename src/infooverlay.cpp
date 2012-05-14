@@ -42,30 +42,13 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     
     KGameRenderer* renderer;
     renderer = m_gameScene->renderer(Granatier::Element::SCORE);
-    QGraphicsTextItem em ("M");
-    //calculate max player name length and top-left position
-    for(int i = 0; i < playerList.count(); i++)
-    {
-        QGraphicsTextItem playerName (playerList[i]->getPlayerName());
-        playerName.setFont(QFont("Helvetica", 15, QFont::Bold, false));
-        if(nMaxPlayerNameLength < playerName.boundingRect().width())
-        {
-            nMaxPlayerNameLength = playerName.boundingRect().width();
-        }
-        if(i == playerList.count() - 1)
-        {
-            KGameRenderedItem score(renderer, "score_star_enabled");
-            nLeft = m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + 10 + nWinPoints * (score.boundingRect().width()+2))/2;
-            nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * em.boundingRect().height();
-        }
-    }
     
     //create the labels
     for(int i = 0; i < playerList.count(); i++)
     {
         QList <KGameRenderedItem*> svgItemList;
         QGraphicsTextItem* playerName = new QGraphicsTextItem(playerList[i]->getPlayerName());
-        playerName->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+        playerName->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
         playerName->setDefaultTextColor(QColor("#FFFF00"));
         playerName->setZValue(2001);
         
@@ -82,37 +65,37 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     QString strContinue (i18n("Press Space to continue"));
     
     m_continueLabel = new QGraphicsTextItem(strContinue);
-    m_continueLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_continueLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
     m_continueLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_continueLabel->setZValue(2001);
     
     m_newGameLabel = new QGraphicsTextItem(i18n("Press Space to start a new Game"));
-    m_newGameLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_newGameLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
     m_newGameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_newGameLabel->setZValue(2001);
     
     m_gameOverLabel = new QGraphicsTextItem;;
-    m_gameOverLabel->setFont(QFont("Helvetica", 20, QFont::Bold, false));
+    m_gameOverLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.5, QFont::Bold, false));
     m_gameOverLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_gameOverLabel->setZValue(2001);
     
     m_getReadyLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
-    m_getReadyLabel->setFont(QFont("Helvetica", 25, QFont::Bold, false));
+    m_getReadyLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.6, QFont::Bold, false));
     m_getReadyLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_getReadyLabel->setZValue(2001);
     
     m_startGameLabel = new QGraphicsTextItem(i18n("Press Space to start"));
-    m_startGameLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_startGameLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
     m_startGameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_startGameLabel->setZValue(2001);
     
     m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
-    m_pauseLabel->setFont(QFont("Helvetica", 35, QFont::Bold, false));
+    m_pauseLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.8, QFont::Bold, false));
     m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_pauseLabel->setZValue(2001);
     
     m_continueAfterPauseLabel = new QGraphicsTextItem(strContinue);
-    m_continueAfterPauseLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_continueAfterPauseLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
     m_continueAfterPauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_continueAfterPauseLabel->setZValue(2001);
     
@@ -338,22 +321,23 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     int nTop = 0;
     int nLeft = 0;
     
+    QGraphicsTextItem* playerName;
     KGameRenderer* renderer;
     renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     QGraphicsTextItem em ("M");
+    em.setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
     //calculate max player name length and top-left position
     for(int i = 0; i < playerList.count(); i++)
     {
-        QGraphicsTextItem playerName (playerList[i]->getPlayerName());
-        playerName.setFont(QFont("Helvetica", 15, QFont::Bold, false));
-        if(nMaxPlayerNameLength < playerName.boundingRect().width())
+        playerName = m_mapPlayerNames.value(playerList.at(i));
+        if(nMaxPlayerNameLength < playerName->boundingRect().width())
         {
-            nMaxPlayerNameLength = playerName.boundingRect().width();
+            nMaxPlayerNameLength = playerName->boundingRect().width();
         }
         if(i == playerList.count() - 1)
         {
             KGameRenderedItem score(renderer, "score_star_enabled");
-            nLeft = m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + 10 + nWinPoints * (renderer->boundsOnSprite("score_star_enabled").width()+2))/2;
+            nLeft = m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + em.boundingRect().width()/2 + nWinPoints * (Granatier::CellSize * 0.6 + em.boundingRect().width()/5))/2;
             nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * em.boundingRect().height();
         }
     }
@@ -362,22 +346,18 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     QPoint topLeft(0, 0);
     topLeft = m_gameScene->views().at(0)->mapFromScene(topLeft);
     
-    QGraphicsTextItem* playerName;
     KGameRenderedItem* score;
     renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     for(int i = 0; i < playerList.count(); i++)
     {
-        
         playerName = m_mapPlayerNames.value(playerList.at(i));
-        playerName->setPos(nLeft, nTop + i * (em.boundingRect().height() * 1.5));
+        playerName->setPos(nLeft, nTop + i * em.boundingRect().height() * 1.1);
         
         for(int j = 0; j < nWinPoints; j++)
         {
             score = m_mapScore.value(playerList.at(i)).at(j);
             
-            svgSize = renderer->boundsOnSprite(score->spriteKey()).size().toSize();
-            
-            QPoint bottomRight(svgSize.width(), svgSize.height()); 
+            QPoint bottomRight(Granatier::CellSize * 0.6, Granatier::CellSize * 0.6);
             bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
             
             svgSize.setHeight(bottomRight.y() - topLeft.y());
@@ -386,8 +366,8 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
             score->setRenderSize(svgSize);
             score->setScale(svgScaleFactor);
             
-            score->setPos(nLeft + nMaxPlayerNameLength + 10 + j * (renderer->boundsOnSprite(score->spriteKey()).width()+2),
-                          playerName->pos().y() + em.boundingRect().height()*2/3 - renderer->boundsOnSprite(score->spriteKey()).height()/2);
+            score->setPos(nLeft + nMaxPlayerNameLength + em.boundingRect().width()/2 + j * (Granatier::CellSize * 0.6 + em.boundingRect().width()/5),
+                          playerName->pos().y() + em.boundingRect().height()/2.5 - (Granatier::CellSize * 0.6) / 2);
             
         }
     }

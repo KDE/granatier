@@ -46,6 +46,8 @@
 #include <KGameRenderer>
 #include <KGameRenderedItem>
 
+#include <cmath>
+
 GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_game), m_themeProvider(p_themeProvider)
 {
     connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
@@ -84,12 +86,12 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     
     // The remaining time
     m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
-    m_remainingTimeLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_remainingTimeLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_remainingTimeLabel->setZValue(1000);
     
     m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
-    m_arenaNameLabel->setFont(QFont("Helvetica", 15, QFont::Bold, false));
+    m_arenaNameLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
     m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_arenaNameLabel->setZValue(1000);
     
@@ -98,9 +100,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
                  m_game->getArena()->getNbRows()*Granatier::CellSize + m_remainingTimeLabel->boundingRect().height());
     
     // setup the theme renderer
-    //KgTheme* theme = new KgTheme(m_themeProvider->currentTheme()->identifier());
-    //theme->setGraphicsPath(m_themeProvider->currentTheme()->graphicsPath());
-    m_rendererSelectedTheme = new KGameRenderer(m_themeProvider);//theme);
+    m_rendererSelectedTheme = new KGameRenderer(m_themeProvider);
     m_rendererDefaultTheme = 0;
     setupThemeRenderer();
     
@@ -126,13 +126,14 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     connect(this, SIGNAL(resizeGraphics(qreal)), m_infoOverlay, SLOT(updateGraphics(qreal)));
     
     init();
-    
     //at this point, sceneRect() has the minimum size for the scene
     m_minSize = sceneRect();
-    m_minSize.setX((int) ((int)m_minSize.x() - ((int)m_minSize.x() % (int)Granatier::CellSize)) - Granatier::CellSize/4);
-    m_minSize.setY((int) ((int)m_minSize.y() - ((int)m_minSize.y() % (int)Granatier::CellSize)) - Granatier::CellSize/4);
-    m_minSize.setHeight(((int) (m_minSize.height() / Granatier::CellSize) + 1) * Granatier::CellSize);
-    m_minSize.setWidth(((int) (m_minSize.width() / Granatier::CellSize) + 1) * Granatier::CellSize);
+    int minWidth = ((int) (m_minSize.width() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
+    int minHeight = ((int) (m_minSize.height() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
+    m_minSize.setX(m_minSize.x() + (m_minSize.width() - minWidth) / 10);
+    m_minSize.setY(m_minSize.y() + (m_minSize.height() - minHeight) / 4);
+    m_minSize.setWidth(minWidth);
+    m_minSize.setHeight(minHeight);
     setSceneRect(m_minSize);
 }
 

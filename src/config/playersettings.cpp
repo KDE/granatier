@@ -22,8 +22,6 @@
 #include <KConfig>
 #include <KConfigGroup>
 
-#include <QDebug>
-
 PlayerSettings::PlayerSettings()
 {
     QStringList playersAvailable;
