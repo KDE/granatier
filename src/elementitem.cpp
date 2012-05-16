@@ -32,7 +32,8 @@ ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRende
     connect(p_model, SIGNAL(moved(qreal,qreal)), this, SLOT(update(qreal,qreal)));
     
     m_renderSize = QSize(1, 1);
-    m_itemSize = QSize(Granatier::CellSize, Granatier::CellSize);
+    m_itemSizeSet = QSize(Granatier::CellSize, Granatier::CellSize);
+    m_itemSizeReal = m_itemSizeSet;
 }
 
 ElementItem::~ElementItem()
@@ -54,8 +55,8 @@ QPainterPath ElementItem::shape() const
 void ElementItem::update(qreal p_x, qreal p_y)
 {
     // Compute the top-right coordinates of the item
-    qreal x = p_x - m_itemSize.width() / 2;
-    qreal y = p_y - m_itemSize.height() / 2;
+    qreal x = p_x - m_itemSizeSet.width() / 2;
+    qreal y = p_y - m_itemSizeSet.height() / 2;
 
     // Updates the view coordinates
     setPos(x, y);
@@ -63,22 +64,48 @@ void ElementItem::update(qreal p_x, qreal p_y)
 
 void ElementItem::updateGraphics(qreal svgScaleFactor)
 {
+    updateGraphicsInternal(svgScaleFactor);
+}
+
+void ElementItem::updateGraphicsInternal(qreal svgScaleFactor)
+{
     if(scene()->views().isEmpty())
     {
         return;
     }
     
-    QPoint topLeft(0, 0);
-    topLeft = scene()->views().at(0)->mapFromScene(topLeft);
+    //calculate the size of the item on the view
+    QPoint viewTopLeft = scene()->views().first()->mapFromScene(0, 0);
+    QPoint viewBottomRight = scene()->views().first()->mapFromScene(m_itemSizeSet.width(), m_itemSizeSet.height());
     
-    QPoint bottomRight(m_itemSize.width(), m_itemSize.height()); 
-    bottomRight = scene()->views().at(0)->mapFromScene(bottomRight);
+    int viewWidth = viewBottomRight.x() - viewTopLeft.x();
+    int viewHeight = viewBottomRight.y() - viewTopLeft.y();
     
-    QSize svgSize;
-    svgSize.setHeight(bottomRight.y() - topLeft.y());
-    svgSize.setWidth(bottomRight.x() - topLeft.x());
+    //for better alignment, if the item size is different from the cell size, make the difference between the cell size and item size always even
+    if(m_itemSizeSet.width() != Granatier::CellSize || m_itemSizeSet.height() != Granatier::CellSize)
+    {
+        viewBottomRight = scene()->views().first()->mapFromScene(Granatier::CellSize, Granatier::CellSize);
+        int viewCellWidth = viewBottomRight.x() - viewTopLeft.x();
+        int viewCellHeight = viewBottomRight.y() - viewTopLeft.y();
+        if((viewCellWidth - viewWidth) % 2 != 0)
+        {
+            viewWidth--;
+        }
+        if((viewCellHeight - viewHeight) % 2 != 0)
+        {
+            viewHeight--;
+        }
+        
+        //calculate the real item size after change of the render size
+        QPointF sceneTopLeft = scene()->views().first()->mapToScene(0, 0);
+        QPointF sceneBottomRight = scene()->views().first()->mapToScene(viewWidth, viewHeight);
+        
+        qreal sceneWidth = sceneBottomRight.x() - sceneTopLeft.x();
+        qreal sceneHeight = sceneBottomRight.y() - sceneTopLeft.y();
+        m_itemSizeReal = QSize(sceneWidth, sceneHeight);
+    }
     
-    setRenderSize(svgSize);
+    setRenderSize(QSize(viewWidth, viewHeight));
     setScale(svgScaleFactor);
-    m_renderSize = svgSize;
+    m_renderSize = renderSize();
 }

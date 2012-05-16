@@ -51,7 +51,18 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
     m_animationTimer->setDuration(PlayerItem::ANIM_SPEED);
     connect(m_animationTimer, SIGNAL(frameChanged(int)), this, SLOT(setFrame(int)));
     
-    m_itemSize = QSize(Granatier::CellSize * 0.9, Granatier::CellSize * 0.9);
+    int width = Granatier::CellSize * 0.9;
+    int height = Granatier::CellSize * 0.9;
+    if(((int) Granatier::CellSize - width) % 2 != 0)
+    {
+        width--;
+    }
+    if(((int) Granatier::CellSize - height) % 2 != 0)
+    {
+        height--;
+    }
+    m_itemSizeSet = QSize(width, height);
+    m_itemSizeReal = m_itemSizeSet;
     
     if(m_renderer->spriteExists("player_0"))
     {
@@ -76,14 +87,13 @@ void PlayerItem::resurrect()
     m_fallingAnimationCounter = 0;
     m_resurrectionAnimationCounter = 10;
     setRenderSize(m_renderSize);
-    resetTransform();
     if(m_renderer->spriteExists("player_0"))
     {
         setSpriteKey("player_0");
     }
     
     QTransform transform;
-    transform.translate(m_itemSize.width() / 2.0, m_itemSize.width() / 2.0);
+    transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.height() / 2.0);
     // get the angle
     switch(nDirection)
     {
@@ -103,7 +113,7 @@ void PlayerItem::resurrect()
             transform.rotate(0);
             break;
     }
-    transform.translate(-m_itemSize.width() / 2.0, -m_itemSize.width() / 2.0);
+    transform.translate(-m_itemSizeReal.width() / 2.0, -m_itemSizeReal.height() / 2.0);
     setTransform(transform);
     
     startAnim();
@@ -114,9 +124,10 @@ void PlayerItem::resurrect()
 void PlayerItem::updateDirection()
 {
     int nDirection = dynamic_cast <Player*> (m_model)->direction();
+    
     // Rotate the item
     QTransform transform;
-    transform.translate(m_itemSize.width() / 2.0, m_itemSize.width() / 2.0);
+    transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.height() / 2.0);
     // get the angle
     switch(nDirection)
     {
@@ -136,8 +147,14 @@ void PlayerItem::updateDirection()
             transform.rotate(0);
             break;
     }
-    transform.translate(-m_itemSize.width() / 2.0, -m_itemSize.width() / 2.0);
+    transform.translate(-m_itemSizeReal.width() / 2.0, -m_itemSizeReal.height() / 2.0);
     setTransform(transform);
+}
+
+void PlayerItem::updateGraphics(qreal svgScaleFactor)
+{
+    updateGraphicsInternal(svgScaleFactor);
+    updateDirection();
 }
 
 void PlayerItem::manageCollision()
@@ -276,10 +293,10 @@ void PlayerItem::setFrame(const int p_frame)
                 setZValue(-2);
                 // shrink the item
                 QTransform transform;
-                transform.translate(m_itemSize.width() / 2.0, m_itemSize.width() / 2.0);
+                transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.width() / 2.0);
                 transform.rotate(angle);
                 setRenderSize(m_renderSize * (1-m_fallingAnimationCounter*0.02));
-                transform.translate(-m_itemSize.width() * (1-m_fallingAnimationCounter*0.02) / 2.0, -m_itemSize.width() * (1-m_fallingAnimationCounter*0.02) / 2.0);
+                transform.translate(-m_itemSizeReal.width() * (1-m_fallingAnimationCounter*0.02) / 2.0, -m_itemSizeReal.width() * (1-m_fallingAnimationCounter*0.02) / 2.0);
                 setTransform(transform);
                 m_fallingAnimationCounter++;
                 
@@ -295,7 +312,7 @@ void PlayerItem::setFrame(const int p_frame)
             {
                 qreal resurrectionScale = 1;
                 QTransform transform;
-                transform.translate(m_itemSize.width() / 2.0, m_itemSize.width() / 2.0);
+                transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.width() / 2.0);
                 transform.rotate(angle);
                 if(m_resurrectionAnimationCounter > 9)
                 {
@@ -346,7 +363,7 @@ void PlayerItem::setFrame(const int p_frame)
                 }
                 
                 setRenderSize(m_renderSize * resurrectionScale);
-                transform.translate(-m_itemSize.width() * resurrectionScale / 2.0, -m_itemSize.width() * resurrectionScale / 2.0);
+                transform.translate(-m_itemSizeReal.width() * resurrectionScale / 2.0, -m_itemSizeReal.width() * resurrectionScale / 2.0);
                 setTransform(transform);
             }
         }
@@ -359,8 +376,11 @@ void PlayerItem::setDead()
     setZValue(1);
     if(m_resurrectionAnimationCounter != 0)
     {
+        QTransform transform;
+        transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.height() / 2.0);
         setRenderSize(m_renderSize);
-        resetTransform();
+        transform.translate(-m_itemSizeReal.width() / 2.0, -m_itemSizeReal.height() / 2.0);
+        setTransform(transform);
     }
     if(m_renderer->spriteExists("player_death"))
     {

@@ -344,7 +344,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     
     QSize svgSize;
     QPoint topLeft(0, 0);
-    topLeft = m_gameScene->views().at(0)->mapFromScene(topLeft);
+    topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
     
     KGameRenderedItem* score;
     renderer = m_gameScene->renderer(Granatier::Element::SCORE);
@@ -358,7 +358,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
             score = m_mapScore.value(playerList.at(i)).at(j);
             
             QPoint bottomRight(Granatier::CellSize * 0.6, Granatier::CellSize * 0.6);
-            bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+            bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
             
             svgSize.setHeight(bottomRight.y() - topLeft.y());
             svgSize.setWidth(bottomRight.x() - topLeft.x());

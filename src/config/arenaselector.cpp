@@ -409,11 +409,16 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview(QListWidgetItem* curr
 
 QSize ArenaSelector::ArenaSelectorPrivate::calculateSvgSize(KGameRenderedItem* arenaItem)
 {
+    if(m_graphicsScene->views().isEmpty())
+    {
+        return QSize(1, 1);
+    }
+    
     QPoint topLeft(0, 0); 
-    topLeft = m_graphicsScene->views().at(0)->mapFromScene(topLeft);
+    topLeft = m_graphicsScene->views().first()->mapFromScene(topLeft);
     
     QPoint bottomRight(Granatier::CellSize, Granatier::CellSize); 
-    bottomRight = m_graphicsScene->views().at(0)->mapFromScene(bottomRight);
+    bottomRight = m_graphicsScene->views().first()->mapFromScene(bottomRight);
     
     QSize svgSize;
     svgSize.setHeight(bottomRight.y() - topLeft.y());

@@ -35,16 +35,17 @@ ArenaItem::~ArenaItem()
 
 void ArenaItem::updateGraphics(qreal svgScaleFactor)
 {
-    QPoint topLeft(0, 0);
-    topLeft = scene()->views().at(0)->mapFromScene(topLeft);
+    if(scene()->views().isEmpty())
+    {
+        return;
+    }
     
-    QPoint bottomRight(Granatier::CellSize, Granatier::CellSize); 
-    bottomRight = scene()->views().at(0)->mapFromScene(bottomRight);
+    QPoint topLeft = scene()->views().first()->mapFromScene(0, 0);
+    QPoint bottomRight = scene()->views().first()->mapFromScene(Granatier::CellSize, Granatier::CellSize);
     
-    QSize svgSize;
-    svgSize.setHeight(bottomRight.y() - topLeft.y());
-    svgSize.setWidth(bottomRight.x() - topLeft.x());
+    int width = bottomRight.x() - topLeft.x();
+    int heigth = bottomRight.y() - topLeft.y();
     
-    setRenderSize(svgSize);
+    setRenderSize(QSize(width, heigth));
     setScale(svgScaleFactor);
 }

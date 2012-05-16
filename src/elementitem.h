@@ -41,7 +41,8 @@ protected:
     
     QSize m_renderSize;
     
-    QSize m_itemSize;
+    QSize m_itemSizeSet;
+    QSize m_itemSizeReal;
 
 public:
 
@@ -82,6 +83,9 @@ public slots:
      * @param svgScaleFactor the scaling factor between svg and rendered pixmap
      */
     virtual void updateGraphics(qreal svgScaleFactor);
+    
+protected:
+    virtual void updateGraphicsInternal(qreal svgScaleFactor);
 };
 
 #endif

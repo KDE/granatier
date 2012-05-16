@@ -46,8 +46,8 @@ QPainterPath CharacterItem::shape() const
 void CharacterItem::update(qreal p_x, qreal p_y)
 {
     // Compute the top-right coordinates of the item
-    qreal x = p_x - m_itemSize.width() / 2;
-    qreal y = p_y - m_itemSize.height() / 2;
+    qreal x = p_x - m_itemSizeSet.width() / 2;
+    qreal y = p_y - m_itemSizeSet.height() / 2;
     // Updates the view coordinates
     setPos(x, y);
 }

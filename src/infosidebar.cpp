@@ -356,6 +356,11 @@ QRectF InfoSidebar::rect()
 
 void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusType, int percentageElapsed)
 {
+    if(m_gameScene->views().isEmpty())
+    {
+        return;
+    }
+    
     switch((int)bonusType)
     {
         case Granatier::Bonus::SHIELD:
@@ -439,12 +444,12 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
                     //calculate graphics size
                     QSize svgSize;
                     QPoint topLeft(0, 0);
-                    topLeft = m_gameScene->views().at(0)->mapFromScene(topLeft);
+                    topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
                     QGraphicsRectItem* rectItem;
                     QRectF rect;
                     
                     QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
-                    bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+                    bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
                     
                     svgSize.setHeight(bottomRight.y() - topLeft.y());
                     svgSize.setWidth(bottomRight.x() - topLeft.x());
@@ -480,7 +485,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     KGameRenderer* renderer;
     QSize svgSize;
     QPoint topLeft(0, 0);
-    topLeft = m_gameScene->views().at(0)->mapFromScene(topLeft);
+    topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
     QGraphicsRectItem* rectItem;
     QRectF rect;
     
@@ -493,7 +498,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         renderer = m_gameScene->renderer(Granatier::Element::PLAYER, i.key());
     
         QPoint bottomRight(Granatier::CellSize * 0.45, Granatier::CellSize * 0.45); 
-        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
@@ -511,7 +516,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
         
         QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
-        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
@@ -534,7 +539,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
     
         QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
-        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
@@ -557,7 +562,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
     
         QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
-        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());
@@ -580,7 +585,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
     
         QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
-        bottomRight = m_gameScene->views().at(0)->mapFromScene(bottomRight);
+        bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
         svgSize.setHeight(bottomRight.y() - topLeft.y());
         svgSize.setWidth(bottomRight.x() - topLeft.x());

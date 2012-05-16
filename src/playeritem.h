@@ -73,6 +73,8 @@ public slots:
       * Rotates the image function of the Player direction.
       */
     void updateDirection();
+    
+    void updateGraphics(qreal svgScaleFactor);
 
     /**
       * Manages the collisions with any Element.
