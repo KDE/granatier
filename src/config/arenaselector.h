@@ -47,11 +47,15 @@ class ArenaSelector : public QWidget
 {
 Q_OBJECT
 public:
-  enum NewStuffState
-  {
-      NewStuffDisableDownload,
-      NewStuffEnableDownload
-  };
+    ///Flags which control the behavior of ArenaSelector.
+    enum Option {
+        DefaultBehavior = 0,
+        ///Enable downloading of additional themes with KNewStuff3.
+        ///This requires a KNS3 config file to be installed for this app.
+        EnableNewStuffDownload = 1 << 0
+    };
+    Q_DECLARE_FLAGS(Options, Option)
+    
     /**
     * Load a specific arena file.
     * @param parent the parent widget
@@ -61,7 +65,7 @@ public:
     * @param directory subdirectory (of share/apps/appname) to search in
     * @return true if the arena files and properties could be loaded
     */
-    ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, ArenaSelector::NewStuffState knsflags = ArenaSelector::NewStuffEnableDownload, const QString& groupName = QLatin1String("Arena"), const QString& directory = QLatin1String("arenas"));
+    ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, Options options = DefaultBehavior, const QString& groupName = QLatin1String("Arena"), const QString& directory = QLatin1String("arenas"));
     virtual ~ArenaSelector();
     
 protected:
@@ -78,8 +82,8 @@ protected:
     void showEvent(QShowEvent* p_event);
 
 private:
-    class ArenaSelectorPrivate;
-    ArenaSelectorPrivate* const d;
+    class Private;
+    Private* const d;
 
     Q_DISABLE_COPY(ArenaSelector)
 

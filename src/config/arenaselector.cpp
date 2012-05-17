@@ -27,7 +27,7 @@
 #include <KGameRenderer>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
-#include <knewstuff2/engine.h>
+#include <KNS3/DownloadDialog>
 #include <KSaveFile>
 #include <QDir>
 #include <KComponentData>
@@ -35,28 +35,14 @@
 #include "ui_arenaselector.h"
 #include "arenasettings.h"
 
-class ArenaSelector::ArenaSelectorPrivate
+class ArenaSelector::Private
 {
     public:
-        ArenaSelectorPrivate(ArenaSelector* parent) : q(parent) , m_arena(NULL), m_graphicsScene(NULL), m_svgScaleFactor(1)
-        {
-            KgTheme* theme = new KgTheme(QByteArray());
-            theme->setGraphicsPath(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
-            m_renderer = new KGameRenderer(theme);
-        }
-        ~ArenaSelectorPrivate()
-        {
-            qDeleteAll(arenaMap);
-            if(m_graphicsScene)
-            {
-                qDeleteAll(m_arenaItems);
-                delete m_graphicsScene;
-            }
-            delete m_renderer;
-            delete m_arena;
-        }
+        Private(ArenaSelector* parent, Options options);
+        ~Private();
 
         ArenaSelector* q;
+        Options m_options;
 
         QMap<QString, ArenaSettings*> arenaMap;
         Ui::ArenaSelectorBase ui;
@@ -72,7 +58,7 @@ class ArenaSelector::ArenaSelectorPrivate
         QStringList* m_randomArenaModeArenaList;
         QStringList m_tempRandomArenaModeArenaList;
 
-        void setupData(KConfigSkeleton* config, ArenaSelector::NewStuffState knsflags);
+        void setupData(KConfigSkeleton* aconfig);
         void findArenas(const QString &initialSelection);
         QSize calculateSvgSize(KGameRenderedItem* arenaItem);
 
@@ -85,13 +71,13 @@ class ArenaSelector::ArenaSelectorPrivate
         void _k_updateRandomArenaModeArenaList(QListWidgetItem* item);
 };
 
-ArenaSelector::ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, ArenaSelector::NewStuffState knsflags, const QString& groupName, const QString& directory)
-    : QWidget(parent), d(new ArenaSelectorPrivate(this))
+ArenaSelector::ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, ArenaSelector::Options options, const QString& groupName, const QString& directory)
+    : QWidget(parent), d(new Private(this, options))
 {
     d->m_randomArenaModeArenaList = randomArenaModeArenaList;
     d->lookupDirectory = directory;
     d->groupName = groupName;
-    d->setupData(aconfig, knsflags);
+    d->setupData(aconfig);
 }
 
 ArenaSelector::~ArenaSelector()
@@ -109,20 +95,45 @@ void ArenaSelector::showEvent(QShowEvent*)
     d->_k_updatePreview();
 }
 
-void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, ArenaSelector::NewStuffState knsflags)
+ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(NULL), m_graphicsScene(NULL), m_svgScaleFactor(1)
+{
+    KgTheme* theme = new KgTheme(QByteArray());
+    theme->setGraphicsPath(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
+    m_renderer = new KGameRenderer(theme);
+}
+
+ArenaSelector::Private::~Private()
+{
+    qDeleteAll(arenaMap);
+    if(m_graphicsScene)
+    {
+        qDeleteAll(m_arenaItems);
+        delete m_graphicsScene;
+    }
+    delete m_renderer;
+    delete m_arena;
+}
+
+void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
 {
     ui.setupUi(q);
-    ui.getNewButton->setIcon(KIcon( QLatin1String( "get-hot-new-stuff" )));
+    
+    //setup KNS button
+    if (m_options & EnableNewStuffDownload)
+    {
+        ui.getNewButton->setIcon(KIcon( QLatin1String( "get-hot-new-stuff" )));
+        connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
+    }
+    else
+    {
+        ui.getNewButton->hide();
+    }
+    
 
     //The lineEdit widget holds our arena path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.
     ui.kcfg_Arena->hide();
     connect(ui.kcfg_Arena, SIGNAL(textChanged(QString)), q, SLOT(_k_updateArenaList(QString)));
-
-    //Disable KNS button?
-    if (knsflags==ArenaSelector::NewStuffDisableDownload) {
-      ui.getNewButton->hide();
-    }
     
     //graphicsscene for new arena preview
     m_graphicsScene = new QGraphicsScene();
@@ -141,12 +152,11 @@ void ArenaSelector::ArenaSelectorPrivate::setupData(KConfigSkeleton * aconfig, A
     KGlobal::dirs()->addResourceType("arenaselector", "data", KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
     findArenas(lastUsedArena);
 
-    connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
     connect(ui.importArenas, SIGNAL(clicked()), q, SLOT(_k_importArenasDialog()));
     connect(ui.kcfg_RandomArenaMode, SIGNAL(toggled(bool)), q, SLOT(_k_setRandomArenaMode(bool)));
 }
 
-void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelection)
+void ArenaSelector::Private::findArenas(const QString &initialSelection)
 {
     qDeleteAll(arenaMap);
     arenaMap.clear();
@@ -246,7 +256,7 @@ void ArenaSelector::ArenaSelectorPrivate::findArenas(const QString &initialSelec
     }
 }
 
-void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview(QListWidgetItem* currentItem, QListWidgetItem* previousItem)
+void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem, QListWidgetItem* previousItem)
 {
     if(currentItem != NULL)
     {
@@ -407,7 +417,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updatePreview(QListWidgetItem* curr
     }
 }
 
-QSize ArenaSelector::ArenaSelectorPrivate::calculateSvgSize(KGameRenderedItem* arenaItem)
+QSize ArenaSelector::Private::calculateSvgSize(KGameRenderedItem* arenaItem)
 {
     if(m_graphicsScene->views().isEmpty())
     {
@@ -427,7 +437,7 @@ QSize ArenaSelector::ArenaSelectorPrivate::calculateSvgSize(KGameRenderedItem* a
     return svgSize;
 }
 
-void ArenaSelector::ArenaSelectorPrivate::_k_updateArenaList(const QString& strArena)
+void ArenaSelector::Private::_k_updateArenaList(const QString& strArena)
 {
     //find arena and set selection to the current arena; happens when pressing "Default"
     if(arenaMap.value(ui.arenaList->currentItem()->text())->fileName() != strArena)
@@ -443,17 +453,17 @@ void ArenaSelector::ArenaSelectorPrivate::_k_updateArenaList(const QString& strA
     }
 }
 
-void ArenaSelector::ArenaSelectorPrivate::_k_openKNewStuffDialog()
+void ArenaSelector::Private::_k_openKNewStuffDialog()
 {
-    KNS::Entry::List entries = KNS::Engine::download();
-    //rescan arena directory
-    QString currentArenaPath = ui.kcfg_Arena->text();
-    if (entries.size()>0) findArenas(currentArenaPath);
-    //Needed as the static KNS constructor made copies
-    qDeleteAll(entries);
+    KNS3::DownloadDialog dialog(q);
+    dialog.exec();
+    if (!dialog.changedEntries().isEmpty())
+    {
+        //TODO: discover new arenas and add them to the list
+    }
 }
 
-void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
+void ArenaSelector::Private::_k_importArenasDialog()
 {
     //find the clanbomber files
     QStringList listClanbomberPaths;
@@ -541,7 +551,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_importArenasDialog()
     findArenas(selArena->fileName());
 }
 
-void ArenaSelector::ArenaSelectorPrivate::_k_setRandomArenaMode(bool randomModeEnabled)
+void ArenaSelector::Private::_k_setRandomArenaMode(bool randomModeEnabled)
 {
     if(!randomModeEnabled)
     {
@@ -582,7 +592,7 @@ void ArenaSelector::ArenaSelectorPrivate::_k_setRandomArenaMode(bool randomModeE
     }
 }
 
-void ArenaSelector::ArenaSelectorPrivate::_k_updateRandomArenaModeArenaList(QListWidgetItem* item)
+void ArenaSelector::Private::_k_updateRandomArenaModeArenaList(QListWidgetItem* item)
 {
     QString arenaName = arenaMap.value(item->text())->fileName();
     arenaName.remove(0, 7); //length of "arenas/"

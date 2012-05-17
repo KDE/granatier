@@ -182,7 +182,7 @@ void MainWindow::showSettings()
     m_currentThemeIdentifier = m_themeProvider->currentTheme()->identifier();
     settingsDialog->addPage(new KgThemeSelector(m_themeProvider, KgThemeSelector::DefaultBehavior, settingsDialog), i18n("Theme"), "games-config-theme");
     // Arena
-    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::NewStuffDisableDownload), i18n("Arena"), "games-config-board");
+    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18n("Arena"), "games-config-board");
     // Player
     settingsDialog->addPage(new PlayerSelector(m_playerSettings, PlayerSelector::DefaultBehavior, settingsDialog), i18n("Player"), "games-config-custom");
     

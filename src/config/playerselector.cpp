@@ -79,7 +79,7 @@ PlayerSelector::PlayerSelector(PlayerSettings* playerSettings, Options options, 
     if (options & EnableNewStuffDownload)
     {
         d->m_knsButton = new QPushButton(KIcon("get-hot-new-stuff"),
-            i18n("Get New Themes..."), this);
+            i18n("Get New Players..."), this);
         layout->addWidget(d->m_knsButton);
         connect(d->m_knsButton, SIGNAL(clicked()), SLOT(_k_showNewStuffDialog()));
     }
