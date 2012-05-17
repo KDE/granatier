@@ -152,7 +152,7 @@ public:
     /**
      * Updates the sprites after a resize.
      */
-    void resizeSprites();
+    void resizeSprites(int delayForBackground = 0);
     
     /**
      * Returns the renderer for the requestet Element Type

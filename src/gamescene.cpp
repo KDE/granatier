@@ -95,10 +95,6 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_arenaNameLabel->setZValue(1000);
     
-    setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
-                 m_game->getArena()->getNbColumns()*Granatier::CellSize,
-                 m_game->getArena()->getNbRows()*Granatier::CellSize + m_remainingTimeLabel->boundingRect().height());
-    
     // setup the theme renderer
     m_rendererSelectedTheme = new KGameRenderer(m_themeProvider);
     m_rendererDefaultTheme = 0;
@@ -106,35 +102,11 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     
     connect(m_themeProvider, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(themeChanged(const KgTheme*)));
     
-    // create the info sidebar
-    m_infoSidebar = new InfoSidebar(m_game, this);
-    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoSidebar, SLOT(updateGraphics(qreal)));
-    
-    //update the sceneRect
-    QRectF oldSceneRect = sceneRect();
-    QRectF sidebarRect = m_infoSidebar->rect();
-    QRectF newSceneRect;
-    newSceneRect.setLeft(oldSceneRect.left() < sidebarRect.left() ? oldSceneRect.left() : sidebarRect.left());
-    newSceneRect.setRight(oldSceneRect.right() > sidebarRect.right() ? oldSceneRect.right() : sidebarRect.right());
-    newSceneRect.setTop(oldSceneRect.top() < sidebarRect.top() ? oldSceneRect.top() : sidebarRect.top());
-    newSceneRect.setBottom(oldSceneRect.bottom() > sidebarRect.bottom() ? oldSceneRect.bottom() : sidebarRect.bottom());
-    newSceneRect.adjust(-5, -5, 5, 5);
-    setSceneRect(newSceneRect);
-    
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, this);
     connect(this, SIGNAL(resizeGraphics(qreal)), m_infoOverlay, SLOT(updateGraphics(qreal)));
     
     init();
-    //at this point, sceneRect() has the minimum size for the scene
-    m_minSize = sceneRect();
-    int minWidth = ((int) (m_minSize.width() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
-    int minHeight = ((int) (m_minSize.height() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
-    m_minSize.setX(m_minSize.x() + (m_minSize.width() - minWidth) / 10);
-    m_minSize.setY(m_minSize.y() + (m_minSize.height() - minHeight) / 4);
-    m_minSize.setWidth(minWidth);
-    m_minSize.setHeight(minHeight);
-    setSceneRect(m_minSize);
 }
 
 void GameScene::setupThemeRenderer()
@@ -260,9 +232,40 @@ void GameScene::init()
     m_arenaNameLabel->setPlainText(m_game->getArena()->getName());
     m_arenaNameLabel->setPos(0, - m_arenaNameLabel->boundingRect().height());
     
+    //this is needed for info sidebar
+    setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
+                 m_game->getArena()->getNbColumns()*Granatier::CellSize,
+                 m_game->getArena()->getNbRows()*Granatier::CellSize + m_remainingTimeLabel->boundingRect().height());
+    
+    // create the info sidebar
+    m_infoSidebar = new InfoSidebar(m_game, this);
+    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoSidebar, SLOT(updateGraphics(qreal)));
+    
+    //update the sceneRect
+    QRectF oldSceneRect = sceneRect();
+    QRectF sidebarRect = m_infoSidebar->rect();
+    QRectF newSceneRect;
+    newSceneRect.setLeft(oldSceneRect.left() < sidebarRect.left() ? oldSceneRect.left() : sidebarRect.left());
+    newSceneRect.setRight(oldSceneRect.right() > sidebarRect.right() ? oldSceneRect.right() : sidebarRect.right());
+    newSceneRect.setTop(oldSceneRect.top() < sidebarRect.top() ? oldSceneRect.top() : sidebarRect.top());
+    newSceneRect.setBottom(oldSceneRect.bottom() > sidebarRect.bottom() ? oldSceneRect.bottom() : sidebarRect.bottom());
+    newSceneRect.adjust(-5, -5, 5, 5);
+    setSceneRect(newSceneRect);
     m_infoSidebar->reset();
     
     m_infoOverlay->showGetReady();
+    
+    //set the minimum size for the scene
+    m_minSize = sceneRect();
+    int minWidth = ((int) (m_minSize.width() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
+    int minHeight = ((int) (m_minSize.height() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
+    m_minSize.setX(m_minSize.x() + (m_minSize.width() - minWidth) / 10);
+    m_minSize.setY(m_minSize.y() + (m_minSize.height() - minHeight) / 4);
+    m_minSize.setWidth(minWidth);
+    m_minSize.setHeight(minHeight);
+    setSceneRect(m_minSize);
+    
+    resizeSprites();
 }
 
 void GameScene::initItemsWithGraphicsFromTheme()
@@ -485,7 +488,6 @@ void GameScene::initItemsWithGraphicsFromTheme()
     addItem(m_arenaBackground);
     
     resizeSprites();
-    resizeBackground();
 }
 
 GameScene::~GameScene()
@@ -495,7 +497,6 @@ GameScene::~GameScene()
     cleanUp();
     
     delete m_infoOverlay;
-    delete m_infoSidebar;
     
     for (int i = 0; i < m_playerItems.size(); i++)
     {
@@ -522,7 +523,7 @@ void GameScene::cleanUp()
 {
     cleanUpItemsWithGraphicsFromTheme();
     
-    m_infoOverlay->hideItems();
+    delete m_infoSidebar;
     
     if(items().contains(m_remainingTimeLabel))
     {
@@ -657,7 +658,7 @@ void GameScene::showScore()
     m_infoOverlay->showScore();
 }
 
-void GameScene::resizeSprites()
+void GameScene::resizeSprites(int delayForBackground)
 {
     if(views().isEmpty())
     {
@@ -696,7 +697,7 @@ void GameScene::resizeSprites()
     m_arenaBackground->setPixmap(m_arenaBackground->pixmap().scaled(viewRect.size()));
     
     m_backgroundResizeTimer->stop();
-    m_backgroundResizeTimer->start(250);
+    m_backgroundResizeTimer->start(delayForBackground);
 }
 
 void GameScene::resizeBackground()

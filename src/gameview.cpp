@@ -42,7 +42,7 @@ GameView::~GameView()
 
 void GameView::resizeEvent(QResizeEvent*)
 {
-    dynamic_cast <GameScene*> (scene())->resizeSprites();
+    dynamic_cast <GameScene*> (scene())->resizeSprites(250);
 }
 
 void GameView::focusOutEvent(QFocusEvent*)
