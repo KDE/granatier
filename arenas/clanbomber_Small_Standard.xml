@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
-<Arena arenaFileVersion="1" rowCount="13" colCount="17">
-  <Row>                 </Row>
-  <Row> =============== </Row>
-  <Row> =p_xxxxxxxxx_p= </Row>
-  <Row> =_=x=_=x=_=x=_= </Row>
-  <Row> =xxx_pxxxp_xxx= </Row>
-  <Row> =x=x=x=x=x=x=x= </Row>
-  <Row> =xxxxxxxxxxxxx= </Row>
-  <Row> =x=x=x=x=x=x=x= </Row>
-  <Row> =xxx_pxxxp_xxx= </Row>
-  <Row> =_=x=_=x=_=x=_= </Row>
-  <Row> =p__xxxxxxxx_p= </Row>
-  <Row> =============== </Row>
-  <Row>                 </Row>
+<Arena arenaFileVersion="1" rowCount="11" colCount="15">
+  <Row>===============</Row>
+  <Row>=p_xxxxxxxxx_p=</Row>
+  <Row>=_=x=_=x=_=x=_=</Row>
+  <Row>=xxx_pxxxp_xxx=</Row>
+  <Row>=x=x=x=x=x=x=x=</Row>
+  <Row>=xxxxxxxxxxxxx=</Row>
+  <Row>=x=x=x=x=x=x=x=</Row>
+  <Row>=xxx_pxxxp_xxx=</Row>
+  <Row>=_=x=_=x=_=x=_=</Row>
+  <Row>=p__xxxxxxxx_p=</Row>
+  <Row>===============</Row>
 </Arena>

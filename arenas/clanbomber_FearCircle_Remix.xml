@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
-<Arena arenaFileVersion="1" rowCount="13" colCount="17">
-  <Row>                 </Row>
-  <Row> __p+++++++++p__ </Row>
-  <Row> _-------------_ </Row>
-  <Row> p-+++++++++++-p </Row>
-  <Row> +-+         +-+ </Row>
-  <Row> +-+         +-+ </Row>
-  <Row> +-+         +-+ </Row>
-  <Row> +-+         +-+ </Row>
-  <Row> +-+         +-+ </Row>
-  <Row> p-+++++++++++-p </Row>
-  <Row> _-------------_ </Row>
-  <Row> __p+++++++++p__ </Row>
-  <Row>                 </Row>
+<Arena arenaFileVersion="1" rowCount="11" colCount="15">
+  <Row>__p+++++++++p__</Row>
+  <Row>_-------------_</Row>
+  <Row>p-+++++++++++-p</Row>
+  <Row>+-+         +-+</Row>
+  <Row>+-+         +-+</Row>
+  <Row>+-+         +-+</Row>
+  <Row>+-+         +-+</Row>
+  <Row>+-+         +-+</Row>
+  <Row>p-+++++++++++-p</Row>
+  <Row>_-------------_</Row>
+  <Row>__p+++++++++p__</Row>
 </Arena>
