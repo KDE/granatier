@@ -166,7 +166,7 @@ void Game::init()
         {
             if(m_arena->getCell(i,j).getType() == Granatier::Cell::BLOCK)
             {
-                Block* block = new Block(i, j, m_arena, "arena_block");
+                Block* block = new Block((j + 0.5) * Granatier::CellSize, (i + 0.5) * Granatier::CellSize, m_arena, "arena_block");
                 m_blocks.append(block);
                 m_arena->setCellElement(i, j, block);
             }
@@ -437,20 +437,6 @@ void Game::initCharactersPosition()
         {
             m_players[i]->initCoordinate();
             m_players[i]->init();
-        }
-        // Initialize the Block coordinates
-        QList<Element*> blockElements;
-        for (int i = 0; i < m_arena->getNbRows(); ++i)
-        {
-            for (int j = 0; j < m_arena->getNbColumns(); ++j)
-            {
-                blockElements =  m_arena->getCell(i, j).getElements(Granatier::Element::BLOCK);
-                foreach(Element* element, blockElements)
-                {
-                    element->setX(Granatier::CellSize * (j + 0.5));
-                    element->setY(Granatier::CellSize * (i + 0.5));
-                }
-            }
         }
     }
 }
