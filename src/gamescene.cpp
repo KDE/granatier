@@ -836,7 +836,7 @@ void GameScene::createBombItem(Bomb* bomb)
     bombItem->updateGraphics(m_SvgScaleFactor); //TODO: use a Renderer class and get the scale factor from a static function during initialization
     
     connect(this, SIGNAL(resizeGraphics(qreal)), bombItem, SLOT(updateGraphics(qreal)));
-    connect(bomb, SIGNAL(mortar(int, int, int, int)), bombItem, SLOT(updateMortar(int, int, int, int)));
+    connect(bomb, SIGNAL(mortar(int,int,int,int)), bombItem, SLOT(updateMortar(int,int,int,int)));
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
     connect(bombItem, SIGNAL(bombItemFinished(BombItem*)), this, SLOT(removeBombItem(BombItem*)));
     connect(bombItem, SIGNAL(animationFrameChanged(BombItem*,int)), this, SLOT(updateBombExplosionItemAnimation(BombItem*,int)));

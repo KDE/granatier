@@ -19,13 +19,13 @@
 #include "playersettings.h"
 
 #include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QGridLayout>
 #include <QtGui/QSpacerItem>
 #include <QtGui/QCheckBox>
 
+#include <KDE/KLineEdit>
 #include <KDE/KKeySequenceWidget>
 #include <KDE/KLocalizedString>
 
@@ -34,7 +34,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
 {
     m_selectCheckBox = new QCheckBox;
     m_selectCheckBox->setChecked(m_playerSettings->enabled(playerId));
-    m_playerName = new QLineEdit(m_playerSettings->playerName(playerId));
+    m_playerName = new KLineEdit(m_playerSettings->playerName(playerId));
     m_playerName->setFixedWidth(200);
     m_playerPreviewPixmap = new QPixmap(QSize(64, 64));
     m_playerPreviewPixmapAlphaChannel = new QPixmap(QSize(64, 64));

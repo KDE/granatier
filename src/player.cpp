@@ -739,7 +739,7 @@ void Player::resurrect()
         int cellRow = m_arena->getRowFromY(m_y);
         int cellCol = m_arena->getColFromX(m_x);
         
-        m_arena->removeCellElement(cellRow, cellCol, this); //just to be really shure 
+        m_arena->removeCellElement(cellRow, cellCol, this); //just to be really sure 
         
         if(m_arena->getCell(cellRow, cellCol).getType() == Granatier::Cell::HOLE)
         {

@@ -31,4 +31,4 @@ public:
     virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
 };
 
-#endif // PLAYERSELECTOR_GRAPHICSDELEGATE_P_H
+#endif //PLAYERSELECTOR_GRAPHICSDELEGATE_P_H

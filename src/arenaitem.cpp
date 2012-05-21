@@ -44,8 +44,8 @@ void ArenaItem::updateGraphics(qreal svgScaleFactor)
     QPoint bottomRight = scene()->views().first()->mapFromScene(Granatier::CellSize, Granatier::CellSize);
     
     int width = bottomRight.x() - topLeft.x();
-    int heigth = bottomRight.y() - topLeft.y();
+    int height = bottomRight.y() - topLeft.y();
     
-    setRenderSize(QSize(width, heigth));
+    setRenderSize(QSize(width, height));
     setScale(svgScaleFactor);
 }
