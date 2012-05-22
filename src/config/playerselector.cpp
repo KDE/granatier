@@ -22,6 +22,7 @@
 #include "playerselectoritem.h"
 #include "playersettings.h"
 
+#include <QtCore/QPointer>
 #include <QtGui/QAbstractItemView>
 #include <QtGui/QApplication>
 #include <QtGui/QCloseEvent>
@@ -129,13 +130,16 @@ void PlayerSelector::Private::fillList()
 
 void PlayerSelector::Private::_k_showNewStuffDialog()
 {
-    KNS3::DownloadDialog dialog(q);
-    dialog.exec();
-    if (!dialog.changedEntries().isEmpty())
+    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog (q);
+    if(dialog->exec() == QDialog::Accepted)
     {
-        //TODO: discover new players e.g. m_playerSettings->rediscover();
-        fillList();
+        if(!(dialog->changedEntries().isEmpty()))
+        {
+            //TODO: discover new arenas and add them to the list
+            fillList();
+        }
     }
+    delete dialog;
 }
 
 class PlayerSelector::Dialog : public KDialog

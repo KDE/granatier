@@ -23,6 +23,8 @@
 #include "arenaitem.h"
 #include "mapparser.h"
 
+#include <QtCore/QPointer>
+
 #include <KgTheme>
 #include <KGameRenderer>
 #include <KStandardDirs>
@@ -454,13 +456,16 @@ void ArenaSelector::Private::_k_updateArenaList(const QString& strArena)
 }
 
 void ArenaSelector::Private::_k_openKNewStuffDialog()
-{
-    KNS3::DownloadDialog dialog(q);
-    dialog.exec();
-    if (!dialog.changedEntries().isEmpty())
+{    
+    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog (q);
+    if(dialog->exec() == QDialog::Accepted)
     {
-        //TODO: discover new arenas and add them to the list
+        if(!(dialog->changedEntries().isEmpty()))
+        {
+            //TODO: discover new arenas and add them to the list
+        }
     }
+    delete dialog;
 }
 
 void ArenaSelector::Private::_k_importArenasDialog()
