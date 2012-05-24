@@ -1,18 +1,22 @@
 [KGameTheme]
 Name=Player 3
 Name[es]=Jugador 3
+Name[et]=Mängija 3
 Name[nl]=Speler 3
 Name[pl]=Gracz 3
 Name[pt]=Jogador 3
 Name[pt_BR]=Jogador 3
+Name[sv]=Spelare 3
 Name[uk]=Гравець 3
 Name[x-test]=xxPlayer 3xx
 Description=This is Player 3
 Description[es]=Este es el jugador 3
+Description[et]=See on mängija 3
 Description[nl]=Dit is speler 3
 Description[pl]=To jest Gracz 3
 Description[pt]=Este é o Jogador 3
 Description[pt_BR]=Este é o Jogador 3
+Description[sv]=Det här är tredje spelaren
 Description[uk]=Це Гравець 3
 Description[x-test]=xxThis is Player 3xx
 Type=SVG

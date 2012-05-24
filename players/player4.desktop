@@ -1,18 +1,22 @@
 [KGameTheme]
 Name=Player 4
 Name[es]=Jugador 4
+Name[et]=Mängija 4
 Name[nl]=Speler 4
 Name[pl]=Gracz 4
 Name[pt]=Jogador 4
 Name[pt_BR]=Jogador 4
+Name[sv]=Spelare 4
 Name[uk]=Гравець 4
 Name[x-test]=xxPlayer 4xx
 Description=This is Player 4
 Description[es]=Este es el jugador 4
+Description[et]=See on mängija 4
 Description[nl]=Dit is speler 4
 Description[pl]=To jest Gracz 4
 Description[pt]=Este é o Jogador 4
 Description[pt_BR]=Este é o Jogador 4
+Description[sv]=Det här är fjärde spelaren
 Description[uk]=Це Гравець 4
 Description[x-test]=xxThis is Player 4xx
 Type=SVG

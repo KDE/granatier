@@ -1,18 +1,22 @@
 [KGameTheme]
 Name=Player 2
 Name[es]=Jugador 2
+Name[et]=Mängija 2
 Name[nl]=Speler 2
 Name[pl]=Gracz 2
 Name[pt]=Jogador 2
 Name[pt_BR]=Jogador 2
+Name[sv]=Spelare 2
 Name[uk]=Гравець 2
 Name[x-test]=xxPlayer 2xx
 Description=This is Player 2
 Description[es]=Este es el jugador 2
+Description[et]=See on mängija 2
 Description[nl]=Dit is speler 2
 Description[pl]=To jest Gracz 2
 Description[pt]=Este é o Jogador 2
 Description[pt_BR]=Este é o Jogador 2
+Description[sv]=Det här är andra spelaren
 Description[uk]=Це Гравець 2
 Description[x-test]=xxThis is Player 2xx
 Type=SVG
