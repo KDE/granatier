@@ -18,7 +18,6 @@
  ***************************************************************************/
 
 #include "playerselector.h"
-#include "playerselector_p.h"
 #include "playerselectoritem.h"
 #include "playersettings.h"
 
@@ -40,6 +39,17 @@
 #include <KDE/KConfig>
 #include <KDE/KLocalizedString>
 #include <KNS3/DownloadDialog>
+
+//PlayerSelectorDelegate declaration
+#include <QtGui/QStyledItemDelegate>
+class PlayerSelectorDelegate : public QStyledItemDelegate
+{
+public:
+    PlayerSelectorDelegate(QObject* parent = 0);
+    virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
+    ///@note The implementation is independent of @a option and @a index.
+    virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
+};
 
 //BEGIN PlayerSelector
 
