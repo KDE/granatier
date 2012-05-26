@@ -880,7 +880,6 @@ void GameScene::bombDetonated(Bomb* bomb)
 {
     BombItem* bombItem = NULL;
     BombExplosionItem* bombExplosionItem = NULL;
-    Element* element = NULL;
     QList<Element*> blockElements;
     QList<Element*> bombElements;
     int nBombPower = bomb->bombPower();
@@ -918,7 +917,7 @@ void GameScene::bombDetonated(Bomb* bomb)
     {
         bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BOMB);
         int tempBombDetonationCountdown = nDetonationCountdown;
-        foreach(element, bombElements)
+        foreach(Element* element, bombElements)
         {
             if(dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
             {
@@ -930,7 +929,7 @@ void GameScene::bombDetonated(Bomb* bomb)
         blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BLOCK);
         if(!blockElements.isEmpty())
         {
-            foreach(element, blockElements)
+            foreach(Element* element, blockElements)
             {
                 dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
                 if (m_blockItems[nRow][nColumn] != NULL)
@@ -985,7 +984,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     int tempBombDetonationCountdown = anDirectionDetonationCountdown[direction];
                     bool increaseDetonationTimeout = false;
-                    foreach(element, bombElements)
+                    foreach(Element* element, bombElements)
                     {
                         if(dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                         {
@@ -1002,7 +1001,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     if(!blockElements.isEmpty())
                     {
                         abDirectionsDone[direction] = true;
-                        foreach(element, blockElements)
+                        foreach(Element* element, blockElements)
                         {
                             dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
                             if (m_blockItems[nRow][nColumn] != NULL)
