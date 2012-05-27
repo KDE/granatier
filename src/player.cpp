@@ -516,6 +516,8 @@ void Player::addBonus(Bonus* p_bonus)
             {
                 m_speed = m_maxSpeed;
             }
+            setXSpeed(sign(m_xSpeed) * m_speed);
+            setYSpeed(sign(m_ySpeed) * m_speed);
             break;
         case Granatier::Bonus::POWER:
             m_bombPower++;
