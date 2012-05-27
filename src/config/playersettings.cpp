@@ -42,7 +42,6 @@ PlayerSettings::PlayerSettings()
         settings.strPlayerDesktopFilePath = desktopFile.name();
         settings.strPlayerName = desktopFile.group("KGameTheme").readEntry<QString>("Name", "");
         settings.strPlayerGraphicsFile = desktopFile.group("KGameTheme").readEntry<QString>("FileName", "");
-        settings.strPlayerPreviewFile = desktopFile.group("KGameTheme").readEntry<QString>("Preview", "");
         settings.enabled = false;
         
         m_playerSettings.insert(settings.strPlayerID, settings);
@@ -140,11 +139,6 @@ const QString PlayerSettings::playerDesktopFilePath(const QString& strPlayerID) 
 const QString PlayerSettings::playerGraphicsFile(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).strPlayerGraphicsFile;
-}
-
-const QString PlayerSettings::playerPreviewFile(const QString& strPlayerID) const
-{
-    return m_playerSettings.value(strPlayerID).strPlayerPreviewFile;
 }
 
 bool PlayerSettings::enabled(const QString& strPlayerID) const

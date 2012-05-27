@@ -34,7 +34,6 @@ public:
     const QString playerName(const QString& strPlayerID) const;
     const QString playerDesktopFilePath(const QString& strPlayerID) const;
     const QString playerGraphicsFile(const QString& strPlayerID) const;
-    const QString playerPreviewFile(const QString& strPlayerID) const;
     bool enabled(const QString& strPlayerID) const;
     const QKeySequence keyUp(const QString& strPlayerID) const;
     const QKeySequence keyRight(const QString& strPlayerID) const;
@@ -59,7 +58,6 @@ private:
         QString strPlayerName;
         QString strPlayerDesktopFilePath;
         QString strPlayerGraphicsFile;
-        QString strPlayerPreviewFile;
         bool enabled;
         QKeySequence keyUp;
         QKeySequence keyRight;

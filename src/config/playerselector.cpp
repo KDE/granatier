@@ -123,8 +123,8 @@ void PlayerSelector::Private::fillList()
         
         playerSelectorItem = new PlayerSelectorItem(playerIDs[i], m_playerSettings, m_list);
         
-        renderer.load(KStandardDirs::locate("appdata", QString("players/%1").arg(m_playerSettings->playerPreviewFile(playerIDs[i]))));
-        renderer.render(&pixPainter, "player");
+        renderer.load(KStandardDirs::locate("appdata", QString("players/%1").arg(m_playerSettings->playerGraphicsFile(playerIDs[i]))));
+        renderer.render(&pixPainter, "player_0");
         playerSelectorItem->setPlayerPreviewPixmap(pixmap);
         
         KConfig desktopFile(KStandardDirs::locate("appdata", "players/" + playerIDs[i]), KConfig::SimpleConfig);
