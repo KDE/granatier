@@ -1,5 +1,6 @@
 [KGameTheme]
 Name=Player 1
+Name[de]=Spieler 1
 Name[es]=Jugador 1
 Name[et]=Mängija 1
 Name[nl]=Speler 1
@@ -12,6 +13,7 @@ Name[sv]=Spelare 1
 Name[uk]=Гравець 1
 Name[x-test]=xxPlayer 1xx
 Description=This is Player 1
+Description[de]=Das ist Spieler 1.
 Description[es]=Este es el jugador 1
 Description[et]=See on mängija 1
 Description[nl]=Dit is speler 1
