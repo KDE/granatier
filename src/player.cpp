@@ -45,7 +45,7 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
     
     m_badBonusCountdownTimer = new QTimer;
     m_badBonusCountdownTimer->setInterval(badBonusTimerTimeout);
-    m_badBonusMillisecondsElapsed = 0;
+    m_badBonusMillisecondsToElapse = 0;
     connect(m_badBonusCountdownTimer, SIGNAL(timeout()), this, SLOT(slot_badBonusTimerTimeout()));
     
     resurrect();
@@ -89,6 +89,19 @@ void Player::init()
     int row = m_arena->getRowFromY(m_y);
     int column = m_arena->getColFromX(m_x);
     m_arena->setCellElement(row, column, this);
+}
+
+void Player::pause()
+{
+    m_badBonusCountdownTimer->stop();
+}
+
+void Player::resume()
+{
+    if(m_badBonusMillisecondsToElapse > 0)
+    {
+        m_badBonusCountdownTimer->start();
+    }
 }
 
 void Player::goUp()
@@ -563,6 +576,7 @@ void Player::addBonus(Bonus* p_bonus)
                 m_askedYSpeed = askedYSpeedTemp;
                 
                 m_badBonusType = Granatier::Bonus::HYPERACTIVE;
+                m_badBonusMillisecondsToElapse = badBonusCountdown;
                 m_badBonusCountdownTimer->start();
             }
             break;
@@ -579,6 +593,7 @@ void Player::addBonus(Bonus* p_bonus)
                 m_askedYSpeed = askedYSpeedTemp;
                 
                 m_badBonusType = Granatier::Bonus::SLOW;
+                m_badBonusMillisecondsToElapse = badBonusCountdown;
                 m_badBonusCountdownTimer->start();
             }
             break;
@@ -616,17 +631,20 @@ void Player::addBonus(Bonus* p_bonus)
                 
                 m_moveMirrored = true;
                 m_badBonusType = Granatier::Bonus::MIRROR;
+                m_badBonusMillisecondsToElapse = badBonusCountdown;
                 m_badBonusCountdownTimer->start();
             }
             break;
         case Granatier::Bonus::SCATTY:
             m_badBonusType = Granatier::Bonus::SCATTY;
+            m_badBonusMillisecondsToElapse = badBonusCountdown;
             m_badBonusCountdownTimer->start();
             break;
         case Granatier::Bonus::RESTRAIN:
             m_normalBombArmory = m_bombArmory;
             m_bombArmory = 0;
             m_badBonusType = Granatier::Bonus::RESTRAIN;
+            m_badBonusMillisecondsToElapse = badBonusCountdown;
             m_badBonusCountdownTimer->start();
             break;
         case Granatier::Bonus::RESURRECT:
@@ -816,22 +834,22 @@ void Player::slot_refillBombArmory()
 
 void Player::slot_badBonusTimerTimeout()
 {
-    m_badBonusMillisecondsElapsed += badBonusTimerTimeout;
-    if(m_badBonusMillisecondsElapsed >= badBonusCountdown)
+    m_badBonusMillisecondsToElapse -= badBonusTimerTimeout;
+    if(m_badBonusMillisecondsToElapse <= 0)
     {
         m_badBonusCountdownTimer->stop();
         slot_removeBadBonus();
     }
     else
     {
-        bonusUpdated(this, m_badBonusType, m_badBonusMillisecondsElapsed/(badBonusCountdown / 100));
+        bonusUpdated(this, m_badBonusType, (badBonusCountdown - m_badBonusMillisecondsToElapse)/(badBonusCountdown/100.));
     }
 }
 
 void Player::slot_removeBadBonus()
 {
     m_badBonusCountdownTimer->stop();
-    m_badBonusMillisecondsElapsed = 0;
+    m_badBonusMillisecondsToElapse = 0;
     
     switch (m_badBonusType)
     {

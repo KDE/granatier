@@ -93,8 +93,8 @@ private:
     
     /** timer for the bad bonus to disapear */
     QTimer* m_badBonusCountdownTimer;
-    /** elapsed milliseconds since the last bad bonus */
-    int m_badBonusMillisecondsElapsed;
+    /** milliseconds to elapse till the last bad bonus will be removed */
+    int m_badBonusMillisecondsToElapse;
     
     
 
@@ -141,6 +141,16 @@ public:
       * Initializes the Player.
       */
     void init();
+
+    /**
+      * pause the timer
+      */
+    void pause();
+
+    /**
+      * resume the timer
+      */
+    void resume();
 
     /**
       * Makes the Player ask to go up

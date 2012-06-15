@@ -225,6 +225,7 @@ void PlayerItem::startAnim()
 
 void PlayerItem::pauseAnim()
 {
+    dynamic_cast <Player*> (m_model)->pause();
     if (m_animationTimer->state() == QTimeLine::Running)
     {
         m_animationTimer->setPaused(true);
@@ -233,6 +234,7 @@ void PlayerItem::pauseAnim()
 
 void PlayerItem::resumeAnim()
 {
+    dynamic_cast <Player*> (m_model)->resume();
     if (m_animationTimer->state() == QTimeLine::Paused)
     {
         m_animationTimer->setPaused(false);
