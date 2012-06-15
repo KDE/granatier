@@ -482,7 +482,6 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         return;
     }
     
-    KGameRenderer* renderer;
     QSize svgSize;
     QPoint topLeft(0, 0);
     topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
@@ -495,8 +494,6 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     QMap <Player*, KGameRenderedItem*>::iterator i = m_mapPlayerSvgs.begin();
     while (i != m_mapPlayerSvgs.end())
     {
-        renderer = m_gameScene->renderer(Granatier::Element::PLAYER, i.key());
-    
         QPoint bottomRight(Granatier::CellSize * 0.45, Granatier::CellSize * 0.45); 
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
@@ -513,8 +510,6 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     i = m_mapBonusThrowSvgs.begin();
     while (i != m_mapBonusThrowSvgs.end())
     {
-        renderer = m_gameScene->renderer(Granatier::Element::BONUS);
-        
         QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
@@ -536,8 +531,6 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     i = m_mapBonusKickSvgs.begin();
     while (i != m_mapBonusKickSvgs.end())
     {
-        renderer = m_gameScene->renderer(Granatier::Element::BONUS);
-    
         QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
@@ -559,8 +552,6 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     i = m_mapBonusShieldSvgs.begin();
     while (i != m_mapBonusShieldSvgs.end())
     {
-        renderer = m_gameScene->renderer(Granatier::Element::BONUS);
-    
         QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         
@@ -582,8 +573,6 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     i = m_mapBadBonusSvgs.begin();
     while (i != m_mapBadBonusSvgs.end())
     {
-        renderer = m_gameScene->renderer(Granatier::Element::BONUS);
-    
         QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         

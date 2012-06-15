@@ -69,6 +69,8 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
     QSize svgSize = m_itemSizeSet / m_svgScaleFactor;
     setRenderSize(svgSize);
     setScale(m_svgScaleFactor);
+    
+    setZValue(303 + bombPower);
 }
 
 BombExplosionItem::~BombExplosionItem()

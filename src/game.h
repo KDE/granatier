@@ -145,9 +145,8 @@ public:
 
     /**
     * Pauses / unpauses the game.
-    * @param p_locked if true the player will be unable to unset the pause.
     */
-    void switchPause(bool p_locked = false);
+    void switchPause();
 
     /**
     * Enables / disables the sounds.
@@ -286,7 +285,7 @@ private slots:
     /**
     * Manages the loss of a life.
     */
-    void playerDeath(Player* player);
+    void playerDeath();
     
     /**
     * Resurrects the death players
@@ -296,7 +295,7 @@ private slots:
     /**
     * Plays the detonation sound
     */
-    void bombDetonated(Bomb* bomb);
+    void bombDetonated();
     
     /**
     * Decrement the remaining round time

@@ -41,7 +41,7 @@ Bonus* Block::getBonus()
     return m_bonus;
 }
 
-void Block::startDestruction(int nExplosionID)
+void Block::startDestruction()
 {
     emit startDestructionAnimation();
 }

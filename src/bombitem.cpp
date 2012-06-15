@@ -31,7 +31,7 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
 {
     setSpriteKey("bomb");
     setZValue(210);
-    connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation(Bomb*)));
+    connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation()));
     connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
     connect(this, SIGNAL(bombItemFinished(BombItem*)), p_model, SLOT(slot_detonationCompleted()));
     
@@ -121,7 +121,7 @@ void BombItem::update(qreal p_x, qreal p_y)
     m_y = p_y;
 }
 
-void BombItem::startDetonation(Bomb* bomb)
+void BombItem::startDetonation()
 {
     if(m_pulseTimer)
     {

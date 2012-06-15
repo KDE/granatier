@@ -342,7 +342,7 @@ signals:
       /**
       * Emitted when the player is dying
       */
-      void dying(Player* player);
+      void dying();
       
       /**
       * Emitted when the player is falling in a hole

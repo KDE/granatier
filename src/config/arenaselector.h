@@ -87,7 +87,7 @@ private:
 
     Q_DISABLE_COPY(ArenaSelector)
 
-    Q_PRIVATE_SLOT(d, void _k_updatePreview(QListWidgetItem* currentItem = NULL, QListWidgetItem* previousItem = NULL))
+    Q_PRIVATE_SLOT(d, void _k_updatePreview(QListWidgetItem* currentItem = NULL))
     Q_PRIVATE_SLOT(d, void _k_updateArenaList(const QString&))
     Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
     Q_PRIVATE_SLOT(d, void _k_importArenasDialog())

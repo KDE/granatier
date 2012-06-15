@@ -63,7 +63,7 @@ Game::Game(PlayerSettings* playerSettings)
         {
             Player* player = new Player(qreal(Granatier::CellSize * (-0.5)),qreal(Granatier::CellSize * 0.5), strPlayerIDs[i], playerSettings, m_arena);
             m_players.append(player);
-            connect(player, SIGNAL(dying(Player*)), this, SLOT(playerDeath(Player*)));
+            connect(player, SIGNAL(dying()), this, SLOT(playerDeath()));
             connect(player, SIGNAL(falling()), this, SLOT(playerFalling()));
             connect(player, SIGNAL(resurrectBonusTaken()), this, SLOT(resurrectBonusTaken()));
         }
@@ -261,13 +261,13 @@ void Game::pause(bool p_locked)
     emit(pauseChanged(true, false));
 }
 
-void Game::switchPause(bool p_locked)
+void Game::switchPause()
 {
     // If the Game is not already paused
     if (m_state == RUNNING)
     {
         // Pause the Game
-        pause(p_locked);
+        pause();
         emit(pauseChanged(true, true));
     }
     // If the Game is already paused
@@ -567,7 +567,7 @@ void Game::decrementRemainingRoundTime()
             Bomb* bomb = new Bomb((nCol + 0.5) * Granatier::CellSize, (nRow + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 1000);    // time in ms
             bomb->setBombPower(1);
             emit bombCreated(bomb);
-            connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
+            connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated()));
             m_bombs.append(bomb);
             if(m_remainingTime > -100 && m_roundTimer->interval() > 150)
             {
@@ -589,7 +589,7 @@ void Game::playerFalling()
     }
 }
 
-void Game::playerDeath(Player* player)
+void Game::playerDeath()
 {
     //wait some time until the game stops
     QTimer::singleShot(1500, this, SLOT(checkRoundFinished()));   
@@ -689,7 +689,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     Bomb* bomb = new Bomb((col + 0.5) * Granatier::CellSize, (row + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 2500);    // time in ms
     bomb->setBombPower(player->getBombPower());
     emit bombCreated(bomb);
-    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
+    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated()));
     connect(bomb, SIGNAL(releaseBombArmory()), player, SLOT(slot_refillBombArmory()));
     m_bombs.append(bomb);
     player->decrementBombArmory();
@@ -712,7 +712,7 @@ void Game::removeBomb(Bomb* bomb)
     }
 }
 
-void Game::bombDetonated(Bomb* bomb)
+void Game::bombDetonated()
 {
     if(m_soundEnabled)
     {

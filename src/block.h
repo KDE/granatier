@@ -59,7 +59,7 @@ public:
     /**
       * destroys the block
       */
-    void startDestruction(int nExplosionID);
+    void startDestruction();
         
 private:
     Bonus* m_bonus;

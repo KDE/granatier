@@ -62,10 +62,10 @@ class ArenaSelector::Private
 
         void setupData(KConfigSkeleton* aconfig);
         void findArenas(const QString &initialSelection);
-        QSize calculateSvgSize(KGameRenderedItem* arenaItem);
+        QSize calculateSvgSize();
 
         // private slots
-        void _k_updatePreview(QListWidgetItem* currentItem = NULL, QListWidgetItem* previousItem = NULL);
+        void _k_updatePreview(QListWidgetItem* currentItem = NULL);
         void _k_updateArenaList(const QString& strArena);
         void _k_openKNewStuffDialog();
         void _k_importArenasDialog();
@@ -251,14 +251,14 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     }
 
     //Reconnect the arenaList
-    connect(ui.arenaList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), q, SLOT(_k_updatePreview(QListWidgetItem*, QListWidgetItem*)));
+    connect(ui.arenaList, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), q, SLOT(_k_updatePreview(QListWidgetItem*)));
     if(ui.kcfg_RandomArenaMode->isChecked())
     {
         connect(ui.arenaList, SIGNAL(itemChanged(QListWidgetItem*)), q, SLOT(_k_updateRandomArenaModeArenaList(QListWidgetItem*)));
     }
 }
 
-void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem, QListWidgetItem* previousItem)
+void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
 {
     if(currentItem != NULL)
     {
@@ -348,7 +348,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem, QLis
             m_svgScaleFactor = svgScaleFactor;
             foreach(KGameRenderedItem* arenaItem, m_arenaItems)
             {
-                arenaItem->setRenderSize(calculateSvgSize(arenaItem));
+                arenaItem->setRenderSize(calculateSvgSize());
                 arenaItem->setScale(m_svgScaleFactor);
             }
         }
@@ -408,7 +408,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem, QLis
                 }
                 if(arenaItem)
                 {
-                    arenaItem->setRenderSize(calculateSvgSize(arenaItem));
+                    arenaItem->setRenderSize(calculateSvgSize());
                     arenaItem->setScale(m_svgScaleFactor);
                     
                     m_arenaItems.append(arenaItem);
@@ -419,7 +419,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem, QLis
     }
 }
 
-QSize ArenaSelector::Private::calculateSvgSize(KGameRenderedItem* arenaItem)
+QSize ArenaSelector::Private::calculateSvgSize()
 {
     if(m_graphicsScene->views().isEmpty())
     {

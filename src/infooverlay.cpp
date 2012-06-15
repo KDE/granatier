@@ -36,9 +36,6 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     
     int nWinPoints = m_game->getWinPoints();
     QList <Player*> playerList = m_game->getPlayers();
-    int nMaxPlayerNameLength = 0;
-    int nTop = 0;
-    int nLeft = 0;
     
     KGameRenderer* renderer;
     renderer = m_gameScene->renderer(Granatier::Element::SCORE);

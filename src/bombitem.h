@@ -100,7 +100,7 @@ private slots:
     /**
      * Starts the bomb detonation
      */
-    virtual void startDetonation(Bomb* bomb);
+    virtual void startDetonation();
 
     /**
      * Makes the bomb pulse

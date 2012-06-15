@@ -43,7 +43,6 @@ class QTimer;
 class KGameRenderer;
 class KGameRenderedItem;
 class KgThemeProvider;
-class KgTheme;
 
 /**
  * @brief This class contains all the Game elements to be drawn on the screen by the GameView instance.
@@ -171,7 +170,7 @@ private slots:
     */
     void start();
     
-    void themeChanged(const KgTheme* newTheme);
+    void themeChanged();
     
     /**
      * Updates the background to fit into the QGraphicsView after a resize.

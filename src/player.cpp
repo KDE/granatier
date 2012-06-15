@@ -711,7 +711,7 @@ void Player::die()
     if(!m_death)
     {
         m_death = true;
-        emit dying(this);
+        emit dying();
         m_xSpeed = 0;
         m_xSpeed = 0;
         

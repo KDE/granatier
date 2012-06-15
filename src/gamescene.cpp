@@ -100,7 +100,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     m_rendererDefaultTheme = 0;
     setupThemeRenderer();
     
-    connect(m_themeProvider, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(themeChanged(const KgTheme*)));
+    connect(m_themeProvider, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(themeChanged()));
     
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, this);
@@ -443,7 +443,6 @@ void GameScene::initItemsWithGraphicsFromTheme()
     }
     if(!m_tempBombList.isEmpty())
     {
-        BombExplosionItem* bombExplosionItem;
         QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
         while (i != m_bombItems.end())
         {
@@ -614,7 +613,7 @@ void GameScene::cleanUpItemsWithGraphicsFromTheme()
     delete m_arenaBackground;
 }
 
-void GameScene::themeChanged(const KgTheme* newTheme)
+void GameScene::themeChanged()
 {
     m_tempBombList.clear();
     QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
@@ -931,7 +930,7 @@ void GameScene::bombDetonated(Bomb* bomb)
         {
             foreach(Element* element, blockElements)
             {
-                dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
+                dynamic_cast <Block*> (element)->startDestruction();
                 if (m_blockItems[nRow][nColumn] != NULL)
                 {
                     //display bonus if available
@@ -1003,7 +1002,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                         abDirectionsDone[direction] = true;
                         foreach(Element* element, blockElements)
                         {
-                            dynamic_cast <Block*> (element)->startDestruction(bomb->explosionID());
+                            dynamic_cast <Block*> (element)->startDestruction();
                             if (m_blockItems[nRow][nColumn] != NULL)
                             {
                                 //display bonus if available
@@ -1022,7 +1021,6 @@ void GameScene::bombDetonated(Bomb* bomb)
                     
                     bombExplosionItem = new BombExplosionItem (bomb, direction, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
                     bombExplosionItem->setPosition(xPos, yPos);
-                    bombExplosionItem->setZValue(300 + nBombPower+3 - i);
                     connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
                     addItem(bombExplosionItem);
                     m_bombItems[bombItem].append(bombExplosionItem);
