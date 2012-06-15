@@ -23,11 +23,11 @@
     <!-- TRANS:ROLES_OF_TRANSLATORS -->
     </authorgroup>
     <legalnotice>&FDLNotice;</legalnotice>
-    <date>2012-05-07</date>
-    <releaseinfo>1.1.50 (&kde; 4.9)</releaseinfo>
+    <date>2012-06-15</date>
+    <releaseinfo>1.2.0 (&kde; 4.9)</releaseinfo>
     
     <abstract>
-      <para>This documentation describes the game of &granatier; version 1.1.50</para>
+      <para>This documentation describes the game of &granatier; version 1.2.0</para>
     </abstract>
     
     <keywordset>
