@@ -733,6 +733,11 @@ bool Player::isAlive() const
 
 void Player::resurrect()
 {
+    if(m_badBonusMillisecondsToElapse > 0)
+    {
+        slot_removeBadBonus();
+    }
+    
     m_onIce = false;
     m_falling = false;
     m_death = false;
@@ -837,7 +842,6 @@ void Player::slot_badBonusTimerTimeout()
     m_badBonusMillisecondsToElapse -= badBonusTimerTimeout;
     if(m_badBonusMillisecondsToElapse <= 0)
     {
-        m_badBonusCountdownTimer->stop();
         slot_removeBadBonus();
     }
     else
