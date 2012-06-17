@@ -68,6 +68,9 @@ private :
     /** The Round timer */
     QTimer* m_roundTimer;
     
+    /** The timer to add a little delay after the round is finished after there's at most only one player alive */
+    QTimer* m_setRoundFinishedTimer;
+    
     /** The gamecene */
     GameScene* m_gameScene;
     
@@ -97,9 +100,6 @@ private :
     
     /** The remaining time for a round */
     int m_remainingTime;
-    
-    /** Flag if the round is over */
-    int m_roundFinished;
     
     /** Flag if the game is over */
     bool m_gameOver;
@@ -256,9 +256,9 @@ public slots:
     void keyReleaseEvent(QKeyEvent* p_event);
     
     /**
-    * Checks if the round has finished.
+    * Checks if the round has finished and set it finished.
     */
-    void checkRoundFinished();
+    void setRoundFinished();
     
     /**
     * Creates a bomb in the Cell with the coordinates x and y or throws the bomb from that possition if the player has the throw bonus

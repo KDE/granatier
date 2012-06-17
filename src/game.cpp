@@ -84,7 +84,6 @@ void Game::init()
     // Create the Arena instance
     m_arena = new Arena();
 
-    m_roundFinished = 0;
     m_remainingTime = Settings::roundTime();
     m_bombCount = 0;
     
@@ -185,6 +184,10 @@ void Game::init()
     connect(m_roundTimer, SIGNAL(timeout()), this, SLOT(decrementRemainingRoundTime()));
     m_roundTimer->start();
     
+    m_setRoundFinishedTimer  = new QTimer(this);
+    m_setRoundFinishedTimer->setSingleShot(true);
+    connect(m_setRoundFinishedTimer, SIGNAL(timeout()), this, SLOT(setRoundFinished()));
+    
     // Init the characters coordinates on the Arena
     for (int i = 0; i < m_players.size(); i++)
     {
@@ -229,6 +232,8 @@ void Game::cleanUp()
     m_timer = 0;
     delete m_roundTimer;
     m_roundTimer = 0;
+    delete m_setRoundFinishedTimer;
+    m_setRoundFinishedTimer = 0;
 }
 
 void Game::setGameScene(GameScene* p_gameScene)
@@ -591,13 +596,28 @@ void Game::playerFalling()
 
 void Game::playerDeath()
 {
-    //wait some time until the game stops
-    QTimer::singleShot(1500, this, SLOT(checkRoundFinished()));   
-
     if(m_soundEnabled)
     {
         m_soundDie->start();
     }
+    
+    //check if at most one player is alive if not already finished
+    if(!m_setRoundFinishedTimer->isActive())
+    {
+        int nPlayerAlive = 0;
+        for(int i = 0; i < m_players.length(); i++)
+        {
+            if(m_players[i]->isAlive())
+            {
+                nPlayerAlive++;
+            }
+        }
+        if(nPlayerAlive <= 1)
+        {
+            //wait some time until the game stops
+            m_setRoundFinishedTimer->start(1500);
+        }
+   }
 }
 
 void Game::resurrectBonusTaken()
@@ -611,7 +631,7 @@ void Game::resurrectBonusTaken()
     }
 }
 
-void Game::checkRoundFinished()
+void Game::setRoundFinished()
 {
     int nPlayerAlive = 0;
     int nIndex = 0;;
@@ -627,37 +647,30 @@ void Game::checkRoundFinished()
             nIndex = i;
         }
     }
+    //this check is needed, if in the meantime the resurrect bonus was taken
     if (nPlayerAlive > 1)
     {
         return;
     }
 
-    if(!m_roundFinished)
+    if (nPlayerAlive == 1)
     {
-        // Start the timer
-        start();
-        
-        if (nPlayerAlive == 1)
-        {
-            m_roundFinished = 1;
-            m_players[nIndex]->addPoint();
-        }
-        
-        pause(true);
-        
-        for(int i = 0; i < m_players.length(); i++)
-        {
-            // check if a player reaches the win points
-            if (m_players[i]->points() >= m_winPoints)
-            {
-                m_gameOver = true;
-                m_strWinner = m_players[i]->getPlayerName();
-                break;
-            }
-        }
-        m_gameScene->showScore();
+        m_players[nIndex]->addPoint();
     }
     
+    pause(true);
+    
+    for(int i = 0; i < m_players.length(); i++)
+    {
+        // check if a player reaches the win points
+        if (m_players[i]->points() >= m_winPoints)
+        {
+            m_gameOver = true;
+            m_strWinner = m_players[i]->getPlayerName();
+            break;
+        }
+    }
+    m_gameScene->showScore();
 }
 
 void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwDistance)
