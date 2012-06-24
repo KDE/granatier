@@ -64,6 +64,8 @@ private:
     QGraphicsRectItem* m_background;
     
     qreal m_svgScaleFactor;
+    
+    QString m_badBonusSpriteKey;
 
 public:
 
@@ -89,6 +91,11 @@ public:
       * Returns the background rect of the infoSidebar
       */
     QRectF rect();
+    
+    /**
+      * Handles theme changes
+      */
+    void themeChanged();
 
 private slots:
     /**

@@ -629,6 +629,7 @@ void GameScene::themeChanged()
     cleanUpItemsWithGraphicsFromTheme();
     setupThemeRenderer();
     initItemsWithGraphicsFromTheme();
+    m_infoSidebar->themeChanged();
     
     m_tempBombList.clear();
 }

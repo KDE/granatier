@@ -34,6 +34,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
     m_game = p_game;
     m_gameScene = p_scene;
     m_svgScaleFactor = 1;
+    m_badBonusSpriteKey = "bonus_bad_restrain";
     
     QList <Player*> playerList = m_game->getPlayers();
     int nMaxPlayerNameLength = 0;
@@ -151,7 +152,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             m_gameScene->addItem(playerInfo->bonusKickDimm);
             
             //create the bad bonus icons
-            playerInfo->badBonus = new KGameRenderedItem(renderer, "bonus_bad_restrain");
+            playerInfo->badBonus = new KGameRenderedItem(renderer, m_badBonusSpriteKey);
             playerInfo->badBonus->setZValue(1001);
             playerInfo->badBonus->setPos(nLeft + 3 * (Granatier::CellSize / 2 + 4), nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->badBonus);
@@ -279,6 +280,69 @@ QRectF InfoSidebar::rect()
     return m_background->rect();
 }
 
+void InfoSidebar::themeChanged()
+{
+    KGameRenderer* renderer = m_gameScene->renderer(Granatier::Element::BONUS);
+    KGameRenderedItem* tempItem;
+    
+    //update player infosidebar
+    QMap <Player*, PlayerInfo*>::iterator iteratorPlayerInfo = m_mapPlayerInfo.begin();
+    while (iteratorPlayerInfo != m_mapPlayerInfo.end())
+    {
+        tempItem = iteratorPlayerInfo.value()->bonusShield;
+        if(m_gameScene->items().contains(tempItem))
+        {
+            m_gameScene->removeItem(tempItem);
+        }
+        //create the bonus shield
+        iteratorPlayerInfo.value()->bonusShield = new KGameRenderedItem(renderer, "bonus_shield");
+        iteratorPlayerInfo.value()->bonusShield->setZValue(1001);
+        iteratorPlayerInfo.value()->bonusShield->setPos(tempItem->pos());
+        m_gameScene->addItem(iteratorPlayerInfo.value()->bonusShield);
+        delete tempItem;
+        
+        tempItem = iteratorPlayerInfo.value()->bonusThrow;
+        if(m_gameScene->items().contains(tempItem))
+        {
+            m_gameScene->removeItem(tempItem);
+        }
+        //create the bonus throw
+        iteratorPlayerInfo.value()->bonusThrow = new KGameRenderedItem(renderer, "bonus_throw");
+        iteratorPlayerInfo.value()->bonusThrow->setZValue(1001);
+        iteratorPlayerInfo.value()->bonusThrow->setPos(tempItem->pos());
+        m_gameScene->addItem(iteratorPlayerInfo.value()->bonusThrow);
+        delete tempItem;
+        
+        tempItem = iteratorPlayerInfo.value()->bonusKick;
+        if(m_gameScene->items().contains(tempItem))
+        {
+            m_gameScene->removeItem(tempItem);
+        }
+        //create the bonus kick
+        iteratorPlayerInfo.value()->bonusKick = new KGameRenderedItem(renderer, "bonus_kick");
+        iteratorPlayerInfo.value()->bonusKick->setZValue(1001);
+        iteratorPlayerInfo.value()->bonusKick->setPos(tempItem->pos());
+        m_gameScene->addItem(iteratorPlayerInfo.value()->bonusKick);
+        delete tempItem;
+        
+        tempItem = iteratorPlayerInfo.value()->badBonus;
+        if(m_gameScene->items().contains(tempItem))
+        {
+            m_gameScene->removeItem(tempItem);
+        }
+        //create the bad bonus
+        iteratorPlayerInfo.value()->badBonus = new KGameRenderedItem(renderer, m_badBonusSpriteKey);
+        iteratorPlayerInfo.value()->badBonus->setZValue(1001);
+        iteratorPlayerInfo.value()->badBonus->setPos(tempItem->pos());
+        m_gameScene->addItem(iteratorPlayerInfo.value()->badBonus);
+        delete tempItem;
+        
+        iteratorPlayerInfo++;
+    }
+    
+    updateGraphics(m_svgScaleFactor);
+}
+
 void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusType, int percentageElapsed)
 {
     if(m_gameScene->views().isEmpty())
@@ -311,35 +375,25 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
                     switch((int)bonusType)
                     {
                         case Granatier::Bonus::HYPERACTIVE:
-                            if(renderer->spriteExists("bonus_bad_hyperactive"))
-                            {
-                                m_mapPlayerInfo.value(player)->badBonus->setSpriteKey("bonus_bad_hyperactive");
-                            }
+                            m_badBonusSpriteKey = "bonus_bad_hyperactive";
                             break;
                         case Granatier::Bonus::SLOW:
-                            if(renderer->spriteExists("bonus_bad_slow"))
-                            {
-                                m_mapPlayerInfo.value(player)->badBonus->setSpriteKey("bonus_bad_slow");
-                            }
+                            m_badBonusSpriteKey = "bonus_bad_slow";
                             break;
                         case Granatier::Bonus::MIRROR:
-                            if(renderer->spriteExists("bonus_bad_mirror"))
-                            {
-                                m_mapPlayerInfo.value(player)->badBonus->setSpriteKey("bonus_bad_mirror");
-                            }
+                            m_badBonusSpriteKey = "bonus_bad_mirror";
                             break;
                         case Granatier::Bonus::SCATTY:
-                            if(renderer->spriteExists("bonus_bad_scatty"))
-                            {
-                                m_mapPlayerInfo.value(player)->badBonus->setSpriteKey("bonus_bad_scatty");
-                            }
+                            m_badBonusSpriteKey = "bonus_bad_scatty";
                             break;
                         case Granatier::Bonus::RESTRAIN:
-                            if(renderer->spriteExists("bonus_bad_restrain"))
-                            {
-                                m_mapPlayerInfo.value(player)->badBonus->setSpriteKey("bonus_bad_restrain");
-                            }
+                            m_badBonusSpriteKey = "bonus_bad_restrain";
                             break;
+                    }
+                    
+                    if(renderer->spriteExists(m_badBonusSpriteKey))
+                    {
+                        m_mapPlayerInfo.value(player)->badBonus->setSpriteKey(m_badBonusSpriteKey);
                     }
                     
                     //hide the dimm overlay
