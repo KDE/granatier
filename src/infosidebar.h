@@ -33,6 +33,19 @@ class Player;
 class QRectF;
 class KGameRenderedItem;
 
+struct PlayerInfo
+{
+    QGraphicsTextItem* name;
+    KGameRenderedItem* icon;
+    KGameRenderedItem* bonusShield;
+    QGraphicsRectItem* bonusShieldDimm;
+    KGameRenderedItem* bonusThrow;
+    QGraphicsRectItem* bonusThrowDimm;
+    KGameRenderedItem* bonusKick;
+    QGraphicsRectItem* bonusKickDimm;
+    KGameRenderedItem* badBonus;
+    QGraphicsRectItem* badBonusDimm;
+};
 
 /**
  * @brief This class represents the game sidebar with game information about the player.
@@ -46,16 +59,7 @@ private:
     GameScene* m_gameScene;
     Game* m_game;
     
-    QMap <Player*, KGameRenderedItem*> m_mapPlayerSvgs;
-    QMap <Player*, QGraphicsTextItem*> m_mapPlayerNames;
-    QMap <Player*, KGameRenderedItem*> m_mapBonusThrowSvgs;
-    QMap <Player*, QGraphicsRectItem*> m_mapBonusThrowDimm;
-    QMap <Player*, KGameRenderedItem*> m_mapBonusKickSvgs;
-    QMap <Player*, QGraphicsRectItem*> m_mapBonusKickDimm;
-    QMap <Player*, KGameRenderedItem*> m_mapBonusShieldSvgs;
-    QMap <Player*, QGraphicsRectItem*> m_mapBonusShieldDimm;
-    QMap <Player*, KGameRenderedItem*> m_mapBadBonusSvgs;
-    QMap <Player*, QGraphicsRectItem*> m_mapBadBonusDimm;
+    QMap<Player*, PlayerInfo*> m_mapPlayerInfo;
     
     QGraphicsRectItem* m_background;
     
