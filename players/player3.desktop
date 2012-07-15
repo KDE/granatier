@@ -1,8 +1,10 @@
 [KGameTheme]
 Name=Player 3
+Name[da]=Spiller 3
 Name[de]=Spieler 3
 Name[es]=Jugador 3
 Name[et]=Mängija 3
+Name[fr]=Joueur 3
 Name[hu]=3. játékos
 Name[km]=អ្នក​លេង​ ៣
 Name[lv]=3. spēlētājs
@@ -22,9 +24,11 @@ Name[x-test]=xxPlayer 3xx
 Name[zh_CN]=玩家 3
 Name[zh_TW]=玩家 3
 Description=This is Player 3
+Description[da]=Dette er spiller 3
 Description[de]=Das ist Spieler 3.
 Description[es]=Este es el jugador 3
 Description[et]=See on mängija 3
+Description[fr]=Voici le Joueur 3
 Description[hu]=Ez a 3. játékos
 Description[km]=នេះ​គឺ​ជា​អ្នក​លេង​ ៣
 Description[lv]=Šis ir 3. spēlētājs

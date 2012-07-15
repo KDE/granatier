@@ -1,8 +1,10 @@
 [KGameTheme]
 Name=Player 1
+Name[da]=Spiller 1
 Name[de]=Spieler 1
 Name[es]=Jugador 1
 Name[et]=Mängija 1
+Name[fr]=Joueur 1
 Name[hu]=1. játékos
 Name[km]=អ្នក​លេង​ ១
 Name[lv]=1. spēlētājs
@@ -22,9 +24,11 @@ Name[x-test]=xxPlayer 1xx
 Name[zh_CN]=玩家 1
 Name[zh_TW]=玩家 1
 Description=This is Player 1
+Description[da]=Dette er spiller 1
 Description[de]=Das ist Spieler 1.
 Description[es]=Este es el jugador 1
 Description[et]=See on mängija 1
+Description[fr]=Voici le Joueur 1
 Description[hu]=Ez az 1. játékos
 Description[km]=នេះ​គឺ​ជា​អ្នក​លេង​ ១
 Description[lv]=Šis ir 1. spēlētājs
