@@ -1,6 +1,10 @@
 [Arena]
 Name=Boiling Egg
+Name[uk]=Кипіння
+Name[x-test]=xxBoiling Eggxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Boiling_Egg.xml
 Author=Denis Oliver Kropp

@@ -1,6 +1,10 @@
 [Arena]
 Name=Death Corridor
+Name[uk]=Смертельний коридор
+Name[x-test]=xxDeath Corridorxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Death_Corridor.xml
 Author=Ivar

@@ -1,6 +1,10 @@
 [Arena]
 Name=Fear Circle
+Name[uk]=Коло страху
+Name[x-test]=xxFear Circlexx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_FearCircle.xml
 Author=Ivar

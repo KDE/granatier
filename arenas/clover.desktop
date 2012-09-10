@@ -1,6 +1,10 @@
 [Arena]
 Name=The four-leaf clover
+Name[uk]=Чотирипелюсткова конюшина
+Name[x-test]=xxThe four-leaf cloverxx
 Description=The four-leaf clover is an uncommon variation of the common, three-leaved clover. According to tradition, such leaves bring good luck to their finders, especially if found accidentally. According to legend, each leaf represents something: the first is for hope, the second is for faith, the third is for love, and the fourth is for luck.
+Description[uk]=Чотирипелюстковий листок конюшини є незвичним різновидом звичайного трійчастого листка. Традиційно вважається, що тому, хто знайде такий листок, особливо випадково, має поталанити. Згідно до повір’я, кожна з пелюсток щось символізує: перша — надію, друга — віру, третя — любов, четверта — удачу.
+Description[x-test]=xxThe four-leaf clover is an uncommon variation of the common, three-leaved clover. According to tradition, such leaves bring good luck to their finders, especially if found accidentally. According to legend, each leaf represents something: the first is for hope, the second is for faith, the third is for love, and the fourth is for luck.xx
 Type=XML
 FileName=clover.xml
 Author=Samarina Nastya

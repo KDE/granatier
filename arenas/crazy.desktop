@@ -1,6 +1,10 @@
 [Arena]
 Name=Crazy
+Name[uk]=Шалена
+Name[x-test]=xxCrazyxx
 Description=Crazy Arena
+Description[uk]=Шалена арена
+Description[x-test]=xxCrazy Arenaxx
 Type=XML
 FileName=crazy.xml
 Author=Mathias Kraus

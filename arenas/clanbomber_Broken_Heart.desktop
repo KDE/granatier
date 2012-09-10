@@ -1,6 +1,10 @@
 [Arena]
 Name=Broken Heart
+Name[uk]=Розбите серце
+Name[x-test]=xxBroken Heartxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Broken_Heart.xml
 Author=mass

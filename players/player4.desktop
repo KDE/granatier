@@ -1,6 +1,10 @@
 [KGameTheme]
 Name=Player 4
+Name[uk]=Гравець 4
+Name[x-test]=xxPlayer 4xx
 Description=This is Player 4
+Description[uk]=Це Гравець 4
+Description[x-test]=xxThis is Player 4xx
 Type=SVG
 FileName=player4.svgz
 Author=Mathias Kraus

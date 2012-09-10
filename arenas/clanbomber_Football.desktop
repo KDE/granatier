@@ -1,6 +1,10 @@
 [Arena]
 Name=Football
+Name[uk]=Футбол
+Name[x-test]=xxFootballxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Football.xml
 Author=Denis Oliver Kropp

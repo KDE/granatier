@@ -1,6 +1,10 @@
 [Arena]
 Name=Blast Matrix
+Name[uk]=Вибух матриці
+Name[x-test]=xxBlast Matrixxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Blast_Matrix.xml
 Author=Ivar

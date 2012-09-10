@@ -1,6 +1,10 @@
 [Arena]
 Name=Big Block
+Name[uk]=Великий блок
+Name[x-test]=xxBig Blockxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Big_Block.xml
 Author=Andreas Hundt

@@ -1,6 +1,10 @@
 [Arena]
 Name=Crammed
+Name[uk]=Тиснява
+Name[x-test]=xxCrammedxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Crammed.xml
 Author=Andreas Hundt

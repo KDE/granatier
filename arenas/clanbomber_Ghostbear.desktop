@@ -1,6 +1,10 @@
 [Arena]
 Name=Ghostbear
+Name[uk]=Ведмідь-привид
+Name[x-test]=xxGhostbearxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Ghostbear.xml
 Author=Clanner

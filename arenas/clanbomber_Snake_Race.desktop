@@ -1,6 +1,10 @@
 [Arena]
 Name=Snake Race
+Name[uk]=Змійка
+Name[x-test]=xxSnake Racexx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Snake_Race.xml
 Author=Denis Oliver Kropp

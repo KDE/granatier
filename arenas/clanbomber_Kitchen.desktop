@@ -1,6 +1,10 @@
 [Arena]
 Name=Kitchen
+Name[uk]=Кухня
+Name[x-test]=xxKitchenxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Kitchen.xml
 Author=Denis Oliver Kropp

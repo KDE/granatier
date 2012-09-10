@@ -1,6 +1,10 @@
 [Arena]
 Name=Four Instance
+Name[uk]=Четвертий примірник
+Name[x-test]=xxFour Instancexx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Four_Instance.xml
 Author=Andreas Hundt

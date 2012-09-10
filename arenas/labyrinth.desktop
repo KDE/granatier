@@ -1,6 +1,10 @@
 [Arena]
 Name=Labyrinth
+Name[uk]=Лабіринт
+Name[x-test]=xxLabyrinthxx
 Description=Labyrinth Arena
+Description[uk]=Арена-лабіринт
+Description[x-test]=xxLabyrinth Arenaxx
 Type=XML
 FileName=labyrinth.xml
 Author=Mathias Kraus

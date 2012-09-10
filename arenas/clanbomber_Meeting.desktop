@@ -1,6 +1,10 @@
 [Arena]
 Name=Meeting
+Name[uk]=Зустріч
+Name[x-test]=xxMeetingxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Meeting.xml
 Author=Clanner

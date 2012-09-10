@@ -1,6 +1,10 @@
 [Arena]
 Name=Prison Cells
+Name[uk]=Тюремні камери
+Name[x-test]=xxPrison Cellsxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Prison_Cells.xml
 Author=Andreas Hundt

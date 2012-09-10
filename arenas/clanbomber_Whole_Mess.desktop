@@ -1,6 +1,10 @@
 [Arena]
 Name=Whole Mess
+Name[uk]=Плутанина
+Name[x-test]=xxWhole Messxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Whole_Mess.xml
 Author=Denis Oliver Kropp

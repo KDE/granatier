@@ -1,6 +1,10 @@
 [Arena]
 Name=Hard Work
+Name[uk]=Важка робота
+Name[x-test]=xxHard Workxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Hard_Work.xml
 Author=Andreas Hundt

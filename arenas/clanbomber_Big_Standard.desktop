@@ -1,6 +1,10 @@
 [Arena]
 Name=Clanbomber Big Standard
+Name[uk]=Велика стандартна Clanbomber
+Name[x-test]=xxClanbomber Big Standardxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Big_Standard.xml
 Author=Andreas Hundt

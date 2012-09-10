@@ -1,6 +1,10 @@
 [Arena]
 Name=Redirection
+Name[uk]=Переспрямування
+Name[x-test]=xxRedirectionxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Redirection.xml
 Author=Andreas Hundt

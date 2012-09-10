@@ -1,6 +1,10 @@
 [Arena]
 Name=Fire Wheels
+Name[uk]=Вогняні колеса
+Name[x-test]=xxFire Wheelsxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_FireWheels.xml
 Author=Ivar

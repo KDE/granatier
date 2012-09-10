@@ -1,6 +1,10 @@
 [KGameTheme]
 Name=Clanbomber
+Name[uk]=Clanbomber
+Name[x-test]=xxClanbomberxx
 Description=Clanbomber Theme
+Description[uk]=Тема «Clanbomber»
+Description[x-test]=xxClanbomber Themexx
 Type=SVG
 FileName=clanbomber.svgz
 Preview=clanbomber_preview.png

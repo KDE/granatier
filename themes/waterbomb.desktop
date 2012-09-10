@@ -1,6 +1,10 @@
 [KGameTheme]
 Name=Water Bomb
+Name[uk]=Водяна бомба
+Name[x-test]=xxWater Bombxx
 Description=Water Bomb Theme
+Description[uk]=Тема «Водяна бомба»
+Description[x-test]=xxWater Bomb Themexx
 Type=SVG
 FileName=waterbomb.svgz
 Preview=waterbomb_preview.png

@@ -1,7 +1,11 @@
 [Desktop Entry]
 Type=Application
 Name=Granatier
+Name[uk]=Гренадер
+Name[x-test]=xxGranatierxx
 GenericName=Bomberman clone
+GenericName[uk]=Клон Bomberman
+GenericName[x-test]=xxBomberman clonexx
 Icon=granatier
 TryExec=granatier
 Exec=granatier

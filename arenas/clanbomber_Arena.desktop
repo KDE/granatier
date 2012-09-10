@@ -1,6 +1,10 @@
 [Arena]
 Name=Arena
+Name[uk]=Арена
+Name[x-test]=xxArenaxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Arena.xml
 Author=Denis Oliver Kropp

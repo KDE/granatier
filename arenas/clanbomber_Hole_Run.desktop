@@ -1,6 +1,10 @@
 [Arena]
 Name=Hole Run
+Name[uk]=Втеча крізь дірки
+Name[x-test]=xxHole Runxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Hole_Run.xml
 Author=Andreas Hundt

@@ -1,6 +1,10 @@
 [Arena]
 Name=Dilemma
+Name[uk]=Дилема
+Name[x-test]=xxDilemmaxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Dilemma.xml
 Author=Ivar

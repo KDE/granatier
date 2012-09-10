@@ -1,6 +1,10 @@
 [Arena]
 Name=Obstacle Race
+Name[uk]=Біг з перепонами
+Name[x-test]=xxObstacle Racexx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Obstacle_Race.xml
 Author=Andreas Hundt

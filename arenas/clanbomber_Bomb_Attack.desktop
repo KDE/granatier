@@ -1,6 +1,10 @@
 [Arena]
 Name=Bomb Attack
+Name[uk]=Бомбовий напад
+Name[x-test]=xxBomb Attackxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Bomb_Attack.xml
 Author=Denis Oliver Kropp

@@ -1,6 +1,10 @@
 [Arena]
 Name=Bloody Ring
+Name[uk]=Криваве кільце
+Name[x-test]=xxBloody Ringxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Bloody_Ring.xml
 Author=Denis Oliver Kropp

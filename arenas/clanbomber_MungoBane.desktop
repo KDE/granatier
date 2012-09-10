@@ -1,6 +1,10 @@
 [Arena]
 Name=Mungo Bane
+Name[uk]=Отрута
+Name[x-test]=xxMungo Banexx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_MungoBane.xml
 Author=Ivar

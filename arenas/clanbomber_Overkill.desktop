@@ -1,6 +1,10 @@
 [Arena]
 Name=Overkill
+Name[uk]=Підірвати все
+Name[x-test]=xxOverkillxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Overkill.xml
 Author=Denis Oliver Kropp

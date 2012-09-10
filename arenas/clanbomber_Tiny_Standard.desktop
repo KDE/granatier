@@ -1,6 +1,10 @@
 [Arena]
 Name=Clanbomber Tiny Standard
+Name[uk]=Малюсінька стандартна Clanbomber
+Name[x-test]=xxClanbomber Tiny Standardxx
 Description=Clanbomber Import
+Description[uk]=Імпорт з Clanbomber
+Description[x-test]=xxClanbomber Importxx
 Type=XML
 FileName=clanbomber_Tiny_Standard.xml
 Author=Andreas Hundt

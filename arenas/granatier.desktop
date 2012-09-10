@@ -1,6 +1,10 @@
 [Arena]
 Name=Granatier
+Name[uk]=Гренадер
+Name[x-test]=xxGranatierxx
 Description=Default Granatier Arena
+Description[uk]=Типова арена «Гренадера»
+Description[x-test]=xxDefault Granatier Arenaxx
 Type=XML
 FileName=granatier.xml
 Author=Mathias Kraus
