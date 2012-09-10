@@ -22,6 +22,7 @@
 #include "arena.h"
 #include "arenaitem.h"
 #include "mapparser.h"
+#include "settings.h"
 
 #include <QtCore/QPointer>
 
@@ -615,5 +616,6 @@ void ArenaSelector::Private::_k_updateRandomArenaModeArenaList(QListWidgetItem* 
     }
     m_tempRandomArenaModeArenaList.removeDuplicates();
     *m_randomArenaModeArenaList = m_tempRandomArenaModeArenaList;
+    Settings::self()->setDummy(Settings::self()->dummy() + 3);
 }
 #include "arenaselector.moc"
