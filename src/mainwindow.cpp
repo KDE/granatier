@@ -61,7 +61,7 @@ MainWindow::MainWindow()
     m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
     m_themeProvider->discoverThemes("appdata", QLatin1String("themes"), "granatier");
     // Set the window menus
-    KStandardGameAction::gameNew(this, SLOT(newGame(bool)), actionCollection());
+    KStandardGameAction::gameNew(this, SLOT(newGame()), actionCollection());
     //KStandardGameAction::highscores(this, SLOT(showHighscores()), actionCollection());
     KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
     KStandardGameAction::quit(this, SLOT(close()), actionCollection());
@@ -113,7 +113,7 @@ void MainWindow::initGame()
     }
     // Create a new Game instance
     m_game = new Game(m_playerSettings);
-    connect(m_game, SIGNAL(gameOver(bool)), this, SLOT(newGame(bool)));     // TODO Remove the useless bool parameter from gameOver()
+    connect(m_game, SIGNAL(gameOver()), this, SLOT(newGame()));
     
     m_scene = new GameScene(m_game, m_themeProvider);
     
@@ -127,7 +127,7 @@ void MainWindow::initGame()
     this->setFocus();
 }
 
-void MainWindow::newGame(const bool gameOver)
+void MainWindow::newGame()
 {
     bool gameRunning;       // True if the game is running (game timer is active), false otherwise
   
@@ -139,7 +139,7 @@ void MainWindow::newGame(const bool gameOver)
         m_game->pause();
     }
     // If the game was not over
-    if (!gameOver)
+    if (!m_game->getGameOver())
     {
         // Confirm before starting a new game
         if (KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit the current game?"), i18n("New game")) == KMessageBox::Yes)

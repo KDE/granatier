@@ -475,7 +475,7 @@ void Game::keyPressEvent(QKeyEvent* p_event)
                 // if the game is over, start a new game
                 if (m_gameOver)
                 {
-                    emit(gameOver(true));
+                    emit(gameOver());
                     return;
                 }
                 else

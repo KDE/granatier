@@ -311,9 +311,8 @@ signals:
     
     /**
     * Emitted when the Game is over.
-    * @param p_unused this parameter must always be true !
     */
-    void gameOver(const bool p_unused);
+    void gameOver();
     
     /**
     * Emitted when the pause state has changed.
