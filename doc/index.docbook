@@ -9,7 +9,7 @@
 ]>
 
 <book id="granatier" lang="&language;">
-  <book id="granatier"info>
+  <bookinfo>
     <title>&granatier; Handbook</title>
     
     <authorgroup>
