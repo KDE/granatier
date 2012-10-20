@@ -8,7 +8,7 @@
   <!ENTITY % addindex "IGNORE"> <!-- do not change this! -->
 ]>
 
-<book lang="&language;">
+<book id="granatier" lang="&language;">
   <bookinfo>
     <title>&granatier; Handbook</title>
     
