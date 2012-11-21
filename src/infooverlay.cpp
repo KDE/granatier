@@ -384,3 +384,37 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     m_continueAfterPauseLabel->setPos(m_gameScene->sceneRect().x() + (m_gameScene->width() - m_continueAfterPauseLabel->boundingRect().width()) / 2,
                                       m_gameScene->sceneRect().y() + (m_gameScene->height() + m_pauseLabel->boundingRect().height() - m_continueAfterPauseLabel->boundingRect().height()) / 2);
 }
+
+void InfoOverlay::themeChanged()
+{
+    KGameRenderer* renderer = m_gameScene->renderer(Granatier::Element::SCORE);
+    KGameRenderedItem* tempItem;
+    int nWinPoints = m_game->getWinPoints();
+    
+    //update player infosidebar
+    QMap <Player*, QList<KGameRenderedItem*> >::iterator iteratorScore = m_mapScore.begin();
+    while (iteratorScore != m_mapScore.end())
+    {
+        QList <KGameRenderedItem*>::iterator iteratorStar = iteratorScore.value().begin();
+        while(iteratorStar != iteratorScore.value().end())
+        {
+            tempItem = *iteratorStar;
+            *iteratorStar = new KGameRenderedItem(renderer, tempItem->spriteKey());
+            (*iteratorStar)->setZValue(tempItem->zValue());
+            (*iteratorStar)->setPos(tempItem->pos());
+            
+            if(m_gameScene->items().contains(tempItem))
+            {
+                m_gameScene->removeItem(tempItem);
+                m_gameScene->addItem(*iteratorStar);
+            }
+            delete tempItem;
+
+            iteratorStar++;
+        }
+        
+        iteratorScore++;
+    }
+    
+    updateGraphics(m_svgScaleFactor);
+}
