@@ -98,6 +98,11 @@ public:
       * @param height the new height
       */
     void resizeDimmOverlay(qreal x, qreal y, qreal width, qreal height);
+
+    /**
+     * Handles theme changes
+     */
+    void themeChanged();
     
 public slots:
     /**
