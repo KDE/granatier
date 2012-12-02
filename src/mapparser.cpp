@@ -64,8 +64,6 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
         }
         // Create the Arena matrix
         m_arena->init(nbRows, nbColumns);
-        // initialize random generator
-        qsrand(QDateTime::currentDateTime().toTime_t());
     }
     
     return true;

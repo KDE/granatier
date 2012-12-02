@@ -93,7 +93,6 @@ void Arena::addPlayerPosition(const QPointF &p_position)
     
     //TODO: maybe in own function
     int nShuffle;
-    qsrand(QDateTime::currentDateTime().toTime_t());
     for (int i = 0; i < m_playerPosition.size(); i++)
     {
         nShuffle = m_playerPosition.size() * (qrand()/1.0)/RAND_MAX;

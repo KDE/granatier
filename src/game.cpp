@@ -81,6 +81,9 @@ Game::Game(PlayerSettings* playerSettings)
 
 void Game::init()
 {
+    // initialize random generator
+    qsrand(QDateTime::currentDateTime().toTime_t());
+    
     // Create the Arena instance
     m_arena = new Arena();
 
@@ -118,7 +121,6 @@ void Game::init()
             randomArenaModeArenaList = arenasAvailable;
         }
         
-        qsrand(QDateTime::currentDateTime().toTime_t());
         int nIndex = ((double) qrand() / RAND_MAX) * randomArenaModeArenaList.count();
         if(nIndex < 0)
         {
@@ -332,7 +334,6 @@ QList<Bonus*> Game::getBonus() const
 void Game::createBonus()
 {
     Bonus* bonus;
-    qsrand(QDateTime::currentDateTime().toTime_t());
     int nBonusCount = 0.3 * m_blocks.size();
     int nBadBonusCount = 0.1 * m_blocks.size();
     int nNeutralBonusCount = static_cast <int> ((qrand()/1.0)/RAND_MAX * 2);
@@ -561,7 +562,7 @@ void Game::decrementRemainingRoundTime()
                 nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
                 nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
                 cellType = m_arena->getCell(nRow, nCol).getType();
-                if(cellType != Granatier::Cell::WALL && cellType != Granatier::Cell::HOLE && cellType != Granatier::Cell::BLOCK)
+                if(cellType != Granatier::Cell::WALL && cellType != Granatier::Cell::HOLE && m_arena->getCell(nRow, nCol).isWalkable(0))
                 {
                     bFound = true;
                 }
@@ -570,7 +571,7 @@ void Game::decrementRemainingRoundTime()
             
             m_bombCount++;
             Bomb* bomb = new Bomb((nCol + 0.5) * Granatier::CellSize, (nRow + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 1000);    // time in ms
-            bomb->setBombPower(1);
+            bomb->setBombPower((qrand()/1.0)/RAND_MAX * 2 + 1);
             emit bombCreated(bomb);
             connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated()));
             m_bombs.append(bomb);
@@ -578,7 +579,7 @@ void Game::decrementRemainingRoundTime()
             {
                 m_roundTimer->setInterval(m_roundTimer->interval() + m_remainingTime);
             }
-            else if (m_roundTimer->interval() > 40)
+            else if (m_roundTimer->interval() > 30)
             {
                 m_roundTimer->setInterval(m_roundTimer->interval() - 1);
             }

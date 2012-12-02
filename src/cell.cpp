@@ -39,8 +39,8 @@ bool Cell::isWalkable(Element* p_element) const
         foreach(Element* element, m_elements)
         {
             if(element->getType() == Granatier::Element::BLOCK ||
-                (element->getType() == Granatier::Element::BOMB && p_element != element) ||
-                (element->getType() == Granatier::Element::PLAYER && p_element->getType() != Granatier::Element::PLAYER))
+                (element->getType() == Granatier::Element::BOMB && (p_element == 0 || p_element != element)) ||
+                (element->getType() == Granatier::Element::PLAYER && (p_element == 0 || p_element->getType() != Granatier::Element::PLAYER)))
             {
                 return false;
             }
