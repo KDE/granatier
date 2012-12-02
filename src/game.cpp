@@ -53,6 +53,7 @@ Game::Game(PlayerSettings* playerSettings)
     m_soundDie = new KgSound(KStandardDirs::locate("appdata", "sounds/die.wav"));
     
     m_arena = 0;
+    m_randomArenaModeArenaList.clear();
     m_gameScene = 0;
     m_winPoints = Settings::self()->pointsToWin();
     
@@ -80,10 +81,7 @@ Game::Game(PlayerSettings* playerSettings)
 }
 
 void Game::init()
-{
-    // initialize random generator
-    qsrand(QDateTime::currentDateTime().toTime_t());
-    
+{    
     // Create the Arena instance
     m_arena = new Arena();
 
@@ -97,40 +95,44 @@ void Game::init()
     QString filePath;
     if(Settings::self()->randomArenaMode())
     {
-        QStringList arenasAvailable;
-        QStringList randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
-        
-        KGlobal::dirs()->addResourceType("arenaselector", "data", KGlobal::mainComponent().componentName() + "/arenas/");
-        KGlobal::dirs()->findAllResources("arenaselector", "*.desktop", KStandardDirs::Recursive, arenasAvailable);
-        
-        QStringList::Iterator i = randomArenaModeArenaList.begin();
-        while(i != randomArenaModeArenaList.end())
+        if(m_randomArenaModeArenaList.isEmpty())
         {
-            if(arenasAvailable.contains(*i))
+            QStringList arenasAvailable;
+            m_randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
+
+            KGlobal::dirs()->addResourceType("arenaselector", "data", KGlobal::mainComponent().componentName() + "/arenas/");
+            KGlobal::dirs()->findAllResources("arenaselector", "*.desktop", KStandardDirs::Recursive, arenasAvailable);
+
+            QStringList::Iterator i = m_randomArenaModeArenaList.begin();
+            while(i != m_randomArenaModeArenaList.end())
             {
-                i++;
+                if(arenasAvailable.contains(*i))
+                {
+                    i++;
+                }
+                else
+                {
+                    i = m_randomArenaModeArenaList.erase(i);
+                }
             }
-            else
+
+            if(m_randomArenaModeArenaList.isEmpty())
             {
-                i = randomArenaModeArenaList.erase(i);
+                m_randomArenaModeArenaList = arenasAvailable;
             }
         }
         
-        if(randomArenaModeArenaList.isEmpty())
-        {
-            randomArenaModeArenaList = arenasAvailable;
-        }
-        
-        int nIndex = ((double) qrand() / RAND_MAX) * randomArenaModeArenaList.count();
+        int nIndex = ((double) qrand() / RAND_MAX) * m_randomArenaModeArenaList.count();
         if(nIndex < 0)
         {
             nIndex = 0;
         }
-        else if(nIndex >= randomArenaModeArenaList.count())
+        else if(nIndex >= m_randomArenaModeArenaList.count())
         {
-            nIndex = randomArenaModeArenaList.count() - 1;
+            nIndex = m_randomArenaModeArenaList.count() - 1;
         }
-        filePath = KStandardDirs::locate("appdata", "arenas/" + randomArenaModeArenaList.at(nIndex));
+        filePath = KStandardDirs::locate("appdata", "arenas/" + m_randomArenaModeArenaList.at(nIndex));
+        m_randomArenaModeArenaList.removeAt(nIndex);
     }
     else
     {

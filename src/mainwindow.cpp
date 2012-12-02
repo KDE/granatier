@@ -52,6 +52,9 @@ private:
 
 MainWindow::MainWindow()
 {
+    // initialize random generator
+    qsrand(QDateTime::currentDateTime().toTime_t());
+    
     m_settingsDialog = NULL;
     // Initialize the game
     m_game = NULL;

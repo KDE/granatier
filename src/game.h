@@ -23,6 +23,7 @@
 #include "granatierglobals.h"
 
 #include <QObject>
+#include <QStringList>
 
 class GameScene;
 class Arena;
@@ -79,6 +80,9 @@ private :
     
     /** The Arena */
     Arena* m_arena;
+
+    /** List with arenas for the random arena mode */
+    QStringList m_randomArenaModeArenaList;
 
     /** The Players */
     QList<Player*> m_players;
