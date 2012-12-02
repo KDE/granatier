@@ -748,9 +748,21 @@ void Player::resurrect()
     m_bombPower = Settings::self()->initialBombPower();
     m_maxBombArmory = Settings::self()->initialBombArmory();
     m_bombArmory = m_maxBombArmory;
-    m_listShield.clear();
-    m_throwBomb = false;
-    m_kickBomb = false;
+    if(m_listShield.count() != 0)
+    {
+        m_listShield.clear();
+        emit bonusUpdated(this, Granatier::Bonus::SHIELD, 100);
+    }
+    if(m_throwBomb)
+    {
+        m_throwBomb = false;
+        emit bonusUpdated(this, Granatier::Bonus::THROW, 100);
+    }
+    if(m_kickBomb)
+    {
+        m_kickBomb = false;
+        emit bonusUpdated(this, Granatier::Bonus::KICK, 100);
+    }
     m_omitBombCurrentCell = false;
     if(m_badBonusCountdownTimer->isActive())
     {
