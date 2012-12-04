@@ -2,6 +2,7 @@
 Name=Player 1
 Name[da]=Spiller 1
 Name[de]=Spieler 1
+Name[el]=Παίκτης 1
 Name[es]=Jugador 1
 Name[et]=Mängija 1
 Name[fi]=Pelaaja 1
@@ -32,6 +33,7 @@ Name[zh_TW]=玩家 1
 Description=This is Player 1
 Description[da]=Dette er spiller 1
 Description[de]=Das ist Spieler 1.
+Description[el]=Αυτός είναι ο Παίκτης 1
 Description[es]=Este es el jugador 1
 Description[et]=See on mängija 1
 Description[fi]=Tämä on Pelaaja 1
