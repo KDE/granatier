@@ -1,6 +1,5 @@
 [Arena]
 Name=Broken Heart
-Name[bs]=Slomljeno srce
 Name[ca]=Cor trencat
 Name[ca@valencia]=Cor trencat
 Name[da]=Knust hjerte
@@ -42,7 +41,6 @@ Name[x-test]=xxBroken Heartxx
 Name[zh_CN]=破碎的心
 Name[zh_TW]=心碎
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

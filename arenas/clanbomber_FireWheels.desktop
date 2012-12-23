@@ -1,6 +1,5 @@
 [Arena]
 Name=Fire Wheels
-Name[bs]=Užareni točkovi
 Name[ca]=Rodes de foc
 Name[ca@valencia]=Rodes de foc
 Name[da]=Ildhjul
@@ -41,7 +40,6 @@ Name[x-test]=xxFire Wheelsxx
 Name[zh_CN]=火轮
 Name[zh_TW]=火輪
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

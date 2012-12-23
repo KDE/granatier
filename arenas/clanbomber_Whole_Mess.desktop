@@ -1,6 +1,5 @@
 [Arena]
 Name=Whole Mess
-Name[bs]=Potpuni nered
 Name[ca]=Desordre total
 Name[ca@valencia]=Desordre total
 Name[da]=Værre rod
@@ -38,7 +37,6 @@ Name[x-test]=xxWhole Messxx
 Name[zh_CN]=一团糟
 Name[zh_TW]=一團糟
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

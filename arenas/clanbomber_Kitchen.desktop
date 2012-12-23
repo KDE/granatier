@@ -1,6 +1,5 @@
 [Arena]
 Name=Kitchen
-Name[bs]=Kuhinja
 Name[ca]=Gatet
 Name[ca@valencia]=Gatet
 Name[cs]=Kuchyně
@@ -42,7 +41,6 @@ Name[x-test]=xxKitchenxx
 Name[zh_CN]=厨房
 Name[zh_TW]=廚房
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

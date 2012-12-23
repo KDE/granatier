@@ -1,6 +1,5 @@
 [Arena]
 Name=Sixty Nine
-Name[bs]=Šezdeset i devet
 Name[ca]=Seixanta-nou
 Name[ca@valencia]=Seixanta-nou
 Name[da]=Niogtres
@@ -41,7 +40,6 @@ Name[x-test]=xxSixty Ninexx
 Name[zh_CN]=69
 Name[zh_TW]=69
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

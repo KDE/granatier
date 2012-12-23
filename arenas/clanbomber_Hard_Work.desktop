@@ -1,6 +1,5 @@
 [Arena]
 Name=Hard Work
-Name[bs]=Teški rad
 Name[ca]=Treball dur
 Name[ca@valencia]=Treball dur
 Name[da]=Hårdt arbejde
@@ -42,7 +41,6 @@ Name[x-test]=xxHard Workxx
 Name[zh_CN]=难局
 Name[zh_TW]=困難工作
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

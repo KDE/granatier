@@ -1,6 +1,5 @@
 [Arena]
 Name=Three of Three
-Name[bs]=Tri od tri
 Name[ca]=Tres de tres
 Name[ca@valencia]=Tres de tres
 Name[da]=Tre ud af tre
@@ -42,7 +41,6 @@ Name[x-test]=xxThree of Threexx
 Name[zh_CN]=三三
 Name[zh_TW]=三之三
 Description=Three of Three Arena
-Description[bs]=Tri od tri arena
 Description[ca]=Camp de batalla tres de tres
 Description[ca@valencia]=Camp de batalla tres de tres
 Description[da]=Tre ud af tre-arena

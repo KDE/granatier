@@ -1,6 +1,5 @@
 [Arena]
 Name=Death Corridor
-Name[bs]=Koridor smrti
 Name[ca]=El corredor de la mort
 Name[ca@valencia]=El corredor de la mort
 Name[da]=Dødens korridor
@@ -42,7 +41,6 @@ Name[x-test]=xxDeath Corridorxx
 Name[zh_CN]=死亡走廊
 Name[zh_TW]=死亡走道
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

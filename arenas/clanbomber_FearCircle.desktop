@@ -1,6 +1,5 @@
 [Arena]
 Name=Fear Circle
-Name[bs]=Krug straha
 Name[ca]=Cercle ferotge
 Name[ca@valencia]=Cercle ferotge
 Name[da]=Frygtens cirkel
@@ -41,7 +40,6 @@ Name[x-test]=xxFear Circlexx
 Name[zh_CN]=恐怖环
 Name[zh_TW]=恐懼之圓
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

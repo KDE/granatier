@@ -1,6 +1,5 @@
 [Arena]
 Name=Football
-Name[bs]=Fudbal
 Name[ca]=Futbol
 Name[ca@valencia]=Futbol
 Name[cs]=Fotbal
@@ -43,7 +42,6 @@ Name[x-test]=xxFootballxx
 Name[zh_CN]=足球
 Name[zh_TW]=足球
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

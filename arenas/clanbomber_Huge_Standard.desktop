@@ -1,6 +1,5 @@
 [Arena]
 Name=Clanbomber Huge Standard
-Name[bs]=Klan bombarderski ogromni standard
 Name[ca]=Immens estàndard del Clanbomber
 Name[ca@valencia]=Immens estàndard del Clanbomber
 Name[da]=Enorm standard fra Clanbomber
@@ -39,7 +38,6 @@ Name[x-test]=xxClanbomber Huge Standardxx
 Name[zh_CN]=炸弹人巨型版
 Name[zh_TW]=炸彈超人巨大標準
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

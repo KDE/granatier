@@ -1,6 +1,5 @@
 [Arena]
 Name=Snake Race
-Name[bs]=Utrka zmija
 Name[ca]=Cursa de serps
 Name[ca@valencia]=Cursa de serps
 Name[da]=Slangeræs
@@ -40,7 +39,6 @@ Name[x-test]=xxSnake Racexx
 Name[zh_CN]=竞速蛇
 Name[zh_TW]=蛇賽跑
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

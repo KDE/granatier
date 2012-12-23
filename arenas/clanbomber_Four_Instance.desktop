@@ -1,6 +1,5 @@
 [Arena]
 Name=Four Instance
-Name[bs]=Četiri stepena
 Name[ca]=Quatre instàncies
 Name[ca@valencia]=Quatre instàncies
 Name[da]=Fire afdelinger
@@ -39,7 +38,6 @@ Name[x-test]=xxFour Instancexx
 Name[zh_CN]=四样东西
 Name[zh_TW]=四個實體
 Description=Clanbomber Import
-Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera
