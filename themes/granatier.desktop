@@ -1,5 +1,6 @@
 [KGameTheme]
 Name=Granatier
+Name[bs]=Bombaš
 Name[ca]=Granatier
 Name[ca@valencia]=Granatier
 Name[cs]=Granatier
@@ -41,6 +42,7 @@ Name[x-test]=xxGranatierxx
 Name[zh_CN]=Granatier
 Name[zh_TW]=Granatier
 Description=Granatier Theme
+Description[bs]=Tema granater
 Description[ca]=Tema Granatier
 Description[ca@valencia]=Tema Granatier
 Description[da]=Granatier-tema

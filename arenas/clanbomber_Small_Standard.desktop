@@ -1,5 +1,6 @@
 [Arena]
 Name=Clanbomber Small Standard
+Name[bs]=Klan bombarderski mali standard
 Name[ca]=Petit estàndard del Clanbomber
 Name[ca@valencia]=Petit estàndard del Clanbomber
 Name[da]=Lille standard fra Clanbomber
@@ -38,6 +39,7 @@ Name[x-test]=xxClanbomber Small Standardxx
 Name[zh_CN]=炸弹人小型版
 Name[zh_TW]=炸彈超人小標準
 Description=Clanbomber Import
+Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

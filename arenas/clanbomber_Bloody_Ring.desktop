@@ -1,5 +1,6 @@
 [Arena]
 Name=Bloody Ring
+Name[bs]=Krvavi prsten
 Name[ca]=Anell sagnant
 Name[ca@valencia]=Anell sagnant
 Name[da]=Blodig ring
@@ -39,6 +40,7 @@ Name[x-test]=xxBloody Ringxx
 Name[zh_CN]=血腥指环
 Name[zh_TW]=血腥之環
 Description=Clanbomber Import
+Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

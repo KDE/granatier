@@ -1,5 +1,6 @@
 [Arena]
 Name=Crammed
+Name[bs]=Natrpano
 Name[ca]=Amuntegats
 Name[ca@valencia]=Amuntegats
 Name[da]=Tætpakket
@@ -39,6 +40,7 @@ Name[x-test]=xxCrammedxx
 Name[zh_CN]=填塞
 Name[zh_TW]=塞滿
 Description=Clanbomber Import
+Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera

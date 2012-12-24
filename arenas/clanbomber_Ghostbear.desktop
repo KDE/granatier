@@ -1,5 +1,6 @@
 [Arena]
 Name=Ghostbear
+Name[bs]=Duh medvjed
 Name[ca]=Ós fantasma
 Name[ca@valencia]=Ós fantasma
 Name[da]=Spøgelsesbjørn
@@ -38,6 +39,7 @@ Name[x-test]=xxGhostbearxx
 Name[zh_CN]=熊鬼
 Name[zh_TW]=鬼熊
 Description=Clanbomber Import
+Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber
 Description[cs]=Import z Clanbombera
