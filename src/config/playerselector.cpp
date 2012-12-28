@@ -219,7 +219,7 @@ PlayerSelectorDelegate::PlayerSelectorDelegate(QObject* parent)
         view->setItemDelegate(this);
 }
 
-void PlayerSelectorDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const
+void PlayerSelectorDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& /*index*/) const
 {
     //draw background
     QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, 0);

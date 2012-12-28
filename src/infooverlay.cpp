@@ -389,7 +389,6 @@ void InfoOverlay::themeChanged()
 {
     KGameRenderer* renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     KGameRenderedItem* tempItem;
-    int nWinPoints = m_game->getWinPoints();
     
     //update player infosidebar
     QMap <Player*, QList<KGameRenderedItem*> >::iterator iteratorScore = m_mapScore.begin();
