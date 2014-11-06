@@ -6,7 +6,7 @@ set(granatierSources
     config/playerselector.cpp
     config/playerselectoritem.cpp
     config/playersettings.cpp
-    
+
     arena.cpp
     arenaitem.cpp
     block.cpp
@@ -51,6 +51,7 @@ target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${KDEGAME
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(PROGRAMS granatier.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(FILES granatier.appdata.xml DESTINATION share/appdata)
 install(FILES config/granatier.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 install(FILES ${granatierData} DESTINATION ${DATA_INSTALL_DIR}/granatier)
 
