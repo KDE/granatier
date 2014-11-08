@@ -1,14 +1,21 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <component type="desktop">
   <id>granatier.desktop</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Granatier</name>
+  <name xml:lang="pt">Granatier</name>
+  <name xml:lang="uk">Granatier</name>
+  <name xml:lang="x-test">xxGranatierxx</name>
   <summary>Bomberman clone</summary>
+  <summary xml:lang="uk">Клон гри бомбермен (Bomberman)</summary>
+  <summary xml:lang="x-test">xxBomberman clonexx</summary>
   <description>
     <p>
       Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.
     </p>
+    <p xml:lang="uk">Granatier — клон класичної гри «бомбермен», ідеї для якого запозичено з роботи над клоном гри Clanbomber.</p>
+    <p xml:lang="x-test">xxGranatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.xx</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=granatier</url>
   <url type="help">http://docs.kde.org/stable/en/kdegames/granatier/index.html</url>
