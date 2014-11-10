@@ -9,6 +9,10 @@
   <name xml:lang="pl">Granatier</name>
   <name xml:lang="pt">Granatier</name>
   <name xml:lang="sk">Granatier</name>
+  <name xml:lang="sr">Гренадир</name>
+  <name xml:lang="sr-Latn">Grenadir</name>
+  <name xml:lang="sr-ijekavian">Гренадир</name>
+  <name xml:lang="sr-ijekavianlatin">Grenadir</name>
   <name xml:lang="uk">Granatier</name>
   <name xml:lang="x-test">xxGranatierxx</name>
   <summary>Bomberman clone</summary>
@@ -16,6 +20,10 @@
   <summary xml:lang="nl">Bomberman kloon</summary>
   <summary xml:lang="pl">Klon Bombermana</summary>
   <summary xml:lang="sk">Klon Bombermana</summary>
+  <summary xml:lang="sr">Клон Бомбермана</summary>
+  <summary xml:lang="sr-Latn">Klon Bombermana</summary>
+  <summary xml:lang="sr-ijekavian">Клон Бомбермана</summary>
+  <summary xml:lang="sr-ijekavianlatin">Klon Bombermana</summary>
   <summary xml:lang="uk">Клон гри бомбермен (Bomberman)</summary>
   <summary xml:lang="x-test">xxBomberman clonexx</summary>
   <description>
@@ -25,6 +33,10 @@
     <p xml:lang="nl">Granatier is een kloon van het klassieke spel Bomberman, geïnspireerd door het werk van de kloon Clanbomber.</p>
     <p xml:lang="pl">Granatier jest klonem klasycznej gry Bomberman, zainspirowany pracą nad klonem Clanbomber.</p>
     <p xml:lang="sk">Granatier je klon klasickej hry Bomberman, inšpirovanej prácou klonu Clanmombera.</p>
+    <p xml:lang="sr">Гренадир је клон класичне игре Бомберман, инспирисан радом клона Кланбомбер.</p>
+    <p xml:lang="sr-Latn">Grenadir je klon klasične igre Bomberman, inspirisan radom klona ClanBomber.</p>
+    <p xml:lang="sr-ijekavian">Гренадир је клон класичне игре Бомберман, инспирисан радом клона Кланбомбер.</p>
+    <p xml:lang="sr-ijekavianlatin">Grenadir je klon klasične igre Bomberman, inspirisan radom klona ClanBomber.</p>
     <p xml:lang="uk">Granatier — клон класичної гри «бомбермен», ідеї для якого запозичено з роботи над клоном гри Clanbomber.</p>
     <p xml:lang="x-test">xxGranatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.xx</p>
   </description>
