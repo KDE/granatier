@@ -36,6 +36,8 @@
 #include <KConfigDialog>
 #include <KLocale>
 #include <KgThemeSelector>
+#include <KAction>
+#include <KToggleAction>
 
 class GeneralSettings : public QWidget
 {
@@ -68,7 +70,7 @@ MainWindow::MainWindow()
     //KStandardGameAction::highscores(this, SLOT(showHighscores()), actionCollection());
     KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
     KStandardGameAction::quit(this, SLOT(close()), actionCollection());
-    KAction* soundAction = new KToggleAction(i18n("&Play sounds"), this);
+    KToggleAction* soundAction = new KToggleAction(i18n("&Play sounds"), this);
     soundAction->setChecked(Settings::sounds());
     actionCollection()->addAction( QLatin1String( "sounds" ), soundAction);
     connect(soundAction, SIGNAL(triggered(bool)), this, SLOT(setSoundsEnabled(bool)));

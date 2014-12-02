@@ -21,6 +21,7 @@
 #include <KStandardDirs>
 #include <KConfig>
 #include <KConfigGroup>
+#include <KGlobal>
 
 PlayerSettings::PlayerSettings()
 {

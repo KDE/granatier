@@ -18,16 +18,16 @@
 
 #include "mainwindow.h"
 
-#include <KAboutData>
+#include <K4AboutData>
 #include <KCmdLineArgs>
 #include <KApplication>
 
 int main(int argc, char** argv)
 {
     // About Granatier
-    KAboutData about("granatier", 0, ki18n("Granatier"), "1.2.1",
+    K4AboutData about("granatier", 0, ki18n("Granatier"), "1.2.1",
         ki18n("Granatier is a Bomberman Clone!"),
-        KAboutData::License_GPL, ki18n("Copyright (c) 2009 The Granatier Team!"));
+        K4AboutData::License_GPL, ki18n("Copyright (c) 2009 The Granatier Team!"));
     about.addAuthor(ki18n("Mathias Kraus"), ki18n("Maintainer"), "k.hias@gmx.de", 0);
     about.addCredit(ki18n("Thomas Gallinari"), ki18n("Developer of Kapman, which was the base of Granatier"), "tg8187@yahoo.fr", 0);
     about.addCredit(ki18n("Pierre-Benoit Besse"), ki18n("Developer of Kapman, which was the base of Granatier"), "besse.pb@gmail.com", 0);
@@ -38,8 +38,6 @@ int main(int argc, char** argv)
     KCmdLineArgs::init(argc, argv, &about);
     // Create the application
     KApplication app;
-    // Insert libkdegames catalog, for translation of libkdegames messages
-    KGlobal::locale()->insertCatalog( QLatin1String( "libkdegames" ));
     // Create the main window
     MainWindow* window = new MainWindow();
     // Show the main window

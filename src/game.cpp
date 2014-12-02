@@ -33,6 +33,7 @@
 #include <QTimer>
 #include <QKeyEvent>
 
+#include <KGlobal>
 #include <KStandardDirs>
 #include <KConfig>
 #include <KComponentData>

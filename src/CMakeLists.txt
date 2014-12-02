@@ -37,15 +37,15 @@ set(granatierData
     config/granatierui.rc
 )
 
-kde4_add_ui_files(granatierSources config/arenaselector.ui config/generalsettings.ui)
+ki18n_wrap_ui(granatierSources config/arenaselector.ui config/generalsettings.ui)
 
-kde4_add_kcfg_files(granatierSources config/settings.kcfgc)
+kconfig_add_kcfg_files(granatierSources config/settings.kcfgc)
 
-kde4_add_app_icon(granatierSources "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/hi*-app-granatier.png")
+kde4_add_app_icon(granatierSources "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/hi*-apps-granatier.png")
 
-kde4_add_executable(granatier ${granatierSources})
+add_executable(granatier ${granatierSources})
 
-target_link_libraries(granatier ${KDE4_KDEUI_LIBS} ${QT_QTXML_LIBRARY} ${KDEGAMES_LIBRARY} ${KDE4_KNEWSTUFF3_LIBS} kdegames)
+target_link_libraries(granatier  Qt5::Xml Qt5::Widgets KF5::NewStuff KF5KDEGames KF5::KDELibs4Support Qt5::Svg)
 
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})

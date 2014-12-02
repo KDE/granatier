@@ -21,7 +21,7 @@
 #ifndef ARENASELECTOR_H
 #define ARENASELECTOR_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class KConfigSkeleton; 
 class ArenaSelectorPrivate;

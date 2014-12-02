@@ -18,7 +18,7 @@
 #ifndef PLAYERSELECTORITEM_H
 #define PLAYERSELECTORITEM_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class PlayerSettings;
 class QCheckBox;

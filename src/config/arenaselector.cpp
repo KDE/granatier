@@ -26,7 +26,9 @@
 
 #include <QtCore/QPointer>
 
+#include <KGlobal>
 #include <KgTheme>
+#include <KIcon>
 #include <KGameRenderer>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
@@ -618,4 +620,5 @@ void ArenaSelector::Private::_k_updateRandomArenaModeArenaList(QListWidgetItem* 
     *m_randomArenaModeArenaList = m_tempRandomArenaModeArenaList;
     Settings::self()->setDummy(Settings::self()->dummy() + 3);
 }
-#include "arenaselector.moc"
+#include "moc_arenaselector.cpp"
+

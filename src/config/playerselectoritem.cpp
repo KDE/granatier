@@ -18,16 +18,16 @@
 #include "playerselectoritem.h"
 #include "playersettings.h"
 
-#include <QtGui/QLabel>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QGridLayout>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QCheckBox>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QGridLayout>
+#include <QSpacerItem>
+#include <QCheckBox>
 
-#include <KDE/KLineEdit>
-#include <KDE/KKeySequenceWidget>
-#include <KDE/KLocalizedString>
+#include <KLineEdit>
+#include <KKeySequenceWidget>
+#include <KLocalizedString>
 
 
 PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* playerSettings, QWidget* parent) : QWidget(parent), m_playerId(playerId), m_playerSettings(playerSettings)

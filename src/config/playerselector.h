@@ -20,7 +20,7 @@
 #ifndef PLAYERSELECTOR_H
 #define PLAYERSELECTOR_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 
 class PlayerSettings;
 class PlayerProvider;

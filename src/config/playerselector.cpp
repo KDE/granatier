@@ -22,26 +22,28 @@
 #include "playersettings.h"
 
 #include <QtCore/QPointer>
-#include <QtGui/QAbstractItemView>
-#include <QtGui/QApplication>
-#include <QtGui/QCloseEvent>
-#include <QtGui/QFont>
-#include <QtGui/QFontMetrics>
-#include <QtGui/QListWidget>
-#include <QtGui/QLineEdit>
-#include <QtGui/QPainter>
-#include <QtGui/QPushButton>
-#include <QtGui/QScrollBar>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QSpacerItem>
+#include <QAbstractItemView>
+#include <QApplication>
+#include <QCloseEvent>
+#include <QFont>
+#include <QFontMetrics>
+#include <QListWidget>
+#include <QLineEdit>
+#include <QPainter>
+#include <QPushButton>
+#include <QScrollBar>
+#include <QVBoxLayout>
+#include <QSpacerItem>
 #include <QtSvg/QSvgRenderer>
-#include <KDE/KStandardDirs>
-#include <KDE/KConfig>
-#include <KDE/KLocalizedString>
+#include <KStandardDirs>
+#include <KConfig>
+#include <KLocalizedString>
 #include <KNS3/DownloadDialog>
-
+#include <KIcon>
+#include <KConfigGroup>
+#include <KDialog>
 //PlayerSelectorDelegate declaration
-#include <QtGui/QStyledItemDelegate>
+#include <QStyledItemDelegate>
 class PlayerSelectorDelegate : public QStyledItemDelegate
 {
 public:
@@ -234,4 +236,4 @@ QSize PlayerSelectorDelegate::sizeHint(const QStyleOptionViewItem& option, const
 
 //END PlayerSelectorDelegate
 
-#include "playerselector.moc"
+#include "moc_playerselector.cpp"
