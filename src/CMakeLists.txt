@@ -50,7 +50,7 @@ target_link_libraries(granatier  Qt5::Xml Qt5::Widgets KF5::NewStuff KF5KDEGames
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(PROGRAMS granatier.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(PROGRAMS org.kde.granatier.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
 install(FILES granatier.appdata.xml DESTINATION share/appdata)
 install(FILES config/granatier.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 install(FILES ${granatierData} DESTINATION ${DATA_INSTALL_DIR}/granatier)
