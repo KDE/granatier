@@ -34,9 +34,8 @@
 #include <KToggleAction>
 #include <KMessageBox>
 #include <KConfigDialog>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KgThemeSelector>
-#include <KAction>
 #include <KToggleAction>
 
 class GeneralSettings : public QWidget

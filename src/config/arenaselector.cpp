@@ -28,7 +28,7 @@
 
 #include <KGlobal>
 #include <KgTheme>
-#include <KIcon>
+#include <QIcon>
 #include <KGameRenderer>
 #include <KStandardDirs>
 #include <KConfigSkeleton>
@@ -126,7 +126,7 @@ void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
     //setup KNS button
     if (m_options & EnableNewStuffDownload)
     {
-        ui.getNewButton->setIcon(KIcon( QLatin1String( "get-hot-new-stuff" )));
+        ui.getNewButton->setIcon(QIcon::fromTheme( QLatin1String( "get-hot-new-stuff" )));
         connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
     }
     else

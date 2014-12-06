@@ -37,7 +37,7 @@
 
 #include <KgTheme>
 #include <KgThemeProvider>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KStandardDirs>
 #include <QPainter>
 #include <QGraphicsView>

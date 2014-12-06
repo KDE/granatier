@@ -39,7 +39,7 @@
 #include <KConfig>
 #include <KLocalizedString>
 #include <KNS3/DownloadDialog>
-#include <KIcon>
+#include <QIcon>
 #include <KConfigGroup>
 #include <KDialog>
 //PlayerSelectorDelegate declaration
@@ -91,7 +91,7 @@ PlayerSelector::PlayerSelector(PlayerSettings* playerSettings, Options options, 
     //setup KNS button
     if (options & EnableNewStuffDownload)
     {
-        d->m_knsButton = new QPushButton(KIcon("get-hot-new-stuff"),
+        d->m_knsButton = new QPushButton(QIcon::fromTheme("get-hot-new-stuff"),
             i18n("Get New Players..."), this);
         layout->addWidget(d->m_knsButton);
         connect(d->m_knsButton, SIGNAL(clicked()), SLOT(_k_showNewStuffDialog()));
@@ -168,7 +168,7 @@ class PlayerSelector::Dialog : public KDialog
                 setButtons(Close | User1);
                 setButtonText(User1, btn->text());
                 //cannot use btn->icon() because setButtonIcon() wants KIcon
-                setButtonIcon(User1, KIcon("get-hot-new-stuff"));
+                setButtonIcon(User1, QIcon::fromTheme("get-hot-new-stuff"));
                 connect(this, SIGNAL(user1Clicked()), btn, SIGNAL(clicked()));
             }
             else

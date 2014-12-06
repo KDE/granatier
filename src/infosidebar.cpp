@@ -24,7 +24,7 @@
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
 #include <QTimer>
-#include <KLocale>
+#include <KLocalizedString>
 #include <KStandardDirs>
 #include <KGameRenderer>
 #include <KGameRenderedItem>
