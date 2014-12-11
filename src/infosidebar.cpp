@@ -25,7 +25,6 @@
 #include <QGraphicsRectItem>
 #include <QTimer>
 #include <KLocalizedString>
-#include <KStandardDirs>
 #include <KGameRenderer>
 #include <KGameRenderedItem>
 

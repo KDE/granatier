@@ -19,7 +19,7 @@
      <item>
       <layout class="QVBoxLayout">
        <item>
-        <widget class="KListWidget" name="arenaList"/>
+        <widget class="QListWidget" name="arenaList"/>
        </item>
        <item>
         <widget class="QCheckBox" name="kcfg_RandomArenaMode">
@@ -168,11 +168,6 @@
    <class>KLineEdit</class>
    <extends>QLineEdit</extends>
    <header>klineedit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>KListWidget</class>
-   <extends>QListWidget</extends>
-   <header>klistwidget.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
