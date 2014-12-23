@@ -23,6 +23,7 @@
   <name xml:lang="sr-ijekavianlatin">Grenadir</name>
   <name xml:lang="uk">Granatier</name>
   <name xml:lang="x-test">xxGranatierxx</name>
+  <name xml:lang="zh-TW">Granatier</name>
   <summary>Bomberman clone</summary>
   <summary xml:lang="ca">Un clon del Bomberman</summary>
   <summary xml:lang="cs">Klon Bombermana</summary>
@@ -42,6 +43,7 @@
   <summary xml:lang="sr-ijekavianlatin">Klon Bombermana</summary>
   <summary xml:lang="uk">Клон гри бомбермен (Bomberman)</summary>
   <summary xml:lang="x-test">xxBomberman clonexx</summary>
+  <summary xml:lang="zh-TW">炸彈超人遊戲</summary>
   <description>
     <p>
       Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.
@@ -62,6 +64,7 @@
     <p xml:lang="sr-ijekavianlatin">Grenadir je klon klasične igre Bomberman, inspirisan radom klona ClanBomber.</p>
     <p xml:lang="uk">Granatier — клон класичної гри «бомбермен», ідеї для якого запозичено з роботи над клоном гри Clanbomber.</p>
     <p xml:lang="x-test">xxGranatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.xx</p>
+    <p xml:lang="zh-TW">Granatier 是從傳統的炸彈超人所承襲而來的遊戲，並且參考了 Clanbomber 的源碼。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=granatier</url>
   <url type="help">http://docs.kde.org/stable/en/kdegames/granatier/index.html</url>
