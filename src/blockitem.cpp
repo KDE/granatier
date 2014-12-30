@@ -40,7 +40,7 @@ void BlockItem::startDestructionAnimation()
     m_destructionTimer = new QTimer(this);
     m_destructionTimer->setInterval(300);
     m_destructionTimer->start();
-    connect(m_destructionTimer, SIGNAL(timeout()), this, SLOT(destructionAnimation()));
+    connect(m_destructionTimer, &QTimer::timeout, this, &BlockItem::destructionAnimation);
     
     setSpriteKey("arena_block_highlight");
 }

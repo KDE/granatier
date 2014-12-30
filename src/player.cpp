@@ -46,7 +46,7 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
     m_badBonusCountdownTimer = new QTimer;
     m_badBonusCountdownTimer->setInterval(badBonusTimerTimeout);
     m_badBonusMillisecondsToElapse = 0;
-    connect(m_badBonusCountdownTimer, SIGNAL(timeout()), this, SLOT(slot_badBonusTimerTimeout()));
+    connect(m_badBonusCountdownTimer, &QTimer::timeout, this, &Player::slot_badBonusTimerTimeout);
     
     resurrect();
     

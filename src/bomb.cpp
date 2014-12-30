@@ -53,7 +53,7 @@ Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCount
     m_detonationCountdownTimer->setInterval(nDetonationCountdown);
     m_detonationCountdownTimer->setSingleShot(true);
     m_detonationCountdownTimer->start();
-    connect(m_detonationCountdownTimer, SIGNAL(timeout()), this, SLOT(detonate()));
+    connect(m_detonationCountdownTimer, &QTimer::timeout, this, &Bomb::detonate);
     
     m_mortarTimer = 0;
     m_mortarState = -1;

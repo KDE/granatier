@@ -65,9 +65,9 @@ Game::Game(PlayerSettings* playerSettings)
         {
             Player* player = new Player(qreal(Granatier::CellSize * (-0.5)),qreal(Granatier::CellSize * 0.5), strPlayerIDs[i], playerSettings, m_arena);
             m_players.append(player);
-            connect(player, SIGNAL(dying()), this, SLOT(playerDeath()));
-            connect(player, SIGNAL(falling()), this, SLOT(playerFalling()));
-            connect(player, SIGNAL(resurrectBonusTaken()), this, SLOT(resurrectBonusTaken()));
+            connect(player, &Player::dying, this, &Game::playerDeath);
+            connect(player, &Player::falling, this, &Game::playerFalling);
+            connect(player, &Player::resurrectBonusTaken, this, &Game::resurrectBonusTaken);
         }
     }
     
@@ -180,18 +180,18 @@ void Game::init()
     // Start the Game timer
     m_timer = new QTimer(this);
     m_timer->setInterval(int(1000 / Granatier::FPS));
-    connect(m_timer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(m_timer, &QTimer::timeout, this, &Game::update);
     m_timer->start();
     m_state = RUNNING;
     
     m_roundTimer  = new QTimer(this);
     m_roundTimer->setInterval(1000);
-    connect(m_roundTimer, SIGNAL(timeout()), this, SLOT(decrementRemainingRoundTime()));
+    connect(m_roundTimer, &QTimer::timeout, this, &Game::decrementRemainingRoundTime);
     m_roundTimer->start();
     
     m_setRoundFinishedTimer  = new QTimer(this);
     m_setRoundFinishedTimer->setSingleShot(true);
-    connect(m_setRoundFinishedTimer, SIGNAL(timeout()), this, SLOT(setRoundFinished()));
+    connect(m_setRoundFinishedTimer, &QTimer::timeout, this, &Game::setRoundFinished);
     
     // Init the characters coordinates on the Arena
     for (int i = 0; i < m_players.size(); i++)
@@ -576,7 +576,7 @@ void Game::decrementRemainingRoundTime()
             Bomb* bomb = new Bomb((nCol + 0.5) * Granatier::CellSize, (nRow + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 1000);    // time in ms
             bomb->setBombPower((qrand()/1.0)/RAND_MAX * 2 + 1);
             emit bombCreated(bomb);
-            connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated()));
+            connect(bomb, &Bomb::bombDetonated, this, &Game::bombDetonated);
             m_bombs.append(bomb);
             if(m_remainingTime > -100 && m_roundTimer->interval() > 150)
             {
@@ -706,8 +706,8 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     Bomb* bomb = new Bomb((col + 0.5) * Granatier::CellSize, (row + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 2500);    // time in ms
     bomb->setBombPower(player->getBombPower());
     emit bombCreated(bomb);
-    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated()));
-    connect(bomb, SIGNAL(releaseBombArmory()), player, SLOT(slot_refillBombArmory()));
+    connect(bomb, &Bomb::bombDetonated, this, &Game::bombDetonated);
+    connect(bomb, &Bomb::releaseBombArmory, player, &Player::slot_refillBombArmory);
     m_bombs.append(bomb);
     player->decrementBombArmory();
     

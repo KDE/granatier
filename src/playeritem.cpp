@@ -49,7 +49,7 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
     m_animationTimer->setFrameRange(0, NB_FRAMES - 1);
     // Animation speed
     m_animationTimer->setDuration(PlayerItem::ANIM_SPEED);
-    connect(m_animationTimer, SIGNAL(frameChanged(int)), this, SLOT(setFrame(int)));
+    connect(m_animationTimer, &QTimeLine::frameChanged, this, &PlayerItem::setFrame);
     
     int width = Granatier::CellSize * 0.9;
     int height = Granatier::CellSize * 0.9;

@@ -53,7 +53,7 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
     m_pulseTimer = new QTimer(this);
     m_pulseTimer->setInterval(nBombPulseTime);
     m_pulseTimer->start();
-    connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
+    connect(m_pulseTimer, &QTimer::timeout, this, &BombItem::pulse);
     
     m_explosionTimer = NULL;
     m_listExplosionTiming.append(Settings::self()->blastTime1());
@@ -143,7 +143,7 @@ void BombItem::startDetonation()
     m_explosionTimer->setInterval(m_listExplosionTiming.at(0));
     m_explosionTimer->setSingleShot(true);
     m_explosionTimer->start();
-    connect(m_explosionTimer, SIGNAL(timeout()), this, SLOT(updateAnimation()));
+    connect(m_explosionTimer, &QTimer::timeout, this, &BombItem::updateAnimation);
     
     int width = Granatier::CellSize * 1.1;
     int height = Granatier::CellSize * 1.1;
@@ -269,7 +269,7 @@ void BombItem::updateMortar(int nMortarState, int nMortarRampEnd, int nMortarPea
             m_pulseTimer->setInterval(nBombPulseTime);
             m_animationCounter = 1; // set to one, to start pulsing with a small bomb
             m_pulseTimer->start();
-            connect(m_pulseTimer, SIGNAL(timeout()), this, SLOT(pulse()));
+            connect(m_pulseTimer, &QTimer::timeout, this, &BombItem::pulse);
         }
         QTransform transform;
         transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.height() / 2.0);

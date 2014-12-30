@@ -59,7 +59,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     
     m_backgroundResizeTimer = new QTimer();
     m_backgroundResizeTimer->setSingleShot(true);
-    connect(m_backgroundResizeTimer, SIGNAL(timeout()), this, SLOT(resizeBackground()));
+    connect(m_backgroundResizeTimer, &QTimer::timeout, this, &GameScene::resizeBackground);
 
     // Create the PlayerItems and the points labels
     QList <Player*> players = p_game->getPlayers();
@@ -80,8 +80,8 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
         
         m_playerItems.append(playerItem);
         
-        connect(this, SIGNAL(resizeGraphics(qreal)), playerItem, SLOT(updateGraphics(qreal)));
-        connect (playerItem, SIGNAL(bonusItemTaken(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
+        connect(this, &GameScene::resizeGraphics, playerItem, &PlayerItem::updateGraphics);
+        connect(playerItem, &PlayerItem::bonusItemTaken, this, &GameScene::removeBonusItem);
     }
     
     // The remaining time
@@ -100,11 +100,11 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     m_rendererDefaultTheme = 0;
     setupThemeRenderer();
     
-    connect(m_themeProvider, SIGNAL(currentThemeChanged(const KgTheme*)), this, SLOT(themeChanged()));
+    connect(m_themeProvider, &KgThemeProvider::currentThemeChanged, this, &GameScene::themeChanged);
     
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, this);
-    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoOverlay, SLOT(updateGraphics(qreal)));
+    connect(this, &GameScene::resizeGraphics, m_infoOverlay, &InfoOverlay::updateGraphics);
     
     init();
 }
@@ -239,7 +239,7 @@ void GameScene::init()
     
     // create the info sidebar
     m_infoSidebar = new InfoSidebar(m_game, this);
-    connect(this, SIGNAL(resizeGraphics(qreal)), m_infoSidebar, SLOT(updateGraphics(qreal)));
+    connect(this, &GameScene::resizeGraphics, m_infoSidebar, &InfoSidebar::updateGraphics);
     
     //update the sceneRect
     QRectF oldSceneRect = sceneRect();
@@ -280,7 +280,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
         {
             // Create the ArenaItem and set the image
             ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, "");
-            connect(this, SIGNAL(resizeGraphics(qreal)), arenaItem, SLOT(updateGraphics(qreal)));
+            connect(this, &GameScene::resizeGraphics, arenaItem, &ArenaItem::updateGraphics);
             
             //TODO: use this function call
             //arenaItem->setElementId(m_game->getArena()->getCell(i,j).getElement()->getImageId());
@@ -346,7 +346,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
                 {
                     Block* block = dynamic_cast <Block*> (element);
                     BlockItem* blockItem = new BlockItem(block, m_rendererArenaItems);
-                    connect(this, SIGNAL(resizeGraphics(qreal)), blockItem, SLOT(updateGraphics(qreal)));
+                    connect(this, &GameScene::resizeGraphics, blockItem, &BlockItem::updateGraphics);
                     blockItem->setSpriteKey(block->getImageId());
                     blockItem->update(block->getX(), block->getY());
                     blockItem->setZValue(200);
@@ -354,8 +354,8 @@ void GameScene::initItemsWithGraphicsFromTheme()
                     {
                         blockItem->setZValue(99);
                     }
-                    connect(this, SIGNAL(resizeGraphics(qreal)), blockItem, SLOT(updateGraphics(qreal)));
-                    connect(blockItem, SIGNAL(blockItemDestroyed(BlockItem*)), this, SLOT(removeBlockItem(BlockItem*)));
+                    connect(this, &GameScene::resizeGraphics, blockItem, &BlockItem::updateGraphics);
+                    connect(blockItem, &BlockItem::blockItemDestroyed, this, &GameScene::removeBlockItem);
                     m_blockItems[i][j] = blockItem;
                     // if the block contains a hidden bonus, create the bonus item 
                     Bonus* bonus = block->getBonus();
@@ -413,8 +413,8 @@ void GameScene::initItemsWithGraphicsFromTheme()
                         bonusItem->setZValue(100);
                         m_bonusItems[i][j] = bonusItem;
                         
-                        connect(this, SIGNAL(resizeGraphics(qreal)), bonusItem, SLOT(updateGraphics(qreal)));
-                        connect(bonusItem, SIGNAL(bonusItemDestroyed(BonusItem*)), this, SLOT(removeBonusItem(BonusItem*)));
+                        connect(this, &GameScene::resizeGraphics, bonusItem, &BonusItem::updateGraphics);
+                        connect(bonusItem, &BonusItem::bonusItemDestroyed, this, &GameScene::removeBonusItem);
                         
                         addItem(bonusItem);
                         if(Settings::self()->showAllTiles() == 0)
@@ -836,11 +836,11 @@ void GameScene::createBombItem(Bomb* bomb)
     
     bombItem->updateGraphics(m_SvgScaleFactor); //TODO: use a Renderer class and get the scale factor from a static function during initialization
     
-    connect(this, SIGNAL(resizeGraphics(qreal)), bombItem, SLOT(updateGraphics(qreal)));
+    connect(this, &GameScene::resizeGraphics, bombItem, &BombItem::updateGraphics);
     connect(bomb, SIGNAL(mortar(int,int,int,int)), bombItem, SLOT(updateMortar(int,int,int,int)));
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
-    connect(bombItem, SIGNAL(bombItemFinished(BombItem*)), this, SLOT(removeBombItem(BombItem*)));
-    connect(bombItem, SIGNAL(animationFrameChanged(BombItem*,int)), this, SLOT(updateBombExplosionItemAnimation(BombItem*,int)));
+    connect(bombItem, &BombItem::bombItemFinished, this, &GameScene::removeBombItem);
+    connect(bombItem, &BombItem::animationFrameChanged, this, &GameScene::updateBombExplosionItemAnimation);
 }
 
 void GameScene::removeBombItem(BombItem* bombItem)
@@ -1023,7 +1023,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     
                     bombExplosionItem = new BombExplosionItem (bomb, direction, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
                     bombExplosionItem->setPosition(xPos, yPos);
-                    connect(this, SIGNAL(resizeGraphics(qreal)), bombExplosionItem, SLOT(updateGraphics(qreal)));
+                    connect(this, &GameScene::resizeGraphics, bombExplosionItem, &BombExplosionItem::updateGraphics);
                     addItem(bombExplosionItem);
                     m_bombItems[bombItem].append(bombExplosionItem);
                 }
