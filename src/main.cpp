@@ -23,10 +23,16 @@
 #include <QApplication>
 #include <KLocalizedString>
 #include <QCommandLineParser>
+#include <kdelibs4configmigrator.h>
 
 
 int main(int argc, char** argv)
 {
+    Kdelibs4ConfigMigrator migrate(QStringLiteral("granatier"));
+    migrate.setConfigFiles(QStringList() << QStringLiteral("granatierrc"));
+    migrate.setUiFiles(QStringList() << QStringLiteral("granatierui.rc"));
+    migrate.migrate();
+
     // About Granatier
     KAboutData about("granatier",  i18n("Granatier"), "1.2.1",
         i18n("Granatier is a Bomberman Clone!"),
