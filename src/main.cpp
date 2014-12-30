@@ -18,26 +18,35 @@
 
 #include "mainwindow.h"
 
-#include <K4AboutData>
-#include <KCmdLineArgs>
-#include <KApplication>
+#include <KAboutData>
+
+#include <QApplication>
+#include <KLocalizedString>
+#include <QCommandLineParser>
+
 
 int main(int argc, char** argv)
 {
     // About Granatier
-    K4AboutData about("granatier", 0, ki18n("Granatier"), "1.2.1",
-        ki18n("Granatier is a Bomberman Clone!"),
-        K4AboutData::License_GPL, ki18n("Copyright (c) 2009 The Granatier Team!"));
-    about.addAuthor(ki18n("Mathias Kraus"), ki18n("Maintainer"), "k.hias@gmx.de", 0);
-    about.addCredit(ki18n("Thomas Gallinari"), ki18n("Developer of Kapman, which was the base of Granatier"), "tg8187@yahoo.fr", 0);
-    about.addCredit(ki18n("Pierre-Benoit Besse"), ki18n("Developer of Kapman, which was the base of Granatier"), "besse.pb@gmail.com", 0);
-    about.addCredit(ki18n("Romain Castan"), ki18n("Developer of Kapman, which was the base of Granatier"), "romaincastan@gmail.com", 0);
-    about.addCredit(ki18n("Alexandre Galinier"), ki18n("Developer of Kapman, which was the base of Granatier"), "alex.galinier@gmail.com", 0);
-    about.addCredit(ki18n("Nathalie Liesse"), ki18n("Developer of Kapman, which was the base of Granatier"), "nathalie.liesse@gmail.com", 0);
+    KAboutData about("granatier",  i18n("Granatier"), "1.2.1",
+        i18n("Granatier is a Bomberman Clone!"),
+        KAboutLicense::GPL, i18n("Copyright (c) 2009 The Granatier Team!"));
+    about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), "k.hias@gmx.de", 0);
+    about.addCredit(i18n("Thomas Gallinari"), i18n("Developer of Kapman, which was the base of Granatier"), "tg8187@yahoo.fr", 0);
+    about.addCredit(i18n("Pierre-Benoit Besse"), i18n("Developer of Kapman, which was the base of Granatier"), "besse.pb@gmail.com", 0);
+    about.addCredit(i18n("Romain Castan"), i18n("Developer of Kapman, which was the base of Granatier"), "romaincastan@gmail.com", 0);
+    about.addCredit(i18n("Alexandre Galinier"), i18n("Developer of Kapman, which was the base of Granatier"), "alex.galinier@gmail.com", 0);
+    about.addCredit(i18n("Nathalie Liesse"), i18n("Developer of Kapman, which was the base of Granatier"), "nathalie.liesse@gmail.com", 0);
     // Command line arguments
-    KCmdLineArgs::init(argc, argv, &about);
+    QApplication app(argc, argv);
+    QCommandLineParser parser;
+    KAboutData::setApplicationData(about);
+    parser.addVersionOption();
+    parser.addHelpOption();
+    about.setupCommandLine(&parser);
+    parser.process(app);
+    about.processCommandLine(&parser);
     // Create the application
-    KApplication app;
     // Create the main window
     MainWindow* window = new MainWindow();
     // Show the main window
