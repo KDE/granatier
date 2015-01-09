@@ -429,7 +429,7 @@ void Game::setSoundsEnabled(bool p_enabled)
 {
     m_soundEnabled = p_enabled;
     Settings::setSounds(p_enabled);
-    Settings::self()->writeConfig();
+    Settings::self()->save();
 }
 
 void Game::initCharactersPosition()

@@ -28,7 +28,6 @@
 
 #include <QTimeLine>
 
-#include <KStandardDirs>
 #include <KGameRenderer>
 
 const int PlayerItem::NB_FRAMES = 13;
