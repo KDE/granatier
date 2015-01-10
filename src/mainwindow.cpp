@@ -37,6 +37,7 @@
 #include <KLocalizedString>
 #include <KgThemeSelector>
 #include <KToggleAction>
+#include <QPushButton>
 
 class GeneralSettings : public QWidget
 {
@@ -193,7 +194,7 @@ void MainWindow::showSettings()
     m_settingsDialog = settingsDialog;
     
     connect(settingsDialog, SIGNAL(settingsChanged(QString)), this, SLOT(applyNewSettings()));
-    connect(settingsDialog, SIGNAL(cancelClicked()), this, SLOT(settingsDialogCanceled()));
+    connect(settingsDialog->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT(settingsDialogCanceled()));
     settingsDialog->show();
 }
 
