@@ -24,7 +24,7 @@
 #include <KLocalizedString>
 #include <QCommandLineParser>
 #include <kdelibs4configmigrator.h>
-
+#include <KDBusService>
 
 int main(int argc, char** argv)
 {
@@ -52,6 +52,7 @@ int main(int argc, char** argv)
     about.setupCommandLine(&parser);
     parser.process(app);
     about.processCommandLine(&parser);
+    KDBusService service;
     // Create the application
     // Create the main window
     MainWindow* window = new MainWindow();
