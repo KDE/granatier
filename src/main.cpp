@@ -28,6 +28,8 @@
 
 int main(int argc, char** argv)
 {
+    QApplication app(argc, argv);
+
     Kdelibs4ConfigMigrator migrate(QStringLiteral("granatier"));
     migrate.setConfigFiles(QStringList() << QStringLiteral("granatierrc"));
     migrate.setUiFiles(QStringList() << QStringLiteral("granatierui.rc"));
@@ -44,7 +46,6 @@ int main(int argc, char** argv)
     about.addCredit(i18n("Alexandre Galinier"), i18n("Developer of Kapman, which was the base of Granatier"), "alex.galinier@gmail.com", 0);
     about.addCredit(i18n("Nathalie Liesse"), i18n("Developer of Kapman, which was the base of Granatier"), "nathalie.liesse@gmail.com", 0);
     // Command line arguments
-    QApplication app(argc, argv);
     QCommandLineParser parser;
     KAboutData::setApplicationData(about);
     parser.addVersionOption();
