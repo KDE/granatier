@@ -341,80 +341,93 @@ QList<Bonus*> Game::getBonus() const
 void Game::createBonus()
 {
     Bonus* bonus;
-    int nBonusCount = 0.3 * m_blocks.size();
-    int nBadBonusCount = 0.1 * m_blocks.size();
+    int nBonusCount = 0.3 * m_blocks.size() / 4;
+    int nBadBonusCount = 0.1 * m_blocks.size() / 4;
     int nNeutralBonusCount = static_cast <int> ((qrand()/1.0)/RAND_MAX * 2);
     QList<Granatier::Bonus::Type> bonusTypeList;
     Granatier::Bonus::Type bonusType;
-    for (int i = 0; i < m_blocks.size(); i++)
-    {
-        bonusType = Granatier::Bonus::NONE;
-        if(i < nBonusCount)
-        {
-            int nNumberOfBonuses = 6;
-            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * nNumberOfBonuses))
-            {
-                case 0: bonusType = Granatier::Bonus::SPEED;
-                        break;
-                case 1: bonusType = Granatier::Bonus::BOMB;
-                        break;
-                case 2: bonusType = Granatier::Bonus::POWER;
-                        break;
-                case 3: bonusType = Granatier::Bonus::SHIELD;
-                        break;
-                case 4: bonusType = Granatier::Bonus::THROW;
-                        break;
-                case 5: bonusType = Granatier::Bonus::KICK;
-                        break;
-                default: bonusType = Granatier::Bonus::SPEED;
-            }
-        }
-        else if (i-nBonusCount < nBadBonusCount)
-        {
-            switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 5))
-            {
-                case 0: bonusType = Granatier::Bonus::HYPERACTIVE;
-                        break;
-                case 1: bonusType = Granatier::Bonus::SLOW;
-                        break;
-                case 2: bonusType = Granatier::Bonus::MIRROR;
-                        break;
-                case 3: bonusType = Granatier::Bonus::SCATTY;
-                        break;
-                case 4: bonusType = Granatier::Bonus::RESTRAIN;
-                        break;
-                default: bonusType = Granatier::Bonus::HYPERACTIVE;
-            }
-        }
-        else if(i-nBonusCount-nBadBonusCount < nNeutralBonusCount)
-        {
-            bonusType = Granatier::Bonus::RESURRECT;
-        }
-        bonusTypeList.append(bonusType);
-    }
+    int nFullSize = m_blocks.size();
+    int nQuarterSize = 0;
     
-    int nShuffle;
-    for (int i = 0; i < m_blocks.size(); i++)
+    for(int nQuarter = 0; nQuarter < 4; nQuarter++)
     {
-        nShuffle = m_blocks.size() * (qrand()/1.0)/RAND_MAX;
-        if(nShuffle >= m_blocks.size())
+        nQuarterSize = (nQuarter < 3 ? nFullSize / 4 : nFullSize - 3 * nFullSize / 4);
+        bonusTypeList.clear();
+        
+        for (int i = 0; i < nQuarterSize; i++)
         {
-            nShuffle = m_blocks.size() - 1;
+            if(i < nBonusCount)
+            {
+                int nNumberOfBonuses = 6;
+                switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * nNumberOfBonuses))
+                {
+                    case 0: bonusType = Granatier::Bonus::SPEED;
+                            break;
+                    case 1: bonusType = Granatier::Bonus::BOMB;
+                            break;
+                    case 2: bonusType = Granatier::Bonus::POWER;
+                            break;
+                    case 3: bonusType = Granatier::Bonus::SHIELD;
+                            break;
+                    case 4: bonusType = Granatier::Bonus::THROW;
+                            break;
+                    case 5: bonusType = Granatier::Bonus::KICK;
+                            break;
+                    default: bonusType = Granatier::Bonus::SPEED;
+                }
+            }
+            else if (i-nBonusCount < nBadBonusCount)
+            {
+                switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 5))
+                {
+                    case 0: bonusType = Granatier::Bonus::HYPERACTIVE;
+                            break;
+                    case 1: bonusType = Granatier::Bonus::SLOW;
+                            break;
+                    case 2: bonusType = Granatier::Bonus::MIRROR;
+                            break;
+                    case 3: bonusType = Granatier::Bonus::SCATTY;
+                            break;
+                    case 4: bonusType = Granatier::Bonus::RESTRAIN;
+                            break;
+                    default: bonusType = Granatier::Bonus::HYPERACTIVE;
+                }
+            }
+            else if(i-nBonusCount-nBadBonusCount < nNeutralBonusCount)
+            {
+                bonusType = Granatier::Bonus::RESURRECT;
+            }
+            else {
+                bonusType = Granatier::Bonus::NONE;
+            }
+            
+            bonusTypeList.append(bonusType);
         }
-        else if(nShuffle < 0)
+        
+        int nShuffle;
+        for (int i = 0; i < nQuarterSize; i++)
         {
-            nShuffle = 0;
+            nShuffle = nQuarterSize * (qrand()/1.0)/RAND_MAX;
+            if(nShuffle >= nQuarterSize)
+            {
+                nShuffle = nQuarterSize - 1;
+            }
+            else if(nShuffle < 0)
+            {
+                nShuffle = 0;
+            }
+            bonusTypeList.swap(i, nShuffle);
         }
-        bonusTypeList.swap(i, nShuffle);
-    }
-    
-    for (int i = 0; i < m_blocks.size(); ++i)
-    {
-        if(bonusTypeList[i] != Granatier::Bonus::NONE)
+        
+        for (int i = 0; i < nQuarterSize; ++i)
         {
-            bonus = new Bonus(m_blocks[i]->getX(), m_blocks[i]->getY(), m_arena, bonusTypeList[i]);
-            m_bonus.append(bonus);
-            m_blocks[i]->setBonus(bonus);
+            if(bonusTypeList[i] != Granatier::Bonus::NONE)
+            {
+                int nIndex = nQuarter * nQuarterSize + i;
+                bonus = new Bonus(m_blocks[nIndex]->getX(), m_blocks[nIndex]->getY(), m_arena, bonusTypeList[i]);
+                m_bonus.append(bonus);
+                m_blocks[nIndex]->setBonus(bonus);
+            }
         }
     }
 }
