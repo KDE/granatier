@@ -22,6 +22,7 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include <KGlobal>
+#include <QStandardPaths>
 
 PlayerSettings::PlayerSettings()
 {
@@ -38,7 +39,7 @@ PlayerSettings::PlayerSettings()
         StructPlayerSettings settings;
         settings.strPlayerID = playersAvailable[i];
         
-        KConfig desktopFile(KStandardDirs::locate("appdata", "players/" + settings.strPlayerID), KConfig::SimpleConfig);
+        KConfig desktopFile(QStandardPaths::locate(QStandardPaths::DataLocation, "players/" + settings.strPlayerID), KConfig::SimpleConfig);
         
         settings.strPlayerDesktopFilePath = desktopFile.name();
         settings.strPlayerName = desktopFile.group("KGameTheme").readEntry<QString>("Name", "");

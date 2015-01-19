@@ -38,6 +38,7 @@
 #include <KConfig>
 #include <KComponentData>
 #include <kgsound.h>
+#include <QStandardPaths>
 
 Game::Game(PlayerSettings* playerSettings)
 {
@@ -47,11 +48,11 @@ Game::Game(PlayerSettings* playerSettings)
     setSoundsEnabled(Settings::sounds());
     m_wilhelmScream = Settings::useWilhelmScream();
     
-    m_soundPutBomb = new KgSound(KStandardDirs::locate("appdata", "sounds/putbomb.wav"));
-    m_soundExplode = new KgSound(KStandardDirs::locate("appdata", "sounds/explode.wav"));
-    m_soundBonus = new KgSound(KStandardDirs::locate("appdata", "sounds/wow.wav"));
-    m_soundFalling = new KgSound(KStandardDirs::locate("appdata", "sounds/deepfall.wav"));
-    m_soundDie = new KgSound(KStandardDirs::locate("appdata", "sounds/die.wav"));
+    m_soundPutBomb = new KgSound(QStandardPaths::locate(QStandardPaths::DataLocation, "sounds/putbomb.wav"));
+    m_soundExplode = new KgSound(QStandardPaths::locate(QStandardPaths::DataLocation, "sounds/explode.wav"));
+    m_soundBonus = new KgSound(QStandardPaths::locate(QStandardPaths::DataLocation, "sounds/wow.wav"));
+    m_soundFalling = new KgSound(QStandardPaths::locate(QStandardPaths::DataLocation, "sounds/deepfall.wav"));
+    m_soundDie = new KgSound(QStandardPaths::locate(QStandardPaths::DataLocation, "sounds/die.wav"));
     
     m_arena = 0;
     m_randomArenaModeArenaList.clear();
@@ -132,18 +133,18 @@ void Game::init()
         {
             nIndex = m_randomArenaModeArenaList.count() - 1;
         }
-        filePath = KStandardDirs::locate("appdata", "arenas/" + m_randomArenaModeArenaList.at(nIndex));
+        filePath = QStandardPaths::locate(QStandardPaths::DataLocation, "arenas/" + m_randomArenaModeArenaList.at(nIndex));
         m_randomArenaModeArenaList.removeAt(nIndex);
     }
     else
     {
-        filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
+        filePath = QStandardPaths::locate(QStandardPaths::DataLocation, Settings::self()->arena());
     }
     
     if(!QFile::exists(filePath))
     {
         Settings::self()->useDefaults(true);
-        filePath = KStandardDirs::locate("appdata", Settings::self()->arena());
+        filePath = QStandardPaths::locate(QStandardPaths::DataLocation, Settings::self()->arena());
         Settings::self()->useDefaults(false);
     }
     
@@ -151,8 +152,8 @@ void Game::init()
     KConfigGroup group = arenaConfig.group("Arena");
     QString arenaFileName = group.readEntry("FileName");
     
-    QFile arenaXmlFile(KStandardDirs::locate("appdata", QString("arenas/%1").arg(arenaFileName)));
-    //QFile arenaXmlFile(KStandardDirs::locate("appdata", "arenas/granatier.xml"));
+    QFile arenaXmlFile(QStandardPaths::locate(QStandardPaths::DataLocation, QString("arenas/%1").arg(arenaFileName)));
+    //QFile arenaXmlFile(QStandardPaths::locate(QStandardPaths::DataLocation, "arenas/granatier.xml"));
     QXmlInputSource source(&arenaXmlFile);
     // Create the XML file reader
     QXmlSimpleReader reader;
