@@ -73,7 +73,7 @@ MainWindow::MainWindow()
     KToggleAction* soundAction = new KToggleAction(i18n("&Play sounds"), this);
     soundAction->setChecked(Settings::sounds());
     actionCollection()->addAction( QLatin1String( "sounds" ), soundAction);
-    connect(soundAction, SIGNAL(triggered(bool)), this, SLOT(setSoundsEnabled(bool)));
+    connect(soundAction, &KToggleAction::triggered, this, &MainWindow::setSoundsEnabled);
     // init game
     initGame();
     // Setup the window
@@ -118,7 +118,7 @@ void MainWindow::initGame()
     }
     // Create a new Game instance
     m_game = new Game(m_playerSettings);
-    connect(m_game, SIGNAL(gameOver()), this, SLOT(newGame()));
+    connect(m_game, &Game::gameOver, this, &MainWindow::newGame);
     
     m_scene = new GameScene(m_game, m_themeProvider);
     
@@ -193,8 +193,8 @@ void MainWindow::showSettings()
     
     m_settingsDialog = settingsDialog;
     
-    connect(settingsDialog, SIGNAL(settingsChanged(QString)), this, SLOT(applyNewSettings()));
-    connect(settingsDialog->button(QDialogButtonBox::Cancel), SIGNAL(clicked()), this, SLOT(settingsDialogCanceled()));
+    connect(settingsDialog, &KConfigDialog::settingsChanged, this, &MainWindow::applyNewSettings);
+    connect(settingsDialog->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &MainWindow::settingsDialogCanceled);
     settingsDialog->show();
 }
 
