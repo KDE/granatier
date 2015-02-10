@@ -6,7 +6,7 @@ set(granatierSources
     config/playerselector.cpp
     config/playerselectoritem.cpp
     config/playersettings.cpp
-
+    granatier_debug.cpp
     arena.cpp
     arenaitem.cpp
     block.cpp
