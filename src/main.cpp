@@ -35,6 +35,8 @@ int main(int argc, char** argv)
     migrate.setUiFiles(QStringList() << QStringLiteral("granatierui.rc"));
     migrate.migrate();
 
+    app.setWindowIcon(QIcon::fromTheme(QLatin1String("granatier")));
+
     // About Granatier
     KAboutData about("granatier",  i18n("Granatier"), "1.2.1",
         i18n("Granatier is a Bomberman Clone!"),
