@@ -32,7 +32,10 @@ const int onIceSpeedIncrease = 2;
 const int badBonusTimerTimeout = 100;
 const int badBonusCountdown = 10000;
 
-Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSettings* p_playerSettings, Arena* p_arena) : Character(p_x, p_y, p_arena)
+Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSettings* p_playerSettings, Arena* p_arena)
+ : Character(p_x, p_y, p_arena)
+ , m_throwBomb(false)
+ , m_kickBomb(false)
 {
     m_type = Granatier::Element::PLAYER;
     m_desktopFilePath = p_playerSettings->playerDesktopFilePath(p_playerID);
