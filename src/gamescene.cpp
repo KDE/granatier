@@ -70,7 +70,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     {
         const QString desktopPath = players[i]->getDesktopFilePath();
         KgTheme* theme = new KgTheme(desktopPath.toUtf8());
-        theme->readFromDesktopFile(QStandardPaths::locate(QStandardPaths::DataLocation, desktopPath));
+        theme->readFromDesktopFile(desktopPath);
         KGameRenderer* playerRenderer = new KGameRenderer(theme);
         m_mapRendererPlayerItems.insert(players[i], playerRenderer);
         playerItem = new PlayerItem(players[i], playerRenderer);
