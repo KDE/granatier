@@ -36,6 +36,7 @@
 #include <KSaveFile>
 #include <QDir>
 #include <KComponentData>
+#include <QStandardPaths>
 
 #include "ui_arenaselector.h"
 #include "arenasettings.h"
@@ -103,7 +104,7 @@ void ArenaSelector::showEvent(QShowEvent*)
 ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(NULL), m_graphicsScene(NULL), m_svgScaleFactor(1)
 {
     KgTheme* theme = new KgTheme(QByteArray());
-    theme->setGraphicsPath(KStandardDirs::locate("appdata", QString("themes/granatier.svgz")));
+    theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::DataLocation, QString("themes/granatier.svgz")));
     m_renderer = new KGameRenderer(theme);
 }
 
@@ -172,7 +173,13 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     ui.arenaList->setSortingEnabled(true);
 
     QStringList arenasAvailable;
-    KGlobal::dirs()->findAllResources("arenaselector", "*.desktop", KStandardDirs::Recursive, arenasAvailable);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "granatier/arenas", QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+         Q_FOREACH (const QString& file, fileNames) {
+                arenasAvailable.append(dir + '/' + file);
+         }
+    }
     
     QStringList::Iterator i = m_tempRandomArenaModeArenaList.begin();
     while(i != m_tempRandomArenaModeArenaList.end())

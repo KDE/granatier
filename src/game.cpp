@@ -32,11 +32,8 @@
 #include <QPointF>
 #include <QTimer>
 #include <QKeyEvent>
-
-#include <KGlobal>
-#include <KStandardDirs>
+#include <QDir>
 #include <KConfig>
-#include <KComponentData>
 #include <kgsound.h>
 #include <QStandardPaths>
 
@@ -99,11 +96,17 @@ void Game::init()
     {
         if(m_randomArenaModeArenaList.isEmpty())
         {
-            QStringList arenasAvailable;
             m_randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
 
-            KGlobal::dirs()->addResourceType("arenaselector", "data", KGlobal::mainComponent().componentName() + "/arenas/");
-            KGlobal::dirs()->findAllResources("arenaselector", "*.desktop", KStandardDirs::Recursive, arenasAvailable);
+            QStringList arenasAvailable;
+            const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "granatier/arenas", QStandardPaths::LocateDirectory);
+            Q_FOREACH (const QString& dir, dirs) {
+            const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+                Q_FOREACH (const QString& file, fileNames) {
+                    arenasAvailable.append(dir + '/' + file);
+                }
+            }
+
 
             QStringList::Iterator i = m_randomArenaModeArenaList.begin();
             while(i != m_randomArenaModeArenaList.end())
