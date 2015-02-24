@@ -25,7 +25,7 @@
 #include <QSpacerItem>
 #include <QCheckBox>
 
-#include <KLineEdit>
+#include <QLineEdit>
 #include <KKeySequenceWidget>
 #include <KLocalizedString>
 
@@ -34,7 +34,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
 {
     m_selectCheckBox = new QCheckBox;
     m_selectCheckBox->setChecked(m_playerSettings->enabled(playerId));
-    m_playerName = new KLineEdit(m_playerSettings->playerName(playerId));
+    m_playerName = new QLineEdit(m_playerSettings->playerName(playerId));
     m_playerName->setFixedWidth(200);
     m_playerPreviewPixmap = new QPixmap(QSize(64, 64));
     m_playerPreviewPixmapAlphaChannel = new QPixmap(QSize(64, 64));

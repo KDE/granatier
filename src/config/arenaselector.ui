@@ -149,7 +149,7 @@
     </layout>
    </item>
    <item>
-    <widget class="KLineEdit" name="kcfg_Arena">
+    <widget class="QLineEdit" name="kcfg_Arena">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -163,13 +163,7 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KLineEdit</class>
-   <extends>QLineEdit</extends>
-   <header>klineedit.h</header>
-  </customwidget>
- </customwidgets>
+ <customwidgets/>
  <resources/>
  <connections/>
 </ui>

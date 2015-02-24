@@ -26,16 +26,13 @@
 
 #include <QtCore/QPointer>
 
-#include <KGlobal>
 #include <KgTheme>
 #include <QIcon>
 #include <KGameRenderer>
-#include <KStandardDirs>
 #include <KConfigSkeleton>
 #include <KNS3/DownloadDialog>
-#include <KSaveFile>
+#include <QFile>
 #include <QDir>
-#include <KComponentData>
 #include <QStandardPaths>
 
 #include "ui_arenaselector.h"
@@ -104,7 +101,7 @@ void ArenaSelector::showEvent(QShowEvent*)
 ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(NULL), m_graphicsScene(NULL), m_svgScaleFactor(1)
 {
     KgTheme* theme = new KgTheme(QByteArray());
-    theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::DataLocation, QString("themes/granatier.svgz")));
+    theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::AppDataLocation, QString("themes/granatier.svgz")));
     m_renderer = new KGameRenderer(theme);
 }
 
@@ -155,7 +152,6 @@ void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
     m_tempRandomArenaModeArenaList.removeDuplicates();
     
     //Now get our arenas into the list widget
-    KGlobal::dirs()->addResourceType("arenaselector", "data", KGlobal::mainComponent().componentName() + '/' + lookupDirectory + '/');
     findArenas(lastUsedArena);
 
     connect(ui.importArenas, SIGNAL(clicked()), q, SLOT(_k_importArenasDialog()));
@@ -173,11 +169,11 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     ui.arenaList->setSortingEnabled(true);
 
     QStringList arenasAvailable;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "granatier/arenas", QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, "arenas", QStandardPaths::LocateDirectory);
     Q_FOREACH (const QString& dir, dirs) {
          const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
          Q_FOREACH (const QString& file, fileNames) {
-                arenasAvailable.append(dir + '/' + file);
+                arenasAvailable.append(file);
          }
     }
     
@@ -200,6 +196,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     }
     
     bool initialFound = false;
+
     foreach (const QString &file, arenasAvailable)
     {
       QString arenaPath = lookupDirectory + '/' + file;
@@ -480,6 +477,12 @@ void ArenaSelector::Private::_k_openKNewStuffDialog()
 
 void ArenaSelector::Private::_k_importArenasDialog()
 {
+    // get local directory for arenas
+    const QString arenaDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QStringLiteral("/arenas/");
+    // create path if it does not exist
+    if(!QDir(arenaDir).exists()) QDir().mkpath(arenaDir);
+
+
     //find the clanbomber files
     QStringList listClanbomberPaths;
     listClanbomberPaths.append(QDir::homePath() + "/.clanbomber/maps/");
@@ -502,10 +505,10 @@ void ArenaSelector::Private::_k_importArenasDialog()
             QString strAuthor = readStream.readLine();
             int nNumberOfPlayers = readStream.readLine().toInt();
             
-            KSaveFile desktopFile;
+            QFile desktopFile;
             QString strName = listMaps[j].left(listMaps[j].count()-4);
-            desktopFile.setFileName(QString("%1clanbomber_%2.desktop").arg(KStandardDirs::locateLocal("appdata", "arenas/")).arg(strName));
-            desktopFile.open();
+            desktopFile.setFileName(QString("%1clanbomber_%2.desktop").arg(arenaDir).arg(strName));
+            desktopFile.open(QIODevice::WriteOnly | QIODevice::Text);
             QTextStream streamDesktopFile(&desktopFile);
             
             streamDesktopFile << "[Arena]\n";
@@ -517,7 +520,6 @@ void ArenaSelector::Private::_k_importArenasDialog()
             streamDesktopFile << "AuthorEmail=-\n";
             
             streamDesktopFile.flush();
-            desktopFile.finalize();
             desktopFile.close();
             
             QStringList arena;
@@ -546,9 +548,9 @@ void ArenaSelector::Private::_k_importArenasDialog()
             arena.replaceInStrings("8", "p");
             arena.replaceInStrings("9", "p");
             
-            KSaveFile arenaFile;
-            arenaFile.setFileName(QString("%1clanbomber_%2.xml").arg(KStandardDirs::locateLocal("appdata", "arenas/")).arg(strName));
-            arenaFile.open();
+            QFile arenaFile;
+            arenaFile.setFileName(QString("%1clanbomber_%2.xml").arg(arenaDir).arg(strName));
+            arenaFile.open(QIODevice::WriteOnly | QIODevice::Text);
             
             QTextStream streamArenaFile(&arenaFile);
             
@@ -559,6 +561,9 @@ void ArenaSelector::Private::_k_importArenasDialog()
                 streamArenaFile << "  <Row>" << arena[j] << "</Row>\n";
             }
             streamArenaFile << "</Arena>\n";
+
+            streamArenaFile.flush();
+            arenaFile.close();
         }
     }
     

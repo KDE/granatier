@@ -23,7 +23,7 @@
 class PlayerSettings;
 class QCheckBox;
 class QLabel;
-class KLineEdit;
+class QLineEdit;
 class KKeySequenceWidget;
 
 class PlayerSelectorItem : public QWidget
@@ -33,7 +33,7 @@ class PlayerSelectorItem : public QWidget
 private:
     QCheckBox* m_selectCheckBox;
     
-    KLineEdit* m_playerName;
+    QLineEdit* m_playerName;
     QPixmap* m_playerPreviewPixmap;
     QPixmap* m_playerPreviewPixmapAlphaChannel;
     

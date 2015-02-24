@@ -18,10 +18,9 @@
 #include "playersettings.h"
 #include "settings.h"
 
-#include <KStandardDirs>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KGlobal>
+#include <QDir>
 #include <QStandardPaths>
 
 PlayerSettings::PlayerSettings()
@@ -29,8 +28,14 @@ PlayerSettings::PlayerSettings()
     QStringList playersAvailable;
     QStringList playerFilesAvailable;
     QStringList playerNamesAvailable;
-    KGlobal::dirs()->addResourceType("players", "data", "granatier/players/");
-    KGlobal::dirs()->findAllResources("players", "*.desktop", KStandardDirs::Recursive, playersAvailable);
+
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, "players", QStandardPaths::LocateDirectory);
+    Q_FOREACH (const QString& dir, dirs) {
+         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+         Q_FOREACH (const QString& file, fileNames) {
+                playersAvailable.append(file);
+         }
+    }
     
     playersAvailable.removeDuplicates();
     playersAvailable.sort();

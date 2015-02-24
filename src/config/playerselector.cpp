@@ -35,13 +35,12 @@
 #include <QVBoxLayout>
 #include <QSpacerItem>
 #include <QtSvg/QSvgRenderer>
-#include <KStandardDirs>
+#include <QStandardPaths>
 #include <KConfig>
 #include <KLocalizedString>
 #include <KNS3/DownloadDialog>
 #include <QIcon>
 #include <KConfigGroup>
-#include <KDialog>
 //PlayerSelectorDelegate declaration
 #include <QStyledItemDelegate>
 class PlayerSelectorDelegate : public QStyledItemDelegate
@@ -124,12 +123,12 @@ void PlayerSelector::Private::fillList()
         item->setFlags(item->flags() & ~Qt::ItemIsSelectable);
         
         playerSelectorItem = new PlayerSelectorItem(playerIDs[i], m_playerSettings, m_list);
-        
-        renderer.load(KStandardDirs::locate("appdata", QString("players/%1").arg(m_playerSettings->playerGraphicsFile(playerIDs[i]))));
+
+        renderer.load(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/%1").arg(m_playerSettings->playerGraphicsFile(playerIDs[i]))));
         renderer.render(&pixPainter, "player_0");
         playerSelectorItem->setPlayerPreviewPixmap(pixmap);
         
-        KConfig desktopFile(KStandardDirs::locate("appdata", "players/" + playerIDs[i]), KConfig::SimpleConfig);
+        KConfig desktopFile(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("players/%1").arg(playerIDs[i])), KConfig::SimpleConfig);
         QString author = desktopFile.group("KGameTheme").readEntry<QString>("Author", "");
         QString authorEmail = QString("<a href=\"mailto:%1\">%1</a>").arg(desktopFile.group("KGameTheme").readEntry<QString>("AuthorEmail", ""));
         //TODO: QString description = desktopFile.group("KGameTheme").readEntry<QString>("Description", "");
@@ -152,62 +151,6 @@ void PlayerSelector::Private::_k_showNewStuffDialog()
         }
     }
     delete dialog;
-}
-
-class PlayerSelector::Dialog : public KDialog
-{
-    public:
-        Dialog(PlayerSelector* sel, const QString& caption)
-        {
-            setMainWidget(sel);
-            //replace
-            QPushButton* btn = sel->d->m_knsButton;
-            if (btn)
-            {
-                btn->hide();
-                setButtons(Close | User1);
-                setButtonText(User1, btn->text());
-                //cannot use btn->icon() because setButtonIcon() wants KIcon
-                setButtonIcon(User1, QIcon::fromTheme("get-hot-new-stuff"));
-                connect(this, SIGNAL(user1Clicked()), btn, SIGNAL(clicked()));
-            }
-            else
-            {
-                setButtons(Close);
-            }
-            //window caption
-            if (caption.isEmpty())
-            {
-                setCaption(i18nc("@title:window config dialog", "Select player"));
-            }
-            else
-            {
-                setCaption(caption);
-            }
-            show();
-        }
-    protected:
-        virtual void closeEvent(QCloseEvent* event)
-        {
-            event->accept();
-            PlayerSelector* sel = qobject_cast<PlayerSelector*>(mainWidget());
-            //delete myself, but *not* the PlayerSelector
-            sel->setParent(0);
-            deleteLater();
-            //restore the KNS button
-            if (sel->d->m_knsButton)
-            {
-                sel->d->m_knsButton->show();
-            }
-        }
-};
-
-void PlayerSelector::showAsDialog(const QString& caption)
-{
-    if (!isVisible())
-    {
-        new PlayerSelector::Dialog(this, caption);
-    }
 }
 
 //END PlayerSelector
