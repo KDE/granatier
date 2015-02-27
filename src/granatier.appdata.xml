@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Granatier</name>
+  <name xml:lang="ast">Granatier</name>
   <name xml:lang="bs">Granatier</name>
   <name xml:lang="ca">Granatier</name>
   <name xml:lang="cs">Granatier</name>
@@ -11,6 +12,7 @@
   <name xml:lang="de">Granatier</name>
   <name xml:lang="en-GB">Granatier</name>
   <name xml:lang="es">Granatier</name>
+  <name xml:lang="fi">Granatier</name>
   <name xml:lang="it">Granatier</name>
   <name xml:lang="nl">Granatier</name>
   <name xml:lang="pl">Granatier</name>
@@ -33,6 +35,7 @@
   <summary xml:lang="de">Bomberman-Klon</summary>
   <summary xml:lang="en-GB">Bomberman clone</summary>
   <summary xml:lang="es">Clon de Bomberman</summary>
+  <summary xml:lang="fi">Bomberman-klooni</summary>
   <summary xml:lang="it">Un clone di Bomberman</summary>
   <summary xml:lang="nl">Bomberman kloon</summary>
   <summary xml:lang="pl">Klon Bombermana</summary>
