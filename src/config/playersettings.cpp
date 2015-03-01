@@ -29,7 +29,7 @@ PlayerSettings::PlayerSettings()
     QStringList playerFilesAvailable;
     QStringList playerNamesAvailable;
 
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, "players", QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, "players", QStandardPaths::LocateDirectory);
     Q_FOREACH (const QString& dir, dirs) {
          const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
          Q_FOREACH (const QString& file, fileNames) {

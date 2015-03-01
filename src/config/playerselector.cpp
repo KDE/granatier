@@ -124,7 +124,7 @@ void PlayerSelector::Private::fillList()
         
         playerSelectorItem = new PlayerSelectorItem(playerIDs[i], m_playerSettings, m_list);
 
-        renderer.load(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/%1").arg(m_playerSettings->playerGraphicsFile(playerIDs[i]))));
+        renderer.load(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("players/%1").arg(m_playerSettings->playerGraphicsFile(playerIDs[i]))));
         renderer.render(&pixPainter, "player_0");
         playerSelectorItem->setPlayerPreviewPixmap(pixmap);
         
