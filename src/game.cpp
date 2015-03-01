@@ -99,7 +99,7 @@ void Game::init()
             m_randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
 
             QStringList arenasAvailable;
-            const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, "granatier/arenas", QStandardPaths::LocateDirectory);
+            const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, "arenas", QStandardPaths::LocateDirectory);
             Q_FOREACH (const QString& dir, dirs) {
             const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
                 Q_FOREACH (const QString& file, fileNames) {
