@@ -24,16 +24,48 @@
 #include <KLocalizedString>
 #include <QCommandLineParser>
 #include <kdelibs4configmigrator.h>
+#include <kdelibs4migration.h>
+#include <QStandardPaths>
+#include <QDir>
 #include <KDBusService>
 
 int main(int argc, char** argv)
 {
-    QApplication app(argc, argv);
-
     Kdelibs4ConfigMigrator migrate(QStringLiteral("granatier"));
     migrate.setConfigFiles(QStringList() << QStringLiteral("granatierrc"));
     migrate.setUiFiles(QStringList() << QStringLiteral("granatierui.rc"));
-    migrate.migrate();
+    if(migrate.migrate())
+    {
+        // migrate old data
+        Kdelibs4Migration dataMigrator;
+        const QString sourceBasePath = dataMigrator.saveLocation("data", "granatier");
+        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QStringLiteral("/granatier/");
+        QString targetFilePath;
+        
+        QStringList dataDirs;
+        dataDirs.append("arenas");
+        dataDirs.append("players");
+        dataDirs.append("themes");
+
+        // migrate arenas, players and themes
+        foreach(const QString &dataDir, dataDirs)
+        {
+            QDir sourceDir(sourceBasePath + dataDir);
+            if(!sourceDir.exists()) continue;
+            QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+            QDir().mkpath(targetBasePath + dataDir);
+            foreach (const QString &fileName, fileNames)
+            {
+                targetFilePath = targetBasePath + dataDir + QLatin1Char('/') + fileName;
+                if(!QFile::exists(targetFilePath))
+                {
+                    QFile::copy(sourceBasePath + dataDir + QLatin1Char('/') + fileName, targetFilePath);
+                }
+            }
+        }
+    }
+
+    QApplication app(argc, argv);
 
     app.setWindowIcon(QIcon::fromTheme(QLatin1String("granatier")));
 
