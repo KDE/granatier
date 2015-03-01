@@ -136,7 +136,7 @@ void Game::init()
         {
             nIndex = m_randomArenaModeArenaList.count() - 1;
         }
-        filePath = QStandardPaths::locate(QStandardPaths::DataLocation, "arenas/" + m_randomArenaModeArenaList.at(nIndex));
+        filePath = m_randomArenaModeArenaList.at(nIndex);
         m_randomArenaModeArenaList.removeAt(nIndex);
     }
     else
