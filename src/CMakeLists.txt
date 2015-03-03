@@ -41,17 +41,18 @@ ki18n_wrap_ui(granatierSources config/arenaselector.ui config/generalsettings.ui
 
 kconfig_add_kcfg_files(granatierSources config/settings.kcfgc)
 
-kde4_add_app_icon(granatierSources "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/hi*-apps-granatier.png")
+file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/hi*-apps-granatier.png")
+ecm_add_app_icon(granatierSources ICONS ${ICONS_SRCS})
 
 add_executable(granatier ${granatierSources})
 
 target_link_libraries(granatier Qt5::Xml Qt5::Widgets KF5::NewStuff KF5KDEGames Qt5::Svg KF5::DBusAddons)
 
 
-install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS granatier ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
-install(PROGRAMS org.kde.granatier.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
+install(PROGRAMS org.kde.granatier.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES granatier.appdata.xml DESTINATION share/appdata)
-install(FILES config/granatier.kcfg DESTINATION ${KCFG_INSTALL_DIR})
-install(FILES ${granatierData} DESTINATION ${KXMLGUI_INSTALL_DIR}/granatier)
+install(FILES config/granatier.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
+install(FILES ${granatierData} DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/granatier)
 
