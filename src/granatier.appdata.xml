@@ -27,6 +27,7 @@
   <name xml:lang="sv">Granatier</name>
   <name xml:lang="uk">Granatier</name>
   <name xml:lang="x-test">xxGranatierxx</name>
+  <name xml:lang="zh-CN">Granatier</name>
   <name xml:lang="zh-TW">Granatier</name>
   <summary>Bomberman clone</summary>
   <summary xml:lang="bs">Klon igre Bomberman</summary>
@@ -50,6 +51,7 @@
   <summary xml:lang="sv">Klon av Bomberman</summary>
   <summary xml:lang="uk">Клон гри бомбермен (Bomberman)</summary>
   <summary xml:lang="x-test">xxBomberman clonexx</summary>
+  <summary xml:lang="zh-CN">炸弹人游戏复刻</summary>
   <summary xml:lang="zh-TW">炸彈超人遊戲</summary>
   <description>
     <p>
