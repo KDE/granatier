@@ -1,2 +1,2 @@
-ecm_install_icons(ICONS hi128-apps-granatier.png  hi16-apps-granatier.png  hi22-apps-granatier.png  hi32-apps-granatier.png  hi48-apps-granatier.png  hi64-apps-granatier.png DESTINATION ${KDE_INSTALL_ICONDIR})
+ecm_install_icons(ICONS 128-apps-granatier.png  16-apps-granatier.png  22-apps-granatier.png  32-apps-granatier.png  48-apps-granatier.png  64-apps-granatier.png DESTINATION ${KDE_INSTALL_ICONDIR} THEME hicolor)
 
