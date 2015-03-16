@@ -18,6 +18,7 @@
   <name xml:lang="pl">Granatier</name>
   <name xml:lang="pt">Granatier</name>
   <name xml:lang="pt-BR">Granatier</name>
+  <name xml:lang="ru">Granatier</name>
   <name xml:lang="sk">Granatier</name>
   <name xml:lang="sl">Granatier</name>
   <name xml:lang="sr">Гренадир</name>
@@ -41,6 +42,7 @@
   <summary xml:lang="pl">Klon Bombermana</summary>
   <summary xml:lang="pt">Clone do Bomberman</summary>
   <summary xml:lang="pt-BR">Clone do Bomberman</summary>
+  <summary xml:lang="ru">Клон игры Bomberman</summary>
   <summary xml:lang="sk">Klon Bombermana</summary>
   <summary xml:lang="sl">Dvojnik Bombermana</summary>
   <summary xml:lang="sr">Клон Бомбермана</summary>
@@ -64,6 +66,7 @@
     <p xml:lang="pl">Granatier jest klonem klasycznej gry Bomberman, zainspirowany pracą nad klonem Clanbomber.</p>
     <p xml:lang="pt">O Granatier é um clone do jogo clássico Bomberman, inspirado pelo trabalho do clone Clanbomber.</p>
     <p xml:lang="pt-BR">Granatier é um clone do jogo clássico Bomberman, inspirado no trabalho do jogo Clanbomber.</p>
+    <p xml:lang="ru">Granatier — клон классической игры Bomberman, вобравший в себя некоторые особенности Clanbomber, другого клона той же игры.</p>
     <p xml:lang="sk">Granatier je klon klasickej hry Bomberman, inšpirovanej prácou klonu Clanmombera.</p>
     <p xml:lang="sl">Granatier je dvojnik klasične igre Bomberman, navdahnjen z delom na dvojniku imenovanem Clanbomber.</p>
     <p xml:lang="sr">Гренадир је клон класичне игре Бомберман, инспирисан радом клона Кланбомбер.</p>
