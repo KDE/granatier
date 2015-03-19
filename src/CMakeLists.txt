@@ -45,8 +45,14 @@ kde4_add_app_icon(granatierSources "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/hi*-
 
 add_executable(granatier ${granatierSources})
 
-target_link_libraries(granatier Qt5::Xml Qt5::Widgets KF5::NewStuff KF5KDEGames Qt5::Svg KF5::DBusAddons)
-
+target_link_libraries(granatier
+    Qt5::Xml
+    Qt5::Widgets
+    KF5::NewStuff
+    KF5KDEGames
+    Qt5::Svg
+    KF5::DBusAddons
+)
 
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
 
