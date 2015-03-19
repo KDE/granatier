@@ -46,8 +46,14 @@ ecm_add_app_icon(granatierSources ICONS ${ICONS_SRCS})
 
 add_executable(granatier ${granatierSources})
 
-target_link_libraries(granatier Qt5::Xml Qt5::Widgets KF5::NewStuff KF5KDEGames Qt5::Svg KF5::DBusAddons)
-
+target_link_libraries(granatier
+    Qt5::Xml
+    Qt5::Widgets
+    KF5::NewStuff
+    KF5KDEGames
+    Qt5::Svg
+    KF5::DBusAddons
+)
 
 install(TARGETS granatier ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
