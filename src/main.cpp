@@ -28,9 +28,12 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <KDBusService>
+#include <KSharedConfig>
 
 int main(int argc, char** argv)
 {
+    QApplication app(argc, argv);
+
     Kdelibs4ConfigMigrator migrate(QStringLiteral("granatier"));
     migrate.setConfigFiles(QStringList() << QStringLiteral("granatierrc"));
     migrate.setUiFiles(QStringList() << QStringLiteral("granatierui.rc"));
@@ -39,7 +42,7 @@ int main(int argc, char** argv)
         // migrate old data
         Kdelibs4Migration dataMigrator;
         const QString sourceBasePath = dataMigrator.saveLocation("data", "granatier");
-        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QStringLiteral("/granatier/");
+        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/');
         QString targetFilePath;
         
         QStringList dataDirs;
@@ -63,9 +66,10 @@ int main(int argc, char** argv)
                 }
             }
         }
-    }
 
-    QApplication app(argc, argv);
+        // update the configuration cache
+        KSharedConfig::openConfig()->reparseConfiguration();
+    }
 
     app.setWindowIcon(QIcon::fromTheme(QLatin1String("granatier")));
 
