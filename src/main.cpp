@@ -70,9 +70,9 @@ int main(int argc, char** argv)
     app.setWindowIcon(QIcon::fromTheme(QLatin1String("granatier")));
 
     // About Granatier
-    KAboutData about("granatier",  i18n("Granatier"), "1.2.1",
+    KAboutData about("granatier",  i18n("Granatier"), "1.3.1",
         i18n("Granatier is a Bomberman Clone!"),
-        KAboutLicense::GPL, i18n("Copyright (c) 2009 The Granatier Team!"));
+        KAboutLicense::GPL, i18n("Copyright (c) 2009-2015 The Granatier Team!"));
     about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), "k.hias@gmx.de", 0);
     about.addCredit(i18n("Thomas Gallinari"), i18n("Developer of Kapman, which was the base of Granatier"), "tg8187@yahoo.fr", 0);
     about.addCredit(i18n("Pierre-Benoit Besse"), i18n("Developer of Kapman, which was the base of Granatier"), "besse.pb@gmail.com", 0);
