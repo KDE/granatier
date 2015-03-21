@@ -70,7 +70,7 @@ int main(int argc, char** argv)
     app.setWindowIcon(QIcon::fromTheme(QLatin1String("granatier")));
 
     // About Granatier
-    KAboutData about("granatier",  i18n("Granatier"), "1.2.1",
+    KAboutData about("granatier",  i18n("Granatier"), "1.3.0",
         i18n("Granatier is a Bomberman Clone!"),
         KAboutLicense::GPL, i18n("Copyright (c) 2009 The Granatier Team!"));
     about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), "k.hias@gmx.de", 0);
