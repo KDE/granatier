@@ -57,7 +57,7 @@ target_link_libraries(granatier
 install(TARGETS granatier ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(PROGRAMS org.kde.granatier.desktop DESTINATION ${XDG_APPS_INSTALL_DIR})
-install(FILES granatier.appdata.xml DESTINATION share/appdata)
+install(FILES granatier.appdata.xml DESTINATION ${DATA_INSTALL_DIR}/appdata)
 install(FILES config/granatier.kcfg DESTINATION ${KCFG_INSTALL_DIR})
 install(FILES ${granatierData} DESTINATION ${KXMLGUI_INSTALL_DIR}/granatier)
 
