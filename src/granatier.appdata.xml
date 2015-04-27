@@ -14,6 +14,7 @@
   <name xml:lang="fi">Granatier</name>
   <name xml:lang="gl">Granatier</name>
   <name xml:lang="it">Granatier</name>
+  <name xml:lang="ko">Granatier</name>
   <name xml:lang="nl">Granatier</name>
   <name xml:lang="pl">Granatier</name>
   <name xml:lang="pt">Granatier</name>
@@ -40,6 +41,7 @@
   <summary xml:lang="fi">Bomberman-klooni</summary>
   <summary xml:lang="gl">Clon do Bomberman</summary>
   <summary xml:lang="it">Un clone di Bomberman</summary>
+  <summary xml:lang="ko">Bomberman 클론</summary>
   <summary xml:lang="nl">Bomberman kloon</summary>
   <summary xml:lang="pl">Klon Bombermana</summary>
   <summary xml:lang="pt">Clone do Bomberman</summary>
@@ -66,6 +68,7 @@
     <p xml:lang="fi">Granatier on perinteisen Bomberman-pelin klooni, joka on saanut inspiraatiota Clanbomber-kloonista.</p>
     <p xml:lang="gl">Granatier é un clon do clásico xogo do Bomberman, inspirado no traballo do clon Clanbomber.</p>
     <p xml:lang="it">Granatier è un clone del classico Bomberman, che si ispira al lavoro fatto per il clone Clanbomber.</p>
+    <p xml:lang="ko">Granatier는 Clanbomber 클론에서 아이디어를 얻은 고전 Bomberman 게임 클론입니다.</p>
     <p xml:lang="nl">Granatier is een kloon van het klassieke spel Bomberman, geïnspireerd door het werk van de kloon Clanbomber.</p>
     <p xml:lang="pl">Granatier jest klonem klasycznej gry Bomberman, zainspirowany pracą nad klonem Clanbomber.</p>
     <p xml:lang="pt">O Granatier é um clone do jogo clássico Bomberman, inspirado pelo trabalho do clone Clanbomber.</p>
