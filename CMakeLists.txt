@@ -33,7 +33,6 @@ include(KDECMakeSettings)
 include(ECMAddAppIcon)
 
 add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-add_definitions(-DTRANSLATION_DOMAIN="granatier")
 
 
 add_subdirectory(themes) 

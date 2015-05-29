@@ -72,6 +72,7 @@ int main(int argc, char** argv)
     }
 
     app.setWindowIcon(QIcon::fromTheme(QLatin1String("granatier")));
+    KLocalizedString::setApplicationDomain("granatier");
 
     // About Granatier
     KAboutData about("granatier",  i18n("Granatier"), "1.3.1",
