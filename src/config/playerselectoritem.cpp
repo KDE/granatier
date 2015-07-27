@@ -37,7 +37,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_playerName = new QLineEdit(m_playerSettings->playerName(playerId));
     m_playerName->setFixedWidth(200);
     m_playerPreviewPixmap = new QPixmap(QSize(64, 64));
-    m_playerPreviewPixmapAlphaChannel = new QPixmap(QSize(64, 64));
+    m_playerPreviewImageAlphaChannel = new QImage(QSize(64, 64), QImage::Format_ARGB32_Premultiplied);
     m_playerPreviewPixmapLabel = new QLabel;
     m_playerAuthor = new QLabel;
     
@@ -129,7 +129,7 @@ PlayerSelectorItem::~PlayerSelectorItem()
     
     delete m_playerName;
     delete m_playerPreviewPixmap;
-    delete m_playerPreviewPixmapAlphaChannel;;
+    delete m_playerPreviewImageAlphaChannel;
     delete m_playerPreviewPixmapLabel;
     delete m_playerAuthor;
     
@@ -152,7 +152,7 @@ void PlayerSelectorItem::setPlayerPreviewPixmap(const QPixmap& pixmap)
     m_playerPreviewPixmap = new QPixmap(pixmap);
 
     QImage tempImage = m_playerPreviewPixmap->toImage();
-    tempImage.setAlphaChannel(m_playerPreviewPixmapAlphaChannel->toImage());
+    tempImage.setAlphaChannel(*m_playerPreviewImageAlphaChannel);
     m_playerPreviewPixmapLabel->setPixmap(QPixmap::fromImage(tempImage));
 }
 
@@ -173,15 +173,15 @@ void PlayerSelectorItem::selectionChanged(bool selectionState)
     
     if(selectionState == true)
     {
-        m_playerPreviewPixmapAlphaChannel->fill(QColor(255, 255, 255, 255));
+        m_playerPreviewImageAlphaChannel->fill(QColor(255, 255, 255, 255));
     }
     else
     {
-        m_playerPreviewPixmapAlphaChannel->fill(QColor(64, 64, 64, 255));
+        m_playerPreviewImageAlphaChannel->fill(QColor(64, 64, 64, 255));
     }
 
     QImage tempImage = m_playerPreviewPixmap->toImage();
-    tempImage.setAlphaChannel(m_playerPreviewPixmapAlphaChannel->toImage());
+    tempImage.setAlphaChannel(*m_playerPreviewImageAlphaChannel);
     m_playerPreviewPixmapLabel->setPixmap(QPixmap::fromImage(tempImage));
     
     m_moveLeft->setEnabled(selectionState);

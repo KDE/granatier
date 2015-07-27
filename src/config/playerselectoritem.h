@@ -35,7 +35,7 @@ private:
     
     QLineEdit* m_playerName;
     QPixmap* m_playerPreviewPixmap;
-    QPixmap* m_playerPreviewPixmapAlphaChannel;
+    QImage* m_playerPreviewImageAlphaChannel;
     
     QLabel* m_playerPreviewPixmapLabel;
     QLabel* m_playerAuthor;
