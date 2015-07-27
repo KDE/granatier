@@ -150,10 +150,10 @@ void PlayerSelectorItem::setPlayerPreviewPixmap(const QPixmap& pixmap)
 {
     delete m_playerPreviewPixmap;
     m_playerPreviewPixmap = new QPixmap(pixmap);
-    
-    QPixmap tempPixmap(*m_playerPreviewPixmap);
-    tempPixmap.setAlphaChannel(*m_playerPreviewPixmapAlphaChannel);
-    m_playerPreviewPixmapLabel->setPixmap(tempPixmap);
+
+    QImage tempImage = m_playerPreviewPixmap->toImage();
+    tempImage.setAlphaChannel(m_playerPreviewPixmapAlphaChannel->toImage());
+    m_playerPreviewPixmapLabel->setPixmap(QPixmap::fromImage(tempImage));
 }
 
 void PlayerSelectorItem::setPlayerAuthor(const QString& name, const QString& mail)
@@ -179,9 +179,10 @@ void PlayerSelectorItem::selectionChanged(bool selectionState)
     {
         m_playerPreviewPixmapAlphaChannel->fill(QColor(64, 64, 64, 255));
     }
-    QPixmap tempPixmap(*m_playerPreviewPixmap);
-    tempPixmap.setAlphaChannel(*m_playerPreviewPixmapAlphaChannel);
-    m_playerPreviewPixmapLabel->setPixmap(tempPixmap);
+
+    QImage tempImage = m_playerPreviewPixmap->toImage();
+    tempImage.setAlphaChannel(m_playerPreviewPixmapAlphaChannel->toImage());
+    m_playerPreviewPixmapLabel->setPixmap(QPixmap::fromImage(tempImage));
     
     m_moveLeft->setEnabled(selectionState);
     m_moveUp->setEnabled(selectionState);

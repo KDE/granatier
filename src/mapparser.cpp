@@ -75,7 +75,7 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
     {
         for (int i=0; i<m_buffer.length();++i)
         {
-            switch(m_buffer.at(i).toAscii())
+            switch(m_buffer.at(i).toLatin1())
             {
                 case ' ':
                     m_arena->setCellType(m_counterRows,i,Granatier::Cell::HOLE);
