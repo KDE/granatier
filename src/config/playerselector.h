@@ -42,7 +42,7 @@ public:
     explicit PlayerSelector(PlayerSettings* playerSettings, Options options = DefaultBehavior, QWidget* parent = 0);
     virtual ~PlayerSelector();
 private:
-    class Private;
+    struct Private;
     Private* const d;
 
     Q_PRIVATE_SLOT(d, void _k_showNewStuffDialog());
