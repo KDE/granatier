@@ -31,7 +31,6 @@
 #include <QTimer>
 #include <KActionCollection>
 #include <KStandardGameAction>
-#include <KToggleAction>
 #include <KMessageBox>
 #include <KConfigDialog>
 #include <KLocalizedString>
