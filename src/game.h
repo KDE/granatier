@@ -129,7 +129,7 @@ public:
     * Creates a new Game instance.
     * @param playerSettings the player settings
     */
-    Game(PlayerSettings* playerSettings);
+    explicit Game(PlayerSettings* playerSettings);
 
     /**
     * Deletes the Game instance.

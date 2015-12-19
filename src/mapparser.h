@@ -46,7 +46,7 @@ public:
       * Creates a new GameParser.
       * @param p_arena the Arena to initialize
       */
-    MapParser(Arena* p_arena);
+    explicit MapParser(Arena* p_arena);
     
     /**
       * Deletes the GameParser instance.
