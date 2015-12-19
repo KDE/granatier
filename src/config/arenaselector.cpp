@@ -503,7 +503,6 @@ void ArenaSelector::Private::_k_importArenasDialog()
             QTextStream readStream(&mapFile);
             
             QString strAuthor = readStream.readLine();
-            int nNumberOfPlayers = readStream.readLine().toInt();
             
             QFile desktopFile;
             QString strName = listMaps[j].left(listMaps[j].count()-4);
