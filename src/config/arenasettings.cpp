@@ -24,8 +24,8 @@
 #include <KConfig>
 #include <KConfigGroup>
 #include "granatier_debug.h"
-#include <QtCore/QFile>
-#include <QtCore/QFileInfo>
+#include <QFile>
+#include <QFileInfo>
 #include <QStandardPaths>
 
 class ArenaSettingsPrivate

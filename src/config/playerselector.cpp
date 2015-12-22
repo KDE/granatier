@@ -21,7 +21,7 @@
 #include "playerselectoritem.h"
 #include "playersettings.h"
 
-#include <QtCore/QPointer>
+#include <QPointer>
 #include <QAbstractItemView>
 #include <QApplication>
 #include <QCloseEvent>
@@ -34,7 +34,7 @@
 #include <QScrollBar>
 #include <QVBoxLayout>
 #include <QSpacerItem>
-#include <QtSvg/QSvgRenderer>
+#include <QSvgRenderer>
 #include <QStandardPaths>
 #include <KConfig>
 #include <KLocalizedString>

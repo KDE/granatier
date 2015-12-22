@@ -24,7 +24,7 @@
 #include "mapparser.h"
 #include "settings.h"
 
-#include <QtCore/QPointer>
+#include <QPointer>
 
 #include <KgTheme>
 #include <QIcon>

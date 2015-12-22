@@ -21,7 +21,7 @@
 #ifndef ARENASETTINGS_H
 #define ARENASETTINGS_H
 
-#include <QtCore/QString>
+#include <QString>
 
 class ArenaSettingsPrivate;
 
