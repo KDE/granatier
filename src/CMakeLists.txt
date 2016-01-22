@@ -53,6 +53,7 @@ target_link_libraries(granatier
     KF5KDEGames
     Qt5::Svg
     KF5::DBusAddons
+    KF5::Crash
 )
 
 install(TARGETS granatier ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
