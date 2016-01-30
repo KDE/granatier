@@ -351,7 +351,7 @@ void Game::createBonus()
     
     for(int nQuarter = 0; nQuarter < 4; nQuarter++)
     {
-        nQuarterSize = (nQuarter < 3 ? nFullSize / 4 : nFullSize - 3 * nFullSize / 4);
+        nQuarterSize = (nQuarter < 3 ? nFullSize / 4 : nFullSize - 3 * (nFullSize / 4));
         bonusTypeList.clear();
         
         for (int i = 0; i < nQuarterSize; i++)
@@ -423,7 +423,7 @@ void Game::createBonus()
         {
             if(bonusTypeList[i] != Granatier::Bonus::NONE)
             {
-                int nIndex = nQuarter * nQuarterSize + i;
+                int nIndex = nQuarter * (nFullSize/4) + i;
                 bonus = new Bonus(m_blocks[nIndex]->getX(), m_blocks[nIndex]->getY(), m_arena, bonusTypeList[i]);
                 m_bonus.append(bonus);
                 m_blocks[nIndex]->setBonus(bonus);
