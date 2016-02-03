@@ -42,7 +42,7 @@ void BlockItem::startDestructionAnimation()
     m_destructionTimer->start();
     connect(m_destructionTimer, &QTimer::timeout, this, &BlockItem::destructionAnimation);
     
-    setSpriteKey("arena_block_highlight");
+    setSpriteKey(QStringLiteral("arena_block_highlight"));
 }
 
 void BlockItem::destructionAnimation()

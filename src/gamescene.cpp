@@ -87,12 +87,12 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     
     // The remaining time
     m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
-    m_remainingTimeLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_remainingTimeLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_remainingTimeLabel->setZValue(1000);
     
     m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
-    m_arenaNameLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_arenaNameLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_arenaNameLabel->setZValue(1000);
     
@@ -126,7 +126,7 @@ void GameScene::setupThemeRenderer()
         }
     }
     
-    if(selectedThemeIsDefault || m_rendererSelectedTheme->spriteExists("background"))
+    if(selectedThemeIsDefault || m_rendererSelectedTheme->spriteExists(QStringLiteral("background")))
     {
         m_rendererBackground = m_rendererSelectedTheme;
     }
@@ -136,16 +136,16 @@ void GameScene::setupThemeRenderer()
     }
     
     // set the renderer for the arena items TODO: add all the arena items
-    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists("arena_ground") &&
-        m_rendererSelectedTheme->spriteExists("arena_wall") &&
-        m_rendererSelectedTheme->spriteExists("arena_block") &&
-        m_rendererSelectedTheme->spriteExists("arena_block_highlight") &&
-        m_rendererSelectedTheme->spriteExists("arena_ice") &&
-        m_rendererSelectedTheme->spriteExists("arena_bomb_mortar") &&
-        m_rendererSelectedTheme->spriteExists("arena_arrow_up") &&
-        m_rendererSelectedTheme->spriteExists("arena_arrow_right") &&
-        m_rendererSelectedTheme->spriteExists("arena_arrow_down") &&
-        m_rendererSelectedTheme->spriteExists("arena_arrow_left")))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_ground")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_wall")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_block")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_block_highlight")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_ice")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_bomb_mortar")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_arrow_up")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_arrow_right")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_arrow_down")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_arrow_left"))))
     {
         m_rendererArenaItems = m_rendererSelectedTheme;
     }
@@ -155,19 +155,19 @@ void GameScene::setupThemeRenderer()
     }
     
     // set the renderer for the bonus items TODO: add all the bonus items
-    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists("bonus_speed") &&
-        m_rendererSelectedTheme->spriteExists("bonus_bomb") &&
-        m_rendererSelectedTheme->spriteExists("bonus_power") &&
-        m_rendererSelectedTheme->spriteExists("bonus_shield") &&
-        m_rendererSelectedTheme->spriteExists("bonus_throw") &&
-        m_rendererSelectedTheme->spriteExists("bonus_kick") &&
-        m_rendererSelectedTheme->spriteExists("bonus_bad_slow") &&
-        m_rendererSelectedTheme->spriteExists("bonus_bad_hyperactive") &&
-        m_rendererSelectedTheme->spriteExists("bonus_bad_mirror") &&
-        m_rendererSelectedTheme->spriteExists("bonus_bad_scatty") &&
-        m_rendererSelectedTheme->spriteExists("bonus_bad_restrain") &&
-        m_rendererSelectedTheme->spriteExists("bonus_neutral_pandora") &&
-        m_rendererSelectedTheme->spriteExists("bonus_neutral_resurrect")))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_speed")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_bomb")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_power")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_shield")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_throw")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_kick")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_bad_slow")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_bad_hyperactive")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_bad_mirror")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_bad_scatty")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_bad_restrain")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_neutral_pandora")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_neutral_resurrect"))))
     {
         m_rendererBonusItems = m_rendererSelectedTheme;
     }
@@ -177,12 +177,12 @@ void GameScene::setupThemeRenderer()
     }
     
     // set the renderer for the bomb items
-    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists("bomb") &&
-        m_rendererSelectedTheme->spriteExists("bomb_blast_core_0") &&
-        m_rendererSelectedTheme->spriteExists("bomb_blast_north_0") &&
-        m_rendererSelectedTheme->spriteExists("bomb_blast_east_0") &&
-        m_rendererSelectedTheme->spriteExists("bomb_blast_south_0") &&
-        m_rendererSelectedTheme->spriteExists("bomb_blast_west_0")))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists(QStringLiteral("bomb")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bomb_blast_core_0")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bomb_blast_north_0")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bomb_blast_east_0")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bomb_blast_south_0")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("bomb_blast_west_0"))))
     {
         m_rendererBombItems = m_rendererSelectedTheme;
     }
@@ -192,8 +192,8 @@ void GameScene::setupThemeRenderer()
     }
     
     // set the renderer for the score items
-    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists("score_star_enabled") &&
-        m_rendererSelectedTheme->spriteExists("score_star_disabled")))
+    if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists(QStringLiteral("score_star_enabled")) &&
+        m_rendererSelectedTheme->spriteExists(QStringLiteral("score_star_disabled"))))
     {
         m_rendererScoreItems = m_rendererSelectedTheme;
     }
@@ -223,7 +223,7 @@ void GameScene::init()
     }
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     int nTime = m_game->getRemainingTime();
-    m_remainingTimeLabel->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
+    m_remainingTimeLabel->setPlainText(QStringLiteral("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QLatin1Char('0')));
     m_remainingTimeLabel->setPos(Granatier::CellSize * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
     
     if (!items().contains(m_arenaNameLabel))
@@ -280,7 +280,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             // Create the ArenaItem and set the image
-            ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, "");
+            ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, QStringLiteral(""));
             connect(this, &GameScene::resizeGraphics, arenaItem, &ArenaItem::updateGraphics);
             
             //TODO: use this function call
@@ -288,7 +288,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             switch(m_game->getArena()->getCell(i,j).getType())
             {
                 case Granatier::Cell::WALL:
-                    arenaItem->setSpriteKey("arena_wall");
+                    arenaItem->setSpriteKey(QStringLiteral("arena_wall"));
                     arenaItem->setZValue(-2);
                     break;
                 case Granatier::Cell::HOLE:
@@ -296,33 +296,33 @@ void GameScene::initItemsWithGraphicsFromTheme()
                     arenaItem = NULL;
                     break;
                 case Granatier::Cell::ICE:
-                    arenaItem->setSpriteKey("arena_ice");
+                    arenaItem->setSpriteKey(QStringLiteral("arena_ice"));
                     arenaItem->setZValue(0);
                     break;
                 case Granatier::Cell::BOMBMORTAR:
-                    arenaItem->setSpriteKey("arena_bomb_mortar");
+                    arenaItem->setSpriteKey(QStringLiteral("arena_bomb_mortar"));
                     arenaItem->setZValue(0);
                     break;
                 case Granatier::Cell::ARROWUP:
-                    arenaItem->setSpriteKey("arena_arrow_up");
+                    arenaItem->setSpriteKey(QStringLiteral("arena_arrow_up"));
                     arenaItem->setZValue(0);
                     break;
                 case Granatier::Cell::ARROWRIGHT:
-                    arenaItem->setSpriteKey("arena_arrow_right");
+                    arenaItem->setSpriteKey(QStringLiteral("arena_arrow_right"));
                     arenaItem->setZValue(0);
                     break;
                 case Granatier::Cell::ARROWDOWN:
-                    arenaItem->setSpriteKey("arena_arrow_down");
+                    arenaItem->setSpriteKey(QStringLiteral("arena_arrow_down"));
                     arenaItem->setZValue(0);
                     break;
                 case Granatier::Cell::ARROWLEFT:
-                    arenaItem->setSpriteKey("arena_arrow_left");
+                    arenaItem->setSpriteKey(QStringLiteral("arena_arrow_left"));
                     arenaItem->setZValue(0);
                     break;
                 case Granatier::Cell::GROUND:
                 case Granatier::Cell::BLOCK:
                 default:
-                    arenaItem->setSpriteKey("arena_ground");
+                    arenaItem->setSpriteKey(QStringLiteral("arena_ground"));
                     arenaItem->setZValue(-1);
             }
             m_arenaItem[i][j] = arenaItem;
@@ -366,48 +366,48 @@ void GameScene::initItemsWithGraphicsFromTheme()
                         switch(bonus->getBonusType())
                         {
                             case Granatier::Bonus::SPEED:
-                                bonusItem->setSpriteKey("bonus_speed");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_speed"));
                                 break;
                             case Granatier::Bonus::BOMB:
-                                bonusItem->setSpriteKey("bonus_bomb");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_bomb"));
                                 break;
                             case Granatier::Bonus::POWER:
-                                bonusItem->setSpriteKey("bonus_power");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_power"));
                                 break;
                             case Granatier::Bonus::SHIELD:
-                                bonusItem->setSpriteKey("bonus_shield");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_shield"));
                                 break;
                             case Granatier::Bonus::THROW:
-                                bonusItem->setSpriteKey("bonus_throw");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_throw"));
                                 break;
                             case Granatier::Bonus::KICK:
-                                bonusItem->setSpriteKey("bonus_kick");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_kick"));
                                 break;
                             case Granatier::Bonus::HYPERACTIVE:
-                                bonusItem->setSpriteKey("bonus_bad_hyperactive");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_bad_hyperactive"));
                                 break;
                             case Granatier::Bonus::SLOW:
-                                bonusItem->setSpriteKey("bonus_bad_slow");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_bad_slow"));
                                 break;
                             case Granatier::Bonus::MIRROR:
-                                bonusItem->setSpriteKey("bonus_bad_mirror");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_bad_mirror"));
                                 break;
                             case Granatier::Bonus::SCATTY:
-                                bonusItem->setSpriteKey("bonus_bad_scatty");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_bad_scatty"));
                                 break;
                             case Granatier::Bonus::RESTRAIN:
-                                bonusItem->setSpriteKey("bonus_bad_restrain");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_bad_restrain"));
                                 break;
                             case Granatier::Bonus::RESURRECT:
-                                bonusItem->setSpriteKey("bonus_neutral_resurrect");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_resurrect"));
                                 break;
                             default:
-                                bonusItem->setSpriteKey("bonus_neutral_pandora");
+                                bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_pandora"));
                         }
                         
-                        if((qrand()/1.0)/RAND_MAX * 10 > 9 && bonusItem->spriteKey() != "bonus_neutral_resurrect")
+                        if((qrand()/1.0)/RAND_MAX * 10 > 9 && bonusItem->spriteKey() != QStringLiteral("bonus_neutral_resurrect"))
                         {
-                            bonusItem->setSpriteKey("bonus_neutral_pandora");
+                            bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_pandora"));
                         }
                         
                         bonusItem->update(bonus->getX(), bonus->getY());
@@ -480,7 +480,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
     }
     
     //create the background
-    m_arenaBackground = new KGameRenderedItem(m_rendererBackground, "background");
+    m_arenaBackground = new KGameRenderedItem(m_rendererBackground, QStringLiteral("background"));
     m_arenaBackground->setZValue(-5);
     m_arenaBackground->setPos(0, 0);
     m_arenaBackground->setCacheMode(QGraphicsItem::NoCache);  // if cache is set, there are some artifacts; pay attention, that the KGameRenderer cache is used nevertheless
@@ -815,7 +815,7 @@ void GameScene::updateInfo(const Granatier::Info::Type p_info)
         int nTime = m_game->getRemainingTime();
         if(nTime > 0)
         {
-            m_remainingTimeLabel->setPlainText(QString("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QChar('0')));
+            m_remainingTimeLabel->setPlainText(QStringLiteral("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QLatin1Char('0')));
         }
         else
         {

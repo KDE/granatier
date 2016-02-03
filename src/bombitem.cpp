@@ -29,7 +29,7 @@ const int nBombPulseTime = 100;
 
 BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_model, renderer)
 {
-    setSpriteKey("bomb");
+    setSpriteKey(QStringLiteral("bomb"));
     setZValue(210);
     connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation()));
     connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
@@ -157,7 +157,7 @@ void BombItem::startDetonation()
     }
     m_itemSizeSet = QSize(width, height);
     m_itemSizeReal = m_itemSizeSet;
-    setSpriteKey("bomb_blast_core_0");
+    setSpriteKey(QStringLiteral("bomb_blast_core_0"));
     setZValue(300+15); //300+maxBombPower+5
     updateGraphics(scale());
     update(m_x, m_y);
@@ -233,7 +233,7 @@ void BombItem::updateAnimation()
         m_animationCounter = 0;
         return;
     }
-    QString strElemetId = QString("bomb_blast_core_%1").arg(m_animationCounter);
+    QString strElemetId = QStringLiteral("bomb_blast_core_%1").arg(m_animationCounter);
     setSpriteKey(strElemetId);
     updateGraphics(scale());
     update(m_x, m_y);

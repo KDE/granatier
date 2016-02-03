@@ -63,7 +63,7 @@ MainWindow::MainWindow()
     m_scene = NULL;
     m_playerSettings = new PlayerSettings();
     m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
-    m_themeProvider->discoverThemes("appdata", QLatin1String("themes"), "granatier");
+    m_themeProvider->discoverThemes(QByteArray("appdata"), QStringLiteral("themes"), QStringLiteral("granatier"));
     // Set the window menus
     KStandardGameAction::gameNew(this, SLOT(newGame()), actionCollection());
     //KStandardGameAction::highscores(this, SLOT(showHighscores()), actionCollection());
@@ -178,17 +178,17 @@ void MainWindow::showSettings()
     {
         delete m_settingsDialog;
     }
-    KConfigDialog* settingsDialog = new KConfigDialog(this, "settings", Settings::self());
+    KConfigDialog* settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), Settings::self());
     // General Settings
-    settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), "games-config-options");
+    settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), QStringLiteral("games-config-options"));
     // Theme
     m_themeProvider->rediscoverThemes();
-    m_currentThemeIdentifier = m_themeProvider->currentTheme()->identifier();
-    settingsDialog->addPage(new KgThemeSelector(m_themeProvider, KgThemeSelector::DefaultBehavior, settingsDialog), i18n("Theme"), "games-config-theme");
+    m_currentThemeIdentifier = QString::fromLatin1(m_themeProvider->currentTheme()->identifier());
+    settingsDialog->addPage(new KgThemeSelector(m_themeProvider, KgThemeSelector::DefaultBehavior, settingsDialog), i18n("Theme"), QStringLiteral("games-config-theme"));
     // Arena
-    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18n("Arena"), "games-config-board");
+    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18n("Arena"), QStringLiteral("games-config-board"));
     // Player
-    settingsDialog->addPage(new PlayerSelector(m_playerSettings, PlayerSelector::DefaultBehavior, settingsDialog), i18n("Player"), "games-config-custom");
+    settingsDialog->addPage(new PlayerSelector(m_playerSettings, PlayerSelector::DefaultBehavior, settingsDialog), i18n("Player"), QStringLiteral("games-config-custom"));
     
     m_settingsDialog = settingsDialog;
     
@@ -212,12 +212,12 @@ void MainWindow::settingsDialogCanceled()
 {
     m_playerSettings->discardUnsavedSettings();
     m_tempRandomArenaModeArenaList.clear();
-    if(m_currentThemeIdentifier != m_themeProvider->currentTheme()->identifier())
+    if(m_currentThemeIdentifier != QString::fromLatin1(m_themeProvider->currentTheme()->identifier()))
     {
         QList<const KgTheme*> themeList = m_themeProvider->themes();
         foreach(const KgTheme* theme, themeList)
         {
-            if(theme->identifier() == m_currentThemeIdentifier)
+            if(QString::fromLatin1(theme->identifier()) == m_currentThemeIdentifier)
             {
                 m_themeProvider->setCurrentTheme(theme);
                 break;

@@ -41,18 +41,18 @@ bool MapParser::characters(const QString & ch)
 
 bool MapParser::startElement(const QString&, const QString&, const QString& p_qName, const QXmlAttributes& p_atts)
 {
-    if (p_qName == "Arena")
+    if (p_qName == QLatin1String("Arena"))
     {
         int nbRows = 0;
         int nbColumns = 0;
         // Initialize the number of rows and columns
         for (int i = 0; i < p_atts.count(); ++i)
         {
-            if (p_atts.qName(i) == "rowCount")
+            if (p_atts.qName(i) == QLatin1String("rowCount"))
             {
                 nbRows = p_atts.value(i).toInt();
             }
-            if (p_atts.qName(i) == "colCount")
+            if (p_atts.qName(i) == QLatin1String("colCount"))
             {
                 nbColumns = p_atts.value(i).toInt();
             }
@@ -71,7 +71,7 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
 
 bool MapParser::endElement(const QString &, const QString &, const QString & p_qName)
 {
-    if(p_qName == "Row")
+    if(p_qName == QLatin1String("Row"))
     {
         for (int i=0; i<m_buffer.length();++i)
         {

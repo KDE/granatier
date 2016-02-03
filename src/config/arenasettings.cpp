@@ -56,7 +56,7 @@ ArenaSettings::~ArenaSettings() {
 
 bool ArenaSettings::loadDefault()
 {
-    return load("arenas/granatier.desktop"); //TODO make this editable to match custom directories.
+    return load(QStringLiteral("arenas/granatier.desktop")); //TODO make this editable to match custom directories.
                                            // If this ever changes change findArenas in ArenaSelectorPrivate too
 }
 
@@ -80,7 +80,7 @@ bool ArenaSettings::load(const QString &fileName) {
         qCDebug(GRANATIER_LOG) << "Could not open .desktop arena file" << filePath;
         return false;
     }
-    d->prefix = QFileInfo(arenaFile).absolutePath() + '/';
+    d->prefix = QFileInfo(arenaFile).absolutePath() + QLatin1Char('/');
     arenaFile.close();
 
     KConfig arenaConfig(filePath, KConfig::SimpleConfig);

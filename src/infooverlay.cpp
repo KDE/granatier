@@ -45,13 +45,13 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     {
         QList <KGameRenderedItem*> svgItemList;
         QGraphicsTextItem* playerName = new QGraphicsTextItem(playerList[i]->getPlayerName());
-        playerName->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
+        playerName->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
         playerName->setDefaultTextColor(QColor("#FFFF00"));
         playerName->setZValue(2001);
         
         for(int j = 0; j < nWinPoints; j++)
         {
-            KGameRenderedItem* score = new KGameRenderedItem(renderer, "score_star_disabled");
+            KGameRenderedItem* score = new KGameRenderedItem(renderer, QStringLiteral("score_star_disabled"));
             score->setZValue(2001);
             svgItemList.append(score);
         }
@@ -62,37 +62,37 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     QString strContinue (i18n("Press Space to continue"));
     
     m_continueLabel = new QGraphicsTextItem(strContinue);
-    m_continueLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_continueLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     m_continueLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_continueLabel->setZValue(2001);
     
     m_newGameLabel = new QGraphicsTextItem(i18n("Press Space to start a new Game"));
-    m_newGameLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_newGameLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     m_newGameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_newGameLabel->setZValue(2001);
     
     m_gameOverLabel = new QGraphicsTextItem;;
-    m_gameOverLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.5, QFont::Bold, false));
+    m_gameOverLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.5, QFont::Bold, false));
     m_gameOverLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_gameOverLabel->setZValue(2001);
     
     m_getReadyLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
-    m_getReadyLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.6, QFont::Bold, false));
+    m_getReadyLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.6, QFont::Bold, false));
     m_getReadyLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_getReadyLabel->setZValue(2001);
     
     m_startGameLabel = new QGraphicsTextItem(i18n("Press Space to start"));
-    m_startGameLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_startGameLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     m_startGameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_startGameLabel->setZValue(2001);
     
     m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
-    m_pauseLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.8, QFont::Bold, false));
+    m_pauseLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.8, QFont::Bold, false));
     m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_pauseLabel->setZValue(2001);
     
     m_continueAfterPauseLabel = new QGraphicsTextItem(strContinue);
-    m_continueAfterPauseLabel->setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_continueAfterPauseLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     m_continueAfterPauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_continueAfterPauseLabel->setZValue(2001);
     
@@ -198,7 +198,7 @@ void InfoOverlay::showScore ()
             svgItem = m_mapScore.value(players[i]).at(j);
             if (players[i]->points() > j)
             {
-                svgItem->setSpriteKey("score_star_enabled");
+                svgItem->setSpriteKey(QStringLiteral("score_star_enabled"));
             }
             
             // if the score was not displayed yet
@@ -321,8 +321,8 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     QGraphicsTextItem* playerName;
     KGameRenderer* renderer;
     renderer = m_gameScene->renderer(Granatier::Element::SCORE);
-    QGraphicsTextItem em ("M");
-    em.setFont(QFont("Helvetica", Granatier::CellSize * 0.35, QFont::Bold, false));
+    QGraphicsTextItem em(QStringLiteral("M"));
+    em.setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     //calculate max player name length and top-left position
     for(int i = 0; i < playerList.count(); i++)
     {
@@ -333,7 +333,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
         }
         if(i == playerList.count() - 1)
         {
-            KGameRenderedItem score(renderer, "score_star_enabled");
+            KGameRenderedItem score(renderer, QStringLiteral("score_star_enabled"));
             nLeft = m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + em.boundingRect().width()/2 + nWinPoints * (Granatier::CellSize * 0.6 + em.boundingRect().width()/5))/2;
             nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * em.boundingRect().height();
         }

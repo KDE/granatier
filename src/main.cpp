@@ -42,14 +42,14 @@ int main(int argc, char** argv)
     {
         // migrate old data
         Kdelibs4Migration dataMigrator;
-        const QString sourceBasePath = dataMigrator.saveLocation("data", "granatier");
+        const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("granatier"));
         const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/');
         QString targetFilePath;
         
         QStringList dataDirs;
-        dataDirs.append("arenas");
-        dataDirs.append("players");
-        dataDirs.append("themes");
+        dataDirs.append(QStringLiteral("arenas"));
+        dataDirs.append(QStringLiteral("players"));
+        dataDirs.append(QStringLiteral("themes"));
 
         // migrate arenas, players and themes
         foreach(const QString &dataDir, dataDirs)
@@ -76,16 +76,16 @@ int main(int argc, char** argv)
     KLocalizedString::setApplicationDomain("granatier");
 
     // About Granatier
-    KAboutData about("granatier",  i18n("Granatier"), "1.3.1",
+    KAboutData about(QStringLiteral("granatier"),  i18n("Granatier"), QStringLiteral("1.3.1"),
         i18n("Granatier is a Bomberman Clone!"),
         KAboutLicense::GPL, i18n("Copyright (c) 2009-2015 The Granatier Team!"));
-    about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), "k.hias@gmx.de", 0);
-    about.addCredit(i18n("Thomas Gallinari"), i18n("Developer of Kapman, which was the base of Granatier"), "tg8187@yahoo.fr", 0);
-    about.addCredit(i18n("Pierre-Benoit Besse"), i18n("Developer of Kapman, which was the base of Granatier"), "besse.pb@gmail.com", 0);
-    about.addCredit(i18n("Romain Castan"), i18n("Developer of Kapman, which was the base of Granatier"), "romaincastan@gmail.com", 0);
-    about.addCredit(i18n("Alexandre Galinier"), i18n("Developer of Kapman, which was the base of Granatier"), "alex.galinier@gmail.com", 0);
-    about.addCredit(i18n("Nathalie Liesse"), i18n("Developer of Kapman, which was the base of Granatier"), "nathalie.liesse@gmail.com", 0);
-    about.setHomepage("https://www.kde.org/applications/games/granatier/");
+    about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), QStringLiteral("k.hias@gmx.de"));
+    about.addCredit(i18n("Thomas Gallinari"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("tg8187@yahoo.fr"));
+    about.addCredit(i18n("Pierre-Benoit Besse"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("besse.pb@gmail.com"));
+    about.addCredit(i18n("Romain Castan"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("romaincastan@gmail.com"));
+    about.addCredit(i18n("Alexandre Galinier"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("alex.galinier@gmail.com"));
+    about.addCredit(i18n("Nathalie Liesse"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("nathalie.liesse@gmail.com"));
+    about.setHomepage(QStringLiteral("https://www.kde.org/applications/games/granatier/"));
     // Command line arguments
     QCommandLineParser parser;
     KAboutData::setApplicationData(about);

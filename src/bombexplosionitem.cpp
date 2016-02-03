@@ -22,7 +22,7 @@
 #include <QGraphicsView>
 #include <KGameRenderer>
 
-BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor) : KGameRenderedItem(renderer, "")
+BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor) : KGameRenderedItem(renderer, QStringLiteral(""))
 {
     m_direction = direction;
     m_explosionID = p_model->explosionID();
@@ -35,22 +35,22 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
     switch(m_direction)
     {
         case Granatier::Direction::NORTH:
-            setSpriteKey("bomb_blast_north_0");
+            setSpriteKey(QStringLiteral("bomb_blast_north_0"));
             width = Granatier::CellSize * 0.5;
             height = Granatier::CellSize * 1.5;
             break;
         case Granatier::Direction::EAST:
-            setSpriteKey("bomb_blast_east_0");
+            setSpriteKey(QStringLiteral("bomb_blast_east_0"));
             width = Granatier::CellSize * 1.5;
             height = Granatier::CellSize * 0.5;
             break;
         case Granatier::Direction::SOUTH:
-            setSpriteKey("bomb_blast_south_0");
+            setSpriteKey(QStringLiteral("bomb_blast_south_0"));
             width = Granatier::CellSize * 0.5;
             height = Granatier::CellSize * 1.5;
             break;
         case Granatier::Direction::WEST:
-            setSpriteKey("bomb_blast_west_0");
+            setSpriteKey(QStringLiteral("bomb_blast_west_0"));
             width = Granatier::CellSize * 1.5;
             height = Granatier::CellSize * 0.5;
             break;
@@ -130,16 +130,16 @@ void BombExplosionItem::updateAnimationn(int nFrame)
     switch(m_direction)
     {
         case Granatier::Direction::NORTH:
-            setSpriteKey(QString("bomb_blast_north_%1").arg(nFrame));
+            setSpriteKey(QStringLiteral("bomb_blast_north_%1").arg(nFrame));
             break;
         case Granatier::Direction::EAST:
-            setSpriteKey(QString("bomb_blast_east_%1").arg(nFrame));
+            setSpriteKey(QStringLiteral("bomb_blast_east_%1").arg(nFrame));
             break;
         case Granatier::Direction::SOUTH:
-            setSpriteKey(QString("bomb_blast_south_%1").arg(nFrame));
+            setSpriteKey(QStringLiteral("bomb_blast_south_%1").arg(nFrame));
             break;
         case Granatier::Direction::WEST:
-            setSpriteKey(QString("bomb_blast_west_%1").arg(nFrame));
+            setSpriteKey(QStringLiteral("bomb_blast_west_%1").arg(nFrame));
             break;
     }
 }

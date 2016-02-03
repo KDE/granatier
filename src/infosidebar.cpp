@@ -33,7 +33,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
     m_game = p_game;
     m_gameScene = p_scene;
     m_svgScaleFactor = 1;
-    m_badBonusSpriteKey = "bonus_bad_restrain";
+    m_badBonusSpriteKey = QStringLiteral("bonus_bad_restrain");
     
     QList <Player*> playerList = m_game->getPlayers();
     int nMaxPlayerNameLength = 0;
@@ -46,7 +46,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
     for(int i = 0; i < playerList.count(); i++)
     {
         QGraphicsTextItem playerName (playerList[i]->getPlayerName());
-        playerName.setFont(QFont("Helvetica", Granatier::CellSize * 0.25, QFont::Bold, false));
+        playerName.setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.25, QFont::Bold, false));
         if(nMaxPlayerNameLength < playerName.boundingRect().width())
         {
             nMaxPlayerNameLength = playerName.boundingRect().width();
@@ -94,7 +94,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         renderer = m_gameScene->renderer(Granatier::Element::PLAYER, playerList[i]);
         if(renderer)
         {
-            playerInfo->icon = new KGameRenderedItem(renderer, "player_0");
+            playerInfo->icon = new KGameRenderedItem(renderer, QStringLiteral("player_0"));
             playerInfo->icon->setZValue(1001);
             playerInfo->icon->setPos(nLeft, nTop + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->icon);
@@ -102,7 +102,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         
         //create the player names
         playerInfo->name = new QGraphicsTextItem(playerList[i]->getPlayerName());
-        playerInfo->name->setFont(QFont("Helvetica", Granatier::CellSize * 0.25, QFont::Bold, false));
+        playerInfo->name->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.25, QFont::Bold, false));
         playerInfo->name->setDefaultTextColor(QColor("#FFFF00"));
         playerInfo->name->setZValue(1001);
         playerInfo->name->setPos(nLeft + Granatier::CellSize / 2 + 2, nTop + i * (nHeight+4) - 4);
@@ -112,7 +112,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         if(renderer)
         {
             //create the bonus shield icons
-            playerInfo->bonusShield = new KGameRenderedItem(renderer, "bonus_shield");
+            playerInfo->bonusShield = new KGameRenderedItem(renderer, QStringLiteral("bonus_shield"));
             playerInfo->bonusShield->setZValue(1001);
             playerInfo->bonusShield->setPos(nLeft, nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->bonusShield);
@@ -125,7 +125,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             m_gameScene->addItem(playerInfo->bonusShieldDimm);
             
             //create the bonus throw icons
-            playerInfo->bonusThrow = new KGameRenderedItem(renderer, "bonus_throw");
+            playerInfo->bonusThrow = new KGameRenderedItem(renderer, QStringLiteral("bonus_throw"));
             playerInfo->bonusThrow->setZValue(1001);
             playerInfo->bonusThrow->setPos(nLeft + Granatier::CellSize / 2 + 4, nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->bonusThrow);
@@ -138,7 +138,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             m_gameScene->addItem(playerInfo->bonusThrowDimm);
             
             //create the bonus kick icons
-            playerInfo->bonusKick = new KGameRenderedItem(renderer, "bonus_kick");
+            playerInfo->bonusKick = new KGameRenderedItem(renderer, QStringLiteral("bonus_kick"));
             playerInfo->bonusKick->setZValue(1001);
             playerInfo->bonusKick->setPos(nLeft + 2 * (Granatier::CellSize / 2 + 4), nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->bonusKick);
@@ -294,7 +294,7 @@ void InfoSidebar::themeChanged()
             m_gameScene->removeItem(tempItem);
         }
         //create the bonus shield
-        iteratorPlayerInfo.value()->bonusShield = new KGameRenderedItem(renderer, "bonus_shield");
+        iteratorPlayerInfo.value()->bonusShield = new KGameRenderedItem(renderer, QStringLiteral("bonus_shield"));
         iteratorPlayerInfo.value()->bonusShield->setZValue(1001);
         iteratorPlayerInfo.value()->bonusShield->setPos(tempItem->pos());
         m_gameScene->addItem(iteratorPlayerInfo.value()->bonusShield);
@@ -306,7 +306,7 @@ void InfoSidebar::themeChanged()
             m_gameScene->removeItem(tempItem);
         }
         //create the bonus throw
-        iteratorPlayerInfo.value()->bonusThrow = new KGameRenderedItem(renderer, "bonus_throw");
+        iteratorPlayerInfo.value()->bonusThrow = new KGameRenderedItem(renderer, QStringLiteral("bonus_throw"));
         iteratorPlayerInfo.value()->bonusThrow->setZValue(1001);
         iteratorPlayerInfo.value()->bonusThrow->setPos(tempItem->pos());
         m_gameScene->addItem(iteratorPlayerInfo.value()->bonusThrow);
@@ -318,7 +318,7 @@ void InfoSidebar::themeChanged()
             m_gameScene->removeItem(tempItem);
         }
         //create the bonus kick
-        iteratorPlayerInfo.value()->bonusKick = new KGameRenderedItem(renderer, "bonus_kick");
+        iteratorPlayerInfo.value()->bonusKick = new KGameRenderedItem(renderer, QStringLiteral("bonus_kick"));
         iteratorPlayerInfo.value()->bonusKick->setZValue(1001);
         iteratorPlayerInfo.value()->bonusKick->setPos(tempItem->pos());
         m_gameScene->addItem(iteratorPlayerInfo.value()->bonusKick);
@@ -374,19 +374,19 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
                     switch((int)bonusType)
                     {
                         case Granatier::Bonus::HYPERACTIVE:
-                            m_badBonusSpriteKey = "bonus_bad_hyperactive";
+                            m_badBonusSpriteKey = QStringLiteral("bonus_bad_hyperactive");
                             break;
                         case Granatier::Bonus::SLOW:
-                            m_badBonusSpriteKey = "bonus_bad_slow";
+                            m_badBonusSpriteKey = QStringLiteral("bonus_bad_slow");
                             break;
                         case Granatier::Bonus::MIRROR:
-                            m_badBonusSpriteKey = "bonus_bad_mirror";
+                            m_badBonusSpriteKey = QStringLiteral("bonus_bad_mirror");
                             break;
                         case Granatier::Bonus::SCATTY:
-                            m_badBonusSpriteKey = "bonus_bad_scatty";
+                            m_badBonusSpriteKey = QStringLiteral("bonus_bad_scatty");
                             break;
                         case Granatier::Bonus::RESTRAIN:
-                            m_badBonusSpriteKey = "bonus_bad_restrain";
+                            m_badBonusSpriteKey = QStringLiteral("bonus_bad_restrain");
                             break;
                     }
                     

@@ -101,7 +101,7 @@ void ArenaSelector::showEvent(QShowEvent*)
 ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(NULL), m_graphicsScene(NULL), m_svgScaleFactor(1)
 {
     KgTheme* theme = new KgTheme(QByteArray());
-    theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::DataLocation, QString("themes/granatier.svgz")));
+    theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("themes/granatier.svgz")));
     m_renderer = new KGameRenderer(theme);
 }
 
@@ -144,10 +144,10 @@ void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
     ui.arenaPreview->setBackgroundBrush(Qt::black);
     
     //Get the last used arena path from the KConfigSkeleton
-    KConfigSkeletonItem * configItem = aconfig->findItem("Arena");
+    KConfigSkeletonItem * configItem = aconfig->findItem(QStringLiteral("Arena"));
     QString lastUsedArena = configItem->property().toString();
 
-    configItem = aconfig->findItem("RandomArenaModeArenaList");
+    configItem = aconfig->findItem(QStringLiteral("RandomArenaModeArenaList"));
     m_tempRandomArenaModeArenaList = configItem->property().toStringList();
     m_tempRandomArenaModeArenaList.removeDuplicates();
     
@@ -169,7 +169,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     ui.arenaList->setSortingEnabled(true);
 
     QStringList arenasAvailable;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, "arenas", QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, QStringLiteral("arenas"), QStandardPaths::LocateDirectory);
     Q_FOREACH (const QString& dir, dirs) {
          const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
          Q_FOREACH (const QString& file, fileNames) {
@@ -199,14 +199,15 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
 
     foreach (const QString &file, arenasAvailable)
     {
-      QString arenaPath = lookupDirectory + '/' + file;
+      QString arenaPath = lookupDirectory + QLatin1Char('/') + file;
       ArenaSettings* arenaSettings = new ArenaSettings(groupName);
 
       if (arenaSettings->load(arenaPath)) {
-        QString arenaName = arenaSettings->arenaProperty("Name");
+        QString arenaName; // Start with an empty QString here so that the first += allocates a reserve for future +=.
+        arenaName += arenaSettings->arenaProperty(QStringLiteral("Name"));
         //Add underscores to avoid duplicate names.
         while (arenaMap.contains(arenaName))
-          arenaName += '_';
+          arenaName += QLatin1Char('_');
         arenaMap.insert(arenaName, arenaSettings);
         QListWidgetItem * item = new QListWidgetItem(arenaName, ui.arenaList);
         if(ui.kcfg_RandomArenaMode->isChecked())
@@ -241,12 +242,12 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     if (!initialFound)
     {
       // TODO change this if we ever change ArenaSettings::loadDefault
-      QString defaultPath = "arenas/granatier.desktop";
+      QLatin1String defaultPath("arenas/granatier.desktop");
       foreach(ArenaSettings* arenaSettings, arenaMap)
       {
         if (arenaSettings->path().endsWith(defaultPath))
         {
-          const QList<QListWidgetItem *> itemList = ui.arenaList->findItems(arenaSettings->arenaProperty("Name"), Qt::MatchExactly);
+          const QList<QListWidgetItem *> itemList = ui.arenaList->findItems(arenaSettings->arenaProperty(QStringLiteral("Name")), Qt::MatchExactly);
           // never can be != 1 but better safe than sorry
           if (itemList.count() == 1)
           {
@@ -277,17 +278,17 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
         }
         ui.kcfg_Arena->setText(selArena->fileName());
 
-        QString authstr("Author");
-        QString contactstr("AuthorEmail");
-        QString descstr("Description");
+        QString authstr(QStringLiteral("Author"));
+        QString contactstr(QStringLiteral("AuthorEmail"));
+        QString descstr(QStringLiteral("Description"));
         QString emailstr = selArena->arenaProperty(contactstr);
-        if(emailstr.compare("-") == 0) // the imported clanbomber arenas have a "-" if no email address was defined in the clanbomber arena file
+        if(emailstr.compare(QLatin1String("-")) == 0) // the imported clanbomber arenas have a "-" if no email address was defined in the clanbomber arena file
         {
             emailstr.clear();
         }
         if (!emailstr.isEmpty())
         {
-            emailstr = QString("<a href=\"mailto:%1\">%1</a>").arg(selArena->arenaProperty(contactstr));
+            emailstr = QStringLiteral("<a href=\"mailto:%1\">%1</a>").arg(selArena->arenaProperty(contactstr));
         }
         
         ui.arenaAuthor->setText(i18nc("Author attribution, e.g. \"by Jack\"", "by %1", selArena->arenaProperty(authstr)));
@@ -368,49 +369,49 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
             for (int j = 0; j < m_arena->getNbColumns(); ++j)
             {
                 // Create the ArenaItem and set the image
-                ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_renderer, "");
+                ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_renderer, QStringLiteral(""));
                 
                 switch(m_arena->getCell(i,j).getType())
                 {
                     case Granatier::Cell::WALL:
-                        arenaItem->setSpriteKey("arena_wall");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_wall"));
                         arenaItem->setZValue(-2);
                         break;
                     case Granatier::Cell::BLOCK:
-                        arenaItem->setSpriteKey("arena_block");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_block"));
                         arenaItem->setZValue(0);
                         break;
                     case Granatier::Cell::HOLE:
                         delete arenaItem;
-                        arenaItem = NULL;
+                        arenaItem = nullptr;
                         break;
                     case Granatier::Cell::ICE:
-                        arenaItem->setSpriteKey("arena_ice");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_ice"));
                         arenaItem->setZValue(0);
                         break;
                     case Granatier::Cell::BOMBMORTAR:
-                        arenaItem->setSpriteKey("arena_bomb_mortar");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_bomb_mortar"));
                         arenaItem->setZValue(0);
                         break;
                     case Granatier::Cell::ARROWUP:
-                        arenaItem->setSpriteKey("arena_arrow_up");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_arrow_up"));
                         arenaItem->setZValue(0);
                         break;
                     case Granatier::Cell::ARROWRIGHT:
-                        arenaItem->setSpriteKey("arena_arrow_right");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_arrow_right"));
                         arenaItem->setZValue(0);
                         break;
                     case Granatier::Cell::ARROWDOWN:
-                        arenaItem->setSpriteKey("arena_arrow_down");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_arrow_down"));
                         arenaItem->setZValue(0);
                         break;
                     case Granatier::Cell::ARROWLEFT:
-                        arenaItem->setSpriteKey("arena_arrow_left");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_arrow_left"));
                         arenaItem->setZValue(0);
                         break;
                     case Granatier::Cell::GROUND:
                     default:
-                        arenaItem->setSpriteKey("arena_ground");
+                        arenaItem->setSpriteKey(QStringLiteral("arena_ground"));
                         arenaItem->setZValue(-1);
                 }
                 if(arenaItem)
@@ -478,14 +479,14 @@ void ArenaSelector::Private::_k_openKNewStuffDialog()
 void ArenaSelector::Private::_k_importArenasDialog()
 {
     // get local directory for arenas
-    const QString arenaDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QStringLiteral("/arenas/");
+    const QString arenaDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1String("/arenas/");
     // create path if it does not exist
     if(!QDir(arenaDir).exists()) QDir().mkpath(arenaDir);
 
 
     //find the clanbomber files
     QStringList listClanbomberPaths;
-    listClanbomberPaths.append(QDir::homePath() + "/.clanbomber/maps/");
+    listClanbomberPaths.append(QDir::homePath() + QLatin1String("/.clanbomber/maps/"));
     for(int i = 0; i < listClanbomberPaths.count(); i++)
     {
         QDir clanbomberDir(listClanbomberPaths[i]);
@@ -495,7 +496,7 @@ void ArenaSelector::Private::_k_importArenasDialog()
         }
         
         QStringList listMaps;
-        listMaps = clanbomberDir.entryList(QStringList("*.map"));
+        listMaps = clanbomberDir.entryList(QStringList(QStringLiteral("*.map")));
         for(int j = 0; j < listMaps.count(); j++)
         {
             QFile mapFile(listClanbomberPaths[i] + listMaps[j]);
@@ -506,7 +507,7 @@ void ArenaSelector::Private::_k_importArenasDialog()
             
             QFile desktopFile;
             QString strName = listMaps[j].left(listMaps[j].count()-4);
-            desktopFile.setFileName(QString("%1clanbomber_%2.desktop").arg(arenaDir).arg(strName));
+            desktopFile.setFileName(QStringLiteral("%1clanbomber_%2.desktop").arg(arenaDir).arg(strName));
             desktopFile.open(QIODevice::WriteOnly | QIODevice::Text);
             QTextStream streamDesktopFile(&desktopFile);
             
@@ -527,28 +528,27 @@ void ArenaSelector::Private::_k_importArenasDialog()
                 arena.append(readStream.readLine());
             }
             while(!readStream.atEnd());
-            arena.replaceInStrings("*", "=");
-            arena.replaceInStrings(" ", "_");
-            arena.replaceInStrings("-", " ");
-            arena.replaceInStrings("S", "-");
-            arena.replaceInStrings("R", "x");
-            arena.replaceInStrings("^", "u");
-            arena.replaceInStrings(">", "r");
-            arena.replaceInStrings("v", "d");
-            arena.replaceInStrings("<", "l");
-            arena.replaceInStrings("0", "p");
-            arena.replaceInStrings("1", "p");
-            arena.replaceInStrings("2", "p");
-            arena.replaceInStrings("3", "p");
-            arena.replaceInStrings("4", "p");
-            arena.replaceInStrings("5", "p");
-            arena.replaceInStrings("6", "p");
-            arena.replaceInStrings("7", "p");
-            arena.replaceInStrings("8", "p");
-            arena.replaceInStrings("9", "p");
-            
+            arena.replaceInStrings(QStringLiteral("*"), QStringLiteral("="));
+            arena.replaceInStrings(QStringLiteral(" "), QStringLiteral("_"));
+            arena.replaceInStrings(QStringLiteral("-"), QStringLiteral(" "));
+            arena.replaceInStrings(QStringLiteral("S"), QStringLiteral("-"));
+            arena.replaceInStrings(QStringLiteral("R"), QStringLiteral("x"));
+            arena.replaceInStrings(QStringLiteral("^"), QStringLiteral("u"));
+            arena.replaceInStrings(QStringLiteral(">"), QStringLiteral("r"));
+            arena.replaceInStrings(QStringLiteral("v"), QStringLiteral("d"));
+            arena.replaceInStrings(QStringLiteral("<"), QStringLiteral("l"));
+            arena.replaceInStrings(QStringLiteral("0"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("1"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("2"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("3"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("4"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("5"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("6"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("7"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("8"), QStringLiteral("p"));
+            arena.replaceInStrings(QStringLiteral("9"), QStringLiteral("p"));
             QFile arenaFile;
-            arenaFile.setFileName(QString("%1clanbomber_%2.xml").arg(arenaDir).arg(strName));
+            arenaFile.setFileName(QStringLiteral("%1clanbomber_%2.xml").arg(arenaDir).arg(strName));
             arenaFile.open(QIODevice::WriteOnly | QIODevice::Text);
             
             QTextStream streamArenaFile(&arenaFile);

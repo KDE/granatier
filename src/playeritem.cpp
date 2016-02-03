@@ -63,9 +63,9 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
     m_itemSizeSet = QSize(width, height);
     m_itemSizeReal = m_itemSizeSet;
     
-    if(m_renderer->spriteExists("player_0"))
+    if(m_renderer->spriteExists(QStringLiteral("player_0")))
     {
-        setSpriteKey("player_0");
+        setSpriteKey(QStringLiteral("player_0"));
     }
     
     setZValue(250);
@@ -86,9 +86,9 @@ void PlayerItem::resurrect()
     m_fallingAnimationCounter = 0;
     m_resurrectionAnimationCounter = 10;
     setRenderSize(m_renderSize);
-    if(m_renderer->spriteExists("player_0"))
+    if(m_renderer->spriteExists(QStringLiteral("player_0")))
     {
-        setSpriteKey("player_0");
+        setSpriteKey(QStringLiteral("player_0"));
     }
     
     QTransform transform;
@@ -242,9 +242,9 @@ void PlayerItem::resumeAnim()
 
 void PlayerItem::stopAnim()
 {
-    if(m_renderer->spriteExists("player_0"))
+    if(m_renderer->spriteExists(QStringLiteral("player_0")))
     {
-        setSpriteKey("player_0");
+        setSpriteKey(QStringLiteral("player_0"));
     }
     if (m_animationTimer->state() != QTimeLine::NotRunning && m_resurrectionAnimationCounter == 0)
     {
@@ -259,9 +259,9 @@ void PlayerItem::fallingAnimation()
 
 void PlayerItem::setFrame(const int p_frame)
 {
-    if(m_renderer->spriteExists(QString("player_%1").arg(p_frame)))
+    if(m_renderer->spriteExists(QStringLiteral("player_%1").arg(p_frame)))
     {
-        setSpriteKey(QString("player_%1").arg(p_frame));
+        setSpriteKey(QStringLiteral("player_%1").arg(p_frame));
         
         if(m_fallingAnimationCounter > 0 || m_resurrectionAnimationCounter > 0)
         {
@@ -383,8 +383,8 @@ void PlayerItem::setDead()
         transform.translate(-m_itemSizeReal.width() / 2.0, -m_itemSizeReal.height() / 2.0);
         setTransform(transform);
     }
-    if(m_renderer->spriteExists("player_death"))
+    if(m_renderer->spriteExists(QStringLiteral("player_death")))
     {
-        setSpriteKey("player_death");
+        setSpriteKey(QStringLiteral("player_death"));
     }
 }
