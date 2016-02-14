@@ -354,7 +354,7 @@ void Game::createBonus()
         nQuarterSize = (nQuarter < 3 ? nFullSize / 4 : nFullSize - 3 * (nFullSize / 4));
         bonusTypeList.clear();
         
-        for (int i = 0; i < nQuarterSize; i++)
+        for (int i = 0; i < nQuarterSize; ++i)
         {
             if(i < nBonusCount)
             {
@@ -405,7 +405,7 @@ void Game::createBonus()
         }
         
         int nShuffle;
-        for (int i = 0; i < nQuarterSize; i++)
+        for (int i = 0; i < nQuarterSize; ++i)
         {
             nShuffle = nQuarterSize * (qrand()/1.0)/RAND_MAX;
             if(nShuffle >= nQuarterSize)
@@ -459,7 +459,7 @@ void Game::initCharactersPosition()
         m_roundTimer->stop();
         m_state = RUNNING;
         // Initialize the Player coordinates
-        for(int i = 0; i < m_players.size(); i++)
+        for(int i = 0; i < m_players.size(); ++i)
         {
             m_players[i]->initCoordinate();
             m_players[i]->init();
@@ -505,7 +505,7 @@ void Game::keyPressEvent(QKeyEvent* p_event)
                     cleanUp();
                     init();
                     m_gameScene->init();
-                    for(int i = 0; i < m_players.length(); i++)
+                    for(int i = 0; i < m_players.length(); ++i)
                     {
                         m_players[i]->resurrect();
                     }
@@ -526,7 +526,7 @@ void Game::keyPressEvent(QKeyEvent* p_event)
     }
     
     //TODO: make signal
-    for(int i = 0; i < m_players.size(); i++)
+    for(int i = 0; i < m_players.size(); ++i)
     {
         m_players[i]->keyPressed(p_event);
     }
@@ -539,7 +539,7 @@ void Game::keyReleaseEvent(QKeyEvent* p_event)
         return;
     }
     //TODO: make signal
-    for(int i = 0; i < m_players.size(); i++)
+    for(int i = 0; i < m_players.size(); ++i)
     {
         m_players[i]->keyReleased(p_event);
     }
@@ -554,7 +554,7 @@ void Game::update()
     }
     
     //update Player
-    for(int i = 0; i < m_players.size(); i++)
+    for(int i = 0; i < m_players.size(); ++i)
     {
         m_players[i]->updateMove();
         m_players[i]->emitGameUpdated();
@@ -626,7 +626,7 @@ void Game::playerDeath()
     if(!m_setRoundFinishedTimer->isActive())
     {
         int nPlayerAlive = 0;
-        for(int i = 0; i < m_players.length(); i++)
+        for(int i = 0; i < m_players.length(); ++i)
         {
             if(m_players[i]->isAlive())
             {
@@ -643,7 +643,7 @@ void Game::playerDeath()
 
 void Game::resurrectBonusTaken()
 {
-    for(int i = 0; i < m_players.length(); i++)
+    for(int i = 0; i < m_players.length(); ++i)
     {
         if(!(m_players[i]->isAlive()))
         {
@@ -660,7 +660,7 @@ void Game::setRoundFinished()
     {
         return;
     }
-    for(int i = 0; i < m_players.length(); i++)
+    for(int i = 0; i < m_players.length(); ++i)
     {
         if(m_players[i]->isAlive())
         {
@@ -681,7 +681,7 @@ void Game::setRoundFinished()
     
     pause(true);
     
-    for(int i = 0; i < m_players.length(); i++)
+    for(int i = 0; i < m_players.length(); ++i)
     {
         // check if a player reaches the win points
         if (m_players[i]->points() >= m_winPoints)
