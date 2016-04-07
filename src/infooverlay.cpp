@@ -185,18 +185,18 @@ void InfoOverlay::showScore ()
         m_gameScene->addItem(m_dimmOverlay);
     }
     
-    for(int i = 0; i < players.length(); i++)
+    for(auto & player : players)
     {
-        if (!m_gameScene->items().contains(m_mapPlayerNames.value(players[i])))
+        if (!m_gameScene->items().contains(m_mapPlayerNames.value(player)))
         {
             // display the player name
-            m_gameScene->addItem(m_mapPlayerNames.value(players[i]));
+            m_gameScene->addItem(m_mapPlayerNames.value(player));
         }
         
         for(int j = 0; j < nWinPoints; j++)
         {
-            svgItem = m_mapScore.value(players[i]).at(j);
-            if (players[i]->points() > j)
+            svgItem = m_mapScore.value(player).at(j);
+            if (player->points() > j)
             {
                 svgItem->setSpriteKey(QStringLiteral("score_star_enabled"));
             }
@@ -239,17 +239,17 @@ void InfoOverlay::hideItems ()
     int nWinPoints = m_game->getWinPoints();
     QList <Player*> players = m_game->getPlayers();
     
-    for(int i = 0; i < players.length(); i++)
+    for(auto & player : players)
     {
-        if (m_gameScene->items().contains(m_mapPlayerNames.value(players[i])))
+        if (m_gameScene->items().contains(m_mapPlayerNames.value(player)))
         {
             // display the player name
-            m_gameScene->removeItem(m_mapPlayerNames.value(players[i]));
+            m_gameScene->removeItem(m_mapPlayerNames.value(player));
         }
         
         for(int j = 0; j < nWinPoints; j++)
         {
-            KGameRenderedItem* svgItem = m_mapScore.value(players[i]).at(j);
+            KGameRenderedItem* svgItem = m_mapScore.value(player).at(j);
             // if the score is displayed
             if (m_gameScene->items().contains(svgItem))
             {

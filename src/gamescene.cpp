@@ -66,16 +66,16 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     QList <Player*> players = p_game->getPlayers();
     
     PlayerItem* playerItem;
-    for(int i = 0; i < players.size(); i++)
+    for(auto & player : players)
     {
-        const QString desktopPath = players[i]->getDesktopFilePath();
+        const QString desktopPath = player->getDesktopFilePath();
         KgTheme* theme = new KgTheme(desktopPath.toUtf8());
         theme->readFromDesktopFile(desktopPath);
-        KGameRenderer* playerRenderer = new KGameRenderer(theme);
-        m_mapRendererPlayerItems.insert(players[i], playerRenderer);
-        playerItem = new PlayerItem(players[i], playerRenderer);
+        auto  playerRenderer = new KGameRenderer(theme);
+        m_mapRendererPlayerItems.insert(player, playerRenderer);
+        playerItem = new PlayerItem(player, playerRenderer);
         // Corrects the position of the player
-        playerItem->update(players[i]->getX(), players[i]->getY());
+        playerItem->update(player->getX(), player->getY());
         // Stops the player animation
         playerItem->stopAnim();
         
@@ -208,13 +208,13 @@ void GameScene::init()
     initItemsWithGraphicsFromTheme();
     
     // Display each PlayerItem
-    for (int i = 0; i < m_playerItems.size(); i++)
+    for (auto & m_playerItem : m_playerItems)
     {
-        if(!items().contains(m_playerItems[i]))
+        if(!items().contains(m_playerItem))
         {
-            addItem(m_playerItems[i]);
+            addItem(m_playerItem);
         }
-        m_playerItems[i]->resurrect();
+        m_playerItem->resurrect();
     }
     
     if (!items().contains(m_remainingTimeLabel))
@@ -498,14 +498,14 @@ GameScene::~GameScene()
     
     delete m_infoOverlay;
     
-    for (int i = 0; i < m_playerItems.size(); i++)
+    for (auto & m_playerItem : m_playerItems)
     {
-        if(items().contains(m_playerItems[i]))
+        if(items().contains(m_playerItem))
         {
-            removeItem(m_playerItems[i]);
+            removeItem(m_playerItem);
         }
-        m_playerItems[i]->stopAnim();
-        delete m_playerItems[i];
+        m_playerItem->stopAnim();
+        delete m_playerItem;
     }
     
     QMap <Player*, KGameRenderer*>::iterator iteratorRendererPlayer = m_mapRendererPlayerItems.begin();
@@ -735,9 +735,9 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
         }
         
         // Stop player animation
-        for (int i = 0; i < m_playerItems.size(); i++)
+        for (auto & m_playerItem : m_playerItems)
         {
-            m_playerItems[i]->pauseAnim();
+            m_playerItem->pauseAnim();
         }
         // Stop bomb animation
         QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
@@ -752,9 +752,9 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
         m_infoOverlay->hideItems();
         
         // Resume player animation
-        for (int i = 0; i < m_playerItems.size(); i++)
+        for (auto & m_playerItem : m_playerItems)
         {
-            m_playerItems[i]->resumeAnim();
+            m_playerItem->resumeAnim();
         }
         // Resume bomb animation
         QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();

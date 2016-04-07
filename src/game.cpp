@@ -71,9 +71,9 @@ Game::Game(PlayerSettings* playerSettings)
     
     init();
     
-    for (int i = 0; i < m_players.size(); i++)
+    for (auto & m_player : m_players)
     {
-        connect(m_players[i], SIGNAL(bombDropped(Player*,qreal,qreal,bool,int)), this, SLOT(createBomb(Player*,qreal,qreal,bool,int)));
+        connect(m_player, SIGNAL(bombDropped(Player*,qreal,qreal,bool,int)), this, SLOT(createBomb(Player*,qreal,qreal,bool,int)));
     }
     
     m_gameOver = false;
@@ -459,10 +459,10 @@ void Game::initCharactersPosition()
         m_roundTimer->stop();
         m_state = RUNNING;
         // Initialize the Player coordinates
-        for(int i = 0; i < m_players.size(); ++i)
+        for(auto & m_player : m_players)
         {
-            m_players[i]->initCoordinate();
-            m_players[i]->init();
+            m_player->initCoordinate();
+            m_player->init();
         }
     }
 }
@@ -505,9 +505,9 @@ void Game::keyPressEvent(QKeyEvent* p_event)
                     cleanUp();
                     init();
                     m_gameScene->init();
-                    for(int i = 0; i < m_players.length(); ++i)
+                    for(auto & m_player : m_players)
                     {
-                        m_players[i]->resurrect();
+                        m_player->resurrect();
                     }
                 }
             }
@@ -526,9 +526,9 @@ void Game::keyPressEvent(QKeyEvent* p_event)
     }
     
     //TODO: make signal
-    for(int i = 0; i < m_players.size(); ++i)
+    for(auto & m_player : m_players)
     {
-        m_players[i]->keyPressed(p_event);
+        m_player->keyPressed(p_event);
     }
 }
 
@@ -539,25 +539,25 @@ void Game::keyReleaseEvent(QKeyEvent* p_event)
         return;
     }
     //TODO: make signal
-    for(int i = 0; i < m_players.size(); ++i)
+    for(auto & m_player : m_players)
     {
-        m_players[i]->keyReleased(p_event);
+        m_player->keyReleased(p_event);
     }
 }
 
 void Game::update()
 {
     //update Bombs
-    for (int i = 0; i < m_bombs.size(); ++i)
+    for (auto & m_bomb : m_bombs)
     {
-        m_bombs[i]->updateMove();
+        m_bomb->updateMove();
     }
     
     //update Player
-    for(int i = 0; i < m_players.size(); ++i)
+    for(auto & m_player : m_players)
     {
-        m_players[i]->updateMove();
-        m_players[i]->emitGameUpdated();
+        m_player->updateMove();
+        m_player->emitGameUpdated();
     }
 }
 
@@ -626,9 +626,9 @@ void Game::playerDeath()
     if(!m_setRoundFinishedTimer->isActive())
     {
         int nPlayerAlive = 0;
-        for(int i = 0; i < m_players.length(); ++i)
+        for(auto & m_player : m_players)
         {
-            if(m_players[i]->isAlive())
+            if(m_player->isAlive())
             {
                 nPlayerAlive++;
             }
@@ -643,11 +643,11 @@ void Game::playerDeath()
 
 void Game::resurrectBonusTaken()
 {
-    for(int i = 0; i < m_players.length(); ++i)
+    for(auto & m_player : m_players)
     {
-        if(!(m_players[i]->isAlive()))
+        if(!(m_player->isAlive()))
         {
-            m_players[i]->resurrect();
+            m_player->resurrect();
         }
     }
 }
@@ -681,13 +681,13 @@ void Game::setRoundFinished()
     
     pause(true);
     
-    for(int i = 0; i < m_players.length(); ++i)
+    for(auto & m_player : m_players)
     {
         // check if a player reaches the win points
-        if (m_players[i]->points() >= m_winPoints)
+        if (m_player->points() >= m_winPoints)
         {
             m_gameOver = true;
-            m_strWinner = m_players[i]->getPlayerName();
+            m_strWinner = m_player->getPlayerName();
             break;
         }
     }

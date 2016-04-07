@@ -165,21 +165,21 @@ void PlayerItem::manageCollision()
     // when the player only collides with the arena)
     if (collidingList.size() > 1)
     {
-        for (int i = 0; i < collidingList.size(); ++i)
+        for (auto & i : collidingList)
         {
             // The arena and the points labels have a negative zValue which allows to exclude them from the treatment of collisions
-            if (collidingList[i]->zValue() >= 300 && collidingList[i]->zValue() < 400)
+            if (i->zValue() >= 300 && i->zValue() < 400)
             {
                 //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Player*)getModel());
                 int nExplosionID;
-                if(collidingList[i]->zValue() == 315)
+                if(i->zValue() == 315)
                 {
-                    BombItem* bombItem = dynamic_cast <BombItem*> (collidingList[i]);
+                    BombItem* bombItem = dynamic_cast <BombItem*> (i);
                     nExplosionID = dynamic_cast <Bomb*> (bombItem->getModel())->explosionID();
                 }
                 else
                 {
-                    nExplosionID = dynamic_cast <BombExplosionItem*> (collidingList[i])->explosionID();
+                    nExplosionID = dynamic_cast <BombExplosionItem*> (i)->explosionID();
                 }
                 
                 if(dynamic_cast <Player*> (m_model)->shield(nExplosionID) == false)
@@ -188,9 +188,9 @@ void PlayerItem::manageCollision()
                     dynamic_cast <Player*> (m_model)->die();
                 }
             }
-            else if (collidingList[i]->zValue() == 100)
+            else if (i->zValue() == 100)
             {
-                bonusItem = dynamic_cast <BonusItem*> (collidingList[i]);
+                bonusItem = dynamic_cast <BonusItem*> (i);
                 if(dynamic_cast <Bonus*> (bonusItem->getModel())->isTaken() == false)
                 {
                     dynamic_cast <Bonus*> (bonusItem->getModel())->setTaken();
