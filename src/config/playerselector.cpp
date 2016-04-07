@@ -46,7 +46,7 @@
 class PlayerSelectorDelegate : public QStyledItemDelegate
 {
 public:
-    PlayerSelectorDelegate(QObject* parent = nullptr);
+    explicit PlayerSelectorDelegate(QObject* parent = nullptr);
     virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
     ///@note The implementation is independent of @a option and @a index.
     virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
