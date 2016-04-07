@@ -206,17 +206,17 @@ void GameScene::setupThemeRenderer()
 void GameScene::init()
 {
     initItemsWithGraphicsFromTheme();
-    
+
     // Display each PlayerItem
-    for (auto & m_playerItem : m_playerItems)
+    for (auto & playerItem : m_playerItems)
     {
-        if(!items().contains(m_playerItem))
+        if(!items().contains(playerItem))
         {
-            addItem(m_playerItem);
+            addItem(playerItem);
         }
-        m_playerItem->resurrect();
+        playerItem->resurrect();
     }
-    
+
     if (!items().contains(m_remainingTimeLabel))
     {
         addItem(m_remainingTimeLabel);
@@ -497,15 +497,15 @@ GameScene::~GameScene()
     cleanUp();
     
     delete m_infoOverlay;
-    
-    for (auto & m_playerItem : m_playerItems)
+
+    for (auto & playerItem : m_playerItems)
     {
-        if(items().contains(m_playerItem))
+        if(items().contains(playerItem))
         {
-            removeItem(m_playerItem);
+            removeItem(playerItem);
         }
-        m_playerItem->stopAnim();
-        delete m_playerItem;
+        playerItem->stopAnim();
+        delete playerItem;
     }
     
     QMap <Player*, KGameRenderer*>::iterator iteratorRendererPlayer = m_mapRendererPlayerItems.begin();
@@ -733,11 +733,11 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
         {
             m_infoOverlay->showPause();
         }
-        
+
         // Stop player animation
-        for (auto & m_playerItem : m_playerItems)
+        for (auto & playerItem : m_playerItems)
         {
-            m_playerItem->pauseAnim();
+            playerItem->pauseAnim();
         }
         // Stop bomb animation
         QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
@@ -750,11 +750,11 @@ void GameScene::setPaused(const bool p_pause, const bool p_fromUser)
     else
     {   // If the game has resumed, hide the info items
         m_infoOverlay->hideItems();
-        
+
         // Resume player animation
-        for (auto & m_playerItem : m_playerItems)
+        for (auto & playerItem : m_playerItems)
         {
-            m_playerItem->resumeAnim();
+            playerItem->resumeAnim();
         }
         // Resume bomb animation
         QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
