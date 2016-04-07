@@ -349,7 +349,7 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
         return;
     }
     
-    switch((int)bonusType)
+    switch(static_cast<int>(bonusType))
     {
         case Granatier::Bonus::SHIELD:
             m_mapPlayerInfo.value(player)->bonusShieldDimm->setVisible(percentageElapsed);
@@ -371,7 +371,7 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
                 KGameRenderer* renderer = m_gameScene->renderer(Granatier::Element::BONUS);
                 if(renderer)
                 {
-                    switch((int)bonusType)
+                    switch(static_cast<int>(bonusType))
                     {
                         case Granatier::Bonus::HYPERACTIVE:
                             m_badBonusSpriteKey = QStringLiteral("bonus_bad_hyperactive");

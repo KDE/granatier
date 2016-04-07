@@ -127,7 +127,7 @@ void Game::init()
             }
         }
         
-        int nIndex = ((double) qrand() / RAND_MAX) * m_randomArenaModeArenaList.count();
+        int nIndex = (static_cast<double>(qrand()) / RAND_MAX) * m_randomArenaModeArenaList.count();
         if(nIndex < 0)
         {
             nIndex = 0;

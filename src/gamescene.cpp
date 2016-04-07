@@ -258,8 +258,8 @@ void GameScene::init()
     
     //set the minimum size for the scene
     m_minSize = sceneRect();
-    int minWidth = ((int) (m_minSize.width() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
-    int minHeight = ((int) (m_minSize.height() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
+    int minWidth = (static_cast<int>(m_minSize.width() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
+    int minHeight = (static_cast<int>(m_minSize.height() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
     m_minSize.setX(m_minSize.x() + (m_minSize.width() - minWidth) / 10);
     m_minSize.setY(m_minSize.y() + (m_minSize.height() - minHeight) / 4);
     m_minSize.setWidth(minWidth);

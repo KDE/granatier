@@ -37,11 +37,11 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
     
     int width = Granatier::CellSize * 0.9;
     int height = Granatier::CellSize * 0.9;
-    if(((int) Granatier::CellSize - width) % 2 != 0)
+    if((static_cast<int>(Granatier::CellSize) - width) % 2 != 0)
     {
         width--;
     }
-    if(((int) Granatier::CellSize - height) % 2 != 0)
+    if((static_cast<int>(Granatier::CellSize) - height) % 2 != 0)
     {
         height--;
     }
@@ -147,11 +147,11 @@ void BombItem::startDetonation()
     
     int width = Granatier::CellSize * 1.1;
     int height = Granatier::CellSize * 1.1;
-    if(((int) Granatier::CellSize - width) % 2 != 0)
+    if((static_cast<int>(Granatier::CellSize) - width) % 2 != 0)
     {
         width--;
     }
-    if(((int) Granatier::CellSize - height) % 2 != 0)
+    if((static_cast<int>(Granatier::CellSize) - height) % 2 != 0)
     {
         height--;
     }
@@ -299,7 +299,7 @@ void BombItem::updateMortarAnimation(int animationCounter, int nMortarRampEnd, i
     int frame = animationCounter - nMortarRampEnd;
     int peak = nMortarPeak - nMortarRampEnd;
     
-    mortarScale = 1.5 - (frame-peak) * (frame-peak) / (qreal) (peak*peak) * 0.5;
+    mortarScale = 1.5 - (frame-peak) * (frame-peak) / static_cast<qreal>(peak*peak) * 0.5;
 
     transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.height() / 2.0);
     setRenderSize(m_renderSize * mortarScale);

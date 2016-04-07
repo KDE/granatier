@@ -56,11 +56,11 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
             break;
     }
     
-    if(((int) Granatier::CellSize - width) % 2 != 0)
+    if((static_cast<int>(Granatier::CellSize) - width) % 2 != 0)
     {
         width--;
     }
-    if(((int) Granatier::CellSize - height) % 2 != 0)
+    if((static_cast<int>(Granatier::CellSize) - height) % 2 != 0)
     {
         height--;
     }
