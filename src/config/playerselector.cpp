@@ -46,7 +46,7 @@
 class PlayerSelectorDelegate : public QStyledItemDelegate
 {
 public:
-    PlayerSelectorDelegate(QObject* parent = 0);
+    PlayerSelectorDelegate(QObject* parent = nullptr);
     virtual void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const;
     ///@note The implementation is independent of @a option and @a index.
     virtual QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const;
@@ -64,7 +64,7 @@ struct PlayerSelector::Private
 
     void fillList();
 
-    Private(PlayerSettings* playerSettings, Options options, PlayerSelector* q) : q(q), m_playerSettings(playerSettings), m_options(options), m_knsButton(0) {}
+    Private(PlayerSettings* playerSettings, Options options, PlayerSelector* q) : q(q), m_playerSettings(playerSettings), m_options(options), m_knsButton(nullptr) {}
 
     void _k_showNewStuffDialog();
 };
@@ -105,35 +105,35 @@ PlayerSelector::~PlayerSelector()
 void PlayerSelector::Private::fillList()
 {
     m_list->clear();
-        
+
     QModelIndex modelIndex;
     PlayerSelectorItem* playerSelectorItem;
-    
+
     QSvgRenderer renderer;
     QPixmap pixmap(QSize(64, 64));
     pixmap.fill(QColor(0, 0, 0, 0));
     QPainter pixPainter(&pixmap);
-    
+
     QStringList playerIDs = m_playerSettings->playerIDs();
-    
+
     for(int i = 0; i < playerIDs.count(); i++)
     {
         QListWidgetItem* item = new QListWidgetItem(playerIDs[i], m_list);
-        
+
         item->setFlags(item->flags() & ~Qt::ItemIsSelectable);
-        
+
         playerSelectorItem = new PlayerSelectorItem(playerIDs[i], m_playerSettings, m_list);
 
         renderer.load(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("players/%1").arg(m_playerSettings->playerGraphicsFile(playerIDs[i]))));
         renderer.render(&pixPainter, QStringLiteral("player_0"));
         playerSelectorItem->setPlayerPreviewPixmap(pixmap);
-        
+
         KConfig desktopFile(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("players/%1").arg(playerIDs[i])), KConfig::SimpleConfig);
         QString author = desktopFile.group("KGameTheme").readEntry<QString>("Author", QStringLiteral(""));
         QString authorEmail = QStringLiteral("<a href=\"mailto:%1\">%1</a>").arg(desktopFile.group("KGameTheme").readEntry<QString>("AuthorEmail", QStringLiteral("")));
         //TODO: QString description = desktopFile.group("KGameTheme").readEntry<QString>("Description", "");
         playerSelectorItem->setPlayerAuthor(author, authorEmail);
-        
+
         modelIndex = m_list->model()->index(i, 0, m_list->rootIndex());
         m_list->setIndexWidget(modelIndex, playerSelectorItem);
     }
@@ -167,7 +167,7 @@ PlayerSelectorDelegate::PlayerSelectorDelegate(QObject* parent)
 void PlayerSelectorDelegate::paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& /*index*/) const
 {
     //draw background
-    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, 0);
+    QApplication::style()->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, nullptr);
 }
 
 QSize PlayerSelectorDelegate::sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const

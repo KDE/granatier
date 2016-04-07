@@ -2,17 +2,17 @@
  * Copyright 2008 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Pierre-Benoit Bessse <besse@gmail.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -55,12 +55,12 @@ MainWindow::MainWindow()
 {
     // initialize random generator
     qsrand(QDateTime::currentDateTime().toTime_t());
-    
-    m_settingsDialog = NULL;
+
+    m_settingsDialog = nullptr;
     // Initialize the game
-    m_game = NULL;
-    m_view = NULL;
-    m_scene = NULL;
+    m_game = nullptr;
+    m_view = nullptr;
+    m_scene = nullptr;
     m_playerSettings = new PlayerSettings();
     m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
     m_themeProvider->discoverThemes(QByteArray("appdata"), QStringLiteral("themes"), QStringLiteral("granatier"));
@@ -94,21 +94,21 @@ void MainWindow::initGame()
     //TODO: check why setting the focus only at the end doesn't work
     this->setFocusProxy(m_view);
     this->setFocus();
-    
+
     // If a GameView instance already exists
     if (m_view)
     {
         // Delete the GameView instance
         delete m_view;
     }
-    
+
     // If a GameScene instance already exists
     if (m_scene)
     {
         // Delete the GameScene instance
         delete m_scene;
     }
-    
+
     // If a Game instance already exists
     if (m_game)
     {
@@ -118,15 +118,15 @@ void MainWindow::initGame()
     // Create a new Game instance
     m_game = new Game(m_playerSettings);
     connect(m_game, &Game::gameOver, this, &MainWindow::newGame);
-    
+
     m_scene = new GameScene(m_game, m_themeProvider);
-    
+
     // Create a new GameView instance
     m_view = new GameView(m_scene, m_game);
     m_view->setBackgroundBrush(Qt::black);
     setCentralWidget(m_view);
     m_game->setGameScene(dynamic_cast <GameScene*> (m_view->scene()));
-    
+
     this->setFocusProxy(m_view);
     this->setFocus();
 }
@@ -134,7 +134,7 @@ void MainWindow::initGame()
 void MainWindow::newGame()
 {
     bool gameRunning;       // True if the game is running (game timer is active), false otherwise
-  
+
     gameRunning = m_game->getTimer()->isActive();
     // If the game is running
     if (gameRunning)
@@ -189,9 +189,9 @@ void MainWindow::showSettings()
     settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18n("Arena"), QStringLiteral("games-config-board"));
     // Player
     settingsDialog->addPage(new PlayerSelector(m_playerSettings, PlayerSelector::DefaultBehavior, settingsDialog), i18n("Player"), QStringLiteral("games-config-custom"));
-    
+
     m_settingsDialog = settingsDialog;
-    
+
     connect(settingsDialog, &KConfigDialog::settingsChanged, this, &MainWindow::applyNewSettings);
     connect(settingsDialog->button(QDialogButtonBox::Cancel), &QPushButton::clicked, this, &MainWindow::settingsDialogCanceled);
     settingsDialog->show();
@@ -229,7 +229,7 @@ void MainWindow::settingsDialogCanceled()
 void MainWindow::close()
 {
     bool gameRunning;       // True if the game is running (game timer is active), false otherwise
-  
+
     gameRunning = m_game->getTimer()->isActive();
     // If the game is running
     if (gameRunning)

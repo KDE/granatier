@@ -98,7 +98,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     
     // setup the theme renderer
     m_rendererSelectedTheme = new KGameRenderer(m_themeProvider);
-    m_rendererDefaultTheme = 0;
+    m_rendererDefaultTheme = nullptr;
     setupThemeRenderer();
     
     connect(m_themeProvider, &KgThemeProvider::currentThemeChanged, this, &GameScene::themeChanged);
@@ -118,7 +118,7 @@ void GameScene::setupThemeRenderer()
     {
         // Load the default SVG file as fallback
         selectedThemeIsDefault = false;
-        if(m_rendererDefaultTheme == 0)
+        if(m_rendererDefaultTheme == nullptr)
         {
             KgTheme* theme = new KgTheme(m_themeProvider->defaultTheme()->identifier());
             theme->setGraphicsPath(m_themeProvider->defaultTheme()->graphicsPath());
@@ -293,7 +293,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
                     break;
                 case Granatier::Cell::HOLE:
                     delete arenaItem;
-                    arenaItem = NULL;
+                    arenaItem = nullptr;
                     break;
                 case Granatier::Cell::ICE:
                     arenaItem->setSpriteKey(QStringLiteral("arena_ice"));
@@ -425,14 +425,14 @@ void GameScene::initItemsWithGraphicsFromTheme()
                     }
                     else
                     {
-                        m_bonusItems[i][j] = NULL;
+                        m_bonusItems[i][j] = nullptr;
                     }
                 }
             }
             else
             {
-                m_blockItems[i][j] = NULL;
-                m_bonusItems[i][j] = NULL;
+                m_blockItems[i][j] = nullptr;
+                m_bonusItems[i][j] = nullptr;
             }
         }
     }
@@ -457,7 +457,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
     {
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if(m_arenaItem[i][j] != NULL)
+            if(m_arenaItem[i][j] != nullptr)
             {
                 addItem(m_arenaItem[i][j]);
             }
@@ -469,7 +469,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
     {
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if (m_blockItems[i][j] != NULL)
+            if (m_blockItems[i][j] != nullptr)
             {
                 if (!items().contains(m_blockItems[i][j]))
                 {
@@ -543,7 +543,7 @@ void GameScene::cleanUpItemsWithGraphicsFromTheme()
     {
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if (m_arenaItem[i][j] != NULL)
+            if (m_arenaItem[i][j] != nullptr)
             {
                 if (items().contains(m_arenaItem[i][j]))
                 {
@@ -587,7 +587,7 @@ void GameScene::cleanUpItemsWithGraphicsFromTheme()
     {
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if (m_blockItems[i][j] != NULL)
+            if (m_blockItems[i][j] != nullptr)
             {
                 if (items().contains(m_blockItems[i][j]))
                 {
@@ -595,7 +595,7 @@ void GameScene::cleanUpItemsWithGraphicsFromTheme()
                 }
                 delete m_blockItems[i][j];
             }
-            if (m_bonusItems[i][j] != NULL)
+            if (m_bonusItems[i][j] != nullptr)
             {
                 if (items().contains(m_bonusItems[i][j]))
                 {
@@ -651,7 +651,7 @@ KGameRenderer* GameScene::renderer(Granatier::Element::Type type, Player* player
         case Granatier::Element::SCORE:
             return m_rendererScoreItems;
         default:
-            return NULL;
+            return nullptr;
     }
 }
 
@@ -773,12 +773,12 @@ void GameScene::removeBlockItem(BlockItem* blockItem)
     {
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if (m_blockItems[i][j] != NULL && m_blockItems[i][j] == blockItem)
+            if (m_blockItems[i][j] != nullptr && m_blockItems[i][j] == blockItem)
             {
                 if (items().contains(m_blockItems[i][j]))
                 {
                     removeItem(m_blockItems[i][j]);
-                    m_blockItems[i][j] = NULL;
+                    m_blockItems[i][j] = nullptr;
                     m_game->blockDestroyed(i, j, dynamic_cast <Block*> (blockItem->getModel()));
                     delete blockItem;
                 }
@@ -794,12 +794,12 @@ void GameScene::removeBonusItem(BonusItem* bonusItem)
     {
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
-            if (m_bonusItems[i][j] != NULL && m_bonusItems[i][j] == bonusItem)
+            if (m_bonusItems[i][j] != nullptr && m_bonusItems[i][j] == bonusItem)
             {
                 if (items().contains(m_bonusItems[i][j]))
                 {
                     removeItem(m_bonusItems[i][j]);
-                    m_bonusItems[i][j] = NULL;
+                    m_bonusItems[i][j] = nullptr;
                     m_game->removeBonus(dynamic_cast <Bonus*> (bonusItem->getModel()));
                     delete bonusItem;
                 }
@@ -833,7 +833,7 @@ void GameScene::createBombItem(Bomb* bomb)
     // Corrects the position of the BombItem
     bombItem->update(bomb->getX(), bomb->getY());
     addItem(bombItem);
-    m_bombItems[bombItem].append(NULL);
+    m_bombItems[bombItem].append(nullptr);
     
     bombItem->updateGraphics(m_SvgScaleFactor); //TODO: use a Renderer class and get the scale factor from a static function during initialization
     
@@ -880,8 +880,8 @@ void GameScene::removeBombItem(BombItem* bombItem)
 
 void GameScene::bombDetonated(Bomb* bomb)
 {
-    BombItem* bombItem = NULL;
-    BombExplosionItem* bombExplosionItem = NULL;
+    BombItem* bombItem = nullptr;
+    BombExplosionItem* bombExplosionItem = nullptr;
     QList<Element*> blockElements;
     QList<Element*> bombElements;
     int nBombPower = bomb->bombPower();
@@ -934,10 +934,10 @@ void GameScene::bombDetonated(Bomb* bomb)
             foreach(Element* element, blockElements)
             {
                 dynamic_cast <Block*> (element)->startDestruction();
-                if (m_blockItems[nRow][nColumn] != NULL)
+                if (m_blockItems[nRow][nColumn] != nullptr)
                 {
                     //display bonus if available
-                    if (m_bonusItems[nRow][nColumn] != NULL)
+                    if (m_bonusItems[nRow][nColumn] != nullptr)
                     {
                         m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
                         m_bonusItems[nRow][nColumn]->show();
@@ -945,7 +945,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 }
             }
         }
-        else if(m_bonusItems[nRow][nColumn] != NULL)
+        else if(m_bonusItems[nRow][nColumn] != nullptr)
         {
             m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
         }
@@ -1006,10 +1006,10 @@ void GameScene::bombDetonated(Bomb* bomb)
                         foreach(Element* element, blockElements)
                         {
                             dynamic_cast <Block*> (element)->startDestruction();
-                            if (m_blockItems[nRow][nColumn] != NULL)
+                            if (m_blockItems[nRow][nColumn] != nullptr)
                             {
                                 //display bonus if available
-                                if (m_bonusItems[nRow][nColumn] != NULL)
+                                if (m_bonusItems[nRow][nColumn] != nullptr)
                                 {
                                     m_bonusItems[nRow][nColumn]->setUndestroyable(bomb->explosionID());
                                     m_bonusItems[nRow][nColumn]->show();
@@ -1017,7 +1017,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                             }
                         }
                     }
-                    else if(m_bonusItems[nRow][nColumn] != NULL)
+                    else if(m_bonusItems[nRow][nColumn] != nullptr)
                     {
                         m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                     }

@@ -55,7 +55,7 @@ Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCount
     m_detonationCountdownTimer->start();
     connect(m_detonationCountdownTimer, &QTimer::timeout, this, &Bomb::detonate);
     
-    m_mortarTimer = 0;
+    m_mortarTimer = nullptr;
     m_mortarState = -1;
     m_thrown = false;
     m_stopOnCenter = false;
@@ -474,7 +474,7 @@ void Bomb::detonate()
     {
         m_detonated = true;
         delete m_detonationCountdownTimer;
-        m_detonationCountdownTimer = 0;
+        m_detonationCountdownTimer = nullptr;
         emit bombDetonated(this);
         emit releaseBombArmory();
     }

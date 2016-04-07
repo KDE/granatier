@@ -51,13 +51,13 @@ class ArenaSelector::Private
         Ui::ArenaSelectorBase ui;
         QString lookupDirectory;
         QString groupName;
-        
+
         Arena* m_arena;
         KGameRenderer* m_renderer;
         QGraphicsScene* m_graphicsScene;
         QList <KGameRenderedItem*> m_arenaItems;
         qreal m_svgScaleFactor;
-        
+
         QStringList* m_randomArenaModeArenaList;
         QStringList m_tempRandomArenaModeArenaList;
 
@@ -66,7 +66,7 @@ class ArenaSelector::Private
         QSize calculateSvgSize();
 
         // private slots
-        void _k_updatePreview(QListWidgetItem* currentItem = NULL);
+        void _k_updatePreview(QListWidgetItem* currentItem = nullptr);
         void _k_updateArenaList(const QString& strArena);
         void _k_openKNewStuffDialog();
         void _k_importArenasDialog();
@@ -98,7 +98,7 @@ void ArenaSelector::showEvent(QShowEvent*)
     d->_k_updatePreview();
 }
 
-ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(NULL), m_graphicsScene(NULL), m_svgScaleFactor(1)
+ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(nullptr), m_graphicsScene(nullptr), m_svgScaleFactor(1)
 {
     KgTheme* theme = new KgTheme(QByteArray());
     theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("themes/granatier.svgz")));
@@ -120,7 +120,7 @@ ArenaSelector::Private::~Private()
 void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
 {
     ui.setupUi(q);
-    
+
     //setup KNS button
     if (m_options & EnableNewStuffDownload)
     {
@@ -131,18 +131,18 @@ void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
     {
         ui.getNewButton->hide();
     }
-    
+
 
     //The lineEdit widget holds our arena path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.
     ui.kcfg_Arena->hide();
     connect(ui.kcfg_Arena, SIGNAL(textChanged(QString)), q, SLOT(_k_updateArenaList(QString)));
-    
+
     //graphicsscene for new arena preview
     m_graphicsScene = new QGraphicsScene();
     ui.arenaPreview->setScene(m_graphicsScene);
     ui.arenaPreview->setBackgroundBrush(Qt::black);
-    
+
     //Get the last used arena path from the KConfigSkeleton
     KConfigSkeletonItem * configItem = aconfig->findItem(QStringLiteral("Arena"));
     QString lastUsedArena = configItem->property().toString();
@@ -150,7 +150,7 @@ void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
     configItem = aconfig->findItem(QStringLiteral("RandomArenaModeArenaList"));
     m_tempRandomArenaModeArenaList = configItem->property().toStringList();
     m_tempRandomArenaModeArenaList.removeDuplicates();
-    
+
     //Now get our arenas into the list widget
     findArenas(lastUsedArena);
 
@@ -176,7 +176,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
                 arenasAvailable.append(file);
          }
     }
-    
+
     QStringList::Iterator i = m_tempRandomArenaModeArenaList.begin();
     while(i != m_tempRandomArenaModeArenaList.end())
     {
@@ -189,12 +189,12 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
             i = m_tempRandomArenaModeArenaList.erase(i);
         }
     }
-    
+
     if(m_tempRandomArenaModeArenaList.isEmpty())
     {
         m_tempRandomArenaModeArenaList = arenasAvailable;
     }
-    
+
     bool initialFound = false;
 
     foreach (const QString &file, arenasAvailable)
@@ -268,7 +268,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
 
 void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
 {
-    if(currentItem != NULL)
+    if(currentItem != nullptr)
     {
         ArenaSettings * selArena = arenaMap.value(ui.arenaList->currentItem()->text());
         //Sanity checkings. Should not happen.
@@ -290,11 +290,11 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
         {
             emailstr = QStringLiteral("<a href=\"mailto:%1\">%1</a>").arg(selArena->arenaProperty(contactstr));
         }
-        
+
         ui.arenaAuthor->setText(i18nc("Author attribution, e.g. \"by Jack\"", "by %1", selArena->arenaProperty(authstr)));
         ui.arenaContact->setText(emailstr);
         ui.arenaDescription->setText(selArena->arenaProperty(descstr));
-        
+
         //show the arena without a preview pixmap
         delete m_arena;
         m_arena = new Arena;
@@ -315,14 +315,14 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
             }
             delete m_arenaItems.takeLast();
         }
-        
+
         ui.arenaPreview->setSceneRect(0, 0, m_arena->getNbColumns()*Granatier::CellSize, m_arena->getNbRows()*Granatier::CellSize);
         ui.arenaPreview->fitInView(ui.arenaPreview->sceneRect(), Qt::KeepAspectRatio);
     }
-    
+
     qreal svgScaleFactor;
     QRectF minSize = ui.arenaPreview->sceneRect();
-    
+
     if(minSize.width() == 0)
     {
         minSize.setWidth(1);
@@ -331,7 +331,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
     {
         minSize.setHeight(1);
     }
-    
+
     //calculate the scaling factor for the SVGs
     int horizontalPixelsPerCell = (ui.arenaPreview->size().width() - 4) / (minSize.width()/Granatier::CellSize);
     int verticalPixelsPerCell = (ui.arenaPreview->size().height() - 4) / (minSize.height()/Granatier::CellSize);
@@ -343,13 +343,13 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
     {
         svgScaleFactor = Granatier::CellSize / verticalPixelsPerCell;
     }
-    
+
     QTransform transform;
     transform.scale(1/svgScaleFactor, 1/svgScaleFactor);
     m_graphicsScene->views().first()->setTransform(transform);
     m_graphicsScene->views().first()->centerOn( ui.arenaPreview->sceneRect().center());
-    
-    if(currentItem == NULL)
+
+    if(currentItem == nullptr)
     {
         if(m_svgScaleFactor != svgScaleFactor)
         {
@@ -370,7 +370,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
             {
                 // Create the ArenaItem and set the image
                 ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_renderer, QStringLiteral(""));
-                
+
                 switch(m_arena->getCell(i,j).getType())
                 {
                     case Granatier::Cell::WALL:
@@ -418,7 +418,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
                 {
                     arenaItem->setRenderSize(calculateSvgSize());
                     arenaItem->setScale(m_svgScaleFactor);
-                    
+
                     m_arenaItems.append(arenaItem);
                     m_graphicsScene->addItem(arenaItem);
                 }
@@ -433,17 +433,17 @@ QSize ArenaSelector::Private::calculateSvgSize()
     {
         return QSize(1, 1);
     }
-    
-    QPoint topLeft(0, 0); 
+
+    QPoint topLeft(0, 0);
     topLeft = m_graphicsScene->views().first()->mapFromScene(topLeft);
-    
-    QPoint bottomRight(Granatier::CellSize, Granatier::CellSize); 
+
+    QPoint bottomRight(Granatier::CellSize, Granatier::CellSize);
     bottomRight = m_graphicsScene->views().first()->mapFromScene(bottomRight);
-    
+
     QSize svgSize;
     svgSize.setHeight(bottomRight.y() - topLeft.y());
     svgSize.setWidth(bottomRight.x() - topLeft.x());
-    
+
     return svgSize;
 }
 
@@ -464,7 +464,7 @@ void ArenaSelector::Private::_k_updateArenaList(const QString& strArena)
 }
 
 void ArenaSelector::Private::_k_openKNewStuffDialog()
-{    
+{
     QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog (q);
     if(dialog->exec() == QDialog::Accepted)
     {
@@ -494,7 +494,7 @@ void ArenaSelector::Private::_k_importArenasDialog()
         {
             continue;
         }
-        
+
         QStringList listMaps;
         listMaps = clanbomberDir.entryList(QStringList(QStringLiteral("*.map")));
         for(int j = 0; j < listMaps.count(); j++)
@@ -502,15 +502,15 @@ void ArenaSelector::Private::_k_importArenasDialog()
             QFile mapFile(listClanbomberPaths[i] + listMaps[j]);
             mapFile.open(QIODevice::ReadOnly | QIODevice::Text);
             QTextStream readStream(&mapFile);
-            
+
             QString strAuthor = readStream.readLine();
-            
+
             QFile desktopFile;
             QString strName = listMaps[j].left(listMaps[j].count()-4);
             desktopFile.setFileName(QStringLiteral("%1clanbomber_%2.desktop").arg(arenaDir).arg(strName));
             desktopFile.open(QIODevice::WriteOnly | QIODevice::Text);
             QTextStream streamDesktopFile(&desktopFile);
-            
+
             streamDesktopFile << "[Arena]\n";
             streamDesktopFile << "Name=" << strName << "\n";
             streamDesktopFile << "Description=Clanbomber Import\n";
@@ -518,10 +518,10 @@ void ArenaSelector::Private::_k_importArenasDialog()
             streamDesktopFile << "FileName=clanbomber_" << strName << ".xml\n";
             streamDesktopFile << "Author=" << strAuthor << "\n";
             streamDesktopFile << "AuthorEmail=-\n";
-            
+
             streamDesktopFile.flush();
             desktopFile.close();
-            
+
             QStringList arena;
             do
             {
@@ -550,9 +550,9 @@ void ArenaSelector::Private::_k_importArenasDialog()
             QFile arenaFile;
             arenaFile.setFileName(QStringLiteral("%1clanbomber_%2.xml").arg(arenaDir).arg(strName));
             arenaFile.open(QIODevice::WriteOnly | QIODevice::Text);
-            
+
             QTextStream streamArenaFile(&arenaFile);
-            
+
             streamArenaFile << "<?xml version=\"1.0\"?>\n";
             streamArenaFile << "<Arena arenaFileVersion=\"1\" rowCount=\"" << arena.count() << "\" colCount=\"" << arena[0].count() << "\">\n";
             for(int j = 0; j < arena.count(); j++)
@@ -565,7 +565,7 @@ void ArenaSelector::Private::_k_importArenasDialog()
             arenaFile.close();
         }
     }
-    
+
     ArenaSettings* selArena = arenaMap.value(ui.arenaList->currentItem()->text());
     findArenas(selArena->fileName());
 }
@@ -576,9 +576,9 @@ void ArenaSelector::Private::_k_setRandomArenaMode(bool randomModeEnabled)
     {
         disconnect(ui.arenaList, SIGNAL(itemChanged(QListWidgetItem*)), q, SLOT(_k_updateRandomArenaModeArenaList(QListWidgetItem*)));
     }
-    
+
     m_randomArenaModeArenaList->clear();
-    
+
     int numberOfItems = ui.arenaList->count();
     for(int i = 0; i < numberOfItems; i++)
     {
@@ -603,7 +603,7 @@ void ArenaSelector::Private::_k_setRandomArenaMode(bool randomModeEnabled)
             item->setFlags(item->flags() & ~Qt::ItemIsUserCheckable);
         }
     }
-    
+
     if(randomModeEnabled)
     {
         *m_randomArenaModeArenaList = m_tempRandomArenaModeArenaList;

@@ -24,7 +24,7 @@ Block::Block(qreal p_x, qreal p_y, Arena* p_arena, const QString& p_imageId) : E
 {
     m_imageId = p_imageId;
     m_type = Granatier::Element::BLOCK;
-    m_bonus = NULL;
+    m_bonus = nullptr;
 }
 
 Block::~Block()

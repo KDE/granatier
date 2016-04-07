@@ -51,9 +51,9 @@ Game::Game(PlayerSettings* playerSettings)
     m_soundFalling = new KgSound(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("sounds/deepfall.wav")));
     m_soundDie = new KgSound(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("sounds/die.wav")));
     
-    m_arena = 0;
+    m_arena = nullptr;
     m_randomArenaModeArenaList.clear();
-    m_gameScene = 0;
+    m_gameScene = nullptr;
     m_winPoints = Settings::self()->pointsToWin();
     
     QStringList strPlayerIDs = m_playerSettings->playerIDs();
@@ -236,13 +236,13 @@ void Game::cleanUp()
     qDeleteAll(m_bombs);
     m_bombs.clear();
     delete m_arena;
-    m_arena = 0;
+    m_arena = nullptr;
     delete m_timer;
-    m_timer = 0;
+    m_timer = nullptr;
     delete m_roundTimer;
-    m_roundTimer = 0;
+    m_roundTimer = nullptr;
     delete m_setRoundFinishedTimer;
-    m_setRoundFinishedTimer = 0;
+    m_setRoundFinishedTimer = nullptr;
 }
 
 void Game::setGameScene(GameScene* p_gameScene)
@@ -582,7 +582,7 @@ void Game::decrementRemainingRoundTime()
                 nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
                 nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
                 cellType = m_arena->getCell(nRow, nCol).getType();
-                if(cellType != Granatier::Cell::WALL && cellType != Granatier::Cell::HOLE && m_arena->getCell(nRow, nCol).isWalkable(0))
+                if(cellType != Granatier::Cell::WALL && cellType != Granatier::Cell::HOLE && m_arena->getCell(nRow, nCol).isWalkable(nullptr))
                 {
                     bFound = true;
                 }

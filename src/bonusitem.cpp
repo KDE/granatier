@@ -26,7 +26,7 @@ BonusItem::BonusItem(Bonus* p_model, KGameRenderer* renderer) : ElementItem (p_m
 {
     setSpriteKey(p_model->getImageId());
     m_undestroyableExplosionID = 0;
-    m_destructionTimer = NULL;
+    m_destructionTimer = nullptr;
     m_destructionCounter = 0;
 }
 
@@ -65,7 +65,7 @@ void BonusItem::destructionAnimation()
     {
         m_destructionTimer->stop();
         delete m_destructionTimer;
-        m_destructionTimer = 0;
+        m_destructionTimer = nullptr;
         emit bonusItemDestroyed(this);
     }
 }

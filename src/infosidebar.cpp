@@ -79,16 +79,16 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         QBrush dimmRectBrush(QColor(0,0,0,200));
         
         playerInfo = new PlayerInfo;
-        playerInfo->name = 0;
-        playerInfo->icon = 0;
-        playerInfo->bonusShield = 0;
-        playerInfo->bonusShieldDimm = 0;
-        playerInfo->bonusThrow = 0;
-        playerInfo->bonusThrowDimm = 0;
-        playerInfo->bonusKick = 0;
-        playerInfo->bonusKickDimm = 0;
-        playerInfo->badBonus = 0;
-        playerInfo->badBonusDimm = 0;
+        playerInfo->name = nullptr;
+        playerInfo->icon = nullptr;
+        playerInfo->bonusShield = nullptr;
+        playerInfo->bonusShieldDimm = nullptr;
+        playerInfo->bonusThrow = nullptr;
+        playerInfo->bonusThrowDimm = nullptr;
+        playerInfo->bonusKick = nullptr;
+        playerInfo->bonusKickDimm = nullptr;
+        playerInfo->badBonus = nullptr;
+        playerInfo->badBonusDimm = nullptr;
         
         //create the player icons
         renderer = m_gameScene->renderer(Granatier::Element::PLAYER, playerList[i]);
@@ -258,8 +258,8 @@ InfoSidebar::~InfoSidebar()
     }
     delete m_background;
     
-    m_gameScene = 0;
-    m_game = 0;
+    m_gameScene = nullptr;
+    m_game = nullptr;
 }
 
 void InfoSidebar::reset()

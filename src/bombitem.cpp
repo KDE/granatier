@@ -55,7 +55,7 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
     m_pulseTimer->start();
     connect(m_pulseTimer, &QTimer::timeout, this, &BombItem::pulse);
     
-    m_explosionTimer = NULL;
+    m_explosionTimer = nullptr;
     m_listExplosionTiming.append(Settings::self()->blastTime1());
     m_listExplosionTiming.append(Settings::self()->blastTime2());
     m_listExplosionTiming.append(Settings::self()->blastTime3());
@@ -127,7 +127,7 @@ void BombItem::startDetonation()
     {
         m_pulseTimer->stop();
         delete m_pulseTimer;
-        m_pulseTimer = 0;
+        m_pulseTimer = nullptr;
     }
     m_animationCounter = 0;
     QTransform transform;
@@ -249,7 +249,7 @@ void BombItem::updateMortar(int nMortarState, int nMortarRampEnd, int nMortarPea
     {
         m_pulseTimer->stop();
         delete m_pulseTimer;
-        m_pulseTimer = 0;
+        m_pulseTimer = nullptr;
     }
     
     if(nMortarState <= 0)
