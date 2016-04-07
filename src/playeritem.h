@@ -1,17 +1,17 @@
 /*
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -43,13 +43,13 @@ private:
 
     /** Timer used to animate the PlayerItem */
     QTimeLine* m_animationTimer;
-    
+
     /** Counter for falling animation */
     int m_fallingAnimationCounter;
-    
+
     /** Counter for resurrection animation */
     int m_resurrectionAnimationCounter;
-    
+
     /** player ID */
     QString m_strPlayerId;
 
@@ -73,14 +73,14 @@ public slots:
       * Rotates the image function of the Player direction.
       */
     void updateDirection();
-    
+
     void updateGraphics(qreal svgScaleFactor);
 
     /**
       * Manages the collisions with any Element.
       */
     void manageCollision();
-    
+
     /**
       * Updates the PlayerItem coordinates.
       * @param p_x the new x-coordinate
@@ -112,7 +112,7 @@ public slots:
       * the animation when falling in a hole
       */
     void fallingAnimation();
-    
+
     /**
       * Sets the given frame to the PlayerItem.
       * @param p_frame the frame to set
@@ -123,12 +123,12 @@ public slots:
       * Implements the CharacterItem method.
       */
     void setDead();
-    
+
     /**
       * resurrects the playeritem
       */
     void resurrect();
-        
+
 signals:
     void bonusItemTaken(BonusItem* bonusItem);
 };

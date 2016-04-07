@@ -2,17 +2,17 @@
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Nathalie Liesse <nathalie.liesse@gmail.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -49,7 +49,7 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
     // Animation speed
     m_animationTimer->setDuration(PlayerItem::ANIM_SPEED);
     connect(m_animationTimer, &QTimeLine::frameChanged, this, &PlayerItem::setFrame);
-    
+
     int width = Granatier::CellSize * 0.9;
     int height = Granatier::CellSize * 0.9;
     if((static_cast<int>(Granatier::CellSize) - width) % 2 != 0)
@@ -62,14 +62,14 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
     }
     m_itemSizeSet = QSize(width, height);
     m_itemSizeReal = m_itemSizeSet;
-    
+
     if(m_renderer->spriteExists(QStringLiteral("player_0")))
     {
         setSpriteKey(QStringLiteral("player_0"));
     }
-    
+
     setZValue(250);
-    
+
     m_fallingAnimationCounter = 0;
     m_resurrectionAnimationCounter = 0;
 }
@@ -90,7 +90,7 @@ void PlayerItem::resurrect()
     {
         setSpriteKey(QStringLiteral("player_0"));
     }
-    
+
     QTransform transform;
     transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.height() / 2.0);
     // get the angle
@@ -114,16 +114,16 @@ void PlayerItem::resurrect()
     }
     transform.translate(-m_itemSizeReal.width() / 2.0, -m_itemSizeReal.height() / 2.0);
     setTransform(transform);
-    
+
     startAnim();
-    
+
     setVisible(true);
 }
 
 void PlayerItem::updateDirection()
 {
     int nDirection = dynamic_cast <Player*> (m_model)->direction();
-    
+
     // Rotate the item
     QTransform transform;
     transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.height() / 2.0);
@@ -181,7 +181,7 @@ void PlayerItem::manageCollision()
                 {
                     nExplosionID = dynamic_cast <BombExplosionItem*> (i)->explosionID();
                 }
-                
+
                 if(dynamic_cast <Player*> (m_model)->shield(nExplosionID) == false)
                 {
                     setDead();
@@ -205,7 +205,7 @@ void PlayerItem::manageCollision()
 void PlayerItem::update(qreal p_x, qreal p_y)
 {
     ElementItem::update(p_x, p_y);
-    
+
     // If the player is moving
     if (((Player*)getModel())->getXSpeed() != 0 || ((Player*)getModel())->getYSpeed() != 0)
     {
@@ -262,7 +262,7 @@ void PlayerItem::setFrame(const int p_frame)
     if(m_renderer->spriteExists(QStringLiteral("player_%1").arg(p_frame)))
     {
         setSpriteKey(QStringLiteral("player_%1").arg(p_frame));
-        
+
         if(m_fallingAnimationCounter > 0 || m_resurrectionAnimationCounter > 0)
         {
             int angle = 0;
@@ -287,7 +287,7 @@ void PlayerItem::setFrame(const int p_frame)
                     angle = 0;
                     break;
             }
-            
+
             if(m_fallingAnimationCounter > 0)
             {
                 // set z-value below the ground
@@ -300,7 +300,7 @@ void PlayerItem::setFrame(const int p_frame)
                 transform.translate(-m_itemSizeReal.width() * (1-m_fallingAnimationCounter*0.02) / 2.0, -m_itemSizeReal.width() * (1-m_fallingAnimationCounter*0.02) / 2.0);
                 setTransform(transform);
                 m_fallingAnimationCounter++;
-                
+
                 if(m_fallingAnimationCounter > 50)
                 {
                     setDead();
@@ -308,7 +308,7 @@ void PlayerItem::setFrame(const int p_frame)
                     setVisible(false);
                 }
             }
-            
+
             if(m_resurrectionAnimationCounter > 0)
             {
                 qreal resurrectionScale = 1;
@@ -355,14 +355,14 @@ void PlayerItem::setFrame(const int p_frame)
                 {
                     resurrectionScale = 1;
                 }
-                
+
                 m_resurrectionAnimationCounter--;
                 if(m_resurrectionAnimationCounter == 0)
                 {
                     resurrectionScale = 1;
                     stopAnim();
                 }
-                
+
                 setRenderSize(m_renderSize * resurrectionScale);
                 transform.translate(-m_itemSizeReal.width() * resurrectionScale / 2.0, -m_itemSizeReal.width() * resurrectionScale / 2.0);
                 setTransform(transform);

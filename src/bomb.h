@@ -2,17 +2,17 @@
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Pierre-Benoît Besse <besse.pb@gmail.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -33,7 +33,7 @@ class Bomb : public Element
     Q_OBJECT
 
 protected:
-    
+
     /** The Bomb x-speed */
     qreal m_xSpeed;
 
@@ -42,30 +42,30 @@ protected:
 
     /** The Bomb speed */
     qreal m_speed;
-    
+
     /** The Bomb detonation has already started */
     bool m_detonated;
 
     /** The Bomb detonation power */
     int m_bombPower;
-    
+
     /** The Bomb ID */
     int m_bombID;
-    
+
     /** The ID of the Bomb that causes the explosion */
     int m_explosionID;
-    
+
     /** Timer used to make the bomb detonate */
     QTimer* m_detonationCountdownTimer;
-    
+
     /** Timer used for the throw bonus and mortar */
     QTimer* m_mortarTimer;
-    
+
     int m_mortarState;
-    
+
     bool m_thrown;
     bool m_stopOnCenter;
-    
+
     bool m_falling;
 
 public:
@@ -133,65 +133,65 @@ public:
     * @return the Bomb speed
     */
     qreal getSpeed();
-    
+
     /**
     * Set the Bomb x-speed value.
     * @param p_xSpeed the x-speed to set
     */
     void setXSpeed(qreal p_xSpeed);
-        
+
     /**
     * Set the Bomb y-speed value.
     * @param p_ySpeed the y-speed to set
     */
     void setYSpeed(qreal p_ySpeed);
-    
+
     /**
     * The direction to throw
     * @param nDirection direction
     */
     void setThrown(int nDirection);
-    
+
     /**
     * The direction to move
     * @param nDirection direction
     */
     void setKicked(int nDirection);
-    
+
     /**
     * Power of the bomb
     * @return the Bomb power
     */
     int bombPower();
-    
+
     /**
     * Sets the Power of the bomb
     * @param bombPower the Bomb power
     */
     void setBombPower(int bombPower);
-    
+
     /**
     * @return state if the bomb is already detonated
     */
     bool isDetonated();
-    
+
     /**
     * sets the explosion ID and detonation countdown
     * @param nBombID the Bomb ID that causes the detonation
     * @param nDetonationTimeout the new detonation timeout
     */
     void initDetonation(int nBombID, int nDetonationTimeout);
-    
+
     /**
     * @return the explosion ID
     */
     int explosionID();
-    
+
     /**
     * Pauses bomb timer.
     */
     void pause();
-    
+
     /**
     * Resumes bomb timer.
     */
@@ -202,9 +202,9 @@ public slots:
     * Manages the Bomb explosion
     */
     void detonate();
-    
+
     void slot_detonationCompleted();
-    
+
     void updateMortarState();
 
 protected:
@@ -226,18 +226,18 @@ signals:
     * @param bomb this bomb
     */
     void bombDetonated(Bomb* bomb);
-    
+
     /**
     * Emitted to refill the player bomb armory
     */
     void releaseBombArmory();
-    
+
     /**
     * Emitted when the Bomb is thrown by the mortar or by the player.
     * @param nState the current state of the mortar
     */
     void mortar(int nMortarState, int nMortarRampEnd, int nMortarPeak, int nMortarGround);
-    
+
     /**
     * Emitted when the bomb is falling in a hole
     */

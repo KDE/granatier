@@ -1,17 +1,17 @@
 /*
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -41,18 +41,18 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
     m_desktopFilePath = p_playerSettings->playerDesktopFilePath(p_playerID);
     m_graphicsFile = p_playerSettings->playerGraphicsFile(p_playerID);
     m_playerName = p_playerSettings->playerName(p_playerID);
-    
+
     m_points = 0;
-    
+
     m_direction = Granatier::Direction::EAST;
-    
+
     m_badBonusCountdownTimer = new QTimer;
     m_badBonusCountdownTimer->setInterval(badBonusTimerTimeout);
     m_badBonusMillisecondsToElapse = 0;
     connect(m_badBonusCountdownTimer, &QTimer::timeout, this, &Player::slot_badBonusTimerTimeout);
-    
+
     resurrect();
-    
+
     m_key.moveLeft = p_playerSettings->keyLeft(p_playerID);
     m_key.moveRight = p_playerSettings->keyRight(p_playerID);
     m_key.moveUp = p_playerSettings->keyUp(p_playerID);
@@ -110,28 +110,28 @@ void Player::resume()
 void Player::goUp()
 {
     m_askedXSpeed = 0;
-    
+
     int nSpeed = m_speed;
     if(m_onIce)
     {
         nSpeed = m_speed + onIceSpeedIncrease;
     }
     m_askedYSpeed = -nSpeed;
-    
+
     m_direction = Granatier::Direction::NORTH;
 }
 
 void Player::goDown()
 {
     m_askedXSpeed = 0;
-    
+
     int nSpeed = m_speed;
     if(m_onIce)
     {
         nSpeed = m_speed + onIceSpeedIncrease;
     }
     m_askedYSpeed = nSpeed;
-    
+
     m_direction = Granatier::Direction::SOUTH;
 }
 
@@ -143,9 +143,9 @@ void Player::goRight()
         nSpeed = m_speed + onIceSpeedIncrease;
     }
     m_askedXSpeed = nSpeed;
-    
+
     m_askedYSpeed = 0;
-    
+
     m_direction = Granatier::Direction::EAST;
 }
 
@@ -157,9 +157,9 @@ void Player::goLeft()
         nSpeed = m_speed + onIceSpeedIncrease;
     }
     m_askedXSpeed = -nSpeed;
-    
+
     m_askedYSpeed = 0;
-    
+
     m_direction = Granatier::Direction::WEST;
 }
 
@@ -169,7 +169,7 @@ void Player::updateDirection()
     {
         return;
     }
-    
+
     setXSpeed(m_askedXSpeed);
     setYSpeed(m_askedYSpeed);
     m_askedXSpeed = 0;
@@ -184,7 +184,7 @@ void Player::updateMove()
     {
         return;
     }
-    
+
     //check if there is a hurdle in the way
     if(m_askedXSpeed != 0 || m_xSpeed != 0 || m_askedYSpeed != 0 || m_ySpeed != 0)
     {
@@ -201,23 +201,23 @@ void Player::updateMove()
         bool bMoveWithinNextCellCenter = false;     //move is completed without exceeding the cell center
         int cellCol;
         int cellRow;
-        
+
         // Get the current cell coordinates from the character coordinates
         int moveStartRow = m_arena->getRowFromY(m_y);
         int moveStartCol = m_arena->getColFromX(m_x);
         int curCellRow = moveStartRow;
         int curCellCol = moveStartCol;
-        
+
         //set variables for right/left move
         if(m_askedXSpeed != 0 || m_xSpeed != 0)
         {
             //how far to move
             deltaAskedMove = (m_askedXSpeed != 0 ? m_askedXSpeed : m_xSpeed);
-            
+
             //direction to move
             xDirection = sign(deltaAskedMove);
             straightDirection = xDirection;
-            
+
             deltaStraightCellCorner = m_x - curCellCol * Granatier::CellSize;
             deltaPerpendicularCellCorner = m_y - curCellRow * Granatier::CellSize;
         }
@@ -225,19 +225,19 @@ void Player::updateMove()
         {
             //how far to move
             deltaAskedMove = (m_askedYSpeed != 0 ? m_askedYSpeed : m_ySpeed);
-            
+
             //direction to move
             yDirection = sign(deltaAskedMove);
             straightDirection = yDirection;
-            
+
             deltaStraightCellCorner = m_y - curCellRow * Granatier::CellSize;
             deltaPerpendicularCellCorner = m_x - curCellCol * Granatier::CellSize;
         }
-        
+
         //how far to current cell center
         deltaStraightCellCenter = Granatier::CellSize/2 - deltaStraightCellCorner;
         deltaPerpendicularCellCenter = Granatier::CellSize/2 - deltaPerpendicularCellCorner;
-        
+
         //check if the move exceeds a cell center
         if(straightDirection*deltaStraightCellCenter >= 0)
         {
@@ -250,7 +250,7 @@ void Player::updateMove()
         {
             bMoveWithinNextCellCenter = true;
         }
-        
+
         //the move is within two cell centers
         if(bMoveWithinNextCellCenter)
         {
@@ -329,7 +329,7 @@ void Player::updateMove()
                         deltaPerpendicularMove = deltaPerpendicularCellCenter;
                     }
                 }
-                
+
                 //update the current cell and row
                 curCellCol += xDirection;
                 curCellRow += yDirection;
@@ -395,13 +395,13 @@ void Player::updateMove()
                 }
             }
         }
-        
+
         // Update the direction
         if(m_askedXSpeed != 0 || m_askedYSpeed != 0)
         {
             updateDirection();
         }
-        
+
         // Move the player
         if(xDirection != 0)
         {
@@ -411,7 +411,7 @@ void Player::updateMove()
         {
             move(m_x + deltaPerpendicularMove, m_y + deltaStraightMove);
         }
-        
+
         //check if the player is on ice
         // Get the current cell coordinates from the character coordinates
         int newCellRow = m_arena->getRowFromY(m_y);
@@ -447,14 +447,14 @@ void Player::updateMove()
                     }
                 }
                 m_onIce = false;
-                
+
                 if(m_xSpeed == 0 && m_ySpeed == 0 && m_askedXSpeed == 0 && m_askedYSpeed == 0)
                 {
                     stopMoving();
                 }
             }
         }
-        
+
         //check if the player move in a hole
         if(m_arena->getCell(newCellRow, newCellCol).getType() == Granatier::Cell::HOLE)
         {
@@ -489,7 +489,7 @@ void Player::updateMove()
                 }
             }
         }
-        
+
         if(moveStartCol != newCellCol || moveStartRow != newCellRow)
         {
             m_arena->removeCellElement(moveStartRow, moveStartCol, this);
@@ -497,7 +497,7 @@ void Player::updateMove()
             m_omitBombCurrentCell = false;
         }
     }
-    
+
     //check if bad bonus scatty and drop bombs
     if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Granatier::Bonus::SCATTY  && m_bombArmory > 0)
     {
@@ -517,13 +517,13 @@ void Player::move(qreal x, qreal y)
 void Player::addBonus(Bonus* p_bonus)
 {
     Granatier::Bonus::Type bonusType = p_bonus->getBonusType();
-    
+
     if(m_badBonusCountdownTimer->isActive())
     {
         m_badBonusCountdownTimer->stop();
         slot_removeBadBonus();
     }
-    
+
     switch (bonusType)
     {
         case Granatier::Bonus::SPEED:
@@ -577,7 +577,7 @@ void Player::addBonus(Bonus* p_bonus)
                 updateDirection();
                 m_askedXSpeed = askedXSpeedTemp;
                 m_askedYSpeed = askedYSpeedTemp;
-                
+
                 m_badBonusType = Granatier::Bonus::HYPERACTIVE;
                 m_badBonusMillisecondsToElapse = badBonusCountdown;
                 m_badBonusCountdownTimer->start();
@@ -594,7 +594,7 @@ void Player::addBonus(Bonus* p_bonus)
                 updateDirection();
                 m_askedXSpeed = askedXSpeedTemp;
                 m_askedYSpeed = askedYSpeedTemp;
-                
+
                 m_badBonusType = Granatier::Bonus::SLOW;
                 m_badBonusMillisecondsToElapse = badBonusCountdown;
                 m_badBonusCountdownTimer->start();
@@ -624,14 +624,14 @@ void Player::addBonus(Bonus* p_bonus)
                 updateDirection();
                 m_askedXSpeed = -askedXSpeedTemp;
                 m_askedYSpeed = -askedYSpeedTemp;
-                
+
                 QKeySequence tempKey = m_key.moveLeft;
                 m_key.moveLeft = m_key.moveRight;
                 m_key.moveRight = tempKey;
                 tempKey = m_key.moveUp;
                 m_key.moveUp = m_key.moveDown;
                 m_key.moveDown = tempKey;
-                
+
                 m_moveMirrored = true;
                 m_badBonusType = Granatier::Bonus::MIRROR;
                 m_badBonusMillisecondsToElapse = badBonusCountdown;
@@ -656,7 +656,7 @@ void Player::addBonus(Bonus* p_bonus)
         default:
             break;
     }
-    
+
     bonusUpdated(this, bonusType, 0);
 }
 
@@ -717,7 +717,7 @@ void Player::die()
         emit dying();
         m_xSpeed = 0;
         m_xSpeed = 0;
-        
+
         if(m_badBonusCountdownTimer->isActive())
         {
             m_badBonusCountdownTimer->stop();
@@ -740,7 +740,7 @@ void Player::resurrect()
     {
         slot_removeBadBonus();
     }
-    
+
     m_onIce = false;
     m_falling = false;
     m_death = false;
@@ -772,25 +772,25 @@ void Player::resurrect()
         m_badBonusCountdownTimer->stop();
         slot_removeBadBonus();
     }
-    
+
     //check if the player is above a hole
     if(m_arena)
     {
         int cellRow = m_arena->getRowFromY(m_y);
         int cellCol = m_arena->getColFromX(m_x);
-        
-        m_arena->removeCellElement(cellRow, cellCol, this); //just to be really sure 
-        
+
+        m_arena->removeCellElement(cellRow, cellCol, this); //just to be really sure
+
         if(m_arena->getCell(cellRow, cellCol).getType() == Granatier::Cell::HOLE)
         {
             move(m_xInit, m_yInit);
             cellRow = m_arena->getRowFromY(m_yInit);
             cellCol = m_arena->getColFromX(m_xInit);
         }
-        
+
         m_arena->setCellElement(cellRow, cellCol, this);
     }
-    
+
     emit resurrected();
 }
 
@@ -869,7 +869,7 @@ void Player::slot_removeBadBonus()
 {
     m_badBonusCountdownTimer->stop();
     m_badBonusMillisecondsToElapse = 0;
-    
+
     switch (m_badBonusType)
     {
         case Granatier::Bonus::HYPERACTIVE:
@@ -909,14 +909,14 @@ void Player::slot_removeBadBonus()
                 updateDirection();
                 m_askedXSpeed = -askedXSpeedTemp;
                 m_askedYSpeed = -askedYSpeedTemp;
-                
+
                 QKeySequence tempKey = m_key.moveLeft;
                 m_key.moveLeft = m_key.moveRight;
                 m_key.moveRight = tempKey;
                 tempKey = m_key.moveUp;
                 m_key.moveUp = m_key.moveDown;
                 m_key.moveDown = tempKey;
-                
+
                 m_moveMirrored = false;
             }
             break;
@@ -926,7 +926,7 @@ void Player::slot_removeBadBonus()
         default:
             break;
     }
-    
+
     bonusUpdated(this, m_badBonusType, 100);
 }
 
@@ -945,9 +945,9 @@ void Player::keyPressed(QKeyEvent* keyEvent)
     {
         return;
     }
-    
+
     QKeySequence key = QKeySequence(keyEvent->key());
-    
+
     if(key == m_key.moveLeft || key == m_key.moveRight || key == m_key.moveUp || key == m_key.moveDown || key == m_key.dropBomb)
     {
         keyEvent->accept();
@@ -993,7 +993,7 @@ void Player::keyPressed(QKeyEvent* keyEvent)
             emit bombDropped(this, m_x, m_y, false, 2);
         }
     }
-    
+
 }
 
 void Player::keyReleased(QKeyEvent* keyEvent)
@@ -1002,7 +1002,7 @@ void Player::keyReleased(QKeyEvent* keyEvent)
     {
         return;
     }
-    
+
     QKeySequence key = QKeySequence(keyEvent->key());
 
     if(key == m_key.moveLeft || key == m_key.moveRight || key == m_key.moveUp || key == m_key.moveDown || key == m_key.dropBomb)
@@ -1017,13 +1017,13 @@ void Player::keyReleased(QKeyEvent* keyEvent)
     {
         return;
     }
-    
+
     int nSpeed = 0;
     if(m_onIce)
     {
         nSpeed = onIceSpeedIncrease;
     }
-    
+
     if(key == m_key.moveLeft && m_xSpeed < 0)
     {
         setXSpeed(-nSpeed);
@@ -1044,7 +1044,7 @@ void Player::keyReleased(QKeyEvent* keyEvent)
     {
         //emit bomb(this);
     }
-    
+
     if(m_xSpeed == 0 && m_ySpeed == 0 && m_askedXSpeed == 0 && m_askedYSpeed == 0) stopMoving();
 }
 

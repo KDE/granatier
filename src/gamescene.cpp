@@ -2,17 +2,17 @@
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Alexandre Galinier <alex.galinier@hotmail.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -55,16 +55,16 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     connect(p_game, SIGNAL(pauseChanged(bool,bool)), this, SLOT(setPaused(bool,bool)));
     connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
     connect(p_game, SIGNAL(infoChanged(Granatier::Info::Type)), this, SLOT(updateInfo(Granatier::Info::Type)));
-    
+
     m_SvgScaleFactor = 1;
-    
+
     m_backgroundResizeTimer = new QTimer();
     m_backgroundResizeTimer->setSingleShot(true);
     connect(m_backgroundResizeTimer, &QTimer::timeout, this, &GameScene::resizeBackground);
 
     // Create the PlayerItems and the points labels
     QList <Player*> players = p_game->getPlayers();
-    
+
     PlayerItem* playerItem;
     for(auto & player : players)
     {
@@ -78,42 +78,42 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
         playerItem->update(player->getX(), player->getY());
         // Stops the player animation
         playerItem->stopAnim();
-        
+
         m_playerItems.append(playerItem);
-        
+
         connect(this, &GameScene::resizeGraphics, playerItem, &PlayerItem::updateGraphics);
         connect(playerItem, &PlayerItem::bonusItemTaken, this, &GameScene::removeBonusItem);
     }
-    
+
     // The remaining time
     m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
     m_remainingTimeLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_remainingTimeLabel->setZValue(1000);
-    
+
     m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
     m_arenaNameLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_arenaNameLabel->setZValue(1000);
-    
+
     // setup the theme renderer
     m_rendererSelectedTheme = new KGameRenderer(m_themeProvider);
     m_rendererDefaultTheme = nullptr;
     setupThemeRenderer();
-    
+
     connect(m_themeProvider, &KgThemeProvider::currentThemeChanged, this, &GameScene::themeChanged);
-    
+
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, this);
     connect(this, &GameScene::resizeGraphics, m_infoOverlay, &InfoOverlay::updateGraphics);
-    
+
     init();
 }
 
 void GameScene::setupThemeRenderer()
 {
     bool selectedThemeIsDefault = true;
-    
+
     if(m_themeProvider->currentTheme() != m_themeProvider->defaultTheme())
     {
         // Load the default SVG file as fallback
@@ -125,7 +125,7 @@ void GameScene::setupThemeRenderer()
             m_rendererDefaultTheme = new KGameRenderer(theme);
         }
     }
-    
+
     if(selectedThemeIsDefault || m_rendererSelectedTheme->spriteExists(QStringLiteral("background")))
     {
         m_rendererBackground = m_rendererSelectedTheme;
@@ -134,7 +134,7 @@ void GameScene::setupThemeRenderer()
     {
         m_rendererBackground = m_rendererDefaultTheme;
     }
-    
+
     // set the renderer for the arena items TODO: add all the arena items
     if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_ground")) &&
         m_rendererSelectedTheme->spriteExists(QStringLiteral("arena_wall")) &&
@@ -153,7 +153,7 @@ void GameScene::setupThemeRenderer()
     {
         m_rendererArenaItems = m_rendererDefaultTheme;
     }
-    
+
     // set the renderer for the bonus items TODO: add all the bonus items
     if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_speed")) &&
         m_rendererSelectedTheme->spriteExists(QStringLiteral("bonus_bomb")) &&
@@ -175,7 +175,7 @@ void GameScene::setupThemeRenderer()
     {
         m_rendererBonusItems = m_rendererDefaultTheme;
     }
-    
+
     // set the renderer for the bomb items
     if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists(QStringLiteral("bomb")) &&
         m_rendererSelectedTheme->spriteExists(QStringLiteral("bomb_blast_core_0")) &&
@@ -190,7 +190,7 @@ void GameScene::setupThemeRenderer()
     {
         m_rendererBombItems = m_rendererDefaultTheme;
     }
-    
+
     // set the renderer for the score items
     if(selectedThemeIsDefault || (m_rendererSelectedTheme->spriteExists(QStringLiteral("score_star_enabled")) &&
         m_rendererSelectedTheme->spriteExists(QStringLiteral("score_star_disabled"))))
@@ -225,23 +225,23 @@ void GameScene::init()
     int nTime = m_game->getRemainingTime();
     m_remainingTimeLabel->setPlainText(QStringLiteral("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QLatin1Char('0')));
     m_remainingTimeLabel->setPos(Granatier::CellSize * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
-    
+
     if (!items().contains(m_arenaNameLabel))
     {
         addItem(m_arenaNameLabel);
     }
     m_arenaNameLabel->setPlainText(m_game->getArena()->getName());
     m_arenaNameLabel->setPos(0, - m_arenaNameLabel->boundingRect().height());
-    
+
     //this is needed for info sidebar
     setSceneRect(0, -m_remainingTimeLabel->boundingRect().height(),
                  m_game->getArena()->getNbColumns()*Granatier::CellSize,
                  m_game->getArena()->getNbRows()*Granatier::CellSize + m_remainingTimeLabel->boundingRect().height());
-    
+
     // create the info sidebar
     m_infoSidebar = new InfoSidebar(m_game, this);
     connect(this, &GameScene::resizeGraphics, m_infoSidebar, &InfoSidebar::updateGraphics);
-    
+
     //update the sceneRect
     QRectF oldSceneRect = sceneRect();
     QRectF sidebarRect = m_infoSidebar->rect();
@@ -253,9 +253,9 @@ void GameScene::init()
     newSceneRect.adjust(-5, -5, 5, 5);
     setSceneRect(newSceneRect);
     m_infoSidebar->reset();
-    
+
     m_infoOverlay->showGetReady();
-    
+
     //set the minimum size for the scene
     m_minSize = sceneRect();
     int minWidth = (static_cast<int>(m_minSize.width() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
@@ -265,7 +265,7 @@ void GameScene::init()
     m_minSize.setWidth(minWidth);
     m_minSize.setHeight(minHeight);
     setSceneRect(m_minSize);
-    
+
     resizeSprites();
 }
 
@@ -273,7 +273,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
 {
     // Create the ArenaItems
     m_arenaItem = new ArenaItem**[m_game->getArena()->getNbRows()];
-    
+
     for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
     {
         m_arenaItem[i] = new ArenaItem*[m_game->getArena()->getNbColumns()];
@@ -282,7 +282,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             // Create the ArenaItem and set the image
             ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, QStringLiteral(""));
             connect(this, &GameScene::resizeGraphics, arenaItem, &ArenaItem::updateGraphics);
-            
+
             //TODO: use this function call
             //arenaItem->setElementId(m_game->getArena()->getCell(i,j).getElement()->getImageId());
             switch(m_game->getArena()->getCell(i,j).getType())
@@ -328,7 +328,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             m_arenaItem[i][j] = arenaItem;
         }
     }
-    
+
     // Create the Block and Bonus items
     m_blockItems = new BlockItem**[m_game->getArena()->getNbRows()];
     m_bonusItems = new BonusItem**[m_game->getArena()->getNbRows()];
@@ -358,7 +358,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
                     connect(this, &GameScene::resizeGraphics, blockItem, &BlockItem::updateGraphics);
                     connect(blockItem, &BlockItem::blockItemDestroyed, this, &GameScene::removeBlockItem);
                     m_blockItems[i][j] = blockItem;
-                    // if the block contains a hidden bonus, create the bonus item 
+                    // if the block contains a hidden bonus, create the bonus item
                     Bonus* bonus = block->getBonus();
                     if(bonus)
                     {
@@ -404,19 +404,19 @@ void GameScene::initItemsWithGraphicsFromTheme()
                             default:
                                 bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_pandora"));
                         }
-                        
+
                         if((qrand()/1.0)/RAND_MAX * 10 > 9 && bonusItem->spriteKey() != QStringLiteral("bonus_neutral_resurrect"))
                         {
                             bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_pandora"));
                         }
-                        
+
                         bonusItem->update(bonus->getX(), bonus->getY());
                         bonusItem->setZValue(100);
                         m_bonusItems[i][j] = bonusItem;
-                        
+
                         connect(this, &GameScene::resizeGraphics, bonusItem, &BonusItem::updateGraphics);
                         connect(bonusItem, &BonusItem::bonusItemDestroyed, this, &GameScene::removeBonusItem);
-                        
+
                         addItem(bonusItem);
                         if(Settings::self()->showAllTiles() == 0)
                         {
@@ -436,7 +436,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             }
         }
     }
-    
+
     // Create the Bomb items
     foreach(Bomb* bomb, m_tempBombList)
     {
@@ -451,7 +451,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             i++;
         }
     }
-    
+
     // Display the ArenaItem
     for (int i = 0; i < m_game->getArena()->getNbRows();++i)
     {
@@ -463,7 +463,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             }
         }
     }
-    
+
     // Display the Block Items
     for (int i = 0; i < m_game->getArena()->getNbRows(); ++i)
     {
@@ -478,7 +478,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             }
         }
     }
-    
+
     //create the background
     m_arenaBackground = new KGameRenderedItem(m_rendererBackground, QStringLiteral("background"));
     m_arenaBackground->setZValue(-5);
@@ -486,16 +486,16 @@ void GameScene::initItemsWithGraphicsFromTheme()
     m_arenaBackground->setCacheMode(QGraphicsItem::NoCache);  // if cache is set, there are some artifacts; pay attention, that the KGameRenderer cache is used nevertheless
     m_arenaBackground->setRenderSize(QSize(100, 100)); //just to get something in the background, until the right size is rendered
     addItem(m_arenaBackground);
-    
+
     resizeSprites();
 }
 
 GameScene::~GameScene()
 {
     delete m_backgroundResizeTimer;
-    
+
     cleanUp();
-    
+
     delete m_infoOverlay;
 
     for (auto & playerItem : m_playerItems)
@@ -507,14 +507,14 @@ GameScene::~GameScene()
         playerItem->stopAnim();
         delete playerItem;
     }
-    
+
     QMap <Player*, KGameRenderer*>::iterator iteratorRendererPlayer = m_mapRendererPlayerItems.begin();
     while (iteratorRendererPlayer != m_mapRendererPlayerItems.end())
     {
         delete iteratorRendererPlayer.value();
         iteratorRendererPlayer++;
     }
-    
+
     delete m_rendererSelectedTheme;
     delete m_rendererDefaultTheme;
 }
@@ -522,14 +522,14 @@ GameScene::~GameScene()
 void GameScene::cleanUp()
 {
     cleanUpItemsWithGraphicsFromTheme();
-    
+
     delete m_infoSidebar;
-    
+
     if(items().contains(m_remainingTimeLabel))
     {
         removeItem(m_remainingTimeLabel);
     }
-    
+
     if(items().contains(m_arenaNameLabel))
     {
         removeItem(m_arenaNameLabel);
@@ -555,7 +555,7 @@ void GameScene::cleanUpItemsWithGraphicsFromTheme()
         delete[] m_arenaItem[i];
     }
     delete[] m_arenaItem;
-    
+
     // Find the BombItem and remove it
     BombExplosionItem* bombExplosionItem;
     QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
@@ -581,7 +581,7 @@ void GameScene::cleanUpItemsWithGraphicsFromTheme()
         delete i.key();
         i = m_bombItems.erase(i);
     }
-    
+
     // Find the BlockItems and BonusItems and remove it
     for (int i = 0; i < m_game->getArena()->getNbRows();++i)
     {
@@ -609,7 +609,7 @@ void GameScene::cleanUpItemsWithGraphicsFromTheme()
     }
     delete[] m_blockItems;
     delete[] m_bonusItems;
-    
+
     removeItem(m_arenaBackground);
     delete m_arenaBackground;
 }
@@ -626,13 +626,13 @@ void GameScene::themeChanged()
         }
         i++;
     }
-    
+
     cleanUpItemsWithGraphicsFromTheme();
     setupThemeRenderer();
     initItemsWithGraphicsFromTheme();
     m_infoSidebar->themeChanged();
     m_infoOverlay->themeChanged();
-    
+
     m_tempBombList.clear();
 }
 
@@ -666,7 +666,7 @@ void GameScene::resizeSprites(int delayForBackground)
     {
         return;
     }
-    
+
     //calculate the scaling factor for the SVGs
     int horizontalPixelsPerCell = views().first()->size().width() / (m_minSize.width()/Granatier::CellSize);
     int verticalPixelsPerCell = views().first()->size().height() / (m_minSize.height()/Granatier::CellSize);
@@ -683,21 +683,21 @@ void GameScene::resizeSprites(int delayForBackground)
     views().first()->setTransform(transform);
     views().first()->centerOn(sceneRect().center());
     views().first()->updateSceneRect(m_minSize);;
-    
+
     //update pixmaps
     emit resizeGraphics(m_SvgScaleFactor);
-    
+
     //update overlay
     QRect viewRect = views().first()->rect();
     QRectF viewRectToScene = QRectF(views().first()->mapToScene(viewRect.topLeft()), views().first()->mapToScene(viewRect.bottomRight()));
     m_infoOverlay->resizeDimmOverlay(viewRectToScene.x(), viewRectToScene.y(), viewRectToScene.width(), viewRectToScene.height());
-    
+
     //update background pixmap
     m_arenaBackground->setPos(views().first()->mapToScene(viewRect.topLeft()));
     m_arenaBackground->setScale(m_SvgScaleFactor);
-    
+
     m_arenaBackground->setPixmap(m_arenaBackground->pixmap().scaled(viewRect.size()));
-    
+
     m_backgroundResizeTimer->stop();
     m_backgroundResizeTimer->start(delayForBackground);
 }
@@ -834,9 +834,9 @@ void GameScene::createBombItem(Bomb* bomb)
     bombItem->update(bomb->getX(), bomb->getY());
     addItem(bombItem);
     m_bombItems[bombItem].append(nullptr);
-    
+
     bombItem->updateGraphics(m_SvgScaleFactor); //TODO: use a Renderer class and get the scale factor from a static function during initialization
-    
+
     connect(this, &GameScene::resizeGraphics, bombItem, &BombItem::updateGraphics);
     connect(bomb, SIGNAL(mortar(int,int,int,int)), bombItem, SLOT(updateMortar(int,int,int,int)));
     connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
@@ -894,7 +894,7 @@ void GameScene::bombDetonated(Bomb* bomb)
     bool abDirectionsDone[] = {false, false, false, false};
     int nDetonationCountdown = 75;
     int anDirectionDetonationCountdown[] = {nDetonationCountdown, nDetonationCountdown, nDetonationCountdown, nDetonationCountdown};
-    
+
     // Find the BombItem from the Bomb
     QHash<BombItem*, QList<BombExplosionItem*> >::iterator i = m_bombItems.begin();
     while (i != m_bombItems.end())
@@ -906,12 +906,12 @@ void GameScene::bombDetonated(Bomb* bomb)
         }
         ++i;
     }
-    
+
     if(!bombItem)
     {
         return;
     }
-    
+
     //check if there is a bomb or block at the position where the bomb exploded (possible when thrown)
     nColumn = m_game->getArena()->getColFromX(bomb->getX());
     nRow = m_game->getArena()->getRowFromY(bomb->getY());
@@ -927,7 +927,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 tempBombDetonationCountdown += 10;
             }
         }
-        
+
         blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BLOCK);
         if(!blockElements.isEmpty())
         {
@@ -950,7 +950,7 @@ void GameScene::bombDetonated(Bomb* bomb)
             m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
         }
     }
-    
+
     for(int i = 0; i < nBombPower; i++)
     {
         Granatier::Direction::Type direction = Granatier::Direction::NORTH;
@@ -977,7 +977,7 @@ void GameScene::bombDetonated(Bomb* bomb)
             }
             nColumn = m_game->getArena()->getColFromX(xPos);
             nRow = m_game->getArena()->getRowFromY(yPos);
-            
+
             if(!abDirectionsDone[direction] && nColumn >= 0 && nColumn < nNumberOfColums && nRow >= 0 && nRow < nNumberOfRows)
             {
                 bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BOMB);
@@ -999,7 +999,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     {
                         anDirectionDetonationCountdown[direction] += nDetonationCountdown;
                     }
-                    
+
                     if(!blockElements.isEmpty())
                     {
                         abDirectionsDone[direction] = true;
@@ -1021,7 +1021,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     {
                         m_bonusItems[nRow][nColumn]->initDestruction(bomb->explosionID());
                     }
-                    
+
                     bombExplosionItem = new BombExplosionItem (bomb, direction, nBombPower - i, m_rendererBombItems, m_SvgScaleFactor);
                     bombExplosionItem->setPosition(xPos, yPos);
                     connect(this, &GameScene::resizeGraphics, bombExplosionItem, &BombExplosionItem::updateGraphics);
@@ -1037,7 +1037,7 @@ void GameScene::bombDetonated(Bomb* bomb)
             {
                 abDirectionsDone[direction] = true;
             }
-            
+
             switch(direction)
             {
                 case Granatier::Direction::NORTH:

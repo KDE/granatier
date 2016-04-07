@@ -3,17 +3,17 @@
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Pierre-Benoit Besse <besse@gmail.com>
  * Copyright 2007-2008 Alexandre Galinier <alex.galinier@hotmail.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -40,7 +40,7 @@
 Game::Game(PlayerSettings* playerSettings)
 {
     m_playerSettings = playerSettings;
-    
+
     // Initialize the sound state
     setSoundsEnabled(Settings::sounds());
     m_wilhelmScream = Settings::useWilhelmScream();
@@ -55,7 +55,7 @@ Game::Game(PlayerSettings* playerSettings)
     m_randomArenaModeArenaList.clear();
     m_gameScene = nullptr;
     m_winPoints = Settings::self()->pointsToWin();
-    
+
     QStringList strPlayerIDs = m_playerSettings->playerIDs();
     for(int i = 0; i < strPlayerIDs.count(); i++)
     {
@@ -68,25 +68,25 @@ Game::Game(PlayerSettings* playerSettings)
             connect(player, &Player::resurrectBonusTaken, this, &Game::resurrectBonusTaken);
         }
     }
-    
+
     init();
 
     for (auto & player : m_players)
     {
         connect(player, SIGNAL(bombDropped(Player*,qreal,qreal,bool,int)), this, SLOT(createBomb(Player*,qreal,qreal,bool,int)));
     }
-    
+
     m_gameOver = false;
 }
 
 void Game::init()
-{    
+{
     // Create the Arena instance
     m_arena = new Arena();
 
     m_remainingTime = Settings::roundTime();
     m_bombCount = 0;
-    
+
     // Create the parser that will parse the XML file in order to initialize the Arena instance
     // This also creates all the characters
     MapParser mapParser(m_arena);
@@ -126,7 +126,7 @@ void Game::init()
                 m_randomArenaModeArenaList = arenasAvailable;
             }
         }
-        
+
         int nIndex = (static_cast<double>(qrand()) / RAND_MAX) * m_randomArenaModeArenaList.count();
         if(nIndex < 0)
         {
@@ -143,14 +143,14 @@ void Game::init()
     {
         filePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, Settings::self()->arena());
     }
-    
+
     if(!QFile::exists(filePath))
     {
         Settings::self()->useDefaults(true);
         filePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, Settings::self()->arena());
         Settings::self()->useDefaults(false);
     }
-    
+
     KConfig arenaConfig(filePath, KConfig::SimpleConfig);
     KConfigGroup group = arenaConfig.group("Arena");
     QString arenaFileName = group.readEntry("FileName");
@@ -162,10 +162,10 @@ void Game::init()
     reader.setContentHandler(&mapParser);
     // Parse the XML file
     reader.parse(source);
-    
+
     QString arenaName = group.readEntry("Name");
     m_arena->setName(arenaName);
-    
+
     //create the block items
     for (int i = 0; i < m_arena->getNbRows(); ++i)
     {
@@ -179,23 +179,23 @@ void Game::init()
             }
         }
     }
-    
+
     // Start the Game timer
     m_timer = new QTimer(this);
     m_timer->setInterval(int(1000 / Granatier::FPS));
     connect(m_timer, &QTimer::timeout, this, &Game::update);
     m_timer->start();
     m_state = RUNNING;
-    
+
     m_roundTimer  = new QTimer(this);
     m_roundTimer->setInterval(1000);
     connect(m_roundTimer, &QTimer::timeout, this, &Game::decrementRemainingRoundTime);
     m_roundTimer->start();
-    
+
     m_setRoundFinishedTimer  = new QTimer(this);
     m_setRoundFinishedTimer->setSingleShot(true);
     connect(m_setRoundFinishedTimer, &QTimer::timeout, this, &Game::setRoundFinished);
-    
+
     // Init the characters coordinates on the Arena
     for (int i = 0; i < m_players.size(); i++)
     {
@@ -204,7 +204,7 @@ void Game::init()
         m_players[i]->setInitialCoordinates(qreal(Granatier::CellSize * playerPosition.x()), qreal(Granatier::CellSize * playerPosition.y()));
     }
     initCharactersPosition();
-    
+
     // Create the hidden Bonuses
     createBonus();
 }
@@ -213,12 +213,12 @@ Game::~Game()
 {
     //pause is needed to stop all animations and therefore the access of the *items to their model
     pause(true);
-    
+
     qDeleteAll(m_players);
     m_players.clear();
-    
+
     cleanUp();
-    
+
     delete m_soundPutBomb;
     delete m_soundExplode;
     delete m_soundBonus;
@@ -292,7 +292,7 @@ void Game::switchPause()
     }
 }
 
-QList<Player*> Game::getPlayers() const 
+QList<Player*> Game::getPlayers() const
 {
     return m_players;
 }
@@ -329,7 +329,7 @@ QString Game::getWinner() const
 
 int Game::getWinPoints() const
 {
-    return m_winPoints; 
+    return m_winPoints;
 }
 
 QList<Bonus*> Game::getBonus() const
@@ -347,12 +347,12 @@ void Game::createBonus()
     Granatier::Bonus::Type bonusType;
     int nFullSize = m_blocks.size();
     int nQuarterSize = 0;
-    
+
     for(int nQuarter = 0; nQuarter < 4; nQuarter++)
     {
         nQuarterSize = (nQuarter < 3 ? nFullSize / 4 : nFullSize - 3 * (nFullSize / 4));
         bonusTypeList.clear();
-        
+
         for (int i = 0; i < nQuarterSize; ++i)
         {
             if(i < nBonusCount)
@@ -399,10 +399,10 @@ void Game::createBonus()
             else {
                 bonusType = Granatier::Bonus::NONE;
             }
-            
+
             bonusTypeList.append(bonusType);
         }
-        
+
         int nShuffle;
         for (int i = 0; i < nQuarterSize; ++i)
         {
@@ -417,7 +417,7 @@ void Game::createBonus()
             }
             bonusTypeList.swap(i, nShuffle);
         }
-        
+
         for (int i = 0; i < nQuarterSize; ++i)
         {
             if(bonusTypeList[i] != Granatier::Bonus::NONE)
@@ -472,7 +472,7 @@ void Game::keyPressEvent(QKeyEvent* p_event)
     {
         return;
     }
-    
+
     // At the beginning or when paused, we start the timer when a key is pressed
     if (!m_timer->isActive())
     {
@@ -587,7 +587,7 @@ void Game::decrementRemainingRoundTime()
                 }
             }
             while (!bFound);
-            
+
             m_bombCount++;
             Bomb* bomb = new Bomb((nCol + 0.5) * Granatier::CellSize, (nRow + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 1000);    // time in ms
             bomb->setBombPower((qrand()/1.0)/RAND_MAX * 2 + 1);
@@ -712,12 +712,12 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
             return;
         }
     }
-    
+
     if(!newBomb)
     {
         return;
     }
-    
+
     m_bombCount++;
     Bomb* bomb = new Bomb((col + 0.5) * Granatier::CellSize, (row + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 2500);    // time in ms
     bomb->setBombPower(player->getBombPower());
@@ -726,7 +726,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     connect(bomb, &Bomb::releaseBombArmory, player, &Player::slot_refillBombArmory);
     m_bombs.append(bomb);
     player->decrementBombArmory();
-    
+
     if(m_soundEnabled)
     {
         m_soundPutBomb->start();

@@ -1,16 +1,16 @@
 /*
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,14 +34,14 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
     m_gameScene = p_scene;
     m_svgScaleFactor = 1;
     m_badBonusSpriteKey = QStringLiteral("bonus_bad_restrain");
-    
+
     QList <Player*> playerList = m_game->getPlayers();
     int nMaxPlayerNameLength = 0;
     int nTop = 0;
     int nLeft = 0;
     int nWidth = 0;
     int nHeight = 0;
-    
+
     //calculate max player name length and top-left position
     for(int i = 0; i < playerList.count(); i++)
     {
@@ -67,7 +67,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - playerList.count()/2 * (nHeight + 4);
         }
     }
-    
+
     //create the labels
     PlayerInfo* playerInfo;
     KGameRenderer* renderer;
@@ -77,7 +77,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         dimmRectPen.setWidth(0);
         dimmRectPen.setColor(QColor(0,0,0,200));
         QBrush dimmRectBrush(QColor(0,0,0,200));
-        
+
         playerInfo = new PlayerInfo;
         playerInfo->name = nullptr;
         playerInfo->icon = nullptr;
@@ -89,7 +89,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         playerInfo->bonusKickDimm = nullptr;
         playerInfo->badBonus = nullptr;
         playerInfo->badBonusDimm = nullptr;
-        
+
         //create the player icons
         renderer = m_gameScene->renderer(Granatier::Element::PLAYER, playerList[i]);
         if(renderer)
@@ -99,7 +99,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             playerInfo->icon->setPos(nLeft, nTop + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->icon);
         }
-        
+
         //create the player names
         playerInfo->name = new QGraphicsTextItem(playerList[i]->getPlayerName());
         playerInfo->name->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.25, QFont::Bold, false));
@@ -107,7 +107,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         playerInfo->name->setZValue(1001);
         playerInfo->name->setPos(nLeft + Granatier::CellSize / 2 + 2, nTop + i * (nHeight+4) - 4);
         m_gameScene->addItem(playerInfo->name);
-        
+
         renderer = m_gameScene->renderer(Granatier::Element::BONUS);
         if(renderer)
         {
@@ -116,46 +116,46 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             playerInfo->bonusShield->setZValue(1001);
             playerInfo->bonusShield->setPos(nLeft, nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->bonusShield);
-            
+
             playerInfo->bonusShieldDimm = new QGraphicsRectItem();
             playerInfo->bonusShieldDimm->setBrush(dimmRectBrush);
             playerInfo->bonusShieldDimm->setPen(dimmRectPen);
             playerInfo->bonusShieldDimm->setZValue(1002);
             playerInfo->bonusShieldDimm->setPos(playerInfo->bonusShield->pos().x()-0.5, playerInfo->bonusShield->pos().y()-0.5);
             m_gameScene->addItem(playerInfo->bonusShieldDimm);
-            
+
             //create the bonus throw icons
             playerInfo->bonusThrow = new KGameRenderedItem(renderer, QStringLiteral("bonus_throw"));
             playerInfo->bonusThrow->setZValue(1001);
             playerInfo->bonusThrow->setPos(nLeft + Granatier::CellSize / 2 + 4, nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->bonusThrow);
-            
+
             playerInfo->bonusThrowDimm = new QGraphicsRectItem();
             playerInfo->bonusThrowDimm->setBrush(dimmRectBrush);
             playerInfo->bonusThrowDimm->setPen(dimmRectPen);
             playerInfo->bonusThrowDimm->setZValue(1002);
             playerInfo->bonusThrowDimm->setPos(playerInfo->bonusThrow->pos().x()-0.5, playerInfo->bonusThrow->pos().y()-0.5);
             m_gameScene->addItem(playerInfo->bonusThrowDimm);
-            
+
             //create the bonus kick icons
             playerInfo->bonusKick = new KGameRenderedItem(renderer, QStringLiteral("bonus_kick"));
             playerInfo->bonusKick->setZValue(1001);
             playerInfo->bonusKick->setPos(nLeft + 2 * (Granatier::CellSize / 2 + 4), nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->bonusKick);
-            
+
             playerInfo->bonusKickDimm = new QGraphicsRectItem();
             playerInfo->bonusKickDimm->setBrush(dimmRectBrush);
             playerInfo->bonusKickDimm->setPen(dimmRectPen);
             playerInfo->bonusKickDimm->setZValue(1002);
             playerInfo->bonusKickDimm->setPos(playerInfo->bonusKick->pos().x()-0.5, playerInfo->bonusKick->pos().y()-0.5);
             m_gameScene->addItem(playerInfo->bonusKickDimm);
-            
+
             //create the bad bonus icons
             playerInfo->badBonus = new KGameRenderedItem(renderer, m_badBonusSpriteKey);
             playerInfo->badBonus->setZValue(1001);
             playerInfo->badBonus->setPos(nLeft + 3 * (Granatier::CellSize / 2 + 4), nTop + Granatier::CellSize / 2 + 1 + i * (nHeight + 4));
             m_gameScene->addItem(playerInfo->badBonus);
-        
+
             playerInfo->badBonusDimm = new QGraphicsRectItem();
             playerInfo->badBonusDimm->setBrush(dimmRectBrush);
             playerInfo->badBonusDimm->setPen(dimmRectPen);
@@ -163,13 +163,13 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             playerInfo->badBonusDimm->setPos(playerInfo->badBonus->pos().x()-0.5, playerInfo->badBonus->pos().y()-0.5);
             m_gameScene->addItem(playerInfo->badBonusDimm);
         }
-        
+
         m_mapPlayerInfo.insert(playerList[i], playerInfo);
-        
+
         //connect player
         connect(playerList[i], SIGNAL(bonusUpdated(Player*,Granatier::Bonus::Type,int)), this, SLOT(bonusInfoChanged(Player*,Granatier::Bonus::Type,int)));
     }
-    
+
     m_background = new QGraphicsRectItem();
     m_background->setBrush(QBrush(QColor(0,0,0,175)));
     m_background->setZValue(1000);
@@ -245,19 +245,19 @@ InfoSidebar::~InfoSidebar()
                 m_gameScene->removeItem(iteratorPlayerInfo.value()->badBonusDimm);
             }
             delete iteratorPlayerInfo.value()->badBonusDimm;
-            
+
             delete iteratorPlayerInfo.value();
         }
         iteratorPlayerInfo = m_mapPlayerInfo.erase(iteratorPlayerInfo);
     }
-    
+
     //remove the background
     if(m_gameScene->items().contains(m_background))
     {
         m_gameScene->removeItem(m_background);
     }
     delete m_background;
-    
+
     m_gameScene = nullptr;
     m_game = nullptr;
 }
@@ -283,7 +283,7 @@ void InfoSidebar::themeChanged()
 {
     KGameRenderer* renderer = m_gameScene->renderer(Granatier::Element::BONUS);
     KGameRenderedItem* tempItem;
-    
+
     //update player infosidebar
     QMap <Player*, PlayerInfo*>::iterator iteratorPlayerInfo = m_mapPlayerInfo.begin();
     while (iteratorPlayerInfo != m_mapPlayerInfo.end())
@@ -299,7 +299,7 @@ void InfoSidebar::themeChanged()
         iteratorPlayerInfo.value()->bonusShield->setPos(tempItem->pos());
         m_gameScene->addItem(iteratorPlayerInfo.value()->bonusShield);
         delete tempItem;
-        
+
         tempItem = iteratorPlayerInfo.value()->bonusThrow;
         if(m_gameScene->items().contains(tempItem))
         {
@@ -311,7 +311,7 @@ void InfoSidebar::themeChanged()
         iteratorPlayerInfo.value()->bonusThrow->setPos(tempItem->pos());
         m_gameScene->addItem(iteratorPlayerInfo.value()->bonusThrow);
         delete tempItem;
-        
+
         tempItem = iteratorPlayerInfo.value()->bonusKick;
         if(m_gameScene->items().contains(tempItem))
         {
@@ -323,7 +323,7 @@ void InfoSidebar::themeChanged()
         iteratorPlayerInfo.value()->bonusKick->setPos(tempItem->pos());
         m_gameScene->addItem(iteratorPlayerInfo.value()->bonusKick);
         delete tempItem;
-        
+
         tempItem = iteratorPlayerInfo.value()->badBonus;
         if(m_gameScene->items().contains(tempItem))
         {
@@ -335,10 +335,10 @@ void InfoSidebar::themeChanged()
         iteratorPlayerInfo.value()->badBonus->setPos(tempItem->pos());
         m_gameScene->addItem(iteratorPlayerInfo.value()->badBonus);
         delete tempItem;
-        
+
         iteratorPlayerInfo++;
     }
-    
+
     updateGraphics(m_svgScaleFactor);
 }
 
@@ -348,7 +348,7 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
     {
         return;
     }
-    
+
     switch(static_cast<int>(bonusType))
     {
         case Granatier::Bonus::SHIELD:
@@ -389,30 +389,30 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
                             m_badBonusSpriteKey = QStringLiteral("bonus_bad_restrain");
                             break;
                     }
-                    
+
                     if(renderer->spriteExists(m_badBonusSpriteKey))
                     {
                         m_mapPlayerInfo.value(player)->badBonus->setSpriteKey(m_badBonusSpriteKey);
                     }
-                    
+
                     //hide the dimm overlay
                     m_mapPlayerInfo.value(player)->badBonusDimm->setVisible(false);
-                    
+
                     //calculate graphics size
                     QSize renderSize;
                     QPoint topLeft(0, 0);
                     topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
                     QRectF rect;
-                    
-                    QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5); 
+
+                    QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5);
                     bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
-                    
+
                     renderSize.setHeight(bottomRight.y() - topLeft.y());
                     renderSize.setWidth(bottomRight.x() - topLeft.x());
-                    
+
                     m_mapPlayerInfo.value(player)->badBonus->setRenderSize(renderSize);
                     m_mapPlayerInfo.value(player)->badBonus->setScale(m_svgScaleFactor);
-                    
+
                     rect = m_mapPlayerInfo.value(player)->badBonusDimm->rect();
                     rect.setWidth(renderSize.width() * m_svgScaleFactor);
                     rect.setHeight(renderSize.height() * m_svgScaleFactor);
@@ -436,15 +436,15 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     {
         return;
     }
-    
+
     QSize renderSize;
     QPoint topLeft(0, 0);
     topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
     QPoint bottomRight;
     QRectF rect;
-    
+
     m_svgScaleFactor = svgScaleFactor;
-    
+
     //update player infosidebar
     QMap <Player*, PlayerInfo*>::iterator iteratorPlayerInfo = m_mapPlayerInfo.begin();
     while (iteratorPlayerInfo != m_mapPlayerInfo.end())
@@ -454,44 +454,44 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         renderSize.setHeight(bottomRight.y() - topLeft.y());
         renderSize.setWidth(bottomRight.x() - topLeft.x());
-        
+
         iteratorPlayerInfo.value()->icon->setRenderSize(renderSize);
         iteratorPlayerInfo.value()->icon->setScale(m_svgScaleFactor);
-        
+
         bottomRight.setX(Granatier::CellSize * 0.5);
         bottomRight.setY(Granatier::CellSize * 0.5);
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         renderSize.setHeight(bottomRight.y() - topLeft.y());
         renderSize.setWidth(bottomRight.x() - topLeft.x());
-        
+
         iteratorPlayerInfo.value()->bonusShield->setRenderSize(renderSize);
         iteratorPlayerInfo.value()->bonusShield->setScale(m_svgScaleFactor);
         rect = iteratorPlayerInfo.value()->bonusShieldDimm->rect();
         rect.setWidth(renderSize.width() * m_svgScaleFactor);
         rect.setHeight(renderSize.height() * m_svgScaleFactor);
         iteratorPlayerInfo.value()->bonusShieldDimm->setRect(rect);
-        
+
         iteratorPlayerInfo.value()->bonusThrow->setRenderSize(renderSize);
         iteratorPlayerInfo.value()->bonusThrow->setScale(m_svgScaleFactor);
         rect = iteratorPlayerInfo.value()->bonusThrowDimm->rect();
         rect.setWidth(renderSize.width() * m_svgScaleFactor);
         rect.setHeight(renderSize.height() * m_svgScaleFactor);
         iteratorPlayerInfo.value()->bonusThrowDimm->setRect(rect);
-        
+
         iteratorPlayerInfo.value()->bonusKick->setRenderSize(renderSize);
         iteratorPlayerInfo.value()->bonusKick->setScale(m_svgScaleFactor);
         rect = iteratorPlayerInfo.value()->bonusKickDimm->rect();
         rect.setWidth(renderSize.width() * m_svgScaleFactor);
         rect.setHeight(renderSize.height() * m_svgScaleFactor);
         iteratorPlayerInfo.value()->bonusKickDimm->setRect(rect);
-        
+
         iteratorPlayerInfo.value()->badBonus->setRenderSize(renderSize);
         iteratorPlayerInfo.value()->badBonus->setScale(m_svgScaleFactor);
         rect = iteratorPlayerInfo.value()->badBonusDimm->rect();
         rect.setWidth(renderSize.width() * m_svgScaleFactor);
         rect.setHeight(renderSize.height() * m_svgScaleFactor);
         iteratorPlayerInfo.value()->badBonusDimm->setRect(rect);
-        
+
         iteratorPlayerInfo++;
     }
 }

@@ -2,17 +2,17 @@
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
  * Copyright 2007-2008 Pierre-Benoît Besse <besse.pb@gmail.com>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,36 +31,36 @@ const int nMortarGround = (Granatier::FPS * 800 / 1000.0) + nMortarRampEnd;
 Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
 {
     m_type = Granatier::Element::BOMB;
-    
+
     m_xInit = fX;
     m_yInit = fY;
     m_x = fX;
     m_y = fY;
-    
+
     m_bombPower = 1;
-    
+
     int currentRow = m_arena->getRowFromY(m_y);
     int currentCol = m_arena->getColFromX(m_x);
     m_arena->setCellElement(currentRow, currentCol, this);
-    
+
     m_detonated = false;
-    
+
     m_bombID = nBombID;
     m_explosionID = nBombID;
-    
+
     // Define the timer which sets the puls frequency
     m_detonationCountdownTimer = new QTimer(this);
     m_detonationCountdownTimer->setInterval(nDetonationCountdown);
     m_detonationCountdownTimer->setSingleShot(true);
     m_detonationCountdownTimer->start();
     connect(m_detonationCountdownTimer, &QTimer::timeout, this, &Bomb::detonate);
-    
+
     m_mortarTimer = nullptr;
     m_mortarState = -1;
     m_thrown = false;
     m_stopOnCenter = false;
     m_falling = false;
-    
+
     moveOnCenter();
 }
 
@@ -92,7 +92,7 @@ void Bomb::updateMove()
     {
         return;
     }
-    
+
     int currentRow = m_arena->getRowFromY(m_y);
     int currentCol = m_arena->getColFromX(m_x);
     //check if the bomb is on an arrow, mortar or hole
@@ -135,7 +135,7 @@ void Bomb::updateMove()
                 break;
         }
     }
-    
+
     if(m_xSpeed != 0 || m_ySpeed != 0)
     {
         bool bOnCenter = false;
@@ -144,7 +144,7 @@ void Bomb::updateMove()
         bool bMoveAwayFromCenter = false;
         bool bIsHurdleCurrentCell = false;
         bool bIsHurdleNextCell = false;
-        
+
         if (m_xSpeed > 0)
         {
             xDirection = 1;
@@ -163,12 +163,12 @@ void Bomb::updateMove()
         {
             yDirection = -1;
         }
-        
+
         if((xDirection != 0 && xDeltaCenter == 0) || (yDirection != 0 && yDeltaCenter == 0))
         {
             bOnCenter = true;
         }
-        
+
         int newRow = m_arena->getRowFromY(m_y + m_ySpeed);
         int newCol = m_arena->getColFromX(m_x + m_xSpeed);
         int nextRow;
@@ -183,21 +183,21 @@ void Bomb::updateMove()
             nextRow = m_arena->getRowFromY(m_y + m_ySpeed + yDirection * Granatier::CellSize/2);
             nextCol = m_arena->getColFromX(m_x + m_xSpeed + xDirection * Granatier::CellSize/2);
         }
-        
+
         bIsHurdleCurrentCell = !(m_arena->getCell(currentRow, currentCol).isWalkable(this));
         bIsHurdleNextCell = !(m_arena->getCell(nextRow, nextCol).isWalkable(this));
-        
+
         if(xDirection * xDeltaCenter <= 0 || yDirection * yDeltaCenter <= 0)
         {
             bMoveAwayFromCenter = true;
         }
-        
+
         //at first, check if move over cell center or currently on cell center
         if((bOnCenter || (xDirection * xDeltaCenter < 0 && xDirection * (m_xSpeed + xDeltaCenter) >= 0) || (yDirection * yDeltaCenter < 0 && yDirection * (m_ySpeed + yDeltaCenter) >= 0)) && m_mortarState < 0)
         {
             bool bIsMortar = false;
             bool bIsNewDirection = false;
-            
+
             switch (m_arena->getCell(currentRow, currentCol).getType())
             {
                 case Granatier::Cell::ARROWUP:
@@ -237,7 +237,7 @@ void Bomb::updateMove()
                 default:
                     break;
             }
-            
+
             //if two bombs move towards them, stop them and move them to the next cell center
             if(((bIsHurdleCurrentCell && !bMoveAwayFromCenter) || bIsHurdleNextCell) && !m_stopOnCenter)
             {
@@ -253,7 +253,7 @@ void Bomb::updateMove()
                     setYSpeed(-m_ySpeed);
                 }
             }
-            
+
             //stop at cell center if direction change or bomb mortar in current cell
             else if(bIsMortar || bIsNewDirection || m_stopOnCenter)
             {
@@ -300,7 +300,7 @@ void Bomb::updateMove()
             }
         }
     }
-    
+
     if(m_mortarState >= 0 && !(m_mortarTimer->isActive()))
     {
         updateMortarState();
@@ -335,7 +335,7 @@ void Bomb::setXSpeed(qreal p_xSpeed)
     m_xSpeed = p_xSpeed;
 }
 
-void Bomb::setYSpeed(qreal p_ySpeed) 
+void Bomb::setYSpeed(qreal p_ySpeed)
 {
     m_ySpeed = p_ySpeed;
 }
@@ -371,11 +371,11 @@ void Bomb::setThrown(int nDirection)
             setYSpeed(0);
             break;
     }
-    
+
     int curCellRow = m_arena->getRowFromY(m_y);
     int curCellCol = m_arena->getColFromX(m_x);
     m_arena->removeCellElement(curCellRow, curCellCol, this);
-    
+
     m_type = Granatier::Element::NONE;
     m_thrown = true;
     m_mortarState = nMortarRampEnd;
@@ -496,17 +496,17 @@ void Bomb::initDetonation(int nBombID, int nDetonationTimeout)
     {
         m_explosionID = nBombID;
     }
-    
+
     if((!m_detonationCountdownTimer))
     {
         return;
     }
-    
+
     if(m_detonationCountdownTimer->interval() > nDetonationTimeout)
     {
         m_detonationCountdownTimer->setInterval(nDetonationTimeout);
     }
-    
+
     if(!(m_detonationCountdownTimer->isActive()))
     {
         m_detonationCountdownTimer->start();
@@ -522,15 +522,15 @@ void Bomb::slot_detonationCompleted()
 void Bomb::updateMortarState()
 {
     emit mortar(m_mortarState, nMortarRampEnd, nMortarPeak, nMortarGround);
-    
+
     if(m_mortarState <= 0)
     {
         int curCellRow = m_arena->getRowFromY(m_y);
         int curCellCol = m_arena->getColFromX(m_x);
-        
+
         setXSpeed(0);
         setYSpeed(0);
-        
+
         m_thrown = false;
         m_type = Granatier::Element::NONE;
         m_arena->removeCellElement(curCellRow, curCellCol, this);
@@ -539,13 +539,13 @@ void Bomb::updateMortarState()
     {
         int curCellRow = m_arena->getRowFromY(m_y);
         int curCellCol = m_arena->getColFromX(m_x);
-        
+
         if(!m_thrown)
         {
             int nRow;
             int nCol;
             bool bFound = false;
-            
+
             do
             {
                 nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
@@ -556,11 +556,11 @@ void Bomb::updateMortarState()
                 }
             }
             while (!bFound);
-            
+
             setXSpeed((nCol - curCellCol) * Granatier::CellSize / (Granatier::FPS * 800 / 1000.0));
             setYSpeed((nRow - curCellRow) * Granatier::CellSize / (Granatier::FPS * 800 / 1000.0));
         }
-        
+
         m_type = Granatier::Element::NONE;
         m_arena->removeCellElement(curCellRow, curCellCol, this);
     }
@@ -575,7 +575,7 @@ void Bomb::updateMortarState()
         int curCellCol = m_arena->getColFromX(m_x);
         m_type = Granatier::Element::BOMB;
         m_arena->setCellElement(curCellRow, curCellCol, this);
-        
+
         m_mortarState = -1;
         if(m_detonationCountdownTimer)
         {
@@ -590,7 +590,7 @@ void Bomb::updateMortarState()
             }
         }
     }
-    
+
     if(m_mortarState >= 0)
     {
         m_mortarState++;

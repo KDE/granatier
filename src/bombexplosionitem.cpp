@@ -1,17 +1,17 @@
 /*
  * Copyright 2009 Mathias Kraus <k.hias@gmx.de>
  * Copyright 2007-2008 Thomas Gallinari <tg8187@yahoo.fr>
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
- * published by the Free Software Foundation; either version 2 of 
+ * published by the Free Software Foundation; either version 2 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -26,9 +26,9 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
 {
     m_direction = direction;
     m_explosionID = p_model->explosionID();
-    
+
     m_svgScaleFactor = svgScaleFactor;
-    
+
     QString strElemetId;
     int width = 1;
     int height = 1;
@@ -55,7 +55,7 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
             height = Granatier::CellSize * 0.5;
             break;
     }
-    
+
     if((static_cast<int>(Granatier::CellSize) - width) % 2 != 0)
     {
         width--;
@@ -65,11 +65,11 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
         height--;
     }
     m_itemSizeSet = QSize(width, height);
-    
+
     QSize svgSize = m_itemSizeSet / m_svgScaleFactor;
     setRenderSize(svgSize);
     setScale(m_svgScaleFactor);
-    
+
     setZValue(303 + bombPower);
 }
 
@@ -82,7 +82,7 @@ QPainterPath BombExplosionItem::shape() const
     QPainterPath path;
     // Temporary variable to keep the boundingRect available
     QRectF rect = boundingRect();
-    
+
     // Calculation of the shape
     QRectF shapeRect = QRectF(rect.x(), rect.y(), rect.width(), rect.height());
     path.addEllipse(shapeRect);
@@ -98,7 +98,7 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
 {
     qreal x;
     qreal y;
-    
+
     switch(m_direction)
     {
         case Granatier::Direction::NORTH:
@@ -150,14 +150,14 @@ void BombExplosionItem::updateGraphics(qreal svgScaleFactor)
     {
         return;
     }
-    
+
     //calculate the size of the item on the view
     QPoint viewTopLeft = scene()->views().first()->mapFromScene(0, 0);
     QPoint viewBottomRight = scene()->views().first()->mapFromScene(m_itemSizeSet.width(), m_itemSizeSet.height());
-    
+
     int viewWidth = viewBottomRight.x() - viewTopLeft.x();
     int viewHeight = viewBottomRight.y() - viewTopLeft.y();
-    
+
     //for better alignment, if the item size is different from the cell size, make the difference between the cell size and item size always even
     if(m_itemSizeSet.width() != Granatier::CellSize || m_itemSizeSet.height() != Granatier::CellSize)
     {
@@ -172,20 +172,20 @@ void BombExplosionItem::updateGraphics(qreal svgScaleFactor)
         {
             viewHeight--;
         }
-        
+
         //calculate the real item size after change of the render size
         QPointF sceneTopLeft = scene()->views().first()->mapToScene(0, 0);
         QPointF sceneBottomRight = scene()->views().first()->mapToScene(viewWidth, viewHeight);
-        
+
         qreal sceneWidth = sceneBottomRight.x() - sceneTopLeft.x();
         qreal sceneHeight = sceneBottomRight.y() - sceneTopLeft.y();
         m_itemSizeReal = QSize(sceneWidth, sceneHeight);
     }
-    
+
     setRenderSize(QSize(viewWidth, viewHeight));
     setScale(svgScaleFactor);
     m_svgScaleFactor = svgScaleFactor;
-    
+
     QTransform transform;
     transform.translate(m_itemSizeSet.width() / 2.0, m_itemSizeSet.height() / 2.0);
     setRenderSize(renderSize());
