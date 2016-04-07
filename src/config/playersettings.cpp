@@ -29,7 +29,7 @@ PlayerSettings::PlayerSettings()
     QStringList playerFilesAvailable;
     QStringList playerNamesAvailable;
 
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, QStringLiteral("players"), QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, QStringLiteral("players"), QStandardPaths::LocateDirectory);
     Q_FOREACH (const QString& dir, dirs) {
          const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
          Q_FOREACH (const QString& file, fileNames) {
@@ -43,9 +43,9 @@ PlayerSettings::PlayerSettings()
     {
         StructPlayerSettings settings;
         settings.strPlayerID = playersAvailable[i];
-        
-        KConfig desktopFile(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("players/") + settings.strPlayerID), KConfig::SimpleConfig);
-        
+
+        KConfig desktopFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/") + settings.strPlayerID), KConfig::SimpleConfig);
+
         settings.strPlayerDesktopFilePath = desktopFile.name();
         settings.strPlayerName = desktopFile.group("KGameTheme").readEntry<QString>("Name", QStringLiteral(""));
         settings.strPlayerGraphicsFile = desktopFile.group("KGameTheme").readEntry<QString>("FileName", QStringLiteral(""));

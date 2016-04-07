@@ -43,7 +43,7 @@ int main(int argc, char** argv)
         // migrate old data
         Kdelibs4Migration dataMigrator;
         const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("granatier"));
-        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1Char('/');
+        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1Char('/');
         QString targetFilePath;
         
         QStringList dataDirs;

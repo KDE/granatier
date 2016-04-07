@@ -101,7 +101,7 @@ void ArenaSelector::showEvent(QShowEvent*)
 ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(nullptr), m_graphicsScene(nullptr), m_svgScaleFactor(1)
 {
     KgTheme* theme = new KgTheme(QByteArray());
-    theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::DataLocation, QStringLiteral("themes/granatier.svgz")));
+    theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/granatier.svgz")));
     m_renderer = new KGameRenderer(theme);
 }
 
@@ -169,7 +169,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     ui.arenaList->setSortingEnabled(true);
 
     QStringList arenasAvailable;
-    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::DataLocation, QStringLiteral("arenas"), QStandardPaths::LocateDirectory);
+    const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, QStringLiteral("arenas"), QStandardPaths::LocateDirectory);
     Q_FOREACH (const QString& dir, dirs) {
          const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
          Q_FOREACH (const QString& file, fileNames) {
@@ -479,7 +479,7 @@ void ArenaSelector::Private::_k_openKNewStuffDialog()
 void ArenaSelector::Private::_k_importArenasDialog()
 {
     // get local directory for arenas
-    const QString arenaDir = QStandardPaths::writableLocation(QStandardPaths::DataLocation) + QLatin1String("/arenas/");
+    const QString arenaDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1String("/arenas/");
     // create path if it does not exist
     if(!QDir(arenaDir).exists()) QDir().mkpath(arenaDir);
 
