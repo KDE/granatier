@@ -1,5 +1,3 @@
-project(granatier)
-
 set(granatierSources
     config/arenaselector.cpp
     config/arenasettings.cpp
