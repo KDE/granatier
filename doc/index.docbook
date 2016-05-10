@@ -1,9 +1,5 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY granatier "<application>Granatier</application>">
-  <!ENTITY kappname "&granatier;">
-  
-  <!ENTITY package "kdegames">  <!-- do not change this! -->
   <!ENTITY % English "INCLUDE" > <!-- change language only here -->
   <!ENTITY % addindex "IGNORE"> <!-- do not change this! -->
 ]>
@@ -23,11 +19,11 @@
     <!-- TRANS:ROLES_OF_TRANSLATORS -->
     </authorgroup>
     <legalnotice>&FDLNotice;</legalnotice>
-    <date>2012-06-15</date>
-    <releaseinfo>1.2.0 (&kde; 4.9)</releaseinfo>
+    <date>2016-05-09</date>
+    <releaseinfo>1.3.1 (Applications 16.04)</releaseinfo>
     
     <abstract>
-      <para>This documentation describes the game of &granatier; version 1.2.0</para>
+      <para>This documentation describes the game of &granatier; version 1.3.1</para>
     </abstract>
     
     <keywordset>
