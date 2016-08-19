@@ -14,6 +14,7 @@
   <name xml:lang="el">Χειροβομβιστής</name>
   <name xml:lang="en-GB">Granatier</name>
   <name xml:lang="es">Granatier</name>
+  <name xml:lang="et">Granatier</name>
   <name xml:lang="fi">Granatier</name>
   <name xml:lang="fr">Granatier</name>
   <name xml:lang="gl">Granatier</name>
@@ -47,6 +48,7 @@
   <summary xml:lang="el">Κλώνος του Bomberman</summary>
   <summary xml:lang="en-GB">Bomberman clone</summary>
   <summary xml:lang="es">Clon de Bomberman</summary>
+  <summary xml:lang="et">Bombermani kloon</summary>
   <summary xml:lang="fi">Bomberman-klooni</summary>
   <summary xml:lang="fr">Un clone de Bomberman</summary>
   <summary xml:lang="gl">Clon do Bomberman</summary>
@@ -81,6 +83,7 @@
     <p xml:lang="el">Ο Χειροβομβιστής είναι ένας κλώνος του κλασικού παιχνιδιού Bomberman, εμπνευσμένο από την εργασία του κλώνου του Clanbomber.</p>
     <p xml:lang="en-GB">Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.</p>
     <p xml:lang="es">Granatier es un clon del juego clásico Bomberman, inspirado en el trabajo del clon de Clanbomber.</p>
+    <p xml:lang="et">Granatier on klassikalise mängu Bomberman kloon, mis sai innustust teisest kloonist Clanbomber.</p>
     <p xml:lang="fi">Granatier on perinteisen Bomberman-pelin klooni, joka on saanut inspiraatiota Clanbomber-kloonista.</p>
     <p xml:lang="fr">Granatier est un clone du jeu classique Bomberman. Il est inspiré par le travail réalisé par le clone Clanbomber.</p>
     <p xml:lang="gl">Granatier é un clon do clásico xogo do Bomberman, inspirado no traballo do clon Clanbomber.</p>
