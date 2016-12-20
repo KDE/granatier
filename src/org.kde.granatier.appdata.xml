@@ -39,7 +39,6 @@
   <name xml:lang="zh-CN">Granatier</name>
   <name xml:lang="zh-TW">Granatier</name>
   <summary>Bomberman clone</summary>
-  <summary xml:lang="ast">Copia del Bomberman</summary>
   <summary xml:lang="bs">Klon igre Bomberman</summary>
   <summary xml:lang="ca">Un clon del Bomberman</summary>
   <summary xml:lang="ca-valencia">Un clon del Bomberman</summary>
@@ -76,7 +75,6 @@
     <p>
       Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.
     </p>
-    <p xml:lang="ast">Granatiner ye una copia del xuegu clásicu Bomberman, inspiráu pol trabayu de la copia de Clanbomber</p>
     <p xml:lang="ca">Granatier és un clon del joc Bomberman clàssic, inspirat en el treball del clon Clanbomber.</p>
     <p xml:lang="ca-valencia">Granatier és un clon del joc Bomberman clàssic, inspirat en el treball del clon Clanbomber.</p>
     <p xml:lang="de">Granatier ist eine Kopie des klassischen Spiels Bomberman und ist von der Arbeit an dessen Clanbomber-Kopie inspiriert.</p>
