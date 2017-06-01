@@ -155,22 +155,22 @@ public:
     /**
       * Makes the Player ask to go up
       */
-    void goUp();
+    void goUp() Q_DECL_OVERRIDE;
 
     /**
       * Makes the Player ask to go down
       */
-    void goDown();
+    void goDown() Q_DECL_OVERRIDE;
 
     /**
       * Makes the Player ask to go to the right
       */
-    void goRight();
+    void goRight() Q_DECL_OVERRIDE;
 
     /**
       * Makes the Player ask to go to the left
       */
-    void goLeft();
+    void goLeft() Q_DECL_OVERRIDE;
 
     /**
       * Moves the Player function of its current coordinates and speed.
@@ -180,7 +180,7 @@ public:
     /**
       * Updates the Player move
       */
-    void updateMove();
+    void updateMove() Q_DECL_OVERRIDE;
 
     /**
       * @return the asked x speed value

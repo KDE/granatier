@@ -76,7 +76,7 @@ public:
      * This function is used to determinate collision between items
      * @return QPainterPath the new shape of the Bomb
      */
-    QPainterPath shape() const;
+    QPainterPath shape() const Q_DECL_OVERRIDE;
 
     /**
     * @return the explosion ID

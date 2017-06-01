@@ -73,13 +73,13 @@ protected:
     * Resizes the items when the view is resized.
     * @param p_event the resize event
     */
-    void resizeEvent(QResizeEvent* p_event);
+    void resizeEvent(QResizeEvent* p_event) Q_DECL_OVERRIDE;
     
     /**
     * Resizes the items when the view is showed.
     * @param p_event the resize event
     */
-    void showEvent(QShowEvent* p_event);
+    void showEvent(QShowEvent* p_event) Q_DECL_OVERRIDE;
 
 private:
     class Private;

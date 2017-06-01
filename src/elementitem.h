@@ -67,7 +67,7 @@ public:
     /**
       * Reimplement QGraphicsItem::shape() to return an ellipse to improve collisions.
       */
-    QPainterPath shape() const;
+    QPainterPath shape() const Q_DECL_OVERRIDE;
 
 public slots:
 

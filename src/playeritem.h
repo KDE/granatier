@@ -74,7 +74,7 @@ public slots:
       */
     void updateDirection();
 
-    void updateGraphics(qreal svgScaleFactor);
+    void updateGraphics(qreal svgScaleFactor) Q_DECL_OVERRIDE;
 
     /**
       * Manages the collisions with any Element.
@@ -86,7 +86,7 @@ public slots:
       * @param p_x the new x-coordinate
       * @param p_y the new y-coordinate
       */
-    void update(qreal p_x, qreal p_y);
+    void update(qreal p_x, qreal p_y) Q_DECL_OVERRIDE;
 
     /**
       * Starts the PlayerItem animation.
@@ -122,7 +122,7 @@ public slots:
     /**
       * Implements the CharacterItem method.
       */
-    void setDead();
+    void setDead() Q_DECL_OVERRIDE;
 
     /**
       * resurrects the playeritem
