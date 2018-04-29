@@ -96,28 +96,24 @@ void Game::init()
     {
         if(m_randomArenaModeArenaList.isEmpty())
         {
-            m_randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
+            auto randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
 
             QStringList arenasAvailable;
             const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, QStringLiteral("arenas"), QStandardPaths::LocateDirectory);
-            Q_FOREACH (const QString& dir, dirs) {
-            const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
-                Q_FOREACH (const QString& file, fileNames) {
+            for(const auto& dir: dirs) {
+                const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+                for(const auto& file: fileNames) {
                     arenasAvailable.append(dir + QLatin1Char('/') + file);
                 }
             }
 
-
-            QStringList::Iterator i = m_randomArenaModeArenaList.begin();
-            while(i != m_randomArenaModeArenaList.end())
-            {
-                if(arenasAvailable.contains(*i))
-                {
-                    i++;
-                }
-                else
-                {
-                    i = m_randomArenaModeArenaList.erase(i);
+            // store the random arenas if they are available
+            for(const auto& randomArena: randomArenaModeArenaList) {
+                for(const auto& arena: arenasAvailable) {
+                    if(arena.endsWith(randomArena)) {
+                        m_randomArenaModeArenaList.append(arena);
+                        break;
+                    }
                 }
             }
 
