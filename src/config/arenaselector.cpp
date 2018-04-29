@@ -170,34 +170,26 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
 
     QStringList arenasAvailable;
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, QStringLiteral("arenas"), QStandardPaths::LocateDirectory);
-    Q_FOREACH (const QString& dir, dirs) {
+    for(auto& dir: dirs) {
          const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
-         Q_FOREACH (const QString& file, fileNames) {
+         for(auto& file: fileNames) {
                 arenasAvailable.append(file);
          }
     }
-
-    QStringList::Iterator i = m_tempRandomArenaModeArenaList.begin();
-    while(i != m_tempRandomArenaModeArenaList.end())
-    {
-        if(arenasAvailable.contains(*i))
-        {
-            i++;
-        }
-        else
-        {
-            i = m_tempRandomArenaModeArenaList.erase(i);
+    
+    QStringList randomArenaModeArenaList;
+    // store the random arenas if they are available
+    for(const auto& randomArena: m_tempRandomArenaModeArenaList) {
+        if(arenasAvailable.contains(randomArena)) {
+            randomArenaModeArenaList.append(randomArena);
         }
     }
 
-    if(m_tempRandomArenaModeArenaList.isEmpty())
-    {
-        m_tempRandomArenaModeArenaList = arenasAvailable;
-    }
+    m_tempRandomArenaModeArenaList = randomArenaModeArenaList.isEmpty() ? arenasAvailable : randomArenaModeArenaList;
 
     bool initialFound = false;
 
-    foreach (const QString &file, arenasAvailable)
+    for(const auto& file: arenasAvailable)
     {
       QString arenaPath = lookupDirectory + QLatin1Char('/') + file;
       ArenaSettings* arenaSettings = new ArenaSettings(groupName);
@@ -243,7 +235,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     {
       // TODO change this if we ever change ArenaSettings::loadDefault
       QLatin1String defaultPath("arenas/granatier.desktop");
-      foreach(ArenaSettings* arenaSettings, arenaMap)
+      for(auto arenaSettings: arenaMap)
       {
         if (arenaSettings->path().endsWith(defaultPath))
         {
@@ -354,7 +346,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
         if(m_svgScaleFactor != svgScaleFactor)
         {
             m_svgScaleFactor = svgScaleFactor;
-            foreach(KGameRenderedItem* arenaItem, m_arenaItems)
+            for(auto arenaItem: m_arenaItems)
             {
                 arenaItem->setRenderSize(calculateSvgSize());
                 arenaItem->setScale(m_svgScaleFactor);

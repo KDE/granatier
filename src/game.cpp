@@ -37,6 +37,8 @@
 #include <kgsound.h>
 #include <QStandardPaths>
 
+#include <random>
+
 Game::Game(PlayerSettings* playerSettings)
 {
     m_playerSettings = playerSettings;
@@ -96,46 +98,36 @@ void Game::init()
     {
         if(m_randomArenaModeArenaList.isEmpty())
         {
-            m_randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
+            auto randomArenaModeArenaList = Settings::self()->randomArenaModeArenaList();
 
             QStringList arenasAvailable;
             const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, QStringLiteral("arenas"), QStandardPaths::LocateDirectory);
-            Q_FOREACH (const QString& dir, dirs) {
-            const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
-                Q_FOREACH (const QString& file, fileNames) {
+            for(const auto& dir: dirs) {
+                const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+                for(const auto& file: fileNames) {
                     arenasAvailable.append(dir + QLatin1Char('/') + file);
                 }
             }
 
-
-            QStringList::Iterator i = m_randomArenaModeArenaList.begin();
-            while(i != m_randomArenaModeArenaList.end())
-            {
-                if(arenasAvailable.contains(*i))
-                {
-                    i++;
-                }
-                else
-                {
-                    i = m_randomArenaModeArenaList.erase(i);
+            // store the random arenas if they are available
+            for(const auto& randomArena: randomArenaModeArenaList) {
+                for(const auto& arena: arenasAvailable) {
+                    if(arena.endsWith(randomArena)) {
+                        m_randomArenaModeArenaList.append(arena);
+                        break;
+                    }
                 }
             }
 
-            if(m_randomArenaModeArenaList.isEmpty())
-            {
+            if(m_randomArenaModeArenaList.isEmpty()){
                 m_randomArenaModeArenaList = arenasAvailable;
             }
         }
 
-        int nIndex = (static_cast<double>(qrand()) / RAND_MAX) * m_randomArenaModeArenaList.count();
-        if(nIndex < 0)
-        {
-            nIndex = 0;
-        }
-        else if(nIndex >= m_randomArenaModeArenaList.count())
-        {
-            nIndex = m_randomArenaModeArenaList.count() - 1;
-        }
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        std::uniform_int_distribution<int> dis(0, m_randomArenaModeArenaList.count() - 1);
+        int nIndex = dis(gen);
         filePath = m_randomArenaModeArenaList.at(nIndex);
         m_randomArenaModeArenaList.removeAt(nIndex);
     }
