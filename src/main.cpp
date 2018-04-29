@@ -76,7 +76,7 @@ int main(int argc, char** argv)
     KLocalizedString::setApplicationDomain("granatier");
 
     // About Granatier
-    KAboutData about(QStringLiteral("granatier"),  i18n("Granatier"), QStringLiteral("1.3.1"),
+    KAboutData about(QStringLiteral("granatier"),  i18n("Granatier"), QStringLiteral("1.4.0"),
         i18n("Granatier is a Bomberman Clone!"),
         KAboutLicense::GPL, i18n("Copyright (c) 2009-2015 The Granatier Team!"));
     about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), QStringLiteral("k.hias@gmx.de"));
