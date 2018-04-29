@@ -90,7 +90,6 @@ private:
     Q_PRIVATE_SLOT(d, void _k_updatePreview(QListWidgetItem* currentItem = NULL))
     Q_PRIVATE_SLOT(d, void _k_updateArenaList(const QString&))
     Q_PRIVATE_SLOT(d, void _k_openKNewStuffDialog())
-    Q_PRIVATE_SLOT(d, void _k_importArenasDialog())
     Q_PRIVATE_SLOT(d, void _k_setRandomArenaMode(bool randomModeEnabled))
     Q_PRIVATE_SLOT(d, void _k_updateRandomArenaModeArenaList(QListWidgetItem* item))
 };

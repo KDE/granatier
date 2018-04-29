@@ -69,7 +69,6 @@ class ArenaSelector::Private
         void _k_updatePreview(QListWidgetItem* currentItem = nullptr);
         void _k_updateArenaList(const QString& strArena);
         void _k_openKNewStuffDialog();
-        void _k_importArenasDialog();
         void _k_setRandomArenaMode(bool randomModeEnabled);
         void _k_updateRandomArenaModeArenaList(QListWidgetItem* item);
 };
@@ -154,7 +153,6 @@ void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
     //Now get our arenas into the list widget
     findArenas(lastUsedArena);
 
-    connect(ui.importArenas, SIGNAL(clicked()), q, SLOT(_k_importArenasDialog()));
     connect(ui.kcfg_RandomArenaMode, SIGNAL(toggled(bool)), q, SLOT(_k_setRandomArenaMode(bool)));
 }
 
@@ -466,100 +464,6 @@ void ArenaSelector::Private::_k_openKNewStuffDialog()
         }
     }
     delete dialog;
-}
-
-void ArenaSelector::Private::_k_importArenasDialog()
-{
-    // get local directory for arenas
-    const QString arenaDir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1String("/arenas/");
-    // create path if it does not exist
-    if(!QDir(arenaDir).exists()) QDir().mkpath(arenaDir);
-
-
-    //find the clanbomber files
-    QStringList listClanbomberPaths;
-    listClanbomberPaths.append(QDir::homePath() + QLatin1String("/.clanbomber/maps/"));
-    for(int i = 0; i < listClanbomberPaths.count(); i++)
-    {
-        QDir clanbomberDir(listClanbomberPaths[i]);
-        if(!clanbomberDir.exists())
-        {
-            continue;
-        }
-
-        QStringList listMaps;
-        listMaps = clanbomberDir.entryList(QStringList(QStringLiteral("*.map")));
-        for(int j = 0; j < listMaps.count(); j++)
-        {
-            QFile mapFile(listClanbomberPaths[i] + listMaps[j]);
-            mapFile.open(QIODevice::ReadOnly | QIODevice::Text);
-            QTextStream readStream(&mapFile);
-
-            QString strAuthor = readStream.readLine();
-
-            QFile desktopFile;
-            QString strName = listMaps[j].left(listMaps[j].count()-4);
-            desktopFile.setFileName(QStringLiteral("%1clanbomber_%2.desktop").arg(arenaDir).arg(strName));
-            desktopFile.open(QIODevice::WriteOnly | QIODevice::Text);
-            QTextStream streamDesktopFile(&desktopFile);
-
-            streamDesktopFile << "[Arena]\n";
-            streamDesktopFile << "Name=" << strName << "\n";
-            streamDesktopFile << "Description=Clanbomber Import\n";
-            streamDesktopFile << "Type=XML\n";
-            streamDesktopFile << "FileName=clanbomber_" << strName << ".xml\n";
-            streamDesktopFile << "Author=" << strAuthor << "\n";
-            streamDesktopFile << "AuthorEmail=-\n";
-
-            streamDesktopFile.flush();
-            desktopFile.close();
-
-            QStringList arena;
-            do
-            {
-                arena.append(readStream.readLine());
-            }
-            while(!readStream.atEnd());
-            arena.replaceInStrings(QStringLiteral("*"), QStringLiteral("="));
-            arena.replaceInStrings(QStringLiteral(" "), QStringLiteral("_"));
-            arena.replaceInStrings(QStringLiteral("-"), QStringLiteral(" "));
-            arena.replaceInStrings(QStringLiteral("S"), QStringLiteral("-"));
-            arena.replaceInStrings(QStringLiteral("R"), QStringLiteral("x"));
-            arena.replaceInStrings(QStringLiteral("^"), QStringLiteral("u"));
-            arena.replaceInStrings(QStringLiteral(">"), QStringLiteral("r"));
-            arena.replaceInStrings(QStringLiteral("v"), QStringLiteral("d"));
-            arena.replaceInStrings(QStringLiteral("<"), QStringLiteral("l"));
-            arena.replaceInStrings(QStringLiteral("0"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("1"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("2"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("3"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("4"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("5"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("6"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("7"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("8"), QStringLiteral("p"));
-            arena.replaceInStrings(QStringLiteral("9"), QStringLiteral("p"));
-            QFile arenaFile;
-            arenaFile.setFileName(QStringLiteral("%1clanbomber_%2.xml").arg(arenaDir).arg(strName));
-            arenaFile.open(QIODevice::WriteOnly | QIODevice::Text);
-
-            QTextStream streamArenaFile(&arenaFile);
-
-            streamArenaFile << "<?xml version=\"1.0\"?>\n";
-            streamArenaFile << "<Arena arenaFileVersion=\"1\" rowCount=\"" << arena.count() << "\" colCount=\"" << arena[0].count() << "\">\n";
-            for(int j = 0; j < arena.count(); j++)
-            {
-                streamArenaFile << "  <Row>" << arena[j] << "</Row>\n";
-            }
-            streamArenaFile << "</Arena>\n";
-
-            streamArenaFile.flush();
-            arenaFile.close();
-        }
-    }
-
-    ArenaSettings* selArena = arenaMap.value(ui.arenaList->currentItem()->text());
-    findArenas(selArena->fileName());
 }
 
 void ArenaSelector::Private::_k_setRandomArenaMode(bool randomModeEnabled)
