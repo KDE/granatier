@@ -80,6 +80,7 @@ int main(int argc, char** argv)
         i18n("Granatier is a Bomberman Clone!"),
         KAboutLicense::GPL, i18n("Copyright (c) 2009-2015 The Granatier Team!"));
     about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), QStringLiteral("k.hias@gmx.de"));
+    about.addCredit(i18n("Arturo Silva"), i18n("Most of the beautiful granatier graphics"));
     about.addCredit(i18n("Thomas Gallinari"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("tg8187@yahoo.fr"));
     about.addCredit(i18n("Pierre-Benoit Besse"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("besse.pb@gmail.com"));
     about.addCredit(i18n("Romain Castan"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("romaincastan@gmail.com"));
