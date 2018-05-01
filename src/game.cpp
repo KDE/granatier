@@ -28,6 +28,7 @@
 #include "bomb.h"
 #include "block.h"
 #include "config/playersettings.h"
+#include "granatier_random.h"
 
 #include <QPointF>
 #include <QTimer>
@@ -37,7 +38,6 @@
 #include <kgsound.h>
 #include <QStandardPaths>
 
-#include <random>
 
 Game::Game(PlayerSettings* playerSettings)
 {
@@ -124,10 +124,7 @@ void Game::init()
             }
         }
 
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        std::uniform_int_distribution<int> dis(0, m_randomArenaModeArenaList.count() - 1);
-        int nIndex = dis(gen);
+        int nIndex = granatier::RNG::fromIntRange(0, m_randomArenaModeArenaList.count() - 1);
         filePath = m_randomArenaModeArenaList.at(nIndex);
         m_randomArenaModeArenaList.removeAt(nIndex);
     }
@@ -331,26 +328,24 @@ QList<Bonus*> Game::getBonus() const
 
 void Game::createBonus()
 {
-    Bonus* bonus;
-    int nBonusCount = 0.3 * m_blocks.size() / 4;
-    int nBadBonusCount = 0.1 * m_blocks.size() / 4;
-    int nNeutralBonusCount = static_cast <int> ((qrand()/1.0)/RAND_MAX * 2);
-    QList<Granatier::Bonus::Type> bonusTypeList;
-    Granatier::Bonus::Type bonusType;
-    int nFullSize = m_blocks.size();
-    int nQuarterSize = 0;
-
+    int nRemainingNeutralBonuses = 1;
     for(int nQuarter = 0; nQuarter < 4; nQuarter++)
     {
-        nQuarterSize = (nQuarter < 3 ? nFullSize / 4 : nFullSize - 3 * (nFullSize / 4));
-        bonusTypeList.clear();
+        Bonus* bonus;
+        int nBonusCount = 0.3 * m_blocks.size() / 4;
+        int nBadBonusCount = 0.1 * m_blocks.size() / 4;
+        int nNeutralBonusCount = granatier::RNG::fromIntRange(0, nRemainingNeutralBonuses);
+        QList<Granatier::Bonus::Type> bonusTypeList;
+        Granatier::Bonus::Type bonusType;
+        int nFullSize = m_blocks.size();
+        int nQuarterSize = (nQuarter < 3 ? nFullSize / 4 : nFullSize - 3 * (nFullSize / 4));
 
         for (int i = 0; i < nQuarterSize; ++i)
         {
             if(i < nBonusCount)
             {
-                int nNumberOfBonuses = 6;
-                switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * nNumberOfBonuses))
+                constexpr int NumberOfBonuses = 6;
+                switch (granatier::RNG::fromIntRange(0, NumberOfBonuses-1))
                 {
                     case 0: bonusType = Granatier::Bonus::SPEED;
                             break;
@@ -369,7 +364,8 @@ void Game::createBonus()
             }
             else if (i-nBonusCount < nBadBonusCount)
             {
-                switch (static_cast <int> ((qrand()/1.0)/RAND_MAX * 5))
+                constexpr int NumberOfBadBonuses = 5;
+                switch (granatier::RNG::fromIntRange(0, NumberOfBadBonuses-1))
                 {
                     case 0: bonusType = Granatier::Bonus::HYPERACTIVE;
                             break;
@@ -387,6 +383,7 @@ void Game::createBonus()
             else if(i-nBonusCount-nBadBonusCount < nNeutralBonusCount)
             {
                 bonusType = Granatier::Bonus::RESURRECT;
+                nRemainingNeutralBonuses--;
             }
             else {
                 bonusType = Granatier::Bonus::NONE;
@@ -398,15 +395,7 @@ void Game::createBonus()
         int nShuffle;
         for (int i = 0; i < nQuarterSize; ++i)
         {
-            nShuffle = nQuarterSize * (qrand()/1.0)/RAND_MAX;
-            if(nShuffle >= nQuarterSize)
-            {
-                nShuffle = nQuarterSize - 1;
-            }
-            else if(nShuffle < 0)
-            {
-                nShuffle = 0;
-            }
+            nShuffle = granatier::RNG::fromIntRange(0, nQuarterSize-1);
             bonusTypeList.swap(i, nShuffle);
         }
 
@@ -570,8 +559,8 @@ void Game::decrementRemainingRoundTime()
             bool bFound = false;
             do
             {
-                nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
-                nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
+                nRow = granatier::RNG::fromIntRange(0, m_arena->getNbRows()-1);
+                nCol = granatier::RNG::fromIntRange(0, m_arena->getNbColumns()-1);
                 cellType = m_arena->getCell(nRow, nCol).getType();
                 if(cellType != Granatier::Cell::WALL && cellType != Granatier::Cell::HOLE && m_arena->getCell(nRow, nCol).isWalkable(nullptr))
                 {
@@ -582,7 +571,7 @@ void Game::decrementRemainingRoundTime()
 
             m_bombCount++;
             Bomb* bomb = new Bomb((nCol + 0.5) * Granatier::CellSize, (nRow + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 1000);    // time in ms
-            bomb->setBombPower((qrand()/1.0)/RAND_MAX * 2 + 1);
+            bomb->setBombPower(static_cast<int>(granatier::RNG::fromRealRange(1.0, 2.5)));
             emit bombCreated(bomb);
             connect(bomb, &Bomb::bombDetonated, this, &Game::bombDetonated);
             m_bombs.append(bomb);

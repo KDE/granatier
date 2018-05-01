@@ -18,6 +18,7 @@
 
 #include "mapparser.h"
 #include "arena.h"
+#include "granatier_random.h"
 
 #include <cstdlib>
 #include <QPointF>
@@ -91,7 +92,7 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                     break;
                 case 'x':
                     // create a random block
-                    if((qrand()/1.0)/RAND_MAX > 0.25)
+                    if(granatier::RNG::fromIntRange(0, 100) > 25)
                     {
                         m_arena->setCellType(m_counterRows,i,Granatier::Cell::BLOCK);
                     }

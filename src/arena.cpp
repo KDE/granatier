@@ -18,6 +18,7 @@
  */
 
 #include "arena.h"
+#include "granatier_random.h"
 
 #include <QPoint>
 #include <QDateTime>
@@ -91,19 +92,10 @@ void Arena::addPlayerPosition(const QPointF &p_position)
 {
     m_playerPosition.append(p_position);
 
-    //TODO: maybe in own function
     int nShuffle;
     for (int i = 0; i < m_playerPosition.size(); i++)
     {
-        nShuffle = m_playerPosition.size() * (qrand()/1.0)/RAND_MAX;
-        if(nShuffle >= m_playerPosition.size())
-        {
-            nShuffle = m_playerPosition.size() - 1;
-        }
-        else if(nShuffle < 0)
-        {
-            nShuffle = 0;
-        }
+        nShuffle = granatier::RNG::fromIntRange(0, m_playerPosition.size()-1);
         m_playerPosition.swap(i, nShuffle);
     }
 }

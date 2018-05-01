@@ -19,6 +19,7 @@
 
 #include "bomb.h"
 #include "arena.h"
+#include "granatier_random.h"
 
 #include <QTimer>
 
@@ -548,8 +549,8 @@ void Bomb::updateMortarState()
 
             do
             {
-                nRow = m_arena->getNbRows() * (qrand()/1.0)/RAND_MAX;
-                nCol = m_arena->getNbColumns() * (qrand()/1.0)/RAND_MAX;
+                nRow = granatier::RNG::fromIntRange(0, m_arena->getNbRows()-1);
+                nCol = granatier::RNG::fromIntRange(0, m_arena->getNbColumns()-1);
                 if(m_arena->getCell(nRow, nCol).getType() != Granatier::Cell::WALL)
                 {
                     bFound = true;

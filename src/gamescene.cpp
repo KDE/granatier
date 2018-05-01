@@ -34,6 +34,7 @@
 #include "bombexplosionitem.h"
 #include "infooverlay.h"
 #include "infosidebar.h"
+#include "granatier_random.h"
 
 #include <KgTheme>
 #include <KgThemeProvider>
@@ -405,7 +406,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
                                 bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_pandora"));
                         }
 
-                        if((qrand()/1.0)/RAND_MAX * 10 > 9 && bonusItem->spriteKey() != QStringLiteral("bonus_neutral_resurrect"))
+                        if(granatier::RNG::fromIntRange(0, 10) > 9 && bonusItem->spriteKey() != QStringLiteral("bonus_neutral_resurrect"))
                         {
                             bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_pandora"));
                         }
