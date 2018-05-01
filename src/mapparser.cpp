@@ -92,7 +92,7 @@ bool MapParser::endElement(const QString &, const QString &, const QString & p_q
                     break;
                 case 'x':
                     // create a random block
-                    if(granatier::RNG::fromIntRange(0, 100) > 25)
+                    if(granatier::RNG::fromRange(0, 100) > 25)
                     {
                         m_arena->setCellType(m_counterRows,i,Granatier::Cell::BLOCK);
                     }

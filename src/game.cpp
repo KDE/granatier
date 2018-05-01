@@ -124,7 +124,7 @@ void Game::init()
             }
         }
 
-        int nIndex = granatier::RNG::fromIntRange(0, m_randomArenaModeArenaList.count() - 1);
+        int nIndex = granatier::RNG::fromRange(0, m_randomArenaModeArenaList.count() - 1);
         filePath = m_randomArenaModeArenaList.at(nIndex);
         m_randomArenaModeArenaList.removeAt(nIndex);
     }
@@ -334,7 +334,7 @@ void Game::createBonus()
         Bonus* bonus;
         int nBonusCount = static_cast<int>(0.3 * m_blocks.size() / 4);
         int nBadBonusCount = static_cast<int>(0.1 * m_blocks.size() / 4);
-        int nNeutralBonusCount = granatier::RNG::fromIntRange(0, nRemainingNeutralBonuses);
+        int nNeutralBonusCount = granatier::RNG::fromRange(0, nRemainingNeutralBonuses);
         QList<Granatier::Bonus::Type> bonusTypeList;
         Granatier::Bonus::Type bonusType;
         int nFullSize = m_blocks.size();
@@ -345,7 +345,7 @@ void Game::createBonus()
             if(i < nBonusCount)
             {
                 constexpr int NumberOfBonuses = 6;
-                switch (granatier::RNG::fromIntRange(0, NumberOfBonuses-1))
+                switch (granatier::RNG::fromRange(0, NumberOfBonuses-1))
                 {
                     case 0: bonusType = Granatier::Bonus::SPEED;
                             break;
@@ -365,7 +365,7 @@ void Game::createBonus()
             else if (i-nBonusCount < nBadBonusCount)
             {
                 constexpr int NumberOfBadBonuses = 5;
-                switch (granatier::RNG::fromIntRange(0, NumberOfBadBonuses-1))
+                switch (granatier::RNG::fromRange(0, NumberOfBadBonuses-1))
                 {
                     case 0: bonusType = Granatier::Bonus::HYPERACTIVE;
                             break;
@@ -395,7 +395,7 @@ void Game::createBonus()
         int nShuffle;
         for (int i = 0; i < nQuarterSize; ++i)
         {
-            nShuffle = granatier::RNG::fromIntRange(0, nQuarterSize-1);
+            nShuffle = granatier::RNG::fromRange(0, nQuarterSize-1);
             bonusTypeList.swap(i, nShuffle);
         }
 
@@ -559,8 +559,8 @@ void Game::decrementRemainingRoundTime()
             bool bFound = false;
             do
             {
-                nRow = granatier::RNG::fromIntRange(0, m_arena->getNbRows()-1);
-                nCol = granatier::RNG::fromIntRange(0, m_arena->getNbColumns()-1);
+                nRow = granatier::RNG::fromRange(0, m_arena->getNbRows()-1);
+                nCol = granatier::RNG::fromRange(0, m_arena->getNbColumns()-1);
                 cellType = m_arena->getCell(nRow, nCol).getType();
                 if(cellType != Granatier::Cell::WALL && cellType != Granatier::Cell::HOLE && m_arena->getCell(nRow, nCol).isWalkable(nullptr))
                 {
@@ -571,7 +571,7 @@ void Game::decrementRemainingRoundTime()
 
             m_bombCount++;
             Bomb* bomb = new Bomb((nCol + 0.5) * Granatier::CellSize, (nRow + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 1000);    // time in ms
-            bomb->setBombPower(static_cast<int>(granatier::RNG::fromRealRange(1.0, 2.5)));
+            bomb->setBombPower(static_cast<int>(granatier::RNG::fromRange(1.0, 2.5)));
             emit bombCreated(bomb);
             connect(bomb, &Bomb::bombDetonated, this, &Game::bombDetonated);
             m_bombs.append(bomb);

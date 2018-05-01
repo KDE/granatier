@@ -406,7 +406,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
                                 bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_pandora"));
                         }
 
-                        if(granatier::RNG::fromIntRange(0, 10) > 9 && bonusItem->spriteKey() != QStringLiteral("bonus_neutral_resurrect"))
+                        if(granatier::RNG::fromRange(0, 10) > 9 && bonusItem->spriteKey() != QStringLiteral("bonus_neutral_resurrect"))
                         {
                             bonusItem->setSpriteKey(QStringLiteral("bonus_neutral_pandora"));
                         }

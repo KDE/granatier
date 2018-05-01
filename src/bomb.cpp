@@ -549,8 +549,8 @@ void Bomb::updateMortarState()
 
             do
             {
-                nRow = granatier::RNG::fromIntRange(0, m_arena->getNbRows()-1);
-                nCol = granatier::RNG::fromIntRange(0, m_arena->getNbColumns()-1);
+                nRow = granatier::RNG::fromRange(0, m_arena->getNbRows()-1);
+                nCol = granatier::RNG::fromRange(0, m_arena->getNbColumns()-1);
                 if(m_arena->getCell(nRow, nCol).getType() != Granatier::Cell::WALL)
                 {
                     bFound = true;
