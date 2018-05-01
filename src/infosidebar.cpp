@@ -49,7 +49,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         playerName.setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.25, QFont::Bold, false));
         if(nMaxPlayerNameLength < playerName.boundingRect().width())
         {
-            nMaxPlayerNameLength = playerName.boundingRect().width();
+            nMaxPlayerNameLength = static_cast<int>(playerName.boundingRect().width());
         }
         if(i == playerList.count() - 1)
         {
@@ -60,11 +60,11 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
             }
             else
             {
-                nWidth = nMaxPlayerNameLength + Granatier::CellSize / 2 + 4;
+                nWidth = static_cast<int>(nMaxPlayerNameLength + Granatier::CellSize / 2 + 4);
             }
             nLeft = -(nWidth + 20);
-            nHeight = playerName.boundingRect().height() + Granatier::CellSize / 2;
-            nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - playerList.count()/2 * (nHeight + 4);
+            nHeight = static_cast<int>(playerName.boundingRect().height() + Granatier::CellSize / 2);
+            nTop = static_cast<int>(m_gameScene->sceneRect().y() + m_gameScene->height()/2 - playerList.count()/2 * (nHeight + 4));
         }
     }
 

@@ -32,7 +32,7 @@ ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRende
     connect(p_model, SIGNAL(moved(qreal,qreal)), this, SLOT(update(qreal,qreal)));
 
     m_renderSize = QSize(1, 1);
-    m_itemSizeSet = QSize(Granatier::CellSize, Granatier::CellSize);
+    m_itemSizeSet = QSize(static_cast<int>(Granatier::CellSize), static_cast<int>(Granatier::CellSize));
     m_itemSizeReal = m_itemSizeSet;
 }
 
@@ -100,8 +100,8 @@ void ElementItem::updateGraphicsInternal(qreal svgScaleFactor)
         QPointF sceneTopLeft = scene()->views().first()->mapToScene(0, 0);
         QPointF sceneBottomRight = scene()->views().first()->mapToScene(viewWidth, viewHeight);
 
-        qreal sceneWidth = sceneBottomRight.x() - sceneTopLeft.x();
-        qreal sceneHeight = sceneBottomRight.y() - sceneTopLeft.y();
+        int sceneWidth = static_cast<int>(sceneBottomRight.x() - sceneTopLeft.x());
+        int sceneHeight = static_cast<int>(sceneBottomRight.y() - sceneTopLeft.y());
         m_itemSizeReal = QSize(sceneWidth, sceneHeight);
     }
 

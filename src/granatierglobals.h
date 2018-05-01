@@ -25,10 +25,10 @@
 namespace Granatier
 {
     /** The Frames Per Second for the game */
-    const int FPS = 60;
+    constexpr int FPS = 60;
 
     /** The Cell size */
-    const qreal CellSize = 60.0;
+    constexpr qreal CellSize = 60.0;
 
     /** All possible graphic types */
     namespace GraphicItem

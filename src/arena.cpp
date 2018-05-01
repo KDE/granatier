@@ -135,7 +135,7 @@ QPoint Arena::getCoords(Cell* p_cell) const
 
 int Arena::getRowFromY(const qreal p_y) const
 {
-    int nRow = (p_y / Granatier::CellSize);
+    int nRow = static_cast<int>(p_y / Granatier::CellSize);
     if (p_y < 0)
     {
         nRow -= 1;
@@ -145,7 +145,7 @@ int Arena::getRowFromY(const qreal p_y) const
 
 int Arena::getColFromX(const qreal p_x) const
 {
-    int nCol = (p_x / Granatier::CellSize);
+    int nCol = static_cast<int>(p_x / Granatier::CellSize);
     if (p_x < 0)
     {
         nCol -= 1;

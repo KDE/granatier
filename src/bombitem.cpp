@@ -35,8 +35,8 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
     connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
     connect(this, SIGNAL(bombItemFinished(BombItem*)), p_model, SLOT(slot_detonationCompleted()));
 
-    int width = Granatier::CellSize * 0.9;
-    int height = Granatier::CellSize * 0.9;
+    int width = static_cast<int>(Granatier::CellSize * 0.9);
+    int height = static_cast<int>(Granatier::CellSize * 0.9);
     if((static_cast<int>(Granatier::CellSize) - width) % 2 != 0)
     {
         width--;
@@ -117,8 +117,8 @@ void BombItem::update(qreal p_x, qreal p_y)
     qreal y = p_y - m_itemSizeSet.height() / 2;
     // Updates the view coordinates
     setPos(x, y);
-    m_x = p_x;
-    m_y = p_y;
+    m_x = static_cast<int>(p_x);
+    m_y = static_cast<int>(p_y);
 }
 
 void BombItem::startDetonation()
@@ -171,8 +171,8 @@ void BombItem::pulse()
         if (m_animationCounter % 2 == 0)
         {
             m_animationCounter = 0;
-            int viewWidth = m_renderSize.width() * 0.98;
-            int viewHeight = m_renderSize.height() * 0.98;
+            int viewWidth = static_cast<int>(m_renderSize.width() * 0.98);
+            int viewHeight = static_cast<int>(m_renderSize.height() * 0.98);
             if((m_renderSize.width() - viewWidth) % 2 != 0)
             {
                 viewWidth--;

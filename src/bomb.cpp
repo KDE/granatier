@@ -141,7 +141,7 @@ void Bomb::updateMove()
     {
         bool bOnCenter = false;
         int xDirection = 0;
-        int xDeltaCenter = Granatier::CellSize/2 - (m_x - currentCol * Granatier::CellSize);
+        int xDeltaCenter = static_cast<int>(Granatier::CellSize/2 - (m_x - currentCol * Granatier::CellSize));
         bool bMoveAwayFromCenter = false;
         bool bIsHurdleCurrentCell = false;
         bool bIsHurdleNextCell = false;
@@ -155,7 +155,7 @@ void Bomb::updateMove()
             xDirection = -1;
         }
         int yDirection = 0;
-        int yDeltaCenter = Granatier::CellSize/2 - (m_y - currentRow * Granatier::CellSize);
+        int yDeltaCenter = static_cast<int>(Granatier::CellSize/2 - (m_y - currentRow * Granatier::CellSize));
         if (m_ySpeed > 0)
         {
             yDirection = 1;

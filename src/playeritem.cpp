@@ -50,8 +50,8 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
     m_animationTimer->setDuration(PlayerItem::ANIM_SPEED);
     connect(m_animationTimer, &QTimeLine::frameChanged, this, &PlayerItem::setFrame);
 
-    int width = Granatier::CellSize * 0.9;
-    int height = Granatier::CellSize * 0.9;
+    int width = static_cast<int>(Granatier::CellSize * 0.9);
+    int height = static_cast<int>(Granatier::CellSize * 0.9);
     if((static_cast<int>(Granatier::CellSize) - width) % 2 != 0)
     {
         width--;

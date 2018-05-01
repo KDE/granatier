@@ -44,6 +44,8 @@ ecm_add_app_icon(granatierSources ICONS ${ICONS_SRCS})
 
 add_executable(granatier ${granatierSources})
 
+target_compile_options(granatier PRIVATE -W -Wall -Wpedantic -Wextra -Wconversion -Wuninitialized)
+
 target_link_libraries(granatier
     Qt5::Xml
     Qt5::Widgets

@@ -329,13 +329,13 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
         playerName = m_mapPlayerNames.value(playerList.at(i));
         if(nMaxPlayerNameLength < playerName->boundingRect().width())
         {
-            nMaxPlayerNameLength = playerName->boundingRect().width();
+            nMaxPlayerNameLength = static_cast<int>(playerName->boundingRect().width());
         }
         if(i == playerList.count() - 1)
         {
             KGameRenderedItem score(renderer, QStringLiteral("score_star_enabled"));
-            nLeft = m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + em.boundingRect().width()/2 + nWinPoints * (Granatier::CellSize * 0.6 + em.boundingRect().width()/5))/2;
-            nTop = m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * em.boundingRect().height();
+            nLeft = static_cast<int>(m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + em.boundingRect().width()/2 + nWinPoints * (Granatier::CellSize * 0.6 + em.boundingRect().width()/5))/2);
+            nTop = static_cast<int>(m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * em.boundingRect().height());
         }
     }
 

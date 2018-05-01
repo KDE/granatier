@@ -28,9 +28,9 @@
 
 #include <cmath>
 
-const int onIceSpeedIncrease = 2;
-const int badBonusTimerTimeout = 100;
-const int badBonusCountdown = 10000;
+constexpr int onIceSpeedIncrease = 2;
+constexpr int badBonusTimerTimeout = 100;
+constexpr int badBonusCountdown = 10000;
 
 Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSettings* p_playerSettings, Arena* p_arena)
  : Character(p_x, p_y, p_arena)
@@ -111,7 +111,7 @@ void Player::goUp()
 {
     m_askedXSpeed = 0;
 
-    int nSpeed = m_speed;
+    qreal nSpeed = m_speed;
     if(m_onIce)
     {
         nSpeed = m_speed + onIceSpeedIncrease;
@@ -125,7 +125,7 @@ void Player::goDown()
 {
     m_askedXSpeed = 0;
 
-    int nSpeed = m_speed;
+    qreal nSpeed = m_speed;
     if(m_onIce)
     {
         nSpeed = m_speed + onIceSpeedIncrease;
@@ -137,7 +137,7 @@ void Player::goDown()
 
 void Player::goRight()
 {
-    int nSpeed = m_speed;
+    qreal nSpeed = m_speed;
     if(m_onIce)
     {
         nSpeed = m_speed + onIceSpeedIncrease;
@@ -151,7 +151,7 @@ void Player::goRight()
 
 void Player::goLeft()
 {
-    int nSpeed = m_speed;
+    qreal nSpeed = m_speed;
     if(m_onIce)
     {
         nSpeed = m_speed + onIceSpeedIncrease;
@@ -568,8 +568,8 @@ void Player::addBonus(Bonus* p_bonus)
             break;
         case Granatier::Bonus::HYPERACTIVE:
             {
-                int askedXSpeedTemp = m_askedXSpeed;
-                int askedYSpeedTemp = m_askedYSpeed;
+                qreal askedXSpeedTemp = m_askedXSpeed;
+                qreal askedYSpeedTemp = m_askedYSpeed;
                 m_normalSpeed = m_speed;
                 m_speed = m_maxSpeed * 3;
                 m_askedXSpeed = sign(m_xSpeed) * m_speed;
@@ -585,8 +585,8 @@ void Player::addBonus(Bonus* p_bonus)
             break;
         case Granatier::Bonus::SLOW:
             {
-                int askedXSpeedTemp = m_askedXSpeed;
-                int askedYSpeedTemp = m_askedYSpeed;
+                qreal askedXSpeedTemp = m_askedXSpeed;
+                qreal askedYSpeedTemp = m_askedYSpeed;
                 m_normalSpeed = m_speed;
                 m_speed = 1;
                 m_askedXSpeed = sign(m_xSpeed) * m_speed;
@@ -602,8 +602,8 @@ void Player::addBonus(Bonus* p_bonus)
             break;
         case Granatier::Bonus::MIRROR:
             {
-                int askedXSpeedTemp = m_askedXSpeed;
-                int askedYSpeedTemp = m_askedYSpeed;
+                qreal askedXSpeedTemp = m_askedXSpeed;
+                qreal askedYSpeedTemp = m_askedYSpeed;
                 m_askedXSpeed = -m_xSpeed;
                 m_askedYSpeed = -m_ySpeed;
                 switch(m_direction)
@@ -861,7 +861,7 @@ void Player::slot_badBonusTimerTimeout()
     }
     else
     {
-        bonusUpdated(this, m_badBonusType, (badBonusCountdown - m_badBonusMillisecondsToElapse)/(badBonusCountdown/100.));
+        bonusUpdated(this, m_badBonusType, (badBonusCountdown - m_badBonusMillisecondsToElapse) * 100 / badBonusCountdown);
     }
 }
 
@@ -875,8 +875,8 @@ void Player::slot_removeBadBonus()
         case Granatier::Bonus::HYPERACTIVE:
         case Granatier::Bonus::SLOW:
             {
-                int askedXSpeedTemp = m_askedXSpeed;
-                int askedYSpeedTemp = m_askedYSpeed;
+                qreal askedXSpeedTemp = m_askedXSpeed;
+                qreal askedYSpeedTemp = m_askedYSpeed;
                 m_speed = m_normalSpeed;
                 m_askedXSpeed = sign(m_xSpeed) * m_speed;
                 m_askedYSpeed = sign(m_ySpeed) * m_speed;
@@ -887,8 +887,8 @@ void Player::slot_removeBadBonus()
             break;
         case Granatier::Bonus::MIRROR:
             {
-                int askedXSpeedTemp = m_askedXSpeed;
-                int askedYSpeedTemp = m_askedYSpeed;
+                qreal askedXSpeedTemp = m_askedXSpeed;
+                qreal askedYSpeedTemp = m_askedYSpeed;
                 m_askedXSpeed = -m_xSpeed;
                 m_askedYSpeed = -m_ySpeed;
                 switch(m_direction)

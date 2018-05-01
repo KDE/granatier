@@ -323,8 +323,8 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
     }
 
     //calculate the scaling factor for the SVGs
-    int horizontalPixelsPerCell = (ui.arenaPreview->size().width() - 4) / (minSize.width()/Granatier::CellSize);
-    int verticalPixelsPerCell = (ui.arenaPreview->size().height() - 4) / (minSize.height()/Granatier::CellSize);
+    int horizontalPixelsPerCell = static_cast<int>((ui.arenaPreview->size().width() - 4) / (minSize.width()/Granatier::CellSize));
+    int verticalPixelsPerCell = static_cast<int>((ui.arenaPreview->size().height() - 4) / (minSize.height()/Granatier::CellSize));
     if(horizontalPixelsPerCell < verticalPixelsPerCell)
     {
         svgScaleFactor = Granatier::CellSize / horizontalPixelsPerCell;
@@ -427,7 +427,7 @@ QSize ArenaSelector::Private::calculateSvgSize()
     QPoint topLeft(0, 0);
     topLeft = m_graphicsScene->views().first()->mapFromScene(topLeft);
 
-    QPoint bottomRight(Granatier::CellSize, Granatier::CellSize);
+    QPoint bottomRight(static_cast<int>(Granatier::CellSize), static_cast<int>(Granatier::CellSize));
     bottomRight = m_graphicsScene->views().first()->mapFromScene(bottomRight);
 
     QSize svgSize;

@@ -177,8 +177,8 @@ void BombExplosionItem::updateGraphics(qreal svgScaleFactor)
         QPointF sceneTopLeft = scene()->views().first()->mapToScene(0, 0);
         QPointF sceneBottomRight = scene()->views().first()->mapToScene(viewWidth, viewHeight);
 
-        qreal sceneWidth = sceneBottomRight.x() - sceneTopLeft.x();
-        qreal sceneHeight = sceneBottomRight.y() - sceneTopLeft.y();
+        int sceneWidth = static_cast<int>(sceneBottomRight.x() - sceneTopLeft.x());
+        int sceneHeight = static_cast<int>(sceneBottomRight.y() - sceneTopLeft.y());
         m_itemSizeReal = QSize(sceneWidth, sceneHeight);
     }
 

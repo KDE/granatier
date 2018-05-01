@@ -45,7 +45,7 @@ namespace  RNG {
         std::uniform_real_distribution<T> distribution(min, max);
         return distribution(randomDevice);
     }
-};
+}
 
 }
 

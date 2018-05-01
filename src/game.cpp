@@ -332,8 +332,8 @@ void Game::createBonus()
     for(int nQuarter = 0; nQuarter < 4; nQuarter++)
     {
         Bonus* bonus;
-        int nBonusCount = 0.3 * m_blocks.size() / 4;
-        int nBadBonusCount = 0.1 * m_blocks.size() / 4;
+        int nBonusCount = static_cast<int>(0.3 * m_blocks.size() / 4);
+        int nBadBonusCount = static_cast<int>(0.1 * m_blocks.size() / 4);
         int nNeutralBonusCount = granatier::RNG::fromIntRange(0, nRemainingNeutralBonuses);
         QList<Granatier::Bonus::Type> bonusTypeList;
         Granatier::Bonus::Type bonusType;

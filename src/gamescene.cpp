@@ -88,12 +88,12 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
 
     // The remaining time
     m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
-    m_remainingTimeLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_remainingTimeLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_remainingTimeLabel->setZValue(1000);
 
     m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
-    m_arenaNameLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_arenaNameLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_arenaNameLabel->setZValue(1000);
 
@@ -259,8 +259,8 @@ void GameScene::init()
 
     //set the minimum size for the scene
     m_minSize = sceneRect();
-    int minWidth = (static_cast<int>(m_minSize.width() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
-    int minHeight = (static_cast<int>(m_minSize.height() / Granatier::CellSize + 1.1)) * Granatier::CellSize;
+    int minWidth = static_cast<int>((m_minSize.width() / Granatier::CellSize + 1.1) * Granatier::CellSize);
+    int minHeight = static_cast<int>((m_minSize.height() / Granatier::CellSize + 1.1) * Granatier::CellSize);
     m_minSize.setX(m_minSize.x() + (m_minSize.width() - minWidth) / 10);
     m_minSize.setY(m_minSize.y() + (m_minSize.height() - minHeight) / 4);
     m_minSize.setWidth(minWidth);
@@ -669,8 +669,8 @@ void GameScene::resizeSprites(int delayForBackground)
     }
 
     //calculate the scaling factor for the SVGs
-    int horizontalPixelsPerCell = views().first()->size().width() / (m_minSize.width()/Granatier::CellSize);
-    int verticalPixelsPerCell = views().first()->size().height() / (m_minSize.height()/Granatier::CellSize);
+    int horizontalPixelsPerCell = static_cast<int>(views().first()->size().width() / (m_minSize.width()/Granatier::CellSize));
+    int verticalPixelsPerCell = static_cast<int>(views().first()->size().height() / (m_minSize.height()/Granatier::CellSize));
     if(horizontalPixelsPerCell < verticalPixelsPerCell)
     {
         m_SvgScaleFactor = Granatier::CellSize / horizontalPixelsPerCell;
