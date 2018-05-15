@@ -36,7 +36,7 @@ bool Cell::isWalkable(Element* p_element) const
     }
     else if(!m_elements.isEmpty())
     {
-        foreach(Element* element, m_elements)
+        for(const auto& element: m_elements)
         {
             if(element->getType() == Granatier::Element::BLOCK ||
                 (element->getType() == Granatier::Element::BOMB && (p_element == nullptr || p_element != element)) ||
@@ -66,15 +66,15 @@ QList <Element*> Cell::getElements() const
 
 QList <Element*> Cell::getElements(Granatier::Element::Type type) const
 {
-    QList<Element*> elements;
-    foreach(Element* element, m_elements)
+    QList<Element*> elementsFound;
+    for(const auto& element: m_elements)
     {
         if(element->getType() == type)
         {
-            elements.append(element);
+            elementsFound.append(element);
         }
     }
-    return elements;
+    return elementsFound;
 }
 
 void Cell::setElement(Element* p_element)

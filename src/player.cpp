@@ -281,7 +281,7 @@ void Player::updateMove()
                 }
                 if(kickBomb)
                 {
-                    foreach(Element* element, bombElements)
+                    for(auto& element: bombElements)
                     {
                         dynamic_cast <Bomb*> (element)->setKicked(m_direction);
                     }
@@ -385,11 +385,9 @@ void Player::updateMove()
                     if(m_kickBomb)
                     {
                         QList<Element*> bombElements =  m_arena->getCell(cellRow, cellCol).getElements(Granatier::Element::BOMB);
+                        for(auto& element: bombElements)
                         {
-                            foreach(Element* element, bombElements)
-                            {
-                                dynamic_cast <Bomb*> (element)->setKicked(m_direction);
-                            }
+                            dynamic_cast <Bomb*> (element)->setKicked(m_direction);
                         }
                     }
                 }

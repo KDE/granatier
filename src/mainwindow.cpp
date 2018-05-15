@@ -176,6 +176,7 @@ void MainWindow::showSettings()
         delete m_settingsDialog;
     }
     KConfigDialog* settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), Settings::self());
+    settingsDialog->setMinimumSize(900, 600);
     // General Settings
     settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), QStringLiteral("games-config-options"));
     // Theme
@@ -212,7 +213,7 @@ void MainWindow::settingsDialogCanceled()
     if(m_currentThemeIdentifier != QString::fromLatin1(m_themeProvider->currentTheme()->identifier()))
     {
         QList<const KgTheme*> themeList = m_themeProvider->themes();
-        foreach(const KgTheme* theme, themeList)
+        for(const auto& theme: themeList)
         {
             if(QString::fromLatin1(theme->identifier()) == m_currentThemeIdentifier)
             {

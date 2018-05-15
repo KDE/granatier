@@ -344,7 +344,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             if (!blockElements.isEmpty())
             {
                 // Create the element item and set the image
-                foreach(Element* element, blockElements)
+                for(const auto& element: blockElements)
                 {
                     Block* block = dynamic_cast <Block*> (element);
                     BlockItem* blockItem = new BlockItem(block, m_rendererArenaItems);
@@ -439,7 +439,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
     }
 
     // Create the Bomb items
-    foreach(Bomb* bomb, m_tempBombList)
+    for(auto& bomb: m_tempBombList)
     {
         createBombItem(bomb);
     }
@@ -920,7 +920,7 @@ void GameScene::bombDetonated(Bomb* bomb)
     {
         bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BOMB);
         int tempBombDetonationCountdown = nDetonationCountdown;
-        foreach(Element* element, bombElements)
+        for(const auto& element: bombElements)
         {
             if(dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
             {
@@ -932,7 +932,7 @@ void GameScene::bombDetonated(Bomb* bomb)
         blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BLOCK);
         if(!blockElements.isEmpty())
         {
-            foreach(Element* element, blockElements)
+            for(const auto& element: blockElements)
             {
                 dynamic_cast <Block*> (element)->startDestruction();
                 if (m_blockItems[nRow][nColumn] != nullptr)
@@ -987,7 +987,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     int tempBombDetonationCountdown = anDirectionDetonationCountdown[direction];
                     bool increaseDetonationTimeout = false;
-                    foreach(Element* element, bombElements)
+                    for(const auto& element: bombElements)
                     {
                         if(dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                         {
@@ -1004,7 +1004,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     if(!blockElements.isEmpty())
                     {
                         abDirectionsDone[direction] = true;
-                        foreach(Element* element, blockElements)
+                        for(const auto& element: blockElements)
                         {
                             dynamic_cast <Block*> (element)->startDestruction();
                             if (m_blockItems[nRow][nColumn] != nullptr)

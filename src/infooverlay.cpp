@@ -41,10 +41,10 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     renderer = m_gameScene->renderer(Granatier::Element::SCORE);
 
     //create the labels
-    for(int i = 0; i < playerList.count(); i++)
+    for(const auto& player: playerList)
     {
         QList <KGameRenderedItem*> svgItemList;
-        QGraphicsTextItem* playerName = new QGraphicsTextItem(playerList[i]->getPlayerName());
+        QGraphicsTextItem* playerName = new QGraphicsTextItem(player->getPlayerName());
         playerName->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
         playerName->setDefaultTextColor(QColor("#FFFF00"));
         playerName->setZValue(2001);
@@ -55,8 +55,8 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
             score->setZValue(2001);
             svgItemList.append(score);
         }
-        m_mapScore.insert(playerList[i], svgItemList);
-        m_mapPlayerNames.insert(playerList[i], playerName);
+        m_mapScore.insert(player, svgItemList);
+        m_mapPlayerNames.insert(player, playerName);
     }
 
     QString strContinue (i18n("Press Space to continue"));
@@ -113,7 +113,7 @@ InfoOverlay::~InfoOverlay()
     hideItems();
 
     // Find the score items and remove them
-    foreach (const QList<KGameRenderedItem*>& scoreItems, m_mapScore)
+    for(const auto& scoreItems: m_mapScore)
     {
         qDeleteAll(scoreItems);
     }
@@ -307,6 +307,8 @@ void InfoOverlay::resizeDimmOverlay(qreal x, qreal y, qreal width, qreal height)
 
 void InfoOverlay::updateGraphics(qreal svgScaleFactor)
 {
+    m_svgScaleFactor = svgScaleFactor;
+    
     if(m_gameScene->views().isEmpty())
     {
         return;
@@ -319,8 +321,6 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     int nLeft = 0;
 
     QGraphicsTextItem* playerName;
-    KGameRenderer* renderer;
-    renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     QGraphicsTextItem em(QStringLiteral("M"));
     em.setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
     //calculate max player name length and top-left position
@@ -333,7 +333,6 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
         }
         if(i == playerList.count() - 1)
         {
-            KGameRenderedItem score(renderer, QStringLiteral("score_star_enabled"));
             nLeft = static_cast<int>(m_gameScene->sceneRect().x() + m_gameScene->width()/2 - (nMaxPlayerNameLength + em.boundingRect().width()/2 + nWinPoints * (Granatier::CellSize * 0.6 + em.boundingRect().width()/5))/2);
             nTop = static_cast<int>(m_gameScene->sceneRect().y() + m_gameScene->height()/2 - (playerList.count()+2)/2 * em.boundingRect().height());
         }
@@ -344,7 +343,6 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
     topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
 
     KGameRenderedItem* score;
-    renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     for(int i = 0; i < playerList.count(); i++)
     {
         playerName = m_mapPlayerNames.value(playerList.at(i));
@@ -390,29 +388,22 @@ void InfoOverlay::themeChanged()
     KGameRenderer* renderer = m_gameScene->renderer(Granatier::Element::SCORE);
     KGameRenderedItem* tempItem;
 
-    //update player infosidebar
-    QMap <Player*, QList<KGameRenderedItem*> >::iterator iteratorScore = m_mapScore.begin();
-    while (iteratorScore != m_mapScore.end())
+    for(auto& score: m_mapScore)
     {
-        QList <KGameRenderedItem*>::iterator iteratorStar = iteratorScore.value().begin();
-        while(iteratorStar != iteratorScore.value().end())
+        for(auto& star: score)
         {
-            tempItem = *iteratorStar;
-            *iteratorStar = new KGameRenderedItem(renderer, tempItem->spriteKey());
-            (*iteratorStar)->setZValue(tempItem->zValue());
-            (*iteratorStar)->setPos(tempItem->pos());
+            tempItem = star;
+            star = new KGameRenderedItem(renderer, tempItem->spriteKey());
+            star->setZValue(tempItem->zValue());
+            star->setPos(tempItem->pos());
 
             if(m_gameScene->items().contains(tempItem))
             {
                 m_gameScene->removeItem(tempItem);
-                m_gameScene->addItem(*iteratorStar);
+                m_gameScene->addItem(star);
             }
             delete tempItem;
-
-            iteratorStar++;
         }
-
-        iteratorScore++;
     }
 
     updateGraphics(m_svgScaleFactor);

@@ -52,13 +52,13 @@ int main(int argc, char** argv)
         dataDirs.append(QStringLiteral("themes"));
 
         // migrate arenas, players and themes
-        foreach(const QString &dataDir, dataDirs)
+        for(const auto& dataDir: dataDirs)
         {
             QDir sourceDir(sourceBasePath + dataDir);
             if(!sourceDir.exists()) continue;
             QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
             QDir().mkpath(targetBasePath + dataDir);
-            foreach (const QString &fileName, fileNames)
+            for(const auto& fileName: fileNames)
             {
                 targetFilePath = targetBasePath + dataDir + QLatin1Char('/') + fileName;
                 if(!QFile::exists(targetFilePath))

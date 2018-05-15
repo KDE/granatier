@@ -685,7 +685,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
         {
             if(player->hasThrowBomb() && throwDistance > 0)
             {
-                foreach(Element* element, bombElements)
+                for(auto& element: bombElements)
                 {
                     dynamic_cast <Bomb*> (element)->setThrown(player->direction());
                 }

@@ -67,7 +67,7 @@ private:
     };
     
     QMap <QString, StructPlayerSettings> m_playerSettings;
-    QMap <QString, StructPlayerSettings> m_tempPlayerSettings;
+    QMap <QString, StructPlayerSettings> m_pendingPlayerSettings;
 }; 
 
 #endif
