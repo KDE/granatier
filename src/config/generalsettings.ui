@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>385</width>
-    <height>356</height>
+    <width>389</width>
+    <height>489</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout">
@@ -134,6 +134,12 @@
      </item>
      <item row="0" column="1">
       <widget class="QSpinBox" name="kcfg_PointsToWin">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimum">
         <number>1</number>
        </property>
@@ -151,6 +157,12 @@
      </item>
      <item row="1" column="1">
       <widget class="QSpinBox" name="kcfg_RoundTime">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimum">
         <number>10</number>
        </property>
@@ -168,6 +180,12 @@
      </item>
      <item row="2" column="1">
       <widget class="QSpinBox" name="kcfg_InitialSpeed">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimum">
         <number>2</number>
        </property>
@@ -185,6 +203,12 @@
      </item>
      <item row="3" column="1">
       <widget class="QSpinBox" name="kcfg_InitialBombPower">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimum">
         <number>1</number>
        </property>
@@ -202,6 +226,12 @@
      </item>
      <item row="4" column="1">
       <widget class="QSpinBox" name="kcfg_InitialBombArmory">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="minimum">
         <number>1</number>
        </property>
