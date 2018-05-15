@@ -69,8 +69,8 @@ bool ArenaSettings::load(const QString &fileName) {
         return false;
     }
     QString filePath = QStandardPaths::locate(QStandardPaths::AppDataLocation, fileName);
-    qCDebug(GRANATIER_LOG) << "Attempting to load .desktop at" << filePath;
     if (filePath.isEmpty()) {
+        qCDebug(GRANATIER_LOG) << "Could not find arena with name" << fileName;
         return false;
     }
 
