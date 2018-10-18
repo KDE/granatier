@@ -69,13 +69,13 @@ public:
      */
     void initDestruction(int nExplosionID);
 
-private slots:
+private Q_SLOTS:
     /**
      * destruction animation
      */
     void destructionAnimation();
 
-signals:
+Q_SIGNALS:
     /**
      * signals the end of the destruction animation
      * @param bonusItem this bonus item

@@ -70,7 +70,7 @@ public:
       */
     ~MainWindow();
 
-private slots:
+private Q_SLOTS:
 
     /**
       * Initializes the MainWindow for a new game.

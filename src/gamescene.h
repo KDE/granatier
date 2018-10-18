@@ -163,7 +163,7 @@ public:
     /** setup the KGameRenderer for the selected theme and if necessary the default theme */
     void setupThemeRenderer();
 
-private slots:
+private Q_SLOTS:
 
     /**
     * Updates the elements to be drawn when the Game starts.
@@ -220,7 +220,7 @@ private slots:
     */
     void updateBombExplosionItemAnimation(BombItem* bombItem, int nFrame);
 
-signals:
+Q_SIGNALS:
 
     /**
      * Signals that the graphics need an update

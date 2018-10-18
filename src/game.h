@@ -245,7 +245,7 @@ private:
     */
     void initCharactersPosition();
 
-public slots:
+public Q_SLOTS:
 
     /**
     * Manages the key press events.
@@ -274,7 +274,7 @@ public slots:
     */
     void createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwDistance);
 
-private slots:
+private Q_SLOTS:
 
     /**
     * Updates the Game data.
@@ -306,7 +306,7 @@ private slots:
     */
     void decrementRemainingRoundTime();
 
-signals:
+Q_SIGNALS:
 
     /**
     * Emitted when the Game is started.

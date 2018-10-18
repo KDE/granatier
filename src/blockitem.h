@@ -54,7 +54,7 @@ public:
      */
     ~BlockItem();
 
-private slots:
+private Q_SLOTS:
     /**
      * Starts the destruction animation
      */
@@ -65,7 +65,7 @@ private slots:
      */
      void destructionAnimation();
 
-signals:
+Q_SIGNALS:
      /**
      * signals the end of the destruction animation
      * @param blockItem this block item

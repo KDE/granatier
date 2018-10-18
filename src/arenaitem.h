@@ -48,7 +48,7 @@ public:
       */
     ~ArenaItem();
 
-public slots:
+public Q_SLOTS:
 
     /**
      * Updates the graphics after a resize

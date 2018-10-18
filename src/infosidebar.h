@@ -97,7 +97,7 @@ public:
       */
     void themeChanged();
 
-private slots:
+private Q_SLOTS:
     /**
       * sets the bonus info
       * @param player the player which info changed
@@ -106,7 +106,7 @@ private slots:
       */
     void bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusType, int percentageElapsed);
 
-public slots:
+public Q_SLOTS:
     /**
      * Updates the graphics after a resize
      * @param svgScaleFactor the scaling factor between svg and rendered pixmap

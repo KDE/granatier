@@ -96,7 +96,7 @@ public:
      */
      void updateAnimationn(int nFrame);
 
-public slots:
+public Q_SLOTS:
 
     /**
      * Updates the graphics after a resize

@@ -64,7 +64,7 @@ public:
 private:
     Bonus* m_bonus;
 
-signals:
+Q_SIGNALS:
     void startDestructionAnimation();
 };
 

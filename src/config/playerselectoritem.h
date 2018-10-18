@@ -63,7 +63,7 @@ public:
     void setPlayerPreviewPixmap(const QPixmap& pixmap);
     void setPlayerAuthor(const QString& name, const QString& mail);
 
-private slots:
+private Q_SLOTS:
     void selectionChanged(bool selectionState);
     void settingsChanged();
 

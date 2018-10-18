@@ -67,7 +67,7 @@ public:
       */
     ~PlayerItem();
 
-public slots:
+public Q_SLOTS:
 
     /**
       * Rotates the image function of the Player direction.
@@ -129,7 +129,7 @@ public slots:
       */
     void resurrect();
 
-signals:
+Q_SIGNALS:
     void bonusItemTaken(BonusItem* bonusItem);
 };
 

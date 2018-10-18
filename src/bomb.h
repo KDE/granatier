@@ -197,7 +197,7 @@ public:
     */
     void resume();
 
-public slots:
+public Q_SLOTS:
     /**
     * Manages the Bomb explosion
     */
@@ -220,7 +220,7 @@ protected:
     */
     void moveOnCenter();
 
-signals:
+Q_SIGNALS:
     /**
     * Emitted when the Bomb is exploded.
     * @param bomb this bomb

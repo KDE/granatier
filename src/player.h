@@ -301,13 +301,13 @@ private:
       */
     void stopMoving();
 
-public slots:
+public Q_SLOTS:
     /**
      * refills the bomb armory after a bomb is exploded
      */
     void slot_refillBombArmory();
 
-private slots:
+private Q_SLOTS:
     /**
      * removes the bad bonus from the player
      */
@@ -318,7 +318,7 @@ private slots:
      */
     void slot_badBonusTimerTimeout();
 
-signals:
+Q_SIGNALS:
     /**
       * Emitted when the direction changed
       */

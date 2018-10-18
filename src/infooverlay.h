@@ -104,7 +104,7 @@ public:
      */
     void themeChanged();
 
-public slots:
+public Q_SLOTS:
     /**
      * Updates the graphics after a resize
      * @param svgScaleFactor the scaling factor between svg and rendered pixmap

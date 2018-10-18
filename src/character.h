@@ -161,7 +161,7 @@ public:
       */
     bool isInLineSight(Character* p_character) const;
 
-signals:
+Q_SIGNALS:
 
     /**
       * Emitted when the character is dead.

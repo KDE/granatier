@@ -56,7 +56,7 @@ public:
       */
     QPainterPath shape() const Q_DECL_OVERRIDE;
 
-public slots:
+public Q_SLOTS:
 
     /**
       * Updates the CharacterItem coordinates.

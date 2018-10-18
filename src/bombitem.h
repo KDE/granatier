@@ -87,7 +87,7 @@ public:
      */
     void resumeAnim();
 
-public slots:
+public Q_SLOTS:
 
     /**
      * Updates the BombItem coordinates.
@@ -96,7 +96,7 @@ public slots:
      */
     void update(qreal p_x, qreal p_y) Q_DECL_OVERRIDE;
 
-private slots:
+private Q_SLOTS:
     /**
      * Starts the bomb detonation
      */
@@ -127,7 +127,7 @@ private slots:
     */
     virtual void fallingAnimation();
 
-signals:
+Q_SIGNALS:
     /**
      * signals end of the explosion
      * @param bombItem this bombItem
