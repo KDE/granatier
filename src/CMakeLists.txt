@@ -35,6 +35,8 @@ set(granatierData
     config/granatierui.rc
 )
 
+ecm_qt_declare_logging_category(granatierSources HEADER granatier_debug.h IDENTIFIER GRANATIER_LOG CATEGORY_NAME log_granatier)
+
 ki18n_wrap_ui(granatierSources config/arenaselector.ui config/generalsettings.ui)
 
 kconfig_add_kcfg_files(granatierSources config/settings.kcfgc)
