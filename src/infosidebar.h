@@ -75,7 +75,7 @@ public:
       * @param p_renderer the renderer instance
       * @param p_scene the gamescene instance
       */
-    InfoSidebar (Game* p_game, GameScene* p_scene);
+    explicit InfoSidebar (Game* p_game, GameScene* p_scene);
 
     /**
       * Deletes the InfoSidebar instance.

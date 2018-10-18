@@ -47,7 +47,7 @@ public:
       * Computes an action on a collision with the Player.
       * @param p_player the Player instance that collides with the Bonus
       */
-    void doActionOnCollision(Player* p_player) Q_DECL_OVERRIDE;
+    void doActionOnCollision(Player* p_player) override;
 
     Granatier::Bonus::Type getBonusType() const;
 

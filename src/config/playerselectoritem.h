@@ -57,7 +57,7 @@ private:
     PlayerSettings* m_playerSettings;
     
 public:
-    PlayerSelectorItem(const QString& playerId, PlayerSettings* playerSettings, QWidget* parent = 0);
+    PlayerSelectorItem(const QString& playerId, PlayerSettings* playerSettings, QWidget* parent = nullptr);
     ~PlayerSelectorItem();
     
     void setPlayerPreviewPixmap(const QPixmap& pixmap);

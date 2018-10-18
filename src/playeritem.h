@@ -60,12 +60,12 @@ public:
       * @param p_model the Player model
       * @param renderer the KGameRenderer
       */
-    PlayerItem(Player* p_model, KGameRenderer* renderer);
+    explicit PlayerItem(Player* p_model, KGameRenderer* renderer);
 
     /**
       * Deletes the PlayerItem instance.
       */
-    ~PlayerItem();
+    ~PlayerItem() override;
 
 public Q_SLOTS:
 
@@ -74,7 +74,7 @@ public Q_SLOTS:
       */
     void updateDirection();
 
-    void updateGraphics(qreal svgScaleFactor) Q_DECL_OVERRIDE;
+    void updateGraphics(qreal svgScaleFactor) override;
 
     /**
       * Manages the collisions with any Element.
@@ -86,7 +86,7 @@ public Q_SLOTS:
       * @param p_x the new x-coordinate
       * @param p_y the new y-coordinate
       */
-    void update(qreal p_x, qreal p_y) Q_DECL_OVERRIDE;
+    void update(qreal p_x, qreal p_y) override;
 
     /**
       * Starts the PlayerItem animation.
@@ -122,7 +122,7 @@ public Q_SLOTS:
     /**
       * Implements the CharacterItem method.
       */
-    void setDead() Q_DECL_OVERRIDE;
+    void setDead() override;
 
     /**
       * resurrects the playeritem

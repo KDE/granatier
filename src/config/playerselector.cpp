@@ -47,9 +47,9 @@ class PlayerSelectorDelegate : public QStyledItemDelegate
 {
 public:
     explicit PlayerSelectorDelegate(QObject* parent = nullptr);
-    void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;
+    void paint(QPainter* painter, const QStyleOptionViewItem& option, const QModelIndex& index) const override;
     ///@note The implementation is independent of @a option and @a index.
-    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const Q_DECL_OVERRIDE;
+    QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 };
 
 //BEGIN PlayerSelector

@@ -39,7 +39,7 @@ public:
     };
     Q_DECLARE_FLAGS(Options, Option)
 
-    explicit PlayerSelector(PlayerSettings* playerSettings, Options options = DefaultBehavior, QWidget* parent = 0);
+    explicit PlayerSelector(PlayerSettings* playerSettings, Options options = DefaultBehavior, QWidget* parent = nullptr);
     virtual ~PlayerSelector();
 private:
     struct Private;

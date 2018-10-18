@@ -47,14 +47,14 @@ public:
     /**
       * Deletes the CharacterItem instance.
       */
-    ~CharacterItem();
+    ~CharacterItem() override;
 
     /**
       * Overrides the default shape function to make it a small circle
       * This function is used to determinate collision between items
       * @return QPainterPath the new shape of the Character
       */
-    QPainterPath shape() const Q_DECL_OVERRIDE;
+    QPainterPath shape() const override;
 
 public Q_SLOTS:
 
@@ -63,7 +63,7 @@ public Q_SLOTS:
       * @param p_x the new x-coordinate
       * @param p_y the new y-coordinate
       */
-    void update(qreal p_x, qreal p_y) Q_DECL_OVERRIDE;
+    void update(qreal p_x, qreal p_y) override;
 
     /**
       * Sets the character dead.

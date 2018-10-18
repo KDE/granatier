@@ -44,13 +44,13 @@ public:
     /**
       * Deletes the GameView instance.
       */
-    ~GameView();
+    ~GameView() override;
 
     /**
       * Resizes the items when the view is resized.
       * @param p_event the resize event
       */
-    void resizeEvent(QResizeEvent* p_event) Q_DECL_OVERRIDE;
+    void resizeEvent(QResizeEvent* p_event) override;
 
 protected:
 
@@ -58,19 +58,19 @@ protected:
       * Manages the player actions by hanlding the key press events.
       * @param p_event the key press event
       */
-    void keyPressEvent(QKeyEvent* p_event) Q_DECL_OVERRIDE;
+    void keyPressEvent(QKeyEvent* p_event) override;
 
     /**
       * Manages the player actions by hanlding the key release events.
       * @param p_event the key release event
       */
-    void keyReleaseEvent(QKeyEvent* p_event) Q_DECL_OVERRIDE;
+    void keyReleaseEvent(QKeyEvent* p_event) override;
 
     /**
       * Pauses the game on focus lost.
       * @param p_event the focus event
       */
-    void focusOutEvent(QFocusEvent* p_event) Q_DECL_OVERRIDE;
+    void focusOutEvent(QFocusEvent* p_event) override;
 
 Q_SIGNALS:
 

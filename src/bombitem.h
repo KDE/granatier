@@ -75,7 +75,7 @@ public:
      * This function is used to determinate collision between items
      * @return QPainterPath the new shape of the Bomb
      */
-    QPainterPath shape() const Q_DECL_OVERRIDE;
+    QPainterPath shape() const override;
 
     /**
      * Pauses the BombItem animation.
@@ -94,7 +94,7 @@ public Q_SLOTS:
      * @param p_x the new x-coordinate
      * @param p_y the new y-coordinate
      */
-    void update(qreal p_x, qreal p_y) Q_DECL_OVERRIDE;
+    void update(qreal p_x, qreal p_y) override;
 
 private Q_SLOTS:
     /**

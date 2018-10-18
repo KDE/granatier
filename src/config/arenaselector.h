@@ -66,20 +66,20 @@ public:
     * @return true if the arena files and properties could be loaded
     */
     ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, Options options = DefaultBehavior, const QString& groupName = QLatin1String("Arena"), const QString& directory = QLatin1String("arenas"));
-    virtual ~ArenaSelector();
+    ~ArenaSelector() override;
     
 protected:
     /**
     * Resizes the items when the view is resized.
     * @param p_event the resize event
     */
-    void resizeEvent(QResizeEvent* p_event) Q_DECL_OVERRIDE;
+    void resizeEvent(QResizeEvent* p_event) override;
     
     /**
     * Resizes the items when the view is showed.
     * @param p_event the resize event
     */
-    void showEvent(QShowEvent* p_event) Q_DECL_OVERRIDE;
+    void showEvent(QShowEvent* p_event) override;
 
 private:
     class Private;
