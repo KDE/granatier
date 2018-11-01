@@ -46,14 +46,14 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
     for(int i = 0; i < playerList.count(); i++)
     {
         QGraphicsTextItem playerName (playerList[i]->getPlayerName());
-        playerName.setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.25, QFont::Bold, false));
+        playerName.setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.25), QFont::Bold, false));
         if(nMaxPlayerNameLength < playerName.boundingRect().width())
         {
             nMaxPlayerNameLength = static_cast<int>(playerName.boundingRect().width());
         }
         if(i == playerList.count() - 1)
         {
-            int nAllItemsWidth = 4 * (Granatier::CellSize / 2 + 4);
+            int nAllItemsWidth = static_cast<int>(4 * (Granatier::CellSize / 2 + 4));
             if(nAllItemsWidth > nMaxPlayerNameLength + Granatier::CellSize / 2 + 4)
             {
                 nWidth = nAllItemsWidth;
@@ -102,7 +102,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
 
         //create the player names
         playerInfo->name = new QGraphicsTextItem(playerList[i]->getPlayerName());
-        playerInfo->name->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.25, QFont::Bold, false));
+        playerInfo->name->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.25), QFont::Bold, false));
         playerInfo->name->setDefaultTextColor(QColor("#FFFF00"));
         playerInfo->name->setZValue(1001);
         playerInfo->name->setPos(nLeft + Granatier::CellSize / 2 + 2, nTop + i * (nHeight+4) - 4);
@@ -404,7 +404,7 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
                     topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
                     QRectF rect;
 
-                    QPoint bottomRight(Granatier::CellSize * 0.5, Granatier::CellSize * 0.5);
+                    QPoint bottomRight(static_cast<int>(Granatier::CellSize * 0.5), static_cast<int>(Granatier::CellSize * 0.5));
                     bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
 
                     renderSize.setHeight(bottomRight.y() - topLeft.y());
@@ -449,8 +449,8 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     QMap <Player*, PlayerInfo*>::iterator iteratorPlayerInfo = m_mapPlayerInfo.begin();
     while (iteratorPlayerInfo != m_mapPlayerInfo.end())
     {
-        bottomRight.setX(Granatier::CellSize * 0.45);
-        bottomRight.setY(Granatier::CellSize * 0.45);
+        bottomRight.setX(static_cast<int>(Granatier::CellSize * 0.45));
+        bottomRight.setY(static_cast<int>(Granatier::CellSize * 0.45));
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         renderSize.setHeight(bottomRight.y() - topLeft.y());
         renderSize.setWidth(bottomRight.x() - topLeft.x());
@@ -458,8 +458,8 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         iteratorPlayerInfo.value()->icon->setRenderSize(renderSize);
         iteratorPlayerInfo.value()->icon->setScale(m_svgScaleFactor);
 
-        bottomRight.setX(Granatier::CellSize * 0.5);
-        bottomRight.setY(Granatier::CellSize * 0.5);
+        bottomRight.setX(static_cast<int>(Granatier::CellSize * 0.5));
+        bottomRight.setY(static_cast<int>(Granatier::CellSize * 0.5));
         bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
         renderSize.setHeight(bottomRight.y() - topLeft.y());
         renderSize.setWidth(bottomRight.x() - topLeft.x());

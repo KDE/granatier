@@ -145,8 +145,8 @@ void BombItem::startDetonation()
     m_explosionTimer->start();
     connect(m_explosionTimer, &QTimer::timeout, this, &BombItem::updateAnimation);
 
-    int width = Granatier::CellSize * 1.1;
-    int height = Granatier::CellSize * 1.1;
+    int width = static_cast<int>(Granatier::CellSize * 1.1);
+    int height = static_cast<int>(Granatier::CellSize * 1.1);
     if((static_cast<int>(Granatier::CellSize) - width) % 2 != 0)
     {
         width--;

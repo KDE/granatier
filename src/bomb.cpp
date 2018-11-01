@@ -25,9 +25,9 @@
 
 #include <cstdlib>
 
-const int nMortarRampEnd = Granatier::FPS * 50 / 1000.0;
-const int nMortarPeak = (Granatier::FPS * 800 / 1000.0) / 2 + nMortarRampEnd;
-const int nMortarGround = (Granatier::FPS * 800 / 1000.0) + nMortarRampEnd;
+const int nMortarRampEnd = static_cast<int>(Granatier::FPS * 50 / 1000.0);
+const int nMortarPeak = static_cast<int>((Granatier::FPS * 800 / 1000.0) / 2 + nMortarRampEnd);
+const int nMortarGround = static_cast<int>((Granatier::FPS * 800 / 1000.0) + nMortarRampEnd);
 
 Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
 {

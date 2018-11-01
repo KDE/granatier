@@ -45,7 +45,7 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     {
         QList <KGameRenderedItem*> svgItemList;
         QGraphicsTextItem* playerName = new QGraphicsTextItem(player->getPlayerName());
-        playerName->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
+        playerName->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
         playerName->setDefaultTextColor(QColor("#FFFF00"));
         playerName->setZValue(2001);
 
@@ -62,37 +62,37 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     QString strContinue (i18n("Press Space to continue"));
 
     m_continueLabel = new QGraphicsTextItem(strContinue);
-    m_continueLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_continueLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     m_continueLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_continueLabel->setZValue(2001);
 
     m_newGameLabel = new QGraphicsTextItem(i18n("Press Space to start a new Game"));
-    m_newGameLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_newGameLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     m_newGameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_newGameLabel->setZValue(2001);
 
     m_gameOverLabel = new QGraphicsTextItem;;
-    m_gameOverLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.5, QFont::Bold, false));
+    m_gameOverLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.5), QFont::Bold, false));
     m_gameOverLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_gameOverLabel->setZValue(2001);
 
     m_getReadyLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
-    m_getReadyLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.6, QFont::Bold, false));
+    m_getReadyLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.6), QFont::Bold, false));
     m_getReadyLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_getReadyLabel->setZValue(2001);
 
     m_startGameLabel = new QGraphicsTextItem(i18n("Press Space to start"));
-    m_startGameLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_startGameLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     m_startGameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_startGameLabel->setZValue(2001);
 
     m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
-    m_pauseLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.8, QFont::Bold, false));
+    m_pauseLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.8), QFont::Bold, false));
     m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_pauseLabel->setZValue(2001);
 
     m_continueAfterPauseLabel = new QGraphicsTextItem(strContinue);
-    m_continueAfterPauseLabel->setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
+    m_continueAfterPauseLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     m_continueAfterPauseLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_continueAfterPauseLabel->setZValue(2001);
 
@@ -322,7 +322,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
 
     QGraphicsTextItem* playerName;
     QGraphicsTextItem em(QStringLiteral("M"));
-    em.setFont(QFont(QStringLiteral("Helvetica"), Granatier::CellSize * 0.35, QFont::Bold, false));
+    em.setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     //calculate max player name length and top-left position
     for(int i = 0; i < playerList.count(); i++)
     {
@@ -352,7 +352,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
         {
             score = m_mapScore.value(playerList.at(i)).at(j);
 
-            QPoint bottomRight(Granatier::CellSize * 0.6, Granatier::CellSize * 0.6);
+            QPoint bottomRight(static_cast<int>(Granatier::CellSize * 0.6), static_cast<int>(Granatier::CellSize * 0.6));
             bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
 
             svgSize.setHeight(bottomRight.y() - topLeft.y());

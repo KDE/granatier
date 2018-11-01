@@ -36,23 +36,23 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
     {
         case Granatier::Direction::NORTH:
             setSpriteKey(QStringLiteral("bomb_blast_north_0"));
-            width = Granatier::CellSize * 0.5;
-            height = Granatier::CellSize * 1.5;
+            width = static_cast<int>(Granatier::CellSize * 0.5);
+            height = static_cast<int>(Granatier::CellSize * 1.5);
             break;
         case Granatier::Direction::EAST:
             setSpriteKey(QStringLiteral("bomb_blast_east_0"));
-            width = Granatier::CellSize * 1.5;
-            height = Granatier::CellSize * 0.5;
+            width = static_cast<int>(Granatier::CellSize * 1.5);
+            height = static_cast<int>(Granatier::CellSize * 0.5);
             break;
         case Granatier::Direction::SOUTH:
             setSpriteKey(QStringLiteral("bomb_blast_south_0"));
-            width = Granatier::CellSize * 0.5;
-            height = Granatier::CellSize * 1.5;
+            width = static_cast<int>(Granatier::CellSize * 0.5);
+            height = static_cast<int>(Granatier::CellSize * 1.5);
             break;
         case Granatier::Direction::WEST:
             setSpriteKey(QStringLiteral("bomb_blast_west_0"));
-            width = Granatier::CellSize * 1.5;
-            height = Granatier::CellSize * 0.5;
+            width = static_cast<int>(Granatier::CellSize * 1.5);
+            height = static_cast<int>(Granatier::CellSize * 0.5);
             break;
     }
 

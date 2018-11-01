@@ -33,7 +33,7 @@ namespace  RNG {
 * @return T: the random number
 */
 template <typename T>
-T fromRange(T min, T max, typename std::enable_if<std::is_integral<T>::value >::type* = 0) {
+T fromRange(T min, T max, typename std::enable_if<std::is_integral<T>::value >::type* = nullptr) {
 static std::random_device randomDevice;
     std::uniform_int_distribution<T> distribution(min, max);
     return distribution(randomDevice);
@@ -48,7 +48,7 @@ static std::random_device randomDevice;
 * @return T: the random number
 */
 template <typename T>
-T fromRange(T min, T max, typename std::enable_if<std::is_floating_point<T>::value >::type* = 0) {
+T fromRange(T min, T max, typename std::enable_if<std::is_floating_point<T>::value >::type* = nullptr) {
 static std::random_device randomDevice;
     std::uniform_real_distribution<T> distribution(min, max);
     return distribution(randomDevice);
