@@ -112,6 +112,11 @@
   <screenshots>
     <screenshot type="default">
       <caption>Playing Granatier</caption>
+      <caption xml:lang="gl">Xogando a Granatier</caption>
+      <caption xml:lang="nl">Granatier spelen</caption>
+      <caption xml:lang="pt">A jogar ao Granatier</caption>
+      <caption xml:lang="uk">Гра у Granatier</caption>
+      <caption xml:lang="x-test">xxPlaying Granatierxx</caption>
       <image>http://kde.org/images/screenshots/granatier.png</image>
     </screenshot>
   </screenshots>
