@@ -85,7 +85,8 @@ public:
 
     /**
       * Sets the path initial position.
-      * @param p_position initial position
+      * @param p_x x coordinate of the initial position
+      * @param p_y y coordinate of the initial position
       */
     void setInitialCoordinates (qreal p_x, qreal p_y);
 

@@ -110,6 +110,7 @@ public:
     /**
       * Creates a new GameScene instance.
       * @param p_game the Game instance whose elements must be contained in the GameScene in order to be drawn
+      * @param p_themeProvider the Game theme provider
       */
     GameScene(Game* p_game, KgThemeProvider* p_themeProvider);
 
@@ -154,9 +155,9 @@ public:
     void resizeSprites(int delayForBackground = 0);
 
     /**
-     * Returns the renderer for the requestet Element Type
-     * @param type
-     * @param strPlayerID
+     * Returns the renderer for the requested Element Type
+     * @param type the type
+     * @param player the player
      */
     KGameRenderer* renderer(Granatier::Element::Type type, Player* player = NULL);
 

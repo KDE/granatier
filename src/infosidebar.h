@@ -72,7 +72,6 @@ public:
     /**
       * Creates a new InfoSidebar instance.
       * @param p_game the game instance
-      * @param p_renderer the renderer instance
       * @param p_scene the gamescene instance
       */
     explicit InfoSidebar (Game* p_game, GameScene* p_scene);

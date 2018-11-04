@@ -234,7 +234,10 @@ Q_SIGNALS:
 
     /**
     * Emitted when the Bomb is thrown by the mortar or by the player.
-    * @param nState the current state of the mortar
+    * @param nMortarState the current state of the mortar
+    * @param nMortarRampEnd the mortar ramp end
+    * @param nMortarPeak the mortar peak
+    * @param nMortarGround the mortar ground
     */
     void mortar(int nMortarState, int nMortarRampEnd, int nMortarPeak, int nMortarGround);
 

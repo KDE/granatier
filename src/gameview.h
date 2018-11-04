@@ -37,6 +37,7 @@ public:
 
     /**
       * Creates a new GameView instance.
+      * @param p_scene the Game scene
       * @param p_game the Game instance whose elements have to be drawn
       */
     GameView(GameScene* p_scene, Game* p_game);
