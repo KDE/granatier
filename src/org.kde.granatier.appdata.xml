@@ -109,6 +109,7 @@
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=granatier</url>
   <url type="help">http://docs.kde.org/stable/en/kdegames/granatier/index.html</url>
+  <url type="donation">https://www.kde.org/community/donations/?app=granatier&amp;source=appdata</url>
   <screenshots>
     <screenshot type="default">
       <caption>Playing Granatier</caption>
