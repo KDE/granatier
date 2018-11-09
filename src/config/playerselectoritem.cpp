@@ -113,14 +113,14 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     gridLayoutKeySequence->addWidget(m_dropBomb, 1, 4);
     
     selectionChanged(m_selectCheckBox->isChecked());
-    connect(m_selectCheckBox, SIGNAL(toggled(bool)), this, SLOT(selectionChanged(bool)));
-    connect(m_selectCheckBox, SIGNAL(toggled(bool)), this, SLOT(settingsChanged()));
-    connect(m_playerName, SIGNAL(textEdited(QString)), this, SLOT(settingsChanged()));
-    connect(m_moveLeft, SIGNAL(keySequenceChanged(QKeySequence)), this, SLOT(settingsChanged()));
-    connect(m_moveUp, SIGNAL(keySequenceChanged(QKeySequence)), this, SLOT(settingsChanged()));
-    connect(m_moveRight, SIGNAL(keySequenceChanged(QKeySequence)), this, SLOT(settingsChanged()));
-    connect(m_moveDown, SIGNAL(keySequenceChanged(QKeySequence)), this, SLOT(settingsChanged()));
-    connect(m_dropBomb, SIGNAL(keySequenceChanged(QKeySequence)), this, SLOT(settingsChanged()));
+    connect(m_selectCheckBox, &QCheckBox::toggled, this, &PlayerSelectorItem::selectionChanged);
+    connect(m_selectCheckBox, &QCheckBox::toggled, this, &PlayerSelectorItem::settingsChanged);
+    connect(m_playerName, &QLineEdit::textEdited, this, &PlayerSelectorItem::settingsChanged);
+    connect(m_moveLeft, &KKeySequenceWidget::keySequenceChanged, this, &PlayerSelectorItem::settingsChanged);
+    connect(m_moveUp, &KKeySequenceWidget::keySequenceChanged, this, &PlayerSelectorItem::settingsChanged);
+    connect(m_moveRight, &KKeySequenceWidget::keySequenceChanged, this, &PlayerSelectorItem::settingsChanged);
+    connect(m_moveDown, &KKeySequenceWidget::keySequenceChanged, this, &PlayerSelectorItem::settingsChanged);
+    connect(m_dropBomb, &KKeySequenceWidget::keySequenceChanged, this, &PlayerSelectorItem::settingsChanged);
 }
 
 PlayerSelectorItem::~PlayerSelectorItem()

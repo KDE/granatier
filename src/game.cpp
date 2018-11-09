@@ -75,7 +75,7 @@ Game::Game(PlayerSettings* playerSettings)
 
     for (auto & player : m_players)
     {
-        connect(player, SIGNAL(bombDropped(Player*,qreal,qreal,bool,int)), this, SLOT(createBomb(Player*,qreal,qreal,bool,int)));
+        connect(player, &Player::bombDropped, this, &Game::createBomb);
     }
 
     m_gameOver = false;
