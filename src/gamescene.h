@@ -159,7 +159,7 @@ public:
      * @param type the type
      * @param player the player
      */
-    KGameRenderer* renderer(Granatier::Element::Type type, Player* player = NULL);
+    KGameRenderer* renderer(Granatier::Element::Type type, Player* player = nullptr);
 
     /** setup the KGameRenderer for the selected theme and if necessary the default theme */
     void setupThemeRenderer();
