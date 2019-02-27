@@ -45,10 +45,10 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     mainLayout->setMargin(6);
     
     QGridLayout* gridLayoutPlayer = new QGridLayout();
-    gridLayoutPlayer->setMargin(0);
+    gridLayoutPlayer->setContentsMargins(0, 0, 0, 0);
     
     QVBoxLayout* verticalLayoutKeySequence = new QVBoxLayout();
-    verticalLayoutKeySequence->setMargin(0);
+    verticalLayoutKeySequence->setContentsMargins(0, 0, 0, 0);
     
     mainLayout->addLayout(gridLayoutPlayer);
     mainLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
@@ -61,7 +61,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     gridLayoutPlayer->addWidget(m_playerAuthor, 2, 2);//, 1, 1, Qt::AlignBottom);
     
     QGridLayout* gridLayoutKeySequence = new QGridLayout();
-    gridLayoutKeySequence->setMargin(0);
+    gridLayoutKeySequence->setContentsMargins(0, 0, 0, 0);
     
     verticalLayoutKeySequence->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
     verticalLayoutKeySequence->addLayout(gridLayoutKeySequence);

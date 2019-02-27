@@ -85,7 +85,7 @@ PlayerSelector::PlayerSelector(PlayerSettings* playerSettings, Options options, 
     d->m_list->setMinimumSize(static_cast<int>(itemSizeHint.width() + 2 * scrollBarSizeHint.width()), static_cast<int>(3.3 * itemSizeHint.height()));
     //setup main layout
     QVBoxLayout* layout = new QVBoxLayout(this);
-    layout->setMargin(0);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(d->m_list);
     //setup KNS button
     if (options & EnableNewStuffDownload)
