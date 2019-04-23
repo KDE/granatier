@@ -24,7 +24,7 @@
 CharacterItem::CharacterItem(Character* p_model, KGameRenderer* renderer) : ElementItem (p_model, renderer)
 {
     m_renderer = renderer;
-    connect(p_model, SIGNAL(dead()), this, SLOT(setDead()));
+    connect(p_model, &Character::dead, this, &CharacterItem::setDead);
 }
 
 CharacterItem::~CharacterItem()

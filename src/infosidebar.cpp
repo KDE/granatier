@@ -167,7 +167,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         m_mapPlayerInfo.insert(playerList[i], playerInfo);
 
         //connect player
-        connect(playerList[i], SIGNAL(bonusUpdated(Player*,Granatier::Bonus::Type,int)), this, SLOT(bonusInfoChanged(Player*,Granatier::Bonus::Type,int)));
+        connect(playerList[i], &Player::bonusUpdated, this, &InfoSidebar::bonusInfoChanged);
     }
 
     m_background = new QGraphicsRectItem();

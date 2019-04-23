@@ -26,7 +26,7 @@ BlockItem::BlockItem(Block* p_model, KGameRenderer* renderer) : ElementItem (p_m
 {
     setSpriteKey(p_model->getImageId());
     m_destructionTimer = nullptr;
-    connect(p_model, SIGNAL(startDestructionAnimation()), this, SLOT(startDestructionAnimation()));
+    connect(p_model, &Block::startDestructionAnimation, this, &BlockItem::startDestructionAnimation);
 }
 
 BlockItem::~BlockItem()

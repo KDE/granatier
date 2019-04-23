@@ -31,8 +31,8 @@ GameView::GameView(GameScene* p_scene, Game * p_game) : QGraphicsView(p_scene)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     // Forward the key press events to the Game instance
-    connect(this, SIGNAL(keyPressed(QKeyEvent*)), p_game, SLOT(keyPressEvent(QKeyEvent*)));
-    connect(this, SIGNAL(keyReleased(QKeyEvent*)), p_game, SLOT(keyReleaseEvent(QKeyEvent*)));
+    connect(this, &GameView::keyPressed, p_game, &Game::keyPressEvent);
+    connect(this, &GameView::keyReleased, p_game, &Game::keyReleaseEvent);
 }
 
 GameView::~GameView()

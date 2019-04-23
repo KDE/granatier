@@ -35,11 +35,11 @@ const int PlayerItem::ANIM_SPEED = 240;
 
 PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem(p_model, renderer)
 {
-    connect(p_model, SIGNAL(directionChanged()), this, SLOT(updateDirection()));
-    connect(p_model, SIGNAL(gameUpdated()), this, SLOT(manageCollision()));
-    connect(p_model, SIGNAL(stopped()), this, SLOT(stopAnim()));
-    connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
-    connect(p_model, SIGNAL(resurrected()), this, SLOT(resurrect()));
+    connect(p_model, &Player::directionChanged, this, &PlayerItem::updateDirection);
+    connect(p_model, &Player::gameUpdated, this, &PlayerItem::manageCollision);
+    connect(p_model, &Player::stopped, this, &PlayerItem::stopAnim);
+    connect(p_model, &Player::falling, this, &PlayerItem::fallingAnimation);
+    connect(p_model, &Player::resurrected, this, &PlayerItem::resurrect);
 
     // A timeLine for the Player animation
     m_animationTimer = new QTimeLine();

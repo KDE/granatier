@@ -41,7 +41,7 @@ class ArenaSettingsPrivate;
 class ArenaSettings
 {
     public:
-        explicit ArenaSettings(const QString &arenaGroup = QLatin1String("Arena"));
+        explicit ArenaSettings(const QString &arenaGroup = QStringLiteral("Arena"));
         virtual ~ArenaSettings();
 
         /**

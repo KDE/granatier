@@ -52,10 +52,10 @@
 
 GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_game), m_themeProvider(p_themeProvider)
 {
-    connect(p_game, SIGNAL(gameStarted()), this, SLOT(start()));
-    connect(p_game, SIGNAL(pauseChanged(bool,bool)), this, SLOT(setPaused(bool,bool)));
-    connect(p_game, SIGNAL(bombCreated(Bomb*)), this, SLOT(createBombItem(Bomb*)));
-    connect(p_game, SIGNAL(infoChanged(Granatier::Info::Type)), this, SLOT(updateInfo(Granatier::Info::Type)));
+    connect(p_game, &Game::gameStarted, this, &GameScene::start);
+    connect(p_game, &Game::pauseChanged, this, &GameScene::setPaused);
+    connect(p_game, &Game::bombCreated, this, &GameScene::createBombItem);
+    connect(p_game, &Game::infoChanged, this, &GameScene::updateInfo);
 
     m_SvgScaleFactor = 1;
 
@@ -840,7 +840,7 @@ void GameScene::createBombItem(Bomb* bomb)
 
     connect(this, &GameScene::resizeGraphics, bombItem, &BombItem::updateGraphics);
     connect(bomb, SIGNAL(mortar(int,int,int,int)), bombItem, SLOT(updateMortar(int,int,int,int)));
-    connect(bomb, SIGNAL(bombDetonated(Bomb*)), this, SLOT(bombDetonated(Bomb*)));
+    connect(bomb, &Bomb::bombDetonated, this, &GameScene::bombDetonated);
     connect(bombItem, &BombItem::bombItemFinished, this, &GameScene::removeBombItem);
     connect(bombItem, &BombItem::animationFrameChanged, this, &GameScene::updateBombExplosionItemAnimation);
 }

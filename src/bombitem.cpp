@@ -31,9 +31,9 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
 {
     setSpriteKey(QStringLiteral("bomb"));
     setZValue(210);
-    connect(p_model, SIGNAL(bombDetonated(Bomb*)), this, SLOT(startDetonation()));
-    connect(p_model, SIGNAL(falling()), this, SLOT(fallingAnimation()));
-    connect(this, SIGNAL(bombItemFinished(BombItem*)), p_model, SLOT(slot_detonationCompleted()));
+    connect(p_model, &Bomb::bombDetonated, this, &BombItem::startDetonation);
+    connect(p_model, &Bomb::falling, this, &BombItem::fallingAnimation);
+    connect(this, &BombItem::bombItemFinished, p_model, &Bomb::slot_detonationCompleted);
 
     int width = static_cast<int>(Granatier::CellSize * 0.9);
     int height = static_cast<int>(Granatier::CellSize * 0.9);
