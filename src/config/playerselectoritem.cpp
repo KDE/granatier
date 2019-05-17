@@ -42,7 +42,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_playerAuthor = new QLabel;
     
     QHBoxLayout* mainLayout = new QHBoxLayout(this);
-    mainLayout->setMargin(6);
+    mainLayout->setContentsMargins(6, 6, 6, 6);
     
     QGridLayout* gridLayoutPlayer = new QGridLayout();
     gridLayoutPlayer->setContentsMargins(0, 0, 0, 0);
