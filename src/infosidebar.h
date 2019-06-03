@@ -24,7 +24,6 @@
 #include <QMap>
 #include <QList>
 
-class QGraphicsScene;
 class QGraphicsTextItem;
 class QGraphicsRectItem;
 class Game;

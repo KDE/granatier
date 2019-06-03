@@ -24,7 +24,6 @@
 #include <KGameRenderedItem>
 
 class Bomb;
-class BombItem;
 class KGameRenderer;
 
 /**

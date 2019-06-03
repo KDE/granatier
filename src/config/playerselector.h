@@ -23,7 +23,6 @@
 #include <QWidget>
 
 class PlayerSettings;
-class PlayerProvider;
 
 class PlayerSelector : public QWidget
 {
