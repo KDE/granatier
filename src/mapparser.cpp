@@ -22,7 +22,6 @@
 
 #include <cstdlib>
 #include <QPointF>
-#include <QDateTime>
 
 MapParser::MapParser(Arena* p_arena)
 {

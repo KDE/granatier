@@ -22,7 +22,6 @@
 
 #include <QObject>
 #include <QMap>
-#include <QList>
 
 class QGraphicsTextItem;
 class QGraphicsRectItem;

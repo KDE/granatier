@@ -23,8 +23,6 @@
 
 #include <QGraphicsView>
 #include <QGraphicsRectItem>
-#include <QTimer>
-#include <KLocalizedString>
 #include <KGameRenderer>
 #include <KGameRenderedItem>
 

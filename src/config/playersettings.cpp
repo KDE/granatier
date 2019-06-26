@@ -19,7 +19,6 @@
 #include "settings.h"
 
 #include <KConfig>
-#include <KConfigGroup>
 #include <QDir>
 #include <QStandardPaths>
 

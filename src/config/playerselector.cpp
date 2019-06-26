@@ -24,16 +24,12 @@
 #include <QPointer>
 #include <QAbstractItemView>
 #include <QApplication>
-#include <QCloseEvent>
 #include <QFont>
-#include <QFontMetrics>
 #include <QListWidget>
-#include <QLineEdit>
 #include <QPainter>
 #include <QPushButton>
 #include <QScrollBar>
 #include <QVBoxLayout>
-#include <QSpacerItem>
 #include <QSvgRenderer>
 #include <QStandardPaths>
 #include <KConfig>

@@ -21,7 +21,6 @@
 #include "granatier_random.h"
 
 #include <QPoint>
-#include <QDateTime>
 
 #include <cstdlib>
 

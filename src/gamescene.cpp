@@ -40,7 +40,6 @@
 #include <KgThemeProvider>
 #include <KLocalizedString>
 
-#include <QPainter>
 #include <QGraphicsView>
 #include <QTimer>
 
