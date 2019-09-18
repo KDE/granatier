@@ -95,7 +95,11 @@ void Arena::addPlayerPosition(const QPointF &p_position)
     for (int i = 0; i < m_playerPosition.size(); i++)
     {
         nShuffle = granatier::RNG::fromRange(0, m_playerPosition.size()-1);
+#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
+        m_playerPosition.swap(i, nShuffle);
+#else
         m_playerPosition.swapItemsAt(i, nShuffle);
+#endif
     }
 }
 
