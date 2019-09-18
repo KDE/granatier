@@ -396,7 +396,7 @@ void Game::createBonus()
         for (int i = 0; i < nQuarterSize; ++i)
         {
             nShuffle = granatier::RNG::fromRange(0, nQuarterSize-1);
-            bonusTypeList.swap(i, nShuffle);
+            bonusTypeList.swapItemsAt(i, nShuffle);
         }
 
         for (int i = 0; i < nQuarterSize; ++i)
