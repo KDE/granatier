@@ -290,13 +290,10 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
         m_arena = new Arena;
         MapParser mapParser(m_arena);
         QFile arenaXmlFile(selArena->graphics());
-        QXmlInputSource source(&arenaXmlFile);
-        // Create the XML file reader
-        QXmlSimpleReader reader;
-        reader.setContentHandler(&mapParser);
-        // Parse the XML file
-        reader.parse(source);
-
+        if (!arenaXmlFile.open(QIODevice::ReadOnly)) {
+            qWarning() << " impossible to open file " << arenaXmlFile.fileName();
+        }
+        mapParser.parse(&arenaXmlFile);
         while(!m_arenaItems.isEmpty())
         {
             if(m_graphicsScene->items().contains(m_arenaItems.last()))

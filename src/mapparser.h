@@ -19,15 +19,13 @@
 
 #ifndef MAPPARSER_H
 #define MAPPARSER_H
-
-#include <QXmlDefaultHandler>
-
+#include <QXmlStreamAttributes>
 class Arena;
 
 /**
  * @brief This class handles XML reader events in order to initialize the Arena properties.
  */
-class MapParser : public QXmlDefaultHandler
+class MapParser
 {
 
 private:
@@ -51,23 +49,17 @@ public:
     /**
       * Deletes the GameParser instance.
       */
-    ~MapParser() override;
+    ~MapParser();
 
-    /**
-    * Implement QXmlDefaultHandler::characters
-    */
-    bool characters(const QString & ch ) override;
+    Q_REQUIRED_RESULT bool characters(const QStringRef &ch);
 
-    /**
-      * Implements QXmlDefaultHandler::startElement()
-      */
-    bool startElement(const QString&, const QString&, const QString& p_qName, const QXmlAttributes& p_atts) override;
+    Q_REQUIRED_RESULT bool startElement(const QStringRef &namespaceURI, const QStringRef &localName,
+                      const QStringRef &qName, const QXmlStreamAttributes &atts);
 
-    /**
-    * Implements QXmlDefaultHandler::endElement()
-    */
-    bool endElement(const QString &, const QString &, const QString & p_qName ) override;
+    Q_REQUIRED_RESULT bool endElement(const QStringRef &namespaceURI,
+                    const QStringRef &localName, const QStringRef &qName);
 
+    Q_REQUIRED_RESULT bool parse(QIODevice *input);
 };
 
 #endif

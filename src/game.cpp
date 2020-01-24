@@ -145,12 +145,10 @@ void Game::init()
     QString arenaFileName = group.readEntry("FileName");
 
     QFile arenaXmlFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("arenas/%1").arg(arenaFileName)));
-    QXmlInputSource source(&arenaXmlFile);
-    // Create the XML file reader
-    QXmlSimpleReader reader;
-    reader.setContentHandler(&mapParser);
-    // Parse the XML file
-    reader.parse(source);
+    if (!arenaXmlFile.open(QIODevice::ReadOnly)) {
+        qWarning() << " impossible to open file " << arenaFileName;
+    }
+    mapParser.parse(&arenaXmlFile);
 
     QString arenaName = group.readEntry("Name");
     m_arena->setName(arenaName);

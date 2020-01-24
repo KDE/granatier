@@ -33,34 +33,63 @@ MapParser::~MapParser()
 {
 }
 
-bool MapParser::characters(const QString & ch)
+bool MapParser::parse(QIODevice *input)
 {
-    m_buffer = ch;
+    QXmlStreamReader reader(input);
+
+    while (!reader.atEnd()) {
+        reader.readNext();
+        if (reader.hasError())
+            return false;
+
+        switch (reader.tokenType()) {
+        case QXmlStreamReader::StartElement:
+            if (!startElement(reader.namespaceUri(), reader.name(),
+                              reader.qualifiedName(), reader.attributes())) {
+                return false;
+            }
+            break;
+        case QXmlStreamReader::EndElement:
+            if (!endElement(reader.namespaceUri(), reader.name(),
+                            reader.qualifiedName())) {
+                return false;
+            }
+            break;
+        case QXmlStreamReader::Characters:
+            if (!reader.isWhitespace() && !reader.text().toString().trimmed().isEmpty()) {
+                if (!characters(reader.text()))
+                    return false;
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    if (reader.isEndDocument())
+        return false;
+
     return true;
 }
 
-bool MapParser::startElement(const QString&, const QString&, const QString& p_qName, const QXmlAttributes& p_atts)
+bool MapParser::characters(const QStringRef &ch)
 {
-    if (p_qName == QLatin1String("Arena"))
-    {
+    m_buffer = ch.toString();
+    return true;
+}
+
+bool MapParser::startElement(const QStringRef &namespaceURI, const QStringRef &localName, const QStringRef &qName, const QXmlStreamAttributes &atts)
+{
+    Q_UNUSED(namespaceURI)
+    Q_UNUSED(localName)
+    if (qName == QLatin1String("Arena")) {
         int nbRows = 0;
         int nbColumns = 0;
-        // Initialize the number of rows and columns
-        for (int i = 0; i < p_atts.count(); ++i)
-        {
-            if (p_atts.qName(i) == QLatin1String("rowCount"))
-            {
-                nbRows = p_atts.value(i).toInt();
-            }
-            if (p_atts.qName(i) == QLatin1String("colCount"))
-            {
-                nbColumns = p_atts.value(i).toInt();
-            }
-            //TODO:check for the right arenaFileVersion
-            //if (p_atts.qName(i) == "arenaFileVersion")
-            //{
-            //    m_arenaFileVersion = p_atts.value(i).toInt();
-            //}
+        if (atts.hasAttribute(QLatin1String("rowCount"))) {
+            nbRows = atts.value(QLatin1String("rowCount")).toInt();
+        }
+        if (atts.hasAttribute(QLatin1String("colCount"))) {
+            nbColumns = atts.value(QLatin1String("colCount")).toInt();
         }
         // Create the Arena matrix
         m_arena->init(nbRows, nbColumns);
@@ -69,10 +98,12 @@ bool MapParser::startElement(const QString&, const QString&, const QString& p_qN
     return true;
 }
 
-bool MapParser::endElement(const QString &, const QString &, const QString & p_qName)
+bool MapParser::endElement(const QStringRef &namespaceURI, const QStringRef &localName, const QStringRef &qName)
 {
-    if(p_qName == QLatin1String("Row"))
-    {
+    Q_UNUSED(namespaceURI)
+    Q_UNUSED(localName)
+
+    if (qName.toString() == QLatin1String("Row")) {
         for (int i=0; i<m_buffer.length();++i)
         {
             switch(m_buffer.at(i).toLatin1())
