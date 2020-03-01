@@ -111,7 +111,7 @@
     <p xml:lang="zh-TW">Granatier 是從傳統的炸彈超人所承襲而來的遊戲，並且參考了 Clanbomber 的源碼。</p>
   </description>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=granatier</url>
-  <url type="help">http://docs.kde.org/stable/en/kdegames/granatier/index.html</url>
+  <url type="help">https://docs.kde.org/?application=granatier</url>
   <url type="donation">https://www.kde.org/community/donations/?app=granatier&amp;source=appdata</url>
   <screenshots>
     <screenshot type="default">
@@ -138,7 +138,7 @@
       <caption xml:lang="x-test">xxPlaying Granatierxx</caption>
       <caption xml:lang="zh-CN">开始格兰提尔游戏</caption>
       <caption xml:lang="zh-TW">Granatier 遊玩畫面</caption>
-      <image>http://kde.org/images/screenshots/granatier.png</image>
+      <image>https://cdn.kde.org/screenshots/granatier/granatier.png</image>
     </screenshot>
   </screenshots>
   <project_group>KDE</project_group>
