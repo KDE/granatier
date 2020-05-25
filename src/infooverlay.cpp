@@ -35,7 +35,7 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     m_svgScaleFactor = 1;
 
     int nWinPoints = m_game->getWinPoints();
-    QList <Player*> playerList = m_game->getPlayers();
+    const QList <Player*> playerList = m_game->getPlayers();
 
     KGameRenderer* renderer;
     renderer = m_gameScene->renderer(Granatier::Element::SCORE);
@@ -113,7 +113,7 @@ InfoOverlay::~InfoOverlay()
     hideItems();
 
     // Find the score items and remove them
-    for(const auto& scoreItems: m_mapScore)
+    for(const auto& scoreItems: qAsConst(m_mapScore))
     {
         qDeleteAll(scoreItems);
     }
@@ -340,7 +340,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
 
     QSize svgSize;
     QPoint topLeft(0, 0);
-    topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
+    topLeft = m_gameScene->views().constFirst()->mapFromScene(topLeft);
 
     KGameRenderedItem* score;
     for(int i = 0; i < playerList.count(); i++)
@@ -353,7 +353,7 @@ void InfoOverlay::updateGraphics(qreal svgScaleFactor)
             score = m_mapScore.value(playerList.at(i)).at(j);
 
             QPoint bottomRight(static_cast<int>(Granatier::CellSize * 0.6), static_cast<int>(Granatier::CellSize * 0.6));
-            bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
+            bottomRight = m_gameScene->views().constFirst()->mapFromScene(bottomRight);
 
             svgSize.setHeight(bottomRight.y() - topLeft.y());
             svgSize.setWidth(bottomRight.x() - topLeft.x());

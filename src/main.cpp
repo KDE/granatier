@@ -58,7 +58,7 @@ int main(int argc, char** argv)
         {
             QDir sourceDir(sourceBasePath + dataDir);
             if(!sourceDir.exists()) continue;
-            QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
+            const QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
             QDir().mkpath(targetBasePath + dataDir);
             for(const auto& fileName: fileNames)
             {
@@ -74,7 +74,7 @@ int main(int argc, char** argv)
         KSharedConfig::openConfig()->reparseConfiguration();
     }
 
-    app.setWindowIcon(QIcon::fromTheme(QLatin1String("granatier")));
+    app.setWindowIcon(QIcon::fromTheme(QStringLiteral("granatier")));
     KLocalizedString::setApplicationDomain("granatier");
 
     // About Granatier

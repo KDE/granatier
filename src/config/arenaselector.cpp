@@ -123,7 +123,7 @@ void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
     //setup KNS button
     if (m_options & EnableNewStuffDownload)
     {
-        ui.getNewButton->setIcon(QIcon::fromTheme( QLatin1String( "get-hot-new-stuff" )));
+        ui.getNewButton->setIcon(QIcon::fromTheme( QStringLiteral( "get-hot-new-stuff" )));
         connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
     }
     else
@@ -233,7 +233,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     {
       // TODO change this if we ever change ArenaSettings::loadDefault
       QLatin1String defaultPath("arenas/granatier.desktop");
-      for(auto arenaSettings: arenaMap)
+      for(auto arenaSettings: qAsConst(arenaMap))
       {
         if (arenaSettings->path().endsWith(defaultPath))
         {
@@ -333,15 +333,15 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
 
     QTransform transform;
     transform.scale(1/svgScaleFactor, 1/svgScaleFactor);
-    m_graphicsScene->views().first()->setTransform(transform);
-    m_graphicsScene->views().first()->centerOn( ui.arenaPreview->sceneRect().center());
+    m_graphicsScene->views().constFirst()->setTransform(transform);
+    m_graphicsScene->views().constFirst()->centerOn( ui.arenaPreview->sceneRect().center());
 
     if(currentItem == nullptr)
     {
         if(m_svgScaleFactor != svgScaleFactor)
         {
             m_svgScaleFactor = svgScaleFactor;
-            for(auto arenaItem: m_arenaItems)
+            for(auto arenaItem: qAsConst(m_arenaItems))
             {
                 arenaItem->setRenderSize(calculateSvgSize());
                 arenaItem->setScale(m_svgScaleFactor);
@@ -356,7 +356,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
             for (int j = 0; j < m_arena->getNbColumns(); ++j)
             {
                 // Create the ArenaItem and set the image
-                ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_renderer, QStringLiteral(""));
+                ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_renderer, QLatin1String(""));
 
                 switch(m_arena->getCell(i,j).getType())
                 {

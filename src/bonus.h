@@ -27,7 +27,7 @@
  * @brief This class represents a Bonus for the Player.
  */
 class Bonus : public Element {
-
+    Q_OBJECT
 public:
     /**
       * Creates a new Bonus instance.

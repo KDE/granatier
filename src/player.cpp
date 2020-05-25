@@ -655,7 +655,7 @@ void Player::addBonus(Bonus* p_bonus)
             break;
     }
 
-    bonusUpdated(this, bonusType, 0);
+    Q_EMIT bonusUpdated(this, bonusType, 0);
 }
 
 bool Player::shield(int nExplosionID)
@@ -925,7 +925,7 @@ void Player::slot_removeBadBonus()
             break;
     }
 
-    bonusUpdated(this, m_badBonusType, 100);
+    Q_EMIT bonusUpdated(this, m_badBonusType, 100);
 }
 
 void Player::stopMoving()

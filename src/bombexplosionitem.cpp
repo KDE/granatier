@@ -29,7 +29,6 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
 
     m_svgScaleFactor = svgScaleFactor;
 
-    QString strElemetId;
     int width = 1;
     int height = 1;
     switch(m_direction)
@@ -126,7 +125,6 @@ void BombExplosionItem::setPosition(qreal p_x, qreal p_y)
 
 void BombExplosionItem::updateAnimationn(int nFrame)
 {
-    QString strElemetId;
     switch(m_direction)
     {
         case Granatier::Direction::NORTH:

@@ -46,8 +46,8 @@ PlayerSettings::PlayerSettings()
         KConfig desktopFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/") + settings.strPlayerID), KConfig::SimpleConfig);
 
         settings.strPlayerDesktopFilePath = desktopFile.name();
-        settings.strPlayerName = desktopFile.group("KGameTheme").readEntry<QString>("Name", QStringLiteral(""));
-        settings.strPlayerGraphicsFile = desktopFile.group("KGameTheme").readEntry<QString>("FileName", QStringLiteral(""));
+        settings.strPlayerName = desktopFile.group("KGameTheme").readEntry<QString>("Name", QLatin1String(""));
+        settings.strPlayerGraphicsFile = desktopFile.group("KGameTheme").readEntry<QString>("FileName", QLatin1String(""));
         settings.enabled = false;
         
         m_playerSettings.insert(settings.strPlayerID, settings);
@@ -188,7 +188,7 @@ void PlayerSettings::savePlayerSettings()
     {
         playersGroupList = granatierConfig.group("Player").groupList();
         playersGroupList.sort();
-        for(const auto& player: playersGroupList)
+        for(const auto& player: qAsConst(playersGroupList))
         {
             strPlayerIDList.append(granatierConfig.group("Player").group(player).readEntry<QString>("PlayerID", QStringLiteral("")));
         }

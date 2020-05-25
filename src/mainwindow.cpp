@@ -68,7 +68,7 @@ MainWindow::MainWindow()
     KStandardGameAction::quit(this, SLOT(close()), actionCollection());
     KToggleAction* soundAction = new KToggleAction(i18n("&Play sounds"), this);
     soundAction->setChecked(Settings::sounds());
-    actionCollection()->addAction( QLatin1String( "sounds" ), soundAction);
+    actionCollection()->addAction( QStringLiteral( "sounds" ), soundAction);
     connect(soundAction, &KToggleAction::triggered, this, &MainWindow::setSoundsEnabled);
     // init game
     initGame();
@@ -212,7 +212,7 @@ void MainWindow::settingsDialogCanceled()
     m_tempRandomArenaModeArenaList.clear();
     if(m_currentThemeIdentifier != QString::fromLatin1(m_themeProvider->currentTheme()->identifier()))
     {
-        QList<const KgTheme*> themeList = m_themeProvider->themes();
+        const QList<const KgTheme*> themeList = m_themeProvider->themes();
         for(const auto& theme: themeList)
         {
             if(QString::fromLatin1(theme->identifier()) == m_currentThemeIdentifier)

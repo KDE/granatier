@@ -66,7 +66,7 @@ public:
     * @param directory subdirectory (of share/apps/appname) to search in
     * @return true if the arena files and properties could be loaded
     */
-    ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, Options options = DefaultBehavior, const QString& groupName = QLatin1String("Arena"), const QString& directory = QLatin1String("arenas"));
+    ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, Options options = DefaultBehavior, const QString& groupName = QStringLiteral("Arena"), const QString& directory = QStringLiteral("arenas"));
     ~ArenaSelector() override;
     
 protected:

@@ -343,7 +343,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
             if (!blockElements.isEmpty())
             {
                 // Create the element item and set the image
-                for(const auto& element: blockElements)
+                for(const auto& element: qAsConst(blockElements))
                 {
                     Block* block = dynamic_cast <Block*> (element);
                     BlockItem* blockItem = new BlockItem(block, m_rendererArenaItems);
@@ -668,8 +668,8 @@ void GameScene::resizeSprites(int delayForBackground)
     }
 
     //calculate the scaling factor for the SVGs
-    int horizontalPixelsPerCell = static_cast<int>(views().first()->size().width() / (m_minSize.width()/Granatier::CellSize));
-    int verticalPixelsPerCell = static_cast<int>(views().first()->size().height() / (m_minSize.height()/Granatier::CellSize));
+    int horizontalPixelsPerCell = static_cast<int>(views().constFirst()->size().width() / (m_minSize.width()/Granatier::CellSize));
+    int verticalPixelsPerCell = static_cast<int>(views().constFirst()->size().height() / (m_minSize.height()/Granatier::CellSize));
     if(horizontalPixelsPerCell < verticalPixelsPerCell)
     {
         m_SvgScaleFactor = Granatier::CellSize / horizontalPixelsPerCell;
@@ -680,20 +680,20 @@ void GameScene::resizeSprites(int delayForBackground)
     }
     QTransform transform;
     transform.scale(1/m_SvgScaleFactor, 1/m_SvgScaleFactor);
-    views().first()->setTransform(transform);
-    views().first()->centerOn(sceneRect().center());
-    views().first()->updateSceneRect(m_minSize);;
+    views().constFirst()->setTransform(transform);
+    views().constFirst()->centerOn(sceneRect().center());
+    views().constFirst()->updateSceneRect(m_minSize);;
 
     //update pixmaps
     emit resizeGraphics(m_SvgScaleFactor);
 
     //update overlay
-    QRect viewRect = views().first()->rect();
-    QRectF viewRectToScene = QRectF(views().first()->mapToScene(viewRect.topLeft()), views().first()->mapToScene(viewRect.bottomRight()));
+    QRect viewRect = views().constFirst()->rect();
+    QRectF viewRectToScene = QRectF(views().constFirst()->mapToScene(viewRect.topLeft()), views().constFirst()->mapToScene(viewRect.bottomRight()));
     m_infoOverlay->resizeDimmOverlay(viewRectToScene.x(), viewRectToScene.y(), viewRectToScene.width(), viewRectToScene.height());
 
     //update background pixmap
-    m_arenaBackground->setPos(views().first()->mapToScene(viewRect.topLeft()));
+    m_arenaBackground->setPos(views().constFirst()->mapToScene(viewRect.topLeft()));
     m_arenaBackground->setScale(m_SvgScaleFactor);
 
     m_arenaBackground->setPixmap(m_arenaBackground->pixmap().scaled(viewRect.size()));
@@ -708,7 +708,7 @@ void GameScene::resizeBackground()
     {
         return;
     }
-    QRect viewRect = views().first()->rect();
+    QRect viewRect = views().constFirst()->rect();
     m_arenaBackground->setRenderSize(viewRect.size());
 }
 
@@ -919,7 +919,7 @@ void GameScene::bombDetonated(Bomb* bomb)
     {
         bombElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BOMB);
         int tempBombDetonationCountdown = nDetonationCountdown;
-        for(const auto& element: bombElements)
+        for(const auto& element: qAsConst(bombElements))
         {
             if(dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
             {
@@ -931,7 +931,7 @@ void GameScene::bombDetonated(Bomb* bomb)
         blockElements = m_game->getArena()->getCell(nRow, nColumn).getElements(Granatier::Element::BLOCK);
         if(!blockElements.isEmpty())
         {
-            for(const auto& element: blockElements)
+            for(const auto& element: qAsConst(blockElements))
             {
                 dynamic_cast <Block*> (element)->startDestruction();
                 if (m_blockItems[nRow][nColumn] != nullptr)
@@ -986,7 +986,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                 {
                     int tempBombDetonationCountdown = anDirectionDetonationCountdown[direction];
                     bool increaseDetonationTimeout = false;
-                    for(const auto& element: bombElements)
+                    for(const auto& element: qAsConst(bombElements))
                     {
                         if(dynamic_cast <Bomb*> (element) != bomb && !(dynamic_cast <Bomb*> (element)->isDetonated()))
                         {
@@ -1003,7 +1003,7 @@ void GameScene::bombDetonated(Bomb* bomb)
                     if(!blockElements.isEmpty())
                     {
                         abDirectionsDone[direction] = true;
-                        for(const auto& element: blockElements)
+                        for(const auto& element: qAsConst(blockElements))
                         {
                             dynamic_cast <Block*> (element)->startDestruction();
                             if (m_blockItems[nRow][nColumn] != nullptr)

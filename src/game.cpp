@@ -242,7 +242,7 @@ void Game::start()
     m_timer->start();
     m_state = RUNNING;
     m_roundTimer->start();
-    emit(pauseChanged(false, false));
+    Q_EMIT pauseChanged(false, false);
 }
 
 void Game::pause(bool p_locked)
@@ -258,7 +258,7 @@ void Game::pause(bool p_locked)
     {
         m_state = PAUSED_UNLOCKED;
     }
-    emit(pauseChanged(true, false));
+    Q_EMIT pauseChanged(true, false);
 }
 
 void Game::switchPause()
@@ -268,14 +268,14 @@ void Game::switchPause()
     {
         // Pause the Game
         pause();
-        emit(pauseChanged(true, true));
+        Q_EMIT pauseChanged(true, true);
     }
     // If the Game is already paused
     else
     {
         // Resume the Game
         start();
-        emit(pauseChanged(false, true));
+        Q_EMIT pauseChanged(false, true);
     }
 }
 
@@ -472,14 +472,14 @@ void Game::keyPressEvent(QKeyEvent* p_event)
                 // Start the game
                 m_timer->start();
                 m_roundTimer->start();
-                emit(gameStarted());
+                Q_EMIT gameStarted();
             }
             else if (m_state == PAUSED_LOCKED)
             {
                 // if the game is over, start a new game
                 if (m_gameOver)
                 {
-                    emit(gameOver());
+                    Q_EMIT gameOver();
                     return;
                 }
                 else
@@ -549,7 +549,7 @@ void Game::decrementRemainingRoundTime()
     m_remainingTime--;
     if(m_remainingTime >= 0)
     {
-        emit(infoChanged(Granatier::Info::TimeInfo));
+        Q_EMIT infoChanged(Granatier::Info::TimeInfo);
     }
     else
     {

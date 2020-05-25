@@ -399,11 +399,11 @@ void InfoSidebar::bonusInfoChanged(Player* player, Granatier::Bonus::Type bonusT
                     //calculate graphics size
                     QSize renderSize;
                     QPoint topLeft(0, 0);
-                    topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
+                    topLeft = m_gameScene->views().constFirst()->mapFromScene(topLeft);
                     QRectF rect;
 
                     QPoint bottomRight(static_cast<int>(Granatier::CellSize * 0.5), static_cast<int>(Granatier::CellSize * 0.5));
-                    bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
+                    bottomRight = m_gameScene->views().constFirst()->mapFromScene(bottomRight);
 
                     renderSize.setHeight(bottomRight.y() - topLeft.y());
                     renderSize.setWidth(bottomRight.x() - topLeft.x());
@@ -437,7 +437,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
 
     QSize renderSize;
     QPoint topLeft(0, 0);
-    topLeft = m_gameScene->views().first()->mapFromScene(topLeft);
+    topLeft = m_gameScene->views().constFirst()->mapFromScene(topLeft);
     QPoint bottomRight;
     QRectF rect;
 
@@ -449,7 +449,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
     {
         bottomRight.setX(static_cast<int>(Granatier::CellSize * 0.45));
         bottomRight.setY(static_cast<int>(Granatier::CellSize * 0.45));
-        bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
+        bottomRight = m_gameScene->views().constFirst()->mapFromScene(bottomRight);
         renderSize.setHeight(bottomRight.y() - topLeft.y());
         renderSize.setWidth(bottomRight.x() - topLeft.x());
 
@@ -458,7 +458,7 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
 
         bottomRight.setX(static_cast<int>(Granatier::CellSize * 0.5));
         bottomRight.setY(static_cast<int>(Granatier::CellSize * 0.5));
-        bottomRight = m_gameScene->views().first()->mapFromScene(bottomRight);
+        bottomRight = m_gameScene->views().constFirst()->mapFromScene(bottomRight);
         renderSize.setHeight(bottomRight.y() - topLeft.y());
         renderSize.setWidth(bottomRight.x() - topLeft.x());
 
