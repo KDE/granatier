@@ -24,8 +24,8 @@
 #include <QApplication>
 #include <KLocalizedString>
 #include <QCommandLineParser>
-#include <kdelibs4configmigrator.h>
-#include <kdelibs4migration.h>
+#include <Kdelibs4ConfigMigrator>
+#include <Kdelibs4Migration>
 #include <QStandardPaths>
 #include <QDir>
 #include <KDBusService>

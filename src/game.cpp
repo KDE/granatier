@@ -35,7 +35,7 @@
 #include <QKeyEvent>
 #include <QDir>
 #include <KConfig>
-#include <kgsound.h>
+#include <KgSound>
 #include <QStandardPaths>
 
 
