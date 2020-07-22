@@ -45,6 +45,7 @@
   <summary xml:lang="ca">Un clon del Bomberman</summary>
   <summary xml:lang="ca-valencia">Un clon del Bomberman</summary>
   <summary xml:lang="cs">Klon Bombermana</summary>
+  <summary xml:lang="da">Klon af Bomberman</summary>
   <summary xml:lang="de">Bomberman-Klon</summary>
   <summary xml:lang="el">Κλώνος του Bomberman</summary>
   <summary xml:lang="en-GB">Bomberman clone</summary>
@@ -82,6 +83,7 @@
     </p>
     <p xml:lang="ca">El Granatier és un clon del joc Bomberman clàssic, inspirat en el treball del clon Clanbomber.</p>
     <p xml:lang="ca-valencia">El Granatier és un clon del joc Bomberman clàssic, inspirat en el treball del clon Clanbomber.</p>
+    <p xml:lang="da">Granatier er en klon af det klassiske spil Bomberman, inspireret af af arbejdet fra Clanbomber-klonen.</p>
     <p xml:lang="de">Granatier ist eine Kopie des klassischen Spiels Bomberman und ist von der Arbeit an dessen Clanbomber-Kopie inspiriert.</p>
     <p xml:lang="el">Ο Χειροβομβιστής είναι ένας κλώνος του κλασικού παιχνιδιού Bomberman, εμπνευσμένο από την εργασία του κλώνου του Clanbomber.</p>
     <p xml:lang="en-GB">Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.</p>
@@ -122,6 +124,7 @@
       <caption xml:lang="ca">Jugant al Granatier</caption>
       <caption xml:lang="ca-valencia">Jugant al Granatier</caption>
       <caption xml:lang="cs">Hraní Granatier</caption>
+      <caption xml:lang="da">At spille Granatier</caption>
       <caption xml:lang="de">Granatier spielen</caption>
       <caption xml:lang="en-GB">Playing Granatier</caption>
       <caption xml:lang="es">Jugando a Granatier</caption>
