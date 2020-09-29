@@ -43,7 +43,7 @@ PlayerItem::PlayerItem(Player* p_model, KGameRenderer* renderer) : CharacterItem
 
     // A timeLine for the Player animation
     m_animationTimer = new QTimeLine();
-    m_animationTimer->setCurveShape(QTimeLine::LinearCurve);
+    m_animationTimer->setEasingCurve(QEasingCurve::Linear);
     m_animationTimer->setLoopCount(0);
     m_animationTimer->setFrameRange(0, NB_FRAMES - 1);
     // Animation speed
