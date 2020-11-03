@@ -66,7 +66,7 @@ bool MapParser::parse(QIODevice *input)
         }
     }
 
-    if (reader.isEndDocument())
+    if (!reader.isEndDocument())
         return false;
 
     return true;
