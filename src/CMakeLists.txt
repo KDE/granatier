@@ -1,3 +1,8 @@
+ecm_setup_version(${GRANATIER_VERSION}
+    VARIABLE_PREFIX GRANATIER
+    VERSION_HEADER granatier_version.h
+)
+
 set(granatierSources
     config/arenaselector.cpp
     config/arenasettings.cpp

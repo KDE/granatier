@@ -18,6 +18,8 @@
 
 #include "mainwindow.h"
 
+#include "granatier_version.h"
+
 #include <KAboutData>
 #include <KCrash>
 
@@ -78,7 +80,8 @@ int main(int argc, char** argv)
     KLocalizedString::setApplicationDomain("granatier");
 
     // About Granatier
-    KAboutData about(QStringLiteral("granatier"),  i18n("Granatier"), QStringLiteral("1.4.0"),
+    KAboutData about(QStringLiteral("granatier"),  i18n("Granatier"),
+        QStringLiteral(GRANATIER_VERSION_STRING),
         i18n("Granatier is a Bomberman Clone!"),
         KAboutLicense::GPL, i18n("Copyright (c) 2009-2015 The Granatier Team!"));
     about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), QStringLiteral("k.hias@gmx.de"));

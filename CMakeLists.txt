@@ -1,6 +1,18 @@
-project(granatier)
-
 cmake_minimum_required (VERSION 3.5 FATAL_ERROR)
+
+# Release Service version, managed by release script
+set (RELEASE_SERVICE_VERSION_MAJOR "20")
+set (RELEASE_SERVICE_VERSION_MINOR "11")
+set (RELEASE_SERVICE_VERSION_MICRO "80")
+set (RELEASE_SERVICE_COMPACT_VERSION "${RELEASE_SERVICE_VERSION_MAJOR}${RELEASE_SERVICE_VERSION_MINOR}${RELEASE_SERVICE_VERSION_MICRO}")
+
+# Bump GRANATIER_BASE_VERSION once new features are added
+set(GRANATIER_BASE_VERSION "1.4")
+
+set(GRANATIER_VERSION "${GRANATIER_BASE_VERSION}.${RELEASE_SERVICE_COMPACT_VERSION}")
+
+project(granatier VERSION ${GRANATIER_VERSION})
+
 set (QT_MIN_VERSION "5.7.0")
 set (KF5_MIN_VERSION "5.30.0")
 
@@ -31,6 +43,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(KDECMakeSettings)
 include(ECMAddAppIcon)
 include(ECMQtDeclareLoggingCategory)
+include(ECMSetupVersion)
 
 if (${KF5Config_VERSION} STRGREATER "5.56.0")
         add_definitions(-DQT_NO_FOREACH)
