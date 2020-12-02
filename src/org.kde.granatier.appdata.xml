@@ -155,4 +155,7 @@
   <provides>
     <binary>granatier</binary>
   </provides>
+  <releases>
+    <release version="1.4.20120" date="2020-12-10"/>
+  </releases>
 </component>
