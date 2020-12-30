@@ -195,7 +195,7 @@ void PlayerItem::manageCollision()
                 {
                     dynamic_cast <Bonus*> (bonusItem->getModel())->setTaken();
                     bonusItem->getModel()->doActionOnCollision(dynamic_cast <Player*> (this->getModel()));
-                    emit bonusItemTaken(bonusItem);
+                    Q_EMIT bonusItemTaken(bonusItem);
                 }
             }
         }

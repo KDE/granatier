@@ -55,6 +55,6 @@ void BlockItem::destructionAnimation()
         m_destructionTimer->stop();
         delete m_destructionTimer;
         m_destructionTimer = nullptr;
-        emit blockItemDestroyed(this);
+        Q_EMIT blockItemDestroyed(this);
     }
 }

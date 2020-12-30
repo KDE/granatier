@@ -66,6 +66,6 @@ void BonusItem::destructionAnimation()
         m_destructionTimer->stop();
         delete m_destructionTimer;
         m_destructionTimer = nullptr;
-        emit bonusItemDestroyed(this);
+        Q_EMIT bonusItemDestroyed(this);
     }
 }

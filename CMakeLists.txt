@@ -47,6 +47,7 @@ include(ECMSetupVersion)
 
 add_definitions(
     -DQT_NO_FOREACH
+    -DQT_NO_KEYWORDS
 )
 
 add_subdirectory(themes) 

@@ -128,8 +128,8 @@ void Bomb::updateMove()
                     m_falling = true;
                     m_type = Granatier::Element::NONE;
                     m_detonationCountdownTimer->stop();
-                    emit falling();
-                    emit releaseBombArmory();
+                    Q_EMIT falling();
+                    Q_EMIT releaseBombArmory();
                 }
                 break;
             default:
@@ -313,7 +313,7 @@ void Bomb::move(qreal x, qreal y)
     // Move the Bomb
     m_x = x;
     m_y = y;
-    emit(moved(m_x, m_y));
+    Q_EMIT moved(m_x, m_y);
 }
 
 qreal Bomb::getXSpeed() const
@@ -476,8 +476,8 @@ void Bomb::detonate()
         m_detonated = true;
         delete m_detonationCountdownTimer;
         m_detonationCountdownTimer = nullptr;
-        emit bombDetonated(this);
-        emit releaseBombArmory();
+        Q_EMIT bombDetonated(this);
+        Q_EMIT releaseBombArmory();
     }
 }
 
@@ -522,7 +522,7 @@ void Bomb::slot_detonationCompleted()
 
 void Bomb::updateMortarState()
 {
-    emit mortar(m_mortarState, nMortarRampEnd, nMortarPeak, nMortarGround);
+    Q_EMIT mortar(m_mortarState, nMortarRampEnd, nMortarPeak, nMortarGround);
 
     if(m_mortarState <= 0)
     {

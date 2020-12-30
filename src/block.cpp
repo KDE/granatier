@@ -43,5 +43,5 @@ Bonus* Block::getBonus()
 
 void Block::startDestruction()
 {
-    emit startDestructionAnimation();
+    Q_EMIT startDestructionAnimation();
 }

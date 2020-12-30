@@ -60,7 +60,7 @@ void GameView::keyPressEvent(QKeyEvent* p_event)
     {
         return;
     }
-    emit(keyPressed(p_event));
+    Q_EMIT keyPressed(p_event);
 }
 
 void GameView::keyReleaseEvent(QKeyEvent* p_event)
@@ -69,5 +69,5 @@ void GameView::keyReleaseEvent(QKeyEvent* p_event)
     {
         return;
     }
-    emit(keyReleased(p_event));
+    Q_EMIT keyReleased(p_event);
 }

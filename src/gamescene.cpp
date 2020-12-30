@@ -685,7 +685,7 @@ void GameScene::resizeSprites(int delayForBackground)
     views().constFirst()->updateSceneRect(m_minSize);;
 
     //update pixmaps
-    emit resizeGraphics(m_SvgScaleFactor);
+    Q_EMIT resizeGraphics(m_SvgScaleFactor);
 
     //update overlay
     QRect viewRect = views().constFirst()->rect();

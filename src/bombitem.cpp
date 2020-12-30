@@ -219,7 +219,7 @@ void BombItem::pulse()
         {
             m_pulseTimer->stop();
             m_dudBomb = true;
-            emit bombItemFinished(this);
+            Q_EMIT bombItemFinished(this);
         }
     }
 }
@@ -229,7 +229,7 @@ void BombItem::updateAnimation()
     m_animationCounter++;
     if (m_animationCounter > 4)
     {
-        emit bombItemFinished(this);
+        Q_EMIT bombItemFinished(this);
         m_animationCounter = 0;
         return;
     }
@@ -238,7 +238,7 @@ void BombItem::updateAnimation()
     updateGraphics(scale());
     update(m_x, m_y);
 
-    emit animationFrameChanged(this, m_animationCounter);
+    Q_EMIT animationFrameChanged(this, m_animationCounter);
     m_explosionTimer->setInterval(m_listExplosionTiming.at(m_animationCounter));
     m_explosionTimer->start();
 }

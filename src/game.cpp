@@ -575,7 +575,7 @@ void Game::decrementRemainingRoundTime()
             m_bombCount++;
             Bomb* bomb = new Bomb((nCol + 0.5) * Granatier::CellSize, (nRow + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 1000);    // time in ms
             bomb->setBombPower(static_cast<int>(granatier::RNG::fromRange(1.0, 2.5)));
-            emit bombCreated(bomb);
+            Q_EMIT bombCreated(bomb);
             connect(bomb, &Bomb::bombDetonated, this, &Game::bombDetonated);
             m_bombs.append(bomb);
             if(m_remainingTime > -100 && m_roundTimer->interval() > 150)
@@ -705,7 +705,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     m_bombCount++;
     Bomb* bomb = new Bomb((col + 0.5) * Granatier::CellSize, (row + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 2500);    // time in ms
     bomb->setBombPower(player->getBombPower());
-    emit bombCreated(bomb);
+    Q_EMIT bombCreated(bomb);
     connect(bomb, &Bomb::bombDetonated, this, &Game::bombDetonated);
     connect(bomb, &Bomb::releaseBombArmory, player, &Player::slot_refillBombArmory);
     m_bombs.append(bomb);

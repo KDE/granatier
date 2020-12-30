@@ -175,7 +175,7 @@ void Player::updateDirection()
     m_askedXSpeed = 0;
     m_askedYSpeed = 0;
     // Signal to the player item that the direction changed
-    emit directionChanged();
+    Q_EMIT directionChanged();
 }
 
 void Player::updateMove()
@@ -465,7 +465,7 @@ void Player::updateMove()
                 if (cellCenter - m_x == 0)
                 {
                     setXSpeed(0);
-                    emit falling();
+                    Q_EMIT falling();
                 }
                 else if (xDirection * deltaCellCenter < 0)
                 {
@@ -479,7 +479,7 @@ void Player::updateMove()
                 if (cellCenter - m_y == 0)
                 {
                     setYSpeed(0);
-                    emit falling();
+                    Q_EMIT falling();
                 }
                 else if (yDirection * deltaCellCenter < 0)
                 {
@@ -500,7 +500,7 @@ void Player::updateMove()
     if(m_badBonusCountdownTimer->isActive() && m_badBonusType == Granatier::Bonus::SCATTY  && m_bombArmory > 0)
     {
         //TODO: improve
-        emit bombDropped(this, m_x, m_y, true, 0);
+        Q_EMIT bombDropped(this, m_x, m_y, true, 0);
     }
 }
 
@@ -509,7 +509,7 @@ void Player::move(qreal x, qreal y)
     // Move the Character
     m_x = x;
     m_y = y;
-    emit moved(m_x, m_y);
+    Q_EMIT moved(m_x, m_y);
 }
 
 void Player::addBonus(Bonus* p_bonus)
@@ -649,7 +649,7 @@ void Player::addBonus(Bonus* p_bonus)
             m_badBonusCountdownTimer->start();
             break;
         case Granatier::Bonus::RESURRECT:
-            emit resurrectBonusTaken();
+            Q_EMIT resurrectBonusTaken();
             break;
         default:
             break;
@@ -671,7 +671,7 @@ bool Player::shield(int nExplosionID)
             m_listShield[i] = nExplosionID;
             if(i == m_listShield.count()-1)
             {
-                emit bonusUpdated(this, Granatier::Bonus::SHIELD, 100);
+                Q_EMIT bonusUpdated(this, Granatier::Bonus::SHIELD, 100);
             }
             return true;
         }
@@ -712,7 +712,7 @@ void Player::die()
     if(!m_death)
     {
         m_death = true;
-        emit dying();
+        Q_EMIT dying();
         m_xSpeed = 0;
         m_xSpeed = 0;
 
@@ -752,17 +752,17 @@ void Player::resurrect()
     if(m_listShield.count() != 0)
     {
         m_listShield.clear();
-        emit bonusUpdated(this, Granatier::Bonus::SHIELD, 100);
+        Q_EMIT bonusUpdated(this, Granatier::Bonus::SHIELD, 100);
     }
     if(m_throwBomb)
     {
         m_throwBomb = false;
-        emit bonusUpdated(this, Granatier::Bonus::THROW, 100);
+        Q_EMIT bonusUpdated(this, Granatier::Bonus::THROW, 100);
     }
     if(m_kickBomb)
     {
         m_kickBomb = false;
-        emit bonusUpdated(this, Granatier::Bonus::KICK, 100);
+        Q_EMIT bonusUpdated(this, Granatier::Bonus::KICK, 100);
     }
     m_omitBombCurrentCell = false;
     if(m_badBonusCountdownTimer->isActive())
@@ -789,7 +789,7 @@ void Player::resurrect()
         m_arena->setCellElement(cellRow, cellCol, this);
     }
 
-    emit resurrected();
+    Q_EMIT resurrected();
 }
 
 int Player::points() const
@@ -804,7 +804,7 @@ void Player::addPoint()
 
 void Player::emitGameUpdated()
 {
-    emit gameUpdated();
+    Q_EMIT gameUpdated();
 }
 
 qreal Player::getAskedXSpeed() const
@@ -934,7 +934,7 @@ void Player::stopMoving()
     setYSpeed(0);
     m_askedXSpeed = 0;
     m_askedYSpeed = 0;
-    emit stopped();
+    Q_EMIT stopped();
 }
 
 void Player::keyPressed(QKeyEvent* keyEvent)
@@ -983,12 +983,12 @@ void Player::keyPressed(QKeyEvent* keyEvent)
     {
         if(m_bombArmory > 0)
         {
-            emit bombDropped(this, m_x, m_y, true, 2);
+            Q_EMIT bombDropped(this, m_x, m_y, true, 2);
             m_omitBombCurrentCell = true;
         }
         else
         {
-            emit bombDropped(this, m_x, m_y, false, 2);
+            Q_EMIT bombDropped(this, m_x, m_y, false, 2);
         }
     }
 
@@ -1040,7 +1040,7 @@ void Player::keyReleased(QKeyEvent* keyEvent)
     }
     else if(key == m_key.dropBomb)
     {
-        //emit bomb(this);
+        //Q_EMIT bomb(this);
     }
 
     if(m_xSpeed == 0 && m_ySpeed == 0 && m_askedXSpeed == 0 && m_askedYSpeed == 0) stopMoving();
