@@ -40,7 +40,13 @@ set(granatierData
     config/granatierui.rc
 )
 
-ecm_qt_declare_logging_category(granatierSources HEADER granatier_debug.h IDENTIFIER GRANATIER_LOG CATEGORY_NAME log_granatier)
+ecm_qt_declare_logging_category(granatierSources
+    HEADER granatier_debug.h
+    IDENTIFIER GRANATIER_LOG
+    CATEGORY_NAME log_granatier
+    DESCRIPTION "Granatier"
+    EXPORT GRANATIER
+)
 
 ki18n_wrap_ui(granatierSources config/arenaselector.ui config/generalsettings.ui)
 
@@ -71,3 +77,9 @@ install(PROGRAMS org.kde.granatier.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.granatier.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES config/granatier.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
 install(FILES ${granatierData} DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/granatier)
+
+ecm_qt_install_logging_categories(
+    EXPORT GRANATIER
+    FILE granatier.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)

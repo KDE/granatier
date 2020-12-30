@@ -57,6 +57,4 @@ add_subdirectory(arenas)
 add_subdirectory(players)
 add_subdirectory(doc)
 
-install(FILES granatier.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
-
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
