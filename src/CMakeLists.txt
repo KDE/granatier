@@ -46,7 +46,7 @@ ki18n_wrap_ui(granatierSources config/arenaselector.ui config/generalsettings.ui
 
 kconfig_add_kcfg_files(granatierSources config/settings.kcfgc)
 
-file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../pictures/*-apps-granatier.png")
+file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/*-apps-granatier.png")
 ecm_add_app_icon(granatierSources ICONS ${ICONS_SRCS})
 
 add_executable(granatier ${granatierSources})

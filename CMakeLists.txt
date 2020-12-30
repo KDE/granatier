@@ -54,7 +54,7 @@ endif()
 
 add_subdirectory(themes) 
 add_subdirectory(sounds)
-add_subdirectory(pictures)
+add_subdirectory(icons)
 add_subdirectory(src)
 add_subdirectory(arenas)
 add_subdirectory(players)
