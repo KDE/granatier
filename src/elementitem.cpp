@@ -18,7 +18,7 @@ ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRende
     // Init the view coordinates
     update(p_model->getX(), p_model->getY());
     // Connects the model to the view
-    connect(p_model, SIGNAL(moved(qreal,qreal)), this, SLOT(update(qreal,qreal)));
+    connect(p_model, &Element::moved, this, &ElementItem::update);
 
     m_renderSize = QSize(1, 1);
     m_itemSizeSet = QSize(static_cast<int>(Granatier::CellSize), static_cast<int>(Granatier::CellSize));

@@ -22,6 +22,8 @@ class BombItem : public ElementItem
 
     Q_OBJECT
 
+    friend class GameScene;
+
 protected:
 
     /** Timer used to make the bomb pulse */
