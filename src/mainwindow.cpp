@@ -51,10 +51,10 @@ MainWindow::MainWindow()
     m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
     m_themeProvider->discoverThemes(QByteArray("appdata"), QStringLiteral("themes"), QStringLiteral("granatier"));
     // Set the window menus
-    KStandardGameAction::gameNew(this, SLOT(newGame()), actionCollection());
-    //KStandardGameAction::highscores(this, SLOT(showHighscores()), actionCollection());
-    KStandardAction::preferences(this, SLOT(showSettings()), actionCollection());
-    KStandardGameAction::quit(this, SLOT(close()), actionCollection());
+    KStandardGameAction::gameNew(this, &MainWindow::newGame, actionCollection());
+    //KStandardGameAction::highscores(this, &MainWindow::showHighscores, actionCollection());
+    KStandardAction::preferences(this, &MainWindow::showSettings, actionCollection());
+    KStandardGameAction::quit(this, &MainWindow::close, actionCollection());
     KToggleAction* soundAction = new KToggleAction(i18n("&Play sounds"), this);
     soundAction->setChecked(Settings::sounds());
     actionCollection()->addAction( QStringLiteral( "sounds" ), soundAction);
