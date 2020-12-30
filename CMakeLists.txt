@@ -13,8 +13,8 @@ set(GRANATIER_VERSION "${GRANATIER_BASE_VERSION}.${RELEASE_SERVICE_COMPACT_VERSI
 
 project(granatier VERSION ${GRANATIER_VERSION})
 
-set (QT_MIN_VERSION "5.7.0")
-set (KF5_MIN_VERSION "5.30.0")
+set (QT_MIN_VERSION "5.12.0")
+set (KF5_MIN_VERSION "5.68.0")
 
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED CONFIG)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} )
@@ -45,12 +45,9 @@ include(ECMAddAppIcon)
 include(ECMQtDeclareLoggingCategory)
 include(ECMSetupVersion)
 
-if (${KF5Config_VERSION} STRGREATER "5.56.0")
-        add_definitions(-DQT_NO_FOREACH)
-        MESSAGE(STATUS "compile without foreach")
-endif()
-
-
+add_definitions(
+    -DQT_NO_FOREACH
+)
 
 add_subdirectory(themes) 
 add_subdirectory(sounds)
@@ -59,10 +56,7 @@ add_subdirectory(src)
 add_subdirectory(arenas)
 add_subdirectory(players)
 add_subdirectory(doc)
-if (${ECM_VERSION} STRGREATER "5.58.0")
-    install(FILES granatier.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
-else()
-    install(FILES granatier.categories  DESTINATION ${KDE_INSTALL_CONFDIR})
-endif()
+
+install(FILES granatier.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
