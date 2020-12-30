@@ -36,10 +36,6 @@ set(granatierSources
     playeritem.cpp
 )
 
-set(granatierData
-    config/granatierui.rc
-)
-
 ecm_qt_declare_logging_category(granatierSources
     HEADER granatier_debug.h
     IDENTIFIER GRANATIER_LOG
@@ -51,6 +47,10 @@ ecm_qt_declare_logging_category(granatierSources
 ki18n_wrap_ui(granatierSources config/arenaselector.ui config/generalsettings.ui)
 
 kconfig_add_kcfg_files(granatierSources config/settings.kcfgc)
+
+qt5_add_resources(granatierSources
+    granatier.qrc
+)
 
 file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/*-apps-granatier.png")
 ecm_add_app_icon(granatierSources ICONS ${ICONS_SRCS})
@@ -76,7 +76,6 @@ install(TARGETS granatier ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(PROGRAMS org.kde.granatier.desktop DESTINATION ${KDE_INSTALL_APPDIR})
 install(FILES org.kde.granatier.appdata.xml DESTINATION ${KDE_INSTALL_METAINFODIR})
 install(FILES config/granatier.kcfg DESTINATION ${KDE_INSTALL_KCFGDIR})
-install(FILES ${granatierData} DESTINATION ${KDE_INSTALL_KXMLGUI5DIR}/granatier)
 
 ecm_qt_install_logging_categories(
     EXPORT GRANATIER
