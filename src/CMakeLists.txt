@@ -57,10 +57,6 @@ ecm_add_app_icon(granatierSources ICONS ${ICONS_SRCS})
 
 add_executable(granatier ${granatierSources})
 
-if(CMAKE_COMPILER_IS_GNUCXX)
-       target_compile_options(granatier PRIVATE -W -Wall -Wpedantic -Wextra -Wconversion -Wuninitialized)
-endif(CMAKE_COMPILER_IS_GNUCXX)
-
 target_link_libraries(granatier
     Qt5::Xml
     Qt5::Widgets
