@@ -320,11 +320,6 @@ Q_SIGNALS:
     void bombCreated(Bomb* bomb);
 
     /**
-    * Emitted when a bomb was removed.
-    */
-    void bombRemoved(Bomb* bomb);
-
-    /**
     * Emitted when something to display has changed.
     */
     void infoChanged(const Granatier::Info::Type p_info);
