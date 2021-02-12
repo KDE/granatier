@@ -34,6 +34,7 @@ set(granatierSources
     mapparser.cpp
     player.cpp
     playeritem.cpp
+    granatier.qrc
 )
 
 ecm_qt_declare_logging_category(granatierSources
@@ -47,10 +48,6 @@ ecm_qt_declare_logging_category(granatierSources
 ki18n_wrap_ui(granatierSources config/arenaselector.ui config/generalsettings.ui)
 
 kconfig_add_kcfg_files(granatierSources config/settings.kcfgc)
-
-qt5_add_resources(granatierSources
-    granatier.qrc
-)
 
 file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/*-apps-granatier.png")
 ecm_add_app_icon(granatierSources ICONS ${ICONS_SRCS})
