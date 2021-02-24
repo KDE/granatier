@@ -158,6 +158,7 @@
     <binary>granatier</binary>
   </provides>
   <releases>
+    <release version="1.4.20123" date="2021-03-04"/>
     <release version="1.4.20122" date="2021-02-04"/>
     <release version="1.4.20121" date="2021-01-07"/>
     <release version="1.4.20120" date="2020-12-10"/>
