@@ -22,7 +22,6 @@
 #include <QStandardPaths>
 #include <KConfig>
 #include <KLocalizedString>
-#include <KNS3/DownloadDialog>
 #include <QIcon>
 #include <KConfigGroup>
 //PlayerSelectorDelegate declaration
@@ -44,13 +43,9 @@ struct PlayerSelector::Private
     PlayerSettings* m_playerSettings;
     Options m_options;
     QListWidget* m_list;
-    QPushButton* m_knsButton;
-
     void fillList();
 
-    Private(PlayerSettings* playerSettings, Options options, PlayerSelector* q) : q(q), m_playerSettings(playerSettings), m_options(options), m_knsButton(nullptr) {}
-
-    void _k_showNewStuffDialog();
+    Private(PlayerSettings* playerSettings, Options options, PlayerSelector* q) : q(q), m_playerSettings(playerSettings), m_options(options) {}
 };
 
 PlayerSelector::PlayerSelector(PlayerSettings* playerSettings, Options options, QWidget* parent)
@@ -71,14 +66,6 @@ PlayerSelector::PlayerSelector(PlayerSettings* playerSettings, Options options, 
     QVBoxLayout* layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(d->m_list);
-    //setup KNS button
-    if (options & EnableNewStuffDownload)
-    {
-        d->m_knsButton = new QPushButton(QIcon::fromTheme(QStringLiteral("get-hot-new-stuff")),
-            i18n("Get New Players..."), this);
-        layout->addWidget(d->m_knsButton);
-        connect(d->m_knsButton, SIGNAL(clicked()), SLOT(_k_showNewStuffDialog()));
-    }
 }
 
 PlayerSelector::~PlayerSelector()
@@ -121,20 +108,6 @@ void PlayerSelector::Private::fillList()
         modelIndex = m_list->model()->index(i, 0, m_list->rootIndex());
         m_list->setIndexWidget(modelIndex, playerSelectorItem);
     }
-}
-
-void PlayerSelector::Private::_k_showNewStuffDialog()
-{
-    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog (q);
-    if(dialog->exec() == QDialog::Accepted)
-    {
-        if(!(dialog->changedEntries().isEmpty()))
-        {
-            //TODO: discover new arenas and add them to the list
-            fillList();
-        }
-    }
-    delete dialog;
 }
 
 //END PlayerSelector

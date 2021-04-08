@@ -31,8 +31,6 @@ public:
 private:
     struct Private;
     Private* const d;
-
-    Q_PRIVATE_SLOT(d, void _k_showNewStuffDialog())
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(PlayerSelector::Options)

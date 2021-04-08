@@ -56,7 +56,6 @@ class ArenaSelector::Private
         // private slots
         void _k_updatePreview(QListWidgetItem* currentItem = nullptr);
         void _k_updateArenaList(const QString& strArena);
-        void _k_openKNewStuffDialog();
         void _k_setRandomArenaMode(bool randomModeEnabled);
         void _k_updateRandomArenaModeArenaList(QListWidgetItem* item);
 };
@@ -108,17 +107,7 @@ void ArenaSelector::Private::setupData(KConfigSkeleton * aconfig)
 {
     ui.setupUi(q);
 
-    //setup KNS button
-    if (m_options & EnableNewStuffDownload)
-    {
-        ui.getNewButton->setIcon(QIcon::fromTheme( QStringLiteral( "get-hot-new-stuff" )));
-        connect(ui.getNewButton, SIGNAL(clicked()), q, SLOT(_k_openKNewStuffDialog()));
-    }
-    else
-    {
-        ui.getNewButton->hide();
-    }
-
+    ui.getNewButton->hide();
 
     //The lineEdit widget holds our arena path for automatic connection via KConfigXT.
     //But the user should not manipulate it directly, so we hide it.
@@ -436,19 +425,6 @@ void ArenaSelector::Private::_k_updateArenaList(const QString& strArena)
             }
         }
     }
-}
-
-void ArenaSelector::Private::_k_openKNewStuffDialog()
-{
-    QPointer<KNS3::DownloadDialog> dialog = new KNS3::DownloadDialog (q);
-    if(dialog->exec() == QDialog::Accepted)
-    {
-        if(!(dialog->changedEntries().isEmpty()))
-        {
-            //TODO: discover new arenas and add them to the list
-        }
-    }
-    delete dialog;
 }
 
 void ArenaSelector::Private::_k_setRandomArenaMode(bool randomModeEnabled)
