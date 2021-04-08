@@ -57,11 +57,11 @@ add_executable(granatier ${granatierSources})
 target_link_libraries(granatier
     Qt5::Xml
     Qt5::Widgets
-    KF5::NewStuff
     KF5KDEGames
     Qt5::Svg
     KF5::DBusAddons
     KF5::Crash
+    KF5::XmlGui
 )
 
 install(TARGETS granatier ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

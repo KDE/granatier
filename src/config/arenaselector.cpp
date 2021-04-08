@@ -18,7 +18,6 @@
 #include <QIcon>
 #include <KGameRenderer>
 #include <KConfigSkeleton>
-#include <KNS3/DownloadDialog>
 #include <QFile>
 #include <QDir>
 #include <QStandardPaths>
