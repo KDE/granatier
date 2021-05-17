@@ -384,11 +384,7 @@ void Game::createBonus()
         {
             nShuffle = granatier::RNG::fromRange(0, nQuarterSize-1);
 
-#if QT_VERSION < QT_VERSION_CHECK(5, 13, 0)
-        bonusTypeList.swap(i, nShuffle);
-#else
-        bonusTypeList.swapItemsAt(i, nShuffle);
-#endif
+            bonusTypeList.swapItemsAt(i, nShuffle);
         }
 
         for (int i = 0; i < nQuarterSize; ++i)
