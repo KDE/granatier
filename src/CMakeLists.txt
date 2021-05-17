@@ -3,7 +3,9 @@ ecm_setup_version(${GRANATIER_VERSION}
     VERSION_HEADER granatier_version.h
 )
 
-set(granatierSources
+add_executable(granatier)
+
+target_sources(granatier PRIVATE
     config/arenaselector.cpp
     config/arenasettings.cpp
     config/playerselector.cpp
@@ -34,10 +36,11 @@ set(granatierSources
     mapparser.cpp
     player.cpp
     playeritem.cpp
+
     granatier.qrc
 )
 
-ecm_qt_declare_logging_category(granatierSources
+ecm_qt_declare_logging_category(granatier
     HEADER granatier_debug.h
     IDENTIFIER GRANATIER_LOG
     CATEGORY_NAME log_granatier
@@ -45,14 +48,12 @@ ecm_qt_declare_logging_category(granatierSources
     EXPORT GRANATIER
 )
 
-ki18n_wrap_ui(granatierSources config/arenaselector.ui config/generalsettings.ui)
+ki18n_wrap_ui(granatier config/arenaselector.ui config/generalsettings.ui)
 
-kconfig_add_kcfg_files(granatierSources config/settings.kcfgc)
+kconfig_add_kcfg_files(granatier config/settings.kcfgc)
 
 file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/*-apps-granatier.png")
-ecm_add_app_icon(granatierSources ICONS ${ICONS_SRCS})
-
-add_executable(granatier ${granatierSources})
+ecm_add_app_icon(granatier ICONS ${ICONS_SRCS})
 
 target_link_libraries(granatier
     Qt5::Xml
