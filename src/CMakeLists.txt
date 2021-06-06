@@ -56,10 +56,10 @@ file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/*-apps-granatier.png"
 ecm_add_app_icon(granatier ICONS ${ICONS_SRCS})
 
 target_link_libraries(granatier
-    Qt5::Xml
-    Qt5::Widgets
+    Qt::Xml
+    Qt::Widgets
     KF5KDEGames
-    Qt5::Svg
+    Qt::Svg
     KF5::DBusAddons
     KF5::Crash
     KF5::XmlGui
