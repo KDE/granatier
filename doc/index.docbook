@@ -19,11 +19,11 @@
     <!-- TRANS:ROLES_OF_TRANSLATORS -->
     </authorgroup>
     <legalnotice>&FDLNotice;</legalnotice>
-    <date>2016-05-09</date>
-    <releaseinfo>1.3.1 (Applications 16.04)</releaseinfo>
+    <date>2021-06-23</date>
+    <releaseinfo>1.4.2 (KDE Gear 21.04)</releaseinfo>
     
     <abstract>
-      <para>This documentation describes the game of &granatier; version 1.3.1</para>
+      <para>This documentation describes the game of &granatier; version 1.4.2</para>
     </abstract>
     
     <keywordset>
@@ -45,7 +45,7 @@
     <note><title>Gametype:</title><para>Arcade</para></note>
     <note><title>Number of possible players:</title><para>Multiplayer</para></note>
     <para>
-      &granatier; is a clone of the classic <trademark><application>Bomberman</application></trademark> game, inspired by the work of the <application>Clanbomber</application> clone.
+      &granatier; is a clone of the classic &nbsp;<trademark><application>Bomberman</application></trademark> game, inspired by the work of the <application>Clanbomber</application> clone.
     </para>
     <para>
       The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents. Several bonuses and handicaps are hidden underneath the blocks &ndash; these can either help or hinder your progress.
@@ -66,7 +66,7 @@
   <chapter id="howto"><title>How to play</title> <!-- do not change this! -->
     <note><title>Objective:</title><para>Eliminate all Opponents.</para></note>
     <para>
-      Each player is provided with five keys that they use to move their character and lay bombs.  For example, the default keys for Player 1 are the Up, Down, Left and Right arrow keys to move respectively in those directions, and the &Enter; key to lay a bomb.  Please refer to the <link linkend="config_player">Player Configuration</link> Section to find shortcut keys for other players, as well as how to configure them.
+      Each player is provided with five keys that they use to move their character and lay bombs.  For example, the default keys for Player 1 are the &Up;, &Down;, &Left; and &Right; arrow keys to move respectively in those directions, and the &Enter; key to lay a bomb.  Please refer to the <link linkend="config_player">Player Configuration</link> Section to find shortcut keys for other players, as well as how to configure them.
     </para>
     <para>
       The purpose of laying bombs, aside from attacking other opponents, is to destroy the many blocks scattered throughout the arena in order to clear a path or uncover hidden bonuses.  Among the many bonuses that can be uncovered are those that make you move faster or increase your bomb blast range; the more bonuses of this type you collect, the easier it is to eliminate your opponents and win the round.  But be warned that just as many handicaps exist that can turn the tide against you, including those that slow you down or invert your moving keys. 
@@ -242,9 +242,49 @@
     </sect1>
   </chapter>
 
+  <chapter id="interface"><title>Interface Overview</title> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title>Menu Items</title>
+
+      <variablelist>
+        <varlistentry>
+          <term><menuchoice>
+          <shortcut><keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo></shortcut>
+          <guimenu>Game</guimenu>
+          <guimenuitem>New</guimenuitem></menuchoice></term>
+          <listitem><para><action>Starts</action> a new game.</para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><menuchoice>
+          <shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
+          <guimenu>Game</guimenu>
+          <guimenuitem>Quit</guimenuitem></menuchoice></term>
+          <listitem><para><action>Quits</action> &granatier;.</para></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><menuchoice>
+          <guimenu>Settings</guimenu>
+          <guimenuitem>Play Sounds</guimenuitem></menuchoice></term>
+          <listitem><para><action>Toggle whether sounds should be played.</action> The default is on. </para></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>
+      Additionally &bovo; has the common &kde; <guimenu>Settings</guimenu> and <guimenu>Help</guimenu>
+menu items, for more information read the sections about the <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Settings Menu</ulink> and <ulink url="help:/fundamentals/menus.html#menus-help">Help Menu</ulink>
+of the &kde; Fundamentals.
+      </para>
+
+    </sect1>
+  </chapter>
+
   <chapter id="configuration"><title>Game Configuration</title> <!-- do not change this! -->
     <para>
-      To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice>
+      To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice> menu item.
     </para>
     <sect1 id="config_general">
       <title>General</title>
@@ -269,7 +309,7 @@
     <sect1 id="config_theme">
       <title>Theme</title>
       <para>
-        To select the Theme you want to play, go to the Theme section. The Theme is loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Theme.
+        To select the Theme you want to play, go to the Theme section. The Theme is loaded by clicking on &nbsp;<guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the &nbsp;<guibutton>Defaults</guibutton> button to restore the default Theme.
       </para>
       <screenshot>
         <screeninfo>A &granatier; Config screenshot</screeninfo>
@@ -286,10 +326,10 @@
     <sect1 id="config_arena">
       <title>Arena</title>
       <para>
-        To select the Arena you want to play, go to the Arena section. The Arena is loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Arena.
+        To select the Arena you want to play, go to the Arena section. The Arena is loaded by clicking on &nbsp;<guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the &nbsp;<guibutton>Defaults</guibutton> button to restore the default Arena.
       </para>
       <para>
-        If you have self-made <application>Clanbomber</application> arenas, you can import them by clicking on <guibutton>Import Clanbomber Arenas</guibutton>. &granatier; is looking in <filename class="directory">~/.clanbomber/maps</filename> for the arenas. The default <application>Clanbomber</application> arenas are already shipped with &granatier;.
+        If you have self-made <application>Clanbomber</application> arenas, you can copy them to <filename class="directory">~/.clanbomber/maps</filename>, where &granatier; will look for them. The default <application>Clanbomber</application> arenas are already shipped with &granatier;.
       </para>
       <screenshot>
         <screeninfo>A &granatier; Config screenshot</screeninfo>
@@ -320,7 +360,7 @@
     <sect1 id="config_player">
       <title>Player</title>
       <para>
-        To select the Player you want to play, go to the Player section and select the Players with the checkboxes. The Shortcuts can be changed by clicking on the button for the action you want to change and then pressing the key you want to use. The changes are loaded by clicking on <guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the <guibutton>Defaults</guibutton> button to restore the default Shortcuts.
+        To select the Player you want to play, go to the Player section and select the Players with the checkboxes. The Shortcuts can be changed by clicking on the button for the action you want to change and then pressing the key you want to use. The changes are loaded by clicking on &nbsp;<guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the &nbsp;<guibutton>Defaults</guibutton> button to restore the default Shortcuts.
       </para>
       <screenshot>
         <screeninfo>A &granatier; Config screenshot</screeninfo>
@@ -338,11 +378,13 @@
 
   <chapter id="create_arena"><title>Create a custom Arena</title> <!-- do not change this! -->
     <para>
-      An Arena in &granatier; consists of two files, the <filename>myarena.desktop</filename> and the <filename>myarena.xml</filename>.
+      An Arena in &granatier; consists of two files, the <filename>myarena.desktop</filename>&nbsp; and the <filename>myarena.xml</filename>.
     </para>
 
     <para>
-      The .desktop file contains the metadata like the arena name or the author of the arena and consists of the following entries.
+      The <literal role="extension">.desktop</literal> file contains the metadata like the arena name or the author of the arena and consists of the following entries.
+    </para>
+    <para>
       <programlisting>
 [Arena]
 Name=My Arena
@@ -352,10 +394,14 @@ FileName=myarena.xml
 Author=Joe User
 AuthorEmail=joe.user@foo.org
       </programlisting>
-      You can choose whatever name you want, but FileName must be the name of the .xml file.
     </para>
     <para>
-      The .xml file contains the actual arena map.
+      You can choose whatever name you want, but &nbsp;<literal>FileName</literal> must be the name of the <literal role="extension">.xml</literal> file.
+    </para>
+    <para>
+      The <literal role="extension">.xml</literal> file contains the actual arena map.
+    </para>
+    <para>
       <programlisting>
 &lt;?xml version="1.0"?&gt;
 &lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
@@ -374,7 +420,11 @@ AuthorEmail=joe.user@foo.org
   &lt;Row&gt;    ==== ====    &lt;/Row&gt;
 &lt;/Arena&gt;
       </programlisting>
-      There is no limit for rowCount and colCount, so you can choose the size of the arena by yourself. The following symbols are used for the arena map.
+    </para>
+    <para>
+      There is no limit for <literal>rowCount</literal> and <literal>colCount</literal>, so you can choose the size of the arena by yourself. The following symbols are used for the arena map.
+    </para>
+    <para>
       <programlisting>
 '=' a wall item
 ' ' a hole item
