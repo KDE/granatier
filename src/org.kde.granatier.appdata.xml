@@ -159,10 +159,10 @@
     <binary>granatier</binary>
   </provides>
   <releases>
+    <release version="1.4.21043" date="2021-07-08"/>
     <release version="1.4.21042" date="2021-06-10"/>
     <release version="1.4.21041" date="2021-05-13"/>
     <release version="1.4.21040" date="2021-04-22"/>
-    <release version="1.4.20123" date="2021-03-04"/>
   </releases>
   <content_rating type="oars-1.1">
     <content_attribute id="violence-cartoon">mild</content_attribute>
