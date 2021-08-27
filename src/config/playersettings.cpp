@@ -177,7 +177,7 @@ void PlayerSettings::savePlayerSettings()
     {
         playersGroupList = granatierConfig.group("Player").groupList();
         playersGroupList.sort();
-        for(const auto& player: qAsConst(playersGroupList))
+        for(const auto& player: std::as_const(playersGroupList))
         {
             strPlayerIDList.append(granatierConfig.group("Player").group(player).readEntry<QString>("PlayerID", QStringLiteral("")));
         }

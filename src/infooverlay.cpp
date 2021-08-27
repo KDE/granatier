@@ -102,7 +102,7 @@ InfoOverlay::~InfoOverlay()
     hideItems();
 
     // Find the score items and remove them
-    for(const auto& scoreItems: qAsConst(m_mapScore))
+    for(const auto& scoreItems: std::as_const(m_mapScore))
     {
         qDeleteAll(scoreItems);
     }

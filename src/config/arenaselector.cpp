@@ -209,7 +209,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     {
       // TODO change this if we ever change ArenaSettings::loadDefault
       QLatin1String defaultPath("arenas/granatier.desktop");
-      for(auto arenaSettings: qAsConst(arenaMap))
+      for(auto arenaSettings: std::as_const(arenaMap))
       {
         if (arenaSettings->path().endsWith(defaultPath))
         {
@@ -317,7 +317,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
         if(m_svgScaleFactor != svgScaleFactor)
         {
             m_svgScaleFactor = svgScaleFactor;
-            for(auto arenaItem: qAsConst(m_arenaItems))
+            for(auto arenaItem: std::as_const(m_arenaItems))
             {
                 arenaItem->setRenderSize(calculateSvgSize());
                 arenaItem->setScale(m_svgScaleFactor);
