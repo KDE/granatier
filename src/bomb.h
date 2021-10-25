@@ -72,7 +72,7 @@ public:
     /**
     * Deletes the Bomb instance.
     */
-    ~Bomb();
+    ~Bomb() override;
 
     /**
     * Makes the Bomb go up.

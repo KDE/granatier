@@ -35,7 +35,7 @@ public:
     /**
       * Deletes the ArenaItem instances.
       */
-    ~ArenaItem();
+    ~ArenaItem() override;
 
 public Q_SLOTS:
 

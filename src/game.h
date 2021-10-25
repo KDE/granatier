@@ -123,7 +123,7 @@ public:
     /**
     * Deletes the Game instance.
     */
-    ~Game();
+    ~Game() override;
 
     /**
     * Starts the Game.

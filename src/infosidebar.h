@@ -66,7 +66,7 @@ public:
     /**
       * Deletes the InfoSidebar instance.
       */
-    virtual ~InfoSidebar();
+    ~InfoSidebar() override;
 
     /**
       * Resets the player states

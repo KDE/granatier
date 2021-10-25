@@ -41,7 +41,7 @@ public:
     /**
      * Deletes the BlockItem instance.
      */
-    ~BlockItem();
+    ~BlockItem() override;
 
 private Q_SLOTS:
     /**

@@ -47,7 +47,7 @@ private:
     
 public:
     PlayerSelectorItem(const QString& playerId, PlayerSettings* playerSettings, QWidget* parent = nullptr);
-    ~PlayerSelectorItem();
+    ~PlayerSelectorItem() override;
     
     void setPlayerPreviewPixmap(const QPixmap& pixmap);
     void setPlayerAuthor(const QString& name, const QString& mail);

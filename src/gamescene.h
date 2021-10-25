@@ -106,7 +106,7 @@ public:
     /**
       * Deletes the Game instance.
       */
-    ~GameScene();
+    ~GameScene() override;
 
     /**
       * @return the Game instance

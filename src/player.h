@@ -101,7 +101,7 @@ public:
     /**
       * Deletes the Player instance.
       */
-    ~Player();
+    ~Player() override;
 
     /**
       * Shortcuts for moving and dropping bombs

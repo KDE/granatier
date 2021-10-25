@@ -27,7 +27,7 @@ public:
     Q_DECLARE_FLAGS(Options, Option)
 
     explicit PlayerSelector(PlayerSettings* playerSettings, Options options = DefaultBehavior, QWidget* parent = nullptr);
-    virtual ~PlayerSelector();
+    ~PlayerSelector() override;
 private:
     struct Private;
     Private* const d;

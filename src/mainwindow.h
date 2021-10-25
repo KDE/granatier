@@ -57,7 +57,7 @@ public:
     /**
       * Deletes the MainWindow instance.
       */
-    ~MainWindow();
+    ~MainWindow() override;
 
 private Q_SLOTS:
 

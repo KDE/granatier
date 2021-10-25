@@ -57,7 +57,7 @@ public:
     /**
      * Deletes the BombExplosionItem instance.
      */
-    ~BombExplosionItem();
+    ~BombExplosionItem() override;
 
     /**
      * Overrides the default shape function to make it a small circle

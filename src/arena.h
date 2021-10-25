@@ -55,7 +55,7 @@ public:
     /**
       * Deletes the Arena instance.
       */
-    ~Arena();
+    ~Arena() override;
 
     /**
       * Creates the Arena matrix.

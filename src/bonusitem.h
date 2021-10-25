@@ -44,7 +44,7 @@ public:
     /**
      * Deletes the BonusItem instance.
      */
-    ~BonusItem();
+    ~BonusItem() override;
 
     /**
      * Sets the undestroyable explosion IDs

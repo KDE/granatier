@@ -57,7 +57,7 @@ public:
     /**
       * Deletes the InfoOverlay instance.
       */
-    ~InfoOverlay();
+    ~InfoOverlay() override;
 
     /**
       * Shows the get ready info.

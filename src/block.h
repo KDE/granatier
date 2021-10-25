@@ -31,7 +31,7 @@ public:
     /**
       * Deletes the Block instance.
       */
-    ~Block();
+    ~Block() override;
 
     /**
       * Sets the Bonus which is contained by the Block

@@ -58,7 +58,7 @@ public:
     /**
       * Deletes the Element instance.
       */
-    ~Element();
+    ~Element() override;
 
     /**
       * Computes an action on a collision with the Player.

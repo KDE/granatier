@@ -64,7 +64,7 @@ public:
     /**
       * Deletes the Character instance.
       */
-    ~Character();
+    ~Character() override;
 
     /**
       * Makes the Character go up.
