@@ -6,36 +6,65 @@ ecm_setup_version(${GRANATIER_VERSION}
 add_executable(granatier)
 
 target_sources(granatier PRIVATE
-    config/arenaselector.cpp
-    config/arenasettings.cpp
-    config/playerselector.cpp
-    config/playerselectoritem.cpp
-    config/playersettings.cpp
-    granatier_debug.cpp
     arena.cpp
+    arena.h
     arenaitem.cpp
+    arenaitem.h
     block.cpp
+    block.h
     blockitem.cpp
-    bonus.cpp
-    bonusitem.cpp
+    blockitem.h
     bomb.cpp
-    bombitem.cpp
     bombexplosionitem.cpp
+    bombexplosionitem.h
+    bomb.h
+    bombitem.cpp
+    bombitem.h
+    bonus.cpp
+    bonus.h
+    bonusitem.cpp
+    bonusitem.h
     cell.cpp
+    cell.h
     character.cpp
+    character.h
     characteritem.cpp
+    characteritem.h
+    config/arenaselector.cpp
+    config/arenaselector.h
+    config/arenasettings.cpp
+    config/arenasettings.h
+    config/playerselector.cpp
+    config/playerselector.h
+    config/playerselectoritem.cpp
+    config/playerselectoritem.h
+    config/playersettings.cpp
+    config/playersettings.h
     element.cpp
+    element.h
     elementitem.cpp
+    elementitem.h
     game.cpp
+    game.h
     gamescene.cpp
+    gamescene.h
     gameview.cpp
+    gameview.h
+    granatierglobals.h
+    granatier_random.h
     infooverlay.cpp
+    infooverlay.h
     infosidebar.cpp
+    infosidebar.h
     main.cpp
     mainwindow.cpp
+    mainwindow.h
     mapparser.cpp
+    mapparser.h
     player.cpp
+    player.h
     playeritem.cpp
+    playeritem.h
 
     granatier.qrc
 )
