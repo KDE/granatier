@@ -15,8 +15,10 @@
 #include <QApplication>
 #include <KLocalizedString>
 #include <QCommandLineParser>
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <Kdelibs4ConfigMigrator>
 #include <Kdelibs4Migration>
+#endif
 #include <QStandardPaths>
 #include <QDir>
 #include <KDBusService>
@@ -25,8 +27,11 @@
 int main(int argc, char** argv)
 {
     // Fixes blurry icons with fractional scaling
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
+#endif
     QApplication app(argc, argv);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 
     Kdelibs4ConfigMigrator migrate(QStringLiteral("granatier"));
     migrate.setConfigFiles(QStringList() << QStringLiteral("granatierrc"));
@@ -64,7 +69,7 @@ int main(int argc, char** argv)
         // update the configuration cache
         KSharedConfig::openConfig()->reparseConfiguration();
     }
-
+#endif
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("granatier")));
     KLocalizedString::setApplicationDomain("granatier");
 
