@@ -1,5 +1,6 @@
 [Arena]
 Name=Boiling Egg
+Name[ar]=بيضة مسلوقة
 Name[bs]=Vrelo jaje
 Name[ca]=Ou bullint
 Name[ca@valencia]=Ou bullint
@@ -46,6 +47,7 @@ Name[x-test]=xxBoiling Eggxx
 Name[zh_CN]=煮蛋
 Name[zh_TW]=煮蛋
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

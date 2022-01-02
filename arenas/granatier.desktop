@@ -1,5 +1,6 @@
 [Arena]
 Name=Granatier
+Name[ar]=جرنتر
 Name[bs]=Bombaš
 Name[ca]=Granatier
 Name[ca@valencia]=Granatier
@@ -46,6 +47,7 @@ Name[x-test]=xxGranatierxx
 Name[zh_CN]=Granatier
 Name[zh_TW]=Granatier
 Description=Default Granatier Arena
+Description[ar]=سمة جرنتر المبدئية
 Description[bs]=Podrazumjevana granataška arena
 Description[ca]=Camp de batalla predeterminat del Granatier
 Description[ca@valencia]=Camp de batalla predeterminat del Granatier

@@ -1,5 +1,6 @@
 [Arena]
 Name=Obstacle Race
+Name[ar]=سباق الحواجز
 Name[bs]=Trčanje
 Name[ca]=Carrera d'obstacles
 Name[ca@valencia]=Carrera d'obstacles
@@ -45,6 +46,7 @@ Name[x-test]=xxObstacle Racexx
 Name[zh_CN]=障碍竞速
 Name[zh_TW]=障礙賽跑
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

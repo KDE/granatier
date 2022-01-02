@@ -1,5 +1,6 @@
 [Arena]
 Name=Fear Circle Remix
+Name[ar]=دائرة الخوف ريمكس
 Name[bs]=Krug straha remiks
 Name[ca]=Remix del cercle ferotge
 Name[ca@valencia]=Remix del cercle ferotge
@@ -44,6 +45,7 @@ Name[x-test]=xxFear Circle Remixxx
 Name[zh_CN]=恐怖环重制版
 Name[zh_TW]=恐懼之圓重新混合
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

@@ -1,5 +1,6 @@
 [Arena]
 Name=Blast Matrix
+Name[ar]=مصفوفة الانفجار
 Name[bs]=Eksplozivna matrica
 Name[ca]=Matriu explosiva
 Name[ca@valencia]=Matriu explosiva
@@ -43,6 +44,7 @@ Name[x-test]=xxBlast Matrixxx
 Name[zh_CN]=爆破矩阵
 Name[zh_TW]=爆炸矩陣
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

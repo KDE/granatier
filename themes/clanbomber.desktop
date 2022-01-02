@@ -1,5 +1,6 @@
 [KGameTheme]
 Name=Clanbomber
+Name[ar]=كلانبومبر
 Name[bs]=Klan bombardera
 Name[ca]=Clanbomber
 Name[ca@valencia]=Clanbomber
@@ -49,6 +50,7 @@ Name[x-test]=xxClanbomberxx
 Name[zh_CN]=炸弹人之家
 Name[zh_TW]=Clanbomber 炸彈超人
 Description=Clanbomber Theme
+Description[ar]=سمة كلانبومبر
 Description[bs]=Tema klan bombardera
 Description[ca]=Tema Clanbomber
 Description[ca@valencia]=Tema Clanbomber

@@ -1,5 +1,6 @@
 [Arena]
 Name=Crazy
+Name[ar]=مجنون
 Name[bs]=Ludo
 Name[ca]=Bogeria
 Name[ca@valencia]=Bogeria
@@ -46,6 +47,7 @@ Name[x-test]=xxCrazyxx
 Name[zh_CN]=疯狂
 Name[zh_TW]=瘋狂
 Description=Crazy Arena
+Description[ar]=ميدان مجنون
 Description[bs]=Luda arena
 Description[ca]=Camp de batalla boig
 Description[ca@valencia]=Camp de batalla boig

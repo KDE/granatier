@@ -1,5 +1,6 @@
 [Arena]
 Name=Overkill
+Name[ar]=مبالغة
 Name[bs]=Uništenje
 Name[ca]=Rematada
 Name[ca@valencia]=Rematada
@@ -43,6 +44,7 @@ Name[x-test]=xxOverkillxx
 Name[zh_CN]=杀无赦
 Name[zh_TW]=過度殺傷
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

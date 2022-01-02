@@ -1,5 +1,6 @@
 [Arena]
 Name=Dilemma
+Name[ar]=معضلة
 Name[bs]=Dilema
 Name[ca]=Dilema
 Name[ca@valencia]=Dilema
@@ -46,6 +47,7 @@ Name[x-test]=xxDilemmaxx
 Name[zh_CN]=左右为难
 Name[zh_TW]=兩難
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

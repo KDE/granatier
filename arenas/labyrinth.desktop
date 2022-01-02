@@ -1,5 +1,6 @@
 [Arena]
 Name=Labyrinth
+Name[ar]=المتاهة
 Name[bs]=Lavirint
 Name[ca]=Laberint
 Name[ca@valencia]=Laberint
@@ -50,6 +51,7 @@ Name[x-test]=xxLabyrinthxx
 Name[zh_CN]=迷宫
 Name[zh_TW]=迷宮
 Description=Labyrinth Arena
+Description[ar]=ميدان المتاهة
 Description[bs]=Lavirint arena
 Description[ca]=Camp de batalla laberíntic
 Description[ca@valencia]=Camp de batalla laberíntic

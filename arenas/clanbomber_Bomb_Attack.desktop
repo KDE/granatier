@@ -1,5 +1,6 @@
 [Arena]
 Name=Bomb Attack
+Name[ar]=هجوم قنبلة
 Name[bs]=Bombaški napad
 Name[ca]=Bombardeig
 Name[ca@valencia]=Bombardeig
@@ -45,6 +46,7 @@ Name[x-test]=xxBomb Attackxx
 Name[zh_CN]=炸弹特攻
 Name[zh_TW]=炸彈攻擊
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

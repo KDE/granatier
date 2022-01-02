@@ -1,5 +1,6 @@
 [Arena]
 Name=Hole Run
+Name[ar]=حفر الركض
 Name[bs]=Ulazak u rupu
 Name[ca]=Forat ràpid
 Name[ca@valencia]=Forat ràpid
@@ -43,6 +44,7 @@ Name[x-test]=xxHole Runxx
 Name[zh_CN]=穿洞
 Name[zh_TW]=洞穴奔跑
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

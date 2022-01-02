@@ -1,5 +1,6 @@
 [Arena]
 Name=Meeting
+Name[ar]=اجتماع
 Name[bs]=Sastanak
 Name[ca]=Trobada
 Name[ca@valencia]=Trobada
@@ -48,6 +49,7 @@ Name[x-test]=xxMeetingxx
 Name[zh_CN]=会议
 Name[zh_TW]=會議
 Description=Clanbomber Import
+Description[ar]=استيراد كلانبومبر
 Description[bs]=Klan bombarderski uvoz
 Description[ca]=Importació del Clanbomber
 Description[ca@valencia]=Importació del Clanbomber

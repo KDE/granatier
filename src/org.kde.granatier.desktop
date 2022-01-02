@@ -1,6 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Granatier
+Name[ar]=جرنتر
 Name[bs]=Bombaš
 Name[ca]=Granatier
 Name[ca@valencia]=Granatier
@@ -47,6 +48,7 @@ Name[x-test]=xxGranatierxx
 Name[zh_CN]=Granatier
 Name[zh_TW]=Granatier
 GenericName=Bomberman clone
+GenericName[ar]=مستنسخة بومبرمان
 GenericName[bs]=Klon igre Bomberman
 GenericName[ca]=Un clon del Bomberman
 GenericName[ca@valencia]=Un clon del Bomberman
