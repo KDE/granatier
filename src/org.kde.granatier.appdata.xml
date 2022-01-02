@@ -4,6 +4,7 @@
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Granatier</name>
+  <name xml:lang="ar">جرنتر</name>
   <name xml:lang="bs">Granatier</name>
   <name xml:lang="ca">Granatier</name>
   <name xml:lang="ca-valencia">Granatier</name>
@@ -41,6 +42,7 @@
   <name xml:lang="zh-CN">Granatier</name>
   <name xml:lang="zh-TW">Granatier</name>
   <summary>Bomberman clone</summary>
+  <summary xml:lang="ar">مستنسخة بومبرمان</summary>
   <summary xml:lang="bs">Klon igre Bomberman</summary>
   <summary xml:lang="ca">Un clon del Bomberman</summary>
   <summary xml:lang="ca-valencia">Un clon del Bomberman</summary>
@@ -81,6 +83,7 @@
     <p>
       Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.
     </p>
+    <p xml:lang="ar">هي نسخة من لعبة بومبرمان الكلاسيكية ، مستوحاة من نسخة Clanbomber.</p>
     <p xml:lang="ca">El Granatier és un clon del joc Bomberman clàssic, inspirat en el treball del clon Clanbomber.</p>
     <p xml:lang="ca-valencia">El Granatier és un clon del joc Bomberman clàssic, inspirat en el treball del clon Clanbomber.</p>
     <p xml:lang="da">Granatier er en klon af det klassiske spil Bomberman, inspireret af af arbejdet fra Clanbomber-klonen.</p>
@@ -123,6 +126,7 @@
   <screenshots>
     <screenshot type="default">
       <caption>Playing Granatier</caption>
+      <caption xml:lang="ar">يعلب جرنتر</caption>
       <caption xml:lang="ca">Jugant al Granatier</caption>
       <caption xml:lang="ca-valencia">Jugant al Granatier</caption>
       <caption xml:lang="cs">Hraní Granatier</caption>
