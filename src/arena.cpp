@@ -83,7 +83,7 @@ void Arena::addPlayerPosition(const QPointF &p_position)
     int nShuffle;
     for (int i = 0; i < m_playerPosition.size(); i++)
     {
-        nShuffle = granatier::RNG::fromRange(0, m_playerPosition.size()-1);
+        nShuffle = granatier::RNG::fromRange<int>(0, m_playerPosition.size()-1);
         m_playerPosition.swapItemsAt(i, nShuffle);
     }
 }

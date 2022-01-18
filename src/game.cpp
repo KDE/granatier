@@ -113,7 +113,7 @@ void Game::init()
             }
         }
 
-        int nIndex = granatier::RNG::fromRange(0, m_randomArenaModeArenaList.count() - 1);
+        int nIndex = granatier::RNG::fromRange<int>(0, m_randomArenaModeArenaList.count() - 1);
         filePath = m_randomArenaModeArenaList.at(nIndex);
         m_randomArenaModeArenaList.removeAt(nIndex);
     }

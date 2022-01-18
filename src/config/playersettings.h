@@ -10,8 +10,7 @@
 #include <QKeySequence>
 #include <QString>
 #include <QMap>
-
-class QStringList;
+#include <QStringList>
 
 class PlayerSettings
 {
