@@ -113,8 +113,7 @@ PlayerSettings::PlayerSettings()
 }
 
 PlayerSettings::~PlayerSettings()
-{
-}
+= default;
 
 const QStringList PlayerSettings::playerIDs() const
 {

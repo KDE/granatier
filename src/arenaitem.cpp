@@ -19,8 +19,7 @@ ArenaItem::ArenaItem(qreal p_x, qreal p_y, KGameRenderer* renderer, const QStrin
 }
 
 ArenaItem::~ArenaItem()
-{
-}
+= default;
 
 void ArenaItem::updateGraphics(qreal svgScaleFactor)
 {

@@ -17,8 +17,7 @@ Block::Block(qreal p_x, qreal p_y, Arena* p_arena, const QString& p_imageId) : E
 }
 
 Block::~Block()
-{
-}
+= default;
 
 void Block::setBonus(Bonus* bonus)
 {

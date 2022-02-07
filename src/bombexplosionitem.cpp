@@ -62,8 +62,7 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
 }
 
 BombExplosionItem::~BombExplosionItem()
-{
-}
+= default;
 
 QPainterPath BombExplosionItem::shape() const
 {

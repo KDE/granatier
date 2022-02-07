@@ -25,9 +25,7 @@ GameView::GameView(GameScene* p_scene, Game * p_game) : QGraphicsView(p_scene)
 }
 
 GameView::~GameView()
-{
-
-}
+= default;
 
 void GameView::resizeEvent(QResizeEvent*)
 {

@@ -16,8 +16,7 @@ Character::Character(qreal p_x, qreal p_y, Arena* p_arena) : Element(p_x, p_y, p
 }
 
 Character::~Character()
-{
-}
+= default;
 
 void Character::move()
 {

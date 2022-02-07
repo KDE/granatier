@@ -30,13 +30,13 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_playerPreviewPixmapLabel = new QLabel;
     m_playerAuthor = new QLabel;
     
-    QHBoxLayout* mainLayout = new QHBoxLayout(this);
+    auto* mainLayout = new QHBoxLayout(this);
     mainLayout->setContentsMargins(6, 6, 6, 6);
     
-    QGridLayout* gridLayoutPlayer = new QGridLayout();
+    auto* gridLayoutPlayer = new QGridLayout();
     gridLayoutPlayer->setContentsMargins(0, 0, 0, 0);
     
-    QVBoxLayout* verticalLayoutKeySequence = new QVBoxLayout();
+    auto* verticalLayoutKeySequence = new QVBoxLayout();
     verticalLayoutKeySequence->setContentsMargins(0, 0, 0, 0);
     
     mainLayout->addLayout(gridLayoutPlayer);
@@ -49,7 +49,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     gridLayoutPlayer->addWidget(m_playerPreviewPixmapLabel, 1, 1, 2, 1);
     gridLayoutPlayer->addWidget(m_playerAuthor, 2, 2);//, 1, 1, Qt::AlignBottom);
     
-    QGridLayout* gridLayoutKeySequence = new QGridLayout();
+    auto* gridLayoutKeySequence = new QGridLayout();
     gridLayoutKeySequence->setContentsMargins(0, 0, 0, 0);
     
     verticalLayoutKeySequence->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));

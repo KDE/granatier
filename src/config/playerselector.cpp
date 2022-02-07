@@ -58,12 +58,12 @@ PlayerSelector::PlayerSelector(PlayerSettings* playerSettings, Options options, 
     //load themes from provider
     d->fillList();
     //setup appearance of the theme list (min. size = 4 items)
-    PlayerSelectorDelegate* delegate = new PlayerSelectorDelegate(d->m_list);
+    auto* delegate = new PlayerSelectorDelegate(d->m_list);
     const QSize itemSizeHint = delegate->sizeHint(QStyleOptionViewItem(), QModelIndex());
     const QSize scrollBarSizeHint = d->m_list->verticalScrollBar()->sizeHint();
     d->m_list->setMinimumSize(static_cast<int>(itemSizeHint.width() + 2 * scrollBarSizeHint.width()), static_cast<int>(3.3 * itemSizeHint.height()));
     //setup main layout
-    QVBoxLayout* layout = new QVBoxLayout(this);
+    auto* layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(d->m_list);
 }
@@ -89,7 +89,7 @@ void PlayerSelector::Private::fillList()
 
     for(int i = 0; i < playerIDs.count(); i++)
     {
-        QListWidgetItem* item = new QListWidgetItem(playerIDs[i], m_list);
+        auto* item = new QListWidgetItem(playerIDs[i], m_list);
 
         item->setFlags(item->flags() & ~Qt::ItemIsSelectable);
 
@@ -100,7 +100,7 @@ void PlayerSelector::Private::fillList()
         playerSelectorItem->setPlayerPreviewPixmap(pixmap);
 
         KConfig desktopFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/%1").arg(playerIDs[i])), KConfig::SimpleConfig);
-        QString author = desktopFile.group("KGameTheme").readEntry<QString>("Author", QStringLiteral(""));
+        auto author = desktopFile.group("KGameTheme").readEntry<QString>("Author", QStringLiteral(""));
         QString authorEmail = QStringLiteral("<a href=\"mailto:%1\">%1</a>").arg(desktopFile.group("KGameTheme").readEntry<QString>("AuthorEmail", QStringLiteral("")));
         //TODO: QString description = desktopFile.group("KGameTheme").readEntry<QString>("Description", "");
         playerSelectorItem->setPlayerAuthor(author, authorEmail);
@@ -116,7 +116,7 @@ void PlayerSelector::Private::fillList()
 PlayerSelectorDelegate::PlayerSelectorDelegate(QObject* parent)
     : QStyledItemDelegate(parent)
 {
-    QAbstractItemView* view = qobject_cast<QAbstractItemView*>(parent);
+    auto* view = qobject_cast<QAbstractItemView*>(parent);
     if (view)
         view->setItemDelegate(this);
 }
@@ -131,7 +131,7 @@ QSize PlayerSelectorDelegate::sizeHint(const QStyleOptionViewItem& option, const
 {
     Q_UNUSED(option) Q_UNUSED(index)
     //TODO: take text size into account
-    return QSize(600, 64 /*player preview height*/ + 2 * 6 /*padding*/ + 40 /* some space for the player name */);
+    return {600, 64 /*player preview height*/ + 2 * 6 /*padding*/ + 40 /* some space for the player name */};
 }
 
 //END PlayerSelectorDelegate

@@ -52,7 +52,7 @@ Game::Game(PlayerSettings* playerSettings)
     {
         if(m_playerSettings->enabled(strPlayerIDs[i]))
         {
-            Player* player = new Player(qreal(Granatier::CellSize * (-0.5)),qreal(Granatier::CellSize * 0.5), strPlayerIDs[i], playerSettings, m_arena);
+            auto* player = new Player(qreal(Granatier::CellSize * (-0.5)),qreal(Granatier::CellSize * 0.5), strPlayerIDs[i], playerSettings, m_arena);
             m_players.append(player);
             connect(player, &Player::dying, this, &Game::playerDeath);
             connect(player, &Player::falling, this, &Game::playerFalling);
@@ -149,7 +149,7 @@ void Game::init()
         {
             if(m_arena->getCell(i,j).getType() == Granatier::Cell::BLOCK)
             {
-                Block* block = new Block((j + 0.5) * Granatier::CellSize, (i + 0.5) * Granatier::CellSize, m_arena, QStringLiteral("arena_block"));
+                auto* block = new Block((j + 0.5) * Granatier::CellSize, (i + 0.5) * Granatier::CellSize, m_arena, QStringLiteral("arena_block"));
                 m_blocks.append(block);
                 m_arena->setCellElement(i, j, block);
             }

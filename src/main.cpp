@@ -96,7 +96,7 @@ int main(int argc, char** argv)
     KDBusService service;
     // Create the application
     // Create the main window
-    MainWindow* window = new MainWindow();
+    auto* window = new MainWindow();
     // Show the main window
     window->show();
     // Execute the application

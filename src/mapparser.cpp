@@ -19,8 +19,7 @@ MapParser::MapParser(Arena* p_arena)
 }
 
 MapParser::~MapParser()
-{
-}
+= default;
 
 bool MapParser::parse(QIODevice *input)
 {

@@ -19,9 +19,7 @@ Bonus::Bonus(qreal p_x, qreal p_y, Arena* p_arena, Granatier::Bonus::Type bonusT
 }
 
 Bonus::~Bonus()
-{
-
-}
+= default;
 
 void Bonus::doActionOnCollision(Player* p_player)
 {

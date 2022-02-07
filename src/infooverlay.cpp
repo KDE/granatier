@@ -33,14 +33,14 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
     for(const auto& player: playerList)
     {
         QList <KGameRenderedItem*> svgItemList;
-        QGraphicsTextItem* playerName = new QGraphicsTextItem(player->getPlayerName());
+        auto* playerName = new QGraphicsTextItem(player->getPlayerName());
         playerName->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
         playerName->setDefaultTextColor(QColor("#FFFF00"));
         playerName->setZValue(2001);
 
         for(int j = 0; j < nWinPoints; j++)
         {
-            KGameRenderedItem* score = new KGameRenderedItem(renderer, QStringLiteral("score_star_disabled"));
+            auto* score = new KGameRenderedItem(renderer, QStringLiteral("score_star_disabled"));
             score->setZValue(2001);
             svgItemList.append(score);
         }

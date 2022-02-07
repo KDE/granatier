@@ -13,8 +13,7 @@ Cell::Cell() : m_type(Granatier::Cell::WALL)
 }
 
 Cell::~Cell()
-{
-}
+= default;
 
 bool Cell::isWalkable(Element* p_element) const
 {

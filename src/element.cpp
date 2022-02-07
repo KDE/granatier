@@ -13,8 +13,7 @@ Element::Element(qreal p_x, qreal p_y, Arena* p_arena) : m_xInit(p_x), m_yInit(p
 }
 
 Element::~Element()
-{
-}
+= default;
 
 void Element::doActionOnCollision(Player*)
 {

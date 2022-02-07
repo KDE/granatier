@@ -85,7 +85,7 @@ void ArenaSelector::showEvent(QShowEvent*)
 
 ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(nullptr), m_graphicsScene(nullptr), m_svgScaleFactor(1)
 {
-    KgTheme* theme = new KgTheme(QByteArray());
+    auto* theme = new KgTheme(QByteArray());
     theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/granatier.svgz")));
     m_renderer = new KGameRenderer(theme);
 }
@@ -166,7 +166,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     for(const auto& file: arenasAvailable)
     {
       QString arenaPath = lookupDirectory + QLatin1Char('/') + file;
-      ArenaSettings* arenaSettings = new ArenaSettings(groupName);
+      auto* arenaSettings = new ArenaSettings(groupName);
 
       if (arenaSettings->load(arenaPath)) {
         QString arenaName; // Start with an empty QString here so that the first += allocates a reserve for future +=.
@@ -175,7 +175,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
         while (arenaMap.contains(arenaName))
           arenaName += QLatin1Char('_');
         arenaMap.insert(arenaName, arenaSettings);
-        QListWidgetItem * item = new QListWidgetItem(arenaName, ui.arenaList);
+        auto * item = new QListWidgetItem(arenaName, ui.arenaList);
         if(ui.kcfg_RandomArenaMode->isChecked())
         {
             if(m_tempRandomArenaModeArenaList.contains(file))
@@ -332,7 +332,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
             for (int j = 0; j < m_arena->getNbColumns(); ++j)
             {
                 // Create the ArenaItem and set the image
-                ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_renderer, QLatin1String(""));
+                auto* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_renderer, QLatin1String(""));
 
                 switch(m_arena->getCell(i,j).getType())
                 {
@@ -394,7 +394,7 @@ QSize ArenaSelector::Private::calculateSvgSize()
 {
     if(m_graphicsScene->views().isEmpty())
     {
-        return QSize(1, 1);
+        return {1, 1};
     }
 
     QPoint topLeft(0, 0);

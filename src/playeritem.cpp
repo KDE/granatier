@@ -163,7 +163,7 @@ void PlayerItem::manageCollision()
                 int nExplosionID;
                 if(i->zValue() == 315)
                 {
-                    BombItem* bombItem = dynamic_cast <BombItem*> (i);
+                    auto* bombItem = dynamic_cast <BombItem*> (i);
                     nExplosionID = dynamic_cast <Bomb*> (bombItem->getModel())->explosionID();
                 }
                 else

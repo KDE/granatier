@@ -116,7 +116,7 @@ QString ArenaSettings::property(const QString &key) const
     if(!d->loaded)
     {
         qCDebug(GRANATIER_LOG) << "No arena file has been loaded. ArenaSettings::load() or ArenaSettings::loadDefault() must be called.";
-        return QString();
+        return {};
     }
     KConfig arenaConfig(path(), KConfig::SimpleConfig);
     KConfigGroup group = arenaConfig.group(d->arenaGroup);
@@ -127,7 +127,7 @@ QString ArenaSettings::path() const {
     if(!d->loaded)
     {
         qCDebug(GRANATIER_LOG) << "No arena file has been loaded. ArenaSettings::load() or ArenaSettings::loadDefault() must be called.";
-        return QString();
+        return {};
     }
     return d->fullPath;
 }
@@ -136,7 +136,7 @@ QString ArenaSettings::fileName() const {
     if(!d->loaded)
     {
         qCDebug(GRANATIER_LOG) << "No arena file has been loaded. ArenaSettings::load() or ArenaSettings::loadDefault() must be called.";
-        return QString();
+        return {};
     }
     return d->fileName;
 }
@@ -145,7 +145,7 @@ QString ArenaSettings::graphics() const {
     if(!d->loaded)
     {
         qCDebug(GRANATIER_LOG) << "No arena file has been loaded. ArenaSettings::load() or ArenaSettings::loadDefault() must be called.";
-        return QString();
+        return {};
     }
     return d->graphics;
 }
@@ -154,7 +154,7 @@ QString ArenaSettings::arenaProperty(const QString &key) const {
     if(!d->loaded)
     {
         qCDebug(GRANATIER_LOG) << "No arena file has been loaded. ArenaSettings::load() or ArenaSettings::loadDefault() must be called.";
-        return QString();
+        return {};
     }
     return d->arenaProperties[key];
 }

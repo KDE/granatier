@@ -55,7 +55,7 @@ MainWindow::MainWindow()
     //KStandardGameAction::highscores(this, &MainWindow::showHighscores, actionCollection());
     KStandardAction::preferences(this, &MainWindow::showSettings, actionCollection());
     KStandardGameAction::quit(this, &MainWindow::close, actionCollection());
-    KToggleAction* soundAction = new KToggleAction(i18n("&Play sounds"), this);
+    auto* soundAction = new KToggleAction(i18n("&Play sounds"), this);
     soundAction->setChecked(Settings::sounds());
     actionCollection()->addAction( QStringLiteral( "sounds" ), soundAction);
     connect(soundAction, &KToggleAction::triggered, this, &MainWindow::setSoundsEnabled);
@@ -164,7 +164,7 @@ void MainWindow::showSettings()
     {
         delete m_settingsDialog;
     }
-    KConfigDialog* settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), Settings::self());
+    auto* settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), Settings::self());
     settingsDialog->setMinimumSize(900, 600);
     // General Settings
     settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), QStringLiteral("games-config-options"));

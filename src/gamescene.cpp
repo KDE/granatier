@@ -58,7 +58,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     for(auto & player : players)
     {
         const QString desktopPath = player->getDesktopFilePath();
-        KgTheme* theme = new KgTheme(desktopPath.toUtf8());
+        auto* theme = new KgTheme(desktopPath.toUtf8());
         theme->readFromDesktopFile(desktopPath);
         auto  playerRenderer = new KGameRenderer(theme);
         m_mapRendererPlayerItems.insert(player, playerRenderer);
@@ -109,7 +109,7 @@ void GameScene::setupThemeRenderer()
         selectedThemeIsDefault = false;
         if(m_rendererDefaultTheme == nullptr)
         {
-            KgTheme* theme = new KgTheme(m_themeProvider->defaultTheme()->identifier());
+            auto* theme = new KgTheme(m_themeProvider->defaultTheme()->identifier());
             theme->setGraphicsPath(m_themeProvider->defaultTheme()->graphicsPath());
             m_rendererDefaultTheme = new KGameRenderer(theme);
         }
@@ -269,7 +269,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             // Create the ArenaItem and set the image
-            ArenaItem* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, QStringLiteral(""));
+            auto* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, QStringLiteral(""));
             connect(this, &GameScene::resizeGraphics, arenaItem, &ArenaItem::updateGraphics);
 
             //TODO: use this function call
@@ -334,8 +334,8 @@ void GameScene::initItemsWithGraphicsFromTheme()
                 // Create the element item and set the image
                 for(const auto& element: std::as_const(blockElements))
                 {
-                    Block* block = dynamic_cast <Block*> (element);
-                    BlockItem* blockItem = new BlockItem(block, m_rendererArenaItems);
+                    auto* block = dynamic_cast <Block*> (element);
+                    auto* blockItem = new BlockItem(block, m_rendererArenaItems);
                     connect(this, &GameScene::resizeGraphics, blockItem, &BlockItem::updateGraphics);
                     blockItem->setSpriteKey(block->getImageId());
                     blockItem->update(block->getX(), block->getY());
@@ -351,7 +351,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
                     Bonus* bonus = block->getBonus();
                     if(bonus)
                     {
-                        BonusItem* bonusItem = new BonusItem(bonus, m_rendererBonusItems);
+                        auto* bonusItem = new BonusItem(bonus, m_rendererBonusItems);
                         switch(bonus->getBonusType())
                         {
                             case Granatier::Bonus::SPEED:
@@ -818,7 +818,7 @@ void GameScene::updateInfo(const Granatier::Info::Type p_info)
 void GameScene::createBombItem(Bomb* bomb)
 {
     // Create the Bombs
-    BombItem* bombItem = new BombItem(bomb, m_rendererBombItems);
+    auto* bombItem = new BombItem(bomb, m_rendererBombItems);
     // Corrects the position of the BombItem
     bombItem->update(bomb->getX(), bomb->getY());
     addItem(bombItem);

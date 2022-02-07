@@ -14,8 +14,7 @@
 #include <cstdlib>
 
 Arena::Arena()
-{
-}
+= default;
 
 Arena::~Arena()
 {
@@ -114,11 +113,11 @@ QPoint Arena::getCoords(Cell* p_cell) const
         {
             if (&m_cells[i][j] == p_cell)
             {
-                return QPoint(j, i);
+                return {j, i};
             }
         }
     }
-    return QPoint();
+    return {};
 }
 
 int Arena::getRowFromY(const qreal p_y) const

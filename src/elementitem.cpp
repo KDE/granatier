@@ -26,8 +26,7 @@ ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRende
 }
 
 ElementItem::~ElementItem()
-{
-}
+= default;
 
 Element* ElementItem::getModel() const
 {
