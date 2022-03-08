@@ -89,6 +89,7 @@ target_link_libraries(granatier
     Qt${QT_MAJOR_VERSION}::Widgets
     KF5KDEGames
     Qt${QT_MAJOR_VERSION}::Svg
+    KF5::CoreAddons
     KF5::DBusAddons
     KF5::Crash
     KF5::XmlGui
