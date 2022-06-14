@@ -16,14 +16,17 @@
 #include "config/playerselector.h"
 #include "ui_generalsettings.h"
 
+// KDEGames
+#include <kdegames_version.h>
+#include <KStandardGameAction>
+#include <KgThemeSelector>
+
 #include <QGraphicsView>
 #include <QTimer>
 #include <KActionCollection>
-#include <KStandardGameAction>
 #include <KMessageBox>
 #include <KConfigDialog>
 #include <KLocalizedString>
-#include <KgThemeSelector>
 #include <KToggleAction>
 #include <QPushButton>
 
@@ -49,7 +52,11 @@ MainWindow::MainWindow()
     m_scene = nullptr;
     m_playerSettings = new PlayerSettings();
     m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
+#if KDEGAMES_VERSION >= QT_VERSION_CHECK(7, 4, 0)
+    m_themeProvider->discoverThemes(QStringLiteral("themes"), QStringLiteral("granatier"));
+#else
     m_themeProvider->discoverThemes(QByteArray("appdata"), QStringLiteral("themes"), QStringLiteral("granatier"));
+#endif
     // Set the window menus
     KStandardGameAction::gameNew(this, &MainWindow::newGame, actionCollection());
     //KStandardGameAction::highscores(this, &MainWindow::showHighscores, actionCollection());
