@@ -15,19 +15,20 @@
 #include "config/playersettings.h"
 #include "config/playerselector.h"
 #include "ui_generalsettings.h"
-
 // KDEGames
 #include <kdegames_version.h>
 #include <KStandardGameAction>
 #include <KgThemeSelector>
-
-#include <QGraphicsView>
-#include <QTimer>
+// KF
+#include <KStandardGuiItem>
 #include <KActionCollection>
 #include <KMessageBox>
 #include <KConfigDialog>
 #include <KLocalizedString>
 #include <KToggleAction>
+// Qt
+#include <QGraphicsView>
+#include <QTimer>
 #include <QPushButton>
 
 class GeneralSettings : public QWidget
@@ -139,7 +140,10 @@ void MainWindow::newGame()
     if (!m_game->getGameOver())
     {
         // Confirm before starting a new game
-        if (KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit the current game?"), i18n("New game")) == KMessageBox::Yes)
+        if (KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit the current game?"),
+                                      i18nc("@title:window", "New Game"),
+                                      KGuiItem(i18nc("@action:button", "Quit Game"), QStringLiteral("window-close")),
+                                      KStandardGuiItem::cancel()) == KMessageBox::Yes)
         {
             // Start a new game
             initGame();
@@ -232,7 +236,9 @@ void MainWindow::close()
         m_game->pause();
     }
     // Confirm before closing
-    if(KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit Granatier?"), i18nc("To quit Granatier", "Quit")) == KMessageBox::Yes)
+    if(KMessageBox::warningYesNo(this, i18n("Are you sure you want to quit Granatier?"),
+                                 i18nc("To quit Granatier", "Quit"),
+                                 KStandardGuiItem::quit(), KStandardGuiItem::cancel()) == KMessageBox::Yes)
     {
         KXmlGuiWindow::close();
     }
