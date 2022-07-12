@@ -113,7 +113,7 @@
     <p xml:lang="sr-ijekavian">Гренадир је клон класичне игре Бомберман, инспирисан радом клона Кланбомбер.</p>
     <p xml:lang="sr-ijekavianlatin">Grenadir je klon klasične igre Bomberman, inspirisan radom klona ClanBomber.</p>
     <p xml:lang="sv">Granatier är en klon av det klassiska spelet Bomberman, inspirerat av arbetet med klonen Clanbomber.</p>
-    <p xml:lang="tr">Granatie, klasik Bomberman oyununun bir klonudur, Clancomber klonun çalışmasından esinlenmiştir.</p>
+    <p xml:lang="tr">Granatie; klasik Bomberman oyununun bir klonudur, Clancomber klonun çalışmasından esinlenmiştir.</p>
     <p xml:lang="uk">Granatier — клон класичної гри «бомбермен», ідеї для якого запозичено з роботи над клоном гри Clanbomber.</p>
     <p xml:lang="x-test">xxGranatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.xx</p>
     <p xml:lang="zh-CN">Granatier 是经典游戏 Bomberman (炸弹人) 的复刻，它从 Clanbomber 复刻工程中汲取了灵感。</p>
@@ -153,6 +153,7 @@
       <caption xml:lang="sk">Hranie Granatier</caption>
       <caption xml:lang="sl">Igra Granatier</caption>
       <caption xml:lang="sv">Spela Granatier</caption>
+      <caption xml:lang="tr">Granatier Oynarken</caption>
       <caption xml:lang="uk">Гра у Granatier</caption>
       <caption xml:lang="x-test">xxPlaying Granatierxx</caption>
       <caption xml:lang="zh-CN">开始格兰提尔游戏</caption>
