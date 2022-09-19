@@ -119,7 +119,7 @@
     <p xml:lang="zh-CN">Granatier 是经典游戏 Bomberman (炸弹人) 的复刻，它从 Clanbomber 复刻工程中汲取了灵感。</p>
     <p xml:lang="zh-TW">Granatier 是從傳統的炸彈超人所承襲而來的遊戲，並且參考了 Clanbomber 的源碼。</p>
   </description>
-  <url type="homepage">https://www.kde.org/applications/games/granatier/</url>
+  <url type="homepage">https://apps.kde.org//granatier</url>
   <url type="bugtracker">https://bugs.kde.org/enter_bug.cgi?format=guided&amp;product=granatier</url>
   <url type="help">https://docs.kde.org/?application=granatier</url>
   <url type="donation">https://www.kde.org/community/donations/?app=granatier&amp;source=appdata</url>
