@@ -1,0 +1,615 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Czech "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>Příručka aplikace &granatier;</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    <othercredit role="translator"
+><firstname
+>Lukáš</firstname
+><surname
+>Vlček</surname
+><affiliation
+><address
+><email
+>lukas.vlcek777@gmail.com</email
+></address
+></affiliation
+><contrib
+>Překlad</contrib
+></othercredit
+> 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>9.5.2016</date>
+    <releaseinfo
+>1.3.1 (Aplikace 16.04)</releaseinfo>
+    
+    <abstract>
+      <para
+>Tato dokumentace popisuje hru &granatier; ve verzi 1.3.1.</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>kdegames</keyword
+> <!-- do not change this! -->
+      <keyword
+>hra</keyword
+> <!-- do not change this! -->
+      <keyword
+>Granatier</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>arkáda</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>více hráčů</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Úvod</title
+> <!-- do not change this! -->
+    <note
+><title
+>Typ hry:</title
+><para
+>Arkáda</para
+></note>
+    <note
+><title
+>Počet možných hráčů:</title
+><para
+>Více hráčů</para
+></note>
+    <para
+>&granatier; je klon klasické hry <trademark
+><application
+>Bomberman</application
+></trademark
+> inspirovaný působením klonu <application
+>Clanbomber</application
+>. </para>
+    <para
+>Cíl hry je běžet přes arénu s použitím bomb k odstranění překážek a zlikvidování vašeho protivníka. Různé výhody a nevýhody jsou ukryté vespod překážek &ndash; ty mohou buď pomáhat nebo bránit vašemu postupu. </para>
+    <screenshot>
+      <screeninfo
+>Snímek okna aplikace &granatier;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>Snímek okna aplikace &granatier;</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Jak hrát</title
+> <!-- do not change this! -->
+    <note
+><title
+>Cíl:</title
+><para
+>Zlikvidování všech protivníků.</para
+></note>
+    <para
+>Každý hráč je vybaven pěti klávesami, které používá k přesunu své postavy a pokládání bomb. Například výchozí klávesy hráče 1 jsou klávesy šipek Nahoru, Dolů, Vlevo a Vpravo pro pohyb v těchto směrech a klávesa &Enter; k položení bomby. Podívejte se prosím na část <link linkend="config_player"
+>Nastavení hráče</link
+> a najdete ovládání pro ostatní hráče a stejně tak i jak je nastavit. </para>
+    <para
+>Účelem ležících bomb, kromě útoku na ostatní protivníky, je zničit co nejvíce bloků roztroušených po celé aréně tak, aby se vyčistila cesta nebo odhalily skryté bonusy. Mezi mnoha bonusy, které mohou být objeveny, jsou ty, díky kterým se budete pohybovat rychleji, nebo zvýšíte rozsah výbuchu své bomby; více bonusů tohoto typu umožní snáze eliminovat soupeře a vyhrát kolo. Ale pozor, stejně mnoho existuje znevýhodnění, která se mohou obrátit proti vám, jako například zpomalení nebo záměna pohybových kláves. </para>
+    <para
+>U každého vyhraného kola je hráč odměněn jedním bodem. První hráč, který získá předdefinovaný počet bodů (výchozí je 3), vyhrává hru! </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Herní pravidla, strategie a tipy</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>Předměty</title>
+    <sect2>
+      <title
+>Aréna</title>
+      <para
+>Hráči jsou v aréně, která obsahuje: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Zeď arény</phrase
+> </textobject>
+        </inlinemediaobject
+>Zeď &ndash; určuje obrys mapy arény a nemůže být zničena. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Země arény</phrase
+> </textobject>
+        </inlinemediaobject
+>Země &ndash; po té lze bezpečně běžet. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Led arény</phrase
+> </textobject>
+        </inlinemediaobject
+>Led &ndash; udělá zem kluzkou. Rychlost na ledu se zvýší a pohyb není možné úplně zastavit. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Překážka arény</phrase
+> </textobject>
+        </inlinemediaobject
+>Překážka &ndash; může být zničena pomocí bomby a obsahovat výhodu (nebo nevýhodu). </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Minomet bomb arény</phrase
+> </textobject>
+        </inlinemediaobject
+>Minomet bomb &ndash; vrhá bomby, které jsou na něj umístěny, na náhodné místo. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Šipka arény vpravo</phrase
+> </textobject>
+        </inlinemediaobject
+>Šipka &ndash; přesouvá bomby, které jsou na ni umístěny, v jejím směru. </para>
+      <para
+>Není-li na nějakém místě žádná z položek uvedená výše, je tam propast v zemi a přesun na takové místo způsobí pád do hlubin a smrt. Totéž platí i v případě, že na okraji arény není žádná zeď a hráč se přesune mimo arénu. </para>
+    </sect2>
+    <sect2>
+      <title
+>Výhody</title>
+      <para
+>Výhody jsou užitečné pro dosažení cíle hry a jejich účinek je neustálý - dokonce i když nevýhoda zmizí. Následující výhody jsou tyto: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Výhoda rychlosti</phrase
+> </textobject>
+        </inlinemediaobject
+>Rychlost &ndash; mírně zvýší vaši rychlost. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Výhody bomby</phrase
+> </textobject>
+        </inlinemediaobject
+>Bomba &ndash; přidá bombu navíc do vašeho arsenálu umožňující pokládat více než jednu bombu před výbuchem. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Výhoda síly</phrase
+> </textobject>
+        </inlinemediaobject
+>Síla &ndash; zvýší účinnost vaší bomby a rozšíří rozsah výbuchu bomby. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Výhoda štítu</phrase
+> </textobject>
+        </inlinemediaobject
+>Štít &ndash; dělá nepřemožitelného proti výbuchu jedné bomby. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Výhoda hodu</phrase
+> </textobject>
+        </inlinemediaobject
+>Hod &ndash; přidá schopnost bombu hodit. Stačí stisknout klávesu pro pokládání bomb, když je bomba pod Vámi. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Výhoda kopnutí</phrase
+> </textobject>
+        </inlinemediaobject
+>Kopnutí &ndash; přidá schopnost kopnout do bomby. Stačí běžet proti bombě a bomba se přesune. </para>
+    </sect2>
+    <sect2>
+      <title
+>Nevýhody</title>
+      <para
+>Nevýhody jsou opakem výhod a hráče brzdí v postupu. Dobrá zpráva je, že účinek se po nějakém čase ztratí (účinek jiných než výhod) a hráč může hrát normálním způsobem (se zachovanými výhodami). Nevýhody jsou následující: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Nevýhoda zpomalení</phrase
+> </textobject>
+        </inlinemediaobject
+>Zpomalení &ndash; udělá váš pohyb velmi pomalým. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Nevýhoda hyperaktivity</phrase
+> </textobject>
+        </inlinemediaobject
+>Hyperaktivita &ndash; udělá váš pohyb PŘÍLIŠ rychlým. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Nevýhoda zrcadlení</phrase
+> </textobject>
+        </inlinemediaobject
+>Zrcadlení &ndash; prohodí vaše pohybové klávesy, takže nahoru znamená dolů a vlevo znamená vpravo. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Nevýhoda šílenství</phrase
+> </textobject>
+        </inlinemediaobject
+>Šílenství &ndash; přinutí vás bez jakékoli kontroly neustále pokládat bomby. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Nevýhoda nemohoucnosti</phrase
+> </textobject>
+        </inlinemediaobject
+>Nemohoucnost &ndash; brání v pokládání bomb. </para>
+    </sect2>
+    <sect2>
+      <title
+>Nejasné předměty</title>
+      <para
+>Tento typ výhod nejsou dobré ani špatné, to většinou záleží na okolním prostředí. Neutrální výhody jsou následující: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Neutrální Výhoda Pandora</phrase
+> </textobject>
+        </inlinemediaobject
+>Pandora &ndash; obsahuje buď výhodu nebo nevýhodu. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Neutrální výhoda vzkříšení</phrase
+> </textobject>
+        </inlinemediaobject
+>Vzkříšení &ndash; vzkřísí jakéhokoli mrtvého hráče. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Nastavení hry</title
+> <!-- do not change this! -->
+    <para
+>Chcete-li otevřít dialogové okno s nastavením, zvolte <menuchoice
+><guimenu
+>Nastavení</guimenu
+><guimenuitem
+>Nastavit &granatier;...</guimenuitem
+></menuchoice
+>. </para>
+    <sect1 id="config_general">
+      <title
+>Obecné</title>
+      <para
+>Můžete změnit položky, které potřebujete, abyste vyhráli hru a také můžete změnit čas kola. Po tomto čase je konec a začne režim neočekávané smrti. </para>
+      <para
+>Navíc můžete nastavit počáteční rychlost, počáteční sílu bomby a počáteční bombový arzenál. </para>
+      <screenshot>
+        <screeninfo
+>Snímek okna nastavení aplikace &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Snímek okna nastavení aplikace &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Motiv</title>
+      <para
+>Chcete-li vybrat motiv, se kterým chcete hrát, přejděte do části Motiv. Motiv je nahrán kliknutím na tlačítko <guibutton
+>OK</guibutton
+> nebo <guibutton
+>Použít</guibutton
+>. Aktuální hra bude ukončena a začne nová hra. Abyste obnovili výchozí motiv, můžete kliknout na tlačítko <guibutton
+>Výchozí</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>Snímek okna nastavení aplikace &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Snímek okna nastavení aplikace &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Aréna</title>
+      <para
+>Chcete-li vybrat arénu, kterou chcete hrát, přejděte do části Aréna. Aréna bude nahrána kliknutím na tlačítko <guibutton
+>OK</guibutton
+> nebo <guibutton
+>Použít</guibutton
+>. Aktuální hra bude ukončena a začne nová hra. Abyste obnovili výchozí arénu, můžete kliknout na tlačítko <guibutton
+>Výchozí</guibutton
+>. </para>
+      <para
+>Jestli jste vytvořili arény hry <application
+>Clanbomber</application
+>, můžete je importovat kliknutím na tlačítko <guibutton
+>Importovat arény Clanbomber</guibutton
+>. &granatier; hledá arény v <filename class="directory"
+>~/.clanbomber/maps</filename
+>. Výchozí arény hry <application
+>Clanbomber</application
+> jsou již nainstalovány s hrou &granatier;. </para>
+      <screenshot>
+        <screeninfo
+>Snímek okna nastavení aplikace &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Snímek okna nastavení aplikace &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Vyberete-li <guibutton
+>Náhodný režim</guibutton
+>, bude pro každé kolo použita náhodná aréna. Jsou-li zde arény, které nechcete hrát, můžete je odškrtnout. </para>
+      <screenshot>
+        <screeninfo
+>Snímek okna nastavení aplikace &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Snímek okna nastavení aplikace &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Hráč</title>
+      <para
+>Chcete-li vybrat hráče, se kterým chcete hrát, přejděte do části Hráč a pomocí přepínačů vyberte hráče. Klávesová zkratka může být změněna kliknutím na tlačítko činnosti, kterou chcete změnit a stisknutím klávesy, kterou chcete používat. Změny jsou nahrány kliknutím na tlačítko <guibutton
+>OK</guibutton
+> nebo <guibutton
+>Použít</guibutton
+>. Aktuální hra bude ukončena a začne nová hra. Abyste obnovili výchozí klávesové zkratky, můžete kliknout na tlačítko <guibutton
+>Výchozí</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>Snímek okna nastavení aplikace &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Snímek okna nastavení aplikace &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Vytvoření uživatelské arény</title
+> <!-- do not change this! -->
+    <para
+>Aréna v aplikaci &granatier; obsahuje dva soubory. <filename
+>myarena.desktop</filename
+> a <filename
+>myarena.xml</filename
+>. </para>
+
+    <para
+>Soubor .desktop obsahuje metadata jako název arény nebo autora arény a obsahuje následující text. <programlisting>
+[Arena]
+Name=Moje Aréna
+Description=Toto je moje první aréna
+Type=XML
+FileName=myarena.xml
+Author=Aleš Novák
+AuthorEmail=ales.novak@doména.cz
+      </programlisting
+> Název můžete zvolit jakýkoli chcete, ale za FileName musí být název souboru .xml. </para>
+    <para
+>Soubor .xml obsahuje aktuální mapu arény. <programlisting>
+&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting
+> Pro počet řádků a počet sloupců, zde nejsou žádná omezení, takže volba velikosti arény je na vás. Následující symboly jsou použité pro mapu arény. <programlisting
+>'=' znamená předmět zeď
+' ' znamená předmět propast
+'_' znamená předmět země
+'+' znamená předmět překážka
+'x' bude náhodně vytvořený předmět buď překážka nebo země
+'-' znamená předmět led
+'o' znamená předmět minomet
+'u' znamená předmět šipka nahoru
+'r' znamená předmět šipka vpravo
+'d' znamená předmět šipka dolů
+'l' znamená předmět šipka vlevo
+'p' znamená pozici hráče
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Informace o autorech a licenční ujednání</title
+> <!-- do not change this! -->
+    <para
+>&granatier; </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Program copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Graphics copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Graphics copyright 2009 Arturo Silva <email
+>jasilva28@gmail.com</email
+> </para>
+    <para
+>Documentation copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <para
+>Překlad dokumentace Lukáš Vlček <email
+>lukas.vlcek777@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->

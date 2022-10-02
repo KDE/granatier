@@ -1,0 +1,725 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Swedish "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>Handbok &granatier;</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    <othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>2021-06-23</date>
+    <releaseinfo
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
+    
+    <abstract>
+      <para
+>Den här dokumentationen beskriver spelet &granatier;, version 1.4.2</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>kdegames</keyword
+> <!-- do not change this! -->
+      <keyword
+>spel</keyword
+> <!-- do not change this! -->
+      <keyword
+>Granatier</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>spelhall</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>flera spelare</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>klanbombare</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Inledning</title
+> <!-- do not change this! -->
+    <note
+><title
+>Speltyp:</title
+><para
+>Spelhall</para
+></note>
+    <note
+><title
+>Antal möjliga spelare:</title
+><para
+>Flera spelare</para
+></note>
+    <para
+>&granatier; är en klon av det klassiska spelet &nbsp;<trademark
+><application
+>Bomberman</application
+></trademark
+>, inspirerat av arbetet med klonen <application
+>Clanbomber</application
+>. </para>
+    <para
+>Spelets syfte är att springa genom en arena, använda bomber för att rensa bort tegelstenar och utplåna motståndare. Flera typer av bonus och handikapp är dolda under stenarna &ndash; de kan antingen hjälpa eller hindra dig. </para>
+    <screenshot>
+      <screeninfo
+>En skärmbild av &granatier;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>En skärmbild av &granatier;</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Hur man spelar</title
+> <!-- do not change this! -->
+    <note
+><title
+>Syfte:</title
+><para
+>Utplåna alla motståndare.</para
+></note>
+    <para
+>Varje spelare får fem tangenter som de använder för att flytta sin spelare och placera ut bomber. Exempelvis är standardtangenterna för spelare 1 piltangenterna upp, ner, vänster och höger för att förflytta sig i dessa riktningar, och returtangenten för att placera ut en bomb. Se avsnittet <link linkend="config_player"
+>Spelinställning</link
+> för att finna snabbtangenterna för övriga spelare, samt hur man ställer in dem. </para>
+    <para
+>Syftet med att placera ut bomber, förutom att attackera andra motståndare, är att förstöra de många tegelstenarna utspridda överallt i arenan, för att rensa vägen eller avtäcka dolda bonus. Bland de många bonus som kan avtäckas finns de som får dig att röra dig snabbare eller öka explosionsområdet för bomber. Ju fler bonus av denna typ som du samlar in, desto lättare blir det att utplåna motståndarna och vinna omgången. Men var medveten om att det finns lika många handikapp, som kan vända trenden mot dig, inklusive de som gör dig långsammare eller inverterar förflyttningstangenterna. </para>
+    <para
+>För varje vunnen omgång tilldelas spelaren en poäng. Den första spelaren som får ett fördefinierat antal poäng (normalvärdet är tre), vinner spelet. </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Spelets regler, strategi och tips</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>Objekten</title>
+    <sect2>
+      <title
+>Arenan</title>
+      <para
+>Spelarna befinner sig i en arena som består av: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arenavägg</phrase
+> </textobject>
+        </inlinemediaobject
+>Vägg &ndash; Den definierar arenans kontur och kan inte förstöras. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arenans mark</phrase
+> </textobject>
+        </inlinemediaobject
+>Mark &ndash; Den är säker att gå på. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arenans is</phrase
+> </textobject>
+        </inlinemediaobject
+>Is &ndash; Den gör marken hal. Hastigheten ökar på is, och det är inte möjligt att helt sluta röra sig. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arenategelsten</phrase
+> </textobject>
+        </inlinemediaobject
+>Tegelsten &ndash; Den kan förstöras med en bomb, och kan innehålla bonus (eller handikapp). </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arenans granatkastare</phrase
+> </textobject>
+        </inlinemediaobject
+>Granatkastaren &ndash; Den kastar bomber som placeras på den till slumpmässiga platser. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arenans pilar</phrase
+> </textobject>
+        </inlinemediaobject
+>Pilarna &ndash; De flyttar bomber som placeras på den i riktningen de pekar. </para>
+      <para
+>Om inget av ovanstående objekt finns, är det ett hål i marken, och att flytta sig dit gör att man faller ner i avgrunden och dör. Samma sak gäller om det inte finns någon vägg vid arenans kant, och spelaren flyttar sig utanför arenan. </para>
+    </sect2>
+    <sect2>
+      <title
+>Bonus</title>
+      <para
+>Bonus är till hjälp för att uppnå spelets mål, och deras effekt är permanent, till och med efter att ett handikapp försvinner.För närvarande finns följande bonus: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Hastighetsbonus</phrase
+> </textobject>
+        </inlinemediaobject
+>Hastighet &ndash; Ökar din hastighet något. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bombbonus</phrase
+> </textobject>
+        </inlinemediaobject
+>Bomb &ndash; Lägger till en extra bomb i ditt vapenförråd, vilket låter dig placera ut mer än en bomb åt gången. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Styrkebonus</phrase
+> </textobject>
+        </inlinemediaobject
+>Styrka &ndash; Ökar styrkan hos bomberna, vilket utökar deras explosionsområde. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Sköldbonus</phrase
+> </textobject>
+        </inlinemediaobject
+>Sköld &ndash; Gör dig osårbar för en bombexplosion. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonuskast</phrase
+> </textobject>
+        </inlinemediaobject
+>Kast &ndash; Lägger till förmågan att kasta bomber. Tryck bara på tangenten för att släppa bomber medan bomben är under dig. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonusspark</phrase
+> </textobject>
+        </inlinemediaobject
+>Spark &ndash; Lägger till förmågan att flytta bomber. Rör dig bara mot en bomb så flyttar den sig. </para>
+    </sect2>
+    <sect2>
+      <title
+>Handikapp</title>
+      <para
+>Handikapp är motsatsen till bonus, och hindrar spelaren. Den goda nyheten är att effekten försvinner efter ett tag (i motsats till bonus) och spelaren kan spela på normalt sätt igen (inklusive bonus). För närvarande finns följande handikapp: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handikappad med långsamhet</phrase
+> </textobject>
+        </inlinemediaobject
+>Långsam &ndash; Gör att du rör dig mycket långsamt. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handikappad med hyperaktivitet</phrase
+> </textobject>
+        </inlinemediaobject
+>Hyperaktiv &ndash; Gör att du rör dig lite <emphasis
+>för</emphasis
+> fort. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handikappad med spegling</phrase
+> </textobject>
+        </inlinemediaobject
+>Spegling &ndash; Invertera förflyttningstangenterna, så att upp blir ner och vänster blir höger. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handikappad med galenskap</phrase
+> </textobject>
+        </inlinemediaobject
+>Galenskap &ndash; Tvingar dig att hela tiden placera ut bomber utan kontroll. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handikappad med förhinder</phrase
+> </textobject>
+        </inlinemediaobject
+>Förhinder &ndash; Förhindrar dig från att placera ut bomber. </para>
+    </sect2>
+    <sect2>
+      <title
+>De ambivalenta objekten</title>
+      <para
+>Den här bonustypen är varken bra eller dålig. Det beror i huvudsak på omgivningen. För närvarande finns följande neutrala bonus: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Pandora neutral bonus</phrase
+> </textobject>
+        </inlinemediaobject
+>Pandora &ndash; Innehåller antingen bonus eller handikapp. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Återupplivning neutral bonus</phrase
+> </textobject>
+        </inlinemediaobject
+>Återupplivning &ndash; Det återupplivar en död spelare. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="interface"
+><title
+>Översikt av gränssnittet</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Menyalternativen</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Spel</guimenu
+> <guimenuitem
+>Ny</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Startar</action
+> ett nytt spel.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Spel</guimenu
+> <guimenuitem
+>Avsluta</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Avslutar</action
+> &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Inställningar</guimenu
+> <guimenuitem
+>Spela ljud</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Välj om ljud (som spelas.</action
+> Förvalt värde är på. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>Dessutom har &granatier; de vanliga menyalternativen <guimenu
+>Inställningar</guimenu
+> och <guimenu
+>Hjälp</guimenu
+> i &kde;. För mer information, läs avsnitten  <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Menyn Inställningar</ulink
+> och <ulink url="help:/fundamentals/ui.html#menus-help"
+>Menyn Hjälp</ulink
+> i &kde;:s Grunder. </para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Spelinställning</title
+> <!-- do not change this! -->
+    <para
+>Välj menyalternativet <menuchoice
+><guimenu
+>Inställningar</guimenu
+><guimenuitem
+>Anpassa &granatier;...</guimenuitem
+></menuchoice
+> för att öppna inställningsdialogrutan. </para>
+    <sect1 id="config_general">
+      <title
+>Allmänt</title>
+      <para
+>Du kan ändra poäng som krävs för att vinna spelet, och tiden för en omgång. När tiden är slut, börjar sudden death spelet. </para>
+      <para
+>Dessutom kan du justera den ursprungliga hastigheten, bombområde och bombförråd. </para>
+      <screenshot>
+        <screeninfo
+>En skärmbild av &granatier;s inställning</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>En skärmbild av &granatier;s inställning</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Tema</title>
+      <para
+>Gå till temasidan för att välja temat du vill spela med. Temat läses in genom att klicka på &nbsp;<guibutton
+>Ok</guibutton
+> eller <guibutton
+>Verkställ</guibutton
+>. Det pågående spelet avslutas och ett nytt startas. Du kan klicka på knappen &nbsp;<guibutton
+>Förval</guibutton
+> för att återställa standardtemat. </para>
+      <screenshot>
+        <screeninfo
+>En skärmbild av &granatier;s inställning</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>En skärmbild av &granatier;s inställning</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Arena</title>
+      <para
+>Gå till arenasidan för att välja arenan du vill spela med. Arenan läses in genom att klicka på &nbsp;<guibutton
+>Ok</guibutton
+> eller <guibutton
+>Verkställ</guibutton
+>. Det pågående spelet avslutas och ett nytt startas. Du kan klicka på knappen &nbsp;<guibutton
+>Förval</guibutton
+> för att återställa standardarenan. </para>
+      <para
+>Om du har gjort egna arenor för <application
+>Clanbomber</application
+>, kan du kopiera dem till <filename class="directory"
+>~/.clanbomber/maps</filename
+>, där &granatier; söker efter dem. De normala arenorna i <application
+>Clanbomber</application
+> levereras redan med &granatier;. </para>
+      <screenshot>
+        <screeninfo
+>En skärmbild av &granatier;s inställning</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>En skärmbild av &granatier;s inställning</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Om du väljer <guibutton
+>Slumpmässigt läge</guibutton
+>, används en slumpmässig arena för varje ny omgång. Om det finns arenor du inte vill använda, kan du avmarkera dem. </para>
+      <screenshot>
+        <screeninfo
+>En skärmbild av &granatier;s inställning</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>En skärmbild av &granatier;s inställning</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Spelare</title>
+      <para
+>Gå till spelarsidan för att välja spelaren du vill spela som, och välj spelare med kryssrutorna. Genvägar kan ändras genom att klicka på knappen för åtgärden du vill ändra och därefter trycka på tangenten du vill använda. Ändringarna får effekt genom att klicka på &nbsp;<guibutton
+>Ok</guibutton
+> eller <guibutton
+>Verkställ</guibutton
+>. Det pågående spelet avslutas och ett nytt startas. Du kan klicka på knappen &nbsp;<guibutton
+>Förval</guibutton
+> för att återställa standardgenvägarna. </para>
+      <screenshot>
+        <screeninfo
+>En skärmbild av &granatier;s inställning</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>En skärmbild av &granatier;s inställning</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Skapa en egen arena</title
+> <!-- do not change this! -->
+    <para
+>En arena i &granatier; består av två filer, <filename
+>min-arena.desktop</filename
+>&nbsp; och <filename
+>min-arena.xml</filename
+>. </para>
+
+    <para
+>Filen <literal role="extension"
+>.desktop</literal
+> innehåller metadata, som arenans namn och upphovsmannen till arenan, och består av följande poster. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name=Min arena
+Description=Det här är min första arena
+Type=XML
+FileName=min-arena.xml
+Author=Anna Andersson
+AuthorEmail=anna.andersson@exempel.se
+      </programlisting>
+    </para>
+    <para
+>Du kan välja vilket namn du vill, men &nbsp;<literal
+>min-arena</literal
+> måste vara namnet på <literal role="extension"
+>.xml</literal
+>-filen. </para>
+    <para
+><literal role="extension"
+>XML</literal
+>-filen innehåller själva arenans karta. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting>
+    </para>
+    <para
+>Det finns ingen begränsning för <literal
+>rowCount</literal
+> och <literal
+>colCount</literal
+>, så man kan välja arenans storlek själv. Följande symboler används för arenans karta. </para>
+    <para>
+      <programlisting
+>'=' ett väggobjekt
+' ' ett hålobjekt
+'_' ett markobjekt
+'+' ett tegelstensobjekt
+'x' skapar slumpmässigt ett tegelstens- eller markobjekt
+'-' ett isobjekt
+'o' ett granatkastarobjekt
+'u' en pil uppåt
+'r' en pil åt höger
+'d' en pil neråt
+'l' en pil åt vänster
+'p' en spelarposition
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Tack till och licens</title
+> <!-- do not change this! -->
+    <para
+>&granatier; </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Program copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Grafik copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Grafik copyright 2009 Arturo Silva <email
+>jasilva28@gmail.com</email
+> </para>
+    <para
+>Dokumentation copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <para
+>Översättning Stefan Asserhäll <email
+>stefan.asserhall@bredband.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->

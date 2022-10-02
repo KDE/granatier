@@ -1,0 +1,727 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Italian "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>Manuale di &granatier;</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    <othercredit role="translator"
+><firstname
+>Valter</firstname
+><surname
+>Mura</surname
+><affiliation
+><address
+><email
+>valtermura@gmail.com</email
+></address
+></affiliation
+><contrib
+>Traduzione in italiano</contrib
+></othercredit
+> 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>2021-06-23</date>
+    <releaseinfo
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
+    
+    <abstract>
+      <para
+>Questo documentazione descrive il gioco di &granatier; versione 1.4.2</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>kdegames</keyword
+> <!-- do not change this! -->
+      <keyword
+>gioco</keyword
+> <!-- do not change this! -->
+      <keyword
+>Granatiere</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>arcade</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>multigiocatore</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Introduzione</title
+> <!-- do not change this! -->
+    <note
+><title
+>Tipo di gioco:</title
+><para
+>Arcade</para
+></note>
+    <note
+><title
+>Numero di possibili giocatori:</title
+><para
+>più giocatori</para
+></note>
+    <para
+>&granatier; è un clone del gioco classico &nbsp; <trademark
+><application
+>Bomberman</application
+></trademark
+>, ispirato dal lavoro del clone <application
+>Clanbomber</application
+>. </para>
+    <para
+>L'oggetto del gioco è correre attraverso un'arena, utilizzando bombe per abbattere blocchi ed eliminare gli avversari. Sotto i blocchi sono celati sia bonus sia ostacoli: questi possono agevolare o rallentare il tuo avanzamento. </para>
+    <screenshot>
+      <screeninfo
+>Schermata di &granatier;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>Schermata di &granatier;</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Come giocare</title
+> <!-- do not change this! -->
+    <note
+><title
+>Scopo del gioco:</title
+><para
+>Eliminare tutti gli avversari.</para
+></note>
+    <para
+>Ogni giocatore può utilizzare cinque tasti per muovere il suo personaggio e rilasciare le bombe. Ad esempio, i tasti predefiniti per il Giocatore 1 sono i tasti freccia &Up;, &Down;, &Left; &Right; per spostarsi nelle rispettive direzioni, e il tasto &Enter; per sganciare una bomba. Consulta la sezione <link linkend="config_player"
+>Configurazione del giocatore</link
+> per cercare e configurare le combinazioni di tasti per gli altri giocatori. </para>
+    <para
+>Attacco agli avversari a parte, lo scopo di sganciare bombe è distruggere i blocchi sparpagliati nell'arena, per liberare un percorso o scoprire un bonus nascosto. Tra i vari bonus da scoprire, vi sono quelli che ti permettono di spostarti più velocemente o aumentare l'area di scoppio della bomba: più bonus di questo tipo raccogli, più è facile eliminare i tuoi avversari e vincere il turno. Stai attento, perché esistono molti ostacoli che possono cambiare il vento a tuo sfavore, tra gli altri quelli che ti rallentano o che invertono la direzione dei tasti di movimento. </para>
+    <para
+>Per ciascun turno vinto, il giocatore è premiato con un punto. Il primo giocatore che vince un numero prestabilito di punti (quello predefinito è 3) vince la partita! </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Regole del gioco, strategie e suggerimenti</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>Gli elementi</title>
+    <sect2>
+      <title
+>L'Arena</title>
+      <para
+>I giocatori stanno in un'arena che consiste di: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Muro dell'Arena</phrase
+> </textobject>
+        </inlinemediaobject
+>Il Muro: definisce il bordo esterno della mappa dell'arena e non può essere distrutto. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Campo dell'Arena</phrase
+> </textobject>
+        </inlinemediaobject
+>Il Terreno: ci si può camminare in sicurezza. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Ghiaccio dell'arena</phrase
+> </textobject>
+        </inlinemediaobject
+>Il Ghiaccio: rende il terreno scivoloso. Sul ghiaccio la velocità aumenta e non è possibile fermare del tutto il proprio movimento. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Blocco dell'Arena</phrase
+> </textobject>
+        </inlinemediaobject
+>Il Blocco: può essere distrutto con una bomba e può contenere un bonus o un ostacolo. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Mortaio bombe dell'Arena</phrase
+> </textobject>
+        </inlinemediaobject
+>Il mortaio bombe: lancerà le bombe in esso contenute verso punti casuali. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Rettangolo frecce dell'Arena</phrase
+> </textobject>
+        </inlinemediaobject
+>Le frecce: sposteranno le bombe posizionate in esso verso la direzione cui puntano. </para>
+      <para
+>Se non è presente nessuno degli elementi sopra citati, è presente una buca nel terreno: se ci si sposta sopra si cade nel baratro e si muore. Lo stesso accade se non è presente il muro nel bordo esterno dell'area e il giocatore si sposta fuori della stessa. </para>
+    </sect2>
+    <sect2>
+      <title
+>I bonus</title>
+      <para
+>I bonus aiutano a raggiungere lo scopo del gioco e i loro effetti sono permanenti, anche dopo che scompare un ostacolo. Al momento, esistono i seguenti bonus: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus velocità</phrase
+> </textobject>
+        </inlinemediaobject
+>Velocità: aumenta leggermente la tua velocità. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus bomba</phrase
+> </textobject>
+        </inlinemediaobject
+>Bomba: aggiunge una bomba al tuo arsenale, permettendoti di sganciare più di una bomba alla volta. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus potenza</phrase
+> </textobject>
+        </inlinemediaobject
+>Potenza: aumenta la potenza delle tue bombe, estendendo la gittata del loro scoppio. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus scudo</phrase
+> </textobject>
+        </inlinemediaobject
+>Scudo: rende invulnerabili allo scoppio di una bomba. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus lancio</phrase
+> </textobject>
+        </inlinemediaobject
+>Lancio: aggiunge la capacità di lanciare bombe.  </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus calcio</phrase
+> </textobject>
+        </inlinemediaobject
+>Calcio: aggiunge la capacità di spostare le bombe. Basta correre contro una bomba ed essa si sposterà. </para>
+    </sect2>
+    <sect2>
+      <title
+>Gli ostacoli</title>
+      <para
+>Gli ostacoli sono l'opposto dei bonus e ostacolano il giocatore. L'aspetto positivo è che il loro effetto cessa dopo qualche tempo (diversamente dai bonus) e il giocatore può di nuovo giocare normalmente (uso dei bonus inclusi). Al momento sono presenti gli ostacoli seguenti: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Ostacolo rallentamento</phrase
+> </textobject>
+        </inlinemediaobject
+>Rallentamento: rende lentissime le tue mosse. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Ostacolo iperattività</phrase
+> </textobject>
+        </inlinemediaobject
+>Iperattività: rende i tuoi movimenti velocissimi. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Ostacolo specchio</phrase
+> </textobject>
+        </inlinemediaobject
+>Specchio: inverte i tasti di spostamento, ossia su diventa giù e sinistra diventa destra. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Ostacolo sbadataggine</phrase
+> </textobject>
+        </inlinemediaobject
+>Sbadataggine: ti forza a sganciare le bombe senza controllo. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Ostacolo trattenuta</phrase
+> </textobject>
+        </inlinemediaobject
+>Trattenuta: non ti permette di sganciare bombe. </para>
+    </sect2>
+    <sect2>
+      <title
+>Gli elementi ambivalenti</title>
+      <para
+>Questo tipo di bonus non è né buono né cattivo, ma la sua qualità dipende dall'ambiente. Al momento sono presenti i seguenti bonus neutrali: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus neutrale Pandora</phrase
+> </textobject>
+        </inlinemediaobject
+>Pandora: contiene o un bonus o un ostacolo. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus neutrale Resurrezione</phrase
+> </textobject>
+        </inlinemediaobject
+>Resurrezione: resuscita qualsiasi giocatore morto. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="interface"
+><title
+>Panoramica dell'interfaccia</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Elementi dei menu</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Partita</guimenu
+><guimenuitem
+>Nuova</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Inizia</action
+> una nuova partita.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Partita</guimenu
+><guimenuitem
+>Esci</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Esce</action
+> da &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Impostazioni</guimenu
+> <guimenuitem
+>Esegui suoni</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Attiva o disattiva l'emissione di suoni.</action
+> È preimpostata come attiva. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>Inoltre, &granatier; ha le solite voci del menu di &kde; <guimenu
+>Impostazioni</guimenu
+> e <guimenu
+>Aiuto</guimenu
+>; per maggiori informazioni leggi le sezioni sul <ulink url="help:/fundamentals/menuss.html#menus-settings"
+>menu <guimenu
+>Impostazioni</guimenu
+></ulink
+> e sul <ulink url="help:/fundamentals/menus.html#menus-help"
+>menu <guimenu
+>Aiuto</guimenu
+></ulink
+> dei Fondamentali di &kde;. </para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Configurazione del gioco</title
+> <!-- do not change this! -->
+    <para
+>Per aprire la finestra di configurazione, seleziona l'elemento del menu<menuchoice
+><guimenu
+>Impostazioni</guimenu
+><guimenuitem
+>Configura &granatier;...</guimenuitem
+></menuchoice
+> </para>
+    <sect1 id="config_general">
+      <title
+>Generale</title>
+      <para
+>Puoi modificare i punti necessari per vincere il gioco e il tempo del turno. Non appena il tempo è finito, ha inizio la modalità di morte improvvisa. </para>
+      <para
+>In aggiunta, puoi regolare la velocità iniziale, la portata della bomba e l'armamento di bombe. </para>
+      <screenshot>
+        <screeninfo
+>Schermata di configurazione di &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Schermata di configurazione di &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Tema</title>
+      <para
+>Per selezionare il tema con cui giocare, vai alla sezione Tema. Il tema viene caricato facendo clic su &nbsp;<guibutton
+>Ok</guibutton
+> o <guibutton
+>Applica</guibutton
+>. La partita corrente sarà terminata e ne verrà avviata una nuova. Puoi fare clic sul pulsante &nbsp;<guibutton
+>Predefiniti</guibutton
+> per ripristinare il tema predefinito. </para>
+      <screenshot>
+        <screeninfo
+>Schermata di configurazione di &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Schermata di configurazione di &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Arena</title>
+      <para
+>Per selezionare l'arena in cui giocare, vai alla sezione Arena. L'arena viene caricata facendo clic su &nbsp;<guibutton
+>Ok</guibutton
+> o <guibutton
+>Applica</guibutton
+>. La partita corrente sarà terminata e ne verrà avviata una nuova. Puoi fare clic sul pulsante &nbsp;<guibutton
+>Predefiniti</guibutton
+> per ripristinare l'arena predefinita. </para>
+      <para
+>Se ti sei costruito da te le arene di <application
+>Clanbomber</application
+>, puoi copiarle in <filename class="directory"
+>~/.clanbomber/maps</filename
+>, in cui &granatier; cerca le arene. Le arene predefinite di <application
+>Clanbomber</application
+> sono già contenute in &granatier;. </para>
+      <screenshot>
+        <screeninfo
+>Schermata di configurazione di &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Schermata di configurazione di &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Se selezioni <guibutton
+>Modalità casuale</guibutton
+>, verrà selezionata un'arena casuale per ciascun nuovo turno. Se ci sono arene in cui non vuoi giocare, puoi spuntarle dalla lista. </para>
+      <screenshot>
+        <screeninfo
+>Schermata di configurazione di &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Schermata di configurazione di &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Giocatore</title>
+      <para
+>Per selezionare il giocatore con cui giocare, vai alla sezione Giocatore e seleziona i giocatori tramite le caselline di spunta. Le scorciatoie possono essere modificate facendo clic sul pulsante per l'azione che vuoi modificare, quindi premendo il tasto che desideri utilizzare. Le modifiche vengono caricate facendo clic su &nbsp;<guibutton
+>OK</guibutton
+> o <guibutton
+>Applica</guibutton
+>. La partita corrente verrà terminata e ne verrà avviata una nuova. Per ripristinare le scorciatoie predefinite puoi fare clic sul pulsante &nbsp;<guibutton
+>Predefiniti</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>Schermata di configurazione di &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Schermata di configurazione di &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Creare un'arena personalizzata</title
+> <!-- do not change this! -->
+    <para
+>In &granatier; un'arena consiste di due file, <filename
+>miaarena.desktop</filename
+>&nbsp; e <filename
+>miaarena.xml</filename
+>. </para>
+
+    <para
+>Il file <literal role="extension"
+>.desktop</literal
+> contiene i metadati tipo il nome dell'arena o dell'autore dell'area ed è formato dalle voci che seguono. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name=Mia arena
+Description=Questa è la mia prima arena
+Type=XML
+FileName=miarena.xml
+Author=Mario Rossi
+AuthorEmail=mario.utente@pippo.org
+      </programlisting>
+    </para>
+    <para
+>Puoi scegliere il nome che preferisci, ma &nbsp;<literal
+>FileName</literal
+> deve essere il nome del file <literal role="extension"
+>.xml</literal
+>. </para>
+    <para
+>Il file <literal role="extension"
+>.xml</literal
+> contiene la mappa dell'arena reale. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting>
+    </para>
+    <para
+>Non ci sono limiti per <literal
+>rowCount</literal
+> e <literal
+>colCount</literal
+>, puoi dunque scegliere personalmente la dimensione dell'arena. Per la mappa dell'arena vengono utilizzati i simboli sotto riportati. </para>
+    <para>
+      <programlisting
+>'=' elemento muro
+' ' elemento buca
+'_' elemento terreno
+'+' elemento blocco
+'x' crea casualmente un elemento blocco o terreno
+'-' elemento ghiaccio
+'o' elemento mortaio
+'u' freccia su
+'r' freccia destra
+'d' freccia giù
+'l' freccia sinistra
+'p' posizione giocatore
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Riconoscimenti e licenza</title
+> <!-- do not change this! -->
+    <para
+>&granatier; </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Copyright del programma 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Copyright delle immagini 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Copyright delle immagini 2009 Arturo Silva <email
+>jasilva28@gmail.com</email
+> </para>
+    <para
+>Copyright della documentazione 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <para
+>Valter Mura <email
+>valtermura@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->

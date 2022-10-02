@@ -1,0 +1,727 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Ukrainian "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>Підручник з &granatier;</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    <othercredit role="translator"
+><firstname
+>Юрій</firstname
+><surname
+>Чорноіван</surname
+><affiliation
+><address
+><email
+>yurchor@ukr.net</email
+></address
+></affiliation
+><contrib
+>Переклад українською</contrib
+></othercredit
+> 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>23 червня 2021 року</date>
+    <releaseinfo
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
+    
+    <abstract>
+      <para
+>У цій документації описано гру &granatier; версії 1.4.2.</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>kdegames</keyword
+> <!-- do not change this! -->
+      <keyword
+>гра</keyword
+> <!-- do not change this! -->
+      <keyword
+>Гренадер</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>аркада</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>декілька гравців</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Вступ</title
+> <!-- do not change this! -->
+    <note
+><title
+>Тип гри:</title
+><para
+>Аркада</para
+></note>
+    <note
+><title
+>Можлива кількість гравців:</title
+><para
+>Декілька гравців</para
+></note>
+    <para
+>&granatier; є клоном класичної гри <trademark
+><application
+>Bomberman</application
+></trademark
+>, яка сама є клоном гри <application
+>Clanbomber</application
+>. </para>
+    <para
+>Метою гри є проходження арени з використанням бомб, які допоможуть вам в усуванні блоків та знищенні суперників. Під блоками може бути сховано декілька бонусів або перешкод, вони можуть допомогти або зашкодити вашому просуванню ареною. </para>
+    <screenshot>
+      <screeninfo
+>Знімок вікна &granatier;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>Знімок вікна &granatier;</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Як грати</title
+> <!-- do not change this! -->
+    <note
+><title
+>Мета:</title
+><para
+>Усунути з гри всіх суперників.</para
+></note>
+    <para
+>У розпорядженні кожного з гравців буде п’ять клавіш, за допомогою яких вони зможуть пересувати свого героя та закладати бомби. Наприклад, типовими клавішами для Гравця 1 будуть клавіші стрілочок вгору, вниз, ліворуч і праворуч, призначені для руху у відповідних напрямках, і клавіша &Enter;, призначена для закладання бомби. Будь ласка, зверніться до розділу <link linkend="config_player"
+>Налаштування гравців</link
+>, щоб дізнатися про клавіатурні скорочення для інших гравців та способи їх зміни. </para>
+    <para
+>Метою гри закладання бомб, окрім завдання шкоди вашим суперникам, є знищення максимальної кількості блоків, розкиданих ареною, з метою розчистити шлях або дістатися прихованих бонусів. Серед бонусів гри пришвидшення гравця і збільшення потужності закладених ним бомб. Чим більше буде зібрано бонусів, тим простіше буде усунути ваших суперників і виграти раунд. Але у грі передбачено також і перешкоди, зокрема віддзеркалення призначення клавіш ходів або сповільнення гравця, отже вам слід бути обережними під час збирання бонусів. </para>
+    <para
+>За кожен виграний раунд гравець отримуватиме одне очко. Гравець, який першим набере вказану у налаштуваннях програми кількість очок (типово, 3), виграє гру. </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Правила гри, стратегія та поради</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>Елементи</title>
+    <sect2>
+      <title
+>Арена</title>
+      <para
+>Гра відбувається на арені, що складається з таких елементів: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Стіна арени</phrase
+> </textobject>
+        </inlinemediaobject
+>Стіна — це контур арени, який не можна знищити вибухами. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Поверхня арени</phrase
+> </textobject>
+        </inlinemediaobject
+>Поверхня — нею можна безпечно пересуватися. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Лід на арені</phrase
+> </textobject>
+        </inlinemediaobject
+>Лід — ця перешкода робить поверхню слизькою. На льодяній поверхні зростає швидкість руху, на ній неможливо зупинитися. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Блок арени.</phrase
+> </textobject>
+        </inlinemediaobject
+>Блок — його можна знищувати за допомогою бомб. У деяких з блоків містяться бонуси або перешкоди. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Мортира арени</phrase
+> </textobject>
+        </inlinemediaobject
+>Мортира — розкидає бомби у випадкові місця арени. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Стрілка праворуч</phrase
+> </textobject>
+        </inlinemediaobject
+>Стрілки — пересувають бомби, які на них закладають у напрямку, у якому вказують. </para>
+      <para
+>Якщо елемент арени не належатиме до жодного з перелічених вище типів, цей елемент є ямою. Якщо герой впаде у яму, він розіб’ється і загине. Також загибель чекає на героя, який впаде за край арени неоточений стіною. </para>
+    </sect2>
+    <sect2>
+      <title
+>Бонуси</title>
+      <para
+>Бонуси допоможуть вам виграти, їх дія є постійною, вона продовжується після того, як зникне перешкода (якщо гравець випадково з нею зіткнеться). У поточній версії передбачено такі бонуси: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонус швидкості</phrase
+> </textobject>
+        </inlinemediaobject
+>Швидкість — дещо збільшує швидкість вашого героя. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонус-бомба</phrase
+> </textobject>
+        </inlinemediaobject
+>Бомба — додає до вашого арсеналу додаткову бомбу, ви зможете закладати декілька бомб одночасно. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонус потужності</phrase
+> </textobject>
+        </inlinemediaobject
+>Потужність — збільшує потужність вибухів ваших бомб та діапазон дії вибуху. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонус захисту</phrase
+> </textobject>
+        </inlinemediaobject
+>Захист — захищає героя від одного вибуху бомби. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонус кидання</phrase
+> </textobject>
+        </inlinemediaobject
+>Кидання — надає змогу кидати бомби. Просто натисніть кнопку закладання бомби, коли бомба опиниться поряд з вами. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонус удару</phrase
+> </textobject>
+        </inlinemediaobject
+>Удар — надає змогу пересувати бомби. Просто пробіжіть повз бомбу, щоб її пересунути. </para>
+    </sect2>
+    <sect2>
+      <title
+>Перешкоди</title>
+      <para
+>Перешкоди, на відміну від бонусів, перешкоджають героєві у досягненні метри. Приємно у них лише те, що з часом вони зникають і гравець може відновити свої якості (разом з бонусами). У поточній версії гри передбачено такі перешкоди: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Уповільнення</phrase
+> </textobject>
+        </inlinemediaobject
+>Уповільнення — робить героя дуже повільним. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Гіперактивність</phrase
+> </textobject>
+        </inlinemediaobject
+>Гіперактивність — робить героя занадто швидким. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Дзеркало</phrase
+> </textobject>
+        </inlinemediaobject
+>Дзеркало — міняє місцями клавіші керування рухом, клавіша «вгору» міняється місцями з клавішею «вниз», а клавіша «ліворуч» — з клавішею «праворуч». </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Безумство</phrase
+> </textobject>
+        </inlinemediaobject
+>Безумство — ваш герой починає безконтрольно розкидати бомби. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Пута</phrase
+> </textobject>
+        </inlinemediaobject
+>Пута — не дає вам закладати бомби. </para>
+    </sect2>
+    <sect2>
+      <title
+>Нейтральні елементи</title>
+      <para
+>Цей тип бонусів не належить ні до тих, які допомагають героєві, ні до тих, які йому заважають. У поточній версії передбачено такі нейтральні бонуси: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Нейтральний бонус (скринька Пандори)</phrase
+> </textobject>
+        </inlinemediaobject
+>Скринька Пандори — у ній може бути як бонус, так і перешкода. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Нейтральний бонус воскресіння</phrase
+> </textobject>
+        </inlinemediaobject
+>Воскресіння — воскрешає всіх вбитих гравців. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="interface"
+><title
+>Огляд інтерфейсу</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Пункти меню</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Гра</guimenu
+> <guimenuitem
+>Створити</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Починає</action
+> нову гру.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Гра</guimenu
+> <guimenuitem
+>Вийти</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Завершує роботу</action
+> &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Параметри</guimenu
+> <guimenuitem
+>Відтворювати звуки</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Вмикає або вимикає звуки.</action
+> Типово звуковий супровід увімкнено. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>Крім того, у &granatier; передбачено типові для &kde; пункти меню <guimenu
+>Параметри</guimenu
+> і <guimenu
+>Довідка</guimenu
+>. Щоб дізнатися більше, ознайомтеся з розділами щодо <ulink url="help:/fundamentals/menus.html#menus-settings"
+>меню «Параметри»</ulink
+> та <ulink url="help:/fundamentals/menus.html#menus-help"
+>меню «Довідка»</ulink
+> підручника з основ роботи у &kde;. </para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Налаштування гри</title
+> <!-- do not change this! -->
+    <para
+>Щоб відкрити діалогове вікно налаштування, скористайтеся пунктом меню <menuchoice
+><guimenu
+>Параметри</guimenu
+><guimenuitem
+>Налаштувати Гренадер...</guimenuitem
+></menuchoice
+> </para>
+    <sect1 id="config_general">
+      <title
+>Загальне</title>
+      <para
+>Тут ви можете вказати кількість очок, які слід набрати, щоб виграти гру, а також час, відведений на раунд. Після завершення відведеного часу буде увімкнено режим несподіваної смерті. </para>
+      <para
+>Крім того, ви можете змінити початкову швидкість, діапазон вибуху бомби та кількість бомб. </para>
+      <screenshot>
+        <screeninfo
+>Знімок діалогового вікна налаштування &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Знімок діалогового вікна налаштування &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Тема</title>
+      <para
+>Щоб обрати тему гри, вам слід відкрити сторінку тем. Тему буде завантажено після натискання кнопки <guibutton
+>Гаразд</guibutton
+> або <guibutton
+>Застосувати</guibutton
+>. Після цього поточну гру буде завершено, ви розпочнете гру з початку. Для відновлення типової теми натисніть кнопку <guibutton
+>Типові значення</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>Знімок діалогового вікна налаштування &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Знімок діалогового вікна налаштування &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Арена</title>
+      <para
+>Щоб обрати арену, на якій відбуватиметься гра, відкрийте сторінку «Арена». Завантажити одну з арен зі списку можна позначенням її пункту з наступним натисканням кнопки <guibutton
+>Гаразд</guibutton
+> або <guibutton
+>Застосувати</guibutton
+>. Після цього поточну гру буде завершено, ви розпочнете гру з початку. Для відновлення типової арени натисніть кнопку <guibutton
+>Типові значення</guibutton
+>. </para>
+      <para
+>Якщо у вас є створені вами арени <application
+>Clanbomber</application
+>, ви можете скопіювати їх до <filename class="directory"
+>~/.clanbomber/maps</filename
+>, місця, де їх шукатиме «Гренадер». Типові арени <application
+>Clanbomber</application
+> вже є частиною пакунка гри «Гренадер». </para>
+      <screenshot>
+        <screeninfo
+>Знімок діалогового вікна налаштування &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Знімок діалогового вікна налаштування &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Якщо ви позначите пункт <guibutton
+>Випадковий режим</guibutton
+>, під час зміни раундів програма вибиратиме арену випадковим чином. Якщо є арени, на яких ви не хочете грати, зніміть з відповідних пунктів позначки. </para>
+      <screenshot>
+        <screeninfo
+>Знімок діалогового вікна налаштування &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Знімок діалогового вікна налаштування &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Гравець</title>
+      <para
+>Щоб обрати вигляд гравця, зверніться до сторінки «Гравець» і позначте пункт відповідного гравця. Ви можете змінити клавіатурні скорочення керування гравцем за допомогою натискання відповідних кнопок дії з наступним натисканням бажаних клавіш на клавіатурі. Зміни набудуть чинності після натискання кнопки <guibutton
+>Гаразд</guibutton
+> або <guibutton
+>Застосувати</guibutton
+>. Поточну гру буде завершено, ви розпочнете гру з початку. Для відновлення типової клавіатурних скорочень натисніть кнопку <guibutton
+>Типові значення</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>Знімок діалогового вікна налаштування &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Знімок діалогового вікна налаштування &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Створення власної арени</title
+> <!-- do not change this! -->
+    <para
+>Дані арени у &granatier; містяться у двох файлах: <filename
+><replaceable
+>назва арени</replaceable
+>.desktop</filename
+> і <filename
+><replaceable
+>назва арени</replaceable
+>.xml</filename
+>. </para>
+
+    <para
+>У файлі <literal role="extension"
+>.desktop</literal
+> містяться метадані, зокрема назва арени та запис автора арени. Сам файл складається з вказаних нижче записів. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name=My Arena
+Description=Це моя перша арена
+Type=XML
+FileName=myarena.xml
+Author=Ivan Ivanenko
+AuthorEmail=ivan.ivanenko@foo.org
+      </programlisting>
+    </para>
+    <para
+>Ви можете вибрати будь-яку назву, але значення &nbsp;<literal
+>FileName</literal
+> має збігатися із назвою файла <literal role="extension"
+>.xml</literal
+>. </para>
+    <para
+>У файлі <literal role="extension"
+>.xml</literal
+> має міститися сама карта арени. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting>
+    </para>
+    <para
+>Обмежень на параметри <literal
+>rowCount</literal
+> (кількість рядків) та <literal
+>colCount</literal
+> (кількість стовпчиків) не передбачено, отже ви можете створити арену будь-яких розмірів. Для створення карти арени можна використовувати вказані нижче позначення. </para>
+    <para>
+      <programlisting
+>'=' — елемент стіни
+' ' — елементи ями
+'_' — елемент поверхні
+'+' — елемент блоку
+'x' — випадковий елемент (блок або поверхня)
+'-' — елемент льоду
+'o' — мортира
+'u' — стрілка вгору
+'r' — стрілка праворуч
+'d' — стрілка вниз
+'l' — стрілка ліворуч
+'p' — розташування гравця
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Подяки і ліцензія</title
+> <!-- do not change this! -->
+    <para
+>Гренадер </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Авторські права на програму належать Mathias Kraus <email
+>k.hias@gmx.de</email
+>, ©2009 </para>
+    <para
+>Авторські права на графіку програми належать Mathias Kraus <email
+>k.hias@gmx.de</email
+>, ©2009 </para>
+    <para
+>Авторські права на графіку програми належать Arturo Silva <email
+>jasilva28@gmail.com</email
+>, ©2009 </para>
+    <para
+>Авторські права на документацію до програми належать Mathias Kraus <email
+>k.hias@gmx.de</email
+>, ©2009 </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <para
+>Переклад українською: Юрій Чорноіван <email
+>yurchor@ukr.net</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->

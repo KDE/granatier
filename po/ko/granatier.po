@@ -1,0 +1,412 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Shinjo Park <kde@peremen.name>, 2014, 2015, 2019, 2020, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-20 00:42+0000\n"
+"PO-Revision-Date: 2022-07-13 14:14+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "박신조"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde@peremen.name"
+
+#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "%1 작성"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
+#: config/arenaselector.ui:36
+#, kde-format
+msgid "Random Mode"
+msgstr "무작위 모드"
+
+#. i18n: ectx: property (text), widget (QPushButton, getNewButton)
+#: config/arenaselector.ui:43
+#, kde-format
+msgid "&Get New Arenas..."
+msgstr "새 경기장 가져오기(&G)..."
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: config/generalsettings.ui:17
+#, kde-format
+msgid "Only for Artists! Won't be here at release"
+msgstr "예술가 전용! 릴리즈 때 없을 수도 있음"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllTiles)
+#: config/generalsettings.ui:23
+#, kde-format
+msgid " Show all tiles"
+msgstr " 모든 타일 표시"
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: config/generalsettings.ui:30
+#, kde-format
+msgid "Blast Time 2"
+msgstr "폭발 시간 3"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: config/generalsettings.ui:37
+#, kde-format
+msgid "Blast Time 3"
+msgstr "폭발 시간 1"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: config/generalsettings.ui:78
+#, kde-format
+msgid "Blast Time 1"
+msgstr "폭발 시간 1"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: config/generalsettings.ui:85
+#, kde-format
+msgid "Blast Time 5"
+msgstr "폭발 시간 5"
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: config/generalsettings.ui:106
+#, kde-format
+msgid "Blast Time 4"
+msgstr "폭발 시간 4"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: config/generalsettings.ui:131
+#, kde-format
+msgid "Points to win the game:"
+msgstr "승리 점수:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: config/generalsettings.ui:154
+#, kde-format
+msgid "Round Time in Seconds:"
+msgstr "초 단위 탄 시간:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: config/generalsettings.ui:177
+#, kde-format
+msgid "Initial Speed:"
+msgstr "초기 속도:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: config/generalsettings.ui:200
+#, kde-format
+msgid "Initial Bomb Power:"
+msgstr "초기 폭탄 폭발력:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: config/generalsettings.ui:223
+#, kde-format
+msgid "Initial Bomb Armory:"
+msgstr "초기 폭탄 저장고:"
+
+#. i18n: ectx: label, entry (FirstRun), group (General)
+#: config/granatier.kcfg:9
+#, kde-format
+msgid "Check if it is the first run of the game."
+msgstr "게임을 첫 번째로 실행할 경우 선택하십시오."
+
+#. i18n: ectx: label, entry (Theme), group (General)
+#: config/granatier.kcfg:13
+#, kde-format
+msgid "The graphical theme to be used."
+msgstr "사용할 그래픽 테마입니다."
+
+#. i18n: ectx: label, entry (Arena), group (General)
+#: config/granatier.kcfg:17
+#, kde-format
+msgid "The arena to be used."
+msgstr "사용할 경기장입니다."
+
+#. i18n: ectx: label, entry (RandomArenaMode), group (General)
+#: config/granatier.kcfg:21
+#, kde-format
+msgid "Use random arenas."
+msgstr "무작위 경기장을 사용합니다."
+
+#. i18n: ectx: label, entry (RandomArenaModeArenaList), group (General)
+#: config/granatier.kcfg:25
+#, kde-format
+msgid "List of arenas, used in random mode."
+msgstr "무작위 모드에서 사용할 경기장 목록입니다."
+
+#. i18n: ectx: label, entry (PointsToWin), group (General)
+#: config/granatier.kcfg:28
+#, kde-format
+msgid "The points a user needs to win the game."
+msgstr "게임에서 이기려면 따야 하는 점수입니다."
+
+#. i18n: ectx: label, entry (RoundTime), group (General)
+#: config/granatier.kcfg:32
+#, kde-format
+msgid "Time for a round."
+msgstr "각 탄별 시간입니다."
+
+#. i18n: ectx: label, entry (InitialSpeed), group (General)
+#: config/granatier.kcfg:36
+#, kde-format
+msgid "The initial speed."
+msgstr "초기 속도입니다."
+
+#. i18n: ectx: label, entry (InitialBombPower), group (General)
+#: config/granatier.kcfg:40
+#, kde-format
+msgid "The initial bomb power."
+msgstr "초기 폭탄 폭발력입니다."
+
+#. i18n: ectx: label, entry (InitialBombArmory), group (General)
+#: config/granatier.kcfg:44
+#, kde-format
+msgid "The initial bomb armory."
+msgstr "초기 폭탄 저장고입니다."
+
+#. i18n: ectx: label, entry (Sounds), group (General)
+#: config/granatier.kcfg:48
+#, kde-format
+msgid "Whether sound effects should be played."
+msgstr "소리 재생 여부입니다."
+
+#. i18n: ectx: label, entry (UseWilhelmScream), group (General)
+#: config/granatier.kcfg:52
+#, kde-format
+msgid "Whether to use the Wilhelm Scream for dying players."
+msgstr "플레이어가 죽을 때 빌헬름 함성을 사용할지 여부입니다."
+
+#. i18n: ectx: label, entry (Dummy), group (General)
+#: config/granatier.kcfg:56
+#, kde-format
+msgid "This is a dummy setting for player setup."
+msgstr "가짜 플레이어 설정입니다."
+
+#. i18n: ectx: label, entry (ShowAllTiles), group (General)
+#. i18n: ectx: label, entry (BlastTime1), group (General)
+#. i18n: ectx: label, entry (BlastTime2), group (General)
+#. i18n: ectx: label, entry (BlastTime3), group (General)
+#. i18n: ectx: label, entry (BlastTime4), group (General)
+#. i18n: ectx: label, entry (BlastTime5), group (General)
+#: config/granatier.kcfg:60 config/granatier.kcfg:64 config/granatier.kcfg:68
+#: config/granatier.kcfg:72 config/granatier.kcfg:76 config/granatier.kcfg:80
+#, kde-format
+msgid "This is only for the artists to make their life easier."
+msgstr "예술가들이 인생을 즐길 수 있도록 합니다."
+
+#: config/playerselectoritem.cpp:64
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Left:"
+msgstr "왼쪽:"
+
+#: config/playerselectoritem.cpp:73
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Up:"
+msgstr "위:"
+
+#: config/playerselectoritem.cpp:82
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Right:"
+msgstr "오른쪽:"
+
+#: config/playerselectoritem.cpp:91
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Down:"
+msgstr "아래:"
+
+#: config/playerselectoritem.cpp:100
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Bomb:"
+msgstr "폭탄:"
+
+#: gamescene.cpp:78
+#, kde-format
+msgid "0:00"
+msgstr "0:00"
+
+#: gamescene.cpp:83
+#, kde-format
+msgid "Arena Name"
+msgstr "경기장 이름"
+
+#: gamescene.cpp:811
+#, kde-format
+msgid "Sudden Death"
+msgstr "급사"
+
+#: infooverlay.cpp:51
+#, kde-format
+msgid "Press Space to continue"
+msgstr "Space 키를 눌러서 다시 시작하십시오"
+
+#: infooverlay.cpp:58
+#, kde-format
+msgid "Press Space to start a new Game"
+msgstr "Space 키를 눌러서 새 게임을 시작하십시오"
+
+#: infooverlay.cpp:68
+#, kde-format
+msgid "GET READY !!!"
+msgstr "준비하세요 !!!"
+
+#: infooverlay.cpp:73
+#, kde-format
+msgid "Press Space to start"
+msgstr "Space 키를 눌러서 시작하십시오"
+
+#: infooverlay.cpp:78
+#, kde-format
+msgid "PAUSED"
+msgstr "일시 정지됨"
+
+#: infooverlay.cpp:219
+#, kde-format
+msgid "The winner is %1"
+msgstr "%1 님이 이겼습니다!"
+
+#: main.cpp:77
+#, kde-format
+msgid "Granatier"
+msgstr "Granatier"
+
+#: main.cpp:79
+#, kde-format
+msgid "Granatier is a Bomberman Clone!"
+msgstr "Granatier는 봄버맨 클론입니다!"
+
+#: main.cpp:80
+#, kde-format
+msgid "Copyright (c) 2009-2015 The Granatier Team!"
+msgstr "Copyright (c) 2009-2015 The Granatier Team!"
+
+#: main.cpp:84
+#, kde-format
+msgid "Mathias Kraus"
+msgstr "Mathias Kraus"
+
+#: main.cpp:84
+#, kde-format
+msgid "Maintainer"
+msgstr "관리자"
+
+#: main.cpp:85
+#, kde-format
+msgid "Arturo Silva"
+msgstr "Arturo Silva"
+
+#: main.cpp:85
+#, kde-format
+msgid "Most of the beautiful granatier graphics"
+msgstr "Granatier 그래픽 디자인"
+
+#: main.cpp:86
+#, kde-format
+msgid "Thomas Gallinari"
+msgstr "Thomas Gallinari"
+
+#: main.cpp:86 main.cpp:87 main.cpp:88 main.cpp:89 main.cpp:90
+#, kde-format
+msgid "Developer of Kapman, which was the base of Granatier"
+msgstr "Granatier 기반이 되는 Kapman 개발자"
+
+#: main.cpp:87
+#, kde-format
+msgid "Pierre-Benoit Besse"
+msgstr "Pierre-Benoit Besse"
+
+#: main.cpp:88
+#, kde-format
+msgid "Romain Castan"
+msgstr "Romain Castan"
+
+#: main.cpp:89
+#, kde-format
+msgid "Alexandre Galinier"
+msgstr "Alexandre Galinier"
+
+#: main.cpp:90
+#, kde-format
+msgid "Nathalie Liesse"
+msgstr "Nathalie Liesse"
+
+#: mainwindow.cpp:66
+#, kde-format
+msgid "&Play sounds"
+msgstr "소리 재생(&P)"
+
+#: mainwindow.cpp:143
+#, kde-format
+msgid "Are you sure you want to quit the current game?"
+msgstr "현재 게임을 끝내시겠습니까?"
+
+#: mainwindow.cpp:144
+#, kde-format
+msgctxt "@title:window"
+msgid "New Game"
+msgstr "새 게임"
+
+#: mainwindow.cpp:145
+#, kde-format
+msgctxt "@action:button"
+msgid "Quit Game"
+msgstr "게임 끝내기"
+
+#: mainwindow.cpp:181
+#, kde-format
+msgctxt "General settings"
+msgid "General"
+msgstr "일반"
+
+#: mainwindow.cpp:185
+#, kde-format
+msgid "Theme"
+msgstr "테마"
+
+#: mainwindow.cpp:187
+#, kde-format
+msgid "Arena"
+msgstr "경기장"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Player"
+msgstr "플레이어"
+
+#: mainwindow.cpp:239
+#, kde-format
+msgid "Are you sure you want to quit Granatier?"
+msgstr "Granatier를 종료하시겠습니까?"
+
+#: mainwindow.cpp:240
+#, kde-format
+msgctxt "To quit Granatier"
+msgid "Quit"
+msgstr "끝내기"
+
+#~ msgid "Get New Players..."
+#~ msgstr "새 플레이어 가져오기..."
+
+#~ msgid "Import Clanbomber Arenas"
+#~ msgstr "Clanbomber 경기장 가져오기"
+
+#~ msgctxt "@title:window config dialog"
+#~ msgid "Select player"
+#~ msgstr "플레이어 선택"

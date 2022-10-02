@@ -1,0 +1,455 @@
+# translation of granatier.po to Galician
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Marce Villarino <mvillarino@users.sourceforge.net>, 2008, 2009.
+# marce villarino <mvillarino@users.sourceforge.net>, 2009.
+# Xosé <xosecalvo@gmail.com>, 2009, 2012.
+# Marce Villarino <mvillarino@kde-espana.es>, 2012, 2014.
+# Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2017.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+msgid ""
+msgstr ""
+"Project-Id-Version: granatier\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-20 00:42+0000\n"
+"PO-Revision-Date: 2019-01-01 13:29+0100\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Marce Villarino, Xosé Calvo"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "mvillarino@users.sourceforge.net, proxecto@trasno.gal"
+
+#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#, kde-format
+msgctxt "Author attribution, e.g. \"by Jack\""
+msgid "by %1"
+msgstr "por %1"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
+#: config/arenaselector.ui:36
+#, kde-format
+msgid "Random Mode"
+msgstr "Modo ao chou"
+
+#. i18n: ectx: property (text), widget (QPushButton, getNewButton)
+#: config/arenaselector.ui:43
+#, kde-format
+msgid "&Get New Arenas..."
+msgstr "&Obter escenarios novos…"
+
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: config/generalsettings.ui:17
+#, kde-format
+msgid "Only for Artists! Won't be here at release"
+msgstr "Só para artistas! Non estará aquí cando se publique"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllTiles)
+#: config/generalsettings.ui:23
+#, kde-format
+msgid " Show all tiles"
+msgstr " Mostrar todos os mosaicos"
+
+#. i18n: ectx: property (text), widget (QLabel, label_9)
+#: config/generalsettings.ui:30
+#, kde-format
+msgid "Blast Time 2"
+msgstr "Momento do estoupido 2"
+
+#. i18n: ectx: property (text), widget (QLabel, label_8)
+#: config/generalsettings.ui:37
+#, kde-format
+msgid "Blast Time 3"
+msgstr "Momento do estoupido 3"
+
+#. i18n: ectx: property (text), widget (QLabel, label_7)
+#: config/generalsettings.ui:78
+#, kde-format
+msgid "Blast Time 1"
+msgstr "Momento do estoupido 1"
+
+#. i18n: ectx: property (text), widget (QLabel, label_10)
+#: config/generalsettings.ui:85
+#, kde-format
+msgid "Blast Time 5"
+msgstr "Momento do estoupido 5"
+
+#. i18n: ectx: property (text), widget (QLabel, label_11)
+#: config/generalsettings.ui:106
+#, kde-format
+msgid "Blast Time 4"
+msgstr "Momento do estoupido 4"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: config/generalsettings.ui:131
+#, kde-format
+msgid "Points to win the game:"
+msgstr "Puntos para gañar a partida:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_3)
+#: config/generalsettings.ui:154
+#, kde-format
+msgid "Round Time in Seconds:"
+msgstr "Tempo da ronda en segundos:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: config/generalsettings.ui:177
+#, kde-format
+msgid "Initial Speed:"
+msgstr "Velocidade inicial:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_5)
+#: config/generalsettings.ui:200
+#, kde-format
+msgid "Initial Bomb Power:"
+msgstr "Potencia inicial da bomba:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_6)
+#: config/generalsettings.ui:223
+#, kde-format
+msgid "Initial Bomb Armory:"
+msgstr "Armamento inicial da bomba:"
+
+#. i18n: ectx: label, entry (FirstRun), group (General)
+#: config/granatier.kcfg:9
+#, kde-format
+msgid "Check if it is the first run of the game."
+msgstr "Comprobar se é a primeira vez que se executa o xogo."
+
+#. i18n: ectx: label, entry (Theme), group (General)
+#: config/granatier.kcfg:13
+#, kde-format
+msgid "The graphical theme to be used."
+msgstr "O tema gráfico a usar."
+
+#. i18n: ectx: label, entry (Arena), group (General)
+#: config/granatier.kcfg:17
+#, kde-format
+msgid "The arena to be used."
+msgstr "O escenario que se vai utilizar."
+
+#. i18n: ectx: label, entry (RandomArenaMode), group (General)
+#: config/granatier.kcfg:21
+#, kde-format
+msgid "Use random arenas."
+msgstr "Empregar escenarios ao chou."
+
+#. i18n: ectx: label, entry (RandomArenaModeArenaList), group (General)
+#: config/granatier.kcfg:25
+#, kde-format
+msgid "List of arenas, used in random mode."
+msgstr "Lista de escenarios; emprégase no modo ao chou."
+
+#. i18n: ectx: label, entry (PointsToWin), group (General)
+#: config/granatier.kcfg:28
+#, kde-format
+msgid "The points a user needs to win the game."
+msgstr "Os puntos que precisa un usuario para gañar a partida."
+
+#. i18n: ectx: label, entry (RoundTime), group (General)
+#: config/granatier.kcfg:32
+#, kde-format
+msgid "Time for a round."
+msgstr "Tempo para unha ronda."
+
+#. i18n: ectx: label, entry (InitialSpeed), group (General)
+#: config/granatier.kcfg:36
+#, kde-format
+msgid "The initial speed."
+msgstr "A velocidade inicial."
+
+#. i18n: ectx: label, entry (InitialBombPower), group (General)
+#: config/granatier.kcfg:40
+#, kde-format
+msgid "The initial bomb power."
+msgstr "A potencia inicial da bomba."
+
+#. i18n: ectx: label, entry (InitialBombArmory), group (General)
+#: config/granatier.kcfg:44
+#, kde-format
+msgid "The initial bomb armory."
+msgstr "O armamento inicial da bomba."
+
+#. i18n: ectx: label, entry (Sounds), group (General)
+#: config/granatier.kcfg:48
+#, kde-format
+msgid "Whether sound effects should be played."
+msgstr "Indica se deben reproducirse os efectos de son."
+
+#. i18n: ectx: label, entry (UseWilhelmScream), group (General)
+#: config/granatier.kcfg:52
+#, kde-format
+msgid "Whether to use the Wilhelm Scream for dying players."
+msgstr "Se se quere utilizar o Grito de Wilhelm para os xogadores que morren."
+
+#. i18n: ectx: label, entry (Dummy), group (General)
+#: config/granatier.kcfg:56
+#, kde-format
+msgid "This is a dummy setting for player setup."
+msgstr "Esta é unha configuración de proba para a configuración dos xogadores."
+
+#. i18n: ectx: label, entry (ShowAllTiles), group (General)
+#. i18n: ectx: label, entry (BlastTime1), group (General)
+#. i18n: ectx: label, entry (BlastTime2), group (General)
+#. i18n: ectx: label, entry (BlastTime3), group (General)
+#. i18n: ectx: label, entry (BlastTime4), group (General)
+#. i18n: ectx: label, entry (BlastTime5), group (General)
+#: config/granatier.kcfg:60 config/granatier.kcfg:64 config/granatier.kcfg:68
+#: config/granatier.kcfg:72 config/granatier.kcfg:76 config/granatier.kcfg:80
+#, kde-format
+msgid "This is only for the artists to make their life easier."
+msgstr "Isto é só para lles facilitar a vida aos deseñadores."
+
+#: config/playerselectoritem.cpp:64
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Left:"
+msgstr "Esquerda:"
+
+#: config/playerselectoritem.cpp:73
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Up:"
+msgstr "Arriba:"
+
+#: config/playerselectoritem.cpp:82
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Right:"
+msgstr "Dereita:"
+
+#: config/playerselectoritem.cpp:91
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Down:"
+msgstr "Abaixo:"
+
+#: config/playerselectoritem.cpp:100
+#, kde-format
+msgctxt "Label for the key sequence to move the player."
+msgid "Bomb:"
+msgstr "Bomba:"
+
+#: gamescene.cpp:78
+#, kde-format
+msgid "0:00"
+msgstr "0:00"
+
+#: gamescene.cpp:83
+#, kde-format
+msgid "Arena Name"
+msgstr "Nome do escenario"
+
+#: gamescene.cpp:811
+#, kde-format
+msgid "Sudden Death"
+msgstr "Morte súbita"
+
+#: infooverlay.cpp:51
+#, kde-format
+msgid "Press Space to continue"
+msgstr "Preme a barra espazadora para continuar"
+
+#: infooverlay.cpp:58
+#, kde-format
+msgid "Press Space to start a new Game"
+msgstr "Preme a barra espazadora para comezar unha partida nova"
+
+#: infooverlay.cpp:68
+#, kde-format
+msgid "GET READY !!!"
+msgstr "PREPÁRATE!!!"
+
+#: infooverlay.cpp:73
+#, kde-format
+msgid "Press Space to start"
+msgstr "Preme a barra espazadora para comezar"
+
+#: infooverlay.cpp:78
+#, kde-format
+msgid "PAUSED"
+msgstr "EN PAUSA"
+
+#: infooverlay.cpp:219
+#, kde-format
+msgid "The winner is %1"
+msgstr "O gañador é %1"
+
+#: main.cpp:77
+#, kde-format
+msgid "Granatier"
+msgstr "Granatier"
+
+#: main.cpp:79
+#, kde-format
+msgid "Granatier is a Bomberman Clone!"
+msgstr "Granatier é un clon do Bomberman!"
+
+#: main.cpp:80
+#, kde-format
+msgid "Copyright (c) 2009-2015 The Granatier Team!"
+msgstr "© 2009-2015 O equipo de Granatier"
+
+#: main.cpp:84
+#, kde-format
+msgid "Mathias Kraus"
+msgstr "Mathias Kraus"
+
+#: main.cpp:84
+#, kde-format
+msgid "Maintainer"
+msgstr "Mantedor"
+
+#: main.cpp:85
+#, kde-format
+msgid "Arturo Silva"
+msgstr "Arturo Silva"
+
+#: main.cpp:85
+#, kde-format
+msgid "Most of the beautiful granatier graphics"
+msgstr "A meirande parte dos fermosos gráficos de Granatier."
+
+#: main.cpp:86
+#, kde-format
+msgid "Thomas Gallinari"
+msgstr "Thomas Gallinari"
+
+#: main.cpp:86 main.cpp:87 main.cpp:88 main.cpp:89 main.cpp:90
+#, kde-format
+msgid "Developer of Kapman, which was the base of Granatier"
+msgstr "Desenvolvedor de Kapman, que foi a base de Granatier"
+
+#: main.cpp:87
+#, kde-format
+msgid "Pierre-Benoit Besse"
+msgstr "Pierre-Benoit Besse"
+
+#: main.cpp:88
+#, kde-format
+msgid "Romain Castan"
+msgstr "Romain Castan"
+
+#: main.cpp:89
+#, kde-format
+msgid "Alexandre Galinier"
+msgstr "Alexandre Galinier"
+
+#: main.cpp:90
+#, kde-format
+msgid "Nathalie Liesse"
+msgstr "Nathalie Liesse"
+
+#: mainwindow.cpp:66
+#, kde-format
+msgid "&Play sounds"
+msgstr "&Reproducir os sons"
+
+#: mainwindow.cpp:143
+#, kde-format
+msgid "Are you sure you want to quit the current game?"
+msgstr "Seguro que queres saír da partida actual?"
+
+#: mainwindow.cpp:144
+#, fuzzy, kde-format
+#| msgid "New game"
+msgctxt "@title:window"
+msgid "New Game"
+msgstr "Nova partida"
+
+#: mainwindow.cpp:145
+#, fuzzy, kde-format
+#| msgctxt "To quit Granatier"
+#| msgid "Quit"
+msgctxt "@action:button"
+msgid "Quit Game"
+msgstr "Saír"
+
+#: mainwindow.cpp:181
+#, kde-format
+msgctxt "General settings"
+msgid "General"
+msgstr "Xeral"
+
+#: mainwindow.cpp:185
+#, kde-format
+msgid "Theme"
+msgstr "Tema"
+
+#: mainwindow.cpp:187
+#, kde-format
+msgid "Arena"
+msgstr "Escenario"
+
+#: mainwindow.cpp:189
+#, kde-format
+msgid "Player"
+msgstr "Xogador"
+
+#: mainwindow.cpp:239
+#, kde-format
+msgid "Are you sure you want to quit Granatier?"
+msgstr "Seguro que queres saír de Granatier?"
+
+#: mainwindow.cpp:240
+#, kde-format
+msgctxt "To quit Granatier"
+msgid "Quit"
+msgstr "Saír"
+
+#~ msgid "Get New Players..."
+#~ msgstr "Obter xogadores novos…"
+
+#~ msgid "Import Clanbomber Arenas"
+#~ msgstr "Importar escenarios do Clanbomber"
+
+#~ msgctxt "@title:window config dialog"
+#~ msgid "Select player"
+#~ msgstr "Escoller un xogador"
+
+#, fuzzy
+#~| msgid "&Get New Arenas..."
+#~ msgid "Get New Themes..."
+#~ msgstr "&Obter escenarios novos..."
+
+#~ msgid "Preview"
+#~ msgstr "Previsualización"
+
+#~ msgid "Arena Details"
+#~ msgstr "Detalles do escenario"
+
+#~ msgid "Contact:"
+#~ msgstr "Contacto:"
+
+#~ msgid "Description:"
+#~ msgstr "Descrición:"
+
+#~ msgid "Author:"
+#~ msgstr "Autor:"
+
+#~ msgid "Player Details"
+#~ msgstr "Detalles do xogador"
+
+#~ msgid "Shortcuts"
+#~ msgstr "Atallos"
+
+#~ msgid "Move Left"
+#~ msgstr "Mover á esquerda"
+
+#~ msgid "Move Up"
+#~ msgstr "Subir"
+
+#~ msgid "Move Down"
+#~ msgstr "Baixar"

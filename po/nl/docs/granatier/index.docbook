@@ -1,0 +1,705 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Dutch "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>Het handboek van &granatier;</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    &Freek.de.Kruijf;&Ronald.Stroethoff; 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>2021-06-23</date>
+    <releaseinfo
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
+    
+    <abstract>
+      <para
+>Deze documentatie beschrijft het spel &granatier; versie 1.4.2</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>kdegames</keyword
+> <!-- do not change this! -->
+      <keyword
+>spel</keyword
+> <!-- do not change this! -->
+      <keyword
+>Granatier</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>arcade</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>meer dan één speler</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Inleiding</title
+> <!-- do not change this! -->
+    <note
+><title
+>Speltype:</title
+><para
+>Arcade</para
+></note>
+    <note
+><title
+>Aantal mogelijke spelers:</title
+><para
+>Meer dan één speler</para
+></note>
+    <para
+>&granatier; is een kloon van het klassieke spel &nbsp;<trademark
+><application
+>Bomberman</application
+></trademark
+>, geïnspireerd door het werk van de kloon <application
+>Clanbomber</application
+>. </para>
+    <para
+>Het doel van het spel is om door een arena te gaan, bommen gebruikend om blokken te verwijderen en uw tegenstanders te elimineren. Verschillende bonussen en handicaps liggen verborgen onder de blokken &ndash; deze kunnen bij uw voortgang helpen of hinderen. </para>
+    <screenshot>
+      <screeninfo
+>Een schermafbeelding van &granatier;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>Een schermafbeelding van &granatier;</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Hoe te spelen</title
+> <!-- do not change this! -->
+    <note
+><title
+>Doel:</title
+><para
+>Elimineer alle tegenstanders.</para
+></note>
+    <para
+>Elke speler is uitgerust met vijf toetsen om zijn karakter te verplaatsen en bommen te leggen. Bijvoorbeeld de standaard toetsen voor speler 1 zijn de pijltjestoetsen &Up;, &Down;, &Left; en &Right; om in de respectievelijke richtingen te bewegen, en de toets &Enter; om een bom te leggen. Lees de sectie <link linkend="config_player"
+>Spelerconfiguratie</link
+> voor meer informatie over de sneltoetsen voor de andere spelers en hoe u deze kunt aanpassen. </para>
+    <para
+>Het doel van het leggen van bommen, naast het aanvallen van andere deelnemers, is het vernietigen van de vele in de arena verspreidde blokken om een doorgang te maken en om verborgen bonussen vrij te maken. Tussen de vele bonussen die vrijgemaakt kunnen worden, zijn er ook waardoor u sneller kunt gaan of waardoor uw bommen krachtiger worden; Als u meer bonussen van dit type verzamelt dan is het ook makkelijker om uw tegenstanders uit te schakelen en de speelronde te winnen. Maar wees gewaarschuwd dat er ook net zoveel handicaps bestaan waardoor het u ook kan tegenwerken zoals dat het u langzamer maakt of de werking van uw toetsen omkeert. </para>
+    <para
+>De speler krijgt voor elke gewonnen ronde een punt. De eerste speler die een ingesteld aantal punten wint (standaard is dit 3), wint het spel! </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Spelregels, strategieën en tips</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>De items</title>
+    <sect2>
+      <title
+>De arena</title>
+      <para
+>De spelers zijn in een arena die bestaat uit: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arena-muur</phrase
+> </textobject>
+        </inlinemediaobject
+>De muur &ndash; deze definieert de buitenkant van de arena en kunt u niet vernietigen. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arena-bodem</phrase
+> </textobject>
+        </inlinemediaobject
+>De bodem &ndash; hier kunt u veilig op lopen. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arena-ijs</phrase
+> </textobject>
+        </inlinemediaobject
+>Het ijs &ndash; dit maakt de bodem glad. Op het ijs is de snelheid groter en u kunt niet compleet tot stilstand komen. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arena-blok</phrase
+> </textobject>
+        </inlinemediaobject
+>Het blok &ndash; dit kunt u vernietigen met een bom en kan een bonus bevatten (of een handicap). </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arena-bom-mortier</phrase
+> </textobject>
+        </inlinemediaobject
+>De bom-mortier &ndash; deze schiet de erop geplaatste bommen af naar willekeurige plekken. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Arena-pijl rechts</phrase
+> </textobject>
+        </inlinemediaobject
+>De pijlen &ndash; deze verplaatsen de erop geplaatste bommen in de richting waarnaar ze wijzen. </para>
+      <para
+>Als er geen van bovengenoemde items aanwezig is dan is er een gat in de bodem en erin gaan betekent dat u heel diep valt en sterft. Hetzelfde gebeurt ook als er geen muur langs de rand van de arena aanwezig is en de speler buiten de arena gaat. </para>
+    </sect2>
+    <sect2>
+      <title
+>De bonussen</title>
+      <para
+>Bonussen kunnen helpen bij het bereiken van het speldoel en de effecten zijn permanent - zelfs als een handicap verdwijnt. Op dit moment zijn er de volgende bonussen: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus snelheid</phrase
+> </textobject>
+        </inlinemediaobject
+>Snelheid &ndash; verhoogt uw snelheid een beetje. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus bom</phrase
+> </textobject>
+        </inlinemediaobject
+>Bom &ndash; voegt een extra bom aan uw arsenaal toe, hierdoor kunt u meer dan één bom tegelijk leggen. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus kracht</phrase
+> </textobject>
+        </inlinemediaobject
+>Kracht &ndash; vergroot de kracht van uw bommen, het bereik van het explosiegebied wordt uitgebreid. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus schild</phrase
+> </textobject>
+        </inlinemediaobject
+>Schild &ndash; beschermt u tegen een bomontploffing. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus werpen</phrase
+> </textobject>
+        </inlinemediaobject
+>Werpen &ndash; geeft de mogelijkheid om bommen te werpen. Gewoon op de toets voor bommen werpen drukken als u boven op een bom staat. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonus schoppen</phrase
+> </textobject>
+        </inlinemediaobject
+>Schoppen &ndash; geeft de mogelijkheid tot het verplaatsen van bommen. Ren gewoon naar een bom en de bom zal zich verplaatsen. </para>
+    </sect2>
+    <sect2>
+      <title
+>De handicaps</title>
+      <para
+>Handicaps zijn het tegenovergestelde van bonussen en hinderen de speler. Het goede ervan is dat de effecten na enige tijd weer verdwijnen (in tegenstelling tot bonussen) zodat de speler weer met zijn normale gedrag kan spelen (inclusief de bonussen). Op dit moment zijn er de volgende handicaps: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handicap langzaam</phrase
+> </textobject>
+        </inlinemediaobject
+>Langzaam &ndash; maakt dat u erg langzaam beweegt. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handicap hyperactief</phrase
+> </textobject>
+        </inlinemediaobject
+>Hyperactief &ndash;  maakt dat u een beetje TE snel beweegt. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handicap spiegel</phrase
+> </textobject>
+        </inlinemediaobject
+>Spiegel &ndash; spiegelt uw beweeg-toetsen, zodat omhoog in omlaag verandert en links in rechts. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handicap warhoofd</phrase
+> </textobject>
+        </inlinemediaobject
+>Warhoofd &ndash; dwingt u tot het continu zonder controle bommen leggen. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Handicap boeien</phrase
+> </textobject>
+        </inlinemediaobject
+>Boeien &ndash; voorkomt dat u bommen kunt leggen. </para>
+    </sect2>
+    <sect2>
+      <title
+>De neutrale items</title>
+      <para
+>Dit soort bonussen zijn niet goed en niet slecht, meestal hangt dit van de omgeving af. Op dit moment zijn er de volgende neutrale bonussen: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Neutrale bonus pandora</phrase
+> </textobject>
+        </inlinemediaobject
+>Pandora &ndash; dit bevat ofwel een bonus of een handicap. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Neutrale bonus opwekken</phrase
+> </textobject>
+        </inlinemediaobject
+>Opwekken &ndash; dit doet elke dode speler opstaan. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="interface"
+><title
+>Overzicht van het interface</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Menu-items</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Spel</guimenu
+> <guimenuitem
+>Nieuw</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Start</action
+> een nieuw spel.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Spel</guimenu
+> <guimenuitem
+>Afsluiten</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Sluit af</action
+> &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Instellingen</guimenu
+> <guimenuitem
+>Geluiden afspelen</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Bepaalt of geluiden worden afgespeeld</action
+>. Standaard is aan. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>Bovendien heeft &granatier; de gezamenlijke menu-items van &kde; <guimenu
+>Instellingen</guimenu
+> en <guimenu
+>Help</guimenu
+>, voor meer informatie lees de secties over de <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Menu-instellingen</ulink
+> en <ulink url="help:/fundamentals/menus.html#menus-help"
+>Menu Help</ulink
+> van &kde;-fundamentals. </para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Spelconfiguratie</title
+> <!-- do not change this! -->
+    <para
+>Om het configuratievenster te openen, selecteert u menu-item <menuchoice
+><guimenu
+>Instellingen</guimenu
+><guimenuitem
+>&granatier; configureren...</guimenuitem
+></menuchoice
+> </para>
+    <sect1 id="config_general">
+      <title
+>Algemeen</title>
+      <para
+>U kunt het puntenaantal instellen dat nodig is om de spelronde te winnen evenals de speeltijd voor een speelronde. Nadat deze tijd is afgelopen zal de modus 'plotselinge dood' starten. </para>
+      <para
+>Daarnaast kunt u de beginsnelheid, het bereik van de bommen en de kracht van de bommen instellen. </para>
+      <screenshot>
+        <screeninfo
+>Een schermafdruk van de configuratie van &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Een schermafdruk van de configuratie van &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Thema</title>
+      <para
+>Om het thema te selecteren dat u wilt toepassen, gaat u naar de thema-sectie. U laadt het gekozen thema door te klikken op &nbsp;<guibutton
+>OK</guibutton
+> of <guibutton
+>Toepassen</guibutton
+>. Het huidige spel zal eindigen en een nieuwe opgestart. Als u klikt op de knop &nbsp;<guibutton
+>Standaard</guibutton
+> dan laadt u het standaard thema weer. </para>
+      <screenshot>
+        <screeninfo
+>Een schermafdruk van de configuratie van &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Een schermafdruk van de configuratie van &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Arena</title>
+      <para
+>Om de arena te selecteren die u wilt spelen, gaat u naar de arena-sectie. U laadt de gekozen arena door te klikken op &nbsp;<guibutton
+>OK</guibutton
+> of <guibutton
+>Toepassen</guibutton
+>. Het huidige spel zal eindigen en een nieuwe wordt opgestart. Als u klikt op de knop &nbsp;<guibutton
+>Standaard</guibutton
+> dan laadt u de standaard arena weer. </para>
+      <para
+>Als u eigengemaakte <application
+>Clanbomber</application
+> arena's heeft dan kunt u ze kopiëren naar <filename class="directory"
+>~/.clanbomber/maps</filename
+>, waar &granatier; ze zal gaan zoeken. De standaard arena's van <application
+>Clanbomber</application
+>  zijn al meegeleverd met &granatier;. </para>
+      <screenshot>
+        <screeninfo
+>Een schermafdruk van de configuratie van &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Een schermafdruk van de configuratie van &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Door het selecteren van <guibutton
+>Willekeurige modus</guibutton
+> speelt u bij elke nieuwe speelronde in een willekeurige arena . Arena's die u niet wilt spelen kunt deactiveren. </para>
+      <screenshot>
+        <screeninfo
+>Een schermafdruk van de configuratie van &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Een schermafdruk van de configuratie van &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Speler</title>
+      <para
+>Om de speler te selecteren die u wenst te spelen, gaat u naar de spelers-sectie en selecteert u de spelers met de hulp van de keuzevakjes. U kunt de sneltoetsen wijzigen door te klikken op de knop voor met de beschrijving van de actie die u wilt wijzigen en vervolgens de gewenste toetsaanslagen in te voeren. U laadt de wijzigingen door te klikken op &nbsp;<guibutton
+>OK</guibutton
+> of <guibutton
+>Toepassen</guibutton
+>. Het huidige spel zal eindigen en een nieuwe wordt opgestart. Als u klikt op de knop &nbsp;<guibutton
+>Standaard</guibutton
+> dan laadt u de standaard sneltoetsen weer. </para>
+      <screenshot>
+        <screeninfo
+>Een schermafdruk van de configuratie van &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Een schermafdruk van de configuratie van &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Een eigen arena aanmaken</title
+> <!-- do not change this! -->
+    <para
+>In &granatier; bestaat een arena uit twee bestanden, <filename
+>mijnarena.desktop</filename
+>&nbsp; en <filename
+>mijnarena.xml</filename
+>. </para>
+
+    <para
+>Het <literal role="extension"
+>.desktop</literal
+>-bestand bevat de metagegevens zoals de arenanaam of de auteur van de arena en bestaat uit de volgende items. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name=Mijn arena
+Description=Dit is mijn eerste arena
+Type=XML
+FileName=mijnarena.xml
+Author=Jan Gebruiker
+AuthorEmail=jan.gebruiker@foo.org
+      </programlisting>
+    </para>
+    <para
+>U kunt elke die u wilt kiezen, maar &nbsp;<literal
+>FileName</literal
+> moet de naam van het <literal role="extension"
+>.xml</literal
+>-bestand zijn. </para>
+    <para
+>Het <literal role="extension"
+>.xml</literal
+>-bestand bevat de actuele arena-kaart. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting>
+    </para>
+    <para
+>Er zijn geen grenzen voor <literal
+>rowCount</literal
+> en <literal
+>colCount</literal
+>, U kunt dus zelf de afmetingen van de arena bepalen. De volgende symbolen kunt u voor de arena-kaart gebruiken. </para>
+    <para>
+      <programlisting
+>'=' een muur-item
+' ' een gat-item
+'_' een bodem-item
+'+' een blok-item
+'x' zal willekeurig een blok- of een bodem-item plaatsen
+'-' een ijs-item
+'o' een mortier-item
+'u' een pijl omhoog
+'r' een pijl naar rechts
+'d' een pijl omlaag
+'l' een pijl naar links
+'p' een spelers startpunt
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Dankbetuiging en licentie</title
+> <!-- do not change this! -->
+    <para
+>&granatier; </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Programma copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Grafisch copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Grafisch copyright 2009 Arturo Silva <email
+>jasilva28@gmail.com</email
+> </para>
+    <para
+>Documentatie copyright 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  &meld.fouten;&vertaling.freek;&vertaling.ronald;&nagelezen.freek; &underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->

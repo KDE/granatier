@@ -1,0 +1,723 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Russian "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>Руководство пользователя &granatier;</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    <othercredit role="translator"
+><firstname
+>Олеся</firstname
+><surname
+>Герасименко</surname
+><affiliation
+><address
+><email
+>translation-team@basealt.ru</email
+></address
+></affiliation
+><contrib
+>Перевод на русский язык</contrib
+></othercredit
+> 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>2021-06-23</date>
+    <releaseinfo
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
+    
+    <abstract>
+      <para
+>Это руководство описывает игру &granatier; версии 1.4.2.</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>игры kde</keyword
+> <!-- do not change this! -->
+      <keyword
+>игра</keyword
+> <!-- do not change this! -->
+      <keyword
+>Granatier</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>аркада</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>многопользовательский режим</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Введение</title
+> <!-- do not change this! -->
+    <note
+><title
+>Жанр:</title
+><para
+>Аркады</para
+></note>
+    <note
+><title
+>Количество игроков:</title
+><para
+>Многопользовательский режим</para
+></note>
+    <para
+>&granatier; — клон классической игры &nbsp;<trademark
+><application
+>Bomberman</application
+></trademark
+>, вобравший в себя некоторые особенности <application
+>Clanbomber</application
+>, другого клона той же игры. </para>
+    <para
+>Цель игры — пробежать по арене, используя бомбы для уничтожения блоков и устранения противников. Под блоками скрываются бонусы и препятствия; они могут как помочь, так и помешать в прохождении игры. </para>
+    <screenshot>
+      <screeninfo
+>Окно &granatier;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>Окно &granatier;</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Правила игры</title
+> <!-- do not change this! -->
+    <note
+><title
+>Цель:</title
+><para
+>Уничтожить всех противников.</para
+></note>
+    <para
+>Каждому игроку предоставляется пять клавиш для перемещения персонажа и закладки бомб. Например, по умолчанию Игрок 1 использует клавиши со стрелками &Up;, &Down;, &Left; и &Right; для перемещения, а также клавишу &Enter; для закладки бомбы. В разделе, посвящённом <link linkend="config_player"
+>настройке параметров игрока</link
+>, приводится перечень клавиш для других игроков, а также сведения об их настройке. </para>
+    <para
+>Целью закладки бомб, кроме нанесения ущерба противникам, является уничтожениемаксимального количества блоков, разбросанных на арене, чтобы расчистить путьили добраться до скрытых бонусов. Среди бонусов игры ускорение игрока иувеличение мощности заложенных им бомб. Чем больше будет собрано бонусов,тем проще будет устранить противников и выиграть раунд. Но в игрепредусмотрены также и препятствия, в частности инверсия клавишперемещения или замедление игрока. </para>
+    <para
+>За каждый выигранный раунд игроку присуждается очко. Тот игрок, который первым получит заранее определённое количество очков (по умолчанию — 3), побеждает! </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Правила игры, стратегии и советы</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>Элементы</title>
+    <sect2>
+      <title
+>Арена</title>
+      <para
+>Игроки находятся на арене, которая содержит следующие элементы: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Стена арены</phrase
+> </textobject>
+        </inlinemediaobject
+>Стена определяет контур карты арены и не может быть разрушена. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Поверхность арены</phrase
+> </textobject>
+        </inlinemediaobject
+>По поверхности можно безопасно перемещаться. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Лёд на арене</phrase
+> </textobject>
+        </inlinemediaobject
+>Лёд делает поверхность скользкой. На льду увеличивается скорость и невозможно полностью прекратить движение. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Блок на арене</phrase
+> </textobject>
+        </inlinemediaobject
+>Блок можно разрушить с помощью бомбы. Блок может содержать бонус (или препятствие). </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Мортира на арене</phrase
+> </textobject>
+        </inlinemediaobject
+>Мортира — бросает помещённые на неё бомбы в случайные места. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Стрелка вправо на арене</phrase
+> </textobject>
+        </inlinemediaobject
+>Стрелки — перемещают заложенные на них бомбы в том направлении, в котором указывают. </para>
+      <para
+>Если элемент арены не относится ни к одному из указанных выше типов, он представляет собой яму. Перемещение в яму приведёт к падению и гибели. Аналогичная участь ждёт игрока, который попадёт за неограниченный стеной край арены. </para>
+    </sect2>
+    <sect2>
+      <title
+>Бонусы</title>
+      <para
+>Бонусы помогают выиграть, при этом их эффекты являются постоянными (действуют даже после исчезновения препятствия). Доступны следующие бонусы: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонусная скорость</phrase
+> </textobject>
+        </inlinemediaobject
+>Скорость — немного увеличивает скорость игрока. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонусная бомба</phrase
+> </textobject>
+        </inlinemediaobject
+>Бомба — добавляет в арсенал игрока дополнительную бомбу, что позволяет заложить больше одной бомбы за раз. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонусная мощность</phrase
+> </textobject>
+        </inlinemediaobject
+>Мощность — увеличивает мощность бомб, расширяя их диапазон взрыва. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонусный щит</phrase
+> </textobject>
+        </inlinemediaobject
+>Щит делает игрока неуязвимым перед одним взрывом. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонусный бросок</phrase
+> </textobject>
+        </inlinemediaobject
+>Бросок — добавляет способность бросать бомбы. Просто нажмите клавишу закладки бомб, когда бомба находится под вами. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Бонусный удар</phrase
+> </textobject>
+        </inlinemediaobject
+>Удар — добавляет способность перемещать бомбы. Просто бегите на бомбу, чтобы её переместить. </para>
+    </sect2>
+    <sect2>
+      <title
+>Препятствия</title>
+      <para
+>Препятствия представляют собой противоположность бонусам и мешают игроку. К счастью, со временем они исчезают, позволяя игроку продолжить игру в обычном режиме (включая бонусы). Предусмотрены следующие препятствия: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Препятствие замедления</phrase
+> </textobject>
+        </inlinemediaobject
+>Замедление — заставляет игрока двигаться очень медленно. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Препятствие гиперактивности</phrase
+> </textobject>
+        </inlinemediaobject
+>Гиперактивность — заставляет игрока перемещаться СЛИШКОМ быстро. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Препятствие зеркала</phrase
+> </textobject>
+        </inlinemediaobject
+>Зеркало — инвертирует клавиши перемещения (при нажатии клавиши «вверх» выполняется перемещение вниз, а при нажатии клавиши «влево» — вправо). </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Препятствие безумства</phrase
+> </textobject>
+        </inlinemediaobject
+>Безумство — заставляет игрока постоянно бесконтрольно закладывать бомбы. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Препятствие пут</phrase
+> </textobject>
+        </inlinemediaobject
+>Путы — не дают игроку закладывать бомбы. </para>
+    </sect2>
+    <sect2>
+      <title
+>Нейтральные элементы</title>
+      <para
+>Бонусы этого типа нельзя отнести к хорошим или плохим, всё зависит от окружающей среды. Доступны следующие нейтральные бонусы: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Нейтральный бонус Пандоры</phrase
+> </textobject>
+        </inlinemediaobject
+>Пандора — содержит либо бонус, либо препятствие. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Нейтральный бонус воскрешения</phrase
+> </textobject>
+        </inlinemediaobject
+>Воскрешение — позволяет воскресить любого погибшего игрока. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="interface"
+><title
+>Обзор интерфейса</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Пункты меню</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Игра</guimenu
+> <guimenuitem
+>Начать игру</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Начинает</action
+> новую игру.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Игра</guimenu
+> <guimenuitem
+>Выход</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Выход</action
+> из &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Настройка</guimenu
+> <guimenuitem
+>Проигрывать звуки</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Включить или отключить воспроизведение звуков.</action
+> По умолчанию этот параметр включён. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>Также &granatier; содержит общие для приложений &kde; пункты меню <guimenu
+>Настройка</guimenu
+> и <guimenu
+>Справка</guimenu
+>. Информацию о них можно найти в разделах документации о <ulink url="help:/fundamentals/ui.html#menus-settings"
+>меню «Настройка»</ulink
+> и <ulink url="help:/fundamentals/menus.html#menus-help"
+>меню «Справка»</ulink
+>. </para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Настройка игры</title
+> <!-- do not change this! -->
+    <para
+>Чтобы открыть диалог настройки, выберите пункт меню <menuchoice
+><guimenu
+>Настройка</guimenu
+><guimenuitem
+>Настроить &granatier;...</guimenuitem
+></menuchoice
+>. </para>
+    <sect1 id="config_general">
+      <title
+>Общие</title>
+      <para
+>Возможно изменить количество очков, которое требуется набрать для победы в игре, и время раунда. По истечении указанного времени будет включён режим неожиданной смерта. </para>
+      <para
+>Кроме того, возможно настроить начальную скорость, диапазон взрыва бомб и количество бомб. </para>
+      <screenshot>
+        <screeninfo
+>Окно настройки &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Окно настройки &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Оформление</title>
+      <para
+>Для выбора оформления следует перейти в раздел «Оформление». Оформление будет загружено после нажатия кнопки &nbsp;<guibutton
+>OK</guibutton
+> или <guibutton
+>Применить</guibutton
+>. Затем текущая игра будет завершена, и начнётся новая. Чтобы восстановить оформление по умолчанию, нажмите кнопку &nbsp;<guibutton
+>По умолчанию</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>Окно настройки &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Окно настройки &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Арена</title>
+      <para
+>Для выбора арены следует перейти в раздел «Арена». Арена будет загружена после нажатия кнопки &nbsp;<guibutton
+>OK</guibutton
+> или <guibutton
+>Применить</guibutton
+>. Затем текущая игра будет завершена, и начнётся новая. Чтобы восстановить арену по умолчанию, нажмите кнопку &nbsp;<guibutton
+>По умолчанию</guibutton
+>. </para>
+      <para
+>Если у пользователя есть созданные им арены <application
+>Clanbomber</application
+>, можно сохранить их в каталоге <filename class="directory"
+>~/.clanbomber/maps</filename
+> (там их найдёт программа &granatier;). Стандартные арены <application
+>Clanbomber</application
+> уже являются частью пакета &granatier;. </para>
+      <screenshot>
+        <screeninfo
+>Окно настройки &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Окно настройки &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Если выбран <guibutton
+>Случайный режим</guibutton
+>, для каждого нового раунда будет случайным образом выбираться арена. Если имеются арены, на которых не следует играть, просто снимите соответствующие флажки. </para>
+      <screenshot>
+        <screeninfo
+>Окно настройки &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Окно настройки &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Игрок</title>
+      <para
+>Чтобы выбрать игрока, перейдите в раздел «Игрок» и установите соответствующий флажок. Клавиши управления игроком можно изменить: нажмите кнопку, соответствующую той клавише, которую нужно изменить, и затем нажмите ту клавишу, которую следует использовать. Изменения вступят в силу после нажатия кнопки &nbsp;<guibutton
+>OK</guibutton
+> или <guibutton
+>Применить</guibutton
+>. После этого текущая игра будет завершена, и начнётся новая. Чтобы восстановить клавиши по умолчанию, нажмите кнопку &nbsp;<guibutton
+>По умолчанию</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>Окно настройки &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Окно настройки &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Создание собственной арены</title
+> <!-- do not change this! -->
+    <para
+>Арена в &granatier; состоит из двух файлов: <filename
+>myarena.desktop</filename
+>&nbsp; и <filename
+>myarena.xml</filename
+>. </para>
+
+    <para
+>Файл <literal role="extension"
+>.desktop</literal
+> содержит метаданные, в том числе название арены и имя её автора. Этот файл состоит из указанных далее записей. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name=My Arena
+Description=Это моя первая арена
+Type=XML
+FileName=myarena.xml
+Author=Ivan Ivanov
+AuthorEmail=ivan.ivanov@foo.org
+      </programlisting>
+    </para>
+    <para
+>Возможно указать любое название, но значением &nbsp;<literal
+>FileName</literal
+> должно быть имя файла <literal role="extension"
+>.xml</literal
+>. </para>
+    <para
+>В файле <literal role="extension"
+>.xml</literal
+> содержится сама карта арены. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting>
+    </para>
+    <para
+>Ограничений параметров <literal
+>rowCount</literal
+> (количество рядов) и <literal
+>colCount</literal
+> (количество столбцов) не предусмотрено, что позволяет создать арену любого размера. При создании карты арены возможно использовать следующие символы. </para>
+    <para>
+      <programlisting
+>«=» — элемент стены
+« » — элементы ямы
+«_» — элемент поверхности
+«+» — элемент блока
+«x» — случайный элемент (блок или поверхность)
+«-» — элемент льда
+«o» — элемент мортиры
+«u» — стрелка вверх
+«r» — стрелка вправо
+«d» — стрелка вниз
+«l» — стрелка влево
+«p» — положение игрока
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Авторские права и лицензия</title
+> <!-- do not change this! -->
+    <para
+>&granatier; </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Авторские права на программу: Mathias Kraus <email
+>k.hias@gmx.de</email
+>, 2009 </para>
+    <para
+>Авторские права на графику: Mathias Kraus <email
+>k.hias@gmx.de</email
+>, 2009 </para>
+    <para
+>Авторские права на графику: Arturo Silva <email
+>jasilva28@gmail.com</email
+>, 2009 </para>
+    <para
+>Авторские права на документацию: Mathias Kraus <email
+>k.hias@gmx.de</email
+>, 2009 </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <para
+>Олеся Герасименко<email
+>translation-team@basealt.ru</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->

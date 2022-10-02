@@ -1,0 +1,739 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Spanish "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>Manual de &granatier;</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    <othercredit role="translator"
+><firstname
+>Rocío</firstname
+><surname
+>Gallego</surname
+><affiliation
+><address
+><email
+>traducciones@rociogallego.com</email
+></address
+></affiliation
+><contrib
+>Traductora</contrib
+></othercredit
+><othercredit role="translator"
+><firstname
+>Kira</firstname
+><surname
+>J. Fernández</surname
+><affiliation
+><address
+><email
+>kirajfdez@gmail.com</email
+></address
+></affiliation
+><contrib
+>Traductora</contrib
+></othercredit
+> 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>2021-06-23</date>
+    <releaseinfo
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
+    
+    <abstract>
+      <para
+>Esta documentación describe el juego &granatier; versión 1.4.2</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>kdegames</keyword
+> <!-- do not change this! -->
+      <keyword
+>juego</keyword
+> <!-- do not change this! -->
+      <keyword
+>Granatier</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>arcade</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>multijugador</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Introducción</title
+> <!-- do not change this! -->
+    <note
+><title
+>Tipo de juego:</title
+><para
+>Arcade</para
+></note>
+    <note
+><title
+>Número de posibles jugadores:</title
+><para
+>Multijugador</para
+></note>
+    <para
+>&granatier; es un clon del clásico juego &nbsp;<trademark
+><application
+>Bomberman</application
+></trademark
+>, inspirado por el trabajo del clon de <application
+>Clanbomber</application
+>. </para>
+    <para
+>El objetivo del juego es correr a través de una zona de combate, utilizando bombas para destruir obstáculos y eliminar a sus oponentes. Hay varias bonificaciones y penalizaciones escondidas bajo los bloques &ndash;, que pueden ayudarle o perjudicarle en su progreso. </para>
+    <screenshot>
+      <screeninfo
+>Captura de pantalla de &granatier;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>Captura de pantalla de &granatier;</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Cómo jugar</title
+> <!-- do not change this! -->
+    <note
+><title
+>Objetivo:</title
+><para
+>Elimine a todos sus oponentes.</para
+></note>
+    <para
+>A cada jugador se le asignan cinco teclas que usarán para mover a su personaje y colocar bombas. Por ejemplo, las teclas predeterminadas para el jugador 1 son las flechas &Up;, &Down;, &Left; y &Right; para moverse en esas direcciones respectivamente, y la tecla Intro para colocar una bomba. Por favor, consulte la sección <link linkend="config_player"
+>Configuración de los jugadores</link
+> para averiguar los accesos rápidos para otros jugadores, además de para saber cómo configurarlos. </para>
+    <para
+>El propósito de colocar bombas, además de atacar a otros oponentes, es destruir los muchos bloques repartidos por el terreno de juego para despejar un camino o descubrir bonificaciones ocultas. Entre las muchas bonificaciones que pueden ser descubiertas están las que le hacen moverse más rápido o las que aumentan el alcance de la explosión de las bombas; cuantas más bonificaciones de este tipo recoja, más fácil será eliminar a sus oponentes y ganar la ronda. Pero tenga en cuenta que también existen penalizaciones que pueden volverse en su contra, como las que le ralentizan o las que invierten sus teclas de movimiento. </para>
+    <para
+>Por cada ronda ganada, el jugador gana un punto. ¡El primer jugador que gane un número predefinido de puntos (por defecto, 3) gana el juego! </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Reglas del juego, estrategias y consejos</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>Los objetos</title>
+    <sect2>
+      <title
+>El terreno de juego</title>
+      <para
+>Los jugadores están en un terreno de juego que consiste en: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Pared del terreno</phrase
+> </textobject>
+        </inlinemediaobject
+>La pared &ndash; define el límite exterior del terreno de juego, y no se puede destruir. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Suelo del terreno de juego</phrase
+> </textobject>
+        </inlinemediaobject
+>El suelo &ndash; puede ser recorrido con seguridad. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Terreno de hielo</phrase
+> </textobject>
+        </inlinemediaobject
+>El hielo &ndash; hará resbaladizo al terreno. La velocidad se incrementa sobre el hielo, y no es posible detenerse completamente. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bloque del terreno</phrase
+> </textobject>
+        </inlinemediaobject
+>El bloque &ndash; puede ser destruido con una bomba, y a veces contiene una bonificación (o una penalización). </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Mortero explosivo del terreno</phrase
+> </textobject>
+        </inlinemediaobject
+>El mortero explosivo &ndash; lanza las bombas que se le colocan encima hacia lugares aleatorios. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Flecha del terreno</phrase
+> </textobject>
+        </inlinemediaobject
+>Las flechas &ndash; mueven las bombas que se les ponen encima hacia la dirección a la que apuntan. </para>
+      <para
+>Si no hay ninguno de los objetos mencionados arriba, es que hay un agujero en el suelo y moverse hacia él resultará en caerse dentro y morir. Lo mismo se aplica si no hay pared en el borde del terreno de juego y el jugador se mueve hacia fuera. </para>
+    </sect2>
+    <sect2>
+      <title
+>Las bonificaciones</title>
+      <para
+>Las bonificaciones son útiles para lograr el objetivo del juego, y los efectos existen permanentemente, incluso después de que una penalización desaparezca. Actualmente existen las siguientes bonificaciones: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificación de velocidad</phrase
+> </textobject>
+        </inlinemediaobject
+>La velocidad &ndash; incrementa ligeramente su velocidad. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificación de bomba</phrase
+> </textobject>
+        </inlinemediaobject
+>La bomba &ndash; añade una bomba extra a su arsenal, permitiéndole colocar más de una bomba a la vez. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificación de potencia</phrase
+> </textobject>
+        </inlinemediaobject
+>La potencia &ndash; incrementa la potencia de sus bombas, extendiendo el alcance de la explosión. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificación de escudo</phrase
+> </textobject>
+        </inlinemediaobject
+>El escudo &ndash; le hace invencible durante una explosión. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificación de lanzamiento</phrase
+> </textobject>
+        </inlinemediaobject
+>El lanzamiento &ndash; le añade la habilidad de tirar bombas. Presione la tecla de colocar bombas mientras una de ellas está debajo de usted. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificación de patada</phrase
+> </textobject>
+        </inlinemediaobject
+>La patada &ndash; le añade la habilidad de mover bombas. Corra hacia una bomba y esta se moverá. </para>
+    </sect2>
+    <sect2>
+      <title
+>Las penalizaciones</title>
+      <para
+>Las penalizaciones son lo contrario de las bonificaciones, y perjudican al jugador. Lo bueno es que los efectos pasan después de algún tiempo (al revés que las bonificaciones), el jugador puede jugar de la manera habitual (incluyendo las bonificaciones) de nuevo. Actualmente existen las siguientes penalizaciones: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Penalización de lentitud</phrase
+> </textobject>
+        </inlinemediaobject
+>La lentitud &ndash; le hace moverse muy despacio. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Penalización de hiperactividad</phrase
+> </textobject>
+        </inlinemediaobject
+>La hiperactividad &ndash; le hace moverse DEMASIADO rápido. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Penalización de espejo</phrase
+> </textobject>
+        </inlinemediaobject
+>El espejo &ndash; invierte sus teclas de movimiento, de forma que arriba se convierte en abajo e izquierda se convierte en derecha. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Penalización de despiste</phrase
+> </textobject>
+        </inlinemediaobject
+>El despiste &ndash; le obliga a estar continuamente colocando bombas sin control. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Penalización de contención</phrase
+> </textobject>
+        </inlinemediaobject
+>La contención &ndash; evita que pueda poner bombas. </para>
+    </sect2>
+    <sect2>
+      <title
+>Los objetos ambivalentes</title>
+      <para
+>Este tipo de bonificaciones no sin ni buenas ni malas, sino que depende del entorno. Actualmente existen las siguientes bonificaciones neutrales: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificación neutral Pandora</phrase
+> </textobject>
+        </inlinemediaobject
+>Pandora &ndash; contiene una bonificación o una penalización. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificación neutral Resucitar</phrase
+> </textobject>
+        </inlinemediaobject
+>Resucitar &ndash; vuelve a la vida a un jugador muerto. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="interface"
+><title
+>Descripción general de la interfaz</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Elementos del menú</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Juego</guimenu
+> <guimenuitem
+>Nuevo</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Empieza</action
+> un nuevo juego.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Juego</guimenu
+> <guimenuitem
+>Salir</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Sale</action
+> de &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Preferencias</guimenu
+> <guimenuitem
+>Reproducir sonidos</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Conmuta la reproducción de sonidos al jugar</action
+>. Por defecto están activados. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>Además, &granatier; tiene las opciones de menú <guimenu
+>Preferencias</guimenu
+> y <guimenu
+>Ayuda</guimenu
+> comunes de &kde;. Para obtener más información, consulte las secciones sobre el <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Menú «Preferencias»</ulink
+> y <ulink url="help:/fundamentals/menus.html#menus-help"
+>Menú «Ayuda»</ulink
+> de «Aspectos básicos de &kde;». </para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Configuración del juego</title
+> <!-- do not change this! -->
+    <para
+>Para abrir el diálogo de configuración, seleccione la opción del menú <menuchoice
+><guimenu
+>Preferencias</guimenu
+> <guimenuitem
+>Configurar &granatier;...</guimenuitem
+></menuchoice
+> </para>
+    <sect1 id="config_general">
+      <title
+>General</title>
+      <para
+>Puede cambiar los puntos que hacen falta para ganar el juego y el tiempo que dura una ronda. Cuando el tiempo se agota, comenzará el modo de muerte súbita. </para>
+      <para
+>Adicionalmente, puede ajustar la velocidad inicial, el alcance de las bombas y la reserva de bombas. </para>
+      <screenshot>
+        <screeninfo
+>Captura de pantalla de la configuración de &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Captura de pantalla de la configuración de &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Tema</title>
+      <para
+>Para seleccionar el tema con el que quiere jugar, vaya a la sección de temas. El tema se carga haciendo clic en <guibutton
+>Aceptar</guibutton
+> o en <guibutton
+>Aplicar</guibutton
+>. El juego actual terminará y empezará uno nuevo. Puede hacer clic en el botón <guibutton
+>Predeterminado</guibutton
+> para restaurar el tema por defecto. </para>
+      <screenshot>
+        <screeninfo
+>Captura de pantalla de la configuración de &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Captura de pantalla de la configuración de &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Terreno de juego</title>
+      <para
+>Para seleccionar el terreno en el que quiere jugar, vaya a la sección de Terreno. El terreno se carga haciendo clic en <guibutton
+>Aceptar</guibutton
+> o en <guibutton
+>Aplicar</guibutton
+>. El juego actual terminará y empezará uno nuevo. Puede hacer clic en el botón <guibutton
+>Predeterminado</guibutton
+> para restaurar el terreno por defecto. </para>
+      <para
+>Si ha diseñado usted mismo terrenos de juego para <application
+>Clanbomber</application
+>, puede copiarlos en <filename class="directory"
+>~/.clanbomber/maps</filename
+>, donde &granatier; los encontrará. Los terrenos predeterminados de <application
+>Clanbomber</application
+> ya vienen con &granatier;. </para>
+      <screenshot>
+        <screeninfo
+>Captura de pantalla de la configuración de &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Captura de pantalla de la configuración de &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Si selecciona <guibutton
+>Modo aleatorio</guibutton
+>, se utilizará un terreno al azar en cada ronda nueva. Puede desmarcar los terrenos en los que no desea jugar. </para>
+      <screenshot>
+        <screeninfo
+>Captura de pantalla de la configuración de &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Captura de pantalla de la configuración de &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Jugador</title>
+      <para
+>Para seleccionar al jugador con el que desea jugar, vaya a la sección «Jugador» y seleccione los jugadores con las casillas de verificación. Los accesos rápidos de teclado se pueden cambiar haciendo clic en el botón para la acción que desee editar y presionando la tecla que quiera utilizar. Los cambios se cargan haciendo clic en <guibutton
+>Aceptar</guibutton
+> o en <guibutton
+>Aplicar</guibutton
+>. El juego actual finalizará y comenzará uno nuevo. Puede hacer clic en <guibutton
+>Predeterminado</guibutton
+> para restaurar los accesos rápidos de teclado por omisión. </para>
+      <screenshot>
+        <screeninfo
+>Captura de pantalla de la configuración de &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Captura de pantalla de la configuración de &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Crear un terreno de juego personalizado</title
+> <!-- do not change this! -->
+    <para
+>Un terreno de juego de &granatier; consiste en dos archivos: <filename
+>myarena.desktop</filename
+> y <filename
+>myarena.xml</filename
+>. </para>
+
+    <para
+>El archivo <literal role="extension"
+>.desktop</literal
+> contiene los metadatos, como el nombre del terreno de juego o su autor, y consta de las siguientes entradas. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name=Mi terreno de juego
+Description=Este es mi primer terreno de juego
+Type=XML
+FileName=myarena.xml
+Author=Nombre del usuario
+AuthorEmail=nombre.usuario@foo.org
+      </programlisting>
+    </para>
+    <para
+>Puede escoger el nombre que prefiera, pero <literal
+>FileName</literal
+> debe ser el nombre del archivo <literal role="extension"
+>.xml</literal
+>. </para>
+    <para
+>El archivo <literal role="extension"
+>.xml</literal
+> contiene el mapa real del terreno de juego. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting>
+    </para>
+    <para
+>No hay límite para <literal
+>rowCount</literal
+> ni para <literal
+>colCount</literal
+>, por lo que puede escoger usted mismo el tamaño del terreno de juego. Los siguientes símbolos se usan en el mapa del terreno de juego. </para>
+    <para>
+      <programlisting
+>'=' a wall item
+' ' a hole item
+'_' a ground item
+'+' a block item
+'x' will randomly create a block or a ground item
+'-' an ice item
+'o' a mortar item
+'u' an arrow up
+'r' an arrow right
+'d' an arrow down
+'l' an arrow left
+'p' a player position
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Créditos y licencia</title
+> <!-- do not change this! -->
+    <para
+>&granatier; </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Copyright del programa 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Copyright de los gráficos 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Copyright de los gráficos 2009 Arturo Silva <email
+>jasilva28@gmail.com</email
+> </para>
+    <para
+>Copyright de la documentación 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <para
+>Traducido por Rocío Gallego <email
+>traducciones@rociogallego.com</email
+> y Kira J. Fernández <email
+>kirajfdez@gmail.com</email
+>.</para
+> &underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->

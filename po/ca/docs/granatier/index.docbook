@@ -1,0 +1,732 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Catalan  "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>El manual del &granatier;</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    &traductor.Antoni.Bella; 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>23 de juny de 2021</date>
+    <releaseinfo
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
+    
+    <abstract>
+      <para
+>Aquesta documentació descriu el joc &granatier; versió 14.2</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>kdegames</keyword
+> <!-- do not change this! -->
+      <keyword
+>joc</keyword
+> <!-- do not change this! -->
+      <keyword
+>Granatier</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>arcade</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>multijugador</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Introducció</title
+> <!-- do not change this! -->
+    <note
+><title
+>Tipus de joc:</title
+><para
+>Arcade</para
+></note>
+    <note
+><title
+>Nombre de possibles jugadors:</title
+><para
+>Multijugador</para
+></note>
+    <para
+>El &granatier; és un clon del joc <trademark
+><application
+>Bomberman</application
+></trademark
+> clàssic, inspirat en el treball del clon <application
+>Clanbomber</application
+>. </para>
+    <para
+>L'objectiu del joc és córrer per un camp de batalla, utilitzant bombes per a aclarir blocs els i eliminar els adversaris. Sota els blocs s'oculten diverses bonificacions i desavantatges -poden ajudar o dificultar el vostre progrés-. </para>
+    <screenshot>
+      <screeninfo
+>Una captura de pantalla del &granatier;</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>Una captura de pantalla del &granatier;</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Com es juga</title
+> <!-- do not change this! -->
+    <note
+><title
+>Objectiu:</title
+><para
+>Eliminar tots els adversaris.</para
+></note>
+    <para
+>A cada jugador se li proporcionen cinc tecles que utilitzen per a moure el seu personatge i col·locar les bombes. Per exemple, les tecles predeterminades per al jugador 1 són les tecles &Up;, &Down;, &Left; i &Right; per a moure respectivament en aquestes direccions, i la tecla &Intro; per a posar una bomba. Consulteu la secció &nbsp;<link linkend="config_player"
+>Configurar el jugador</link
+> per a trobar les dreceres de teclat per als altres jugadors, així com per a configurar-les. </para>
+    <para
+>El propòsit de col·locar bombes, a més d'atacar als altres adversaris, és destruir els molts blocs escampats pel camp de batalla per a aclarir un camí o descobrir les bonificacions ocultes. Entre les moltes bonificacions que es poden descobrir, es troben les que fan moure més de pressa o que fan augmentar l'abast de l'explosió de les bombes. Com més bonificacions d'aquest tipus recolliu, més fàcil serà eliminar als adversaris i guanyar la tanda. Però, cal tenir en compte que hi ha tants desavantatges que poden desviar-vos, inclosos els que alenteixen o que inverteixen les tecles de moviment. </para>
+    <para
+>Per cada tanda guanyada, el jugador rebrà un punt. El primer jugador a guanyar un nombre predefinit de punts (el valor predeterminat és 3), guanyarà la partida! </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Les regles del joc, estratègies i consells</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>Els elements</title>
+    <sect2>
+      <title
+>El camp de batalla</title>
+      <para
+>Els jugadors es troben en un camp de batalla que consta de: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Mur del camp de batalla</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;El mur &ndash; defineix el contorn del mapa del camp de batalla i no es pot destruir. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Terreny del camp de batalla</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;El terreny &ndash; s'hi pot caminar de forma segura. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Gel del camp de batalla</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;El gel &ndash; fa que es rellisqui sobre el terreny. Sobre el gel, la velocitat augmentarà i no serà possible aturar-se del tot. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bloc en el camp de batalla</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;El bloc &ndash; es pot destruir amb una bomba i pot contenir una bonificació (o un desavantatge). </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Morter de bombes en el camp de batalla</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;El morter de bombes &ndash; llançarà bombes que es col·locaran sobre vostre en llocs aleatoris. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Fletxa dreta en el camp de batalla</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Les fletxes &ndash; mouran les bombes que es col·loquen en la direcció a la que apuntin. </para>
+      <para
+>Si no hi ha cap dels elements anteriors, hi haurà un forat a terra i entrar-hi resultarà en caure a les profunditats i morir. El mateix també s'aplicarà si no hi ha un mur en el límit del camp de batalla i el jugador es mou fora d'aquest. </para>
+    </sect2>
+    <sect2>
+      <title
+>Les bonificacions</title>
+      <para
+>Les bonificacions són útils per a assolir l'objectiu del joc i els efectes són permanents -fins i tot una vegada que desapareix un desavantatge-. Actualment hi ha les bonificacions següents: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificació de velocitat</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Velocitat &ndash; augmenta lleugerament la velocitat. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificació de bomba</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Bomba &ndash; afegeix una bomba addicional al vostre arsenal, el qual permet col·locar més d'una bomba a la vegada. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificació de potència</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Potència &ndash; augmenta la potència de les bombes, ampliant el seu abast de l'explosió. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificació d'escut</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Escut &ndash; us fa invencible a l'explosió d'una bomba. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificació de llançar</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Llançar &ndash; afegeix la capacitat de llançar les bombes. Senzillament premeu la tecla per a col·locar bombes mentre hi ha una bomba a sota vostre. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificació de xutar</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Xutar &ndash; afegeix la capacitat de moure les bombes. Senzillament correu contra una bomba i la bomba es mourà. </para>
+    </sect2>
+    <sect2>
+      <title
+>Els desavantatges</title>
+      <para
+>Els desavantatges són l'oposat a les bonificacions i obstaculitzen al jugador. El millor és que els efectes es perden després d'un temps (amb l'excepció de les bonificacions) i el jugador podrà tornar a jugar amb el seu comportament habitual (incloses les bonificacions). Actualment hi ha els desavantatges següents: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Desavantatge de lentitud</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Lentitud &ndash; fa que us moveu molt lentament. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Desavantatge d'hiperactivitat</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Hiperactivitat &ndash; fa que us moveu una mica MASSA de pressa. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Desavantatge de mirall</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Mirall &ndash; inverteix les tecles de moviment, de manera que amunt es convertirà en avall i l'esquerra en dreta. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Desavantatge d'atabalat</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Atabalat &ndash; us obliga a col·locar bombes contínuament sense control. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Desavantatge de restricció</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Restricció &ndash; evita que col·loqueu bombes. </para>
+    </sect2>
+    <sect2>
+      <title
+>Els elements ambivalents</title>
+      <para
+>Aquest tipus de bonificacions no són ni bones ni dolentes, això dependrà majoritàriament de l'entorn. Actualment hi ha les bonificacions neutrals següents: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificació neutral de Pandora</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Pandora &ndash; conté una bonificació o un desavantatge. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Bonificació neutral de resurrecció</phrase
+> </textobject>
+        </inlinemediaobject
+>&nbsp;Resurrecció &ndash; ressuscitarà a qualsevol jugador mort. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="interface"
+><title
+>Resum de la interfície</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Elements de menú</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Joc</guimenu
+> <guimenuitem
+>Nova</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Comença</action
+> una partida nova.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Joc</guimenu
+> <guimenuitem
+>Surt</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Surt</action
+> del &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Arranjament</guimenu
+> <guimenuitem
+>Reprodueix els sons</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Alterna si s'hauran de reproduir els sons.</action
+> El valor predeterminat és que estan activats. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>De manera addicional, el &granatier; té la configuració comuna al &kde; i els elements dels menús <guimenu
+>Arranjament</guimenu
+> i <guimenu
+>Ajuda</guimenu
+>. Per a obtenir més informació, llegiu les seccions sobre <ulink url="help:/fundamentals/menus.html#menus-settings"
+>El menú Arranjament</ulink
+> i <ulink url="help:/fundamentals/menus.html#menus-help"
+>El menú Ajuda</ulink
+> en els Fonaments del &kde;. </para>
+
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Configuració del joc</title
+> <!-- do not change this! -->
+    <para
+>Per a obrir el diàleg de configuració, seleccioneu l'element de menú &nbsp;<menuchoice
+><guimenu
+>Arranjament</guimenu
+><guimenuitem
+>Configura el &granatier;...</guimenuitem
+></menuchoice
+>. </para>
+    <sect1 id="config_general">
+      <title
+>General</title>
+      <para
+>Podreu canviar els punts necessaris per a guanyar el joc i el temps d'una tanda. Un cop transcorregut el temps, s'iniciarà el mode de mort sobtada. </para>
+      <para
+>A més, podreu ajustar la velocitat inicial, l'abast de l'explosió i l'arsenal de bombes. </para>
+      <screenshot>
+        <screeninfo
+>Una captura de pantalla de la configuració en el &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Una captura de pantalla de la configuració en el &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Tema</title>
+      <para
+>Per a seleccionar el tema amb el qual voleu jugar, aneu a la secció Tema. El tema es carregarà fent clic a <guibutton
+>D'acord</guibutton
+> o <guibutton
+>Aplica</guibutton
+>. La partida actual acabarà i començarà una de nova. Podeu fer clic sobre el botó &nbsp;<guibutton
+>Per omissió</guibutton
+> per a restaurar el tema predeterminat. </para>
+      <screenshot>
+        <screeninfo
+>Una captura de pantalla de la configuració en el &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Una captura de pantalla de la configuració en el &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Camp de batalla</title>
+      <para
+>Per a seleccionar el camp de batalla amb el qual voleu jugar, aneu a la secció Camp de batalla. El camp de batalla es carregarà fent clic a <guibutton
+>D'acord</guibutton
+> o <guibutton
+>Aplica</guibutton
+>. La partida actual acabarà i començarà una de nova. Podeu fer clic sobre el botó <guibutton
+>Per omissió</guibutton
+> per a restaurar el camp de batalla predeterminat. </para>
+      <para
+>Si teniu camps de batalla per al <application
+>Clanbomber</application
+> que heu fet vosaltres mateixos, els podeu a &nbsp;<filename class="directory"
+>~/.clanbomber/maps</filename
+>&nbsp;. Els camps de batalla del <application
+>Clanbomber</application
+> ja s'inclouen amb el &granatier;. </para>
+      <screenshot>
+        <screeninfo
+>Una captura de pantalla de la configuració en el &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Una captura de pantalla de la configuració en el &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Si seleccioneu el <guibutton
+>Mode aleatori</guibutton
+>, s'utilitzarà un camp de batalla aleatori per a cada tanda nova. Si hi ha camps de batalla amb els que no voleu jugar, els podeu desmarcar. </para>
+      <screenshot>
+        <screeninfo
+>Una captura de pantalla de la configuració en el &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Una captura de pantalla de la configuració en el &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Jugador</title>
+      <para
+>Per a seleccionar el jugador amb el qual voleu jugar, aneu a la secció Jugador i seleccioneu els jugadors amb les caselles de selecció. Les dreceres es poden canviar fent clic sobre el botó de l'acció que voleu canviar i després prement la tecla que voleu utilitzar. Els canvis es carregaran fent clic a <guibutton
+>D'acord</guibutton
+> o <guibutton
+>Aplica</guibutton
+>. La partida actual acabarà i començarà una de nova. Podeu fer clic sobre el botó &nbsp;<guibutton
+>Per omissió</guibutton
+> per a restaurar les dreceres predeterminades. </para>
+      <screenshot>
+        <screeninfo
+>Una captura de pantalla de la configuració en el &granatier;</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>Una captura de pantalla de la configuració en el &granatier;</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Crear un camp de batalla personalitzat</title
+> <!-- do not change this! -->
+    <para
+>Un camp de batalla en el &granatier; consta de dos fitxers, <filename
+>nom_del_camp.desktop</filename
+>&nbsp; i <filename
+>nom_del_camp.xml</filename
+>&nbsp;. </para>
+
+    <para
+>El fitxer <literal role="extension"
+>role="extension"
+>desktop</literal
+> conté les metadades com el nom o l'autor del camp de batalla i consta de les entrades següents. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name=El meu camp de batalla
+Description=Aquest és el meu primer camp de batalla
+Type=XML
+FileName=nom_del_camp.xml
+Author=Jordi Usuari
+AuthorEmail=jordiusuari@foo.org
+      </programlisting>
+    </para>
+    <para
+>Podeu triar el nom que vulgueu, però <literal
+>FileName</literal
+> haurà de ser el nom del fitxer <literal role="extension"
+>.xml</literal
+>. </para>
+    <para
+>El fitxer <literal role="extension"
+>.xml</literal
+> conté el mapa real del camp de batalla. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting>
+    </para>
+    <para
+>No hi ha cap límit per a <literal
+>rowCount</literal
+> i <literal
+>colCount</literal
+>, de manera que podreu triar la mida del camp de batalla. Per al mapa del camp de batalla, s'utilitzen els símbols següents. </para>
+    <para>
+      <programlisting
+><quote
+>=</quote
+> un element de mur
+<quote
+> </quote
+> un element de forat
+<quote
+>_</quote
+> un element de terreny
+<quote
+>+</quote
+> un element de bloc
+<quote
+>x</quote
+> crearà aleatòriament un bloc o un element de terreny
+<quote
+>-</quote
+> un element de gel
+<quote
+>o</quote
+> un element de morter
+<quote
+>u</quote
+> una fletxa cap amunt
+<quote
+>r</quote
+> una fletxa cap a la dreta
+<quote
+>d</quote
+> una fletxa cap avall
+<quote
+>l</quote
+> una fletxa cap a l'esquerra
+<quote
+>p</quote
+> una posició del jugador
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Crèdits i llicència</title
+> <!-- do not change this! -->
+    <para
+>&granatier; </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Copyright del programa 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Copyright dels gràfics 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Copyright dels gràfics 2009 Arturo Silva <email
+>jasilva28@gmail.com</email
+> </para>
+    <para
+>Copyright de la documentació 2009 Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <para
+>Traductor de la documentació: &credits.Antoni.Bella;</para
+> &underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->

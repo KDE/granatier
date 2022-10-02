@@ -1,0 +1,623 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY granatier "<application
+>Granatier</application
+>">
+  <!ENTITY kappname "&granatier;">
+  
+  <!ENTITY package "kdegames"
+>  <!-- do not change this! -->
+  <!ENTITY % Estonian  "INCLUDE"
+> <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"
+> <!-- do not change this! -->
+]>
+
+<book id="granatier" lang="&language;">
+  <bookinfo>
+    <title
+>&granatier;i käsiraamat</title>
+    
+    <authorgroup>
+      <author
+><personname
+> <firstname
+>Mathias</firstname
+> <surname
+>Kraus</surname
+> </personname
+> <email
+>k.hias@gmx.de</email
+> </author>
+    <othercredit role="translator"
+><firstname
+>Marek</firstname
+><surname
+>Laane</surname
+><affiliation
+><address
+><email
+>bald@smail.ee</email
+></address
+></affiliation
+><contrib
+>Tõlge eesti keelde</contrib
+></othercredit
+> 
+    </authorgroup>
+    <legalnotice
+>&FDLNotice;</legalnotice>
+    <date
+>2012-06-15</date>
+    <releaseinfo
+>1.2.0 (&kde; 4.9)</releaseinfo>
+    
+    <abstract>
+      <para
+>See käsiraamat kirjeldab mängu &granatier; versiooni 1.2.0</para>
+    </abstract>
+    
+    <keywordset>
+      <keyword
+>KDE</keyword
+> <!-- do not change this! -->
+      <keyword
+>kdegames</keyword
+> <!-- do not change this! -->
+      <keyword
+>mäng</keyword
+> <!-- do not change this! -->
+      <keyword
+>Granatier</keyword
+><!--Application name goes here-->
+      <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
+      <keyword
+>arkaadmäng</keyword>
+      <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
+      <keyword
+>mitu mängijat</keyword>
+      <!--All other relevant keywords-->
+      <keyword
+>bomberman</keyword>
+      <keyword
+>clanbomber</keyword>
+    </keywordset>
+  </bookinfo>
+
+  <chapter id="introduction"
+><title
+>Sissejuhatus</title
+> <!-- do not change this! -->
+    <note
+><title
+>Mängu tüüp:</title
+><para
+>arkaadmäng</para
+></note>
+    <note
+><title
+>Mängijate arv:</title
+><para
+>Mitme mängijaga mäng</para
+></note>
+    <para
+>&granatier; on klassikalise mängu <trademark
+><application
+>Bomberman</application
+></trademark
+> kloon, mis sai innustust teisest kloonist <application
+>Clanbomber</application
+>. </para>
+    <para
+>Mängu eesmärk on läbida areen, kasutades pomme takistavate plokkide ja vastaste kõrvaldamiseks. Plokkide alla on peidetud mitmeid boonuseid ja takistusi, mis vastavalt võivad sinu edenemisele kaasa aidata või seda pidurdada. </para>
+    <screenshot>
+      <screeninfo
+>&granatier;i pilt</screeninfo>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="granatier.png" format="PNG"/>
+        </imageobject>
+        <textobject>
+          <phrase
+>&granatier;i pilt</phrase>
+        </textobject>
+      </mediaobject>
+    </screenshot>
+  </chapter>
+  
+  <chapter id="howto"
+><title
+>Kuidas mängida</title
+> <!-- do not change this! -->
+    <note
+><title
+>Eesmärk:</title
+><para
+>Kõrvaldada kõik vastased.</para
+></note>
+    <para
+>Igale mängijale on eraldatud viis klahvi, millega nad saavad liigutada oma tegelast ning asetada pomme. Vaikimisi on mängija 1 klahvideks neli nooleklahvi, mis liigutavad tegelast vastavas suunas, ning klahv &Enter; pommide asetamiseks. Teiste mängijate klahve näeb ning saab seadistada seadistustedialoogi sektsioonis <link linkend="config_player"
+>Mängija</link
+>. </para>
+    <para
+>Lisaks vastaste ründamisele on pommide asetamine vajalik ka areenile puistatud plokkide likvideerimiseks, et puhastada endale teed või leida üles peidetud boonused. Arvukate boonuste seas on sellised, mis lubavad liikuda kiiremini või suurendavad sinu pommide plahvatusjõudu. Mida rohkem boonuseid kogud, seda hõlpsam on kõrvaldada vastaseid ja võita voor. Kuid arvesta, et sama hästi võid leida ka takistusi, mis aeglustavad sinu liikumist või vahetavad ära liikumisklahvid. </para>
+    <para
+>Iga võidetud vooru eest saab mängija punkti. Mängu võidab mängija, kes kogub esimesena eelnevalt kindlaks määratud arvu punkte (vaikimisi 3). </para>
+  </chapter>
+  
+  <chapter id="rules_and_tips"
+><title
+>Mängureeglid, strateegia ja nõuanded</title
+> <!-- do not change this! -->
+    <sect1 id="test">
+    <title
+>Elemendid</title>
+    <sect2>
+      <title
+>Areen</title>
+      <para
+>Mängijad asuvad areenil, mis koosneb järgmistest osadest: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Areeni sein</phrase
+> </textobject>
+        </inlinemediaobject>
+Sein määratleb areeni välised piirid ning seda ei saa hävitada. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Areeni pind</phrase
+> </textobject>
+        </inlinemediaobject>
+Pind on piirkond, kus saab turvaliselt liikuda. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Areeni jää</phrase
+> </textobject>
+        </inlinemediaobject>
+Jää muudab pinna libedaks. Kiirus suureneb jääl ning liikumist ei saagi täielikult peatada. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Areeni plokk</phrase
+> </textobject>
+        </inlinemediaobject>
+Plokke saab hävitada pommiga ning need võivad sisaldada boonuseid (või ka takistusi). </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Areeni pommipilduja</phrase
+> </textobject>
+        </inlinemediaobject>
+Pommipilduja heidab pomme juhuslikesse kohtadesse. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Areeni nool paremale</phrase
+> </textobject>
+        </inlinemediaobject>
+Nooled liigutavad pomme suunas, kuhu nad osutavad. </para>
+      <para
+>Kui tegemist ei ole ühegi mainitud elemendiga, siis on sinu ees pinnas olev auk, mille peale liikudes kukud sisse ja sured. Sama juhtub siis, kui areenil pole seina ja sa liigud areenilt välja. </para>
+    </sect2>
+    <sect2>
+      <title
+>Boonused</title>
+      <para
+>Boonused on abiks mängu eesmärgi saavutamisel ning nende efektid jäävad püsima ka pärast seda, kui nende mõju on ajutiselt mõne takistuse tõttu kahanenud. Praegu on olemas järgmised boonused: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Kiiruseboonus</phrase
+> </textobject>
+        </inlinemediaobject>
+Kiirus suurendab veidi sinu liikumiskiirust. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Pommiboonus</phrase
+> </textobject>
+        </inlinemediaobject>
+Pomm annab sinu arsenali lisapommi, mis võimaldab korraga asetada rohkem kui ühe pommi. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Võimsusboonus</phrase
+> </textobject>
+        </inlinemediaobject>
+Võimsus suurendab pommi võimsust, laiendades plahvatuse mõjuala. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Kilbiboonus</phrase
+> </textobject>
+        </inlinemediaobject>
+Kilp kaitseb sind ühe pommiplahvatuse eest. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Heiteboonus</phrase
+> </textobject>
+        </inlinemediaobject>
+Heitmine annab võimaluse pomme heita. Vajuta lihtsalt pommi asetamise klahvi, kui pomm asub sinu all. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Tõukamisboonus</phrase
+> </textobject>
+        </inlinemediaobject>
+Tõukamine annab võimaluse pomme liigutada. Jookse lihtsalt pommi pihta ja see liigub paigast. </para>
+    </sect2>
+    <sect2>
+      <title
+>Takistused</title>
+      <para
+>Erinevalt boonustest takistused muudavad mängija elu raskemaks. Õnneks erinevalt boonustest nende mõju kaob mõne aja pärast ning mängija saab taas tavapäraselt edasi mängida (ning kasutada ka kõiki boonuseid, mis tal on). Praegu on olemas järgmised takistused: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Aeglustakistus</phrase
+> </textobject>
+        </inlinemediaobject>
+Aeglus muudab kogu liikumise väga aeglaseks. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Hüperaktiivsuse takistus</phrase
+> </textobject>
+        </inlinemediaobject>
+Hüperaktiivsus paneb LIIGA kiiresti liikuma. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Peegeldamistakistus</phrase
+> </textobject>
+        </inlinemediaobject>
+Peegeldamine muudab liikumisklahvid vastupidiseks, nii et noolt üles vajutades liigud alla, noolt vasakule vajutades aga paremale. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Hajameelsustakistus</phrase
+> </textobject>
+        </inlinemediaobject>
+Hajameelsus sunnib pidevalt ka vastu tahtmist pomme asetama. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Vaoshoituse takistus</phrase
+> </textobject>
+        </inlinemediaobject>
+Vaoshoitus takistab pomme asetamast. </para>
+    </sect2>
+    <sect2>
+      <title
+>Ambivalentsed elemendid</title>
+      <para
+>Need boonused ei ole õieti head ega halvad, sõltudes rohkem keskkonnast, kus nad ette tulevad. Praegu on olemas järgmised neutraalsed boonused: </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Pandora neutraalne boonus</phrase
+> </textobject>
+        </inlinemediaobject>
+Pandora sisaldab kas boonust või takistust. </para>
+      <para>
+        <inlinemediaobject>
+          <imageobject
+> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
+          <textobject
+> <phrase
+>Taaselustamise neutraalne boonus</phrase
+> </textobject>
+        </inlinemediaobject>
+Taaselustamine võimaldab ellu äratada iga surnud mängija. </para>
+    </sect2>
+    </sect1>
+  </chapter>
+
+  <chapter id="configuration"
+><title
+>Mängu seadistamine</title
+> <!-- do not change this! -->
+    <para
+>Seadistustedialoogi saab avada menüükäsuga <menuchoice
+><guimenu
+>Seadistused</guimenu
+><guimenuitem
+>&granatier;i seadistamine...</guimenuitem
+></menuchoice
+> </para>
+    <sect1 id="config_general">
+      <title
+>Üldine</title>
+      <para
+>Võimalik on muuta seda, mitu punkti on vajalik mängu võitmiseks, samuti vooru kestmise aega. Kui aeg saab läbi, käivitub niinimetatud äkksurma režiim. </para>
+      <para
+>Lisaks saab kohandada algset kiirust, plahvatuse raadiust ja pommide hulka. </para>
+      <screenshot>
+        <screeninfo
+>&granatier;i seadistamise pilt</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_general.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&granatier;i seadistamise pilt</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_theme">
+      <title
+>Teema</title>
+      <para
+>Mängus kasutatava teema valimiseks ava sektsioon Teema. Teema saab laadida klõpsuga nupule <guibutton
+>OK</guibutton
+> või <guibutton
+>Rakenda</guibutton
+> Aktiivne mäng lõpetatakse ja alustatakse uut. Vaikimisi teema taastamiseks tuleb klõpsata nupule <guibutton
+>Vaikeväärtused</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>&granatier;i seadistamise pilt</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_theme.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&granatier;i seadistamise pilt</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_arena">
+      <title
+>Areen</title>
+      <para
+>Mängus kasutatava areeni valimiseks ava sektsioon Areen. Areeni saab laadida klõpsuga nupule <guibutton
+>OK</guibutton
+> või <guibutton
+>Rakenda</guibutton
+> Aktiivne mäng lõpetatakse ja alustatakse uut. Vaikimisi areeni taastamiseks tuleb klõpsata nupule <guibutton
+>Vaikeväärtused</guibutton
+>. </para>
+      <para
+>Kui sul on enda loodud <application
+>Clanbomber</application
+>i areene, saab neid importida klõpsuga nupule <guibutton
+>Impordi Clanbomberi areenid</guibutton
+>. &granatier; otsib areene asukohast <filename class="directory"
+>~/.clanbomber/maps</filename
+>. Vaikimisi <application
+>Clanbomber</application
+>i areenid on juba &granatier;iga kaasas. </para>
+      <screenshot>
+        <screeninfo
+>&granatier;i seadistamise pilt</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&granatier;i seadistamise pilt</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+      <para
+>Kui valida <guibutton
+>Juhuslik režiim</guibutton
+>, kasutatakse igas voorus suvaliselt valitud areeni. Kui on areene, millel sa ei soovi mängida, võib need välja lülitada. </para>
+      <screenshot>
+        <screeninfo
+>&granatier;i seadistamise pilt</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&granatier;i seadistamise pilt</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+    <sect1 id="config_player">
+      <title
+>Mängija</title>
+      <para
+>Mängija valimiseks ava sektsioon Mängija ning märgi kastike selle mängija ees, keda soovid mängus näha. Kiirklahve saab muuta, kui klõpsata toimingu nimele, mida soovid muuta, ning seejärel vajutada soovitud klahvi. Muudatused rakendatakse klõpsuga nupule <guibutton
+>OK</guibutton
+> või <guibutton
+>Rakenda</guibutton
+>. Aktiivne mäng lõpetatakse ja alustatakse uut mängu. Vaikimisi kiirklahvide taastamiseks tuleb klõpsata nupule <guibutton
+>Vaikeväärtused</guibutton
+>. </para>
+      <screenshot>
+        <screeninfo
+>&granatier;i seadistamise pilt</screeninfo>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="config_player.png" format="PNG"/>
+          </imageobject>
+          <textobject>
+            <phrase
+>&granatier;i seadistamise pilt</phrase>
+          </textobject>
+        </mediaobject>
+      </screenshot>
+    </sect1>
+  </chapter>
+
+  <chapter id="create_arena"
+><title
+>Kohandatud areeni loomine</title
+> <!-- do not change this! -->
+    <para
+>&granatier;i areen koosneb kahest failist: <filename
+>minuareen.desktop</filename
+> ja <filename
+>minuareen.xml</filename
+>. </para>
+
+    <para
+>.desktop-fail koosneb metaandmetest, näiteks areeni nimi ja selle autor, ning sisaldab järgmisi kirjeid: <programlisting>
+[Arena]
+Name=Minu Areen
+Description=See on minu esimene areen
+Type=XML
+FileName=minuareen.xml
+Author=Jaan Jalgratas
+AuthorEmail=jaan.jalgratas@kusagil.ee
+      </programlisting
+> Nimi (Name) võib olla milline tahes, kuid failinimi (FileName) peab olema .xml-faili nimi. </para>
+    <para
+>.xml-fail sisaldab areeni tegelikku kaarti: <programlisting>
+&lt;?xml version="1.0"?&gt;
+&lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt; +++++-- --+++++ &lt;/Row&gt;
+  &lt;Row&gt;=+++=++_-_++=+++=&lt;/Row&gt;
+  &lt;Row&gt;==++===_-_===++==&lt;/Row&gt;
+  &lt;Row&gt; ==+++=_p_=+++== &lt;/Row&gt;
+  &lt;Row&gt;  =+++++_+++++=  &lt;/Row&gt;
+  &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
+  &lt;Row&gt;    ==== ====    &lt;/Row&gt;
+&lt;/Arena&gt;
+      </programlisting
+> rowCount ja colCount võivad olla millised tahes, nii et sa saad ise määrata areeni suuruse. Areeni kaardil saab kasutada järgmisi sümboleid: <programlisting
+>'=' sein
+' ' auk
+'_' pind
+'+' plokk
+'x' loob juhuslikult ploki või pinna
+'-' jää
+'o' pommipilduja
+'u' nool üles
+'r' nool paremale
+'d' nool alla
+'l' nool vasakule
+'p' mängija asukoht
+      </programlisting>
+    </para>
+  </chapter>
+
+  <chapter id="credits"
+><title
+>Autorid ja litsents</title
+> <!-- do not change this! -->
+    <para
+>&granatier; </para>
+    <!-- List all the copyright holders here-->
+    <para
+>Rakenduse autoriõigus 2009: Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Graafika autoriõigus 2009: Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+    <para
+>Graafika autoriõigus 2009: Arturo Silva <email
+>jasilva28@gmail.com</email
+> </para>
+    <para
+>Dokumentatsiooni autoriõigus 2009: Mathias Kraus <email
+>k.hias@gmx.de</email
+> </para>
+
+  <!-- !!!do not change ANYTHING after this line!!!! -->
+  <para
+>Tõlge eesti keelde: Marek Laane <email
+>bald@smail.ee</email
+></para
+> 
+&underFDL; &underGPL; </chapter>
+
+  &documentation.index; 
+</book>
+
+<!--
+Local Variables:
+mode: xml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+ 
+vim:tabstop=2:shiftwidth=2:expandtab
+kate: space-indent on; indent-width 2; tab-width 2; indent-mode none;
+-->
