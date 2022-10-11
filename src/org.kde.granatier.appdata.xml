@@ -22,6 +22,7 @@
   <name xml:lang="hu">Granatier</name>
   <name xml:lang="id">Granatier</name>
   <name xml:lang="it">Granatier</name>
+  <name xml:lang="ka">Granatier</name>
   <name xml:lang="ko">Granatier</name>
   <name xml:lang="nl">Granatier</name>
   <name xml:lang="nn">Granatier</name>
@@ -60,6 +61,7 @@
   <summary xml:lang="hu">Bomberman-klón</summary>
   <summary xml:lang="id">Klona Bomberman</summary>
   <summary xml:lang="it">Un clone di Bomberman</summary>
+  <summary xml:lang="ka">Bomberman -ის კლონი</summary>
   <summary xml:lang="ko">Bomberman 클론</summary>
   <summary xml:lang="nl">Bomberman kloon</summary>
   <summary xml:lang="nn">Bomberman-klon</summary>
@@ -143,6 +145,7 @@
       <caption xml:lang="hu">Granatier játék</caption>
       <caption xml:lang="id">Memainkan Granatier</caption>
       <caption xml:lang="it">Giocare con Granatier</caption>
+      <caption xml:lang="ka">Granatier-ის თამაში</caption>
       <caption xml:lang="ko">Granatier 플레이</caption>
       <caption xml:lang="nl">Granatier spelen</caption>
       <caption xml:lang="nn">Spelar Granatier</caption>
