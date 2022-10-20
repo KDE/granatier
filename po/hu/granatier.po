@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-20 00:42+0000\n"
+"POT-Creation-Date: 2022-10-20 00:43+0000\n"
 "PO-Revision-Date: 2021-09-22 09:33+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -350,24 +350,24 @@ msgstr "Alexandre Galinier"
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
-#: mainwindow.cpp:66
+#: mainwindow.cpp:67
 #, kde-format
 msgid "&Play sounds"
 msgstr "&Hang"
 
-#: mainwindow.cpp:143
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr "Biztosan ki szeretne lépni a futó játékból?"
 
-#: mainwindow.cpp:144
+#: mainwindow.cpp:150
 #, fuzzy, kde-format
 #| msgid "New game"
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "Új játék"
 
-#: mainwindow.cpp:145
+#: mainwindow.cpp:151
 #, fuzzy, kde-format
 #| msgctxt "To quit Granatier"
 #| msgid "Quit"
@@ -375,33 +375,33 @@ msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "Kilépés"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:192
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "Általános"
 
-#: mainwindow.cpp:185
+#: mainwindow.cpp:196
 #, kde-format
 msgid "Theme"
 msgstr "Téma"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Arena"
 msgstr "Aréna"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:200
 #, kde-format
 msgid "Player"
 msgstr "Játékos"
 
-#: mainwindow.cpp:239
+#: mainwindow.cpp:255
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr "Biztosan ki szeretne lépni a játékból?"
 
-#: mainwindow.cpp:240
+#: mainwindow.cpp:256
 #, kde-format
 msgctxt "To quit Granatier"
 msgid "Quit"

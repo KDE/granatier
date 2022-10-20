@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-20 00:42+0000\n"
+"POT-Creation-Date: 2022-10-20 00:43+0000\n"
 "PO-Revision-Date: 2010-09-26 12:08-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -350,24 +350,24 @@ msgstr "Alexandre Galinier"
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
-#: mainwindow.cpp:66
+#: mainwindow.cpp:67
 #, kde-format
 msgid "&Play sounds"
 msgstr "効果音あり(&P)"
 
-#: mainwindow.cpp:143
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr "本当に現在のゲームを終了しますか？"
 
-#: mainwindow.cpp:144
+#: mainwindow.cpp:150
 #, fuzzy, kde-format
 #| msgid "New game"
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "新しいゲーム"
 
-#: mainwindow.cpp:145
+#: mainwindow.cpp:151
 #, fuzzy, kde-format
 #| msgctxt "To quit Granatier"
 #| msgid "Quit"
@@ -375,33 +375,33 @@ msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "終了"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:192
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr ""
 
-#: mainwindow.cpp:185
+#: mainwindow.cpp:196
 #, kde-format
 msgid "Theme"
 msgstr "テーマ"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Arena"
 msgstr ""
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:200
 #, kde-format
 msgid "Player"
 msgstr ""
 
-#: mainwindow.cpp:239
+#: mainwindow.cpp:255
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr "本当に Granatier を終了しますか？"
 
-#: mainwindow.cpp:240
+#: mainwindow.cpp:256
 #, kde-format
 msgctxt "To quit Granatier"
 msgid "Quit"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-20 00:42+0000\n"
+"POT-Creation-Date: 2022-10-20 00:43+0000\n"
 "PO-Revision-Date: 2010-03-22 21:54+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -355,24 +355,24 @@ msgstr "Alexandre Galinier"
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
-#: mainwindow.cpp:66
+#: mainwindow.cpp:67
 #, kde-format
 msgid "&Play sounds"
 msgstr "เล่นเสีย&ง"
 
-#: mainwindow.cpp:143
+#: mainwindow.cpp:149
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr "คุณต้องการจะออกจากเกมปัจจุบันจริงหรือไม่ ?"
 
-#: mainwindow.cpp:144
+#: mainwindow.cpp:150
 #, fuzzy, kde-format
 #| msgid "New game"
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "เริ่มเกมใหม่"
 
-#: mainwindow.cpp:145
+#: mainwindow.cpp:151
 #, fuzzy, kde-format
 #| msgctxt "To quit Granatier"
 #| msgid "Quit"
@@ -380,33 +380,33 @@ msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "ออก"
 
-#: mainwindow.cpp:181
+#: mainwindow.cpp:192
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "ค่าทั่วไป"
 
-#: mainwindow.cpp:185
+#: mainwindow.cpp:196
 #, kde-format
 msgid "Theme"
 msgstr "ชุดตกแต่ง"
 
-#: mainwindow.cpp:187
+#: mainwindow.cpp:198
 #, kde-format
 msgid "Arena"
 msgstr "สนาม"
 
-#: mainwindow.cpp:189
+#: mainwindow.cpp:200
 #, kde-format
 msgid "Player"
 msgstr "ผู้เล่น"
 
-#: mainwindow.cpp:239
+#: mainwindow.cpp:255
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr "คุณแน่ใจหรือว่าต้องการจะออกจากเกม Granatier ?"
 
-#: mainwindow.cpp:240
+#: mainwindow.cpp:256
 #, kde-format
 msgctxt "To quit Granatier"
 msgid "Quit"
