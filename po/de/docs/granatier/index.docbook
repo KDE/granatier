@@ -1,727 +1,409 @@
 <?xml version="1.0" ?>
 <!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
-  <!ENTITY % German "INCLUDE"
-> <!-- change language only here -->
-  <!ENTITY % addindex "IGNORE"
-> <!-- do not change this! -->
+  <!ENTITY % English "INCLUDE" > <!-- change language only here -->
+  <!ENTITY % addindex "IGNORE"> <!-- do not change this! -->
 ]>
 
 <book id="granatier" lang="&language;">
   <bookinfo>
-    <title
->Das Handbuch zu &granatier;</title>
+    <title>&granatier; Handbook</title>
     
     <authorgroup>
-      <author
-><personname
-><firstname
->Mathias</firstname
-><surname
->Kraus</surname
-></personname
-><email
->k.hias@gmx.de</email
-> </author>
-    <othercredit role="translator"
-><firstname
->Johannes</firstname
-><surname
->Obermayr</surname
-><affiliation
-><address
-><email
->johannesobermayr@gmx.de</email
-></address
-></affiliation
-><contrib
->Übersetzung</contrib
-></othercredit
-> 
+      <author>
+        <personname>
+          <firstname>Mathias</firstname>
+          <surname>Kraus</surname>
+        </personname>
+        <email>k.hias@gmx.de</email>
+      </author>
+    <!-- TRANS:ROLES_OF_TRANSLATORS -->
     </authorgroup>
-    <legalnotice
->&FDLNotice;</legalnotice>
-    <date
->2021-06-23</date>
-    <releaseinfo
->1.4.2 (KDE Gear 21.04)</releaseinfo>
+    <legalnotice>&FDLNotice;</legalnotice>
+    <date>2021-06-23</date>
+    <releaseinfo>1.4.2 (KDE Gear 21.04)</releaseinfo>
     
     <abstract>
-      <para
->Diese Dokumentation beschreibt die Version 1.4.2 des Spiels &granatier;</para>
+      <para>This documentation describes the game of &granatier; version 1.4.2</para>
     </abstract>
     
     <keywordset>
-      <keyword
->KDE</keyword
-> <!-- do not change this! -->
-      <keyword
->KDE-Spiele</keyword
-> <!-- do not change this! -->
-      <keyword
->Spiel</keyword
-> <!-- do not change this! -->
-      <keyword
->Granatier</keyword
-><!--Application name goes here-->
+      <keyword>KDE</keyword> <!-- do not change this! -->
+      <keyword>kdegames</keyword> <!-- do not change this! -->
+      <keyword>game</keyword> <!-- do not change this! -->
+      <keyword>Granatier</keyword><!--Application name goes here-->
       <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
-      <keyword
->Arcade</keyword>
+      <keyword>arcade</keyword>
       <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
-      <keyword
->Mehrspieler</keyword>
+      <keyword>multiplayer</keyword>
       <!--All other relevant keywords-->
-      <keyword
->Bomberman</keyword>
-      <keyword
->Clanbomber</keyword>
+      <keyword>bomberman</keyword>
+      <keyword>clanbomber</keyword>
     </keywordset>
   </bookinfo>
 
-  <chapter id="introduction"
-><title
->Einleitung</title
-> <!-- do not change this! -->
-    <note
-><title
->Spielart:</title
-><para
->Arcade</para
-></note>
-    <note
-><title
->Anzahl der Spieler:</title
-><para
->Mehrere</para
-></note>
-    <para
->&granatier; ist eine erweiterte Kopie des klassischen Spiels &nbsp;<trademark
-><application
->Bomberman</application
-></trademark
-> und ist von der Arbeit an dessen <emphasis
-><application
->Clanbomber</application
-></emphasis
->-Kopie inspiriert. </para>
-    <para
->Die Spieler müssen sich auf dem Spielfeld bewegen und Bomben zum Entfernen der Hindernisse und Töten der Gegner legen. Einige <emphasis
->Boni</emphasis
-> und <emphasis
->Hemmer</emphasis
-> sind unter den <emphasis
->Hindernissen</emphasis
-> versteckt und können sich dabei als hilfreich bzw. nachteilig erweisen. </para>
+  <chapter id="introduction"><title>Introduction</title> <!-- do not change this! -->
+    <note><title>Gametype:</title><para>Arcade</para></note>
+    <note><title>Number of possible players:</title><para>Multiplayer</para></note>
+    <para>
+      &granatier; is a clone of the classic &nbsp;<trademark><application>Bomberman</application></trademark> game, inspired by the work of the <application>Clanbomber</application> clone.
+    </para>
+    <para>
+      The object of the game is to run through an arena, using bombs to clear out blocks and eliminate your opponents. Several bonuses and handicaps are hidden underneath the blocks &ndash; these can either help or hinder your progress.
+    </para>
     <screenshot>
-      <screeninfo
->Ein Bildschirmfoto von &granatier;</screeninfo>
+      <screeninfo>A &granatier; screenshot</screeninfo>
       <mediaobject>
         <imageobject>
           <imagedata fileref="granatier.png" format="PNG"/>
         </imageobject>
         <textobject>
-          <phrase
->Ein Bildschirmfoto von &granatier;</phrase>
+          <phrase>A &granatier; screenshot</phrase>
         </textobject>
       </mediaobject>
     </screenshot>
   </chapter>
   
-  <chapter id="howto"
-><title
->Spielanleitung</title
-> <!-- do not change this! -->
-    <note
-><title
->Spielziel:</title
-><para
->Das Spielziel besteht im Töten aller Gegner.</para
-></note>
-    <para
->Jeder Spieler benötigt fünf Tasten für die Steuerung der Spielfigur und das Legen der Bomben. Die Standardtasten für <emphasis
->Spieler 1</emphasis
-> sind beispielsweise zur Steuerung die Pfeiltasten &Up;, &Down;, &Left; und &Right; sowie die &Enter;taste zum Legen der Bomben. Im Abschnitt <link linkend="config_player"
->Spieler</link
-> sind weitere Informationen zu den Tastenkürzeln der anderen Spieler sowie deren Änderung enthalten. </para>
-    <para
->Mit dem Legen der Bomben werden - abgesehen vom Angreifen der Gegner - die vielen Hindernisse auf dem Spielfeld entfernt und dadurch der Weg freigemacht bzw. <emphasis
->Boni</emphasis
-> oder <emphasis
->Hemmer</emphasis
-> freigelegt. Zu den vielen freizulegenden <emphasis
->Boni</emphasis
-> gehören unter anderem solche, mit denen die Reichweite der Bombe oder auch die Geschwindigkeit des Spielers erhöht werden. Je mehr <emphasis
->Boni</emphasis
-> eingesammelt werden, desto leichter wird das Töten der Gegner und somit das Gewinnen der Runde. Es ist jedoch Vorsicht geboten: Es gibt auch <emphasis
->Hemmer</emphasis
->, die sich nachteilig auswirken, indem sie die Geschwindigkeit herabsetzen oder die Funktion der Richtungstasten umkehren.  </para>
-    <para
->Für jede gewonnene Runde erhält der Gewinner einen Punkt. Der Spieler, der als erstes die eingestellte Punktzahl (Standard: 3) erreicht, gewinnt das Spiel. </para>
+  <chapter id="howto"><title>How to play</title> <!-- do not change this! -->
+    <note><title>Objective:</title><para>Eliminate all Opponents.</para></note>
+    <para>
+      Each player is provided with five keys that they use to move their character and lay bombs.  For example, the default keys for Player 1 are the &Up;, &Down;, &Left; and &Right; arrow keys to move respectively in those directions, and the &Enter; key to lay a bomb.  Please refer to the <link linkend="config_player">Player Configuration</link> Section to find shortcut keys for other players, as well as how to configure them.
+    </para>
+    <para>
+      The purpose of laying bombs, aside from attacking other opponents, is to destroy the many blocks scattered throughout the arena in order to clear a path or uncover hidden bonuses.  Among the many bonuses that can be uncovered are those that make you move faster or increase your bomb blast range; the more bonuses of this type you collect, the easier it is to eliminate your opponents and win the round.  But be warned that just as many handicaps exist that can turn the tide against you, including those that slow you down or invert your moving keys. 
+    </para>
+    <para> 
+      For each won round, the player is awarded a point.  The first player to win a predefined number of points (the default is 3), wins the game!
+    </para>
   </chapter>
   
-  <chapter id="rules_and_tips"
-><title
->Spielregeln, Spielstrategien und Tipps</title
-> <!-- do not change this! -->
+  <chapter id="rules_and_tips"><title>Game Rules, Strategies and Tips</title> <!-- do not change this! -->
     <sect1 id="test">
-    <title
->Gegenstände</title>
+    <title>The Items</title>
     <sect2>
-      <title
->Spielfeld</title>
-      <para
->Die Spieler befinden sich auf einem Spielfeld, das aus folgenden Objekten besteht: </para>
+      <title>The Arena</title>
+      <para>
+       The players are in an arena which consists of:
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="arena_wall.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Wand</phrase
-> </textobject>
-        </inlinemediaobject
->Die <emphasis
->Wand</emphasis
-> begrenzt das Spielfeld und kann nicht zerstört werden. </para>
+          <imageobject> <imagedata fileref="arena_wall.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Wall</phrase> </textobject>
+        </inlinemediaobject>
+        The Wall &ndash; this defines the outline of the arena map and cannot be destroyed.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="arena_ground.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Boden</phrase
-> </textobject>
-        </inlinemediaobject
->Auf dem <emphasis
->Boden</emphasis
-> bewegen sich die Spieler. </para>
+          <imageobject> <imagedata fileref="arena_ground.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Ground</phrase> </textobject>
+        </inlinemediaobject>
+        The Ground &ndash; this can be walked on safely.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="arena_ice.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Eis</phrase
-> </textobject>
-        </inlinemediaobject
->Das <emphasis
->Eis</emphasis
-> macht den Boden rutschig. Die Geschwindigkeit des Spielers erhöht sich und das vollständige Stehen bleiben ist nicht möglich. </para>
+          <imageobject> <imagedata fileref="arena_ice.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Ice</phrase> </textobject>
+        </inlinemediaobject>
+        The Ice &ndash; this will make the ground slippery. The speed increases on the ice and it is not possible to completly stop moving.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="arena_block.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Hindernis</phrase
-> </textobject>
-        </inlinemediaobject
->Die <emphasis
->Hindernisse</emphasis
-> können mit Bomben zerstört werden und ein paar von Ihnen enthalten <emphasis
->Boni</emphasis
-> oder <emphasis
->Hemmer</emphasis
->. </para>
+          <imageobject> <imagedata fileref="arena_block.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Block</phrase> </textobject>
+        </inlinemediaobject>
+        The Block &ndash; this can be destroyed with a bomb, and may contain a bonus (or a handicap).
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Mörser</phrase
-> </textobject>
-        </inlinemediaobject
->Auf dem <emphasis
->Mörser</emphasis
-> gelegte Bomben werden an eine zufällige Stelle auf dem Spielfeld <emphasis
->teleportiert</emphasis
->. </para>
+          <imageobject> <imagedata fileref="arena_bomb_mortar.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Bomb Mortar</phrase> </textobject>
+        </inlinemediaobject>
+        The Bomb Mortar &ndash; this will throw bombs that are placed on it to random places.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Pfeile</phrase
-> </textobject>
-        </inlinemediaobject
->Die <emphasis
->Pfeile</emphasis
-> bewegen die darauf gelegten Bomben in die jeweils zeigende Richtung (bis sie an einer Wand oder einem Hindernis anstoßen). </para>
-      <para
->Falls keines der oben genannten Objekte vorhanden ist, befindet sich ein <emphasis
->Loch</emphasis
-> im Boden. Sobald sich der Spieler in ein solches bewegt, fällt er in die Tiefe und stirbt. Selbiges geschieht, wenn das Spielfeld nicht durch eine Wand begrenzt wird und sich der Spieler vom Spielfeld bewegt. </para>
+          <imageobject> <imagedata fileref="arena_arrow_right.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Arena Arrow Right</phrase> </textobject>
+        </inlinemediaobject>
+        The Arrows &ndash; this will move the bombs that are placed on it to the direction they point.
+      </para>
+      <para>
+        If there is none of the above items, there is a hole at the ground and moving into it will result in falling into the deep and die. The same applies also if there is no wall at the edge of the arena and the player moves outside of the arena.
+      </para>
     </sect2>
     <sect2>
-      <title
->Boni</title>
-      <para
-><emphasis
->Boni</emphasis
-> sind für das Erreichen des Spielziels hilfreich. Sie existieren dauernd - sogar nachdem die Wirkung der <emphasis
->Hemmer</emphasis
-> verschwindet. Derzeit sind folgende <emphasis
->Boni</emphasis
-> verfügbar: </para>
+      <title>The Bonuses</title>
+      <para>
+       Bonuses are helpful for reaching the game goal and effects exists permanent - even after a handicap disappears. Currently there are following bonuses:
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_speed.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Geschwindigkeit</phrase
-> </textobject>
-        </inlinemediaobject
->Durch den <emphasis
->Geschwindigkeits</emphasis
->bonus kann sich der Spieler ein bisschen schneller bewegen. </para>
+          <imageobject> <imagedata fileref="bonus_speed.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Speed</phrase> </textobject>
+        </inlinemediaobject>
+        Speed &ndash; increases your speed slightly.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Bombe</phrase
-> </textobject>
-        </inlinemediaobject
->Durch den <emphasis
->Bomben</emphasis
->bonus können mehrere Bomben gleichzeitig gelegt werden. </para>
+          <imageobject> <imagedata fileref="bonus_bomb.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Bomb</phrase> </textobject>
+        </inlinemediaobject>
+        Bomb &ndash; adds an extra bomb to your arsenal, allowing you to lay more than one bomb at a time.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Schlagkraft</phrase
-> </textobject>
-        </inlinemediaobject
->Der <emphasis
->Schlagkraft</emphasis
->bonus erhöht die Reichweite der Bombe. </para>
+          <imageobject> <imagedata fileref="bonus_power.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Power</phrase> </textobject>
+        </inlinemediaobject>
+        Power &ndash; increases the power of your bombs, extending their bomb blast range.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Schild</phrase
-> </textobject>
-        </inlinemediaobject
->Das <emphasis
->Schild</emphasis
-> schützt vor der Wirkung der Bombenexplosion. </para>
+          <imageobject> <imagedata fileref="bonus_shield.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Shield</phrase> </textobject>
+        </inlinemediaobject>
+        Shield &ndash; makes invincible for one bomb blast.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Werfen</phrase
-> </textobject>
-        </inlinemediaobject
->Mit dem <emphasis
->Treten</emphasis
->bonus können die Bomben auch geworfen werden. Dazu muss lediglich die Taste für das Legen der Bombe gedrückt werden, sobald sich die Spielfigur über einer Bombe befindet. </para>
+          <imageobject> <imagedata fileref="bonus_throw.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Throw</phrase> </textobject>
+        </inlinemediaobject>
+        Throw &ndash; adds the ability to throw bombs. Just press the key for laying bombs while a bomb is below you.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Treten</phrase
-> </textobject>
-        </inlinemediaobject
->Mit dem <emphasis
->Treten</emphasis
->bonus können die Bomben bewegt werden. Hierzu wird lediglich die Bombe berührt und sie bewegt sich in die entsprechende Richtung. </para>
+          <imageobject> <imagedata fileref="bonus_kick.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Kick</phrase> </textobject>
+        </inlinemediaobject>
+        Kick &ndash; adds the ability to move bombs. Just run against an bomb and the bomb will move.
+      </para>
     </sect2>
     <sect2>
-      <title
->Hemmer</title>
-      <para
-><emphasis
->Hemmer</emphasis
-> sind das genaue Gegenteil der <emphasis
->Boni</emphasis
-> und behindern den Spieler. Die gute Sache ist, dass deren Auswirkungen nach einiger Zeit wieder verschwinden (anders als bei <emphasis
->Boni</emphasis
->) und der Spieler in seinem gewohnten Verhalten (einschl. <emphasis
->Boni</emphasis
->) weiterspielen kann. Derzeit sind folgende <emphasis
->Hemmer</emphasis
-> verfügbar: </para>
+      <title>The Handicaps</title>
+      <para>
+       Handicaps are the opposite of bonuses and hinder the player. The good thing is that effects get lost after some time (other than bonuses) and the player can play in is usual behavior (including bonuses) again. Currently there are following handicaps:
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_bad_slow.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Bremse</phrase
-> </textobject>
-        </inlinemediaobject
->Durch die <emphasis
->Bremse</emphasis
-> kann sich der Spieler nur noch langsam fortbewegen. </para>
+          <imageobject> <imagedata fileref="bonus_bad_slow.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Slow</phrase> </textobject>
+        </inlinemediaobject>
+        Slow &ndash; makes you move very slowly.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Hyperaktivität</phrase
-> </textobject>
-        </inlinemediaobject
->Der <emphasis
->hyperaktive</emphasis
-> Spieler bewegt sich sehr schnell und ist dadurch nur schwer steuerbar ... </para>
+          <imageobject> <imagedata fileref="bonus_bad_hyperactive.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Hyperactive</phrase> </textobject>
+        </inlinemediaobject>
+        Hyperactive &ndash; makes you move a little TOO fast.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_bad_mirror.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Spiegel</phrase
-> </textobject>
-        </inlinemediaobject
->Durch den <emphasis
->Spiegel</emphasis
-> bewegt sich der Spieler immer in die andere Richtung (hoch -> runter, links -> rechts, bzw. umgekehrt). </para>
+          <imageobject> <imagedata fileref="bonus_bad_mirror.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Mirror</phrase> </textobject>
+        </inlinemediaobject>
+        Mirror &ndash; inverts your moving keys, so that up becomes down and left becomes right.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_bad_scatty.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Schusseligkeit</phrase
-> </textobject>
-        </inlinemediaobject
->Der <emphasis
->Schussel</emphasis
-> legt ständig Bomben. </para>
+          <imageobject> <imagedata fileref="bonus_bad_scatty.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Scatty</phrase> </textobject>
+        </inlinemediaobject>
+        Scatty &ndash; forces you to continuously lay bombs without control.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_bad_restrain.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Handschellen</phrase
-> </textobject>
-        </inlinemediaobject
->Durch die <emphasis
->Handschellen</emphasis
-> können keine Bomben gelegt werden. </para>
+          <imageobject> <imagedata fileref="bonus_bad_restrain.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Handicap Restrain</phrase> </textobject>
+        </inlinemediaobject>
+        Restrain &ndash; prevents you to lay bombs.
+      </para>
     </sect2>
     <sect2>
-      <title
->Doppelwirkende Gegenstände</title>
-      <para
->Die Gegenstände sind weder gut noch schlecht. Vielmehr hängt deren Wirkung von der Umgebung ab. Derzeit sind folgende <emphasis
->neutrale</emphasis
-> Gegenstände verfügbar: </para>
+      <title>The ambivalent Items</title>
+      <para>
+      This type of bonuses are neither good nor bad, it mostly depends on the environment. Currently there are following neutral bonuses:
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_neutral_pandora.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Kiste der Pandora</phrase
-> </textobject>
-        </inlinemediaobject
->Die <emphasis
->Kiste der Pandora</emphasis
-> ist eine Überraschung und beinhaltet entweder einen <emphasis
->Bonus</emphasis
-> oder <emphasis
->Hemmer</emphasis
->. </para>
+          <imageobject> <imagedata fileref="bonus_neutral_pandora.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Neutral Pandora</phrase> </textobject>
+        </inlinemediaobject>
+        Pandora &ndash; this contains either a bonus or a handicap.
+      </para>
       <para>
         <inlinemediaobject>
-          <imageobject
-> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
-          <textobject
-> <phrase
->Wiederbelebung</phrase
-> </textobject>
-        </inlinemediaobject
->Die <emphasis
->Wiederbelebung</emphasis
-> erweckt einen getöteten Spieler zu neuem Leben. </para>
+          <imageobject> <imagedata fileref="bonus_neutral_resurrect.png" format="PNG" /> </imageobject>
+          <textobject> <phrase>Bonus Neutral Resurrect</phrase> </textobject>
+        </inlinemediaobject>
+        Resurrect &ndash; this will resurrect any dead player.
+      </para>
     </sect2>
     </sect1>
   </chapter>
 
-  <chapter id="interface"
-><title
->Die Benutzeroberfläche</title
-> <!-- do not change this! -->
+  <chapter id="interface"><title>Interface Overview</title> <!-- do not change this! -->
 
     <sect1 id="menu">
-    <title
->Menüeinträge</title>
+    <title>Menu Items</title>
 
       <variablelist>
         <varlistentry>
-          <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->N</keycap
-></keycombo
-></shortcut
-> <guimenu
->Spiel</guimenu
-> <guimenuitem
->Neu</guimenuitem
-></menuchoice
-></term>
-          <listitem
-><para
-><action
->Startet</action
-> ein neues Spiel.</para
-></listitem>
+          <term><menuchoice>
+          <shortcut><keycombo action="simul">&Ctrl;<keycap>N</keycap></keycombo></shortcut>
+          <guimenu>Game</guimenu>
+          <guimenuitem>New</guimenuitem></menuchoice></term>
+          <listitem><para><action>Starts</action> a new game.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-          <term
-><menuchoice
-><shortcut
-><keycombo action="simul"
->&Ctrl;<keycap
->Q</keycap
-></keycombo
-></shortcut
-><guimenu
->Spiel</guimenu
-><guimenuitem
->Beenden</guimenuitem
-></menuchoice
-></term>
-          <listitem
-><para
-><action
->Beendet</action
-> &granatier;.</para
-></listitem>
+          <term><menuchoice>
+          <shortcut><keycombo action="simul">&Ctrl;<keycap>Q</keycap></keycombo></shortcut>
+          <guimenu>Game</guimenu>
+          <guimenuitem>Quit</guimenuitem></menuchoice></term>
+          <listitem><para><action>Quits</action> &granatier;.</para></listitem>
         </varlistentry>
 
         <varlistentry>
-          <term
-><menuchoice
-><guimenu
->Einstellungen</guimenu
-> <guimenuitem
->Klänge wiedergeben</guimenuitem
-></menuchoice
-></term>
-          <listitem
-><para
->Falls markiert, <action
->werden die Klänge zum Spiel abgespielt.</action
-> In der Voreinstellung sind die Klänge eingeschaltet. </para
-></listitem>
+          <term><menuchoice>
+          <guimenu>Settings</guimenu>
+          <guimenuitem>Play Sounds</guimenuitem></menuchoice></term>
+          <listitem><para><action>Toggle whether sounds should be played.</action> The default is on. </para></listitem>
         </varlistentry>
       </variablelist>
 
-      <para
->Zusätzlich hat &granatier; die bekannten &kde;-Einträge im Menü <guimenu
->Einstellungen</guimenu
-> und <guimenu
->Hilfe</guimenu
->, weitere Informationen dazu finden Sie in den Abschnitten über die Menüs <ulink url="help:/fundamentals/menus.html#menus-settings"
->Einstellungen</ulink
-> und <ulink url="help:/fundamentals/menus.html#menus-help"
->Hilfe</ulink
-> der &kde;-Grundlagen. </para>
+      <para>
+      Additionally &granatier; has the common &kde; <guimenu>Settings</guimenu> and <guimenu>Help</guimenu>
+menu items, for more information read the sections about the <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Settings Menu</ulink> and <ulink url="help:/fundamentals/menus.html#menus-help">Help Menu</ulink>
+of the &kde; Fundamentals.
+      </para>
 
     </sect1>
   </chapter>
 
-  <chapter id="configuration"
-><title
->Spieleinstellungen</title
-> <!-- do not change this! -->
-    <para
->Der Dialog für die Spieleinstellungen kann über das Menü <menuchoice
-><guimenu
->Einstellungen</guimenu
-><guimenuitem
->&granatier; einrichten ...</guimenuitem
-></menuchoice
-> aufgerufen werden. </para>
+  <chapter id="configuration"><title>Game Configuration</title> <!-- do not change this! -->
+    <para>
+      To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice> menu item.
+    </para>
     <sect1 id="config_general">
-      <title
->Allgemein</title>
-      <para
->Die zum Gewinnen benötigte Punktzahl sowie die Spielzeit für eine Runde können verändert werden. Nachdem die Zeit abgelaufen ist, wird die <emphasis
->Todesfalle</emphasis
-> aktiviert. </para>
-      <para
->Zusätzlich können die Geschwindigkeit, Bombenreichweite und Bombenausstattung zum Spielbeginn festgelegt werden. </para>
+      <title>General</title>
+      <para>
+        You can change the points which are needed to win the game and the time for a round. After the time is over, the sudden death mode will start.
+      </para>
+      <para>
+        Additionally you can adjust the initial speed, bomb range and bomb armory.
+      </para>
       <screenshot>
-        <screeninfo
->Einrichtungsdialog von &granatier;</screeninfo>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
         <mediaobject>
           <imageobject>
             <imagedata fileref="config_general.png" format="PNG"/>
           </imageobject>
           <textobject>
-            <phrase
->Einrichtungsdialog von &granatier;</phrase>
+            <phrase>A &granatier; Config screenshot</phrase>
           </textobject>
         </mediaobject>
       </screenshot>
     </sect1>
     <sect1 id="config_theme">
-      <title
->Design</title>
-      <para
->Das Design wird im Abschnitt <guilabel
->Design</guilabel
-> ausgewählt und durch einen Klick auf &nbsp;<guibutton
->OK</guibutton
-> oder &nbsp;<guibutton
->Anwenden</guibutton
-> geladen. Dadurch wird das aktuelle Spiel beendet und ein neues startet. Mittels Klick auf <guibutton
->Voreinstellungen</guibutton
-> wird das Standarddesign wiederhergestellt. </para>
+      <title>Theme</title>
+      <para>
+        To select the Theme you want to play, go to the Theme section. The Theme is loaded by clicking on &nbsp;<guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the &nbsp;<guibutton>Defaults</guibutton> button to restore the default Theme.
+      </para>
       <screenshot>
-        <screeninfo
->Einrichtungsdialog von &granatier;</screeninfo>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
         <mediaobject>
           <imageobject>
             <imagedata fileref="config_theme.png" format="PNG"/>
           </imageobject>
           <textobject>
-            <phrase
->Einrichtungsdialog von &granatier;</phrase>
+            <phrase>A &granatier; Config screenshot</phrase>
           </textobject>
         </mediaobject>
       </screenshot>
     </sect1>
     <sect1 id="config_arena">
-      <title
->Spielfeld</title>
-      <para
->Das Spielfeld wird im Abschnitt <guilabel
->Spielfeld</guilabel
-> ausgewählt und durch einen Klick auf &nbsp;<guibutton
->OK</guibutton
-> oder &nbsp;<guibutton
->Anwenden</guibutton
-> geladen. Dadurch wird das aktuelle Spiel beendet und ein neues startet. Mittels Klick auf <guibutton
->Voreinstellungen</guibutton
-> wird das Standardspielfeld wiederhergestellt. </para>
-      <para
->Falls sie eigene <application
->Clanbomber</application
->-Spielfelder erstellt haben, können Sie sie in den Ordner <filename class="directory"
->~/.clanbomber/maps</filename
-> kopieren. &granatier; sucht in diesem Ordner nach Spielfeldern. Die standardmäßigen Spielfelder von <application
->Clanbomber</application
-> werden bereits mit &granatier; ausgeliefert. </para>
+      <title>Arena</title>
+      <para>
+        To select the Arena you want to play, go to the Arena section. The Arena is loaded by clicking on &nbsp;<guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the &nbsp;<guibutton>Defaults</guibutton> button to restore the default Arena.
+      </para>
+      <para>
+        If you have self-made <application>Clanbomber</application> arenas, you can copy them to <filename class="directory">~/.clanbomber/maps</filename>, where &granatier; will look for them. The default <application>Clanbomber</application> arenas are already shipped with &granatier;.
+      </para>
       <screenshot>
-        <screeninfo
->Einrichtungsdialog von &granatier;</screeninfo>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
         <mediaobject>
           <imageobject>
             <imagedata fileref="config_arena.png" format="PNG"/>
           </imageobject>
           <textobject>
-            <phrase
->Einrichtungsdialog von &granatier;</phrase>
+            <phrase>A &granatier; Config screenshot</phrase>
           </textobject>
         </mediaobject>
       </screenshot>
-      <para
->Durch Auswahl von <guibutton
->Zufallsmodus</guibutton
-> wird für jede Runde ein zufälliges Spielfeld gewählt. Möchten Sie einige Spielfelder nicht benutzen, wählen Sie sie in der Liste ab. </para>
+      <para>
+        If you select <guibutton>Random Mode</guibutton>, a random arena will be used for each new round. If there are arenas you don't want to play, you can uncheck them.
+      </para>
       <screenshot>
-        <screeninfo
->Einrichtungsdialog von &granatier;</screeninfo>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
         <mediaobject>
           <imageobject>
             <imagedata fileref="config_arena_random_mode.png" format="PNG"/>
           </imageobject>
           <textobject>
-            <phrase
->Einrichtungsdialog von &granatier;</phrase>
+            <phrase>A &granatier; Config screenshot</phrase>
           </textobject>
         </mediaobject>
       </screenshot>
     </sect1>
     <sect1 id="config_player">
-      <title
->Spieler</title>
-      <para
->Im Abschnitt <guilabel
->Spieler</guilabel
-> können die gewünschten Spieler ausgewählt werden (Farbe und Anzahl). Die Steuerungstasten können geändert werden, indem auf die gewünschte Aktion geklickt und danach die entsprechende Taste gedrückt wird. Durch einen Klick auf &nbsp;<guibutton
->OK</guibutton
-> oder <guibutton
->Anwenden</guibutton
-> werden die Änderungen übernommen. Dadurch wird das aktuelle Spiel beendet und ein neues startet. Mittels Klick auf &nbsp;<guibutton
->Voreinstellungen</guibutton
-> werden die standardmäßigen Steuerungstasten wiederhergestellt. </para>
+      <title>Player</title>
+      <para>
+        To select the Player you want to play, go to the Player section and select the Players with the checkboxes. The Shortcuts can be changed by clicking on the button for the action you want to change and then pressing the key you want to use. The changes are loaded by clicking on &nbsp;<guibutton>OK</guibutton> or <guibutton>Apply</guibutton>. The current game will be ended and a new one started. You can click on the &nbsp;<guibutton>Defaults</guibutton> button to restore the default Shortcuts.
+      </para>
       <screenshot>
-        <screeninfo
->Einrichtungsdialog von &granatier;</screeninfo>
+        <screeninfo>A &granatier; Config screenshot</screeninfo>
         <mediaobject>
           <imageobject>
             <imagedata fileref="config_player.png" format="PNG"/>
           </imageobject>
           <textobject>
-            <phrase
->Einrichtungsdialog von &granatier;</phrase>
+            <phrase>A &granatier; Config screenshot</phrase>
           </textobject>
         </mediaobject>
       </screenshot>
     </sect1>
   </chapter>
 
-  <chapter id="create_arena"
-><title
->Spielfeld erstellen</title
-> <!-- do not change this! -->
-    <para
->Die Spielfelder von &granatier; bestehen aus den zwei Dateien <filename
->meinSpielfeld.desktop</filename
->&nbsp; und <filename
->meinSpielfeld.xml</filename
->. </para>
-
-    <para
->Die <literal role="extension"
->.desktop</literal
->-Datei enthält die Metadaten wie den Namen und Autor des Spielfelds und besteht aus folgenden Einträgen. </para>
+  <chapter id="create_arena"><title>Create a custom Arena</title> <!-- do not change this! -->
     <para>
-      <programlisting
->[Arena]
-Name=Mein Spielfeld
-Description=Dies ist mein erstes Spielfeld
+      An Arena in &granatier; consists of two files, the <filename>myarena.desktop</filename>&nbsp; and the <filename>myarena.xml</filename>.
+    </para>
+
+    <para>
+      The <literal role="extension">.desktop</literal> file contains the metadata like the arena name or the author of the arena and consists of the following entries.
+    </para>
+    <para>
+      <programlisting>
+[Arena]
+Name=My Arena
+Description=This is my first Arena
 Type=XML
-FileName=meinSpielfeld.xml
+FileName=myarena.xml
 Author=Joe User
 AuthorEmail=joe.user@foo.org
       </programlisting>
     </para>
-    <para
->Sie können einen beliebigen Namen wählen, aber &nbsp;<literal
->FileName</literal
-> muss der Name der <literal role="extension"
->.xml</literal
->-Datei sein. </para>
-    <para
->Die <filename
->.xml</filename
->-Datei beschreibt den Aufbau des Spielfelds. </para>
     <para>
-      <programlisting
->&lt;?xml version="1.0"?&gt;
+      You can choose whatever name you want, but &nbsp;<literal>FileName</literal> must be the name of the <literal role="extension">.xml</literal> file.
+    </para>
+    <para>
+      The <literal role="extension">.xml</literal> file contains the actual arena map.
+    </para>
+    <para>
+      <programlisting>
+&lt;?xml version="1.0"?&gt;
 &lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
   &lt;Row&gt;    ==== ====    &lt;/Row&gt;
   &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
@@ -739,84 +421,51 @@ AuthorEmail=joe.user@foo.org
 &lt;/Arena&gt;
       </programlisting>
     </para>
-    <para
->Für <userinput
->rowCount</userinput
-> (= Anzahl der Zeilen) und <userinput
->colCount</userinput
-> (= Anzahl der Spalten) gibt es keine Höchstwerte. Somit kann die Größe des Spielfelds beliebig gewählt werden. Die nachstehenden Zeichen können Verwendung finden: </para>
     <para>
-      <programlisting
->„<keycap
->=</keycap
->“ Wand
-„<keycap
-> </keycap
->“ Loch
-„<keycap
->_</keycap
->“ Boden
-„<keycap
->+</keycap
->“ Hindernis
-„<keycap
->x</keycap
->“ Boden oder Hindernis (zufällig)
-„<keycap
->-</keycap
->“ Eis
-„<keycap
->o</keycap
->“ Mörser
-„<keycap
->u</keycap
->“ Pfeil hoch
-„<keycap
->r</keycap
->“ Pfeil rechts
-„<keycap
->d</keycap
->“ Pfeil runter
-„<keycap
->l</keycap
->“ Pfeil links
-„<keycap
->p</keycap
->“ Position eines Spielers
+      There is no limit for <literal>rowCount</literal> and <literal>colCount</literal>, so you can choose the size of the arena by yourself. The following symbols are used for the arena map.
+    </para>
+    <para>
+      <programlisting>
+'=' a wall item
+' ' a hole item
+'_' a ground item
+'+' a block item
+'x' will randomly create a block or a ground item
+'-' an ice item
+'o' a mortar item
+'u' an arrow up
+'r' an arrow right
+'d' an arrow down
+'l' an arrow left
+'p' a player position
       </programlisting>
     </para>
   </chapter>
 
-  <chapter id="credits"
-><title
->Danksagungen und Lizenz</title
-> <!-- do not change this! -->
-    <para
->&granatier; </para>
+  <chapter id="credits"><title>Credits and License</title> <!-- do not change this! -->
+    <para>
+      &granatier;  <!-- do not change this! -->
+    </para>
     <!-- List all the copyright holders here-->
-    <para
->Programm © 2009 Mathias Kraus <email
->k.hias@gmx.de</email
-> </para>
-    <para
->Grafiken © 2009 Mathias Kraus <email
->k.hias@gmx.de</email
-> </para>
-    <para
->Grafiken © Arturo Silva <email
->jasilva28@gmail.com</email
-> </para>
-    <para
->Dokumentation © 2009 Mathias Kraus <email
->k.hias@gmx.de</email
-> </para>
+    <para>
+      Program copyright 2009 Mathias Kraus <email>k.hias@gmx.de</email>
+    </para>
+    <para>
+      Graphics copyright 2009 Mathias Kraus <email>k.hias@gmx.de</email>
+    </para>
+    <para>
+      Graphics copyright 2009 Arturo Silva <email>jasilva28@gmail.com</email>
+    </para>
+    <para>
+      Documentation copyright 2009 Mathias Kraus <email>k.hias@gmx.de</email>
+    </para>
 
   <!-- !!!do not change ANYTHING after this line!!!! -->
-  <para
->Übersetzung: Johannes Obermayr <email
->johannesobermayr@gmx.de</email
-></para
-> &underFDL; &underGPL; </chapter>
+  <!-- TRANS:CREDIT_FOR_TRANSLATORS -->
+  &underFDL;
+  &underGPL;
+
+  </chapter>
 
   &documentation.index; 
 </book>
