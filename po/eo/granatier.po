@@ -1,13 +1,15 @@
 # Translation of granatier into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:43+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-01-06 22:00+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -19,42 +21,42 @@ msgstr ""
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Axel Rousseau"
+msgstr "Axel Rousseau, Oliver Kellogg"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org"
+msgstr "axel@esperanto-jeunes.org, okellogg@users.sourceforge.net"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
-msgstr ""
+msgstr "de %1"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
 #: config/arenaselector.ui:36
 #, kde-format
 msgid "Random Mode"
-msgstr ""
+msgstr "Hazarda Reĝimo"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
 #, kde-format
 msgid "&Get New Arenas..."
-msgstr ""
+msgstr "&Ekhavi Novajn Arenojn..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
 #, kde-format
 msgid "Only for Artists! Won't be here at release"
-msgstr ""
+msgstr "Nur por Artistoj! Ĝi ne estos je eldono."
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllTiles)
 #: config/generalsettings.ui:23
 #, kde-format
 msgid " Show all tiles"
-msgstr ""
+msgstr " Montri ĉiujn kahelojn"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: config/generalsettings.ui:30
@@ -120,7 +122,7 @@ msgstr ""
 #: config/granatier.kcfg:9
 #, kde-format
 msgid "Check if it is the first run of the game."
-msgstr ""
+msgstr "Kontroli ĉu etas la unua rondo de la ludo."
 
 #. i18n: ectx: label, entry (Theme), group (General)
 #: config/granatier.kcfg:13
@@ -130,58 +132,57 @@ msgstr "La uzota grafika etoso."
 
 #. i18n: ectx: label, entry (Arena), group (General)
 #: config/granatier.kcfg:17
-#, fuzzy, kde-format
-#| msgid "The graphical theme to be used."
+#, kde-format
 msgid "The arena to be used."
-msgstr "La uzota grafika etoso."
+msgstr "La areno uzenda."
 
 #. i18n: ectx: label, entry (RandomArenaMode), group (General)
 #: config/granatier.kcfg:21
 #, kde-format
 msgid "Use random arenas."
-msgstr ""
+msgstr "Uzi hazardajn arenojn."
 
 #. i18n: ectx: label, entry (RandomArenaModeArenaList), group (General)
 #: config/granatier.kcfg:25
 #, kde-format
 msgid "List of arenas, used in random mode."
-msgstr ""
+msgstr "Listo de arenoj, uzata in hazarda reĝimo."
 
 #. i18n: ectx: label, entry (PointsToWin), group (General)
 #: config/granatier.kcfg:28
 #, kde-format
 msgid "The points a user needs to win the game."
-msgstr ""
+msgstr "La poentoj necesaj por venki la ludon."
 
 #. i18n: ectx: label, entry (RoundTime), group (General)
 #: config/granatier.kcfg:32
 #, kde-format
 msgid "Time for a round."
-msgstr ""
+msgstr "Tempo de unu ludrondo."
 
 #. i18n: ectx: label, entry (InitialSpeed), group (General)
 #: config/granatier.kcfg:36
 #, kde-format
 msgid "The initial speed."
-msgstr ""
+msgstr "La komenca rapido."
 
 #. i18n: ectx: label, entry (InitialBombPower), group (General)
 #: config/granatier.kcfg:40
 #, kde-format
 msgid "The initial bomb power."
-msgstr ""
+msgstr "La komenca bombforto."
 
 #. i18n: ectx: label, entry (InitialBombArmory), group (General)
 #: config/granatier.kcfg:44
 #, kde-format
 msgid "The initial bomb armory."
-msgstr ""
+msgstr "La komenca bombarsenalo."
 
 #. i18n: ectx: label, entry (Sounds), group (General)
 #: config/granatier.kcfg:48
 #, kde-format
 msgid "Whether sound effects should be played."
-msgstr ""
+msgstr "Ĉu sonefektoj estu aŭdigataj."
 
 #. i18n: ectx: label, entry (UseWilhelmScream), group (General)
 #: config/granatier.kcfg:52
