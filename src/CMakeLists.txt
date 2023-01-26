@@ -89,10 +89,10 @@ target_link_libraries(granatier
     Qt${QT_MAJOR_VERSION}::Widgets
     KF5KDEGames
     Qt${QT_MAJOR_VERSION}::Svg
-    KF5::CoreAddons
-    KF5::DBusAddons
-    KF5::Crash
-    KF5::XmlGui
+    KF${KF_MAJOR_VERSION}::CoreAddons
+    KF${KF_MAJOR_VERSION}::DBusAddons
+    KF${KF_MAJOR_VERSION}::Crash
+    KF${KF_MAJOR_VERSION}::XmlGui
 )
 
 install(TARGETS granatier ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
