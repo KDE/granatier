@@ -84,10 +84,15 @@ kconfig_add_kcfg_files(granatier config/settings.kcfgc)
 file(GLOB ICONS_SRCS "${CMAKE_CURRENT_SOURCE_DIR}/../icons/*-apps-granatier.png")
 ecm_add_app_icon(granatier ICONS ${ICONS_SRCS})
 
+if (QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(granatier KDEGames6)
+else()
+    target_link_libraries(granatier KF5KDEGames)
+endif()
+
 target_link_libraries(granatier
     Qt${QT_MAJOR_VERSION}::Xml
     Qt${QT_MAJOR_VERSION}::Widgets
-    KF5KDEGames
     Qt${QT_MAJOR_VERSION}::Svg
     KF${KF_MAJOR_VERSION}::CoreAddons
     KF${KF_MAJOR_VERSION}::DBusAddons
