@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:43+0000\n"
-"PO-Revision-Date: 2023-01-06 22:00+0100\n"
+"PO-Revision-Date: 2023-03-20 22:31+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -62,37 +62,37 @@ msgstr " Montri ĉiujn kahelojn"
 #: config/generalsettings.ui:30
 #, kde-format
 msgid "Blast Time 2"
-msgstr ""
+msgstr "Eksplodigtempo 2"
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: config/generalsettings.ui:37
 #, kde-format
 msgid "Blast Time 3"
-msgstr ""
+msgstr "Eksplodigtempo 3"
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: config/generalsettings.ui:78
 #, kde-format
 msgid "Blast Time 1"
-msgstr ""
+msgstr "Eksplodigtempo 1"
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: config/generalsettings.ui:85
 #, kde-format
 msgid "Blast Time 5"
-msgstr ""
+msgstr "Eksplodigtempo 5"
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: config/generalsettings.ui:106
 #, kde-format
 msgid "Blast Time 4"
-msgstr ""
+msgstr "Eksplodigtempo 4"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/generalsettings.ui:131
 #, kde-format
 msgid "Points to win the game:"
-msgstr ""
+msgstr "Poentoj por venki:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: config/generalsettings.ui:154
@@ -104,13 +104,13 @@ msgstr ""
 #: config/generalsettings.ui:177
 #, kde-format
 msgid "Initial Speed:"
-msgstr ""
+msgstr "Komenca Rapideco:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/generalsettings.ui:200
 #, kde-format
 msgid "Initial Bomb Power:"
-msgstr ""
+msgstr "Komenca Bomboforto:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/generalsettings.ui:223
@@ -212,32 +212,31 @@ msgstr ""
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Left:"
-msgstr ""
+msgstr "Maldekstren:"
 
 #: config/playerselectoritem.cpp:73
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Up:"
-msgstr ""
+msgstr "Supren:"
 
 #: config/playerselectoritem.cpp:82
-#, fuzzy, kde-format
-#| msgid "Move Right"
+#, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Right:"
-msgstr "Movi dekstren"
+msgstr "Dekstren:"
 
 #: config/playerselectoritem.cpp:91
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Down:"
-msgstr ""
+msgstr "Malsupren:"
 
 #: config/playerselectoritem.cpp:100
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Bomb:"
-msgstr ""
+msgstr "Bombo:"
 
 #: gamescene.cpp:78
 #, kde-format
@@ -247,42 +246,42 @@ msgstr "0:00"
 #: gamescene.cpp:83
 #, kde-format
 msgid "Arena Name"
-msgstr ""
+msgstr "Arenonomo"
 
 #: gamescene.cpp:811
 #, kde-format
 msgid "Sudden Death"
-msgstr ""
+msgstr "Subtia Morto"
 
 #: infooverlay.cpp:51
 #, kde-format
 msgid "Press Space to continue"
-msgstr ""
+msgstr "Premu Spacon por daŭrigi"
 
 #: infooverlay.cpp:58
 #, kde-format
 msgid "Press Space to start a new Game"
-msgstr ""
+msgstr "Premu Spacon por komenci novan ludon"
 
 #: infooverlay.cpp:68
 #, kde-format
 msgid "GET READY !!!"
-msgstr ""
+msgstr "PRETIĜU !!!"
 
 #: infooverlay.cpp:73
 #, kde-format
 msgid "Press Space to start"
-msgstr ""
+msgstr "Premu Spacon por komenci"
 
 #: infooverlay.cpp:78
 #, kde-format
 msgid "PAUSED"
-msgstr ""
+msgstr "PAŬZITA"
 
 #: infooverlay.cpp:219
 #, kde-format
 msgid "The winner is %1"
-msgstr ""
+msgstr "La venkanto estas %1"
 
 #: main.cpp:77
 #, kde-format
@@ -312,12 +311,12 @@ msgstr "Prizorganto"
 #: main.cpp:85
 #, kde-format
 msgid "Arturo Silva"
-msgstr ""
+msgstr "Arturo Silva"
 
 #: main.cpp:85
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
-msgstr ""
+msgstr "Plejparton de la belaj granatier-grafikoj"
 
 #: main.cpp:86
 #, kde-format
@@ -352,35 +351,35 @@ msgstr "Nathalie Liesse"
 #: mainwindow.cpp:67
 #, kde-format
 msgid "&Play sounds"
-msgstr ""
+msgstr "&Aŭdigi sonojn"
 
 #: mainwindow.cpp:149
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
-msgstr ""
+msgstr "Ĉu vi certas ke vi volas forlasi la nunan ludon?"
 
 #: mainwindow.cpp:150
 #, kde-format
 msgctxt "@title:window"
 msgid "New Game"
-msgstr ""
+msgstr "Nova Ludo"
 
 #: mainwindow.cpp:151
 #, kde-format
 msgctxt "@action:button"
 msgid "Quit Game"
-msgstr ""
+msgstr "Forlasi Ludon"
 
 #: mainwindow.cpp:192
 #, kde-format
 msgctxt "General settings"
 msgid "General"
-msgstr ""
+msgstr "Ĝenerala"
 
 #: mainwindow.cpp:196
 #, kde-format
 msgid "Theme"
-msgstr "Temo"
+msgstr "Etoso"
 
 #: mainwindow.cpp:198
 #, kde-format
@@ -395,34 +394,10 @@ msgstr "Ludanto"
 #: mainwindow.cpp:255
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
-msgstr ""
+msgstr "Ĉu vi certas ke vi volas forlasi Granatier?"
 
 #: mainwindow.cpp:256
 #, kde-format
 msgctxt "To quit Granatier"
 msgid "Quit"
-msgstr ""
-
-#~ msgid "Preview"
-#~ msgstr "Antaŭrigardo"
-
-#~ msgid "Contact:"
-#~ msgstr "Kontakto:"
-
-#~ msgid "Description:"
-#~ msgstr "Priskribo:"
-
-#~ msgid "Author:"
-#~ msgstr "Aŭtoro:"
-
-#~ msgid "Shortcuts"
-#~ msgstr "Klavkombinoj"
-
-#~ msgid "Move Left"
-#~ msgstr "Movi maldekstren"
-
-#~ msgid "Move Up"
-#~ msgstr "Movi supren"
-
-#~ msgid "Move Down"
-#~ msgstr "Movi malsupren"
+msgstr "Forlasi"
