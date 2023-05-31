@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-20 00:43+0000\n"
-"PO-Revision-Date: 2023-03-20 22:31+0100\n"
+"PO-Revision-Date: 2023-05-30 22:35+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -98,7 +98,7 @@ msgstr "Poentoj por venki:"
 #: config/generalsettings.ui:154
 #, kde-format
 msgid "Round Time in Seconds:"
-msgstr ""
+msgstr "Rondumdaŭro en sekundoj:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: config/generalsettings.ui:177
@@ -116,7 +116,7 @@ msgstr "Komenca Bomboforto:"
 #: config/generalsettings.ui:223
 #, kde-format
 msgid "Initial Bomb Armory:"
-msgstr ""
+msgstr "Komenca Bombaro:"
 
 #. i18n: ectx: label, entry (FirstRun), group (General)
 #: config/granatier.kcfg:9
@@ -188,13 +188,13 @@ msgstr "Ĉu sonefektoj estu aŭdigataj."
 #: config/granatier.kcfg:52
 #, kde-format
 msgid "Whether to use the Wilhelm Scream for dying players."
-msgstr ""
+msgstr "Ĉu uzi la Wilhelm-krion por mortantaj ludantoj."
 
 #. i18n: ectx: label, entry (Dummy), group (General)
 #: config/granatier.kcfg:56
 #, kde-format
 msgid "This is a dummy setting for player setup."
-msgstr ""
+msgstr "Tio estas lokokupa meto por agordo de ludantoj."
 
 #. i18n: ectx: label, entry (ShowAllTiles), group (General)
 #. i18n: ectx: label, entry (BlastTime1), group (General)
@@ -206,7 +206,7 @@ msgstr ""
 #: config/granatier.kcfg:72 config/granatier.kcfg:76 config/granatier.kcfg:80
 #, kde-format
 msgid "This is only for the artists to make their life easier."
-msgstr ""
+msgstr "Tio estas nur por la artverkantoj por igi ilian vivon pli facila."
 
 #: config/playerselectoritem.cpp:64
 #, kde-format
@@ -291,12 +291,12 @@ msgstr "Granatier"
 #: main.cpp:79
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
-msgstr ""
+msgstr "Granatier estas Bomberman-klono!"
 
 #: main.cpp:80
 #, kde-format
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
-msgstr ""
+msgstr "Kopirajto (k) 2009-2015 La Teamo de Granatier!"
 
 #: main.cpp:84
 #, kde-format
@@ -326,7 +326,7 @@ msgstr "Thomas Gallinari"
 #: main.cpp:86 main.cpp:87 main.cpp:88 main.cpp:89 main.cpp:90
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
-msgstr ""
+msgstr "Disvolvisto de Kapman, kio estis la bazo de Granatier"
 
 #: main.cpp:87
 #, kde-format
