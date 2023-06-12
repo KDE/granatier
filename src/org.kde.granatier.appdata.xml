@@ -13,6 +13,7 @@
   <name xml:lang="de">Granatier</name>
   <name xml:lang="el">Χειροβομβιστής</name>
   <name xml:lang="en-GB">Granatier</name>
+  <name xml:lang="eo">Granatier</name>
   <name xml:lang="es">Granatier</name>
   <name xml:lang="et">Granatier</name>
   <name xml:lang="eu">Granatier</name>
@@ -52,6 +53,7 @@
   <summary xml:lang="de">Bomberman-Klon</summary>
   <summary xml:lang="el">Κλώνος του Bomberman</summary>
   <summary xml:lang="en-GB">Bomberman clone</summary>
+  <summary xml:lang="eo">Bomberman-klono</summary>
   <summary xml:lang="es">Clon de Bomberman</summary>
   <summary xml:lang="et">Bombermani kloon</summary>
   <summary xml:lang="eu">Bomberman jokoaren klona</summary>
@@ -137,6 +139,7 @@
       <caption xml:lang="de">Granatier spielen</caption>
       <caption xml:lang="el">Παίζω χειροβομβιστή</caption>
       <caption xml:lang="en-GB">Playing Granatier</caption>
+      <caption xml:lang="eo">Ludante Granatier</caption>
       <caption xml:lang="es">Jugando a Granatier</caption>
       <caption xml:lang="et">Granatieri mängimine</caption>
       <caption xml:lang="eu">Granatier-ren jokatzea</caption>
