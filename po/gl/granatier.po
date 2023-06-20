@@ -61,7 +61,7 @@ msgstr "Só para artistas! Non estará aquí cando se publique"
 #: config/generalsettings.ui:23
 #, kde-format
 msgid " Show all tiles"
-msgstr " Mostrar todos os mosaicos"
+msgstr " Amosar todos os mosaicos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: config/generalsettings.ui:30
@@ -145,13 +145,13 @@ msgstr "O escenario que se vai utilizar."
 #: config/granatier.kcfg:21
 #, kde-format
 msgid "Use random arenas."
-msgstr "Empregar escenarios ao chou."
+msgstr "Usar escenarios ao chou."
 
 #. i18n: ectx: label, entry (RandomArenaModeArenaList), group (General)
 #: config/granatier.kcfg:25
 #, kde-format
 msgid "List of arenas, used in random mode."
-msgstr "Lista de escenarios; emprégase no modo ao chou."
+msgstr "Lista de escenarios; úsase no modo ao chou."
 
 #. i18n: ectx: label, entry (PointsToWin), group (General)
 #: config/granatier.kcfg:28
