@@ -59,7 +59,7 @@
   <summary xml:lang="eu">Bomberman jokoaren klona</summary>
   <summary xml:lang="fi">Bomberman-klooni</summary>
   <summary xml:lang="fr">Un clone de Bomberman</summary>
-  <summary xml:lang="gl">Clon do Bomberman</summary>
+  <summary xml:lang="gl">Clon do Bomberman.</summary>
   <summary xml:lang="hu">Bomberman-klón</summary>
   <summary xml:lang="id">Klona Bomberman</summary>
   <summary xml:lang="it">Un clone di Bomberman</summary>
@@ -146,7 +146,7 @@
       <caption xml:lang="eu">Granatier-ren jokatzea</caption>
       <caption xml:lang="fi">Granatierin pelaaminen</caption>
       <caption xml:lang="fr">Partie de Granatier en cours</caption>
-      <caption xml:lang="gl">Xogando a Granatier</caption>
+      <caption xml:lang="gl">Xogando a Granatier.</caption>
       <caption xml:lang="hu">Granatier játék</caption>
       <caption xml:lang="id">Memainkan Granatier</caption>
       <caption xml:lang="it">Giocare con Granatier</caption>
