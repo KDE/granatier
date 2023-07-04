@@ -164,3 +164,5 @@ bool Character::isInLineSight(Character* p_character) const
     // If the two Characters are not on the same row or column, they are not in the line of sight
     return false;
 }
+
+#include "moc_character.cpp"

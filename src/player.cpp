@@ -1048,3 +1048,5 @@ int Player::sign(const qreal value)
     }
     return (value > 0 ? 1 : -1);
 }
+
+#include "moc_player.cpp"

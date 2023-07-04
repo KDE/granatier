@@ -377,3 +377,5 @@ void PlayerItem::setDead()
         setSpriteKey(QStringLiteral("player_death"));
     }
 }
+
+#include "moc_playeritem.cpp"

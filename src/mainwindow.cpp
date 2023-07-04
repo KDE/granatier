@@ -274,3 +274,4 @@ void MainWindow::close()
     }
 }
 
+#include "moc_mainwindow.cpp"

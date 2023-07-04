@@ -306,3 +306,5 @@ void BombItem::fallingAnimation()
     setZValue(-2);
     m_pulseTimer->setInterval(1000 / Granatier::FPS);
 }
+
+#include "moc_bombitem.cpp"

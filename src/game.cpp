@@ -733,3 +733,5 @@ void Game::blockDestroyed(const int row, const int col, Block* block)
         m_arena->removeCellElement(row, col, block);
     }
 }
+
+#include "moc_game.cpp"

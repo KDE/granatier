@@ -397,3 +397,5 @@ void InfoOverlay::themeChanged()
 
     updateGraphics(m_svgScaleFactor);
 }
+
+#include "moc_infooverlay.cpp"

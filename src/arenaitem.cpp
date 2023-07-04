@@ -37,3 +37,5 @@ void ArenaItem::updateGraphics(qreal svgScaleFactor)
     setRenderSize(QSize(width, height));
     setScale(svgScaleFactor);
 }
+
+#include "moc_arenaitem.cpp"

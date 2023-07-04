@@ -44,3 +44,4 @@ void CharacterItem::setDead()
 {
 }
 
+#include "moc_characteritem.cpp"

@@ -178,3 +178,5 @@ void BombExplosionItem::updateGraphics(qreal svgScaleFactor)
     transform.translate(-m_itemSizeReal.width() / 2.0, -m_itemSizeReal.height() / 2.0);
     setTransform(transform);
 }
+
+#include "moc_bombexplosionitem.cpp"

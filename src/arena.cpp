@@ -149,3 +149,5 @@ int Arena::getNbRows() const
 {
     return m_nbRows;
 }
+
+#include "moc_arena.cpp"

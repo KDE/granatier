@@ -51,3 +51,5 @@ bool Bonus::isDestroyed() const
 {
     return m_destroyed;
 }
+
+#include "moc_bonus.cpp"

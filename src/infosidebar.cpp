@@ -482,3 +482,5 @@ void InfoSidebar::updateGraphics(qreal svgScaleFactor)
         iteratorPlayerInfo++;
     }
 }
+
+#include "moc_infosidebar.cpp"

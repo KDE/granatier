@@ -1072,3 +1072,5 @@ void GameScene::updateBombExplosionItemAnimation(BombItem* bombItem, int nFrame)
         }
     }
 }
+
+#include "moc_gamescene.cpp"

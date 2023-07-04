@@ -586,3 +586,5 @@ void Bomb::updateMortarState()
         m_mortarState++;
     }
 }
+
+#include "moc_bomb.cpp"

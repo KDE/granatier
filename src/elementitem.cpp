@@ -97,3 +97,5 @@ void ElementItem::updateGraphicsInternal(qreal svgScaleFactor)
     setScale(svgScaleFactor);
     m_renderSize = renderSize();
 }
+
+#include "moc_elementitem.cpp"

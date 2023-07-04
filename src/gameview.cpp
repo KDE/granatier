@@ -58,3 +58,5 @@ void GameView::keyReleaseEvent(QKeyEvent* p_event)
     }
     Q_EMIT keyReleased(p_event);
 }
+
+#include "moc_gameview.cpp"

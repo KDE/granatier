@@ -196,3 +196,5 @@ void PlayerSelectorItem::settingsChanged()
     m_playerSettings->setKeyDown(m_playerId, m_moveDown->keySequence());
     m_playerSettings->setKeyPutBomb(m_playerId, m_dropBomb->keySequence());
 }
+
+#include "moc_playerselectoritem.cpp"

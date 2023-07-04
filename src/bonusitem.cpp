@@ -58,3 +58,5 @@ void BonusItem::destructionAnimation()
         Q_EMIT bonusItemDestroyed(this);
     }
 }
+
+#include "moc_bonusitem.cpp"

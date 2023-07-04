@@ -33,3 +33,5 @@ void Block::startDestruction()
 {
     Q_EMIT startDestructionAnimation();
 }
+
+#include "moc_block.cpp"

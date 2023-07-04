@@ -47,3 +47,5 @@ void BlockItem::destructionAnimation()
         Q_EMIT blockItemDestroyed(this);
     }
 }
+
+#include "moc_blockitem.cpp"
