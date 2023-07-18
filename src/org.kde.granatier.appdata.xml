@@ -13,7 +13,6 @@
   <name xml:lang="de">Granatier</name>
   <name xml:lang="el">Χειροβομβιστής</name>
   <name xml:lang="en-GB">Granatier</name>
-  <name xml:lang="eo">Granatier</name>
   <name xml:lang="es">Granatier</name>
   <name xml:lang="et">Granatier</name>
   <name xml:lang="eu">Granatier</name>
@@ -53,7 +52,6 @@
   <summary xml:lang="de">Bomberman-Klon</summary>
   <summary xml:lang="el">Κλώνος του Bomberman</summary>
   <summary xml:lang="en-GB">Bomberman clone</summary>
-  <summary xml:lang="eo">Bomberman-klono</summary>
   <summary xml:lang="es">Clon de Bomberman</summary>
   <summary xml:lang="et">Bombermani kloon</summary>
   <summary xml:lang="eu">Bomberman jokoaren klona</summary>
@@ -94,7 +92,6 @@
     <p xml:lang="de">Granatier ist eine Kopie des klassischen Spiels Bomberman und ist von der Arbeit an dessen Clanbomber-Kopie inspiriert.</p>
     <p xml:lang="el">Ο Χειροβομβιστής είναι ένας κλώνος του κλασικού παιχνιδιού Bomberman, εμπνευσμένο από την εργασία του κλώνου του Clanbomber.</p>
     <p xml:lang="en-GB">Granatier is a clone of the classic Bomberman game, inspired by the work of the Clanbomber clone.</p>
-    <p xml:lang="eo">Granatier estas klono de la klasika ludo Bomberman, inspirita de la laboro de la klono Clanbomber.</p>
     <p xml:lang="es">Granatier es un clon del juego clásico Bomberman, inspirado en el trabajo del clon de Clanbomber.</p>
     <p xml:lang="et">Granatier on klassikalise mängu Bomberman kloon, mis sai innustust teisest kloonist Clanbomber.</p>
     <p xml:lang="eu">Granatier Bomberman joko klasikoaren klon bat da, Clanbomber klonean egindako lanean inspiratua.</p>
@@ -140,7 +137,6 @@
       <caption xml:lang="de">Granatier spielen</caption>
       <caption xml:lang="el">Παίζω χειροβομβιστή</caption>
       <caption xml:lang="en-GB">Playing Granatier</caption>
-      <caption xml:lang="eo">Ludante Granatier</caption>
       <caption xml:lang="es">Jugando a Granatier</caption>
       <caption xml:lang="et">Granatieri mängimine</caption>
       <caption xml:lang="eu">Granatier-ren jokatzea</caption>
