@@ -11,65 +11,17 @@
 
 #include <KAboutData>
 #include <KCrash>
+#include <KLocalizedString>
 
 #include <QApplication>
-#include <KLocalizedString>
 #include <QCommandLineParser>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <Kdelibs4ConfigMigrator>
-#include <Kdelibs4Migration>
-#endif
-#include <QStandardPaths>
 #include <QDir>
 #include <KDBusService>
-#include <KSharedConfig>
 
 int main(int argc, char** argv)
 {
-    // Fixes blurry icons with fractional scaling
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QGuiApplication::setAttribute(Qt::AA_UseHighDpiPixmaps);
-#endif
     QApplication app(argc, argv);
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 
-    Kdelibs4ConfigMigrator migrate(QStringLiteral("granatier"));
-    migrate.setConfigFiles(QStringList() << QStringLiteral("granatierrc"));
-    migrate.setUiFiles(QStringList() << QStringLiteral("granatierui.rc"));
-    if(migrate.migrate())
-    {
-        // migrate old data
-        Kdelibs4Migration dataMigrator;
-        const QString sourceBasePath = dataMigrator.saveLocation("data", QStringLiteral("granatier"));
-        const QString targetBasePath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation) + QLatin1Char('/');
-        QString targetFilePath;
-
-        QStringList dataDirs;
-        dataDirs.append(QStringLiteral("arenas"));
-        dataDirs.append(QStringLiteral("players"));
-        dataDirs.append(QStringLiteral("themes"));
-
-        // migrate arenas, players and themes
-        for(const auto& dataDir: dataDirs)
-        {
-            QDir sourceDir(sourceBasePath + dataDir);
-            if(!sourceDir.exists()) continue;
-            const QStringList fileNames = sourceDir.entryList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::NoSymLinks);
-            QDir().mkpath(targetBasePath + dataDir);
-            for(const auto& fileName: fileNames)
-            {
-                targetFilePath = targetBasePath + dataDir + QLatin1Char('/') + fileName;
-                if(!QFile::exists(targetFilePath))
-                {
-                    QFile::copy(sourceBasePath + dataDir + QLatin1Char('/') + fileName, targetFilePath);
-                }
-            }
-        }
-
-        // update the configuration cache
-        KSharedConfig::openConfig()->reparseConfiguration();
-    }
-#endif
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("granatier")));
     KLocalizedString::setApplicationDomain("granatier");
 

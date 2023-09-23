@@ -16,11 +16,9 @@
 #include "config/playerselector.h"
 #include "ui_generalsettings.h"
 // KDEGames
-#include <kdegames_version.h>
 #include <KStandardGameAction>
 #include <KgThemeSelector>
 // KF
-#include <kwidgetsaddons_version.h>
 #include <KStandardGuiItem>
 #include <KActionCollection>
 #include <KMessageBox>
@@ -54,11 +52,7 @@ MainWindow::MainWindow()
     m_scene = nullptr;
     m_playerSettings = new PlayerSettings();
     m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
-#if KDEGAMES_VERSION >= QT_VERSION_CHECK(7, 4, 0)
     m_themeProvider->discoverThemes(QStringLiteral("themes"), QStringLiteral("granatier"));
-#else
-    m_themeProvider->discoverThemes(QByteArray("appdata"), QStringLiteral("themes"), QStringLiteral("granatier"));
-#endif
     // Set the window menus
     KStandardGameAction::gameNew(this, &MainWindow::newGame, actionCollection());
     //KStandardGameAction::highscores(this, &MainWindow::showHighscores, actionCollection());
@@ -141,20 +135,12 @@ void MainWindow::newGame()
     if (!m_game->getGameOver())
     {
         // Confirm before starting a new game
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
         if (KMessageBox::warningTwoActions(this,
-#else
-        if (KMessageBox::warningYesNo(this,
-#endif
                                       i18n("Are you sure you want to quit the current game?"),
                                       i18nc("@title:window", "New Game"),
                                       KGuiItem(i18nc("@action:button", "Quit Game"), QStringLiteral("window-close")),
                                       KStandardGuiItem::cancel())
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
             == KMessageBox::PrimaryAction)
-#else
-            == KMessageBox::Yes)
-#endif
         {
             // Start a new game
             initGame();
@@ -247,19 +233,11 @@ void MainWindow::close()
         m_game->pause();
     }
     // Confirm before closing
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
     if(KMessageBox::warningTwoActions(this,
-#else
-    if(KMessageBox::warningYesNo(this,
-#endif
                                  i18n("Are you sure you want to quit Granatier?"),
                                  i18nc("To quit Granatier", "Quit"),
                                  KStandardGuiItem::quit(), KStandardGuiItem::cancel())
-#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
        == KMessageBox::PrimaryAction)
-#else
-       == KMessageBox::Yes)
-#endif
     {
         KXmlGuiWindow::close();
     }

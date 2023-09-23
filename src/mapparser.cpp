@@ -59,20 +59,13 @@ bool MapParser::parse(QIODevice *input)
 
     return true;
 }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-bool MapParser::characters(const QStringRef &ch)
-#else
 bool MapParser::characters(const QStringView &ch)
-#endif
 {
     m_buffer = ch.toString();
     return true;
 }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-bool MapParser::startElement(const QStringRef &namespaceURI, const QStringRef &localName, const QStringRef &qName, const QXmlStreamAttributes &atts)
-#else
+
 bool MapParser::startElement(const QStringView &namespaceURI, const QStringView &localName, const QStringView &qName, const QXmlStreamAttributes &atts)
-#endif
 {
     Q_UNUSED(namespaceURI)
     Q_UNUSED(localName)
@@ -91,11 +84,8 @@ bool MapParser::startElement(const QStringView &namespaceURI, const QStringView 
 
     return true;
 }
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-bool MapParser::endElement(const QStringRef &namespaceURI, const QStringRef &localName, const QStringRef &qName)
-#else
+
 bool MapParser::endElement(const QStringView &namespaceURI, const QStringView &localName, const QStringView &qName)
-#endif
 {
     Q_UNUSED(namespaceURI)
     Q_UNUSED(localName)

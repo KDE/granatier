@@ -39,15 +39,7 @@ public:
       * Deletes the GameParser instance.
       */
     ~MapParser();
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    Q_REQUIRED_RESULT bool characters(const QStringRef &ch);
 
-    Q_REQUIRED_RESULT bool startElement(const QStringRef &namespaceURI, const QStringRef &localName,
-                      const QStringRef &qName, const QXmlStreamAttributes &atts);
-
-    Q_REQUIRED_RESULT bool endElement(const QStringRef &namespaceURI,
-                    const QStringRef &localName, const QStringRef &qName);
-#else
     Q_REQUIRED_RESULT bool characters(const QStringView &ch);
 
     Q_REQUIRED_RESULT bool startElement(const QStringView &namespaceURI, const QStringView &localName,
@@ -55,7 +47,7 @@ public:
 
     Q_REQUIRED_RESULT bool endElement(const QStringView &namespaceURI,
                     const QStringView &localName, const QStringView &qName);
-#endif
+
     Q_REQUIRED_RESULT bool parse(QIODevice *input);
 };
 
