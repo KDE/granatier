@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:43+0000\n"
+"POT-Creation-Date: 2023-09-25 01:39+0000\n"
 "PO-Revision-Date: 2023-06-15 04:22+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -285,120 +285,120 @@ msgstr "已暫停"
 msgid "The winner is %1"
 msgstr "嬴家是 %1"
 
-#: main.cpp:77
+#: main.cpp:29
 #, kde-format
 msgid "Granatier"
 msgstr "Granatier"
 
-#: main.cpp:79
+#: main.cpp:31
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
 msgstr "Granatier 是另一款炸彈超人的遊戲!"
 
-#: main.cpp:80
+#: main.cpp:32
 #, kde-format
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
 msgstr "Copyright (c) 2009-2015 Granatier 開發團隊"
 
-#: main.cpp:84
+#: main.cpp:36
 #, kde-format
 msgid "Mathias Kraus"
 msgstr "Mathias Kraus"
 
-#: main.cpp:84
+#: main.cpp:36
 #, kde-format
 msgid "Maintainer"
 msgstr "維護者"
 
-#: main.cpp:85
+#: main.cpp:37
 #, kde-format
 msgid "Arturo Silva"
 msgstr "Arturo Silva"
 
-#: main.cpp:85
+#: main.cpp:37
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
 msgstr "大部分美麗的花崗岩圖形"
 
-#: main.cpp:86
+#: main.cpp:38
 #, kde-format
 msgid "Thomas Gallinari"
 msgstr "Thomas Gallinari"
 
-#: main.cpp:86 main.cpp:87 main.cpp:88 main.cpp:89 main.cpp:90
+#: main.cpp:38 main.cpp:39 main.cpp:40 main.cpp:41 main.cpp:42
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
 msgstr "Kapman 開發者，Granatier 的基礎"
 
-#: main.cpp:87
+#: main.cpp:39
 #, kde-format
 msgid "Pierre-Benoit Besse"
 msgstr "Pierre-Benoit Besse"
 
-#: main.cpp:88
+#: main.cpp:40
 #, kde-format
 msgid "Romain Castan"
 msgstr "Romain Castan"
 
-#: main.cpp:89
+#: main.cpp:41
 #, kde-format
 msgid "Alexandre Galinier"
 msgstr "Alexandre Galinier"
 
-#: main.cpp:90
+#: main.cpp:42
 #, kde-format
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
-#: mainwindow.cpp:67
+#: mainwindow.cpp:61
 #, kde-format
 msgid "&Play sounds"
 msgstr "播放音效(&P)"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:139
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr "您確定您要離開目前的遊戲嗎﹖"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:140
 #, kde-format
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "新遊戲"
 
-#: mainwindow.cpp:151
+#: mainwindow.cpp:141
 #, kde-format
 msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "離開遊戲"
 
-#: mainwindow.cpp:192
+#: mainwindow.cpp:178
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "一般"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Theme"
 msgstr "主題"
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Arena"
 msgstr "競技場"
 
-#: mainwindow.cpp:200
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Player"
 msgstr "玩家"
 
-#: mainwindow.cpp:255
+#: mainwindow.cpp:237
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr "您確定要離開 Granatier 嗎？"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:238
 #, kde-format
 msgctxt "To quit Granatier"
 msgid "Quit"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:43+0000\n"
+"POT-Creation-Date: 2023-09-25 01:39+0000\n"
 "PO-Revision-Date: 2020-08-05 14:43+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -284,89 +284,89 @@ msgstr "ΠΑΥΣΗ"
 msgid "The winner is %1"
 msgstr "Ο νικητής είναι %1"
 
-#: main.cpp:77
+#: main.cpp:29
 #, kde-format
 msgid "Granatier"
 msgstr "Χειροβομβιστής"
 
-#: main.cpp:79
+#: main.cpp:31
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
 msgstr "Ο Χειροβομβιστής είναι κλώνος του Βομβιστή!"
 
-#: main.cpp:80
+#: main.cpp:32
 #, kde-format
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
 msgstr "Πνευματικά δικαιώματα (c) 2009-2015 η ομάδα του Χειροβομβιστή!"
 
-#: main.cpp:84
+#: main.cpp:36
 #, kde-format
 msgid "Mathias Kraus"
 msgstr "Mathias Kraus"
 
-#: main.cpp:84
+#: main.cpp:36
 #, kde-format
 msgid "Maintainer"
 msgstr "Συντηρητής"
 
-#: main.cpp:85
+#: main.cpp:37
 #, kde-format
 msgid "Arturo Silva"
 msgstr "Arturo Silva"
 
-#: main.cpp:85
+#: main.cpp:37
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
 msgstr "Τα περισσότερα από τα όμορφα γραφικά του granatier"
 
-#: main.cpp:86
+#: main.cpp:38
 #, kde-format
 msgid "Thomas Gallinari"
 msgstr "Thomas Gallinari"
 
-#: main.cpp:86 main.cpp:87 main.cpp:88 main.cpp:89 main.cpp:90
+#: main.cpp:38 main.cpp:39 main.cpp:40 main.cpp:41 main.cpp:42
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
 msgstr "Προγραμματιστής του Kapman, στο οποίο βασίστηκε ο Χειροβομβιστής"
 
-#: main.cpp:87
+#: main.cpp:39
 #, kde-format
 msgid "Pierre-Benoit Besse"
 msgstr "Pierre-Benoit Besse"
 
-#: main.cpp:88
+#: main.cpp:40
 #, kde-format
 msgid "Romain Castan"
 msgstr "Romain Castan"
 
-#: main.cpp:89
+#: main.cpp:41
 #, kde-format
 msgid "Alexandre Galinier"
 msgstr "Alexandre Galinier"
 
-#: main.cpp:90
+#: main.cpp:42
 #, kde-format
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
-#: mainwindow.cpp:67
+#: mainwindow.cpp:61
 #, kde-format
 msgid "&Play sounds"
 msgstr "&Αναπαραγωγή ήχων"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:139
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr "Επιθυμείτε σίγουρα για την έξοδο από το τρέχων παιχνίδι;"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:140
 #, fuzzy, kde-format
 #| msgid "New game"
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "Νέο παιχνίδι"
 
-#: mainwindow.cpp:151
+#: mainwindow.cpp:141
 #, fuzzy, kde-format
 #| msgctxt "To quit Granatier"
 #| msgid "Quit"
@@ -374,33 +374,33 @@ msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "Έξοδος"
 
-#: mainwindow.cpp:192
+#: mainwindow.cpp:178
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "Γενικά"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Theme"
 msgstr "Θέμα"
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Arena"
 msgstr "Πεδίο δράσης"
 
-#: mainwindow.cpp:200
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Player"
 msgstr "Παίκτης"
 
-#: mainwindow.cpp:255
+#: mainwindow.cpp:237
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr "Επιθυμείτε σίγουρα για την έξοδο από τον Χειροβομβιστή;"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:238
 #, kde-format
 msgctxt "To quit Granatier"
 msgid "Quit"

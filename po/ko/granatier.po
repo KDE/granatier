@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:43+0000\n"
+"POT-Creation-Date: 2023-09-25 01:39+0000\n"
 "PO-Revision-Date: 2022-07-13 14:14+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -282,120 +282,120 @@ msgstr "일시 정지됨"
 msgid "The winner is %1"
 msgstr "%1 님이 이겼습니다!"
 
-#: main.cpp:77
+#: main.cpp:29
 #, kde-format
 msgid "Granatier"
 msgstr "Granatier"
 
-#: main.cpp:79
+#: main.cpp:31
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
 msgstr "Granatier는 봄버맨 클론입니다!"
 
-#: main.cpp:80
+#: main.cpp:32
 #, kde-format
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
 msgstr "Copyright (c) 2009-2015 The Granatier Team!"
 
-#: main.cpp:84
+#: main.cpp:36
 #, kde-format
 msgid "Mathias Kraus"
 msgstr "Mathias Kraus"
 
-#: main.cpp:84
+#: main.cpp:36
 #, kde-format
 msgid "Maintainer"
 msgstr "관리자"
 
-#: main.cpp:85
+#: main.cpp:37
 #, kde-format
 msgid "Arturo Silva"
 msgstr "Arturo Silva"
 
-#: main.cpp:85
+#: main.cpp:37
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
 msgstr "Granatier 그래픽 디자인"
 
-#: main.cpp:86
+#: main.cpp:38
 #, kde-format
 msgid "Thomas Gallinari"
 msgstr "Thomas Gallinari"
 
-#: main.cpp:86 main.cpp:87 main.cpp:88 main.cpp:89 main.cpp:90
+#: main.cpp:38 main.cpp:39 main.cpp:40 main.cpp:41 main.cpp:42
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
 msgstr "Granatier 기반이 되는 Kapman 개발자"
 
-#: main.cpp:87
+#: main.cpp:39
 #, kde-format
 msgid "Pierre-Benoit Besse"
 msgstr "Pierre-Benoit Besse"
 
-#: main.cpp:88
+#: main.cpp:40
 #, kde-format
 msgid "Romain Castan"
 msgstr "Romain Castan"
 
-#: main.cpp:89
+#: main.cpp:41
 #, kde-format
 msgid "Alexandre Galinier"
 msgstr "Alexandre Galinier"
 
-#: main.cpp:90
+#: main.cpp:42
 #, kde-format
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
-#: mainwindow.cpp:67
+#: mainwindow.cpp:61
 #, kde-format
 msgid "&Play sounds"
 msgstr "소리 재생(&P)"
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:139
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr "현재 게임을 끝내시겠습니까?"
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:140
 #, kde-format
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "새 게임"
 
-#: mainwindow.cpp:151
+#: mainwindow.cpp:141
 #, kde-format
 msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "게임 끝내기"
 
-#: mainwindow.cpp:192
+#: mainwindow.cpp:178
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr "일반"
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Theme"
 msgstr "테마"
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Arena"
 msgstr "경기장"
 
-#: mainwindow.cpp:200
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Player"
 msgstr "플레이어"
 
-#: mainwindow.cpp:255
+#: mainwindow.cpp:237
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr "Granatier를 종료하시겠습니까?"
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:238
 #, kde-format
 msgctxt "To quit Granatier"
 msgid "Quit"

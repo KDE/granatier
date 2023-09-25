@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:43+0000\n"
+"POT-Creation-Date: 2023-09-25 01:39+0000\n"
 "PO-Revision-Date: 2019-12-12 22:07+0000\n"
 "Last-Translator: Vivek KJ Pazhedath <vivekkj2004@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -282,120 +282,120 @@ msgstr ""
 msgid "The winner is %1"
 msgstr ""
 
-#: main.cpp:77
+#: main.cpp:29
 #, kde-format
 msgid "Granatier"
 msgstr ""
 
-#: main.cpp:79
+#: main.cpp:31
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
 msgstr ""
 
-#: main.cpp:80
+#: main.cpp:32
 #, kde-format
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
 msgstr ""
 
-#: main.cpp:84
+#: main.cpp:36
 #, kde-format
 msgid "Mathias Kraus"
 msgstr ""
 
-#: main.cpp:84
+#: main.cpp:36
 #, kde-format
 msgid "Maintainer"
 msgstr ""
 
-#: main.cpp:85
+#: main.cpp:37
 #, kde-format
 msgid "Arturo Silva"
 msgstr ""
 
-#: main.cpp:85
+#: main.cpp:37
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
 msgstr ""
 
-#: main.cpp:86
+#: main.cpp:38
 #, kde-format
 msgid "Thomas Gallinari"
 msgstr ""
 
-#: main.cpp:86 main.cpp:87 main.cpp:88 main.cpp:89 main.cpp:90
+#: main.cpp:38 main.cpp:39 main.cpp:40 main.cpp:41 main.cpp:42
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
 msgstr ""
 
-#: main.cpp:87
+#: main.cpp:39
 #, kde-format
 msgid "Pierre-Benoit Besse"
 msgstr ""
 
-#: main.cpp:88
+#: main.cpp:40
 #, kde-format
 msgid "Romain Castan"
 msgstr ""
 
-#: main.cpp:89
+#: main.cpp:41
 #, kde-format
 msgid "Alexandre Galinier"
 msgstr ""
 
-#: main.cpp:90
+#: main.cpp:42
 #, kde-format
 msgid "Nathalie Liesse"
 msgstr ""
 
-#: mainwindow.cpp:67
+#: mainwindow.cpp:61
 #, kde-format
 msgid "&Play sounds"
 msgstr ""
 
-#: mainwindow.cpp:149
+#: mainwindow.cpp:139
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr ""
 
-#: mainwindow.cpp:150
+#: mainwindow.cpp:140
 #, kde-format
 msgctxt "@title:window"
 msgid "New Game"
 msgstr ""
 
-#: mainwindow.cpp:151
+#: mainwindow.cpp:141
 #, kde-format
 msgctxt "@action:button"
 msgid "Quit Game"
 msgstr ""
 
-#: mainwindow.cpp:192
+#: mainwindow.cpp:178
 #, kde-format
 msgctxt "General settings"
 msgid "General"
 msgstr ""
 
-#: mainwindow.cpp:196
+#: mainwindow.cpp:182
 #, kde-format
 msgid "Theme"
 msgstr ""
 
-#: mainwindow.cpp:198
+#: mainwindow.cpp:184
 #, kde-format
 msgid "Arena"
 msgstr ""
 
-#: mainwindow.cpp:200
+#: mainwindow.cpp:186
 #, kde-format
 msgid "Player"
 msgstr ""
 
-#: mainwindow.cpp:255
+#: mainwindow.cpp:237
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr ""
 
-#: mainwindow.cpp:256
+#: mainwindow.cpp:238
 #, kde-format
 msgctxt "To quit Granatier"
 msgid "Quit"
