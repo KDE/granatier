@@ -24,7 +24,7 @@
 #include <QKeyEvent>
 #include <QDir>
 #include <KConfig>
-#include <KgSound>
+#include <KGameSound>
 #include <QStandardPaths>
 
 
@@ -36,11 +36,11 @@ Game::Game(PlayerSettings* playerSettings)
     setSoundsEnabled(Settings::sounds());
     m_wilhelmScream = Settings::useWilhelmScream();
 
-    m_soundPutBomb = new KgSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/putbomb.wav")));
-    m_soundExplode = new KgSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/explode.wav")));
-    m_soundBonus = new KgSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/wow.wav")));
-    m_soundFalling = new KgSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/deepfall.wav")));
-    m_soundDie = new KgSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/die.wav")));
+    m_soundPutBomb = new KGameSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/putbomb.wav")));
+    m_soundExplode = new KGameSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/explode.wav")));
+    m_soundBonus = new KGameSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/wow.wav")));
+    m_soundFalling = new KGameSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/deepfall.wav")));
+    m_soundDie = new KGameSound(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("sounds/die.wav")));
 
     m_arena = nullptr;
     m_randomArenaModeArenaList.clear();

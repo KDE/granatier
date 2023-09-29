@@ -24,7 +24,7 @@ class PlayerSettings;
 class QTimer;
 class QKeyEvent;
 
-class KgSound;
+class KGameSound;
 
 /**
  * @brief This class manages the game main loop : it regularly checks the key press events, computes the character moves and updates their coordinates.
@@ -106,11 +106,11 @@ private :
     /** Flag to use wilhelm scream for dying  */
     bool m_wilhelmScream;
 
-    KgSound* m_soundPutBomb;
-    KgSound* m_soundExplode;
-    KgSound* m_soundBonus;
-    KgSound* m_soundFalling;
-    KgSound* m_soundDie;
+    KGameSound* m_soundPutBomb;
+    KGameSound* m_soundExplode;
+    KGameSound* m_soundBonus;
+    KGameSound* m_soundFalling;
+    KGameSound* m_soundDie;
 
 public:
 
