@@ -15,7 +15,7 @@ class Game;
 class GameView;
 class GameScene;
 class PlayerSettings;
-class KgThemeProvider;
+class KGameThemeProvider;
 class KConfigDialog;
 
 /**
@@ -38,8 +38,8 @@ private :
     /** The PlayerSettings instance for player name, shortcuts ...  */
     PlayerSettings* m_playerSettings;
 
-    /** The KgThemeProvider instance */
-    KgThemeProvider* m_themeProvider;
+    /** The KGameThemeProvider instance */
+    KGameThemeProvider* m_themeProvider;
     QString m_currentThemeIdentifier;
 
     /**  */

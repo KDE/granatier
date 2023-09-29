@@ -25,8 +25,8 @@
 #include "infosidebar.h"
 #include "granatier_random.h"
 
-#include <KgTheme>
-#include <KgThemeProvider>
+#include <KGameTheme>
+#include <KGameThemeProvider>
 #include <KLocalizedString>
 
 #include <QGraphicsView>
@@ -38,7 +38,7 @@
 #include <cmath>
 #include <QStandardPaths>
 
-GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_game), m_themeProvider(p_themeProvider)
+GameScene::GameScene(Game* p_game, KGameThemeProvider* p_themeProvider) : m_game(p_game), m_themeProvider(p_themeProvider)
 {
     connect(p_game, &Game::gameStarted, this, &GameScene::start);
     connect(p_game, &Game::pauseChanged, this, &GameScene::setPaused);
@@ -58,7 +58,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     for(auto & player : players)
     {
         const QString desktopPath = player->getDesktopFilePath();
-        auto* theme = new KgTheme(desktopPath.toUtf8());
+        auto* theme = new KGameTheme(desktopPath.toUtf8());
         theme->readFromDesktopFile(desktopPath);
         auto  playerRenderer = new KGameRenderer(theme);
         m_mapRendererPlayerItems.insert(player, playerRenderer);
@@ -90,7 +90,7 @@ GameScene::GameScene(Game* p_game, KgThemeProvider* p_themeProvider) : m_game(p_
     m_rendererDefaultTheme = nullptr;
     setupThemeRenderer();
 
-    connect(m_themeProvider, &KgThemeProvider::currentThemeChanged, this, &GameScene::themeChanged);
+    connect(m_themeProvider, &KGameThemeProvider::currentThemeChanged, this, &GameScene::themeChanged);
 
     // create the info overlay
     m_infoOverlay = new InfoOverlay(m_game, this);
@@ -109,7 +109,7 @@ void GameScene::setupThemeRenderer()
         selectedThemeIsDefault = false;
         if(m_rendererDefaultTheme == nullptr)
         {
-            auto* theme = new KgTheme(m_themeProvider->defaultTheme()->identifier());
+            auto* theme = new KGameTheme(m_themeProvider->defaultTheme()->identifier());
             theme->setGraphicsPath(m_themeProvider->defaultTheme()->graphicsPath());
             m_rendererDefaultTheme = new KGameRenderer(theme);
         }

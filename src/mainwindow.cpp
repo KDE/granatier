@@ -17,7 +17,7 @@
 #include "ui_generalsettings.h"
 // KDEGames
 #include <KStandardGameAction>
-#include <KgThemeSelector>
+#include <KGameThemeSelector>
 // KF
 #include <KStandardGuiItem>
 #include <KActionCollection>
@@ -51,7 +51,7 @@ MainWindow::MainWindow()
     m_view = nullptr;
     m_scene = nullptr;
     m_playerSettings = new PlayerSettings();
-    m_themeProvider = new KgThemeProvider(QByteArray("Theme"), this);
+    m_themeProvider = new KGameThemeProvider(QByteArray("Theme"), this);
     m_themeProvider->discoverThemes(QStringLiteral("themes"), QStringLiteral("granatier"));
     // Set the window menus
     KStandardGameAction::gameNew(this, &MainWindow::newGame, actionCollection());
@@ -179,7 +179,7 @@ void MainWindow::showSettings()
     // Theme
     m_themeProvider->rediscoverThemes();
     m_currentThemeIdentifier = QString::fromLatin1(m_themeProvider->currentTheme()->identifier());
-    settingsDialog->addPage(new KgThemeSelector(m_themeProvider, KgThemeSelector::DefaultBehavior, settingsDialog), i18n("Theme"), QStringLiteral("games-config-theme"));
+    settingsDialog->addPage(new KGameThemeSelector(m_themeProvider, KGameThemeSelector::DefaultBehavior, settingsDialog), i18n("Theme"), QStringLiteral("games-config-theme"));
     // Arena
     settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18n("Arena"), QStringLiteral("games-config-board"));
     // Player
@@ -209,7 +209,7 @@ void MainWindow::settingsDialogCanceled()
     m_tempRandomArenaModeArenaList.clear();
     if(m_currentThemeIdentifier != QString::fromLatin1(m_themeProvider->currentTheme()->identifier()))
     {
-        const QList<const KgTheme*> themeList = m_themeProvider->themes();
+        const QList<const KGameTheme*> themeList = m_themeProvider->themes();
         for(const auto& theme: themeList)
         {
             if(QString::fromLatin1(theme->identifier()) == m_currentThemeIdentifier)

@@ -14,7 +14,7 @@
 
 #include <QPointer>
 
-#include <KgTheme>
+#include <KGameTheme>
 #include <QIcon>
 #include <KGameRenderer>
 #include <KConfigSkeleton>
@@ -85,7 +85,7 @@ void ArenaSelector::showEvent(QShowEvent*)
 
 ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(nullptr), m_graphicsScene(nullptr), m_svgScaleFactor(1)
 {
-    auto* theme = new KgTheme(QByteArray());
+    auto* theme = new KGameTheme(QByteArray());
     theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/granatier.svgz")));
     m_renderer = new KGameRenderer(theme);
 }
