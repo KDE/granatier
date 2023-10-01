@@ -139,7 +139,7 @@ msgstr "O tema gráfico a usar."
 #: config/granatier.kcfg:17
 #, kde-format
 msgid "The arena to be used."
-msgstr "O escenario que se vai utilizar."
+msgstr "O escenario que se vai usar."
 
 #. i18n: ectx: label, entry (RandomArenaMode), group (General)
 #: config/granatier.kcfg:21
@@ -193,7 +193,7 @@ msgstr "Indica se deben reproducirse os efectos de son."
 #: config/granatier.kcfg:52
 #, kde-format
 msgid "Whether to use the Wilhelm Scream for dying players."
-msgstr "Se se quere utilizar o Grito de Wilhelm para os xogadores que morren."
+msgstr "Se se quere usar o Grito de Wilhelm para os xogadores que morren."
 
 #. i18n: ectx: label, entry (Dummy), group (General)
 #: config/granatier.kcfg:56
