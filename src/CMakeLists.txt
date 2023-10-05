@@ -89,6 +89,7 @@ target_link_libraries(granatier
     KF6::CoreAddons
     KF6::DBusAddons
     KF6::Crash
+    KF6::I18n
     KF6::XmlGui
     Qt6::Xml
     Qt6::Widgets
