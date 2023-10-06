@@ -143,9 +143,9 @@
 >Elimine a todos sus oponentes.</para
 ></note>
     <para
->A cada jugador se le asignan cinco teclas que usarán para mover a su personaje y colocar bombas. Por ejemplo, las teclas predeterminadas para el jugador 1 son las flechas &Up;, &Down;, &Left; y &Right; para moverse en esas direcciones respectivamente, y la tecla Intro para colocar una bomba. Por favor, consulte la sección <link linkend="config_player"
+>A cada jugador se le asignan cinco teclas que usarán para mover a su personaje y colocar bombas. Por ejemplo, las teclas predeterminadas para el jugador 1 son las flechas &Up;, &Down;, &Left; y &Right; para moverse en esas direcciones respectivamente, y la tecla Intro para colocar una bomba. Consulte la sección <link linkend="config_player"
 >Configuración de los jugadores</link
-> para averiguar los accesos rápidos para otros jugadores, además de para saber cómo configurarlos. </para>
+> para encontrar los atajos de teclado para otros jugadores y cómo configurarlos. </para>
     <para
 >El propósito de colocar bombas, además de atacar a otros oponentes, es destruir los muchos bloques repartidos por el terreno de juego para despejar un camino o descubrir bonificaciones ocultas. Entre las muchas bonificaciones que pueden ser descubiertas están las que le hacen moverse más rápido o las que aumentan el alcance de la explosión de las bombas; cuantas más bonificaciones de este tipo recoja, más fácil será eliminar a sus oponentes y ganar la ronda. Pero tenga en cuenta que también existen penalizaciones que pueden volverse en su contra, como las que le ralentizan o las que invierten sus teclas de movimiento. </para>
     <para
@@ -281,7 +281,7 @@
 >Bonificación de lanzamiento</phrase
 > </textobject>
         </inlinemediaobject
->El lanzamiento &ndash; le añade la habilidad de tirar bombas. Presione la tecla de colocar bombas mientras una de ellas está debajo de usted. </para>
+>El lanzamiento &ndash; le añade la habilidad de tirar bombas. Pulse la tecla para colocar bombas mientras una de ellas está debajo de usted. </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -578,13 +578,13 @@
       <title
 >Jugador</title>
       <para
->Para seleccionar al jugador con el que desea jugar, vaya a la sección «Jugador» y seleccione los jugadores con las casillas de verificación. Los accesos rápidos de teclado se pueden cambiar haciendo clic en el botón para la acción que desee editar y presionando la tecla que quiera utilizar. Los cambios se cargan haciendo clic en <guibutton
+>Para seleccionar al jugador con el que desea jugar, vaya a la sección «Jugador» y seleccione los jugadores con las casillas de verificación. Los atajos de teclado se pueden cambiar haciendo clic en el botón para la acción que desee editar y presionando la tecla que quiera utilizar. Los cambios se cargan haciendo clic en <guibutton
 >Aceptar</guibutton
 > o en <guibutton
 >Aplicar</guibutton
 >. El juego actual finalizará y comenzará uno nuevo. Puede hacer clic en <guibutton
 >Predeterminado</guibutton
-> para restaurar los accesos rápidos de teclado por omisión. </para>
+> para restaurar los atajos de teclado predeterminados. </para>
       <screenshot>
         <screeninfo
 >Captura de pantalla de la configuración de &granatier;</screeninfo>
