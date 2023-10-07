@@ -296,7 +296,7 @@ msgstr "Granatier"
 #: main.cpp:79
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
-msgstr "Granatier és un clon del Bomberman!"
+msgstr "Granatier és un clon de Bomberman!"
 
 #: main.cpp:80
 #, kde-format
