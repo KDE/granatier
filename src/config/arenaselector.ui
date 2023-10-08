@@ -55,9 +55,6 @@
         </sizepolicy>
        </property>
        <layout class="QGridLayout" name="gridLayout">
-        <property name="spacing">
-         <number>9</number>
-        </property>
         <item row="1" column="1">
          <widget class="QLabel" name="arenaDescription">
           <property name="sizePolicy">
