@@ -40,13 +40,17 @@ int main(int argc, char** argv)
     about.addCredit(i18n("Romain Castan"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("romaincastan@gmail.com"));
     about.addCredit(i18n("Alexandre Galinier"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("alex.galinier@gmail.com"));
     about.addCredit(i18n("Nathalie Liesse"), i18n("Developer of Kapman, which was the base of Granatier"), QStringLiteral("nathalie.liesse@gmail.com"));
+
+    KAboutData::setApplicationData(about);
+
+    KCrash::initialize();
+
     // Command line arguments
     QCommandLineParser parser;
-    KAboutData::setApplicationData(about);
-    KCrash::initialize();
     about.setupCommandLine(&parser);
     parser.process(app);
     about.processCommandLine(&parser);
+
     KDBusService service;
     // Create the application
     // Create the main window
