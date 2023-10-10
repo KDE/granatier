@@ -269,7 +269,9 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
         if (!arenaXmlFile.open(QIODevice::ReadOnly)) {
             qWarning() << " impossible to open file " << arenaXmlFile.fileName();
         }
-        mapParser.parse(&arenaXmlFile);
+        if (!mapParser.parse(&arenaXmlFile)) {
+            qWarning() << " failed to parse file " << arenaXmlFile.fileName();
+        }
         while(!m_arenaItems.isEmpty())
         {
             if(m_graphicsScene->items().contains(m_arenaItems.last()))

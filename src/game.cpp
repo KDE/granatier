@@ -137,7 +137,9 @@ void Game::init()
     if (!arenaXmlFile.open(QIODevice::ReadOnly)) {
         qWarning() << " impossible to open file " << arenaFileName;
     }
-    mapParser.parse(&arenaXmlFile);
+    if (!mapParser.parse(&arenaXmlFile)) {
+        qWarning() << " failed to parse file " << arenaFileName;
+    }
 
     QString arenaName = group.readEntry("Name");
     m_arena->setName(arenaName);
