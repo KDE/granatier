@@ -7,7 +7,7 @@
 #ifndef GRANATIERGLOBALS_H
 #define GRANATIERGLOBALS_H
 
-#include <QtGlobal>
+#include <QtTypes>
 
 namespace Granatier
 {
