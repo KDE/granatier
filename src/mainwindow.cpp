@@ -16,7 +16,7 @@
 #include "config/playerselector.h"
 #include "ui_generalsettings.h"
 // KDEGames
-#include <KStandardGameAction>
+#include <KGameStandardAction>
 #include <KGameThemeSelector>
 // KF
 #include <KStandardGuiItem>
@@ -54,10 +54,10 @@ MainWindow::MainWindow()
     m_themeProvider = new KGameThemeProvider(QByteArray("Theme"), this);
     m_themeProvider->discoverThemes(QStringLiteral("themes"), QStringLiteral("granatier"));
     // Set the window menus
-    KStandardGameAction::gameNew(this, &MainWindow::newGame, actionCollection());
-    //KStandardGameAction::highscores(this, &MainWindow::showHighscores, actionCollection());
+    KGameStandardAction::gameNew(this, &MainWindow::newGame, actionCollection());
+    //KGameStandardAction::highscores(this, &MainWindow::showHighscores, actionCollection());
     KStandardAction::preferences(this, &MainWindow::showSettings, actionCollection());
-    KStandardGameAction::quit(this, &MainWindow::close, actionCollection());
+    KGameStandardAction::quit(this, &MainWindow::close, actionCollection());
     auto* soundAction = new KToggleAction(i18n("&Play sounds"), this);
     soundAction->setChecked(Settings::sounds());
     actionCollection()->addAction( QStringLiteral( "sounds" ), soundAction);
