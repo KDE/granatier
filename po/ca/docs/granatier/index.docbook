@@ -638,42 +638,18 @@ AuthorEmail=jordiusuari@foo.org
 >, de manera que podreu triar la mida del camp de batalla. Per al mapa del camp de batalla, s'utilitzen els símbols següents. </para>
     <para>
       <programlisting
-><quote
->=</quote
-> un element de mur
-<quote
-> </quote
-> un element de forat
-<quote
->_</quote
-> un element de terreny
-<quote
->+</quote
-> un element de bloc
-<quote
->x</quote
-> crearà aleatòriament un bloc o un element de terreny
-<quote
->-</quote
-> un element de gel
-<quote
->o</quote
-> un element de morter
-<quote
->u</quote
-> una fletxa cap amunt
-<quote
->r</quote
-> una fletxa cap a la dreta
-<quote
->d</quote
-> una fletxa cap avall
-<quote
->l</quote
-> una fletxa cap a l'esquerra
-<quote
->p</quote
-> una posició del jugador
+>«=» un element de mur
+« » un element de forat
+«_» un element de terreny
+«+» un element de bloc
+«x» crearà aleatòriament un bloc o un element de terreny
+«-» un element de gel
+«o» un element de morter
+«u» una fletxa cap amunt
+«r» una fletxa cap a la dreta
+«d» una fletxa cap avall
+«l» una fletxa cap a l'esquerra
+«p» una posició del jugador
       </programlisting>
     </para>
   </chapter>
