@@ -130,7 +130,7 @@ void Game::init()
     }
 
     KConfig arenaConfig(filePath, KConfig::SimpleConfig);
-    KConfigGroup group = arenaConfig.group("Arena");
+    KConfigGroup group = arenaConfig.group(QStringLiteral("Arena"));
     QString arenaFileName = group.readEntry("FileName");
 
     QFile arenaXmlFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("arenas/%1").arg(arenaFileName)));
