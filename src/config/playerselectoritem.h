@@ -8,6 +8,8 @@
 #define PLAYERSELECTORITEM_H
 
 #include <QWidget>
+#include <QImage>
+#include <QPixmap>
 
 class PlayerSettings;
 class QCheckBox;
@@ -23,8 +25,8 @@ private:
     QCheckBox* m_selectCheckBox;
     
     QLineEdit* m_playerName;
-    QPixmap* m_playerPreviewPixmap;
-    QImage* m_playerPreviewImageAlphaChannel;
+    QPixmap m_playerPreviewPixmap;
+    QImage m_playerPreviewImageAlphaChannel;
     
     QLabel* m_playerPreviewPixmapLabel;
     QLabel* m_playerAuthor;

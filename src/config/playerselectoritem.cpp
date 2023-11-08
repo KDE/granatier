@@ -28,9 +28,9 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_playerName->setFixedWidth(200);
     const qreal dpr = qApp->devicePixelRatio();
     const int previewSize = 64 * dpr;
-    m_playerPreviewPixmap = new QPixmap(QSize(previewSize, previewSize));
-    m_playerPreviewPixmap->setDevicePixelRatio(dpr);
-    m_playerPreviewImageAlphaChannel = new QImage(QSize(previewSize, previewSize), QImage::Format_ARGB32_Premultiplied);
+    m_playerPreviewPixmap = QPixmap(QSize(previewSize, previewSize));
+    m_playerPreviewPixmap.setDevicePixelRatio(dpr);
+    m_playerPreviewImageAlphaChannel = QImage(QSize(previewSize, previewSize), QImage::Format_ARGB32_Premultiplied);
     m_playerPreviewPixmapLabel = new QLabel;
     m_playerAuthor = new QLabel;
     
@@ -121,8 +121,6 @@ PlayerSelectorItem::~PlayerSelectorItem()
     delete m_selectCheckBox;
     
     delete m_playerName;
-    delete m_playerPreviewPixmap;
-    delete m_playerPreviewImageAlphaChannel;
     delete m_playerPreviewPixmapLabel;
     delete m_playerAuthor;
     
@@ -141,11 +139,10 @@ PlayerSelectorItem::~PlayerSelectorItem()
 
 void PlayerSelectorItem::setPlayerPreviewPixmap(const QPixmap& pixmap)
 {
-    delete m_playerPreviewPixmap;
-    m_playerPreviewPixmap = new QPixmap(pixmap);
+    m_playerPreviewPixmap = QPixmap(pixmap);
 
-    QImage tempImage = m_playerPreviewPixmap->toImage();
-    tempImage.setAlphaChannel(*m_playerPreviewImageAlphaChannel);
+    QImage tempImage = m_playerPreviewPixmap.toImage();
+    tempImage.setAlphaChannel(m_playerPreviewImageAlphaChannel);
     m_playerPreviewPixmapLabel->setPixmap(QPixmap::fromImage(tempImage));
 }
 
@@ -166,15 +163,15 @@ void PlayerSelectorItem::selectionChanged(bool selectionState)
     
     if(selectionState == true)
     {
-        m_playerPreviewImageAlphaChannel->fill(QColor(255, 255, 255, 255));
+        m_playerPreviewImageAlphaChannel.fill(QColor(255, 255, 255, 255));
     }
     else
     {
-        m_playerPreviewImageAlphaChannel->fill(QColor(64, 64, 64, 255));
+        m_playerPreviewImageAlphaChannel.fill(QColor(64, 64, 64, 255));
     }
 
-    QImage tempImage = m_playerPreviewPixmap->toImage();
-    tempImage.setAlphaChannel(*m_playerPreviewImageAlphaChannel);
+    QImage tempImage = m_playerPreviewPixmap.toImage();
+    tempImage.setAlphaChannel(m_playerPreviewImageAlphaChannel);
     m_playerPreviewPixmapLabel->setPixmap(QPixmap::fromImage(tempImage));
     
     m_moveLeft->setEnabled(selectionState);
