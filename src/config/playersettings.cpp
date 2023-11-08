@@ -19,7 +19,7 @@ PlayerSettings::PlayerSettings()
 
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, QStringLiteral("players"), QStandardPaths::LocateDirectory);
     for(const auto& dir: dirs) {
-         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+         const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.desktop")});
          for(const auto& file: fileNames) {
                 playersAvailable.append(file);
          }

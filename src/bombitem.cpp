@@ -45,11 +45,13 @@ BombItem::BombItem(Bomb* p_model, KGameRenderer* renderer) : ElementItem (p_mode
     connect(m_pulseTimer, &QTimer::timeout, this, &BombItem::pulse);
 
     m_explosionTimer = nullptr;
-    m_listExplosionTiming.append(Settings::self()->blastTime1());
-    m_listExplosionTiming.append(Settings::self()->blastTime2());
-    m_listExplosionTiming.append(Settings::self()->blastTime3());
-    m_listExplosionTiming.append(Settings::self()->blastTime4());
-    m_listExplosionTiming.append(Settings::self()->blastTime5());
+    m_listExplosionTiming = {
+        Settings::self()->blastTime1(),
+        Settings::self()->blastTime2(),
+        Settings::self()->blastTime3(),
+        Settings::self()->blastTime4(),
+        Settings::self()->blastTime5(),
+    };
 
     m_fallingAnimationCounter = 0;
     m_dudBomb = false;

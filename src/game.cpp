@@ -92,7 +92,7 @@ void Game::init()
             QStringList arenasAvailable;
             const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, QStringLiteral("arenas"), QStandardPaths::LocateDirectory);
             for(const auto& dir: dirs) {
-                const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+                const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.desktop")});
                 for(const auto& file: fileNames) {
                     arenasAvailable.append(dir + QLatin1Char('/') + file);
                 }

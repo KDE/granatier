@@ -145,7 +145,7 @@ void ArenaSelector::Private::findArenas(const QString &initialSelection)
     QStringList arenasAvailable;
     const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::AppDataLocation, QStringLiteral("arenas"), QStandardPaths::LocateDirectory);
     for(auto& dir: dirs) {
-         const QStringList fileNames = QDir(dir).entryList(QStringList() << QStringLiteral("*.desktop"));
+         const QStringList fileNames = QDir(dir).entryList({QStringLiteral("*.desktop")});
          for(auto& file: fileNames) {
                 arenasAvailable.append(file);
          }
