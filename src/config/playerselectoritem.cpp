@@ -7,6 +7,7 @@
 #include "playerselectoritem.h"
 #include "playersettings.h"
 
+#include <QApplication>
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -25,8 +26,11 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_selectCheckBox->setChecked(m_playerSettings->enabled(playerId));
     m_playerName = new QLineEdit(m_playerSettings->playerName(playerId));
     m_playerName->setFixedWidth(200);
-    m_playerPreviewPixmap = new QPixmap(QSize(64, 64));
-    m_playerPreviewImageAlphaChannel = new QImage(QSize(64, 64), QImage::Format_ARGB32_Premultiplied);
+    const qreal dpr = qApp->devicePixelRatio();
+    const int previewSize = 64 * dpr;
+    m_playerPreviewPixmap = new QPixmap(QSize(previewSize, previewSize));
+    m_playerPreviewPixmap->setDevicePixelRatio(dpr);
+    m_playerPreviewImageAlphaChannel = new QImage(QSize(previewSize, previewSize), QImage::Format_ARGB32_Premultiplied);
     m_playerPreviewPixmapLabel = new QLabel;
     m_playerAuthor = new QLabel;
     

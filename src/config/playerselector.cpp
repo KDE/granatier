@@ -81,9 +81,8 @@ void PlayerSelector::Private::fillList()
     PlayerSelectorItem* playerSelectorItem;
 
     QSvgRenderer renderer;
-    QPixmap pixmap(QSize(64, 64));
-    pixmap.fill(QColor(0, 0, 0, 0));
-    QPainter pixPainter(&pixmap);
+    const qreal dpr = qApp->devicePixelRatio();
+    const int pixmapSize = 64 * dpr;
 
     QStringList playerIDs = m_playerSettings->playerIDs();
 
@@ -96,7 +95,11 @@ void PlayerSelector::Private::fillList()
         playerSelectorItem = new PlayerSelectorItem(playerIDs[i], m_playerSettings, m_list);
 
         renderer.load(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/%1").arg(m_playerSettings->playerGraphicsFile(playerIDs[i]))));
+        QPixmap pixmap(QSize(pixmapSize, pixmapSize));
+        pixmap.fill(QColor(0, 0, 0, 0));
+        QPainter pixPainter(&pixmap);
         renderer.render(&pixPainter, QStringLiteral("player_0"));
+        pixmap.setDevicePixelRatio(dpr);
         playerSelectorItem->setPlayerPreviewPixmap(pixmap);
 
         KConfig desktopFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/%1").arg(playerIDs[i])), KConfig::SimpleConfig);
