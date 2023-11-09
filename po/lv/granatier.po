@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 01:39+0000\n"
+"POT-Creation-Date: 2023-11-09 01:37+0000\n"
 "PO-Revision-Date: 2012-06-29 20:15+0300\n"
 "Last-Translator: Einars Sprugis <einars8@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -210,31 +210,31 @@ msgstr "Šis ir mānekļa iestatījums spēlētāja iestatīšanai."
 msgid "This is only for the artists to make their life easier."
 msgstr "Šis ir tikai māksliniekiem, lai padarītu viņu dzīvi vieglāku."
 
-#: config/playerselectoritem.cpp:64
+#: config/playerselectoritem.cpp:67
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Left:"
 msgstr "Pa kreisi:"
 
-#: config/playerselectoritem.cpp:73
+#: config/playerselectoritem.cpp:76
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Up:"
 msgstr "Uz augšu:"
 
-#: config/playerselectoritem.cpp:82
+#: config/playerselectoritem.cpp:85
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Right:"
 msgstr "Pa labi:"
 
-#: config/playerselectoritem.cpp:91
+#: config/playerselectoritem.cpp:94
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Down:"
 msgstr "Uz leju:"
 
-#: config/playerselectoritem.cpp:100
+#: config/playerselectoritem.cpp:103
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Bomb:"

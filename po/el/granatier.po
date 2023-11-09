@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 01:39+0000\n"
+"POT-Creation-Date: 2023-11-09 01:37+0000\n"
 "PO-Revision-Date: 2020-08-05 14:43+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -209,31 +209,31 @@ msgstr "Αυτή είναι μία τεχνητή ρύθμιση για την �
 msgid "This is only for the artists to make their life easier."
 msgstr "Αυτό είναι μόνο για να διευκολύνει τη ζωή των καλλιτεχνών."
 
-#: config/playerselectoritem.cpp:64
+#: config/playerselectoritem.cpp:67
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Left:"
 msgstr "Αριστερά:"
 
-#: config/playerselectoritem.cpp:73
+#: config/playerselectoritem.cpp:76
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Up:"
 msgstr "Πάνω:"
 
-#: config/playerselectoritem.cpp:82
+#: config/playerselectoritem.cpp:85
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Right:"
 msgstr "Δεξιά:"
 
-#: config/playerselectoritem.cpp:91
+#: config/playerselectoritem.cpp:94
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Down:"
 msgstr "Κάτω:"
 
-#: config/playerselectoritem.cpp:100
+#: config/playerselectoritem.cpp:103
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Bomb:"

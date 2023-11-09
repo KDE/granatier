@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 01:39+0000\n"
+"POT-Creation-Date: 2023-11-09 01:37+0000\n"
 "PO-Revision-Date: 2022-07-08 06:50+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -211,31 +211,31 @@ msgstr "To so preizkusne nastavitve za igralce."
 msgid "This is only for the artists to make their life easier."
 msgstr "To je samo za lajšanje dela umetnikov."
 
-#: config/playerselectoritem.cpp:64
+#: config/playerselectoritem.cpp:67
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Left:"
 msgstr "Levo:"
 
-#: config/playerselectoritem.cpp:73
+#: config/playerselectoritem.cpp:76
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Up:"
 msgstr "Gor:"
 
-#: config/playerselectoritem.cpp:82
+#: config/playerselectoritem.cpp:85
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Right:"
 msgstr "Desno:"
 
-#: config/playerselectoritem.cpp:91
+#: config/playerselectoritem.cpp:94
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Down:"
 msgstr "Dol:"
 
-#: config/playerselectoritem.cpp:100
+#: config/playerselectoritem.cpp:103
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Bomb:"

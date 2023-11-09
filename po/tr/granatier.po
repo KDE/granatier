@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegames-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-25 01:39+0000\n"
+"POT-Creation-Date: 2023-11-09 01:37+0000\n"
 "PO-Revision-Date: 2023-01-18 22:31+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -214,31 +214,31 @@ msgstr ""
 "Bu kısım yalnızca sanatkarlar için, hayatlarını kolaylaştırmak için "
 "yapılmıştır."
 
-#: config/playerselectoritem.cpp:64
+#: config/playerselectoritem.cpp:67
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Left:"
 msgstr "Sol:"
 
-#: config/playerselectoritem.cpp:73
+#: config/playerselectoritem.cpp:76
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Up:"
 msgstr "Yukarı:"
 
-#: config/playerselectoritem.cpp:82
+#: config/playerselectoritem.cpp:85
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Right:"
 msgstr "Sağ:"
 
-#: config/playerselectoritem.cpp:91
+#: config/playerselectoritem.cpp:94
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Down:"
 msgstr "Aşağı:"
 
-#: config/playerselectoritem.cpp:100
+#: config/playerselectoritem.cpp:103
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Bomb:"
