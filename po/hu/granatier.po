@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:43+0000\n"
+"POT-Creation-Date: 2023-11-09 02:26+0000\n"
 "PO-Revision-Date: 2021-09-22 09:33+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -30,7 +30,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "kiszel.kristof@gmail.com,ur.balazs@fsf.hu"
 
-#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:159
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
@@ -210,31 +210,31 @@ msgstr "Üres játékosbeállítás."
 msgid "This is only for the artists to make their life easier."
 msgstr "Ez csak a grafikusok munkáját segíti."
 
-#: config/playerselectoritem.cpp:64
+#: config/playerselectoritem.cpp:68
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Left:"
 msgstr "Balra:"
 
-#: config/playerselectoritem.cpp:73
+#: config/playerselectoritem.cpp:77
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Up:"
 msgstr "Fel:"
 
-#: config/playerselectoritem.cpp:82
+#: config/playerselectoritem.cpp:86
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Right:"
 msgstr "Jobbra:"
 
-#: config/playerselectoritem.cpp:91
+#: config/playerselectoritem.cpp:95
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Down:"
 msgstr "Le:"
 
-#: config/playerselectoritem.cpp:100
+#: config/playerselectoritem.cpp:104
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Bomb:"

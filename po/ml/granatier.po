@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-20 00:43+0000\n"
+"POT-Creation-Date: 2023-11-09 02:26+0000\n"
 "PO-Revision-Date: 2019-12-12 22:07+0000\n"
 "Last-Translator: Vivek KJ Pazhedath <vivekkj2004@gmail.com>\n"
 "Language-Team: SMC <smc.org.in>\n"
@@ -27,7 +27,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "shijualexonline@gmail.com,snalledam@dataone.in,vivekkj2004@gmail.com"
 
-#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:159
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
@@ -207,31 +207,31 @@ msgstr ""
 msgid "This is only for the artists to make their life easier."
 msgstr ""
 
-#: config/playerselectoritem.cpp:64
+#: config/playerselectoritem.cpp:68
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Left:"
 msgstr ""
 
-#: config/playerselectoritem.cpp:73
+#: config/playerselectoritem.cpp:77
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Up:"
 msgstr ""
 
-#: config/playerselectoritem.cpp:82
+#: config/playerselectoritem.cpp:86
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Right:"
 msgstr ""
 
-#: config/playerselectoritem.cpp:91
+#: config/playerselectoritem.cpp:95
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Down:"
 msgstr ""
 
-#: config/playerselectoritem.cpp:100
+#: config/playerselectoritem.cpp:104
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Bomb:"
