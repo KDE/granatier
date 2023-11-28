@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf8" standalone="no"?>
+<svg height="120" id="svg2" inkscape:version="0.48.3.1 r9886" sodipodi:docname="player5.svgz" version="1.0" width="220" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs id="defs4">
+<linearGradient id="linearGradient4740">
+<stop id="stop4742" offset="0" style="stop-color:#730e0e"/>
+<stop id="stop4744" offset="1" style="stop-color:#ba1f1f"/>
+</linearGradient>
+<linearGradient id="linearGradient4694" inkscape:collect="always">
+<stop id="stop4696" offset="0" style="stop-color:#d90000"/>
+<stop id="stop4698" offset="1" style="stop-opacity:0;stop-color:#d90000"/>
+</linearGradient>
+<linearGradient id="linearGradient4625">
+<stop id="stop4627" offset="0"/>
+<stop id="stop4631" offset="0.5"/>
+<stop id="stop4633" offset="0.75" style="stop-opacity:0.75294119"/>
+<stop id="stop4629" offset="1" style="stop-opacity:0"/>
+</linearGradient>
+<linearGradient id="linearGradient37616">
+<stop id="stop37618" offset="0" style="stop-color:#c419c4"/>
+<stop id="stop37620" offset="1" style="stop-color:#400040"/>
+</linearGradient>
+<radialGradient cx="46.222408" cy="242.37999" fx="46.222408" fy="242.37999" gradientTransform="matrix(1,0,0,.82857,-22.72235,-165.96685)" gradientUnits="userSpaceOnUse" id="radialGradient4608" inkscape:collect="always" r="17.5" xlink:href="#linearGradient37616"/>
+<radialGradient cx="46.222408" cy="242.37999" fx="46.222408" fy="242.37999" gradientTransform="matrix(1,0,0,.82857,-22.72235,-165.96685)" gradientUnits="userSpaceOnUse" id="radialGradient4608-6" inkscape:collect="always" r="17.5" xlink:href="#linearGradient4625"/>
+<radialGradient cx="166.03752" cy="102.89685" fx="166.03752" fy="102.89685" gradientTransform="matrix(1,0,0,4.45504,0,-355.51235)" gradientUnits="userSpaceOnUse" id="radialGradient4700" inkscape:collect="always" r="2.2716911" xlink:href="#linearGradient4694"/>
+<radialGradient cx="166.03752" cy="102.89685" fx="166.03752" fy="102.89685" gradientTransform="matrix(1,0,0,4.45504,0,-355.51235)" gradientUnits="userSpaceOnUse" id="radialGradient4702" inkscape:collect="always" r="2.2716911" xlink:href="#linearGradient4694"/>
+<radialGradient cx="24.828608" cy="19.45216" fx="24.828608" fy="19.45216" gradientTransform="matrix(1.04008,.10629,-.07693,.50622,-2.19756,9.30497)" gradientUnits="userSpaceOnUse" id="radialGradient4866" inkscape:collect="always" r="6.9342494" xlink:href="#linearGradient4740"/>
+<radialGradient cx="24.828608" cy="19.45216" fx="24.828608" fy="19.45216" gradientTransform="matrix(1.04008,.10629,-.07693,.50622,-2.19756,9.30497)" gradientUnits="userSpaceOnUse" id="radialGradient4652" inkscape:collect="always" r="6.9342494" xlink:href="#linearGradient4740"/>
+</defs>
+<sodipodi:namedview id="namedview340" inkscape:current-layer="torso" inkscape:cx="69.51625" inkscape:cy="42.8667" inkscape:pageopacity="0" inkscape:pageshadow="2" inkscape:window-height="880" inkscape:window-maximized="1" inkscape:window-width="1479" inkscape:window-x="119" inkscape:window-y="-3" inkscape:zoom="4.615347"/>
+<g id="layer1" inkscape:groupmode="layer" inkscape:label="template" transform="translate(0,-932.3622)">
+<g id="leftLeg" transform="matrix(.99452,-.10453,.10453,.99452,11.83306,982.62951)">
+<g id="g4760" transform="matrix(.99939,-.0349,.0349,.99939,-.74667,.78157)">
+<rect height="8.0215454" id="rect4117-0-1" rx="6" ry="4" transform="matrix(.99483,.10153,-.14827,.98895,0,0)" width="15.667521" x="17.194677" y="15.441989"/>
+<rect height="7.6634331" id="rect4117-0-1-2" rx="5.7321362" ry="3.8214242" style="fill:#dedede" transform="matrix(.99483,.10153,-.14827,.98895,0,0)" width="14.968062" x="17.544407" y="15.621045"/>
+<path d="m 24.363025,18.442831 -3.382517,-0.324095 c -3.060248,-0.312741 -5.760601,0.974802 -6.055354,2.914258 l -0.0033,0.03108 c -0.294753,1.939455 1.931946,3.76266 4.992194,4.075402 l 3.382517,0.324094 c 0.956328,0.09773 1.853961,0.03036 2.677647,-0.158478 l 0.659836,-6.277919 c -0.676157,-0.28045 -1.436758,-0.49908 -2.271056,-0.584341 z" id="rect4117-0-1-2-0" inkscape:connector-curvature="0" style="fill:url(#radialGradient4866)"/>
+<path d="M 39.113106,71.627162 38.585302,67.015815 37.335238,71.775318 36.751875,66.87692 35.52033,71.886435 34.788812,66.821361" id="path4758" inkscape:connector-curvature="0" sodipodi:nodetypes="cccccc" style="stroke:#dedede;fill:none" transform="matrix(.99452,.10453,-.10453,.99452,-6.51387,-51.22885)"/>
+</g>
+</g>
+<rect height="35" id="rect4115-7-8" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="20" y="997.36218"/>
+<g id="rightLeg" transform="matrix(.99452,.10453,-.10453,.99452,19.12136,977.75279)">
+<g id="g4760-3" transform="matrix(.99939,.0349,.0349,-.99939,-.75047,68.94412)">
+<rect height="8.0215454" id="rect4117-0-1-25" rx="6" ry="4" transform="matrix(.99483,.10153,-.14827,.98895,0,0)" width="15.667521" x="17.194677" y="15.441989"/>
+<rect height="7.6634331" id="rect4117-0-1-2-6" rx="5.7321362" ry="3.8214242" style="fill:#dedede" transform="matrix(.99483,.10153,-.14827,.98895,0,0)" width="14.968062" x="17.544407" y="15.621045"/>
+<path d="m 24.363025,18.442831 -3.382517,-0.324095 c -3.060248,-0.312741 -5.760601,0.974802 -6.055354,2.914258 l -0.0033,0.03108 c -0.294753,1.939455 1.931946,3.76266 4.992194,4.075402 l 3.382517,0.324094 c 0.956328,0.09773 1.853961,0.03036 2.677647,-0.158478 l 0.659836,-6.277919 c -0.676157,-0.28045 -1.436758,-0.49908 -2.271056,-0.584341 z" id="rect4117-0-1-2-0-3" inkscape:connector-curvature="0" style="fill:url(#radialGradient4652)"/>
+<path d="M 39.113106,71.627162 38.585302,67.015815 37.335238,71.775318 36.751875,66.87692 35.52033,71.886435 34.788812,66.821361" id="path4758-6" inkscape:connector-curvature="0" sodipodi:nodetypes="cccccc" style="stroke:#dedede;fill:none" transform="matrix(.99452,.10453,-.10453,.99452,-6.51387,-51.22885)"/>
+</g>
+</g>
+<g id="torso" transform="translate(13.9999,980)">
+<rect height="29" id="rect4105-7-1" rx="14.5" style="fill:url(#radialGradient4608)" width="35" x="6.0000558" y="20.362209"/>
+<g id="eye" transform="matrix(.88807,-.52021,.51273,.90103,-12.04818,20.97091)">
+<path d="m 51.14101,59.101128 c 0,1.038963 -0.592692,1.881209 -1.323814,1.881209 -0.731122,0 -1.323814,-0.842246 -1.323814,-1.881209 0,-1.038963 0.592692,-1.881209 1.323814,-1.881209 0.731122,0 1.323814,0.842246 1.323814,1.881209 z" id="path4217" sodipodi:cx="49.817196" sodipodi:cy="59.101128" sodipodi:rx="1.3238137" sodipodi:ry="1.8812089" sodipodi:type="arc" style="fill:#fff" transform="matrix(1.57269,0,0,1.32893,-42.86456,-52.62696)"/>
+<path d="m 52.952546,56.801872 c 0,0.923523 -0.65508,1.672186 -1.463162,1.672186 -0.808083,0 -1.463163,-0.748663 -1.463163,-1.672186 0,-0.923522 0.65508,-1.672185 1.463163,-1.672185 0.808082,0 1.463162,0.748663 1.463162,1.672185 z" id="path5458" sodipodi:cx="51.489384" sodipodi:cy="56.801872" sodipodi:rx="1.4631624" sodipodi:ry="1.6721857" sodipodi:type="arc" transform="matrix(1,0,0,1.04167,-15.69659,-32.88622)"/>
+</g>
+<g id="eye-9" transform="matrix(.88807,.52021,.51273,-.90103,-12.04818,48.75351)">
+<path d="m 51.14101,59.101128 c 0,1.038963 -0.592692,1.881209 -1.323814,1.881209 -0.731122,0 -1.323814,-0.842246 -1.323814,-1.881209 0,-1.038963 0.592692,-1.881209 1.323814,-1.881209 0.731122,0 1.323814,0.842246 1.323814,1.881209 z" id="path4217-7" sodipodi:cx="49.817196" sodipodi:cy="59.101128" sodipodi:rx="1.3238137" sodipodi:ry="1.8812089" sodipodi:type="arc" style="fill:#fff" transform="matrix(1.57269,0,0,1.32893,-42.86456,-52.62696)"/>
+<path d="m 52.952546,56.801872 c 0,0.923523 -0.65508,1.672186 -1.463162,1.672186 -0.808083,0 -1.463163,-0.748663 -1.463163,-1.672186 0,-0.923522 0.65508,-1.672185 1.463163,-1.672185 0.808082,0 1.463162,0.748663 1.463162,1.672185 z" id="path5458-4" sodipodi:cx="51.489384" sodipodi:cy="56.801872" sodipodi:rx="1.4631624" sodipodi:ry="1.6721857" sodipodi:type="arc" transform="matrix(1,0,0,1.04167,-15.69659,-32.88622)"/>
+</g>
+</g><text id="text4247" sodipodi:linespacing="125%" style="font-weight:bold;font-family:Sans;letter-spacing:0;font-size:40;word-spacing:0" x="39.697594" xml:space="preserve" y="943.12256"><tspan id="tspan4249" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="943.12256">template layer</tspan><tspan id="tspan4096" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="948.12256">the items in the other layers</tspan><tspan id="tspan4100" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="953.12256">are just clones of this layer.</tspan><tspan id="tspan4102" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="958.12256">if the properties of this items is</tspan><tspan id="tspan4104" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="963.12256">changed, the clones properties</tspan><tspan id="tspan4108" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="968.12256">are also changed. please move,</tspan><tspan id="tspan4112" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="973.12256">rotate, etc. only inside the torso group,</tspan><tspan id="tspan4114" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="978.12256">leftLeg group, etc. else the movement</tspan><tspan id="tspan4116" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="39.697594" y="983.12256">is not taken by the clones</tspan></text><text id="text4247-4" sodipodi:linespacing="125%" style="font-weight:bold;font-family:Sans;letter-spacing:0;font-size:40;word-spacing:0" x="117.64868" xml:space="preserve" y="943.12256"><tspan id="tspan4249-5" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="117.64868" y="943.12256">player animation layers</tspan><tspan id="tspan4126" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="117.64868" y="948.12256">there are 13 layers, each with</tspan><tspan id="tspan4128" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="118.2854" y="953.12256">a player where all elements </tspan><tspan id="tspan4130" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="117.64868" y="958.12256">are grouped together and</tspan><tspan id="tspan4132" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="117.64868" y="963.12256">with the ID "player_#".</tspan><tspan id="tspan4154" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="117.64868" y="968.12256">please move, rotate only the</tspan><tspan id="tspan4158" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="117.64868" y="973.12256">groups like torso, leftLeg, etc.</tspan><tspan id="tspan4150" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="117.64868" y="978.12256">and lock the layers after</tspan><tspan id="tspan4152" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="117.64868" y="983.12256">editing.</tspan></text><text id="text4247-1" sodipodi:linespacing="125%" style="font-weight:bold;font-family:Sans;letter-spacing:0;font-size:40;word-spacing:0" x="188.03972" xml:space="preserve" y="943.12256"><tspan id="tspan4249-4" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="188.03972" y="943.12256">player death layer</tspan><tspan id="tspan4712" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="188.03972" y="948.12256">the torso overlay is in this case</tspan><tspan id="tspan4714" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="188.03972" y="953.12256">not a clone, but a copy,</tspan><tspan id="tspan4716" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="188.03972" y="958.12256">to be able to set a different</tspan><tspan id="tspan4718" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4;text-anchor:middle" x="188.03972" y="963.12256">gradient.</tspan></text><text id="text4247-4-2" sodipodi:linespacing="125%" style="font-weight:bold;font-family:Sans;letter-spacing:0;font-size:40;word-spacing:0" x="87.260384" xml:space="preserve" y="1058.7014"><tspan id="tspan4152-0" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4" x="87.260384" y="1058.7014">player_0: legs moved 0; torso rotated 0</tspan><tspan id="tspan3916" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4" x="87.260384" y="1063.7014">player_1: legs moved 0.8; torso rotated 1</tspan><tspan id="tspan3918" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4" x="87.260384" y="1068.7014">player_2: legs moved 1.3; torso rotated 2</tspan><tspan id="tspan3920" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4" x="87.260384" y="1073.7014">player_3: legs moved 1.5; torso rotated 3</tspan><tspan id="tspan3922" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4" x="87.260384" y="1078.7014">player_4: legs moved 1.3; torso rotated 2</tspan><tspan id="tspan3924" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4" x="87.260384" y="1083.7014">.</tspan><tspan id="tspan3926" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4" x="87.260384" y="1088.7014">.</tspan><tspan id="tspan3928" sodipodi:role="line" style="font-weight:normal;font-family:Sans;font-size:4" x="87.260384" y="1093.7014">.</tspan></text>
+</g>
+<g id="layer5" inkscape:groupmode="layer" inkscape:label="player_0" sodipodi:insensitive="true" transform="translate(0,-932.3622)">
+<g id="player_0" transform="translate(27.0997,13.3731)">
+<rect height="35" id="rect4115-7-8-6" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer3" inkscape:groupmode="layer" inkscape:label="player_1" sodipodi:insensitive="true" transform="translate(0,-932.3622)">
+<g id="player_1" transform="translate(27.0997,13.3731)">
+<rect height="35" id="rect4115-7-8-6-8" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-4" transform="translate(53.7003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-0" transform="translate(52.1003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-3" transform="matrix(.99987,-.01745,.01745,.99985,35.19337,-12.56405)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer4" inkscape:groupmode="layer" inkscape:label="player_2" sodipodi:insensitive="true" transform="translate(0,-932.3622)">
+<g id="player_2" transform="translate(27.0997,13.3731)">
+<rect height="35" id="rect4115-7-8-6-6" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-2" transform="translate(54.2003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-7" transform="translate(51.6003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-2" transform="matrix(.99948,-.0349,.0349,.99939,17.49842,-11.44612)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer6" inkscape:groupmode="layer" inkscape:label="player_3" sodipodi:insensitive="true" transform="translate(0,-932.3622)">
+<g id="player_3" transform="translate(27.0997,13.3731)">
+<rect height="35" id="rect4115-7-8-6-2" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-40" transform="translate(54.4003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-3" transform="translate(51.4003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-6" transform="matrix(.99883,-.05234,.05235,.99863,-.18051,-10.01965)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer2" inkscape:groupmode="layer" inkscape:label="player_4" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_4" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-82" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-5" transform="translate(54.2003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-08" transform="translate(51.6003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-7" transform="matrix(.99948,-.0349,.0349,.99939,17.49842,-11.44612)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer7" inkscape:groupmode="layer" inkscape:label="player_5" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_5" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-22" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-52" transform="translate(53.7003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-00" transform="translate(52.1003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-0" transform="matrix(.99987,-.01745,.01745,.99985,35.19337,-12.56405)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer8" inkscape:groupmode="layer" inkscape:label="player_6" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_6" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-63" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-6" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-8" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-5" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer9" inkscape:groupmode="layer" inkscape:label="player_7" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_7" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-0" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-1" transform="translate(52.1003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-9" transform="translate(53.7003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-32" transform="matrix(.99987,.01745,-.01745,.99985,70.61773,-13.87298)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer10" inkscape:groupmode="layer" inkscape:label="player_8" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_8" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-87" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-28" transform="translate(51.6003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-03" transform="translate(54.2003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-4" transform="matrix(.99948,.0349,-.0349,.99939,88.34112,-14.06358)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer11" inkscape:groupmode="layer" inkscape:label="player_9" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_9" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-5" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-71" transform="translate(51.4003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-87" transform="translate(54.4003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-33" transform="matrix(.99883,.05234,-.05235,.99863,106.06864,-13.94485)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer12" inkscape:groupmode="layer" inkscape:label="player_10" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_10" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-631" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-61" transform="translate(51.6003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-4" transform="translate(54.2003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-04" transform="matrix(.99948,.0349,-.0349,.99939,88.34112,-14.06358)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer13" inkscape:groupmode="layer" inkscape:label="player_11" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_11" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-61" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-59" transform="translate(52.1003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-873" transform="translate(53.7003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-337" transform="matrix(.99987,.01745,-.01745,.99985,70.61773,-13.87298)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer14" inkscape:groupmode="layer" inkscape:label="player_12" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_12" transform="translate(27.0997,-938.9891)">
+<rect height="35" id="rect4115-7-8-6-52" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="72.900284" y="983.98907"/>
+<use height="100" id="use3532-14" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-74" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#rightLeg"/>
+<use height="100" id="use3530-69" transform="translate(52.9003,-13.3731)" width="200" xlink:href="#torso"/>
+</g>
+</g>
+<g id="layer15" inkscape:groupmode="layer" inkscape:label="player_death" sodipodi:insensitive="true" transform="translate(0,20)">
+<g id="player_death">
+<rect height="35" id="rect4115-7-8-6-83" ry="0" style="fill:#f0f;fill-opacity:0" width="35" x="172" y="45"/>
+<use height="100" id="use3532-7" transform="translate(152,-952.3622)" width="200" xlink:href="#leftLeg"/>
+<use height="100" id="use3534-461" transform="translate(152,-952.3622)" width="200" xlink:href="#rightLeg"/>
+<use height="120" id="use4801" transform="translate(152,-952.3622)" width="220" xlink:href="#torso"/>
+<g id="torso-4" transform="translate(165.9999,27.6378)">
+<rect height="29" id="rect4105-7-1-6" rx="14.5" style="fill:url(#radialGradient4608-6)" width="35" x="6.0000558" y="20.362209"/>
+<g id="eye-0" transform="matrix(.88807,-.52021,.51273,.90103,-12.04818,20.97091)">
+<path d="m 51.14101,59.101128 c 0,1.038963 -0.592692,1.881209 -1.323814,1.881209 -0.731122,0 -1.323814,-0.842246 -1.323814,-1.881209 0,-1.038963 0.592692,-1.881209 1.323814,-1.881209 0.731122,0 1.323814,0.842246 1.323814,1.881209 z" id="path4217-8" sodipodi:cx="49.817196" sodipodi:cy="59.101128" sodipodi:rx="1.3238137" sodipodi:ry="1.8812089" sodipodi:type="arc" style="fill:#fff" transform="matrix(1.57269,0,0,1.32893,-42.86456,-52.62696)"/>
+<path d="m 51.838859,56.801872 c 0,0.923523 -0.156465,1.672186 -0.349475,1.672186 -0.19301,0 -0.349476,-0.748663 -0.349476,-1.672186 0,-0.923522 0.156466,-1.672185 0.349476,-1.672185 0.19301,0 0.349475,0.748663 0.349475,1.672185 z" id="path5458-7" sodipodi:cx="51.489384" sodipodi:cy="56.801872" sodipodi:rx="0.34947541" sodipodi:ry="1.6721857" sodipodi:type="arc" style="fill:#7f0000" transform="matrix(1,0,0,1.04167,-15.69659,-32.88622)"/>
+<path d="m 51.838859,56.801872 c 0,0.923523 -0.156465,1.672186 -0.349475,1.672186 -0.19301,0 -0.349476,-0.748663 -0.349476,-1.672186 0,-0.923522 0.156466,-1.672185 0.349476,-1.672185 0.19301,0 0.349475,0.748663 0.349475,1.672185 z" id="path5458-7-7" sodipodi:cx="51.489384" sodipodi:cy="56.801872" sodipodi:rx="0.34947541" sodipodi:ry="1.6721857" sodipodi:type="arc" style="fill:#7f0000" transform="matrix(-.08455,-.99028,1.0466,-.062,-19.41054,80.83658)"/>
+<path d="m 51.14101,59.101128 c 0,1.038963 -0.592692,1.881209 -1.323814,1.881209 -0.731122,0 -1.323814,-0.842246 -1.323814,-1.881209 0,-1.038963 0.592692,-1.881209 1.323814,-1.881209 0.731122,0 1.323814,0.842246 1.323814,1.881209 z" id="path4217-8-4" sodipodi:cx="49.817196" sodipodi:cy="59.101128" sodipodi:rx="1.3238137" sodipodi:ry="1.8812089" sodipodi:type="arc" style="fill:#fff" transform="matrix(.78635,1.36199,1.15089,-.66447,-80.36017,12.31734)"/>
+<path d="m 51.838859,56.801872 c 0,0.923523 -0.156465,1.672186 -0.349475,1.672186 -0.19301,0 -0.349476,-0.748663 -0.349476,-1.672186 0,-0.923522 0.156466,-1.672185 0.349476,-1.672185 0.19301,0 0.349475,0.748663 0.349475,1.672185 z" id="path5458-7-5" sodipodi:cx="51.489384" sodipodi:cy="56.801872" sodipodi:rx="0.34947541" sodipodi:ry="1.6721857" sodipodi:type="arc" style="fill:#7f0000" transform="matrix(.5,.86603,.90211,-.52083,-49.68021,25.97512)"/>
+<path d="m 51.838859,56.801872 c 0,0.923523 -0.156465,1.672186 -0.349475,1.672186 -0.19301,0 -0.349476,-0.748663 -0.349476,-1.672186 0,-0.923522 0.156466,-1.672185 0.349476,-1.672185 0.19301,0 0.349475,0.748663 0.349475,1.672185 z" id="path5458-7-7-7" sodipodi:cx="51.489384" sodipodi:cy="56.801872" sodipodi:rx="0.34947541" sodipodi:ry="1.6721857" sodipodi:type="arc" style="fill:#7f0000" transform="matrix(-.89988,.42192,.46961,.93738,46.94965,-34.10265)"/>
+</g>
+<path d="m 168.30921,102.89685 c 0,5.58938 -1.01707,10.12047 -2.27169,10.12047 -1.25462,0 -2.27169,-4.53109 -2.27169,-10.12047 0,-5.589379 1.01707,-10.120466 2.27169,-10.120466 1.25462,0 2.27169,4.531087 2.27169,10.120466 z" id="path4674" sodipodi:cx="166.03752" sodipodi:cy="102.89685" sodipodi:rx="2.2716911" sodipodi:ry="10.120466" sodipodi:type="arc" style="fill:url(#radialGradient4700)" transform="matrix(.74436,-.81234,.8337,.72528,-185.8768,95.11174)"/>
+<path d="m 168.30921,102.89685 c 0,5.58938 -1.01707,10.12047 -2.27169,10.12047 -1.25462,0 -2.27169,-4.53109 -2.27169,-10.12047 0,-5.589379 1.01707,-10.120466 2.27169,-10.120466 1.25462,0 2.27169,4.531087 2.27169,10.120466 z" id="path4674-3" sodipodi:cx="166.03752" sodipodi:cy="102.89685" sodipodi:rx="2.2716911" sodipodi:ry="10.120466" sodipodi:type="arc" style="fill:url(#radialGradient4702)" transform="matrix(.74436,.81234,.8337,-.72528,-185.8768,-25.38732)"/>
+</g>
+</g>
+</g>
+</svg>
