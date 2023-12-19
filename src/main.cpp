@@ -31,7 +31,7 @@ int main(int argc, char** argv)
         i18n("Granatier is a Bomberman Clone!"),
         KAboutLicense::GPL, i18n("Copyright (c) 2009-2015 The Granatier Team!"),
         QString(),
-        QStringLiteral("https://apps.kde.org//granatier")
+        QStringLiteral("https://apps.kde.org/granatier")
     );
     about.addAuthor(i18n("Mathias Kraus"), i18n("Maintainer"), QStringLiteral("k.hias@gmx.de"));
     about.addCredit(i18n("Arturo Silva"), i18n("Most of the beautiful granatier graphics"));
@@ -60,4 +60,3 @@ int main(int argc, char** argv)
     // Execute the application
     return app.exec();
 }
-
