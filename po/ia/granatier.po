@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-09 01:37+0000\n"
-"PO-Revision-Date: 2023-09-25 10:32+0200\n"
+"PO-Revision-Date: 2023-12-28 19:33+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -181,7 +181,7 @@ msgstr ""
 #: config/granatier.kcfg:48
 #, kde-format
 msgid "Whether sound effects should be played."
-msgstr ""
+msgstr "Si effectos de sono deberea esser reproducite."
 
 #. i18n: ectx: label, entry (UseWilhelmScream), group (General)
 #: config/granatier.kcfg:52
@@ -285,7 +285,7 @@ msgstr ""
 #: main.cpp:29
 #, kde-format
 msgid "Granatier"
-msgstr ""
+msgstr "Granatier"
 
 #: main.cpp:31
 #, kde-format
@@ -310,7 +310,7 @@ msgstr "Mantenitor"
 #: main.cpp:37
 #, kde-format
 msgid "Arturo Silva"
-msgstr ""
+msgstr "Arturo Silva"
 
 #: main.cpp:37
 #, kde-format
@@ -361,7 +361,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "New Game"
-msgstr ""
+msgstr "Nove Joco"
 
 #: mainwindow.cpp:141
 #, kde-format
