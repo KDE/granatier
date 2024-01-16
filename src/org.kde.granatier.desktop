@@ -105,4 +105,3 @@ TryExec=granatier
 Exec=granatier
 Categories=Qt;KDE;Game;ArcadeGame;
 X-DocPath=granatier/index.html
-X-DBUS-ServiceName=org.kde.granatier
