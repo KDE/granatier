@@ -23,7 +23,7 @@ int main(int argc, char** argv)
     QApplication app(argc, argv);
 
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("granatier")));
-    KLocalizedString::setApplicationDomain("granatier");
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("granatier"));
 
     // About Granatier
     KAboutData about(QStringLiteral("granatier"),  i18n("Granatier"),
