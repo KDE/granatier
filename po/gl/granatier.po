@@ -6,22 +6,22 @@
 # Xosé <xosecalvo@gmail.com>, 2009, 2012.
 # Marce Villarino <mvillarino@kde-espana.es>, 2012, 2014.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015, 2017.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-09 01:37+0000\n"
-"PO-Revision-Date: 2023-04-23 08:18+0200\n"
+"PO-Revision-Date: 2024-02-27 07:12+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
-"Language-Team: Galician <proxecto@trasno.gal>\n"
+"Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -103,7 +103,7 @@ msgstr "Puntos para gañar a partida:"
 #: config/generalsettings.ui:154
 #, kde-format
 msgid "Round Time in Seconds:"
-msgstr "Tempo da ronda en segundos:"
+msgstr "Tempo da rolda en segundos:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: config/generalsettings.ui:177
@@ -163,7 +163,7 @@ msgstr "Os puntos que precisa un usuario para gañar a partida."
 #: config/granatier.kcfg:32
 #, kde-format
 msgid "Time for a round."
-msgstr "Tempo para unha ronda."
+msgstr "Tempo para unha rolda."
 
 #. i18n: ectx: label, entry (InitialSpeed), group (General)
 #: config/granatier.kcfg:36
