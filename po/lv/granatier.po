@@ -4,31 +4,32 @@
 #
 # Einars Sprugis <einars8@gmail.com>, 2010, 2012.
 # Maris Nartiss <maris.kde@gmail.com>, 2010.
+# SPDX-FileCopyrightText: 2024 Toms Trasūns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-09 01:37+0000\n"
-"PO-Revision-Date: 2012-06-29 20:15+0300\n"
-"Last-Translator: Einars Sprugis <einars8@gmail.com>\n"
-"Language-Team: Latvian <locale@laka.lv>\n"
+"PO-Revision-Date: 2024-02-29 11:07+0200\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Einārs Sprūģis"
+msgstr "Einārs Sprūģis, Toms Trasūns"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "einars8@gmail.com"
+msgstr "einars8@gmail.com, toms.trasuns@posteo.net"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
 #, kde-format
@@ -46,7 +47,7 @@ msgstr "Gadījuma režīms"
 #: config/arenaselector.ui:43
 #, kde-format
 msgid "&Get New Arenas..."
-msgstr "Ie&gūt jaunas arēnas..."
+msgstr "&Iegūt jaunas arēnas..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
@@ -100,7 +101,7 @@ msgstr "Punkti, lai uzvarētu spēlē:"
 #: config/generalsettings.ui:154
 #, kde-format
 msgid "Round Time in Seconds:"
-msgstr "Kārtas ilgums sekundēs:"
+msgstr "Raunda ilgums sekundēs:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: config/generalsettings.ui:177
@@ -118,7 +119,7 @@ msgstr "Sākotnējā bumbas jauda:"
 #: config/generalsettings.ui:223
 #, kde-format
 msgid "Initial Bomb Armory:"
-msgstr "Sākotnējais bumbas bruņojums:"
+msgstr "Sākotnējais bumbu skaits:"
 
 #. i18n: ectx: label, entry (FirstRun), group (General)
 #: config/granatier.kcfg:9
@@ -130,37 +131,37 @@ msgstr "Pārbaudīt, vai šī ir pirmā spēles palaišanas reize."
 #: config/granatier.kcfg:13
 #, kde-format
 msgid "The graphical theme to be used."
-msgstr "Izmantojamā grafiskā tēma."
+msgstr "Izmantojamais grafikas motīvs."
 
 #. i18n: ectx: label, entry (Arena), group (General)
 #: config/granatier.kcfg:17
 #, kde-format
 msgid "The arena to be used."
-msgstr "Izmantojamā arēna."
+msgstr "Spēles arēna."
 
 #. i18n: ectx: label, entry (RandomArenaMode), group (General)
 #: config/granatier.kcfg:21
 #, kde-format
 msgid "Use random arenas."
-msgstr "Izmantot nejaušas arēnas."
+msgstr "Spēlē nejauši izvēlētās arēnās."
 
 #. i18n: ectx: label, entry (RandomArenaModeArenaList), group (General)
 #: config/granatier.kcfg:25
 #, kde-format
 msgid "List of arenas, used in random mode."
-msgstr "Arēnu saraksts, tiek izmantots nejaušajā režīmā."
+msgstr "Arēnas, starp kurām spēle izvēlēsies nejauši."
 
 #. i18n: ectx: label, entry (PointsToWin), group (General)
 #: config/granatier.kcfg:28
 #, kde-format
 msgid "The points a user needs to win the game."
-msgstr "Lietotājam vajadzīgie punkti, lai uzvarētu spēlē."
+msgstr "Sakrājamie punkti, lai uzvarētu spēlē."
 
 #. i18n: ectx: label, entry (RoundTime), group (General)
 #: config/granatier.kcfg:32
 #, kde-format
 msgid "Time for a round."
-msgstr "Kārtas ilgums."
+msgstr "Raunda ilgums."
 
 #. i18n: ectx: label, entry (InitialSpeed), group (General)
 #: config/granatier.kcfg:36
@@ -178,7 +179,7 @@ msgstr "Sākotnējā bumbas jauda."
 #: config/granatier.kcfg:44
 #, kde-format
 msgid "The initial bomb armory."
-msgstr "Sākotnējais bumbas bruņojums."
+msgstr "Sākotnējais bumbu skaits."
 
 #. i18n: ectx: label, entry (Sounds), group (General)
 #: config/granatier.kcfg:48
@@ -190,13 +191,13 @@ msgstr "Vai atskaņot skaņas efektus."
 #: config/granatier.kcfg:52
 #, kde-format
 msgid "Whether to use the Wilhelm Scream for dying players."
-msgstr "Vai izmantot 'Vilhelma kliedzienu', nomirstot spēlētājam."
+msgstr "Vai izmantot „Vilhelma kliedzienu“, nomirstot spēlētājam."
 
 #. i18n: ectx: label, entry (Dummy), group (General)
 #: config/granatier.kcfg:56
 #, kde-format
 msgid "This is a dummy setting for player setup."
-msgstr "Šis ir mānekļa iestatījums spēlētāja iestatīšanai."
+msgstr "Šis ir tukšs iestatījums spēlētāja iestatīšanai."
 
 #. i18n: ectx: label, entry (ShowAllTiles), group (General)
 #. i18n: ectx: label, entry (BlastTime1), group (General)
@@ -220,7 +221,7 @@ msgstr "Pa kreisi:"
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Up:"
-msgstr "Uz augšu:"
+msgstr "Augšup:"
 
 #: config/playerselectoritem.cpp:85
 #, kde-format
@@ -232,7 +233,7 @@ msgstr "Pa labi:"
 #, kde-format
 msgctxt "Label for the key sequence to move the player."
 msgid "Down:"
-msgstr "Uz leju:"
+msgstr "Lejup:"
 
 #: config/playerselectoritem.cpp:103
 #, kde-format
@@ -258,12 +259,12 @@ msgstr "Pēkšņa nāve"
 #: infooverlay.cpp:51
 #, kde-format
 msgid "Press Space to continue"
-msgstr "Nospied 'Space', lai turpinātu"
+msgstr "Spied atstarpes taustiņu, lai turpinātu"
 
 #: infooverlay.cpp:58
 #, kde-format
 msgid "Press Space to start a new Game"
-msgstr "Nospied 'Space', lai sāktu jaunu spēli"
+msgstr "Spied atstarpes taustiņu, lai sāktu jaunu spēli"
 
 #: infooverlay.cpp:68
 #, kde-format
@@ -273,12 +274,12 @@ msgstr "SAGATAVOJIES!!!"
 #: infooverlay.cpp:73
 #, kde-format
 msgid "Press Space to start"
-msgstr "Nospied 'Space', lai sāktu"
+msgstr "Spied atstarpes taustiņu, lai sāktu"
 
 #: infooverlay.cpp:78
 #, kde-format
 msgid "PAUSED"
-msgstr "PAUZĒTS"
+msgstr "SPĒLE PAUZĒTA"
 
 #: infooverlay.cpp:219
 #, kde-format
@@ -288,18 +289,17 @@ msgstr "Uzvarētājs ir %1"
 #: main.cpp:29
 #, kde-format
 msgid "Granatier"
-msgstr "Granatier"
+msgstr "„Granatier“"
 
 #: main.cpp:31
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
-msgstr "Granatier ir Bomberman klons!"
+msgstr "„Granatier“ ir „Bomberman“ klons!"
 
 #: main.cpp:32
-#, fuzzy, kde-format
-#| msgid "Copyright (c) 2009 The Granatier Team!"
+#, kde-format
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
-msgstr "Autortiesības (c) 2009 The Granatier komanda"
+msgstr "Autortiesības (c) 2009—2015 „Granatier“ komanda"
 
 #: main.cpp:36
 #, kde-format
@@ -314,12 +314,12 @@ msgstr "Uzturētājs"
 #: main.cpp:37
 #, kde-format
 msgid "Arturo Silva"
-msgstr ""
+msgstr "Arturo Silva"
 
 #: main.cpp:37
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
-msgstr ""
+msgstr "Visskaistākās „Granatier“ grafikas"
 
 #: main.cpp:38
 #, kde-format
@@ -329,7 +329,7 @@ msgstr "Thomas Gallinari"
 #: main.cpp:38 main.cpp:39 main.cpp:40 main.cpp:41 main.cpp:42
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
-msgstr "Spēles, uz kuras ir balstīta Granatier — Kapman — izstrādātājs"
+msgstr "Spēles, uz kuras ir balstīta „Granatier“ — „Kapman“ — izstrādātājs"
 
 #: main.cpp:39
 #, kde-format
@@ -362,16 +362,13 @@ msgid "Are you sure you want to quit the current game?"
 msgstr "Vai tiešām vēlies iziet no pašreizējās spēles?"
 
 #: mainwindow.cpp:140
-#, fuzzy, kde-format
-#| msgid "New game"
+#, kde-format
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "Jauna spēle"
 
 #: mainwindow.cpp:141
-#, fuzzy, kde-format
-#| msgctxt "To quit Granatier"
-#| msgid "Quit"
+#, kde-format
 msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "Iziet"
@@ -380,12 +377,12 @@ msgstr "Iziet"
 #, kde-format
 msgctxt "General settings"
 msgid "General"
-msgstr "Vispārīgi"
+msgstr "Pamata"
 
 #: mainwindow.cpp:182
 #, kde-format
 msgid "Theme"
-msgstr "Tēma"
+msgstr "Motīvs"
 
 #: mainwindow.cpp:184
 #, kde-format
@@ -400,7 +397,7 @@ msgstr "Spēlētājs"
 #: mainwindow.cpp:237
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
-msgstr "Vai tiešām vēlies iziet no Granatier?"
+msgstr "Vai tiešām vēlies iziet no „Granatier“?"
 
 #: mainwindow.cpp:238
 #, kde-format
