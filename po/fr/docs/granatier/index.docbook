@@ -44,7 +44,7 @@
 ><affiliation
 ><address
 ><email
->xavier.besnard@neuf.fr</email
+>xavier.besnard@kde.org</email
 ></address
 ></affiliation
 ><contrib
@@ -55,13 +55,13 @@
     <legalnotice
 >&FDLNotice;</legalnotice>
     <date
->09-05-2016</date>
+>23-06-2021</date>
     <releaseinfo
->1.3.1 (Applications 16.04)</releaseinfo>
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
     
     <abstract>
       <para
->Cette documentation explique comment jouer à &granatier; version 1.3.1</para>
+>Cette documentation explique comment jouer à &granatier; version 1.4.2.</para>
     </abstract>
     
     <keywordset>
@@ -85,7 +85,7 @@
 >multijoueur</keyword>
       <!--All other relevant keywords-->
       <keyword
->bomberman</keyword>
+>Bomberman</keyword>
       <keyword
 >Clanbomber</keyword>
     </keywordset>
@@ -108,11 +108,11 @@
 >Multijoueur</para
 ></note>
     <para
->&granatier; est un clone du classique jeu <trademark
+>&granatier; est un clone du jeu classique <trademark
 ><application
 >Bomberman</application
 ></trademark
->, inspiré par le jeu <application
+>, inspiré par le travail autour du clone <application
 >Clanbomber</application
 >. </para>
     <para
@@ -143,9 +143,9 @@
 >Éliminer tous les adversaires.</para
 ></note>
     <para
->Chaque joueur dispose de cinq touches lui permettant de déplacer son personnage et de déposer des bombes. Par exemple, les touches par défaut pour le Joueur 1 sont les touches fléchées Haut, Bas, Gauche et Droite pour se déplacer, ainsi que la touche &Entree; pour poser une bombe. Pour plus de détails sur les raccourcis des autres joueurs ainsi que leur configuration, référez-vous à la section <link linkend="config_player"
+>Chaque joueur dispose de cinq touches lui permettant de déplacer son personnage et de déposer des bombes. Par exemple, les touches par défaut pour le joueur 1 sont les touches de flèches &Up;, &Down;, &Left; and &Right; pour se déplacer dans les directions correspondantes, ainsi que la touche &Enter; pour déposer une bombe. Veuillez consulter la section <link linkend="config_player"
 >Configuration du joueur</link
->. </para>
+> pour trouver les touches de raccourcis des autres joueurs ainsi que le façon de les configurer. </para>
     <para
 >Poser des bombes vous permet, en plus d'attaquer vos adversaires, de détruire les blocs disposés un peu partout dans l'arène afin de vous trouver un passage et de découvrir des bonus cachés. Parmi les nombreux bonus qui peuvent être découverts, il y a ceux qui vous font vous déplacer plus vite ou encore ceux qui augmentent la puissance de vos bombes ; plus vous collectez de bonus de ce type, plus il devient facile d'éliminer vos adversaires et de gagner le round. Mais attention, de nombreux handicaps existent et peuvent renverser la tendance, comme par exemple ceux qui vous ralentissent ou qui inversent vos touches de déplacement. </para>
     <para
@@ -378,12 +378,100 @@
     </sect1>
   </chapter>
 
+  <chapter id="interface"
+><title
+>Vue d'ensemble de l'interface</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Éléments de menu</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Jeu</guimenu
+> <guimenuitem
+>Nouveau</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Démarre</action
+> une nouvelle partie.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+></shortcut
+> <guimenu
+>Jeu</guimenu
+> <guimenuitem
+>Quitter</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Ferme</action
+> &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Configuration</guimenu
+> <guimenuitem
+>Lire les sons</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Activer / Désactiver la lecture de sons.</action
+> La valeur par défaut est activée. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>En outre, &granatier; possède les éléments standard de menu de &kde;, <guimenu
+>Configuration</guimenu
+> et <guimenu
+>Aide</guimenu
+> communs. Pour plus d'informations, veuillez consulter les sections sur le <ulink url="help:/fundamentals/menus.html#menus-settings"
+>menu « Configuration »</ulink
+> et le <ulink url="help:/fundamentals/menus.html#menus-help"
+>menu « Aide »</ulink
+> dans les principes fondamentaux de &kde;. </para>
+
+    </sect1>
+  </chapter>
+
   <chapter id="configuration"
 ><title
 >Configuration du jeu</title
 > <!-- do not change this! -->
     <para
->Pour ouvrir la fenêtre de configuration, sélectionnez <menuchoice
+>Pour ouvrir la boîte de dialogue de configuration, veuillez sélectionner l'élément de menu <menuchoice
 ><guimenu
 >Configuration</guimenu
 ><guimenuitem
@@ -415,13 +503,13 @@
       <title
 >Thème</title>
       <para
->Pour sélectionner un thème, allez dans la section Thème. Le thème peut être chargé en cliquant sur les boutons <guibutton
+>Pour sélectionner un thème avec lequel vous souhaitez jouer, veuillez vous rendre dans la section « Thème ». Le thème peut être chargé par un clic sur les boutons <guibutton
 >Ok</guibutton
 > ou <guibutton
 >Appliquer</guibutton
->. Cela mettra fin à la partie en cours et en démarrera une nouvelle. Vous pouvez revenir au thème par défaut en cliquant sur le bouton <guibutton
+>. La partie en cours sera stoppée et une nouvelle partie sera démarrée. Vous pouvez faire un clic sur le bouton <guibutton
 >Réglages par défaut</guibutton
->. </para>
+> pour revenir au thème par défaut. </para>
       <screenshot>
         <screeninfo
 >Capture d'écran de la fenêtre de Configuration de &granatier;</screeninfo>
@@ -440,21 +528,19 @@
       <title
 >Arène</title>
       <para
->Pour sélectionner l'arène dans laquelle vous souhaitez jouer, rendez-vous dans la section Arène. L'arène peut être chargée en cliquant sur le bouton <guibutton
+>Pour sélectionner l'arène dans laquelle vous souhaitez jouer, veuillez vous rendre dans la section « Arène ». L'arène peut être chargée par un clic sur le bouton <guibutton
 >Ok</guibutton
 > ou <guibutton
 >Appliquer</guibutton
->. Cela mettra fin à la partie en cours et en démarrera une nouvelle. Vous pouvez revenir à l'arène par défaut en cliquant sur le bouton <guibutton
+>. La partie en cours sera stoppée et une nouvelle partie sera démarrée. Vous pouvez faire un clic sur le bouton <guibutton
 >Réglages par défaut</guibutton
->. </para>
+> pour revenir à l'arène par défaut. </para>
       <para
->Si vous disposez d'arènes <application
+>Si vous avez des arènes <application
 >Clanbomber</application
-> créées par vos soins, vous pouvez les importer en cliquant sur <guibutton
->Importer des arènes de Clanbomber</guibutton
->. &granatier; cherchera les arènes dans <filename class="directory"
+> créées par vos soins, vous pouvez les copier dans <filename class="directory"
 >~/.clanbomber/maps</filename
->. Notez que les arènes par défaut de <application
+>. &granatier; les y cherchera. Veuillez noter que les arènes par défaut de <application
 >Clanbomber</application
 > sont déjà fournies avec &granatier;. </para>
       <screenshot>
@@ -492,11 +578,11 @@
       <title
 >Joueur</title>
       <para
->Pour choisir le joueur à incarner, allez dans la section « Joueur » et sélectionnez les joueurs grâce aux cases à cocher. Les raccourcis peuvent être changés en cliquant sur le bouton correspondant à l'action que vous souhaitez changer puis sur la touche à laquelle vous voulez la lier. Pour enregistrer les changements, cliquez sur <guibutton
+>Pour sélectionner le joueur à incarner, veuillez vous rendre dans la section « Joueur » et sélectionner les joueurs grâce aux boîtes à cocher. Les raccourcis peuvent être modifiés par un clic sur le bouton correspondant à l'action que vous souhaitez modifier puis sur la touche à laquelle vous voulez l'associer. Les modifications sont enregistrées par un clic sur le bouton <guibutton
 >Ok</guibutton
 > ou <guibutton
 >Appliquer</guibutton
->. Cela mettra fin à la partie en cours et en démarrera une nouvelle. Vous pouvez revenir aux raccourcis par défaut en cliquant sur le bouton <guibutton
+>. La partie en cours sera stoppée et une nouvelle partie sera démarrée. Vous pouvez revenir aux raccourcis par défaut par un clic sur le bouton <guibutton
 >Réglages par défaut</guibutton
 >. </para>
       <screenshot>
@@ -520,26 +606,40 @@
 >Créer une arène personnalisée</title
 > <!-- do not change this! -->
     <para
->Une arène est constituée de deux fichiers : <filename
+>Une arène dans &granatier; est constituée de deux fichiers : <filename
 >myarena.desktop</filename
 > et <filename
 >myarena.xml</filename
 >. </para>
 
     <para
->Le fichier .desktop contient des métadonnées, telles que le nom et l'auteur de l'arène. Voici de quoi il est constitué : <programlisting>
-[Arena]
-Name=Mon arène
-Description=Ma première arène
-Type=XML
-FileName=myarena.xml
-Author=Martin Durand
-AuthorEmail=martin.durand@foo.org
-      </programlisting
-> Vous pouvez choisir le nom que vous voulez, mais FileName doit absolument être le nom du fichier .xml. </para>
+>Le fichier <literal role="extension"
+>.desktop</literal
+> contient les métadonnées comme le nom de l'arène ou l'auteur de l'arène et se compose des entrées suivantes. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name = Mon arène
+Description = Ma première arène
+Type = XML
+FileName = mon-arène.xml
+Author=Jean Martin
+AuthorEmail=jean.martin@truc.org
+      </programlisting>
+    </para>
     <para
->Le fichier .xml contient l'arène en elle-même. <programlisting>
-&lt;?xml version="1.0"?&gt;
+>Vous pouvez sélectionner le nom que vous voulez, mais <literal
+>Nom-Fichier</literal
+> doit être le nom du fichier <literal role="extension"
+>.xml</literal
+>. </para>
+    <para
+>Le fichier <literal role="extension"
+>.xml</literal
+> contient la carte réelle de l'arène. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
 &lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
   &lt;Row&gt;    ==== ====    &lt;/Row&gt;
   &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
@@ -555,8 +655,16 @@ AuthorEmail=martin.durand@foo.org
   &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
   &lt;Row&gt;    ==== ====    &lt;/Row&gt;
 &lt;/Arena&gt;
-      </programlisting
-> Il n'y a pas de limites pour rowCount (le nombre de lignes) et colCount (le nombre de colonnes), vous pouvez donc choisir n'importe quelles dimensions. Voici les symboles utilisés pour définir votre arène : <programlisting
+      </programlisting>
+    </para>
+    <para
+>Il n'y a aucune limite pour les paramètres <literal
+>rowCount</literal
+> et <literal
+>colCount</literal
+>. Vous pouvez donc choisir la taille de l'arène par vous-même. Les symboles suivants sont utilisés pour la carte de l'arène. </para>
+    <para>
+      <programlisting
 >« = »  un mur
 «   » un trou
 « _ » du terrain
@@ -604,7 +712,7 @@ AuthorEmail=martin.durand@foo.org
 >.</para
 ><para
 >Traduction française par Xavier Besnard<email
->xavier.besnard@neuf.fr</email
+>xavier.besnard@kde.org</email
 >.</para
 > &underFDL; &underGPL; </chapter>
 
