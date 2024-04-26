@@ -72,8 +72,9 @@ target_sources(granatier PRIVATE
 ecm_qt_declare_logging_category(granatier
     HEADER granatier_debug.h
     IDENTIFIER GRANATIER_LOG
-    CATEGORY_NAME log_granatier
-    DESCRIPTION "Granatier"
+    CATEGORY_NAME granatier
+    OLD_CATEGORY_NAMES log_granatier
+    DESCRIPTION "Granatier game"
     EXPORT GRANATIER
 )
 
