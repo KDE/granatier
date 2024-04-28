@@ -58,7 +58,8 @@ MainWindow::MainWindow()
     //KGameStandardAction::highscores(this, &MainWindow::showHighscores, actionCollection());
     KStandardAction::preferences(this, &MainWindow::showSettings, actionCollection());
     KGameStandardAction::quit(this, &MainWindow::close, actionCollection());
-    auto *soundAction = new KToggleAction(i18nc("@option:check", "Play Sounds"), this);
+    auto *soundAction = new KToggleAction(QIcon::fromTheme(QStringLiteral("speaker")),
+                                          i18nc("@option:check", "Play Sounds"), this);
     soundAction->setChecked(Settings::sounds());
     actionCollection()->addAction( QStringLiteral( "sounds" ), soundAction);
     connect(soundAction, &KToggleAction::triggered, this, &MainWindow::setSoundsEnabled);
