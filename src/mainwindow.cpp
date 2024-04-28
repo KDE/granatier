@@ -58,7 +58,7 @@ MainWindow::MainWindow()
     //KGameStandardAction::highscores(this, &MainWindow::showHighscores, actionCollection());
     KStandardAction::preferences(this, &MainWindow::showSettings, actionCollection());
     KGameStandardAction::quit(this, &MainWindow::close, actionCollection());
-    auto* soundAction = new KToggleAction(i18n("&Play sounds"), this);
+    auto *soundAction = new KToggleAction(i18nc("@option:check", "Play Sounds"), this);
     soundAction->setChecked(Settings::sounds());
     actionCollection()->addAction( QStringLiteral( "sounds" ), soundAction);
     connect(soundAction, &KToggleAction::triggered, this, &MainWindow::setSoundsEnabled);
@@ -175,15 +175,15 @@ void MainWindow::showSettings()
     auto* settingsDialog = new KConfigDialog(this, QStringLiteral("settings"), Settings::self());
     settingsDialog->setMinimumSize(900, 600);
     // General Settings
-    settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("General settings", "General"), QStringLiteral("games-config-options"));
+    settingsDialog->addPage(new GeneralSettings(settingsDialog), i18nc("@title:tab General settings", "General"), QStringLiteral("games-config-options"));
     // Theme
     m_themeProvider->rediscoverThemes();
     m_currentThemeIdentifier = QString::fromLatin1(m_themeProvider->currentTheme()->identifier());
-    settingsDialog->addPage(new KGameThemeSelector(m_themeProvider, KGameThemeSelector::DefaultBehavior, settingsDialog), i18n("Theme"), QStringLiteral("games-config-theme"));
+    settingsDialog->addPage(new KGameThemeSelector(m_themeProvider, KGameThemeSelector::DefaultBehavior, settingsDialog), i18nc("@title:tab", "Theme"), QStringLiteral("games-config-theme"));
     // Arena
-    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18n("Arena"), QStringLiteral("games-config-board"));
+    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18nc("@title:tab", "Arena"), QStringLiteral("games-config-board"));
     // Player
-    settingsDialog->addPage(new PlayerSelector(m_playerSettings, PlayerSelector::DefaultBehavior, settingsDialog), i18n("Player"), QStringLiteral("games-config-custom"));
+    settingsDialog->addPage(new PlayerSelector(m_playerSettings, PlayerSelector::DefaultBehavior, settingsDialog), i18nc("@title:tab", "Player"), QStringLiteral("games-config-custom"));
 
     m_settingsDialog = settingsDialog;
 
@@ -235,7 +235,7 @@ void MainWindow::close()
     // Confirm before closing
     if(KMessageBox::warningTwoActions(this,
                                  i18n("Are you sure you want to quit Granatier?"),
-                                 i18nc("To quit Granatier", "Quit"),
+                                 i18nc("@title:window To quit Granatier", "Quit"),
                                  KStandardGuiItem::quit(), KStandardGuiItem::cancel())
        == KMessageBox::PrimaryAction)
     {

@@ -64,7 +64,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_moveLeft->setModifierlessAllowed(true);
     m_moveLeft->setClearButtonShown(false);
     m_moveLeft->setKeySequence(m_playerSettings->keyLeft(playerId));
-    m_labelMoveLeft = new QLabel(i18nc("Label for the key sequence to move the player.", "Left:"));
+    m_labelMoveLeft = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Left:"));
     gridLayoutKeySequence->addWidget(m_labelMoveLeft, 1, 1, Qt::AlignRight);
     gridLayoutKeySequence->addWidget(m_moveLeft, 1, 2);
     
@@ -73,7 +73,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_moveUp->setModifierlessAllowed(true);
     m_moveUp->setClearButtonShown(false);
     m_moveUp->setKeySequence(m_playerSettings->keyUp(playerId));
-    m_labelMoveUp = new QLabel(i18nc("Label for the key sequence to move the player.", "Up:"));
+    m_labelMoveUp = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Up:"));
     gridLayoutKeySequence->addWidget(m_labelMoveUp, 0, 3, Qt::AlignRight);
     gridLayoutKeySequence->addWidget(m_moveUp, 0, 4);
     
@@ -82,7 +82,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_moveRight->setModifierlessAllowed(true);
     m_moveRight->setClearButtonShown(false);
     m_moveRight->setKeySequence(m_playerSettings->keyRight(playerId));
-    m_labelMoveRight = new QLabel(i18nc("Label for the key sequence to move the player.", "Right:"));
+    m_labelMoveRight = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Right:"));
     gridLayoutKeySequence->addWidget(m_labelMoveRight, 1, 5, Qt::AlignRight);
     gridLayoutKeySequence->addWidget(m_moveRight, 1, 6);
     
@@ -91,7 +91,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_moveDown->setModifierlessAllowed(true);
     m_moveDown->setClearButtonShown(false);
     m_moveDown->setKeySequence(m_playerSettings->keyDown(playerId));
-    m_labelMoveDown = new QLabel(i18nc("Label for the key sequence to move the player.", "Down:"));
+    m_labelMoveDown = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Down:"));
     gridLayoutKeySequence->addWidget(m_labelMoveDown, 2, 3, Qt::AlignRight);
     gridLayoutKeySequence->addWidget(m_moveDown, 2, 4);
     
@@ -100,7 +100,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_dropBomb->setModifierlessAllowed(true);
     m_dropBomb->setClearButtonShown(false);
     m_dropBomb->setKeySequence(m_playerSettings->keyPutBomb(playerId));
-    m_labelDropBomb = new QLabel(i18nc("Label for the key sequence to move the player.", "Bomb:"));
+    m_labelDropBomb = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Bomb:"));
     gridLayoutKeySequence->addWidget(m_labelDropBomb, 1, 3, Qt::AlignRight);
     gridLayoutKeySequence->addWidget(m_dropBomb, 1, 4);
     
