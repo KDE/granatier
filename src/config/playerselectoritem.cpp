@@ -152,7 +152,7 @@ void PlayerSelectorItem::setPlayerAuthor(const QString& name, const QString& mai
     {
         mailString = QStringLiteral("<br />") + mail;
     }
-    m_playerAuthor->setText(QStringLiteral("<i>%1</i>%2").arg(i18nc("Author attribution, e.g. \"by Jack\"", "by %1", name), mailString));
+    m_playerAuthor->setText(QStringLiteral("<i>%1</i>%2").arg(i18nc("@info author attribution", "By %1", name), mailString));
 }
 
 void PlayerSelectorItem::selectionChanged(bool selectionState)

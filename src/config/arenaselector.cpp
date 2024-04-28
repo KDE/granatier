@@ -257,7 +257,7 @@ void ArenaSelector::Private::_k_updatePreview(QListWidgetItem* currentItem)
             emailstr = QStringLiteral("<a href=\"mailto:%1\">%1</a>").arg(selArena->arenaProperty(contactstr));
         }
 
-        ui.arenaAuthor->setText(i18nc("Author attribution, e.g. \"by Jack\"", "by %1", selArena->arenaProperty(authstr)));
+        ui.arenaAuthor->setText(i18nc("@info author attribution", "By %1", selArena->arenaProperty(authstr)));
         ui.arenaContact->setText(emailstr);
         ui.arenaDescription->setText(selArena->arenaProperty(descstr));
 
