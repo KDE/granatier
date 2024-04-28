@@ -75,12 +75,12 @@ GameScene::GameScene(Game* p_game, KGameThemeProvider* p_themeProvider) : m_game
     }
 
     // The remaining time
-    m_remainingTimeLabel = new QGraphicsTextItem(i18n("0:00"));
+    m_remainingTimeLabel = new QGraphicsTextItem();
     m_remainingTimeLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_remainingTimeLabel->setZValue(1000);
 
-    m_arenaNameLabel = new QGraphicsTextItem(i18n("Arena Name"));
+    m_arenaNameLabel = new QGraphicsTextItem();
     m_arenaNameLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
     m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
     m_arenaNameLabel->setZValue(1000);
