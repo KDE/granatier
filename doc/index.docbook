@@ -284,7 +284,7 @@ of the &kde; Fundamentals.
 
   <chapter id="configuration"><title>Game Configuration</title> <!-- do not change this! -->
     <para>
-      To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;...</guimenuitem></menuchoice> menu item.
+      To open the Configuration Dialogue, select <menuchoice><guimenu>Settings</guimenu><guimenuitem>Configure &granatier;…</guimenuitem></menuchoice> menu item.
     </para>
     <sect1 id="config_general">
       <title>General</title>

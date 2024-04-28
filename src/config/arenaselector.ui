@@ -40,7 +40,7 @@
        <item>
         <widget class="QPushButton" name="getNewButton">
          <property name="text">
-          <string>&amp;Get New Arenas...</string>
+          <string>&amp;Get New Arenas…</string>
          </property>
         </widget>
        </item>
