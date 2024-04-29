@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-09 01:37+0000\n"
+"POT-Creation-Date: 2024-04-29 00:37+0000\n"
 "PO-Revision-Date: 2010-09-26 12:08-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -28,8 +28,8 @@ msgstr "ybando@k6.dion.ne.jp"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
 #, kde-format
-msgctxt "Author attribution, e.g. \"by Jack\""
-msgid "by %1"
+msgctxt "@info author attribution"
+msgid "By %1"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
@@ -41,7 +41,7 @@ msgstr ""
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
 #, kde-format
-msgid "&Get New Arenas..."
+msgid "&Get New Arenas…"
 msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
@@ -209,42 +209,32 @@ msgstr ""
 
 #: config/playerselectoritem.cpp:67
 #, kde-format
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr ""
 
 #: config/playerselectoritem.cpp:76
 #, kde-format
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr ""
 
 #: config/playerselectoritem.cpp:85
 #, kde-format
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr ""
 
 #: config/playerselectoritem.cpp:94
 #, kde-format
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr ""
 
 #: config/playerselectoritem.cpp:103
 #, kde-format
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
-msgstr ""
-
-#: gamescene.cpp:78
-#, kde-format
-msgid "0:00"
-msgstr ""
-
-#: gamescene.cpp:83
-#, kde-format
-msgid "Arena Name"
 msgstr ""
 
 #: gamescene.cpp:811
@@ -350,24 +340,26 @@ msgstr "Alexandre Galinier"
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
-#: mainwindow.cpp:61
-#, kde-format
-msgid "&Play sounds"
+#: mainwindow.cpp:62
+#, fuzzy, kde-format
+#| msgid "&Play sounds"
+msgctxt "@option:check"
+msgid "Play Sounds"
 msgstr "効果音あり(&P)"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:140
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr "本当に現在のゲームを終了しますか？"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:141
 #, fuzzy, kde-format
 #| msgid "New game"
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "新しいゲーム"
 
-#: mainwindow.cpp:141
+#: mainwindow.cpp:142
 #, fuzzy, kde-format
 #| msgctxt "To quit Granatier"
 #| msgid "Quit"
@@ -375,34 +367,40 @@ msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "終了"
 
-#: mainwindow.cpp:178
+#: mainwindow.cpp:179
 #, kde-format
-msgctxt "General settings"
+msgctxt "@title:tab General settings"
 msgid "General"
 msgstr ""
 
-#: mainwindow.cpp:182
-#, kde-format
+#: mainwindow.cpp:183
+#, fuzzy, kde-format
+#| msgid "Theme"
+msgctxt "@title:tab"
 msgid "Theme"
 msgstr "テーマ"
 
-#: mainwindow.cpp:184
+#: mainwindow.cpp:185
 #, kde-format
+msgctxt "@title:tab"
 msgid "Arena"
 msgstr ""
 
-#: mainwindow.cpp:186
+#: mainwindow.cpp:187
 #, kde-format
+msgctxt "@title:tab"
 msgid "Player"
 msgstr ""
 
-#: mainwindow.cpp:237
+#: mainwindow.cpp:238
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr "本当に Granatier を終了しますか？"
 
-#: mainwindow.cpp:238
-#, kde-format
-msgctxt "To quit Granatier"
+#: mainwindow.cpp:239
+#, fuzzy, kde-format
+#| msgctxt "To quit Granatier"
+#| msgid "Quit"
+msgctxt "@title:window To quit Granatier"
 msgid "Quit"
 msgstr "終了"

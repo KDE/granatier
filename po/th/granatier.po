@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-09 01:37+0000\n"
+"POT-Creation-Date: 2024-04-29 00:37+0000\n"
 "PO-Revision-Date: 2010-03-22 21:54+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -29,8 +29,8 @@ msgstr "donga.nb@gmail.com"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
 #, kde-format
-msgctxt "Author attribution, e.g. \"by Jack\""
-msgid "by %1"
+msgctxt "@info author attribution"
+msgid "By %1"
 msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
@@ -41,8 +41,9 @@ msgstr "Random Mode"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, kde-format
-msgid "&Get New Arenas..."
+#, fuzzy, kde-format
+#| msgid "&Get New Arenas..."
+msgid "&Get New Arenas…"
 msgstr "&หาสนามใหม่ ๆ ..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
@@ -214,45 +215,35 @@ msgstr "ส่วนนี้สำหรับศิลปินเท่าน
 
 #: config/playerselectoritem.cpp:67
 #, kde-format
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr ""
 
 #: config/playerselectoritem.cpp:76
 #, kde-format
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr ""
 
 #: config/playerselectoritem.cpp:85
 #, fuzzy, kde-format
 #| msgid "Move Right"
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "ย้ายไปด้านขวา"
 
 #: config/playerselectoritem.cpp:94
 #, kde-format
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr ""
 
 #: config/playerselectoritem.cpp:103
 #, fuzzy, kde-format
 #| msgid "Put Bomb"
-msgctxt "Label for the key sequence to move the player."
+msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
 msgstr "วางระเบิด"
-
-#: gamescene.cpp:78
-#, kde-format
-msgid "0:00"
-msgstr "0:00"
-
-#: gamescene.cpp:83
-#, kde-format
-msgid "Arena Name"
-msgstr "ชื่อของสนาม"
 
 #: gamescene.cpp:811
 #, kde-format
@@ -355,24 +346,26 @@ msgstr "Alexandre Galinier"
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
-#: mainwindow.cpp:61
-#, kde-format
-msgid "&Play sounds"
+#: mainwindow.cpp:62
+#, fuzzy, kde-format
+#| msgid "&Play sounds"
+msgctxt "@option:check"
+msgid "Play Sounds"
 msgstr "เล่นเสีย&ง"
 
-#: mainwindow.cpp:139
+#: mainwindow.cpp:140
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
 msgstr "คุณต้องการจะออกจากเกมปัจจุบันจริงหรือไม่ ?"
 
-#: mainwindow.cpp:140
+#: mainwindow.cpp:141
 #, fuzzy, kde-format
 #| msgid "New game"
 msgctxt "@title:window"
 msgid "New Game"
 msgstr "เริ่มเกมใหม่"
 
-#: mainwindow.cpp:141
+#: mainwindow.cpp:142
 #, fuzzy, kde-format
 #| msgctxt "To quit Granatier"
 #| msgid "Quit"
@@ -380,37 +373,53 @@ msgctxt "@action:button"
 msgid "Quit Game"
 msgstr "ออก"
 
-#: mainwindow.cpp:178
-#, kde-format
-msgctxt "General settings"
+#: mainwindow.cpp:179
+#, fuzzy, kde-format
+#| msgctxt "General settings"
+#| msgid "General"
+msgctxt "@title:tab General settings"
 msgid "General"
 msgstr "ค่าทั่วไป"
 
-#: mainwindow.cpp:182
-#, kde-format
+#: mainwindow.cpp:183
+#, fuzzy, kde-format
+#| msgid "Theme"
+msgctxt "@title:tab"
 msgid "Theme"
 msgstr "ชุดตกแต่ง"
 
-#: mainwindow.cpp:184
-#, kde-format
+#: mainwindow.cpp:185
+#, fuzzy, kde-format
+#| msgid "Arena"
+msgctxt "@title:tab"
 msgid "Arena"
 msgstr "สนาม"
 
-#: mainwindow.cpp:186
-#, kde-format
+#: mainwindow.cpp:187
+#, fuzzy, kde-format
+#| msgid "Player"
+msgctxt "@title:tab"
 msgid "Player"
 msgstr "ผู้เล่น"
 
-#: mainwindow.cpp:237
+#: mainwindow.cpp:238
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
 msgstr "คุณแน่ใจหรือว่าต้องการจะออกจากเกม Granatier ?"
 
-#: mainwindow.cpp:238
-#, kde-format
-msgctxt "To quit Granatier"
+#: mainwindow.cpp:239
+#, fuzzy, kde-format
+#| msgctxt "To quit Granatier"
+#| msgid "Quit"
+msgctxt "@title:window To quit Granatier"
 msgid "Quit"
 msgstr "ออก"
+
+#~ msgid "0:00"
+#~ msgstr "0:00"
+
+#~ msgid "Arena Name"
+#~ msgstr "ชื่อของสนาม"
 
 #, fuzzy
 #~| msgid "&Get New Players..."
