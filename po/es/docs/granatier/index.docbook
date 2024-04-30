@@ -50,6 +50,20 @@
 ><contrib
 >Traductora</contrib
 ></othercredit
+><othercredit role="translator"
+><firstname
+>Eloy</firstname
+><surname
+>Cuadra</surname
+><affiliation
+><address
+><email
+>ecuadra@eloihr.net</email
+></address
+></affiliation
+><contrib
+>Revisión de la traducción</contrib
+></othercredit
 > 
     </authorgroup>
     <legalnotice
@@ -79,7 +93,7 @@
 ><!--Application name goes here-->
       <!-- Game genre. use as many as necessary.Available game types are: Arcade, Board, Card, Dice, Toys, Logic, Strategy.-->
       <keyword
->arcade</keyword>
+>recreativo</keyword>
       <!--Number of possible players. It can be: One, Two,..., Multiplayer-->
       <keyword
 >multijugador</keyword>
@@ -99,7 +113,7 @@
 ><title
 >Tipo de juego:</title
 ><para
->Arcade</para
+>Recreativo</para
 ></note>
     <note
 ><title
@@ -116,7 +130,7 @@
 >Clanbomber</application
 >. </para>
     <para
->El objetivo del juego es correr a través de una zona de combate, utilizando bombas para destruir obstáculos y eliminar a sus oponentes. Hay varias bonificaciones y penalizaciones escondidas bajo los bloques &ndash;, que pueden ayudarle o perjudicarle en su progreso. </para>
+>El objetivo del juego es correr a través de una zona de combate, usando bombas para destruir obstáculos y eliminar a tus oponentes. Hay varias bonificaciones y penalizaciones escondidas bajo los bloques (que pueden ayudarte o perjudicarte en el avance). </para>
     <screenshot>
       <screeninfo
 >Captura de pantalla de &granatier;</screeninfo>
@@ -140,14 +154,14 @@
 ><title
 >Objetivo:</title
 ><para
->Elimine a todos sus oponentes.</para
+>Eliminar a todos los oponentes.</para
 ></note>
     <para
->A cada jugador se le asignan cinco teclas que usarán para mover a su personaje y colocar bombas. Por ejemplo, las teclas predeterminadas para el jugador 1 son las flechas &Up;, &Down;, &Left; y &Right; para moverse en esas direcciones respectivamente, y la tecla Intro para colocar una bomba. Consulte la sección <link linkend="config_player"
+>A cada jugador se le asignan cinco teclas que usará para mover a su personaje y colocar bombas. Por ejemplo, las teclas predeterminadas para el jugador 1 son las flechas &Up;, &Down;, &Left; y &Right; para moverse en esas direcciones respectivamente, y la tecla &Enter; para colocar una bomba. Consulta la sección <link linkend="config_player"
 >Configuración de los jugadores</link
 > para encontrar los atajos de teclado para otros jugadores y cómo configurarlos. </para>
     <para
->El propósito de colocar bombas, además de atacar a otros oponentes, es destruir los muchos bloques repartidos por el terreno de juego para despejar un camino o descubrir bonificaciones ocultas. Entre las muchas bonificaciones que pueden ser descubiertas están las que le hacen moverse más rápido o las que aumentan el alcance de la explosión de las bombas; cuantas más bonificaciones de este tipo recoja, más fácil será eliminar a sus oponentes y ganar la ronda. Pero tenga en cuenta que también existen penalizaciones que pueden volverse en su contra, como las que le ralentizan o las que invierten sus teclas de movimiento. </para>
+>El propósito de colocar bombas, además de atacar a otros oponentes, es destruir los numerosos bloques repartidos por el terreno de juego para despejar un camino o descubrir las bonificaciones ocultas. Entre las muchas bonificaciones que puedes descubrir están las que hacen que te muevas más rápido o las que aumentan el alcance de la explosión de las bombas; cuantas más bonificaciones de este tipo recojas, más fácil será eliminar a tus oponentes y ganar la ronda. Pero ten en cuenta que también existen penalizaciones que pueden volverse en tu contra, como las que te ralentizan o las que invierten tus teclas de movimiento. </para>
     <para
 >Por cada ronda ganada, el jugador gana un punto. ¡El primer jugador que gane un número predefinido de puntos (por defecto, 3) gana el juego! </para>
   </chapter>
@@ -173,7 +187,7 @@
 >Pared del terreno</phrase
 > </textobject>
         </inlinemediaobject
->La pared &ndash; define el límite exterior del terreno de juego, y no se puede destruir. </para>
+>La pared: define el límite exterior del terreno de juego y no se puede destruir. </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -183,7 +197,7 @@
 >Suelo del terreno de juego</phrase
 > </textobject>
         </inlinemediaobject
->El suelo &ndash; puede ser recorrido con seguridad. </para>
+>El suelo: se puede recorrer con seguridad. </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -193,7 +207,7 @@
 >Terreno de hielo</phrase
 > </textobject>
         </inlinemediaobject
->El hielo &ndash; hará resbaladizo al terreno. La velocidad se incrementa sobre el hielo, y no es posible detenerse completamente. </para>
+>El hielo: hará que el suelo sea resbaladizo. La velocidad aumenta sobre el hielo y no es posible detenerse completamente. </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -203,35 +217,35 @@
 >Bloque del terreno</phrase
 > </textobject>
         </inlinemediaobject
->El bloque &ndash; puede ser destruido con una bomba, y a veces contiene una bonificación (o una penalización). </para>
+>El bloque: se puede destruir con una bomba y a veces contiene una bonificación (o una penalización). </para>
       <para>
         <inlinemediaobject>
           <imageobject
 > <imagedata fileref="arena_bomb_mortar.png" format="PNG"/> </imageobject>
           <textobject
 > <phrase
->Mortero explosivo del terreno</phrase
+>Mortero del terreno</phrase
 > </textobject>
         </inlinemediaobject
->El mortero explosivo &ndash; lanza las bombas que se le colocan encima hacia lugares aleatorios. </para>
+>El mortero: lanza las bombas que se le colocan encima hacia lugares aleatorios. </para>
       <para>
         <inlinemediaobject>
           <imageobject
 > <imagedata fileref="arena_arrow_right.png" format="PNG"/> </imageobject>
           <textobject
 > <phrase
->Flecha del terreno</phrase
+>Flechas del terreno</phrase
 > </textobject>
         </inlinemediaobject
->Las flechas &ndash; mueven las bombas que se les ponen encima hacia la dirección a la que apuntan. </para>
+>Las flechas: mueven las bombas que se les ponen encima hacia la dirección a la que apuntan. </para>
       <para
->Si no hay ninguno de los objetos mencionados arriba, es que hay un agujero en el suelo y moverse hacia él resultará en caerse dentro y morir. Lo mismo se aplica si no hay pared en el borde del terreno de juego y el jugador se mueve hacia fuera. </para>
+>Si no hay ninguno de los objetos mencionados arriba, es que hay un agujero en el suelo. Si te mueves hacia él acabarás cayendo dentro y morirás. Lo mismo ocurre si no hay pared en el borde del terreno de juego y te mueves hacia fuera. </para>
     </sect2>
     <sect2>
       <title
 >Las bonificaciones</title>
       <para
->Las bonificaciones son útiles para lograr el objetivo del juego, y los efectos existen permanentemente, incluso después de que una penalización desaparezca. Actualmente existen las siguientes bonificaciones: </para>
+>Las bonificaciones son útiles para lograr el objetivo del juego y sus efectos son permanentes (incluso después de que una penalización desaparezca). Actualmente existen las siguientes bonificaciones: </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -241,63 +255,63 @@
 >Bonificación de velocidad</phrase
 > </textobject>
         </inlinemediaobject
->La velocidad &ndash; incrementa ligeramente su velocidad. </para>
+>Velocidad: aumenta ligeramente tu velocidad. </para>
       <para>
         <inlinemediaobject>
           <imageobject
 > <imagedata fileref="bonus_bomb.png" format="PNG"/> </imageobject>
           <textobject
 > <phrase
->Bonificación de bomba</phrase
+>Bomba extra</phrase
 > </textobject>
         </inlinemediaobject
->La bomba &ndash; añade una bomba extra a su arsenal, permitiéndole colocar más de una bomba a la vez. </para>
+>Bomba: añade una bomba extra a tu arsenal, permitiéndote colocar más de una bomba a la vez. </para>
       <para>
         <inlinemediaobject>
           <imageobject
 > <imagedata fileref="bonus_power.png" format="PNG"/> </imageobject>
           <textobject
 > <phrase
->Bonificación de potencia</phrase
+>Potencia extra</phrase
 > </textobject>
         </inlinemediaobject
->La potencia &ndash; incrementa la potencia de sus bombas, extendiendo el alcance de la explosión. </para>
+>Potencia: aumenta la potencia de tus bombas, extendiendo el alcance de la explosión. </para>
       <para>
         <inlinemediaobject>
           <imageobject
 > <imagedata fileref="bonus_shield.png" format="PNG"/> </imageobject>
           <textobject
 > <phrase
->Bonificación de escudo</phrase
+>Escudo extra</phrase
 > </textobject>
         </inlinemediaobject
->El escudo &ndash; le hace invencible durante una explosión. </para>
+>Escudo: te hace invencible durante una explosión. </para>
       <para>
         <inlinemediaobject>
           <imageobject
 > <imagedata fileref="bonus_throw.png" format="PNG"/> </imageobject>
           <textobject
 > <phrase
->Bonificación de lanzamiento</phrase
+>Lanzamiento extra</phrase
 > </textobject>
         </inlinemediaobject
->El lanzamiento &ndash; le añade la habilidad de tirar bombas. Pulse la tecla para colocar bombas mientras una de ellas está debajo de usted. </para>
+>Lanzamiento: añade la habilidad de lanzar bombas. Pulsa la tecla para colocar bombas mientras una de ellas está debajo de ti. </para>
       <para>
         <inlinemediaobject>
           <imageobject
 > <imagedata fileref="bonus_kick.png" format="PNG"/> </imageobject>
           <textobject
 > <phrase
->Bonificación de patada</phrase
+>Patada extra</phrase
 > </textobject>
         </inlinemediaobject
->La patada &ndash; le añade la habilidad de mover bombas. Corra hacia una bomba y esta se moverá. </para>
+>Patada: añade la habilidad de mover bombas. Corre hacia una bomba y esta se moverá. </para>
     </sect2>
     <sect2>
       <title
 >Las penalizaciones</title>
       <para
->Las penalizaciones son lo contrario de las bonificaciones, y perjudican al jugador. Lo bueno es que los efectos pasan después de algún tiempo (al revés que las bonificaciones), el jugador puede jugar de la manera habitual (incluyendo las bonificaciones) de nuevo. Actualmente existen las siguientes penalizaciones: </para>
+>Las penalizaciones son lo contrario de las bonificaciones y perjudican al jugador. Lo bueno es que los efectos pasan después de algún tiempo (al revés que las bonificaciones) y el jugador puede jugar de la manera habitual (incluyendo las bonificaciones) de nuevo. Actualmente existen las siguientes penalizaciones: </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -307,7 +321,7 @@
 >Penalización de lentitud</phrase
 > </textobject>
         </inlinemediaobject
->La lentitud &ndash; le hace moverse muy despacio. </para>
+>Lentitud: hace que te muevas muy despacio. </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -317,7 +331,7 @@
 >Penalización de hiperactividad</phrase
 > </textobject>
         </inlinemediaobject
->La hiperactividad &ndash; le hace moverse DEMASIADO rápido. </para>
+>Hiperactividad: hace que te muevas DEMASIADO rápido. </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -327,7 +341,7 @@
 >Penalización de espejo</phrase
 > </textobject>
         </inlinemediaobject
->El espejo &ndash; invierte sus teclas de movimiento, de forma que arriba se convierte en abajo e izquierda se convierte en derecha. </para>
+>Espejo: invierte tus teclas de movimiento, de forma que arriba se convierte en abajo e izquierda se convierte en derecha, y viceversa. </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -337,7 +351,7 @@
 >Penalización de despiste</phrase
 > </textobject>
         </inlinemediaobject
->El despiste &ndash; le obliga a estar continuamente colocando bombas sin control. </para>
+>Despiste: te obliga a estar continuamente colocando bombas sin control. </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -347,13 +361,13 @@
 >Penalización de contención</phrase
 > </textobject>
         </inlinemediaobject
->La contención &ndash; evita que pueda poner bombas. </para>
+>Contención: evita que puedas poner bombas. </para>
     </sect2>
     <sect2>
       <title
 >Los objetos ambivalentes</title>
       <para
->Este tipo de bonificaciones no sin ni buenas ni malas, sino que depende del entorno. Actualmente existen las siguientes bonificaciones neutrales: </para>
+>Este tipo de bonificaciones no son ni buenas ni malas, sino que depende del entorno. Actualmente existen las siguientes bonificaciones neutrales: </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -363,17 +377,17 @@
 >Bonificación neutral Pandora</phrase
 > </textobject>
         </inlinemediaobject
->Pandora &ndash; contiene una bonificación o una penalización. </para>
+>Pandora: contiene una bonificación o una penalización. </para>
       <para>
         <inlinemediaobject>
           <imageobject
 > <imagedata fileref="bonus_neutral_resurrect.png" format="PNG"/> </imageobject>
           <textobject
 > <phrase
->Bonificación neutral Resucitar</phrase
+>Bonificación neutral de resurrección</phrase
 > </textobject>
         </inlinemediaobject
->Resucitar &ndash; vuelve a la vida a un jugador muerto. </para>
+>Resurrección: devuelve a la vida a cualquier jugador muerto. </para>
     </sect2>
     </sect1>
   </chapter>
@@ -457,7 +471,7 @@
 >Preferencias</guimenu
 > y <guimenu
 >Ayuda</guimenu
-> comunes de &kde;. Para obtener más información, consulte las secciones sobre el <ulink url="help:/fundamentals/menus.html#menus-settings"
+> comunes de &kde;. Para obtener más información, consulta las secciones sobre el <ulink url="help:/fundamentals/menus.html#menus-settings"
 >Menú «Preferencias»</ulink
 > y <ulink url="help:/fundamentals/menus.html#menus-help"
 >Menú «Ayuda»</ulink
@@ -471,7 +485,7 @@
 >Configuración del juego</title
 > <!-- do not change this! -->
     <para
->Para abrir el diálogo de configuración, seleccione la opción del menú <menuchoice
+>Para abrir el diálogo de configuración, selecciona la opción del menú <menuchoice
 ><guimenu
 >Preferencias</guimenu
 > <guimenuitem
@@ -482,9 +496,9 @@
       <title
 >General</title>
       <para
->Puede cambiar los puntos que hacen falta para ganar el juego y el tiempo que dura una ronda. Cuando el tiempo se agota, comenzará el modo de muerte súbita. </para>
+>Puedes cambiar los puntos que hacen falta para ganar el juego y el tiempo que dura una ronda. Cuando el tiempo se agota, comenzará el modo de muerte súbita. </para>
       <para
->Adicionalmente, puede ajustar la velocidad inicial, el alcance de las bombas y la reserva de bombas. </para>
+>Adicionalmente, puedes ajustar la velocidad inicial, el alcance de las bombas y la reserva de bombas. </para>
       <screenshot>
         <screeninfo
 >Captura de pantalla de la configuración de &granatier;</screeninfo>
@@ -503,11 +517,11 @@
       <title
 >Tema</title>
       <para
->Para seleccionar el tema con el que quiere jugar, vaya a la sección de temas. El tema se carga haciendo clic en <guibutton
+>Para seleccionar el tema con el que quieres jugar, ve a la sección de temas. El tema se carga haciendo clic en <guibutton
 >Aceptar</guibutton
 > o en <guibutton
 >Aplicar</guibutton
->. El juego actual terminará y empezará uno nuevo. Puede hacer clic en el botón <guibutton
+>. El juego actual terminará y empezará uno nuevo. Puedes pulsar el botón <guibutton
 >Predeterminado</guibutton
 > para restaurar el tema por defecto. </para>
       <screenshot>
@@ -528,17 +542,17 @@
       <title
 >Terreno de juego</title>
       <para
->Para seleccionar el terreno en el que quiere jugar, vaya a la sección de Terreno. El terreno se carga haciendo clic en <guibutton
+>Para seleccionar el terreno en el que quieres jugar, ve a la sección de Terreno. El terreno se carga al pulsar <guibutton
 >Aceptar</guibutton
-> o en <guibutton
+> o <guibutton
 >Aplicar</guibutton
->. El juego actual terminará y empezará uno nuevo. Puede hacer clic en el botón <guibutton
+>. El juego actual terminará y empezará uno nuevo. Puedes pulsar el botón <guibutton
 >Predeterminado</guibutton
 > para restaurar el terreno por defecto. </para>
       <para
->Si ha diseñado usted mismo terrenos de juego para <application
+>Si has diseñado terrenos de juego para <application
 >Clanbomber</application
->, puede copiarlos en <filename class="directory"
+>, puedes copiarlos en <filename class="directory"
 >~/.clanbomber/maps</filename
 >, donde &granatier; los encontrará. Los terrenos predeterminados de <application
 >Clanbomber</application
@@ -557,9 +571,9 @@
         </mediaobject>
       </screenshot>
       <para
->Si selecciona <guibutton
+>Si seleccionas <guibutton
 >Modo aleatorio</guibutton
->, se utilizará un terreno al azar en cada ronda nueva. Puede desmarcar los terrenos en los que no desea jugar. </para>
+>, se usará un terreno al azar en cada nueva ronda. Puedes desmarcar los terrenos en los que no quieras jugar. </para>
       <screenshot>
         <screeninfo
 >Captura de pantalla de la configuración de &granatier;</screeninfo>
@@ -578,11 +592,11 @@
       <title
 >Jugador</title>
       <para
->Para seleccionar al jugador con el que desea jugar, vaya a la sección «Jugador» y seleccione los jugadores con las casillas de verificación. Los atajos de teclado se pueden cambiar haciendo clic en el botón para la acción que desee editar y presionando la tecla que quiera utilizar. Los cambios se cargan haciendo clic en <guibutton
+>Para seleccionar al jugador con el que quieres jugar, ve a la sección «Jugador» y selecciona los jugadores con las casillas de verificación. Los atajos de teclado se pueden cambiar haciendo clic en el botón para la acción que quieras editar y pulsando la tecla que quieras usar. Los cambios se cargan pulsando en <guibutton
 >Aceptar</guibutton
 > o en <guibutton
 >Aplicar</guibutton
->. El juego actual finalizará y comenzará uno nuevo. Puede hacer clic en <guibutton
+>. El juego actual finalizará y comenzará uno nuevo. Puedes pulsar <guibutton
 >Predeterminado</guibutton
 > para restaurar los atajos de teclado predeterminados. </para>
       <screenshot>
@@ -628,7 +642,7 @@ AuthorEmail=nombre.usuario@foo.org
       </programlisting>
     </para>
     <para
->Puede escoger el nombre que prefiera, pero <literal
+>Puedes escoger el nombre que prefieras, pero <literal
 >FileName</literal
 > debe ser el nombre del archivo <literal role="extension"
 >.xml</literal
@@ -662,21 +676,21 @@ AuthorEmail=nombre.usuario@foo.org
 >rowCount</literal
 > ni para <literal
 >colCount</literal
->, por lo que puede escoger usted mismo el tamaño del terreno de juego. Los siguientes símbolos se usan en el mapa del terreno de juego. </para>
+>, por lo que puedes escoger el tamaño del terreno de juego. Los siguientes símbolos se usan en el mapa del terreno de juego. </para>
     <para>
       <programlisting
->'=' a wall item
-' ' a hole item
-'_' a ground item
-'+' a block item
-'x' will randomly create a block or a ground item
-'-' an ice item
-'o' a mortar item
-'u' an arrow up
-'r' an arrow right
-'d' an arrow down
-'l' an arrow left
-'p' a player position
+>'=' un elemento de muro
+' ' un elemento de agujero
+'_' un elemento de suelo
+'+' un elemento de bloque
+'x' creará aleatoriamente un elemento de bloque o de suelo
+'-' un elemento de hielo
+'o' un elemento de mortero
+'u' una flecha hacia arriba
+'r' una flecha hacia la derecha
+'d' una flecha hacia abajo
+'l' una flecha hacia la izquierda
+'p' una posición de jugador
       </programlisting>
     </para>
   </chapter>
@@ -711,6 +725,10 @@ AuthorEmail=nombre.usuario@foo.org
 >traducciones@rociogallego.com</email
 > y Kira J. Fernández <email
 >kirajfdez@gmail.com</email
+>.</para
+><para
+>Revisado por Eloy Cuadra <email
+>ecuadra@eloihr.net</email
 >.</para
 > &underFDL; &underGPL; </chapter>
 

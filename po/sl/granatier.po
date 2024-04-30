@@ -9,17 +9,17 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-29 00:37+0000\n"
-"PO-Revision-Date: 2022-07-08 06:50+0200\n"
+"PO-Revision-Date: 2024-04-29 10:06+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Lokalize 22.04.1\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
+"Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -32,12 +32,10 @@ msgid "Your emails"
 msgstr "andrejm@ubuntu.si,matjaz.jeran@amis.net"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr "%1"
+msgstr "Po %1"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
 #: config/arenaselector.ui:36
@@ -47,10 +45,9 @@ msgstr "Naključni način"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, fuzzy, kde-format
-#| msgid "&Get New Arenas..."
+#, kde-format
 msgid "&Get New Arenas…"
-msgstr "&Dobi nove arene ..."
+msgstr "Dobi nove arene…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
@@ -215,41 +212,31 @@ msgid "This is only for the artists to make their life easier."
 msgstr "To je samo za lajšanje dela umetnikov."
 
 #: config/playerselectoritem.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Left:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr "Levo:"
 
 #: config/playerselectoritem.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Up:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr "Gor:"
 
 #: config/playerselectoritem.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Right:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "Desno:"
 
 #: config/playerselectoritem.cpp:94
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Down:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr "Dol:"
 
 #: config/playerselectoritem.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Bomb:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
 msgstr "Bomba:"
@@ -355,11 +342,10 @@ msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
 #: mainwindow.cpp:62
-#, fuzzy, kde-format
-#| msgid "&Play sounds"
+#, kde-format
 msgctxt "@option:check"
 msgid "Play Sounds"
-msgstr "&Predvajaj zvoke"
+msgstr "Predvajaj zvoke"
 
 #: mainwindow.cpp:140
 #, kde-format
@@ -379,30 +365,25 @@ msgid "Quit Game"
 msgstr "Zapusti igro"
 
 #: mainwindow.cpp:179
-#, fuzzy, kde-format
-#| msgctxt "General settings"
-#| msgid "General"
+#, kde-format
 msgctxt "@title:tab General settings"
 msgid "General"
 msgstr "Splošno"
 
 #: mainwindow.cpp:183
-#, fuzzy, kde-format
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Theme"
 msgstr "Tema"
 
 #: mainwindow.cpp:185
-#, fuzzy, kde-format
-#| msgid "Arena"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Arena"
 msgstr "Arena"
 
 #: mainwindow.cpp:187
-#, fuzzy, kde-format
-#| msgid "Player"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Player"
 msgstr "Igralec"
@@ -413,12 +394,10 @@ msgid "Are you sure you want to quit Granatier?"
 msgstr "Ali ste prepričani, da želite končati Granatier?"
 
 #: mainwindow.cpp:239
-#, fuzzy, kde-format
-#| msgctxt "To quit Granatier"
-#| msgid "Quit"
+#, kde-format
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
-msgstr "Končaj"
+msgstr "Zapusti"
 
 #~ msgid "0:00"
 #~ msgstr "0:00"
