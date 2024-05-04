@@ -12,7 +12,8 @@
 
 #include <KGameRenderer>
 
-ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer) : KGameRenderedItem(renderer, QStringLiteral(""))
+ElementItem::ElementItem(Element* p_model, KGameRenderer* renderer)
+    : KGameRenderedItem(renderer, QString())
 {
     m_model = p_model;
     // Init the view coordinates

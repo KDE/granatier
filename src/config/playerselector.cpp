@@ -103,8 +103,8 @@ void PlayerSelector::Private::fillList()
         playerSelectorItem->setPlayerPreviewPixmap(pixmap);
 
         KConfig desktopFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/%1").arg(playerIDs[i])), KConfig::SimpleConfig);
-        auto author = desktopFile.group(QStringLiteral("KGameTheme")).readEntry<QString>("Author", QStringLiteral(""));
-        QString authorEmail = QStringLiteral("<a href=\"mailto:%1\">%1</a>").arg(desktopFile.group(QStringLiteral("KGameTheme")).readEntry<QString>("AuthorEmail", QStringLiteral("")));
+        auto author = desktopFile.group(QStringLiteral("KGameTheme")).readEntry<QString>("Author", QString());
+        QString authorEmail = QStringLiteral("<a href=\"mailto:%1\">%1</a>").arg(desktopFile.group(QStringLiteral("KGameTheme")).readEntry<QString>("AuthorEmail", QString()));
         //TODO: QString description = desktopFile.group(QStringLiteral("KGameTheme")).readEntry<QString>("Description", "");
         playerSelectorItem->setPlayerAuthor(author, authorEmail);
 

@@ -56,18 +56,18 @@ PlayerSettings::PlayerSettings()
             strPlayerID = granatierConfig.group(QStringLiteral("Player")).group(player).readEntry("PlayerID", QString());
             if(m_playerSettings.contains(strPlayerID))
             {
-                m_playerSettings.find(strPlayerID).value().strPlayerName = granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("Name", QStringLiteral(""));
+                m_playerSettings.find(strPlayerID).value().strPlayerName = granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("Name", QString());
                 m_playerSettings.find(strPlayerID).value().enabled = granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<int>("Enabled", 0);
                 if(m_playerSettings.find(strPlayerID).value().enabled)
                 {
                     nEnableCount++;
                 }
                 
-                m_playerSettings.find(strPlayerID).value().keyUp = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyUp", QStringLiteral("")));
-                m_playerSettings.find(strPlayerID).value().keyRight = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyRight", QStringLiteral("")));
-                m_playerSettings.find(strPlayerID).value().keyDown = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyDown", QStringLiteral("")));
-                m_playerSettings.find(strPlayerID).value().keyLeft = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyLeft", QStringLiteral("")));
-                m_playerSettings.find(strPlayerID).value().keyPutBomb = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyPutBomb", QStringLiteral("")));
+                m_playerSettings.find(strPlayerID).value().keyUp = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyUp", QString()));
+                m_playerSettings.find(strPlayerID).value().keyRight = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyRight", QString()));
+                m_playerSettings.find(strPlayerID).value().keyDown = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyDown", QString()));
+                m_playerSettings.find(strPlayerID).value().keyLeft = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyLeft", QString()));
+                m_playerSettings.find(strPlayerID).value().keyPutBomb = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyPutBomb", QString()));
             }
         }
     }
@@ -178,7 +178,7 @@ void PlayerSettings::savePlayerSettings()
         playersGroupList.sort();
         for(const auto& player: std::as_const(playersGroupList))
         {
-            strPlayerIDList.append(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("PlayerID", QStringLiteral("")));
+            strPlayerIDList.append(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("PlayerID", QString()));
         }
         
         int nPlayersGroupIndex;

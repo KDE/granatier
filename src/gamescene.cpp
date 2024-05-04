@@ -269,7 +269,7 @@ void GameScene::initItemsWithGraphicsFromTheme()
         for (int j = 0; j < m_game->getArena()->getNbColumns(); ++j)
         {
             // Create the ArenaItem and set the image
-            auto* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, QStringLiteral(""));
+            auto* arenaItem = new ArenaItem(j * Granatier::CellSize, i * Granatier::CellSize, m_rendererArenaItems, QString());
             connect(this, &GameScene::resizeGraphics, arenaItem, &ArenaItem::updateGraphics);
 
             //TODO: use this function call

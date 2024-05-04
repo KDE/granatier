@@ -11,7 +11,8 @@
 #include <QGraphicsView>
 #include <KGameRenderer>
 
-BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor) : KGameRenderedItem(renderer, QStringLiteral(""))
+BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type direction, int bombPower, KGameRenderer* renderer, qreal svgScaleFactor)
+    : KGameRenderedItem(renderer, QString())
 {
     m_direction = direction;
     m_explosionID = p_model->explosionID();
