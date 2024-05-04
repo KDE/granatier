@@ -90,7 +90,7 @@ InfoSidebar::InfoSidebar (Game* p_game, GameScene* p_scene) : QObject()
         //create the player names
         playerInfo->name = new QGraphicsTextItem(playerList[i]->getPlayerName());
         playerInfo->name->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.25), QFont::Bold, false));
-        playerInfo->name->setDefaultTextColor(QColor("#FFFF00"));
+        playerInfo->name->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
         playerInfo->name->setZValue(1001);
         playerInfo->name->setPos(nLeft + Granatier::CellSize / 2 + 2, nTop + i * (nHeight+4) - 4);
         m_gameScene->addItem(playerInfo->name);

@@ -77,12 +77,12 @@ GameScene::GameScene(Game* p_game, KGameThemeProvider* p_themeProvider) : m_game
     // The remaining time
     m_remainingTimeLabel = new QGraphicsTextItem();
     m_remainingTimeLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
-    m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_remainingTimeLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_remainingTimeLabel->setZValue(1000);
 
     m_arenaNameLabel = new QGraphicsTextItem();
     m_arenaNameLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
-    m_arenaNameLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_arenaNameLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_arenaNameLabel->setZValue(1000);
 
     // setup the theme renderer
@@ -210,7 +210,7 @@ void GameScene::init()
     {
         addItem(m_remainingTimeLabel);
     }
-    m_remainingTimeLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_remainingTimeLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     int nTime = m_game->getRemainingTime();
     m_remainingTimeLabel->setPlainText(QStringLiteral("%1:%2").arg(nTime/60).arg(nTime%60, 2, 10, QLatin1Char('0')));
     m_remainingTimeLabel->setPos(Granatier::CellSize * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
@@ -809,7 +809,7 @@ void GameScene::updateInfo(const Granatier::Info::Type p_info)
         else
         {
             m_remainingTimeLabel->setPlainText(i18n("Sudden Death"));
-            m_remainingTimeLabel->setDefaultTextColor(QColor("#FF0000"));
+            m_remainingTimeLabel->setDefaultTextColor(QColor(0xFF, 0x00, 0x00));
             m_remainingTimeLabel->setPos(Granatier::CellSize * m_game->getArena()->getNbColumns() - m_remainingTimeLabel->boundingRect().width(), - m_remainingTimeLabel->boundingRect().height());
         }
     }

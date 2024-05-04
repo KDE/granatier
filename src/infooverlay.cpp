@@ -35,7 +35,7 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
         QList <KGameRenderedItem*> svgItemList;
         auto* playerName = new QGraphicsTextItem(player->getPlayerName());
         playerName->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
-        playerName->setDefaultTextColor(QColor("#FFFF00"));
+        playerName->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
         playerName->setZValue(2001);
 
         for(int j = 0; j < nWinPoints; j++)
@@ -52,37 +52,37 @@ InfoOverlay::InfoOverlay (Game* p_game, GameScene* p_scene) : QObject()
 
     m_continueLabel = new QGraphicsTextItem(strContinue);
     m_continueLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
-    m_continueLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_continueLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_continueLabel->setZValue(2001);
 
     m_newGameLabel = new QGraphicsTextItem(i18n("Press Space to start a new Game"));
     m_newGameLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
-    m_newGameLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_newGameLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_newGameLabel->setZValue(2001);
 
     m_gameOverLabel = new QGraphicsTextItem;;
     m_gameOverLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.5), QFont::Bold, false));
-    m_gameOverLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_gameOverLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_gameOverLabel->setZValue(2001);
 
     m_getReadyLabel = new QGraphicsTextItem(i18n("GET READY !!!"));
     m_getReadyLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.6), QFont::Bold, false));
-    m_getReadyLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_getReadyLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_getReadyLabel->setZValue(2001);
 
     m_startGameLabel = new QGraphicsTextItem(i18n("Press Space to start"));
     m_startGameLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
-    m_startGameLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_startGameLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_startGameLabel->setZValue(2001);
 
     m_pauseLabel = new QGraphicsTextItem(i18n("PAUSED"));
     m_pauseLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.8), QFont::Bold, false));
-    m_pauseLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_pauseLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_pauseLabel->setZValue(2001);
 
     m_continueAfterPauseLabel = new QGraphicsTextItem(strContinue);
     m_continueAfterPauseLabel->setFont(QFont(QStringLiteral("Helvetica"), static_cast<int>(Granatier::CellSize * 0.35), QFont::Bold, false));
-    m_continueAfterPauseLabel->setDefaultTextColor(QColor("#FFFF00"));
+    m_continueAfterPauseLabel->setDefaultTextColor(QColor(0xFF, 0xFF, 0x00));
     m_continueAfterPauseLabel->setZValue(2001);
 
     m_dimmOverlay = new QGraphicsRectItem();
