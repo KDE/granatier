@@ -87,7 +87,7 @@
       <keyword
 >Bomberman</keyword>
       <keyword
->Clanbomber</keyword>
+>ClanBomber</keyword>
     </keywordset>
   </bookinfo>
 
@@ -113,7 +113,7 @@
 >Bomberman</application
 ></trademark
 >, inspiré par le travail autour du clone <application
->Clanbomber</application
+>ClanBomber</application
 >. </para>
     <para
 >Le but du jeu est de se déplacer dans une arène en utilisant des bombes pour détruire les blocs et éliminer vos adversaires. Des bonus et des handicaps sont cachés sous certains blocs et peuvent ralentir ou accélérer votre progression. </para>
@@ -537,11 +537,11 @@
 > pour revenir à l'arène par défaut. </para>
       <para
 >Si vous avez des arènes <application
->Clanbomber</application
+>ClanBomber</application
 > créées par vos soins, vous pouvez les copier dans <filename class="directory"
 >~/.clanbomber/maps</filename
 >. &granatier; les y cherchera. Veuillez noter que les arènes par défaut de <application
->Clanbomber</application
+>ClanBomber</application
 > sont déjà fournies avec &granatier;. </para>
       <screenshot>
         <screeninfo
