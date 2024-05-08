@@ -28,12 +28,10 @@ msgid "Your emails"
 msgstr "kde-china@kde.org"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr "作者 %1"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
 #: config/arenaselector.ui:36
@@ -43,10 +41,9 @@ msgstr "随机模式"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, fuzzy, kde-format
-#| msgid "&Get New Arenas..."
+#, kde-format
 msgid "&Get New Arenas…"
-msgstr "获得新竞技场(&G)..."
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
@@ -211,41 +208,31 @@ msgid "This is only for the artists to make their life easier."
 msgstr "此项只为美工保留使用。"
 
 #: config/playerselectoritem.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Left:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr "左移："
 
 #: config/playerselectoritem.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Up:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr "上移："
 
 #: config/playerselectoritem.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Right:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "右移："
 
 #: config/playerselectoritem.cpp:94
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Down:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr "下移："
 
 #: config/playerselectoritem.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Bomb:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
 msgstr "投弹："
@@ -351,11 +338,10 @@ msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
 #: mainwindow.cpp:62
-#, fuzzy, kde-format
-#| msgid "&Play sounds"
+#, kde-format
 msgctxt "@option:check"
 msgid "Play Sounds"
-msgstr "播放声音(&P)"
+msgstr ""
 
 #: mainwindow.cpp:140
 #, kde-format
@@ -375,30 +361,25 @@ msgid "Quit Game"
 msgstr "退出游戏"
 
 #: mainwindow.cpp:179
-#, fuzzy, kde-format
-#| msgctxt "General settings"
-#| msgid "General"
+#, kde-format
 msgctxt "@title:tab General settings"
 msgid "General"
 msgstr "常规"
 
 #: mainwindow.cpp:183
-#, fuzzy, kde-format
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Theme"
 msgstr "主题"
 
 #: mainwindow.cpp:185
-#, fuzzy, kde-format
-#| msgid "Arena"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Arena"
 msgstr "竞技场"
 
 #: mainwindow.cpp:187
-#, fuzzy, kde-format
-#| msgid "Player"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Player"
 msgstr "玩家"
@@ -409,15 +390,7 @@ msgid "Are you sure you want to quit Granatier?"
 msgstr "您确定要退出 Granatier 吗？"
 
 #: mainwindow.cpp:239
-#, fuzzy, kde-format
-#| msgctxt "To quit Granatier"
-#| msgid "Quit"
+#, kde-format
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
 msgstr "退出"
-
-#~ msgid "0:00"
-#~ msgstr "0:00"
-
-#~ msgid "Arena Name"
-#~ msgstr "竞技场名称"

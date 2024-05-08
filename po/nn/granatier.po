@@ -417,9 +417,3 @@ msgstr "Er du sikker på at du vil avslutta Granatier?"
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
 msgstr "Avslutt"
-
-#~ msgid "0:00"
-#~ msgstr "0.00"
-
-#~ msgid "Arena Name"
-#~ msgstr "Arenanamn"

@@ -30,12 +30,10 @@ msgid "Your emails"
 msgstr "vit@pelcak.org,david@kolibac.cz"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr "od %1"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
 #: config/arenaselector.ui:36
@@ -45,10 +43,9 @@ msgstr "Náhodný režim"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, fuzzy, kde-format
-#| msgid "&Get New Arenas..."
+#, kde-format
 msgid "&Get New Arenas…"
-msgstr "Zí&skat nové arény..."
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
@@ -213,44 +210,34 @@ msgid "This is only for the artists to make their life easier."
 msgstr "Toto je pouze pro výtvarníky pro ulehčení jejich práce."
 
 #: config/playerselectoritem.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Left:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
-msgstr "Vlevo:"
+msgstr ""
 
 #: config/playerselectoritem.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Up:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
-msgstr "Nahoru:"
+msgstr ""
 
 #: config/playerselectoritem.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Right:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
-msgstr "Vpravo:"
+msgstr ""
 
 #: config/playerselectoritem.cpp:94
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Down:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
-msgstr "Dolů:"
+msgstr ""
 
 #: config/playerselectoritem.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Bomb:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
-msgstr "Bomba:"
+msgstr ""
 
 #: gamescene.cpp:811
 #, kde-format
@@ -353,11 +340,10 @@ msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
 #: mainwindow.cpp:62
-#, fuzzy, kde-format
-#| msgid "&Play sounds"
+#, kde-format
 msgctxt "@option:check"
 msgid "Play Sounds"
-msgstr "&Přehrávat zvuky"
+msgstr ""
 
 #: mainwindow.cpp:140
 #, kde-format
@@ -377,33 +363,28 @@ msgid "Quit Game"
 msgstr "Ukončit hru"
 
 #: mainwindow.cpp:179
-#, fuzzy, kde-format
-#| msgctxt "General settings"
-#| msgid "General"
+#, kde-format
 msgctxt "@title:tab General settings"
 msgid "General"
-msgstr "Obecné"
+msgstr ""
 
 #: mainwindow.cpp:183
-#, fuzzy, kde-format
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Theme"
-msgstr "Motiv"
+msgstr ""
 
 #: mainwindow.cpp:185
-#, fuzzy, kde-format
-#| msgid "Arena"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Arena"
-msgstr "Aréna"
+msgstr ""
 
 #: mainwindow.cpp:187
-#, fuzzy, kde-format
-#| msgid "Player"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Player"
-msgstr "Hráč"
+msgstr ""
 
 #: mainwindow.cpp:238
 #, kde-format
@@ -411,15 +392,7 @@ msgid "Are you sure you want to quit Granatier?"
 msgstr "Opravdu si přejete ukončit hru Granatier?"
 
 #: mainwindow.cpp:239
-#, fuzzy, kde-format
-#| msgctxt "To quit Granatier"
-#| msgid "Quit"
+#, kde-format
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
-msgstr "Ukončit"
-
-#~ msgid "0:00"
-#~ msgstr "0:00"
-
-#~ msgid "Arena Name"
-#~ msgstr "Název arény"
+msgstr ""
