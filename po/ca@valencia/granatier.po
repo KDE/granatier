@@ -48,7 +48,7 @@ msgstr "Mode aleatori"
 #: config/arenaselector.ui:43
 #, kde-format
 msgid "&Get New Arenas..."
-msgstr "O&btín camps de batalla nous..."
+msgstr "O&btín camps de batalla nous…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
