@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:37+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2014-05-13 19:11+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -47,7 +47,7 @@ msgstr "Tofällig"
 #: config/arenaselector.ui:43
 #, fuzzy, kde-format
 #| msgid "&Get New Arenas..."
-msgid "&Get New Arenas…"
+msgid "Download New Arenas…"
 msgstr "Nieg Strietsteden &halen"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)

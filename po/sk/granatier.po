@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:37+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2023-12-05 17:26+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -46,7 +46,7 @@ msgstr "Náhodný režim"
 #: config/arenaselector.ui:43
 #, fuzzy, kde-format
 #| msgid "&Get New Arenas..."
-msgid "&Get New Arenas…"
+msgid "Download New Arenas…"
 msgstr "Zí&skať nové arény..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)

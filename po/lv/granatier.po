@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:37+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2024-02-29 11:07+0200\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -49,7 +49,7 @@ msgstr "Gadījuma režīms"
 #: config/arenaselector.ui:43
 #, fuzzy, kde-format
 #| msgid "&Get New Arenas..."
-msgid "&Get New Arenas…"
+msgid "Download New Arenas…"
 msgstr "&Iegūt jaunas arēnas..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)

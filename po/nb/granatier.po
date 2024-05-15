@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:37+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2012-12-11 20:05+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -47,7 +47,7 @@ msgstr "Tilfeldig modus"
 #: config/arenaselector.ui:43
 #, fuzzy, kde-format
 #| msgid "&Get New Arenas..."
-msgid "&Get New Arenas…"
+msgid "Download New Arenas…"
 msgstr "&Hent nye arenaer …"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)

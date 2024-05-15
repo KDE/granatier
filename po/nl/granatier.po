@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:37+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2024-04-29 10:13+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -43,8 +43,9 @@ msgstr "Willekeurige modus"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, kde-format
-msgid "&Get New Arenas…"
+#, fuzzy, kde-format
+#| msgid "&Get New Arenas…"
+msgid "Download New Arenas…"
 msgstr "&Haal nieuwe arena's op…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)

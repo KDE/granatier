@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-29 00:37+0000\n"
+"POT-Creation-Date: 2024-05-15 00:37+0000\n"
 "PO-Revision-Date: 2024-04-29 10:06+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -45,8 +45,9 @@ msgstr "Naključni način"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, kde-format
-msgid "&Get New Arenas…"
+#, fuzzy, kde-format
+#| msgid "&Get New Arenas…"
+msgid "Download New Arenas…"
 msgstr "Dobi nove arene…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
