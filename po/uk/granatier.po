@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2024-04-29 08:56+0300\n"
+"PO-Revision-Date: 2024-05-15 09:47+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -44,8 +44,7 @@ msgstr "Випадковий режим"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, fuzzy, kde-format
-#| msgid "&Get New Arenas…"
+#, kde-format
 msgid "Download New Arenas…"
 msgstr "&Отримати нові арени…"
 

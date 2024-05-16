@@ -1,15 +1,15 @@
 # Translation of granatier into esperanto.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2024-05-05 18:09+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2024-05-15 09:56+0100\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Axel Rousseau, Oliver Kellogg"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org, okellogg@users.sourceforge.net"
+msgstr "axel@esperanto-jeunes.org, olivermkellogg@gmail.com"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
 #, kde-format
@@ -42,10 +42,9 @@ msgstr "Hazarda Reĝimo"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, fuzzy, kde-format
-#| msgid "&Get New Arenas…"
+#, kde-format
 msgid "Download New Arenas…"
-msgstr "&Ekhavi Novajn Arenojn…"
+msgstr "&Elŝuti Novajn Arenojn…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
