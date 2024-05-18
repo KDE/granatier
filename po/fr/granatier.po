@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2024-05-03 12:36+0200\n"
+"PO-Revision-Date: 2024-05-16 10:57+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -48,10 +48,9 @@ msgstr "Mode aléatoire"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, fuzzy, kde-format
-#| msgid "&Get New Arenas…"
+#, kde-format
 msgid "Download New Arenas…"
-msgstr "&Obtenir de nouvelles arènes..."
+msgstr "Télécharger de nouvelles arènes..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
