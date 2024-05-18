@@ -1,15 +1,15 @@
 # Translation of granatier into esperanto.
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-09 01:37+0000\n"
-"PO-Revision-Date: 2023-05-30 22:35+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"PO-Revision-Date: 2024-05-15 09:56+0100\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -26,7 +26,7 @@ msgstr "Axel Rousseau, Oliver Kellogg"
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "axel@esperanto-jeunes.org, okellogg@users.sourceforge.net"
+msgstr "axel@esperanto-jeunes.org, olivermkellogg@gmail.com"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
 #, kde-format
@@ -122,7 +122,7 @@ msgstr "Komenca Bombaro:"
 #: config/granatier.kcfg:9
 #, kde-format
 msgid "Check if it is the first run of the game."
-msgstr "Kontroli ĉu etas la unua rondo de la ludo."
+msgstr "Kontroli ĉu estas la unua rondo de la ludo."
 
 #. i18n: ectx: label, entry (Theme), group (General)
 #: config/granatier.kcfg:13
@@ -384,7 +384,7 @@ msgstr "Etoso"
 #: mainwindow.cpp:184
 #, kde-format
 msgid "Arena"
-msgstr "Arena"
+msgstr "Areno"
 
 #: mainwindow.cpp:186
 #, kde-format
