@@ -2,21 +2,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Andrew Coles <andrew_coles@yahoo.co.uk>, 2009.
-# Steve Allewell <steve.allewell@gmail.com>, 2014, 2015, 2018, 2022.
+# SPDX-FileCopyrightText: 2014, 2015, 2018, 2022, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-15 00:37+0000\n"
-"PO-Revision-Date: 2022-07-22 14:30+0100\n"
+"PO-Revision-Date: 2024-05-21 19:27+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: British English\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -29,12 +29,10 @@ msgid "Your emails"
 msgstr "andrew_coles@yahoo.co.uk, steve.allewell@gmail.com"
 
 #: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
-#, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
+#, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr "by %1"
+msgstr "By %1"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
 #: config/arenaselector.ui:36
@@ -44,10 +42,9 @@ msgstr "Random Mode"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, fuzzy, kde-format
-#| msgid "&Get New Arenas..."
+#, kde-format
 msgid "Download New Arenas…"
-msgstr "&Get New Arenas..."
+msgstr "Download New Arenas…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
@@ -212,41 +209,31 @@ msgid "This is only for the artists to make their life easier."
 msgstr "This is only for the artists to make their life easier."
 
 #: config/playerselectoritem.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Left:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr "Left:"
 
 #: config/playerselectoritem.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Up:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr "Up:"
 
 #: config/playerselectoritem.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Right:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "Right:"
 
 #: config/playerselectoritem.cpp:94
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Down:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr "Down:"
 
 #: config/playerselectoritem.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Bomb:"
+#, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
 msgstr "Bomb:"
@@ -352,11 +339,10 @@ msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
 
 #: mainwindow.cpp:62
-#, fuzzy, kde-format
-#| msgid "&Play sounds"
+#, kde-format
 msgctxt "@option:check"
 msgid "Play Sounds"
-msgstr "&Play sounds"
+msgstr "Play Sounds"
 
 #: mainwindow.cpp:140
 #, kde-format
@@ -376,30 +362,25 @@ msgid "Quit Game"
 msgstr "Quit Game"
 
 #: mainwindow.cpp:179
-#, fuzzy, kde-format
-#| msgctxt "General settings"
-#| msgid "General"
+#, kde-format
 msgctxt "@title:tab General settings"
 msgid "General"
 msgstr "General"
 
 #: mainwindow.cpp:183
-#, fuzzy, kde-format
-#| msgid "Theme"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Theme"
 msgstr "Theme"
 
 #: mainwindow.cpp:185
-#, fuzzy, kde-format
-#| msgid "Arena"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Arena"
 msgstr "Arena"
 
 #: mainwindow.cpp:187
-#, fuzzy, kde-format
-#| msgid "Player"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Player"
 msgstr "Player"
@@ -410,9 +391,7 @@ msgid "Are you sure you want to quit Granatier?"
 msgstr "Are you sure you want to quit Granatier?"
 
 #: mainwindow.cpp:239
-#, fuzzy, kde-format
-#| msgctxt "To quit Granatier"
-#| msgid "Quit"
+#, kde-format
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
 msgstr "Quit"
