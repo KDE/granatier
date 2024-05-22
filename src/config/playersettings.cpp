@@ -32,8 +32,11 @@ PlayerSettings::PlayerSettings()
         StructPlayerSettings settings;
         settings.strPlayerID = player;
 
-        KConfig desktopFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("players/") + settings.strPlayerID), KConfig::SimpleConfig);
+        const QString desktopFileSubPath =  QLatin1String("players/") + settings.strPlayerID;
+        KConfig desktopFile(QStandardPaths::locate(QStandardPaths::AppDataLocation, desktopFileSubPath), KConfig::SimpleConfig);
 
+        // KGameTheme compatible theme id, e.g. "players/player1.desktop"
+        settings.playerThemeId = desktopFileSubPath.toUtf8();
         settings.strPlayerDesktopFilePath = desktopFile.name();
         settings.strPlayerName = desktopFile.group(QStringLiteral("KGameTheme")).readEntry<QString>("Name", QLatin1String(""));
         settings.strPlayerGraphicsFile = desktopFile.group(QStringLiteral("KGameTheme")).readEntry<QString>("FileName", QLatin1String(""));
@@ -123,6 +126,11 @@ const QStringList PlayerSettings::playerIDs() const
 const QString PlayerSettings::playerName(const QString& strPlayerID) const
 {
     return m_playerSettings.value(strPlayerID).strPlayerName;
+}
+
+const QByteArray PlayerSettings::playerThemeId(const QString& strPlayerID) const
+{
+  return m_playerSettings.value(strPlayerID).playerThemeId;
 }
 
 const QString PlayerSettings::playerDesktopFilePath(const QString& strPlayerID) const

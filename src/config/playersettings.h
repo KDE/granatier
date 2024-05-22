@@ -20,6 +20,7 @@ public:
     
     const QStringList playerIDs() const;
     const QString playerName(const QString& strPlayerID) const;
+    const QByteArray playerThemeId(const QString& strPlayerID) const;
     const QString playerDesktopFilePath(const QString& strPlayerID) const;
     const QString playerGraphicsFile(const QString& strPlayerID) const;
     bool enabled(const QString& strPlayerID) const;
@@ -44,6 +45,7 @@ private:
     {
         QString strPlayerID;
         QString strPlayerName;
+        QByteArray playerThemeId;
         QString strPlayerDesktopFilePath;
         QString strPlayerGraphicsFile;
         bool enabled;

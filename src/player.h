@@ -26,6 +26,7 @@ class Player : public Character
 private:
     /** The path to the Player image */
     QString m_playerName;
+    QByteArray m_themeId;
     QString m_desktopFilePath;
     QString m_graphicsFile;
 
@@ -107,6 +108,12 @@ public:
       * Shortcuts for moving and dropping bombs
       */
     void setShortcuts(const Shortcuts &keys);
+
+    /**
+     * Gets the theme id of the Player Desktop file.
+     * @return the them id of the Player Desktop file
+     */
+    QByteArray getThemeId() const;
 
     /**
       * Gets the file for the Player SVG.
