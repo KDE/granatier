@@ -58,7 +58,7 @@ GameScene::GameScene(Game* p_game, KGameThemeProvider* p_themeProvider) : m_game
     for(auto & player : players)
     {
         const QString desktopPath = player->getDesktopFilePath();
-        auto* theme = new KGameTheme(desktopPath.toUtf8());
+        auto* theme = new KGameTheme(player->getThemeId());
         theme->readFromDesktopFile(desktopPath);
         auto  playerRenderer = new KGameRenderer(theme);
         m_mapRendererPlayerItems.insert(player, playerRenderer);

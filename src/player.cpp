@@ -27,6 +27,7 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
  , m_kickBomb(false)
 {
     m_type = Granatier::Element::PLAYER;
+    m_themeId = p_playerSettings->playerThemeId(p_playerID);
     m_desktopFilePath = p_playerSettings->playerDesktopFilePath(p_playerID);
     m_graphicsFile = p_playerSettings->playerGraphicsFile(p_playerID);
     m_playerName = p_playerSettings->playerName(p_playerID);
@@ -57,6 +58,11 @@ Player::~Player()
 void Player::setShortcuts(const Shortcuts &keys)
 {
     m_key = keys;
+}
+
+QByteArray Player::getThemeId() const
+{
+    return m_themeId;
 }
 
 QString Player::getGraphicsFile() const
