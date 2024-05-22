@@ -684,8 +684,13 @@ void GameScene::resizeSprites(int delayForBackground)
     //update background pixmap
     m_arenaBackground->setPos(views().constFirst()->mapToScene(viewRect.topLeft()));
     m_arenaBackground->setScale(m_SvgScaleFactor);
-
-    m_arenaBackground->setPixmap(m_arenaBackground->pixmap().scaled(viewRect.size()));
+    const QPixmap currentBackgroundPixmap  = m_arenaBackground->pixmap();
+    // On startup with empty render cache there might be no pixmap yet.
+    // At least Qt <= 6.7 warns in the log about trying to scale a null pixmap, so avoid it.
+    if (!currentBackgroundPixmap.isNull()) {
+        // use quickly scaled version for intermediate update while waiting for the rendered one
+        m_arenaBackground->setPixmap(currentBackgroundPixmap.scaled(viewRect.size()));
+    }
 
     m_backgroundResizeTimer->stop();
     m_backgroundResizeTimer->start(delayForBackground);
