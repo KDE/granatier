@@ -15,6 +15,7 @@
 #include <QPointer>
 
 #include <KGameTheme>
+#include <KGameThemeProvider>
 #include <QIcon>
 #include <KGameRenderer>
 #include <KConfigSkeleton>
@@ -28,7 +29,7 @@
 class ArenaSelector::Private
 {
     public:
-        Private(ArenaSelector* parent, Options options);
+        Private(ArenaSelector* parent, KGameThemeProvider *themeProvider, Options options);
         ~Private();
 
         ArenaSelector* q;
@@ -59,8 +60,9 @@ class ArenaSelector::Private
         void _k_updateRandomArenaModeArenaList(QListWidgetItem* item);
 };
 
-ArenaSelector::ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, ArenaSelector::Options options, const QString& groupName, const QString& directory)
-    : QWidget(parent), d(new Private(this, options))
+ArenaSelector::ArenaSelector(KGameThemeProvider *themeProvider, QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, ArenaSelector::Options options, const QString& groupName, const QString& directory)
+    : QWidget(parent)
+    , d(new Private(this, themeProvider, options))
 {
     d->m_randomArenaModeArenaList = randomArenaModeArenaList;
     d->lookupDirectory = directory;
@@ -83,10 +85,16 @@ void ArenaSelector::showEvent(QShowEvent*)
     d->_k_updatePreview();
 }
 
-ArenaSelector::Private::Private(ArenaSelector* parent, Options options) : q(parent), m_options(options), m_arena(nullptr), m_graphicsScene(nullptr), m_svgScaleFactor(1)
+ArenaSelector::Private::Private(ArenaSelector* parent, KGameThemeProvider *themeProvider, Options options)
+    : q(parent)
+    , m_options(options)
+    , m_arena(nullptr)
+    , m_graphicsScene(nullptr)
+    , m_svgScaleFactor(1)
 {
-    auto* theme = new KGameTheme(QByteArray());
-    theme->setGraphicsPath(QStandardPaths::locate(QStandardPaths::AppDataLocation, QStringLiteral("themes/granatier.svgz")));
+    const KGameTheme * defaultTheme = themeProvider->defaultTheme();
+    auto* theme = new KGameTheme(defaultTheme->identifier());
+    theme->setGraphicsPath(defaultTheme->graphicsPath());
     m_renderer = new KGameRenderer(theme);
 }
 
