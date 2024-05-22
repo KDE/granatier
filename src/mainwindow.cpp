@@ -181,7 +181,7 @@ void MainWindow::showSettings()
     m_currentThemeIdentifier = QString::fromLatin1(m_themeProvider->currentTheme()->identifier());
     settingsDialog->addPage(new KGameThemeSelector(m_themeProvider, KGameThemeSelector::DefaultBehavior, settingsDialog), i18n("Theme"), QStringLiteral("games-config-theme"));
     // Arena
-    settingsDialog->addPage(new ArenaSelector(settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18n("Arena"), QStringLiteral("games-config-board"));
+    settingsDialog->addPage(new ArenaSelector(m_themeProvider, settingsDialog, Settings::self(), &m_tempRandomArenaModeArenaList, ArenaSelector::DefaultBehavior), i18n("Arena"), QStringLiteral("games-config-board"));
     // Player
     settingsDialog->addPage(new PlayerSelector(m_playerSettings, PlayerSelector::DefaultBehavior, settingsDialog), i18n("Player"), QStringLiteral("games-config-custom"));
 

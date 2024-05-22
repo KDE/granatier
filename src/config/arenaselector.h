@@ -12,6 +12,7 @@
 #include <QWidget>
 
 class KConfigSkeleton; 
+class KGameThemeProvider;
 class ArenaSelectorPrivate;
 
 /**
@@ -46,6 +47,7 @@ public:
     
     /**
     * Load a specific arena file.
+    * @param themeProvider the theme provider to get the default theme from for preview
     * @param parent the parent widget
     * @param aconfig the KConfigSceleton
     * @param randomArenaModeArenaList the arena mode list
@@ -54,7 +56,7 @@ public:
     * @param directory subdirectory (of share/apps/appname) to search in
     * @return true if the arena files and properties could be loaded
     */
-    ArenaSelector(QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, Options options = DefaultBehavior, const QString& groupName = QStringLiteral("Arena"), const QString& directory = QStringLiteral("arenas"));
+    ArenaSelector(KGameThemeProvider *themeProvider, QWidget* parent, KConfigSkeleton* aconfig, QStringList* randomArenaModeArenaList, Options options = DefaultBehavior, const QString& groupName = QStringLiteral("Arena"), const QString& directory = QStringLiteral("arenas"));
     ~ArenaSelector() override;
     
 protected:
