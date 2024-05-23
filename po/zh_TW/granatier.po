@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-09 01:37+0000\n"
+"POT-Creation-Date: 2024-05-23 02:26+0000\n"
 "PO-Revision-Date: 2023-06-15 04:22+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -30,7 +30,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "franklin@goodhorse.idv.tw"
 
-#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
@@ -250,7 +250,7 @@ msgstr "0:00"
 msgid "Arena Name"
 msgstr "競技場名稱"
 
-#: gamescene.cpp:811
+#: gamescene.cpp:816
 #, kde-format
 msgid "Sudden Death"
 msgstr "驟死戰"

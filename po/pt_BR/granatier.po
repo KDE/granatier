@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-09 01:37+0000\n"
+"POT-Creation-Date: 2024-05-23 02:26+0000\n"
 "PO-Revision-Date: 2022-07-12 12:00-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -31,7 +31,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "elchevive@opensuse.org, piacentini@kde.org"
 
-#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
 #, kde-format
 msgctxt "Author attribution, e.g. \"by Jack\""
 msgid "by %1"
@@ -252,7 +252,7 @@ msgstr "0:00"
 msgid "Arena Name"
 msgstr "Nome da arena"
 
-#: gamescene.cpp:811
+#: gamescene.cpp:816
 #, kde-format
 msgid "Sudden Death"
 msgstr "Morte súbita"
