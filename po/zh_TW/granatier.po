@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-15 00:37+0000\n"
+"POT-Creation-Date: 2024-05-23 00:37+0000\n"
 "PO-Revision-Date: 2024-05-18 16:21+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -30,7 +30,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "franklin@goodhorse.idv.tw"
 
-#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
 #, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
@@ -240,7 +240,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
 msgstr "放炸彈："
 
-#: gamescene.cpp:811
+#: gamescene.cpp:816
 #, kde-format
 msgid "Sudden Death"
 msgstr "驟死戰"

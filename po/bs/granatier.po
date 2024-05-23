@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdegames\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-15 00:37+0000\n"
+"POT-Creation-Date: 2024-05-23 00:37+0000\n"
 "PO-Revision-Date: 2014-10-20 19:24+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -30,7 +30,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "Samir.ribic@etf.unsa.ba,SM@ETF.BA"
 
-#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
 #, fuzzy, kde-format
 #| msgctxt "Author attribution, e.g. \"by Jack\""
 #| msgid "by %1"
@@ -253,7 +253,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
 msgstr "Bomba:"
 
-#: gamescene.cpp:811
+#: gamescene.cpp:816
 #, kde-format
 msgid "Sudden Death"
 msgstr "Iznenadna smrt"

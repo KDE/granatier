@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-15 00:37+0000\n"
+"POT-Creation-Date: 2024-05-23 00:37+0000\n"
 "PO-Revision-Date: 2012-12-11 20:05+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -29,7 +29,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "bjornst@skogkatt.homelinux.org"
 
-#: config/arenaselector.cpp:260 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
 #, fuzzy, kde-format
 #| msgctxt "Author attribution, e.g. \"by Jack\""
 #| msgid "by %1"
@@ -252,7 +252,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
 msgstr "Bombe:"
 
-#: gamescene.cpp:811
+#: gamescene.cpp:816
 #, kde-format
 msgid "Sudden Death"
 msgstr "Plutselig død"
