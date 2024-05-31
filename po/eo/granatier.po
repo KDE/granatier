@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-23 00:37+0000\n"
-"PO-Revision-Date: 2024-05-15 09:56+0100\n"
+"PO-Revision-Date: 2024-05-30 07:49+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -44,7 +44,7 @@ msgstr "Hazarda Reĝimo"
 #: config/arenaselector.ui:43
 #, kde-format
 msgid "Download New Arenas…"
-msgstr "&Elŝuti Novajn Arenojn…"
+msgstr "Elŝuti Novajn Arenojn…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17

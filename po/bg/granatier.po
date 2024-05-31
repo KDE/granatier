@@ -406,9 +406,3 @@ msgstr "Сигурни ли сте, че желаете да напуснете 
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
 msgstr "Изход"
-
-#~ msgid "0:00"
-#~ msgstr "0:00"
-
-#~ msgid "Arena Name"
-#~ msgstr "Име на арена"

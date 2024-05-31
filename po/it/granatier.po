@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-23 00:37+0000\n"
-"PO-Revision-Date: 2024-05-01 12:42+0200\n"
+"PO-Revision-Date: 2024-05-18 21:55+0200\n"
 "Last-Translator: Valter Mura <valtermura@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -41,10 +41,9 @@ msgstr "Modalità casuale"
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
-#, fuzzy, kde-format
-#| msgid "&Get New Arenas…"
+#, kde-format
 msgid "Download New Arenas…"
-msgstr "&Scarica nuove arene…"
+msgstr "Scarica nuove arene…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
