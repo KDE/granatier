@@ -31,8 +31,6 @@ msgstr "bjornst@skogkatt.homelinux.org"
 
 #: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
 #, fuzzy, kde-format
-#| msgctxt "Author attribution, e.g. \"by Jack\""
-#| msgid "by %1"
 msgctxt "@info author attribution"
 msgid "By %1"
 msgstr "av %1"
@@ -46,7 +44,6 @@ msgstr "Tilfeldig modus"
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
 #, fuzzy, kde-format
-#| msgid "&Get New Arenas..."
 msgid "Download New Arenas…"
 msgstr "&Hent nye arenaer …"
 
@@ -214,40 +211,30 @@ msgstr "Dette er bare for tegnere for å gjøre livet lettere for dem."
 
 #: config/playerselectoritem.cpp:67
 #, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Left:"
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr "Gjenstår:"
 
 #: config/playerselectoritem.cpp:76
 #, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Up:"
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr "Opp:"
 
 #: config/playerselectoritem.cpp:85
 #, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Right:"
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "Høyre:"
 
 #: config/playerselectoritem.cpp:94
 #, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Down:"
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr "Ned:"
 
 #: config/playerselectoritem.cpp:103
 #, fuzzy, kde-format
-#| msgctxt "Label for the key sequence to move the player."
-#| msgid "Bomb:"
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
 msgstr "Bombe:"
@@ -354,7 +341,6 @@ msgstr "Nathalie Liesse"
 
 #: mainwindow.cpp:62
 #, fuzzy, kde-format
-#| msgid "&Play sounds"
 msgctxt "@option:check"
 msgid "Play Sounds"
 msgstr "&Spill lyder"
@@ -378,29 +364,24 @@ msgstr ""
 
 #: mainwindow.cpp:179
 #, fuzzy, kde-format
-#| msgctxt "General settings"
-#| msgid "General"
 msgctxt "@title:tab General settings"
 msgid "General"
 msgstr "Generelt"
 
 #: mainwindow.cpp:183
 #, fuzzy, kde-format
-#| msgid "Theme"
 msgctxt "@title:tab"
 msgid "Theme"
 msgstr "Tema"
 
 #: mainwindow.cpp:185
 #, fuzzy, kde-format
-#| msgid "Arena"
 msgctxt "@title:tab"
 msgid "Arena"
 msgstr "Arena"
 
 #: mainwindow.cpp:187
 #, fuzzy, kde-format
-#| msgid "Player"
 msgctxt "@title:tab"
 msgid "Player"
 msgstr "Spiller"
@@ -412,8 +393,6 @@ msgstr "Er du sikker på at du vil avslutte Granatier?"
 
 #: mainwindow.cpp:239
 #, fuzzy, kde-format
-#| msgctxt "To quit Granatier"
-#| msgid "Quit"
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
 msgstr "Avslutt"
