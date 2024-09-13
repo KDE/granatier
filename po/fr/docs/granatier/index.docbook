@@ -143,7 +143,7 @@
 >Éliminer tous les adversaires.</para
 ></note>
     <para
->Chaque joueur dispose de cinq touches lui permettant de déplacer son personnage et de déposer des bombes. Par exemple, les touches par défaut pour le joueur 1 sont les touches de flèches &Up;, &Down;, &Left; and &Right; pour se déplacer dans les directions correspondantes, ainsi que la touche &Enter; pour déposer une bombe. Veuillez consulter la section <link linkend="config_player"
+>Chaque joueur dispose de cinq touches lui permettant de déplacer son personnage et de déposer des bombes. Par exemple, les touches par défaut pour le joueur 1 sont les touches de flèches &Up;, &Down;, &Left; et &Right; pour se déplacer dans les directions correspondantes, ainsi que la touche &Enter; pour déposer une bombe. Veuillez consulter la section <link linkend="config_player"
 >Configuration du joueur</link
 > pour trouver les touches de raccourcis des autres joueurs ainsi que le façon de les configurer. </para>
     <para
