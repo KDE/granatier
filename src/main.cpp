@@ -17,11 +17,28 @@
 #include <QCommandLineParser>
 #include <QDir>
 #include <KDBusService>
+#define HAVE_KICONTHEME __has_include(<KIconTheme>)
+#if HAVE_KICONTHEME
+#include <KIconTheme>
+#endif
 
+#define HAVE_STYLE_MANAGER __has_include(<KStyleManager>)
+#if HAVE_STYLE_MANAGER
+#include <KStyleManager>
+#endif
 int main(int argc, char** argv)
 {
+#if HAVE_KICONTHEME
+    KIconTheme::initTheme();
+#endif
     QApplication app(argc, argv);
-
+#if HAVE_STYLE_MANAGER
+    KStyleManager::initStyle();
+#else // !HAVE_STYLE_MANAGER
+#if defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+    QApplication::setStyle(QStringLiteral("breeze"));
+#endif // defined(Q_OS_MACOS) || defined(Q_OS_WIN)
+#endif // HAVE_STYLE_MANAGER
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("granatier")));
     KLocalizedString::setApplicationDomain(QByteArrayLiteral("granatier"));
 

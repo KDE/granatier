@@ -95,6 +95,7 @@ target_link_libraries(granatier
     Qt6::Xml
     Qt6::Widgets
     Qt6::Svg
+    KF6::IconThemes
 )
 
 install(TARGETS granatier ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
