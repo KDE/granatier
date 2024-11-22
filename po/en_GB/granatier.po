@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:37+0000\n"
+"POT-Creation-Date: 2024-11-22 00:38+0000\n"
 "PO-Revision-Date: 2024-05-21 19:27+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -273,67 +273,67 @@ msgstr "PAUSED"
 msgid "The winner is %1"
 msgstr "The winner is %1"
 
-#: main.cpp:29
+#: main.cpp:46
 #, kde-format
 msgid "Granatier"
 msgstr "Granatier"
 
-#: main.cpp:31
+#: main.cpp:48
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
 msgstr "Granatier is a Bomberman Clone!"
 
-#: main.cpp:32
+#: main.cpp:49
 #, kde-format
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
 msgstr "Copyright (c) 2009-2015 The Granatier Team!"
 
-#: main.cpp:36
+#: main.cpp:53
 #, kde-format
 msgid "Mathias Kraus"
 msgstr "Mathias Kraus"
 
-#: main.cpp:36
+#: main.cpp:53
 #, kde-format
 msgid "Maintainer"
 msgstr "Maintainer"
 
-#: main.cpp:37
+#: main.cpp:54
 #, kde-format
 msgid "Arturo Silva"
 msgstr "Arturo Silva"
 
-#: main.cpp:37
+#: main.cpp:54
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
 msgstr "Most of the beautiful granatier graphics"
 
-#: main.cpp:38
+#: main.cpp:55
 #, kde-format
 msgid "Thomas Gallinari"
 msgstr "Thomas Gallinari"
 
-#: main.cpp:38 main.cpp:39 main.cpp:40 main.cpp:41 main.cpp:42
+#: main.cpp:55 main.cpp:56 main.cpp:57 main.cpp:58 main.cpp:59
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
 msgstr "Developer of Kapman, which was the base of Granatier"
 
-#: main.cpp:39
+#: main.cpp:56
 #, kde-format
 msgid "Pierre-Benoit Besse"
 msgstr "Pierre-Benoit Besse"
 
-#: main.cpp:40
+#: main.cpp:57
 #, kde-format
 msgid "Romain Castan"
 msgstr "Romain Castan"
 
-#: main.cpp:41
+#: main.cpp:58
 #, kde-format
 msgid "Alexandre Galinier"
 msgstr "Alexandre Galinier"
 
-#: main.cpp:42
+#: main.cpp:59
 #, kde-format
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-games/granatier.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:37+0000\n"
+"POT-Creation-Date: 2024-11-22 00:38+0000\n"
 "PO-Revision-Date: 2009-01-20 10:11-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -287,68 +287,68 @@ msgstr "CURTHA AR SHOS"
 msgid "The winner is %1"
 msgstr "Is é %1 an buaiteoir"
 
-#: main.cpp:29
+#: main.cpp:46
 #, kde-format
 msgid "Granatier"
 msgstr "Granatier"
 
-#: main.cpp:31
+#: main.cpp:48
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
 msgstr "Is Clón de Bomberman é Granatier!"
 
-#: main.cpp:32
+#: main.cpp:49
 #, fuzzy, kde-format
 #| msgid "Copyright (c) 2009 The Granatier Team!"
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
 msgstr "Cóipcheart © 2009 Foireann Granatier!"
 
-#: main.cpp:36
+#: main.cpp:53
 #, kde-format
 msgid "Mathias Kraus"
 msgstr "Mathias Kraus"
 
-#: main.cpp:36
+#: main.cpp:53
 #, kde-format
 msgid "Maintainer"
 msgstr "Cothaitheoir"
 
-#: main.cpp:37
+#: main.cpp:54
 #, kde-format
 msgid "Arturo Silva"
 msgstr ""
 
-#: main.cpp:37
+#: main.cpp:54
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
 msgstr ""
 
-#: main.cpp:38
+#: main.cpp:55
 #, kde-format
 msgid "Thomas Gallinari"
 msgstr "Thomas Gallinari"
 
-#: main.cpp:38 main.cpp:39 main.cpp:40 main.cpp:41 main.cpp:42
+#: main.cpp:55 main.cpp:56 main.cpp:57 main.cpp:58 main.cpp:59
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
 msgstr "Forbróir Kapman, clár ar bhunaigh Granatier air"
 
-#: main.cpp:39
+#: main.cpp:56
 #, kde-format
 msgid "Pierre-Benoit Besse"
 msgstr "Pierre-Benoit Besse"
 
-#: main.cpp:40
+#: main.cpp:57
 #, kde-format
 msgid "Romain Castan"
 msgstr "Romain Castan"
 
-#: main.cpp:41
+#: main.cpp:58
 #, kde-format
 msgid "Alexandre Galinier"
 msgstr "Alexandre Galinier"
 
-#: main.cpp:42
+#: main.cpp:59
 #, kde-format
 msgid "Nathalie Liesse"
 msgstr "Nathalie Liesse"
