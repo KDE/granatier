@@ -98,6 +98,17 @@ target_link_libraries(granatier
     KF6::IconThemes
 )
 
+if(APPLE)
+    set_target_properties(granatier PROPERTIES
+        MACOSX_BUNDLE_DISPLAY_NAME "Granatier"
+        MACOSX_BUNDLE_BUNDLE_NAME "Granatier"
+        MACOSX_BUNDLE_LONG_VERSION_STRING "Granatier ${RELEASE_SERVICE_VERSION}"
+        MACOSX_BUNDLE_SHORT_VERSION_STRING "${RELEASE_SERVICE_VERSION_MAJOR}.${RELEASE_SERVICE_VERSION_MINOR}"
+        MACOSX_BUNDLE_BUNDLE_VERSION "${RELEASE_SERVICE_VERSION}"
+        MACOSX_BUNDLE_GUI_IDENTIFIER "org.kde.granatier"
+        MACOSX_BUNDLE_COPYRIGHT "2024 The Granatier Developers")
+endif()
+
 install(TARGETS granatier ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 install(PROGRAMS org.kde.granatier.desktop DESTINATION ${KDE_INSTALL_APPDIR})
