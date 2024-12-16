@@ -1,201 +1,198 @@
-# Sanskrit translations for granatier package.
+# Hindi translations for granatier package.
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the granatier package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
-# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-22 00:38+0000\n"
-"PO-Revision-Date: 2024-12-14 01:48+0530\n"
-"Last-Translator: kali <skkalwar999@gmail.com>\n"
-"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
-"Language: sa\n"
+"PO-Revision-Date: 2024-12-15 15:57+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n>2);\n"
-"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "भवतः नामानि"
+msgstr ""
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "भवतः ईमेलपत्राणि"
+msgstr ""
 
 #: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
 #, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr "%1 द्वारा"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
 #: config/arenaselector.ui:36
 #, kde-format
 msgid "Random Mode"
-msgstr "यादृच्छिक मोड"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QPushButton, getNewButton)
 #: config/arenaselector.ui:43
 #, kde-format
 msgid "Download New Arenas…"
-msgstr "Download नवीन अखाडाः…"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
 #, kde-format
 msgid "Only for Artists! Won't be here at release"
-msgstr "केवलं कलाकारानां कृते एव! मुक्तौ अत्र न भविष्यति"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowAllTiles)
 #: config/generalsettings.ui:23
 #, kde-format
 msgid " Show all tiles"
-msgstr " सर्वाणि टाइल्स् दर्शयतु"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_9)
 #: config/generalsettings.ui:30
 #, kde-format
 msgid "Blast Time 2"
-msgstr "विस्फोटसमयः २"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_8)
 #: config/generalsettings.ui:37
 #, kde-format
 msgid "Blast Time 3"
-msgstr "विस्फोटसमयः ३"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_7)
 #: config/generalsettings.ui:78
 #, kde-format
 msgid "Blast Time 1"
-msgstr "विस्फोटसमयः १"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_10)
 #: config/generalsettings.ui:85
 #, kde-format
 msgid "Blast Time 5"
-msgstr "विस्फोटसमयः ५"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_11)
 #: config/generalsettings.ui:106
 #, kde-format
 msgid "Blast Time 4"
-msgstr "विस्फोटसमयः ४"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: config/generalsettings.ui:131
 #, kde-format
 msgid "Points to win the game:"
-msgstr "क्रीडां जितुम् बिन्दवः : १."
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: config/generalsettings.ui:154
 #, kde-format
 msgid "Round Time in Seconds:"
-msgstr "गोलसमयः सेकण्डेषु : १."
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: config/generalsettings.ui:177
 #, kde-format
 msgid "Initial Speed:"
-msgstr "प्रारम्भिकवेगः : १."
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/generalsettings.ui:200
 #, kde-format
 msgid "Initial Bomb Power:"
-msgstr "प्रारम्भिक बम्ब शक्ति : १."
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/generalsettings.ui:223
 #, kde-format
 msgid "Initial Bomb Armory:"
-msgstr "प्रारम्भिक बम्बशस्त्रालयः : १."
+msgstr ""
 
 #. i18n: ectx: label, entry (FirstRun), group (General)
 #: config/granatier.kcfg:9
 #, kde-format
 msgid "Check if it is the first run of the game."
-msgstr "क्रीडायाः प्रथमः धावनः अस्ति वा इति पश्यन्तु।"
+msgstr ""
 
 #. i18n: ectx: label, entry (Theme), group (General)
 #: config/granatier.kcfg:13
 #, kde-format
 msgid "The graphical theme to be used."
-msgstr "प्रयोक्तव्यः चित्रात्मकः विषयः ।"
+msgstr ""
 
 #. i18n: ectx: label, entry (Arena), group (General)
 #: config/granatier.kcfg:17
 #, kde-format
 msgid "The arena to be used."
-msgstr "प्रयोक्तव्यं रङ्गमण्डपम् ।"
+msgstr ""
 
 #. i18n: ectx: label, entry (RandomArenaMode), group (General)
 #: config/granatier.kcfg:21
 #, kde-format
 msgid "Use random arenas."
-msgstr "यादृच्छिकक्षेत्राणां उपयोगं कुर्वन्तु।"
+msgstr ""
 
 #. i18n: ectx: label, entry (RandomArenaModeArenaList), group (General)
 #: config/granatier.kcfg:25
 #, kde-format
 msgid "List of arenas, used in random mode."
-msgstr "अखाडानां सूची, यादृच्छिकविधाने प्रयुक्ता ।"
+msgstr ""
 
 #. i18n: ectx: label, entry (PointsToWin), group (General)
 #: config/granatier.kcfg:28
 #, kde-format
 msgid "The points a user needs to win the game."
-msgstr "उपयोक्तुः क्रीडां जितुम् आवश्यकाः बिन्दवः।"
+msgstr ""
 
 #. i18n: ectx: label, entry (RoundTime), group (General)
 #: config/granatier.kcfg:32
 #, kde-format
 msgid "Time for a round."
-msgstr "एकस्य गोलस्य समयः।"
+msgstr ""
 
 #. i18n: ectx: label, entry (InitialSpeed), group (General)
 #: config/granatier.kcfg:36
 #, kde-format
 msgid "The initial speed."
-msgstr "प्रारम्भिकवेगः ।"
+msgstr ""
 
 #. i18n: ectx: label, entry (InitialBombPower), group (General)
 #: config/granatier.kcfg:40
 #, kde-format
 msgid "The initial bomb power."
-msgstr "प्रारम्भिकबम्बशक्तिः ।"
+msgstr ""
 
 #. i18n: ectx: label, entry (InitialBombArmory), group (General)
 #: config/granatier.kcfg:44
 #, kde-format
 msgid "The initial bomb armory."
-msgstr "प्रारम्भिकः बम्बशस्त्रागारः ।"
+msgstr ""
 
 #. i18n: ectx: label, entry (Sounds), group (General)
 #: config/granatier.kcfg:48
 #, kde-format
 msgid "Whether sound effects should be played."
-msgstr "ध्वनिप्रभावाः वादनीयाः वा।"
+msgstr ""
 
 #. i18n: ectx: label, entry (UseWilhelmScream), group (General)
 #: config/granatier.kcfg:52
 #, kde-format
 msgid "Whether to use the Wilhelm Scream for dying players."
-msgstr "म्रियमाणानां क्रीडकानां कृते विल्हेल्म् स्क्रीम् इत्यस्य उपयोगः करणीयः वा।"
+msgstr ""
 
 #. i18n: ectx: label, entry (Dummy), group (General)
 #: config/granatier.kcfg:56
 #, kde-format
 msgid "This is a dummy setting for player setup."
-msgstr "इदं प्लेयर् सेटअपस्य कृते डमी सेटिङ्ग् अस्ति ।"
+msgstr ""
 
 #. i18n: ectx: label, entry (ShowAllTiles), group (General)
 #. i18n: ectx: label, entry (BlastTime1), group (General)
@@ -207,192 +204,192 @@ msgstr "इदं प्लेयर् सेटअपस्य कृते �
 #: config/granatier.kcfg:72 config/granatier.kcfg:76 config/granatier.kcfg:80
 #, kde-format
 msgid "This is only for the artists to make their life easier."
-msgstr "एतत् केवलं कलाकारानां जीवनं सुलभं कर्तुं भवति।"
+msgstr ""
 
 #: config/playerselectoritem.cpp:67
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
-msgstr "वामः:"
+msgstr ""
 
 #: config/playerselectoritem.cpp:76
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
-msgstr "उपरि:"
+msgstr ""
 
 #: config/playerselectoritem.cpp:85
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
-msgstr "दक्षिणः:"
+msgstr ""
 
 #: config/playerselectoritem.cpp:94
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
-msgstr "अधः:"
+msgstr ""
 
 #: config/playerselectoritem.cpp:103
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
-msgstr "बम्बः : १."
+msgstr ""
 
 #: gamescene.cpp:816
 #, kde-format
 msgid "Sudden Death"
-msgstr "आकस्मिक मृत्यु"
+msgstr ""
 
 #: infooverlay.cpp:51
 #, kde-format
 msgid "Press Space to continue"
-msgstr "अग्रे गन्तुं Space नुदन्तु"
+msgstr ""
 
 #: infooverlay.cpp:58
 #, kde-format
 msgid "Press Space to start a new Game"
-msgstr "नूतनं Game आरभ्यतुं Space नुदन्तु"
+msgstr ""
 
 #: infooverlay.cpp:68
 #, kde-format
 msgid "GET READY !!!"
-msgstr "सज्जाः भवन्तु !!!"
+msgstr ""
 
 #: infooverlay.cpp:73
 #, kde-format
 msgid "Press Space to start"
-msgstr "आरम्भार्थं Space नुदन्तु"
+msgstr ""
 
 #: infooverlay.cpp:78
 #, kde-format
 msgid "PAUSED"
-msgstr "PAUSED इति"
+msgstr ""
 
 #: infooverlay.cpp:219
 #, kde-format
 msgid "The winner is %1"
-msgstr "विजेता %1 अस्ति"
+msgstr ""
 
 #: main.cpp:46
 #, kde-format
 msgid "Granatier"
-msgstr "ग्रेनेटियर्"
+msgstr ""
 
 #: main.cpp:48
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
-msgstr "ग्रेनेटियरः एकः बम्बर्मैन् क्लोन् अस्ति!"
+msgstr ""
 
 #: main.cpp:49
 #, kde-format
 msgid "Copyright (c) 2009-2015 The Granatier Team!"
-msgstr "प्रतिलिपि अधिकार (ग) 2009-2015 द ग्रेनेटियर टीम!"
+msgstr ""
 
 #: main.cpp:53
 #, kde-format
 msgid "Mathias Kraus"
-msgstr "मथियस क्राउस"
+msgstr ""
 
 #: main.cpp:53
 #, kde-format
 msgid "Maintainer"
-msgstr "परिपालकः"
+msgstr ""
 
 #: main.cpp:54
 #, kde-format
 msgid "Arturo Silva"
-msgstr "आर्तुरो सिल्वा"
+msgstr ""
 
 #: main.cpp:54
 #, kde-format
 msgid "Most of the beautiful granatier graphics"
-msgstr "अधिकांशः सुन्दरः granatier ग्राफिक्स्"
+msgstr ""
 
 #: main.cpp:55
 #, kde-format
 msgid "Thomas Gallinari"
-msgstr "थोमस गैलिनारी"
+msgstr ""
 
 #: main.cpp:55 main.cpp:56 main.cpp:57 main.cpp:58 main.cpp:59
 #, kde-format
 msgid "Developer of Kapman, which was the base of Granatier"
-msgstr "कप्मैन् इत्यस्य विकासकः, यः ग्रेनेटियर् इत्यस्य आधारः आसीत्"
+msgstr ""
 
 #: main.cpp:56
 #, kde-format
 msgid "Pierre-Benoit Besse"
-msgstr "पियरे-बेनोइट् बेस्से"
+msgstr ""
 
 #: main.cpp:57
 #, kde-format
 msgid "Romain Castan"
-msgstr "रोमैन कास्तान्"
+msgstr ""
 
 #: main.cpp:58
 #, kde-format
 msgid "Alexandre Galinier"
-msgstr "अलेक्जेण्डर् गैलिनियर"
+msgstr ""
 
 #: main.cpp:59
 #, kde-format
 msgid "Nathalie Liesse"
-msgstr "नताली लिस्से"
+msgstr ""
 
 #: mainwindow.cpp:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Play Sounds"
-msgstr "ध्वनयः वादयन्तु"
+msgstr ""
 
 #: mainwindow.cpp:140
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
-msgstr "किं भवन्तः वर्तमानक्रीडां त्यक्तुम् इच्छन्ति इति निश्चितम्?"
+msgstr ""
 
 #: mainwindow.cpp:141
 #, kde-format
 msgctxt "@title:window"
 msgid "New Game"
-msgstr "नवीन खेल"
+msgstr ""
 
 #: mainwindow.cpp:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Quit Game"
-msgstr "क्रीडां त्यजतु"
+msgstr ""
 
 #: mainwindow.cpp:179
 #, kde-format
 msgctxt "@title:tab General settings"
 msgid "General"
-msgstr "सामान्य"
+msgstr ""
 
 #: mainwindow.cpp:183
 #, kde-format
 msgctxt "@title:tab"
 msgid "Theme"
-msgstr "विषयवस्तु"
+msgstr ""
 
 #: mainwindow.cpp:185
 #, kde-format
 msgctxt "@title:tab"
 msgid "Arena"
-msgstr "अखाड़ा"
+msgstr ""
 
 #: mainwindow.cpp:187
 #, kde-format
 msgctxt "@title:tab"
 msgid "Player"
-msgstr "खिलाडी"
+msgstr ""
 
 #: mainwindow.cpp:238
 #, kde-format
 msgid "Are you sure you want to quit Granatier?"
-msgstr "किं भवन्तः निश्चिन्ताः सन्ति यत् भवन्तः Granatier -नगरं त्यक्तुम् इच्छन्ति?"
+msgstr ""
 
 #: mainwindow.cpp:239
 #, kde-format
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
-msgstr "परिजहातु"
+msgstr ""
