@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-22 00:38+0000\n"
-"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"PO-Revision-Date: 2024-12-20 21:51+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -93,31 +93,31 @@ msgstr "विस्फोटसमयः ४"
 #: config/generalsettings.ui:131
 #, kde-format
 msgid "Points to win the game:"
-msgstr "क्रीडां जितुम् बिन्दवः : १."
+msgstr "क्रीडां जितुम् बिन्दवः :"
 
 #. i18n: ectx: property (text), widget (QLabel, label_3)
 #: config/generalsettings.ui:154
 #, kde-format
 msgid "Round Time in Seconds:"
-msgstr "गोलसमयः सेकण्डेषु : १."
+msgstr "गोलसमयः सेकण्डेषु :"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: config/generalsettings.ui:177
 #, kde-format
 msgid "Initial Speed:"
-msgstr "प्रारम्भिकवेगः : १."
+msgstr "प्रारम्भिकवेगः :"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/generalsettings.ui:200
 #, kde-format
 msgid "Initial Bomb Power:"
-msgstr "प्रारम्भिक बम्ब शक्ति : १."
+msgstr "प्रारम्भिक बम्ब शक्ति :"
 
 #. i18n: ectx: property (text), widget (QLabel, label_6)
 #: config/generalsettings.ui:223
 #, kde-format
 msgid "Initial Bomb Armory:"
-msgstr "प्रारम्भिक बम्बशस्त्रालयः : १."
+msgstr "प्रारम्भिक बम्बशस्त्रालयः :"
 
 #. i18n: ectx: label, entry (FirstRun), group (General)
 #: config/granatier.kcfg:9
@@ -237,7 +237,7 @@ msgstr "अधः:"
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
-msgstr "बम्बः : १."
+msgstr "बम्बः :"
 
 #: gamescene.cpp:816
 #, kde-format
