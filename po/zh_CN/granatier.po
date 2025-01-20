@@ -31,7 +31,7 @@ msgstr "kde-china@kde.org"
 #, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
-msgstr ""
+msgstr "作者：%1"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_RandomArenaMode)
 #: config/arenaselector.ui:36
@@ -43,7 +43,7 @@ msgstr "随机模式"
 #: config/arenaselector.ui:43
 #, kde-format
 msgid "Download New Arenas…"
-msgstr ""
+msgstr "下载新竞技场..."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
@@ -341,7 +341,7 @@ msgstr "Nathalie Liesse"
 #, kde-format
 msgctxt "@option:check"
 msgid "Play Sounds"
-msgstr ""
+msgstr "播放声音"
 
 #: mainwindow.cpp:140
 #, kde-format
