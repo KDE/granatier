@@ -1,12 +1,11 @@
-# translation of granatier.po to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for granatier.po package.
+# Copyright (C) 2025 This_file_is_part_of_KDE
+# This file is distributed under the same license as the granatier package.
 #
-# Sofía Priego <spriego@darksylvania.net>, %Y.
 # SPDX-FileCopyrightText: 2009, 2012, 2015, 2018, 2021, 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
-# Ignacio Poggi <ignaciop.3@gmail.com>, 2009.
-# Huever, 2009.
-# Kira J. Fernandez <kirajfdez@gmail.com>, 2010.
+# SPDX-FileCopyrightText: 2009 Ignacio Poggi <ignaciop.3@gmail.com>
+# SPDX-FileCopyrightText: 2010 Kira J. Fernandez <kirajfdez@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
@@ -48,7 +47,7 @@ msgstr "Modo aleatorio"
 #: config/arenaselector.ui:43
 #, kde-format
 msgid "Download New Arenas…"
-msgstr "Descargar nuevos escenarios..."
+msgstr "Descargar nuevos escenarios…"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: config/generalsettings.ui:17
@@ -399,19 +398,3 @@ msgstr "¿Seguro que quieres salir de Granatier?"
 msgctxt "@title:window To quit Granatier"
 msgid "Quit"
 msgstr "Salir"
-
-#~ msgid "0:00"
-#~ msgstr "0:00"
-
-#~ msgid "Arena Name"
-#~ msgstr "Nombre del escenario"
-
-#~ msgid "Get New Players..."
-#~ msgstr "Obtener nuevos jugadores..."
-
-#~ msgid "Import Clanbomber Arenas"
-#~ msgstr "Importar campos de juego de Clanbomber"
-
-#~ msgctxt "@title:window config dialog"
-#~ msgid "Select player"
-#~ msgstr "Seleccionar jugador"
