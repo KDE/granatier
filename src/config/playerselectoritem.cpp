@@ -61,7 +61,11 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     
     m_moveLeft = new KKeySequenceWidget(this);
     m_moveLeft->setMultiKeyShortcutsAllowed(false);
+#if KXMLGUI_VERSION >= QT_VERSION_CHECK(6, 12, 0)
+    m_moveLeft->setPatterns(KKeySequenceRecorder::Key);
+#else
     m_moveLeft->setModifierlessAllowed(true);
+#endif
     m_moveLeft->setClearButtonShown(false);
     m_moveLeft->setKeySequence(m_playerSettings->keyLeft(playerId));
     m_labelMoveLeft = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Left:"));
@@ -70,7 +74,11 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     
     m_moveUp = new KKeySequenceWidget(this);
     m_moveUp->setMultiKeyShortcutsAllowed(false);
+#if KXMLGUI_VERSION >= QT_VERSION_CHECK(6, 12, 0)
+    m_moveUp->setPatterns(KKeySequenceRecorder::Key);
+#else
     m_moveUp->setModifierlessAllowed(true);
+#endif
     m_moveUp->setClearButtonShown(false);
     m_moveUp->setKeySequence(m_playerSettings->keyUp(playerId));
     m_labelMoveUp = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Up:"));
@@ -79,7 +87,12 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     
     m_moveRight = new KKeySequenceWidget(this);
     m_moveRight->setMultiKeyShortcutsAllowed(false);
+#if KXMLGUI_VERSION >= QT_VERSION_CHECK(6, 12, 0)
+    m_moveRight->setPatterns(KKeySequenceRecorder::Key);
+#else
     m_moveRight->setModifierlessAllowed(true);
+#endif
+
     m_moveRight->setClearButtonShown(false);
     m_moveRight->setKeySequence(m_playerSettings->keyRight(playerId));
     m_labelMoveRight = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Right:"));
@@ -88,7 +101,12 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     
     m_moveDown = new KKeySequenceWidget(this);
     m_moveDown->setMultiKeyShortcutsAllowed(false);
+#if KXMLGUI_VERSION >= QT_VERSION_CHECK(6, 12, 0)
+    m_moveDown->setPatterns(KKeySequenceRecorder::Key);
+#else
     m_moveDown->setModifierlessAllowed(true);
+#endif
+
     m_moveDown->setClearButtonShown(false);
     m_moveDown->setKeySequence(m_playerSettings->keyDown(playerId));
     m_labelMoveDown = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Down:"));
@@ -97,7 +115,11 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     
     m_dropBomb = new KKeySequenceWidget(this);
     m_dropBomb->setMultiKeyShortcutsAllowed(false);
+#if KXMLGUI_VERSION >= QT_VERSION_CHECK(6, 12, 0)
+    m_dropBomb->setPatterns(KKeySequenceRecorder::Key);
+#else
     m_dropBomb->setModifierlessAllowed(true);
+#endif
     m_dropBomb->setClearButtonShown(false);
     m_dropBomb->setKeySequence(m_playerSettings->keyPutBomb(playerId));
     m_labelDropBomb = new QLabel(i18nc("@label:chooser for the key sequence to move the player.", "Bomb:"));
