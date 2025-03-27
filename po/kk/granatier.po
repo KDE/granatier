@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-22 00:38+0000\n"
+"POT-Creation-Date: 2025-03-27 00:39+0000\n"
 "PO-Revision-Date: 2012-07-30 08:18+0600\n"
 "Last-Translator: Sairan Kikkarin\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -27,7 +27,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sairan@computer.org"
 
-#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:177
 #, fuzzy, kde-format
 #| msgctxt "Author attribution, e.g. \"by Jack\""
 #| msgid "by %1"
@@ -210,7 +210,7 @@ msgstr "Ойыншының жәй баптау параметрлері."
 msgid "This is only for the artists to make their life easier."
 msgstr "Тек құрастырушыларға, өмірін жеңілдету үшін."
 
-#: config/playerselectoritem.cpp:67
+#: config/playerselectoritem.cpp:71
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Left:"
@@ -218,7 +218,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr "Солға:"
 
-#: config/playerselectoritem.cpp:76
+#: config/playerselectoritem.cpp:84
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Up:"
@@ -226,7 +226,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr "Жоғарға:"
 
-#: config/playerselectoritem.cpp:85
+#: config/playerselectoritem.cpp:98
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Right:"
@@ -234,7 +234,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "Оңға:"
 
-#: config/playerselectoritem.cpp:94
+#: config/playerselectoritem.cpp:112
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Down:"
@@ -242,7 +242,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr "Төменге:"
 
-#: config/playerselectoritem.cpp:103
+#: config/playerselectoritem.cpp:125
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Bomb:"

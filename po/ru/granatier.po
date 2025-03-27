@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-22 00:38+0000\n"
+"POT-Creation-Date: 2025-03-27 00:39+0000\n"
 "PO-Revision-Date: 2024-10-01 17:11+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -34,7 +34,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "overmind88@gmail.com, translation-team@basealt.ru"
 
-#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:177
 #, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
@@ -214,31 +214,31 @@ msgstr "Это пустой параметр для настройки игро�
 msgid "This is only for the artists to make their life easier."
 msgstr "Это только для облегчения жизни художников."
 
-#: config/playerselectoritem.cpp:67
+#: config/playerselectoritem.cpp:71
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr "Влево:"
 
-#: config/playerselectoritem.cpp:76
+#: config/playerselectoritem.cpp:84
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr "Вверх:"
 
-#: config/playerselectoritem.cpp:85
+#: config/playerselectoritem.cpp:98
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "Вправо:"
 
-#: config/playerselectoritem.cpp:94
+#: config/playerselectoritem.cpp:112
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr "Вниз:"
 
-#: config/playerselectoritem.cpp:103
+#: config/playerselectoritem.cpp:125
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"

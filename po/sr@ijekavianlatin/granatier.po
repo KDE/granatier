@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-22 00:38+0000\n"
+"POT-Creation-Date: 2025-03-27 00:39+0000\n"
 "PO-Revision-Date: 2016-02-27 21:47+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -29,7 +29,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "caslav.ilic@gmx.net"
 
-#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:177
 #, fuzzy, kde-format
 #| msgctxt "Author attribution, e.g. \"by Jack\""
 #| msgid "by %1"
@@ -212,7 +212,7 @@ msgstr "Lažna postavka za podešavanje igrača."
 msgid "This is only for the artists to make their life easier."
 msgstr "Ovo je samo radi olakšavanja života grafičarima."
 
-#: config/playerselectoritem.cpp:67
+#: config/playerselectoritem.cpp:71
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Left:"
@@ -220,7 +220,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr "Levo:"
 
-#: config/playerselectoritem.cpp:76
+#: config/playerselectoritem.cpp:84
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Up:"
@@ -228,7 +228,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr "Gore:"
 
-#: config/playerselectoritem.cpp:85
+#: config/playerselectoritem.cpp:98
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Right:"
@@ -236,7 +236,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "Desno:"
 
-#: config/playerselectoritem.cpp:94
+#: config/playerselectoritem.cpp:112
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Down:"
@@ -244,7 +244,7 @@ msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr "Dole:"
 
-#: config/playerselectoritem.cpp:103
+#: config/playerselectoritem.cpp:125
 #, fuzzy, kde-format
 #| msgctxt "Label for the key sequence to move the player."
 #| msgid "Bomb:"

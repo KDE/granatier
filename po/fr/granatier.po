@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-22 00:38+0000\n"
+"POT-Creation-Date: 2025-03-27 00:39+0000\n"
 "PO-Revision-Date: 2025-01-05 10:18+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -34,7 +34,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "xavier.besnard@kde.org, guill.@gmail.com, renard@kde.org"
 
-#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:155
+#: config/arenaselector.cpp:268 config/playerselectoritem.cpp:177
 #, kde-format
 msgctxt "@info author attribution"
 msgid "By %1"
@@ -216,31 +216,31 @@ msgstr "Ceci est un paramétrage factice pour la configuration du joueur."
 msgid "This is only for the artists to make their life easier."
 msgstr "Ceci n'est là que pour faciliter la vie des artistes."
 
-#: config/playerselectoritem.cpp:67
+#: config/playerselectoritem.cpp:71
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Left:"
 msgstr "Gauche :"
 
-#: config/playerselectoritem.cpp:76
+#: config/playerselectoritem.cpp:84
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Up:"
 msgstr "Haut :"
 
-#: config/playerselectoritem.cpp:85
+#: config/playerselectoritem.cpp:98
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Right:"
 msgstr "Droite :"
 
-#: config/playerselectoritem.cpp:94
+#: config/playerselectoritem.cpp:112
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Down:"
 msgstr "Bas :"
 
-#: config/playerselectoritem.cpp:103
+#: config/playerselectoritem.cpp:125
 #, kde-format
 msgctxt "@label:chooser for the key sequence to move the player."
 msgid "Bomb:"
