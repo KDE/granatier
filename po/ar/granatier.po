@@ -296,7 +296,7 @@ msgstr "Mathias Kraus"
 #: main.cpp:53
 #, kde-format
 msgid "Maintainer"
-msgstr "المصين"
+msgstr "الصائن"
 
 #: main.cpp:54
 #, kde-format
