@@ -104,7 +104,7 @@ msgstr "زمن الدّورة بالثّواني:"
 #: config/generalsettings.ui:177
 #, kde-format
 msgid "Initial Speed:"
-msgstr "السّرعة الابتدائيّة:"
+msgstr "السرعة الابتدائيّة:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_5)
 #: config/generalsettings.ui:200
