@@ -280,7 +280,7 @@ msgstr "Granatier"
 #: main.cpp:48
 #, kde-format
 msgid "Granatier is a Bomberman Clone!"
-msgstr "Granatier 是款炸弹人游戏复刻！"
+msgstr "Granatier 是一款炸弹人的仿制品！"
 
 #: main.cpp:49
 #, kde-format
