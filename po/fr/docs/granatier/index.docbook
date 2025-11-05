@@ -297,7 +297,7 @@
       <title
 >Les Handicaps</title>
       <para
->Les handicaps sont l'opposé des bonus et mettent des bâtons dans les roues aux joueurs. Contrairement aux bonus, leur effet disparaît après quelques temps. Actuellement, les handicaps suivants sont disponibles : </para>
+>Les handicaps sont l'opposé des bonus et mettent des bâtons dans les roues aux joueurs. Contrairement aux bonus, leur effet disparait après quelques temps. Actuellement, les handicaps suivants sont disponibles : </para>
       <para>
         <inlinemediaobject>
           <imageobject
@@ -471,7 +471,7 @@
 >Configuration du jeu</title
 > <!-- do not change this! -->
     <para
->Pour ouvrir la boîte de dialogue de configuration, veuillez sélectionner l'élément de menu <menuchoice
+>Pour ouvrir la boite de dialogue de configuration, veuillez sélectionner l'élément de menu <menuchoice
 ><guimenu
 >Configuration</guimenu
 ><guimenuitem
@@ -578,7 +578,7 @@
       <title
 >Joueur</title>
       <para
->Pour sélectionner le joueur à incarner, veuillez vous rendre dans la section « Joueur » et sélectionner les joueurs grâce aux boîtes à cocher. Les raccourcis peuvent être modifiés par un clic sur le bouton correspondant à l'action que vous souhaitez modifier puis sur la touche à laquelle vous voulez l'associer. Les modifications sont enregistrées par un clic sur le bouton <guibutton
+>Pour sélectionner le joueur à incarner, veuillez vous rendre dans la section « Joueur » et sélectionner les joueurs grâce aux boites à cocher. Les raccourcis peuvent être modifiés par un clic sur le bouton correspondant à l'action que vous souhaitez modifier puis sur la touche à laquelle vous voulez l'associer. Les modifications sont enregistrées par un clic sur le bouton <guibutton
 >Ok</guibutton
 > ou <guibutton
 >Appliquer</guibutton
