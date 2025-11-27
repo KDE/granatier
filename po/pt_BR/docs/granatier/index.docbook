@@ -55,13 +55,13 @@
     <legalnotice
 >&FDLNotice;</legalnotice>
     <date
->09/05/2016</date>
+>23/06/2021</date>
     <releaseinfo
->1.3.1 (Applications 16.04)</releaseinfo>
+>1.4.2 (KDE Gear 21.04)</releaseinfo>
     
     <abstract>
       <para
->Esta documentação descreve o jogo &granatier; versão 1.3.1</para>
+>Esta documentação descreve o jogo &granatier; versão 1.4.2</para>
     </abstract>
     
     <keywordset>
@@ -108,7 +108,7 @@
 >Multijogador</para
 ></note>
     <para
->O &granatier; é um clone do jogo clássico <trademark
+>O &granatier; é um clone do jogo clássico &nbsp;<trademark
 ><application
 >Bomberman</application
 ></trademark
@@ -143,7 +143,7 @@
 >Eliminar todos os adversários.</para
 ></note>
     <para
->Cada jogador fica com cinco teclas que poderá usar para movimentar a sua personagem e soltar as bombas. Por exemplo, as teclas padrão do Jogador 1 são as teclas de cursores Cima, Baixo, Esquerda e Direita, para se mover nessas direções, e a tecla &Enter; para soltar uma bomba. Veja por favor a seção da <link linkend="config_player"
+>Cada jogador fica com cinco teclas que poderá usar para movimentar a sua personagem e soltar as bombas. Por exemplo, as teclas padrão do Jogador 1 são as teclas de cursores &Up;, &Down;, &Left; e &Right;, para se mover nessas direções, e a tecla &Enter; para soltar uma bomba. Veja por favor a seção da <link linkend="config_player"
 >Configuração do Jogador</link
 > para descobrir as teclas de atalho dos outros jogadores, assim como modificá-las como desejar. </para>
     <para
@@ -378,16 +378,104 @@
     </sect1>
   </chapter>
 
+  <chapter id="interface"
+><title
+>Visão geral da interface</title
+> <!-- do not change this! -->
+
+    <sect1 id="menu">
+    <title
+>Itens dos menus</title>
+
+      <variablelist>
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Jogo</guimenu
+> <guimenuitem
+>Novo</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Inicia</action
+> um novo jogo.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>Q</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>Jogo</guimenu
+> <guimenuitem
+>Sair</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Sai</action
+> do &granatier;.</para
+></listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term
+><menuchoice
+><guimenu
+>Configurações</guimenu
+> <guimenuitem
+>Reproduzir sons</guimenuitem
+></menuchoice
+></term>
+          <listitem
+><para
+><action
+>Alterna se os sons devem ser reproduzidos ou não.</action
+> A opção padrão é ativada. </para
+></listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para
+>Além disso, o &granatier; possui os itens de menu comuns do &kde; como <guimenu
+>Configurações</guimenu
+> e <guimenu
+>Ajuda</guimenu
+>. Para obter mais informações, leia as seções sobre o <ulink url="help:/fundamentals/menus.html#menus-settings"
+>Menu Configurações</ulink
+> e o <ulink url="help:/fundamentals/menus.html#menus-help"
+>Menu Ajuda</ulink
+> dos Fundamentos do &kde;. </para>
+
+    </sect1>
+  </chapter>
+
   <chapter id="configuration"
 ><title
 >Configuração do jogo</title
 > <!-- do not change this! -->
     <para
->Para abrir a janela de configuração, selecione a opção <menuchoice
+>Para abrir a janela de configuração, selecione o menu <menuchoice
 ><guimenu
 >Configurações</guimenu
 ><guimenuitem
->Configurar o &granatier;...</guimenuitem
+>Configurar &granatier;…</guimenuitem
 ></menuchoice
 > </para>
     <sect1 id="config_general">
@@ -415,11 +503,11 @@
       <title
 >Tema</title>
       <para
->Para selecionar o tema com que deseja jogar, vá à seção Tema. Ele é carregado quando selecionar o botão <guibutton
+>Para selecionar o tema com que deseja jogar, vá à seção Tema. Ele é carregado ao clicar em &nbsp;<guibutton
 >OK</guibutton
 > ou <guibutton
 >Aplicar</guibutton
->. O jogo atual será terminado, dando início a um novo. Você poderá clicar no botão de <guibutton
+>. O jogo atual será terminado, dando início a um novo. Você poderá clicar no botão &nbsp;<guibutton
 >Padrões</guibutton
 > para restaurar o tema padrão. </para>
       <screenshot>
@@ -440,23 +528,21 @@
       <title
 >Arena</title>
       <para
->Para selecionar a Arena onde deseja jogar, vá à seção da Arena. Ela é carregada quando selecionar o botão <guibutton
+>Para selecionar a Arena onde deseja jogar, vá à seção da Arena. Ela é carregada ao clicar em &nbsp;<guibutton
 >OK</guibutton
 > ou <guibutton
 >Aplicar</guibutton
->. O jogo atual será terminado, dando início a um novo. Você poderá clicar no botão de <guibutton
+>. O jogo atual será terminado, dando início a um novo. Você poderá clicar no botão &nbsp;<guibutton
 >Padrões</guibutton
 > para restaurar a arena padrão. </para>
       <para
->Se você tiver criado arenas para o <application
+>Se você criou arenas para o <application
 >Clanbomber</application
->, poderá importar as mesmas com o botão <guibutton
->Importar as Arenas do Clanbomber</guibutton
->. O &granatier; irá procurar em <filename class="directory"
+>, pode copiá-las para <filename class="directory"
 >~/.clanbomber/maps</filename
-> por arenas. As arenas padrão do <application
+>, onde o &granatier; irá procurá-las. As arenas padrão do <application
 >Clanbomber</application
-> já são fornecidas com o &granatier;. </para>
+> já são distribuídas com o &granatier;. </para>
       <screenshot>
         <screeninfo
 >Uma imagem de configuração do &granatier;</screeninfo>
@@ -492,11 +578,11 @@
       <title
 >Jogador</title>
       <para
->Para selecionar o jogador que deseja usar, vá à seção do Jogador e selecione os jogadores com as opções respectivas. Os atalhos poderão ser alterados se clicar no botão para a ação a alterar e depois pressionar a tecla que deseja usar. As alterações são carregadas ao selecionar um dos botões <guibutton
+>Para selecionar o jogador que deseja usar, vá à seção do Jogador e selecione os jogadores com as opções respectivas. Os atalhos poderão ser alterados se clicar no botão para a ação a alterar e depois pressionar a tecla que deseja usar. As alterações são carregadas ao clicar em &nbsp;<guibutton
 >OK</guibutton
 > ou <guibutton
 >Aplicar</guibutton
->. O jogo atual será terminado e será iniciado um novo. Você poderá clicar no botão <guibutton
+>. O jogo atual será terminado e será iniciado um novo. Você poderá clicar no botão &nbsp;<guibutton
 >Padrões</guibutton
 > para restaurar os atalhos padrão. </para>
       <screenshot>
@@ -522,24 +608,38 @@
     <para
 >Uma arena do &granatier; consiste em dois arquivos, o <filename
 >minha-arena.desktop</filename
-> e o <filename
+>&nbsp; e o <filename
 >minha-arena.xml</filename
 >. </para>
 
     <para
->O arquivo '.desktop' contém os metadados, como o nome ou o autor da arena e consiste nos seguintes itens.<programlisting>
-[Arena]
-Name=A Minha Arena
-Description=Esta é a minha primeira Arena
+>O arquivo <literal role="extension"
+>.desktop</literal
+> contém os metadados, como o nome da arena ou o autor da arena, e consiste nas seguintes entradas. </para>
+    <para>
+      <programlisting
+>[Arena]
+Name=Minha Arena
+Description=Esta é a minha primeira arena
 Type=XML
 FileName=minha-arena.xml
-Author=João
-AuthorEmail=joao@dominio.org
-      </programlisting
-> Você poderá escolher o nome que quiser, mas o 'FileName' deverá ser o nome do arquivo '.xml'. </para>
+Author=Usuário João
+AuthorEmail=joao.usuario@foo.org
+      </programlisting>
+    </para>
     <para
->O arquivo '.xml' contém o mapa atual da arena. <programlisting>
-&lt;?xml version="1.0"?&gt;
+>Você pode escolher o nome que quiser, mas <literal
+>FileName</literal
+> deve indicar o nome do arquivo <literal role="extension"
+>.xml</literal
+>. </para>
+    <para
+>O arquivo <literal role="extension"
+>.xml</literal
+> contém o mapa da arena propriamente dito. </para>
+    <para>
+      <programlisting
+>&lt;?xml version="1.0"?&gt;
 &lt;Arena arenaFileVersion="1" rowCount="13" colCount="17"&gt;
   &lt;Row&gt;    ==== ====    &lt;/Row&gt;
   &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
@@ -555,8 +655,16 @@ AuthorEmail=joao@dominio.org
   &lt;Row&gt;  ===+++++++===  &lt;/Row&gt;
   &lt;Row&gt;    ==== ====    &lt;/Row&gt;
 &lt;/Arena&gt;
-      </programlisting
-> Não existe qualquer limite para o 'rowCount' (número de linhas) e o 'colCount' (número de colunas), assim você mesmo poderá definir o tamanho da arena. São usados os seguintes símbolos para o mapa da arena. <programlisting
+      </programlisting>
+    </para>
+    <para
+>Não há limite para <literal
+>rowCount</literal
+> e <literal
+>colCount</literal
+>, então você pode escolher o tamanho da arena. Os seguintes símbolos são usados ​​para o mapa da arena. </para>
+    <para>
+      <programlisting
 >'=' um item de muro
 ' ' um item de buraco
 '_' um item de chão
