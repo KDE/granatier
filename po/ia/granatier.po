@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the granatier package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2023, 2024, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: granatier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:49+0000\n"
-"PO-Revision-Date: 2024-07-12 16:16+0200\n"
+"PO-Revision-Date: 2026-01-21 12:41+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -127,7 +127,7 @@ msgstr ""
 #: config/granatier.kcfg:13
 #, kde-format
 msgid "The graphical theme to be used."
-msgstr ""
+msgstr "Le thema graohic essera usate."
 
 #. i18n: ectx: label, entry (Arena), group (General)
 #: config/granatier.kcfg:17
@@ -255,7 +255,7 @@ msgstr ""
 #: infooverlay.cpp:68
 #, kde-format
 msgid "GET READY !!!"
-msgstr ""
+msgstr "PREPARA TE !!!"
 
 #: infooverlay.cpp:73
 #, kde-format
@@ -346,7 +346,7 @@ msgstr "Reproduce sonos"
 #: mainwindow.cpp:140
 #, kde-format
 msgid "Are you sure you want to quit the current game?"
-msgstr ""
+msgstr "Tu es secur que tu vole abandonar le joco currente?"
 
 #: mainwindow.cpp:141
 #, kde-format
