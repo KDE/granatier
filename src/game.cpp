@@ -20,6 +20,7 @@
 #include "granatier_random.h"
 
 #include <QPointF>
+#include <QSet>
 #include <QTimer>
 #include <QKeyEvent>
 #include <QDir>
@@ -585,6 +586,41 @@ void Game::playerFalling()
     }
 }
 
+bool Game::isRoundOver() const
+{
+    QSet<int> activeTeams;
+    int soloCount = 0;
+    int teamedAliveCount = 0;
+
+    for (auto & player : m_players)
+    {
+        if (player->isAlive())
+        {
+            int teamId = player->team();
+            if (teamId == 0) // Solo
+            {
+                soloCount++;
+            }
+            else
+            {
+                activeTeams.insert(teamId);
+                teamedAliveCount++;
+            }
+        }
+    }
+
+    int totalAlive = soloCount + teamedAliveCount;
+    if (totalAlive <= 1)
+    {
+        return true;
+    }
+    if (activeTeams.size() == 1 && soloCount == 0)
+    {
+        return true;
+    }
+    return false;
+}
+
 void Game::playerDeath()
 {
     if(m_soundEnabled)
@@ -592,18 +628,10 @@ void Game::playerDeath()
         m_soundDie->start();
     }
 
-    //check if at most one player is alive if not already finished
+    //check if the round is finished
     if(!m_setRoundFinishedTimer->isActive())
     {
-        int nPlayerAlive = 0;
-        for(auto & player : m_players)
-        {
-            if(player->isAlive())
-            {
-                nPlayerAlive++;
-            }
-        }
-        if(nPlayerAlive <= 1)
+        if(isRoundOver())
         {
             //wait some time until the game stops
             m_setRoundFinishedTimer->start(1500);
@@ -624,29 +652,45 @@ void Game::resurrectBonusTaken()
 
 void Game::setRoundFinished()
 {
-    int nPlayerAlive = 0;
-    int nIndex = 0;;
     if(m_gameOver)
     {
         return;
     }
-    for(int i = 0; i < m_players.length(); ++i)
-    {
-        if(m_players[i]->isAlive())
-        {
-            nPlayerAlive++;
-            nIndex = i;
-        }
-    }
-    //this check is needed, if in the meantime the resurrect bonus was taken
-    if (nPlayerAlive > 1)
+
+    // Check if the round is actually finished (in case of resurrect bonus in the meantime)
+    if (!isRoundOver())
     {
         return;
     }
 
-    if (nPlayerAlive == 1)
+    // Determine the winners of the round
+    QList<Player*> survivors;
+    for (auto & player : m_players)
     {
-        m_players[nIndex]->addPoint();
+        if (player->isAlive())
+        {
+            survivors.append(player);
+        }
+    }
+
+    if (!survivors.isEmpty())
+    {
+        int winningTeam = survivors.first()->team();
+        if (winningTeam == 0) // Solo winner
+        {
+            survivors.first()->addPoint();
+        }
+        else
+        {
+            // All players of the winning team get a point
+            for (auto & player : m_players)
+            {
+                if (player->team() == winningTeam)
+                {
+                    player->addPoint();
+                }
+            }
+        }
     }
 
     pause(true);
@@ -657,7 +701,23 @@ void Game::setRoundFinished()
         if (player->points() >= m_winPoints)
         {
             m_gameOver = true;
-            m_strWinner = player->getPlayerName();
+            int winningTeam = player->team();
+            if (winningTeam == 0)
+            {
+                m_strWinner = player->getPlayerName();
+            }
+            else
+            {
+                QStringList teamMembers;
+                for (auto & p : m_players)
+                {
+                    if (p->team() == winningTeam)
+                    {
+                        teamMembers.append(p->getPlayerName());
+                    }
+                }
+                m_strWinner = QStringLiteral("Team %1 (%2)").arg(winningTeam).arg(teamMembers.join(QStringLiteral(", ")));
+            }
             break;
         }
     }

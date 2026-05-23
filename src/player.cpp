@@ -31,6 +31,7 @@ Player::Player(qreal p_x, qreal p_y, const QString& p_playerID, const PlayerSett
     m_desktopFilePath = p_playerSettings->playerDesktopFilePath(p_playerID);
     m_graphicsFile = p_playerSettings->playerGraphicsFile(p_playerID);
     m_playerName = p_playerSettings->playerName(p_playerID);
+    m_team = p_playerSettings->team(p_playerID);
 
     m_points = 0;
 
@@ -77,7 +78,16 @@ QString Player::getDesktopFilePath() const
 
 QString Player::getPlayerName() const
 {
+    if (m_team > 0)
+    {
+        return QStringLiteral("%1 [T%2]").arg(m_playerName).arg(m_team);
+    }
     return m_playerName;
+}
+
+int Player::team() const
+{
+    return m_team;
 }
 
 void Player::init()

@@ -31,6 +31,9 @@ private:
     QLabel* m_playerPreviewPixmapLabel;
     QLabel* m_playerAuthor;
     
+    QLabel* m_labelTeam;
+    class QComboBox* m_teamComboBox;
+    
     KKeySequenceWidget* m_moveLeft;
     KKeySequenceWidget* m_moveUp;
     KKeySequenceWidget* m_moveRight;

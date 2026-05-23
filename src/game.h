@@ -234,6 +234,11 @@ private:
     */
     void initCharactersPosition();
 
+    /**
+    * Helper function to check if the round is over (e.g. only one team remains alive).
+    */
+    bool isRoundOver() const;
+
 public Q_SLOTS:
 
     /**

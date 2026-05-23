@@ -51,6 +51,9 @@ private:
     /** Points from the player */
     int m_points;
 
+    /** Player team */
+    int m_team;
+
     /** flag if the player is on ice */
     bool m_onIce;
 
@@ -132,6 +135,12 @@ public:
       * @return the Player name
       */
     QString getPlayerName() const;
+
+    /**
+      * Gets the Player team.
+      * @return the Player team
+      */
+    int team() const;
 
     /**
       * Initializes the Player.

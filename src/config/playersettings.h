@@ -24,6 +24,7 @@ public:
     const QString playerDesktopFilePath(const QString& strPlayerID) const;
     const QString playerGraphicsFile(const QString& strPlayerID) const;
     bool enabled(const QString& strPlayerID) const;
+    int team(const QString& strPlayerID) const;
     const QKeySequence keyUp(const QString& strPlayerID) const;
     const QKeySequence keyRight(const QString& strPlayerID) const;
     const QKeySequence keyDown(const QString& strPlayerID) const;
@@ -39,6 +40,7 @@ public:
     void setKeyDown(const QString& strPlayerID, const QKeySequence& key);
     void setKeyLeft(const QString& strPlayerID, const QKeySequence& key);
     void setKeyPutBomb(const QString& strPlayerID, const QKeySequence& key);
+    void setTeam(const QString& strPlayerID, const int team);
     
 private:
     struct StructPlayerSettings
@@ -49,6 +51,7 @@ private:
         QString strPlayerDesktopFilePath;
         QString strPlayerGraphicsFile;
         bool enabled;
+        int team;
         QKeySequence keyUp;
         QKeySequence keyRight;
         QKeySequence keyDown;

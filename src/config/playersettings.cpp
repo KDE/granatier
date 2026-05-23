@@ -41,6 +41,7 @@ PlayerSettings::PlayerSettings()
         settings.strPlayerName = desktopFile.group(QStringLiteral("KGameTheme")).readEntry("Name", QString());
         settings.strPlayerGraphicsFile = desktopFile.group(QStringLiteral("KGameTheme")).readEntry("FileName", QString());
         settings.enabled = false;
+        settings.team = 0;
         
         m_playerSettings.insert(settings.strPlayerID, settings);
     }
@@ -71,6 +72,7 @@ PlayerSettings::PlayerSettings()
                 m_playerSettings.find(strPlayerID).value().keyDown = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyDown", QString()));
                 m_playerSettings.find(strPlayerID).value().keyLeft = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyLeft", QString()));
                 m_playerSettings.find(strPlayerID).value().keyPutBomb = QKeySequence(granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<QString>("KeyPutBomb", QString()));
+                m_playerSettings.find(strPlayerID).value().team = granatierConfig.group(QStringLiteral("Player")).group(player).readEntry<int>("Team", 0);
             }
         }
     }
@@ -224,6 +226,7 @@ void PlayerSettings::savePlayerSettings()
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("PlayerID", (*player).strPlayerID);
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("Name", (*player).strPlayerName);
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("Enabled", ((*player).enabled ? 1 : 0));
+            granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("Team", (*player).team);
             
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("KeyUp", (*player).keyUp.toString());
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("KeyRight", (*player).keyRight.toString());
@@ -242,6 +245,7 @@ void PlayerSettings::savePlayerSettings()
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("PlayerID", player.strPlayerID);
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("Name", player.strPlayerName);
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("Enabled", ( player.enabled ? 1 : 0));
+            granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("Team", player.team);
             
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("KeyUp", player.keyUp.toString());
             granatierConfig.group(QStringLiteral("Player")).group(QStringLiteral("%1").arg(nPlayersGroupIndex)).writeEntry("KeyRight", player.keyRight.toString());
@@ -318,6 +322,20 @@ void PlayerSettings::setKeyPutBomb(const QString& strPlayerID, const QKeySequenc
     if( m_pendingPlayerSettings.contains(strPlayerID))
     {
         m_pendingPlayerSettings.find(strPlayerID).value().keyPutBomb = key;
+        Settings::self()->setDummy(Settings::self()->dummy() + 3);
+    }
+}
+
+int PlayerSettings::team(const QString& strPlayerID) const
+{
+    return m_playerSettings.value(strPlayerID).team;
+}
+
+void PlayerSettings::setTeam(const QString& strPlayerID, const int team)
+{
+    if( m_pendingPlayerSettings.contains(strPlayerID))
+    {
+        m_pendingPlayerSettings.find(strPlayerID).value().team = team;
         Settings::self()->setDummy(Settings::self()->dummy() + 3);
     }
 }

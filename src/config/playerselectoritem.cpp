@@ -16,6 +16,7 @@
 #include <QCheckBox>
 
 #include <QLineEdit>
+#include <QComboBox>
 #include <KKeySequenceWidget>
 #include <KLocalizedString>
 
@@ -26,6 +27,17 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     m_selectCheckBox->setChecked(m_playerSettings->enabled(playerId));
     m_playerName = new QLineEdit(m_playerSettings->playerName(playerId));
     m_playerName->setFixedWidth(200);
+    
+    m_labelTeam = new QLabel(i18n("Team:"), this);
+    m_teamComboBox = new QComboBox(this);
+    m_teamComboBox->addItem(i18n("No Team"));
+    m_teamComboBox->addItem(i18n("Team 1"));
+    m_teamComboBox->addItem(i18n("Team 2"));
+    m_teamComboBox->addItem(i18n("Team 3"));
+    m_teamComboBox->addItem(i18n("Team 4"));
+    m_teamComboBox->addItem(i18n("Team 5"));
+    m_teamComboBox->setCurrentIndex(m_playerSettings->team(playerId));
+    
     const qreal dpr = qApp->devicePixelRatio();
     const int previewSize = 64 * dpr;
     m_playerPreviewPixmap = QPixmap(QSize(previewSize, previewSize));
@@ -51,6 +63,8 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     gridLayoutPlayer->addWidget(m_playerName, 0, 1, 1, 3);
     gridLayoutPlayer->addWidget(m_playerPreviewPixmapLabel, 1, 1, 2, 1);
     gridLayoutPlayer->addWidget(m_playerAuthor, 2, 2);//, 1, 1, Qt::AlignBottom);
+    gridLayoutPlayer->addWidget(m_labelTeam, 3, 1);
+    gridLayoutPlayer->addWidget(m_teamComboBox, 3, 2, 1, 2);
     
     auto* gridLayoutKeySequence = new QGridLayout();
     gridLayoutKeySequence->setContentsMargins(0, 0, 0, 0);
@@ -135,6 +149,7 @@ PlayerSelectorItem::PlayerSelectorItem(const QString& playerId, PlayerSettings* 
     connect(m_moveRight, &KKeySequenceWidget::keySequenceChanged, this, &PlayerSelectorItem::settingsChanged);
     connect(m_moveDown, &KKeySequenceWidget::keySequenceChanged, this, &PlayerSelectorItem::settingsChanged);
     connect(m_dropBomb, &KKeySequenceWidget::keySequenceChanged, this, &PlayerSelectorItem::settingsChanged);
+    connect(m_teamComboBox, &QComboBox::currentIndexChanged, this, &PlayerSelectorItem::settingsChanged);
 }
 
 PlayerSelectorItem::~PlayerSelectorItem()
@@ -144,6 +159,8 @@ PlayerSelectorItem::~PlayerSelectorItem()
     delete m_playerName;
     delete m_playerPreviewPixmapLabel;
     delete m_playerAuthor;
+    delete m_labelTeam;
+    delete m_teamComboBox;
     
     delete m_moveLeft;
     delete m_moveUp;
@@ -181,6 +198,8 @@ void PlayerSelectorItem::selectionChanged(bool selectionState)
 {
     m_playerName->setEnabled(selectionState);
     m_playerAuthor->setEnabled(selectionState);
+    m_labelTeam->setEnabled(selectionState);
+    m_teamComboBox->setEnabled(selectionState);
     
     if(selectionState == true)
     {
@@ -217,6 +236,7 @@ void PlayerSelectorItem::settingsChanged()
     m_playerSettings->setKeyRight(m_playerId, m_moveRight->keySequence());
     m_playerSettings->setKeyDown(m_playerId, m_moveDown->keySequence());
     m_playerSettings->setKeyPutBomb(m_playerId, m_dropBomb->keySequence());
+    m_playerSettings->setTeam(m_playerId, m_teamComboBox->currentIndex());
 }
 
 #include "moc_playerselectoritem.cpp"
