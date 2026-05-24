@@ -14,6 +14,7 @@
 
 class Bomb;
 class KGameRenderer;
+class Player;
 
 /**
  * @brief This class is the graphical representation of a Bomb explosion.
@@ -35,6 +36,9 @@ protected:
 
     /** The ID of the Bomb that causes the explosion */
     int m_explosionID;
+
+    /** The Player who created the bomb causing this explosion */
+    Player* m_creator;
 
     /** The scale factor from the svg for the pixmap */
     qreal m_svgScaleFactor;
@@ -70,6 +74,11 @@ public:
     * @return the explosion ID
     */
     int explosionID();
+
+    /**
+     * @return the creator player
+     */
+    Player* creator() const;
 
     /**
      * Updates the BombExplosionItem coordinates.

@@ -16,6 +16,7 @@ BombExplosionItem::BombExplosionItem(Bomb* p_model, Granatier::Direction::Type d
 {
     m_direction = direction;
     m_explosionID = p_model->explosionID();
+    m_creator = p_model->creator();
 
     m_svgScaleFactor = svgScaleFactor;
 
@@ -80,6 +81,11 @@ QPainterPath BombExplosionItem::shape() const
 int BombExplosionItem::explosionID()
 {
     return m_explosionID;
+}
+
+Player* BombExplosionItem::creator() const
+{
+    return m_creator;
 }
 
 void BombExplosionItem::setPosition(qreal p_x, qreal p_y)

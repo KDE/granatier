@@ -14,6 +14,7 @@
 #include "bomb.h"
 #include "bombitem.h"
 #include "bombexplosionitem.h"
+#include "settings.h"
 
 #include <QTimeLine>
 
@@ -161,20 +162,48 @@ void PlayerItem::manageCollision()
             {
                 //((ElementItem*)collidingList[i])->getModel()->doActionOnCollision((Player*)getModel());
                 int nExplosionID;
+                Player* bombCreator = nullptr;
                 if(i->zValue() == 315)
                 {
                     auto* bombItem = dynamic_cast <BombItem*> (i);
-                    nExplosionID = dynamic_cast <Bomb*> (bombItem->getModel())->explosionID();
+                    auto* bomb = dynamic_cast <Bomb*> (bombItem->getModel());
+                    nExplosionID = bomb->explosionID();
+                    bombCreator = bomb->creator();
                 }
                 else
                 {
-                    nExplosionID = dynamic_cast <BombExplosionItem*> (i)->explosionID();
+                    auto* explosionItem = dynamic_cast <BombExplosionItem*> (i);
+                    nExplosionID = explosionItem->explosionID();
+                    bombCreator = explosionItem->creator();
                 }
 
-                if(dynamic_cast <Player*> (m_model)->shield(nExplosionID) == false)
+                auto* me = dynamic_cast <Player*> (m_model);
+                bool shouldHurt = true;
+                if (bombCreator != nullptr)
                 {
-                    setDead();
-                    dynamic_cast <Player*> (m_model)->die();
+                    if (bombCreator == me)
+                    {
+                        if (Settings::selfBombDamage() == false)
+                        {
+                            shouldHurt = false;
+                        }
+                    }
+                    else if (me->team() > 0 && me->team() == bombCreator->team())
+                    {
+                        if (Settings::teamBombDamage() == false)
+                        {
+                            shouldHurt = false;
+                        }
+                    }
+                }
+
+                if (shouldHurt)
+                {
+                    if(me->shield(nExplosionID) == false)
+                    {
+                        setDead();
+                        me->die();
+                    }
                 }
             }
             else if (i->zValue() == 100)

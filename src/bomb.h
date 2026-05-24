@@ -12,6 +12,7 @@
 #include "element.h"
 
 class QTimer;
+class Player;
 
 /**
  * @brief This class describes the common characteristics and behaviour of the bomb item.
@@ -57,6 +58,9 @@ protected:
 
     bool m_falling;
 
+    /** The Player who created this bomb */
+    Player* m_creator;
+
 public:
 
     /**
@@ -66,8 +70,9 @@ public:
     * @param p_arena the Arena the Bomb is on
     * @param nBombID the unique bomb ID
     * @param nDetonationCountdown the time until detonation
+    * @param creator the Player who created this bomb
     */
-    Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown);
+    Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown, Player* creator = nullptr);
 
     /**
     * Deletes the Bomb instance.
@@ -195,6 +200,12 @@ public Q_SLOTS:
     void slot_detonationCompleted();
 
     void updateMortarState();
+
+    /**
+    * Returns the Player who created this bomb.
+    * @return the creator player
+    */
+    Player* creator() const;
 
 protected:
 

@@ -80,5 +80,13 @@
       <label>This is only for the artists to make their life easier.</label>
       <default>100</default>
     </entry>
+    <entry name="SelfBombDamage" type="Bool" key="SelfBombDamage">
+      <label>Whether players can be hurt by their own bombs.</label>
+      <default>true</default>
+    </entry>
+    <entry name="TeamBombDamage" type="Bool" key="TeamBombDamage">
+      <label>Whether players can be hurt by teammate bombs.</label>
+      <default>true</default>
+    </entry>
   </group>
 </kcfg>

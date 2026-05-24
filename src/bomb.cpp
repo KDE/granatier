@@ -8,6 +8,7 @@
 
 #include "bomb.h"
 #include "arena.h"
+#include "player.h"
 #include "granatier_random.h"
 
 #include <QTimer>
@@ -18,8 +19,9 @@ const int nMortarRampEnd = static_cast<int>(Granatier::FPS * 50 / 1000.0);
 const int nMortarPeak = static_cast<int>((Granatier::FPS * 800 / 1000.0) / 2 + nMortarRampEnd);
 const int nMortarGround = static_cast<int>((Granatier::FPS * 800 / 1000.0) + nMortarRampEnd);
 
-Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
+Bomb::Bomb(qreal fX, qreal fY, Arena* p_arena, int nBombID, int nDetonationCountdown, Player* creator) : Element(fX, fY, p_arena), m_xSpeed(0), m_ySpeed(0)
 {
+    m_creator = creator;
     m_type = Granatier::Element::BOMB;
 
     m_xInit = fX;
@@ -585,6 +587,11 @@ void Bomb::updateMortarState()
     {
         m_mortarState++;
     }
+}
+
+Player* Bomb::creator() const
+{
+    return m_creator;
 }
 
 #include "moc_bomb.cpp"

@@ -750,7 +750,7 @@ void Game::createBomb(Player* player, qreal x, qreal y, bool newBomb, int throwD
     }
 
     m_bombCount++;
-    Bomb* bomb = new Bomb((col + 0.5) * Granatier::CellSize, (row + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 2500);    // time in ms
+    Bomb* bomb = new Bomb((col + 0.5) * Granatier::CellSize, (row + 0.5) * Granatier::CellSize, m_arena, m_bombCount, 2500, player);    // time in ms
     bomb->setBombPower(player->getBombPower());
     Q_EMIT bombCreated(bomb);
     connect(bomb, &Bomb::bombDetonated, this, &Game::bombDetonated);
