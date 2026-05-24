@@ -87,6 +87,11 @@ public Q_SLOTS:
      */
     void update(qreal p_x, qreal p_y) override;
 
+    /**
+     * Reimplemented paint to overlay player's color tint.
+     */
+    void paint(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget = nullptr) override;
+
 private Q_SLOTS:
     /**
      * Starts the bomb detonation

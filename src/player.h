@@ -9,6 +9,7 @@
 #define PLAYER_H
 
 #include "character.h"
+#include <QColor>
 
 class PlayerSettings;
 class QKeyEvent;
@@ -141,6 +142,12 @@ public:
       * @return the Player team
       */
     int team() const;
+
+    /**
+      * Gets the Player's primary color.
+      * @return the player color
+      */
+    QColor color() const;
 
     /**
       * Initializes the Player.

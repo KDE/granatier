@@ -1065,4 +1065,29 @@ int Player::sign(const qreal value)
     return (value > 0 ? 1 : -1);
 }
 
+QColor Player::color() const
+{
+    if (m_graphicsFile.contains(QLatin1String("player1")))
+    {
+        return QColor(25, 25, 196); // Blue
+    }
+    if (m_graphicsFile.contains(QLatin1String("player2")))
+    {
+        return QColor(196, 25, 25); // Red
+    }
+    if (m_graphicsFile.contains(QLatin1String("player3")))
+    {
+        return QColor(25, 196, 25); // Green
+    }
+    if (m_graphicsFile.contains(QLatin1String("player4")))
+    {
+        return QColor(196, 196, 25); // Yellow
+    }
+    if (m_graphicsFile.contains(QLatin1String("player5")))
+    {
+        return QColor(196, 25, 196); // Magenta
+    }
+    return QColor(255, 255, 255); // Default White
+}
+
 #include "moc_player.cpp"

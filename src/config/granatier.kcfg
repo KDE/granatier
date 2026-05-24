@@ -88,5 +88,9 @@
       <label>Whether players can be hurt by teammate bombs.</label>
       <default>true</default>
     </entry>
+    <entry name="ColoredBombs" type="Bool" key="ColoredBombs">
+      <label>Color the bombs using the player's color.</label>
+      <default>false</default>
+    </entry>
   </group>
 </kcfg>

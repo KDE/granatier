@@ -8,6 +8,9 @@
 #include "bombitem.h"
 #include "bomb.h"
 #include "settings.h"
+#include "player.h"
+
+#include <QPainter>
 
 #include <QTimer>
 #include <QGraphicsView>
@@ -307,6 +310,40 @@ void BombItem::fallingAnimation()
     // set z-value below the ground
     setZValue(-2);
     m_pulseTimer->setInterval(1000 / Granatier::FPS);
+}
+
+void BombItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    KGameRenderedItem::paint(painter, option, widget);
+
+    if (Settings::coloredBombs())
+    {
+        Bomb* bomb = dynamic_cast<Bomb*>(m_model);
+        if (bomb)
+        {
+            Player* creator = bomb->creator();
+            if (creator)
+            {
+                QColor color = creator->color();
+                color.setAlpha(80); // semi-transparent overlay
+
+                painter->save();
+                painter->setRenderHint(QPainter::Antialiasing);
+                painter->setBrush(color);
+                painter->setPen(Qt::NoPen);
+
+                QRectF rect = boundingRect();
+                // Bounding ellipse slightly smaller to fit exactly on the bomb's main body
+                QRectF overlayRect = QRectF(rect.x() + rect.width() * 0.15,
+                                            rect.y() + rect.height() * 0.20,
+                                            rect.width() * 0.70,
+                                            rect.height() * 0.70);
+                painter->drawEllipse(overlayRect);
+
+                painter->restore();
+            }
+        }
+    }
 }
 
 #include "moc_bombitem.cpp"
