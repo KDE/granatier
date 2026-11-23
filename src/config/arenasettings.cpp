@@ -8,12 +8,12 @@
 
 #include "arenasettings.h"
 
-
+#include "granatier_debug.h"
 #include <KConfig>
 #include <KConfigGroup>
-#include "granatier_debug.h"
 #include <QFile>
 #include <QFileInfo>
+#include <QMap>
 #include <QStandardPaths>
 
 class ArenaSettingsPrivate
